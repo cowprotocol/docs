@@ -23,7 +23,7 @@ Input, output, amount
 
 Sell 0.3 WETH for DAI&#x20;
 
-<mark style="color:blue;">https://cowswap.exchange/#/swap?inputCurrency=0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2\&outputCurrency=0x6b175474e89094c44da98b954eedeac495271d0f\&exactAmount=0.3</mark>&#x20;
+<mark style="color:blue;">https://swap.cow.fi/#/swap?inputCurrency=0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2\&outputCurrency=0x6b175474e89094c44da98b954eedeac495271d0f\&exactAmount=0.3</mark>&#x20;
 
 **Buy Order:**&#x20;
 
@@ -31,4 +31,4 @@ Input, output, amount, exactField=output&#x20;
 
 Buy 1500 DAI with WETH&#x20;
 
-<mark style="color:blue;">https://cowswap.exchange/#/swap?inputCurrency=0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2\&outputCurrency=0x6b175474e89094c44da98b954eedeac495271d0f\&exactAmount=1500\&exactField=output</mark>
+<mark style="color:blue;">https://swap.cow.fi/#/swap?inputCurrency=0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2\&outputCurrency=0x6b175474e89094c44da98b954eedeac495271d0f\&exactAmount=1500\&exactField=output</mark>

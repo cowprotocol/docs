@@ -31,7 +31,7 @@ CoW Protocol has a wide range of benefits, both technical and functional, but to
 
 ### Trading Cycle
 
-While we call CoW Swap a META DEX Aggregator, as it may have similarities with current DEX aggregators or DEX trading protocol, CoW Protocol introduces a completely new way of trading. In comparison with other DEXs or DEX aggregator, CoW Protocol, and therefore the interfaces built on top of it ([cowswap.exchange](https://cowswap.exchange) for example), don't require the user to send a transaction to submit a trade, but rather require the user to send a signed message. The reason for this is that the protocol works with off-chain messages, where the trader signs an order with the valid parameters they are willing to accept. This signed order is later on picked up by the solvers and executed in the batch auction that satisfies the users signed requirements.
+While we call CoW Swap a META DEX Aggregator, as it may have similarities with current DEX aggregators or DEX trading protocol, CoW Protocol introduces a completely new way of trading. In comparison with other DEXs or DEX aggregator, CoW Protocol, and therefore the interfaces built on top of it ([swap.cow.fi](https://swap.cow.fi) for example), don't require the user to send a transaction to submit a trade, but rather require the user to send a signed message. The reason for this is that the protocol works with off-chain messages, where the trader signs an order with the valid parameters they are willing to accept. This signed order is later on picked up by the solvers and executed in the batch auction that satisfies the users signed requirements.
 
 Let's get an owl's eye view on how the protocol's trading cycles works:
 

@@ -37,5 +37,5 @@ An example of a publicly available solver, namely the Dex Cow Solver, can be fou
 
 You can follow the simple instructions of the Dex Cow Solver to locally deploy that particular solver.
 
-For potential questions/issues regarding the testing of solvers, we also encourage everyone to contact our team in the CoW Swap Discord: [https://chat.cowswap.exchange](https://chat.cowswap.exchange/)\
+For potential questions/issues regarding the testing of solvers, we also encourage everyone to contact our team in the CoW Swap Discord: [https://discord.com/invite/cowprotocol](https://discord.com/invite/cowprotocol)\
 \

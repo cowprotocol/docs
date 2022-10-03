@@ -13,7 +13,7 @@ CoW Swap infrastructure is a lot of services running together, which is a bit in
 #### The Orderbook <a href="#the-orderbook" id="the-orderbook"></a>
 
 The orderbook is a service that uses a database to stores trades.\
-When you go to [https://cowswap.exchange/](https://cowswap.exchange/) and create a trade, the website uses the orderbook API to add the trade to the database. If the trade is ready to go (it might be created but missing a signature), it will be listed in the `solvable_orders` endpoint.
+When you go to [https://swap.cow.fi/](https://swap.cow.fi/) and create a trade, the website uses the orderbook API to add the trade to the database. If the trade is ready to go (it might be created but missing a signature), it will be listed in the `solvable_orders` endpoint.
 
 #### The Driver <a href="#the-driver" id="the-driver"></a>
 

@@ -24,7 +24,7 @@ Additionally, CoW Swap allows for an improved user experience by facilitating ga
 
 CoW Swap uses CoW protocol. One easy way to get familiar with the protocol is by doing one trade in CoW Swap:
 
-* [https://cowswap.exchange](https://cowswap.exchange/)
+* [https://swap.cow.fi](https://swap.cow.fi/)
 
 You can use it in **Rinkeby** test net if you want. Otherwise, it is avaiable in **Mainnet** and **Gnosis Chain**.
 
