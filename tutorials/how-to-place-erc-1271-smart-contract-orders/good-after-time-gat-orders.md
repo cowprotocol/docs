@@ -2,19 +2,19 @@
 
 Good after time, or GAT, orders are very basically orders that become valid only after a given timestamp. Currently, this is not supported natively by CoW Protocol, which only supports order expiry. Thanks to ERC-1271, creating such an order and _extending_ the CoW Protocol becomes possible. All we need to do is add a check in the `isValidSignature` implementation that the current block timestamp is older than some `validFrom` value. The CoW Protocol services constantly simulate `isValidSignature` before each batch, meaning that the order would get automatically picked up and included in a batch auction once it matures. Since the signature validation would revert if the check is not met, this means that we would effectively have a **trust-less** check preventing the order from being filled. Even if a malicious solver would try to include a GAT order before it was mature, the CoW Protocol settlement contract would prevent it from executing a trade because the `isValidSignature` call would fail. Trust-less protocol extensions, nice!
 
-<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+
+<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
-
 <figure><img src="../../.gitbook/assets/image (11).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 
 We also add a `GATOrders` factory contract that allows traders to place GAT orders by:
 
-<figure><img src="../../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 This factory is responsible for:
 
@@ -27,7 +27,7 @@ This factory is responsible for:
 
 After this `place` transaction is executed, the order is ready!
 
-<figure><img src="../../.gitbook/assets/image (7).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 For the order to trade:
 
@@ -42,4 +42,4 @@ For the order to trade:
 
 We can also add an `OrderPlacement` event emission to the factory contract. This would cause GAT order placement to additionally emit an on-chain event. We are currently building a new Ether trading flow on top of CoW Protocol and will start indexing these events in order to automatically add orders created this way to the order-book. This would mean that traders no longer need to make an HTTP request to the API to add an order to it, but instead will have the order added automatically.
 
-<figure><img src="../../.gitbook/assets/image (10).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>

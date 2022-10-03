@@ -17,11 +17,11 @@ Safe signature verification is done on a special EIP-712 `SafeMessage`. This jus
 3. Unlike before, we "wrap" this digest in a `SafeMessage`
 4. Like before, we generate an ECDSA signature with our EOA's private key
 
-<figure><img src="../../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
 For multi-owner Safes, you would just collect a bunch of these signatures and concatenate them together.
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (5).png" alt=""><figcaption></figcaption></figure>
 
 For verification, the CoW Protocol settlement contract would call the ERC-1271 `isValidSignature` function implemented in the Safe Smart Contract and:
 
@@ -32,4 +32,3 @@ For verification, the CoW Protocol settlement contract would call the ERC-1271 `
 5. And finally, to verify the signature, it would make sure that the total number of signatures it got is greater than the owner threshold.
 
 We see that this already works today in CoW Protocol, for example order [`71cff264`](https://barn.explorer.cow.fi/goerli/orders/0x71cff2646c6ca7b26844fdada874db8f20ff10cc831ffc8ba381b77dc185279fd64d6de7a7630d7a63f133b882ac44427d88555562e77d0e).
-

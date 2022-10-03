@@ -2,7 +2,7 @@
 
 CoW Protocol Explorer is an "Etherscan" like interface for the CoW Protocol. Given that CoW Protocol leverages meta transactions, aka signed/offchain orders, the transactions submitted by the users are completely offline/off-chain and are therefore not visible on-chain until they have been fully executed. Because of it, the Explorer exists to help users find their orders, and be informed about the order details and their state.
 
-![Example of the detailed view for a CoW Protocol Order displayed on CoW Protocol Explorer](../.gitbook/assets/Cow\_Explorer.png)
+![Example of the detailed view for a CoW Protocol Order displayed on CoW Protocol Explorer](<../.gitbook/assets/Cow\_Explorer (1).png>)
 
 1. **Order ID:** ID given to each submitted order.
 2. **From:** Ethereum address that is selling the tokens.
