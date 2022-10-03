@@ -1,0 +1,3 @@
+# Introduction
+
+On CoW Protocol, orders are placed off-chain and are not immediately executed, but rather collected and aggregated to be settled in batches. CoW Protocol does not need to work with executed transactions in order for users to be able to trade. The smart contract architecture is composed of an allowance manager and a settlement smart contract. There are two main components that work off-chain, which are the API used for the fee mechanism and price estimations, and the solvers, used for finding different settlements solutions for each batch auction. Let's deep dive into how these work:
