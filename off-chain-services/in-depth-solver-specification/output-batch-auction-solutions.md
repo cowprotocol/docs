@@ -110,8 +110,9 @@ We now discuss some additional functionality that solvers are allowed to use. Si
 
 If both conditions are satisfied, a solver can use the following entry in its solution in order to internalize the interaction:\
 \
-`"exec_plan": "internal"`\
-`\` In such a case, the driver will remove the interaction, and so the solution will end up using less gas, get better ranking, and also be risk-free (at least the part involving the internalized AMM interaction).
+`"exec_plan": "internal"`&#x20;
+
+In such a case, the driver will remove the interaction, and so the solution will end up using less gas, get better ranking, and also be risk-free (at least the part involving the internalized AMM interaction).
 
 ## <mark style="color:blue;">Foreign Liquidity orders</mark>
 
