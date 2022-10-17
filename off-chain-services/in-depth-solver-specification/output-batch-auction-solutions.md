@@ -1,13 +1,21 @@
 # Output: Batch auction solutions
 
-The output is also formatted in JSON, and has the following sections.
+The output is also formatted in JSON. We start with an example of how the simplest possible (i.e., empty) response looks like, and then describe the fields it contains.&#x20;
 
-## <mark style="color:blue;">Reference token</mark>
+#### <mark style="color:blue;">How a valid empty solution looks like</mark>
 
-The "ref\_token" key denotes the token id of the token used as a reference token in the computed solution, and is an optional field, i.e., it can be omitted. An example where WETH is used as a reference token is given below.
+Here, we give an example of the simplest possible valid output, which corresponds to the empty solution, in order to showcase the required fields.\
+
 
 ```json
-"ref_token": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
+{
+  "orders": {},
+  "foreign_liquidity_orders": [],
+  "amms": {},
+  "prices": {},
+  "approvals": [],
+  "interaction_data": [],
+}
 ```
 
 ## <mark style="color:blue;">Prices of the traded tokens</mark>
@@ -116,7 +124,7 @@ In such a case, the driver will remove the interaction, and so the solution will
 
 ## <mark style="color:blue;">Foreign Liquidity orders</mark>
 
-In order to allow solvers to build solutions that use additional liquidity orders, besides the ones contained in the input json, there is a "foreign\_liquidity\_\_\_orders" key that maps to a list of "orders", where each entry describes the liquidity order as well as the executed buy and sell amounts. This is a required field. An example entry is given below.
+In order to allow solvers to build solutions that use additional liquidity orders, besides the ones contained in the input json, there is a "foreign\_liquidity\_orders" key that maps to a list of "orders", where each entry describes the liquidity order as well as the executed buy and sell amounts. This is a required field. An example entry is given below.
 
 {% code overflow="wrap" %}
 ```json
@@ -214,41 +222,4 @@ An example is given below.
         }
     }
 ]
-```
-
-## <mark style="color:blue;">Metadata</mark>
-
-In order to make the output "self-complete", we also include a list of all the tokens participating in trades in the generated solution, following the same format as the "tokens" key in the input instance (see previous section). This is an optional field. An example is given below.
-
-```json
-"tokens": {
-    "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48": {
-        "alias": "USDC",
-        "decimals": 6
-    },
-    "0xba100000625a3754423978a60c9317c58a424e3d": {
-        "alias": "BAL",
-        "decimals": 18
-    },
-    "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2": {
-        "alias": "WETH",
-        "decimals": 18
-    }
-}
-```
-
-## <mark style="color:blue;">How a valid empty solution looks like</mark>
-
-Here, we give an example of the simplest possible valid output, which corresponds to the empty solution, in order to showcase which fields are required and which are optional.\
-
-
-```json
-{
-  "orders": {},
-  "foreign_liquidity_orders": [],
-  "amms": {},
-  "prices": {},
-  "approvals": [],
-  "interaction_data": [],
-}
 ```
