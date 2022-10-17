@@ -18,26 +18,6 @@ Here, we give an example of the simplest possible valid output, which correspond
 }
 ```
 
-## <mark style="color:blue;">Prices of the traded tokens</mark>
-
-The "prices" key is a dictionary mapping each token id to its computed price in terms of the reference token, and it is a required field. Each price is an unsigned integer, and for scaling purposes, the numeraire is usually set to have a large enough value; usually, WETH is selected as the numeraire, which has 18 decimals, and so the price of 1 wei is set to 10¹⁸. We clarify here that this is arbitrary, and is just selected for convenience. We also stress that a solution need only contain prices for the tokens appearing in the executed user orders, and that solvers are free to choose the unit of measure they will use.
-
-An example containing the computed prices of [USDC](https://etherscan.io/token/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48), [BAL](https://etherscan.io/token/0xba100000625a3754423978a60c9317c58a424e3d) and [WETH](https://etherscan.io/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2), where WETH is defined as the reference token, is given below.
-
-```json
-"prices": {
-    "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48": "219193245742363509576247472",
-    "0xba100000625a3754423978a60c9317c58a424e3d": "5245932598960804", 
-    "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2": "1000000000000000000"
-}
-```
-
-The above entries should be interpreted as follows:
-
-* 1 wei (3rd entry) has a price of 1000000000000000000 = 10¹⁸.
-* The lowest denomination of USDC (1st entry), i.e., 1 / 10⁶ of USDC, has a price of 219193245742363509576247472 relative to the price of 10¹⁸ that wei has. This translates to 1 USDC having a price of $$\frac{219193245742363509576247472 \cdot 10^6}{10^{18} \cdot 10^{18}} \approx 0.000219193$$ WETH.
-* The lowest denomination of BAL (2nd entry) is 1 / 10¹⁸ , and it has a price of 5245932598960804 relative to the price of 10¹⁸ that wei has. This translates to 1 BAL having a price of $$\frac{5245932598960804 \cdot 10^{18}}{10^{18} \cdot 10^{18}} \approx 0.005245933$$ WETH.
-
 ## <mark style="color:blue;">Executed orders</mark>
 
 The "orders" key contains all orders that were selected for execution, and it is a required field. It maps to a dictionary, mapping each order id to a copy of the corresponding order input data, but containing two additional keys that specify the executed buy and sell amount. An example entry is given below.
@@ -65,6 +45,42 @@ The "orders" key contains all orders that were selected for execution, and it is
 }
 ```
 {% endcode %}
+
+## <mark style="color:blue;">Foreign Liquidity orders</mark>
+
+In order to allow solvers to build solutions that use additional liquidity orders, besides the ones contained in the input json, there is a "foreign\_liquidity\_orders" key that maps to a list of "orders", where each entry describes the liquidity order as well as the executed buy and sell amounts. This is a required field. An example entry is given below.
+
+{% code overflow="wrap" %}
+```json
+"foreign_liquidity_orders": [
+    {
+        "order": {
+            "from": "0x4242424242424242424242424242424242424242",
+            "sellToken": "0x0101010101010101010101010101010101010101",
+            "buyToken": "0x0202020202020202020202020202020202020202",
+            "sellAmount": "101",
+            "buyAmount": "102",
+            "validTo": 3,
+            "appData": "0x0303030303030303030303030303030303030303030303030303030303030303",
+            "feeAmount": "13",
+            "kind": "sell",
+            "partiallyFillable": true,
+            "signingScheme": "eip1271",
+            "signature": "0x01020304"
+        },
+        "exec_sell_amount": "50",
+        "exec_buy_amount": "51"
+    }
+]
+```
+{% endcode %}
+
+We now clarify the meaning of some of the entries above:
+
+* `"appData"`: this is a free 32-byte slot that does not, in any way, affect on-chain settlement. This might be utilized in the future to allow for additional functionality.
+* `"signingScheme"` and `"signature"`: These two entries contain the relevant information for signing orders; the scheme used and the signature itself. Some more information about signing orders can be found [here](https://docs.cow.fi/tutorials/how-to-submit-orders-via-the-api/4.-signing-the-order).
+
+As a final comment, and similar to the liquidity orders provided by the Driver, foreign liquidity orders are always matched at limit price and do not contribute surplus to the objective function. Moreover, a solution containing only (foreign) liquidity orders is not considered valid.
 
 ## <mark style="color:blue;">Executed AMMs</mark>
 
@@ -122,41 +138,25 @@ If both conditions are satisfied, a solver can use the following entry in its so
 
 In such a case, the driver will remove the interaction, and so the solution will end up using less gas, get better ranking, and also be risk-free (at least the part involving the internalized AMM interaction).
 
-## <mark style="color:blue;">Foreign Liquidity orders</mark>
+## <mark style="color:blue;">Prices of the traded tokens</mark>
 
-In order to allow solvers to build solutions that use additional liquidity orders, besides the ones contained in the input json, there is a "foreign\_liquidity\_orders" key that maps to a list of "orders", where each entry describes the liquidity order as well as the executed buy and sell amounts. This is a required field. An example entry is given below.
+The "prices" key is a dictionary mapping each token id to its computed price in terms of the reference token, and it is a required field. Each price is an unsigned integer, and for scaling purposes, the numeraire is usually set to have a large enough value; usually, WETH is selected as the numeraire, which has 18 decimals, and so the price of 1 wei is set to 10¹⁸. We clarify here that this is arbitrary, and is just selected for convenience. We also stress that a solution need only contain prices for the tokens appearing in the executed user orders, and that solvers are free to choose the unit of measure they will use.
 
-{% code overflow="wrap" %}
+An example containing the computed prices of [USDC](https://etherscan.io/token/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48), [BAL](https://etherscan.io/token/0xba100000625a3754423978a60c9317c58a424e3d) and [WETH](https://etherscan.io/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2), where WETH is defined as the reference token, is given below.
+
 ```json
-"foreign_liquidity_orders": [
-    {
-        "order": {
-            "from": "0x4242424242424242424242424242424242424242",
-            "sellToken": "0x0101010101010101010101010101010101010101",
-            "buyToken": "0x0202020202020202020202020202020202020202",
-            "sellAmount": "101",
-            "buyAmount": "102",
-            "validTo": 3,
-            "appData": "0x0303030303030303030303030303030303030303030303030303030303030303",
-            "feeAmount": "13",
-            "kind": "sell",
-            "partiallyFillable": true,
-            "signingScheme": "eip1271",
-            "signature": "0x01020304"
-        },
-        "exec_sell_amount": "50",
-        "exec_buy_amount": "51"
-    }
-]
+"prices": {
+    "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48": "219193245742363509576247472",
+    "0xba100000625a3754423978a60c9317c58a424e3d": "5245932598960804", 
+    "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2": "1000000000000000000"
+}
 ```
-{% endcode %}
 
-We now clarify the meaning of some of the entries above:
+The above entries should be interpreted as follows:
 
-* `"appData"`: this is a free 32-byte slot that does not, in any way, affect on-chain settlement. This might be utilized in the future to allow for additional functionality.
-* `"signingScheme"` and `"signature"`: These two entries contain the relevant information for signing orders; the scheme used and the signature itself. Some more information about signing orders can be found [here](https://docs.cow.fi/tutorials/how-to-submit-orders-via-the-api/4.-signing-the-order).
-
-As a final comment, and similar to the liquidity orders provided by the Driver, foreign liquidity orders are always matched at limit price and do not contribute surplus to the objective function. Moreover, a solution containing only (foreign) liquidity orders is not considered valid.
+* 1 wei (3rd entry) has a price of 1000000000000000000 = 10¹⁸.
+* The lowest denomination of USDC (1st entry), i.e., 1 / 10⁶ of USDC, has a price of 219193245742363509576247472 relative to the price of 10¹⁸ that wei has. This translates to 1 USDC having a price of $$\frac{219193245742363509576247472 \cdot 10^6}{10^{18} \cdot 10^{18}} \approx 0.000219193$$ WETH.
+* The lowest denomination of BAL (2nd entry) is 1 / 10¹⁸ , and it has a price of 5245932598960804 relative to the price of 10¹⁸ that wei has. This translates to 1 BAL having a price of $$\frac{5245932598960804 \cdot 10^{18}}{10^{18} \cdot 10^{18}} \approx 0.005245933$$ WETH.
 
 ## <mark style="color:blue;">Approvals</mark>
 
