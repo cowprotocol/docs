@@ -4,9 +4,9 @@ description: This section describes the format of Batch Auction Instances.
 
 # Input: Batch auction instances
 
-The input batch is formatted in [JSON](https://www.json.org/json-en.html), described in the following sections.&#x20;
+The input batch is formatted in [JSON](https://www.json.org/json-en.html), described in the following sections.
 
-Note: To avoid precision loss, some numerical literals are encoded as strings, referred below as _stringified_. &#x20;
+Note: To avoid precision loss, some numerical literals are encoded as strings, referred below as _stringified_.
 
 ## <mark style="color:blue;">Tokens</mark>
 
@@ -14,7 +14,7 @@ The "tokens" key lists all tokens that appear in some order or AMM in the batch.
 
 * `"decimals"`: an integer equal to the number of decimals of the token, usually equal to 18 (more on this later).
 * `"alias"`: a string denoting the shorthand name of the token (e.g., WETH, DAI)
-* `"external_price"`: a float that corresponds to the price of the smallest denomination of the token with respect to a reference token. Only tokens that are traded by at least a user order will necessarily have an external price.&#x20;
+* `"external_price"`: a float that corresponds to the price of the smallest denomination of the token with respect to a reference token. Only tokens that are traded by at least a user order will necessarily have an external price.
 * `"normalize_priority"`: an integer that expresses the preference for the token to be used as the [numeraire](https://en.wikipedia.org/wiki/Num%C3%A9raire). The token with highest priority in the solution will have price set to 1. More on this later.
 
 Following are three example token entries, corresponding to [WETH](https://etherscan.io/address/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2), [BAL](https://etherscan.io/token/0xba100000625a3754423978a60c9317c58a424e3d) and [USDC](https://etherscan.io/token/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48).
@@ -60,7 +60,7 @@ The "orders" key maps to a dictionary containing the set of user and liquidity o
   * `"amount"`: a stringified integer denoting the maximum fee amount;
   * `"token"`: the token id of the token in which the fee amount is denominated in. It always coincides with the sell token.
 * `"cost"`:
-  * `"amount"`: a strigified integer denoting the the cost amount;
+  * `"amount"`: a stringified integer denoting the the cost amount; we clarify that this is only an estimate of the cost an order might incur if executed, that is provided to help guide the optimization procedure a solver might use. For the evaluation of the objective value of a proposed solution, this quantity is ignored and the total cost incurred by a solution is computed via a simulation (see [here](https://docs.cow.fi/off-chain-services/in-depth-solver-specification/the-batch-auction-optimization-problem#ranking-of-solutions) for more details).
   * `"token"`: the token id of the token in which the cost amount is denominated in. On Ethereum mainnet, it always coincides with WETH.
 * `"is_liquidity_order"`: a boolean that describes whether the order is a liquidity order.
 
@@ -86,11 +86,11 @@ An example Fill-or-Kill user limit buy order that buys [BAL](https://etherscan.i
 }
 ```
 
-The above entry should be interpreted as follows. It is an order with a unique index ("3"), and is a Fill-or-Kill order since the flag `allow_partial_fill` is set to `false`. Moreover, it is a buy order since the flag <mark style="color:green;"></mark> `is_sell_order` is set to `false`. Finally, this is a user order and not a liquidity order, since the flag `is_liquidity_order` is set to `false.`
+The above entry should be interpreted as follows. It is an order with a unique index ("3"), and is a Fill-or-Kill order since the flag `allow_partial_fill` is set to `false`. Moreover, it is a buy order since the flag `is_sell_order` is set to `false`. Finally, this is a user order and not a liquidity order, since the flag `is_liquidity_order` is set to `false.`
 
-Regarding the tokens traded, the sell token is [USDC](https://etherscan.io/token/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48) and the buy token is [BAL](https://etherscan.io/token/0xba100000625a3754423978a60c9317c58a424e3d). The entry above also specifies the amounts that are to be traded.  We now explain the corresponding entries:
+Regarding the tokens traded, the sell token is [USDC](https://etherscan.io/token/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48) and the buy token is [BAL](https://etherscan.io/token/0xba100000625a3754423978a60c9317c58a424e3d). The entry above also specifies the amounts that are to be traded. We now explain the corresponding entries:
 
-* `"buy_amount": "88967366419390071936"`: the user has signed that they want to buy 88967366419390071936 of BAL, where the amount is with respect to the smallest denomination of BAL. Since BAL has 18 decimals, this translates to 88967366419390071936  / 10¹⁸ ≅ 88.967 BAL tokens. So, if the order is executed, the user must receive this exact amount, since it is a Fill-or-Kill buy order.
+* `"buy_amount": "88967366419390071936"`: the user has signed that they want to buy 88967366419390071936 of BAL, where the amount is with respect to the smallest denomination of BAL. Since BAL has 18 decimals, this translates to 88967366419390071936 / 10¹⁸ ≅ 88.967 BAL tokens. So, if the order is executed, the user must receive this exact amount, since it is a Fill-or-Kill buy order.
 * `"sell_amount": "2129248126"`: the user has signed that they are willing to sell at most 2129248126 of USDC, where again the amount is with respect to the smallest denomination of USDC. Since USDC has 6 decimals, this translates to 2129248126 / 10⁶ ≅ 2129.248 USDC tokens. So, if the order is executed, then the user should sell at most this amount of USDC.
 
 On top of that, the user is willing to pay a fee of 163784016 / 10⁶ ≅ 163.784 USDC tokens, as specified by the `fee` entry. Finally, the estimated cost for this transaction is 8193880727499585 / 10¹⁸ ≅ 0.00819 [WETH](https://etherscan.io/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2), as specified by the `cost` entry, where we used the fact that WETH has 18 decimals.
@@ -104,9 +104,9 @@ The "amms" key describes all the automated market makers that are made available
 A Constant Product pool describes [Uniswap v2 liquidity pools](https://docs.uniswap.org/protocol/V2/concepts/protocol-overview/how-uniswap-works), and consists of the following entries.
 
 * `"kind"`: the type is set to “ConstantProduct”.
-* `"reserves"`: a dictionary describing the reserves of the two tokens of the liquidity pool. More specifically, it maps each token id's of the AMM's tradeable tokens to the corresponding  stringified integer amounts contained in each of the pools.
+* `"reserves"`: a dictionary describing the reserves of the two tokens of the liquidity pool. More specifically, it maps each token id's of the AMM's tradeable tokens to the corresponding stringified integer amounts contained in each of the pools.
 * `"fee"`: a stringified decimal number denoting the percent of the amount traded in the liquidity pool that must be paid for using it. For example, if we transfer an amount $$y$$ to the pool, then the amount blocked and used as a fee is equal to $$\mathrm{fee} \cdot y$$.
-* `"cost"`: this entry is identical  to the cost entry of an order (see above).
+* `"cost"`: this entry is identical to the cost entry of an order (see above), and again is only meant to be used as an indicator of the cost. If the AMM is used, the total execution cost is computed via simulation (as described [here](https://docs.cow.fi/off-chain-services/in-depth-solver-specification/the-batch-auction-optimization-problem#ranking-of-solutions)).
 
 Follows an example entry of such an AMM, corresponding to a pool of [BAL](https://etherscan.io/address/0xba100000625a3754423978a60c9317c58a424e3d) and [WETH](https://etherscan.io/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2). We again clarify that the amounts in the entry are with respect to the smallest denomination of each token.
 
@@ -130,9 +130,9 @@ Follows an example entry of such an AMM, corresponding to a pool of [BAL](https:
 A Weighted Product pool describes [Balancer weighted pools](https://docs.balancer.fi/products/balancer-pools/weighted-pools) and has the following differences to the Constant Product pool described above,
 
 * `"kind"`: the type is set to “WeightedProduct”.
-* `"reserves"`: a dictionary, mapping the token id of each of the AMM's tradeable tokens to its  balance (a stringified integer) and weight (a stringified decimal) of that reserve in the pool.
+* `"reserves"`: a dictionary, mapping the token id of each of the AMM's tradeable tokens to its balance (a stringified integer) and weight (a stringified decimal) of that reserve in the pool.
 
-Follows an example entry of such an AMM, corresponding to a pool of [WTBC](https://etherscan.io/token/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599) (of weight 0.4), [USDC](https://etherscan.io/token/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48) (of weight 0.2) [BAL](https://etherscan.io/address/0xba100000625a3754423978a60c9317c58a424e3d) and [WETH](https://etherscan.io/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2) (of weight 0.4).&#x20;
+Follows an example entry of such an AMM, corresponding to a pool of [WTBC](https://etherscan.io/token/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599) (of weight 0.4), [USDC](https://etherscan.io/token/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48) (of weight 0.2) [BAL](https://etherscan.io/address/0xba100000625a3754423978a60c9317c58a424e3d) and [WETH](https://etherscan.io/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2) (of weight 0.4).
 
 ```json
 "52": {
@@ -164,7 +164,7 @@ Follows an example entry of such an AMM, corresponding to a pool of [WTBC](https
 A Stable pool corresponds to [Curve/Balancer stable pools](https://dev.balancer.fi/resources/pool-interfacing/stable-pool), and has the following differences to the Constant Product pool described above,
 
 * `"kind"`: the type is set to “Stable”.
-* `"amplification_parameter"`: See [amplification coefficient](https://curve.fi/files/stableswap-paper.pdf).&#x20;
+* `"amplification_parameter"`: See [amplification coefficient](https://curve.fi/files/stableswap-paper.pdf).
 * `"scaling_rates"`: See [getScalingFactors](https://github.com/balancer-labs/balancer-v2-monorepo/blob/80b0e1b129d575c313f59800ec7e19237a43c087/pkg/pool-utils/contracts/BasePool.sol#L523-L525).
 
 An example of such an AMM between [DAI](https://etherscan.io/token/0x6b175474e89094c44da98b954eedeac495271d0f), [USDC](https://etherscan.io/token/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48) and [USDT](https://etherscan.io/token/0xdac17f958d2ee523a2206206994597c13d831ec7) is given below.
