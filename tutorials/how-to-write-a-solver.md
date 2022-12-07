@@ -1,6 +1,6 @@
 # How to write a solver
 
-## This tutorial was fully composed by [<mark style="color:blue;">poolpitako</mark>](https://twitter.com/poolpitako), link to the original tutorial doc can be found <mark style="color:blue;"></mark> [<mark style="color:blue;">here</mark> <mark style="color:yellow;"></mark> ](https://hackmd.io/Qx3i17ZMRLSFFNyw0tn8sQ?view)<mark style="color:yellow;"></mark>
+## This tutorial was fully composed by [<mark style="color:blue;">poolpitako</mark>](https://twitter.com/poolpitako), link to the original tutorial doc can be found [<mark style="color:blue;">here</mark>](https://hackmd.io/Qx3i17ZMRLSFFNyw0tn8sQ?view)
 
 ### Idea <a href="#idea" id="idea"></a>
 
@@ -71,8 +71,8 @@ I am trading 10 USDC for 91.412 yvUSDC, which of course, will never settle by re
 Now that we have the real order, the orderbook will return it in the `solvable_orders` endpoint.\
 To consume it, we will need to use the driver.
 
-the cow-dex-solver repo now has a nice [README.md](http://readme.md/) with an explanation of how to run the driver:\
-[https://github.com/gnosis/cow-dex-solver/blob/219ff56d309416bda0d7be4225b95a96711779f6/README.md#how-to-run-simulations-together-with-the-cowswap-official-driver](https://github.com/gnosis/cow-dex-solver/blob/219ff56d309416bda0d7be4225b95a96711779f6/README.md#how-to-run-simulations-together-with-the-cowswap-official-driver)
+the cow-dex-solver repo now has a nice README with an explanation of how to run the driver:\
+[https://github.com/gnosis/cow-dex-solver#how-to-run-simulations-together-with-the-cowswap-official-driver](https://github.com/gnosis/cow-dex-solver#how-to-run-simulations-together-with-the-cowswap-official-driver)
 
 The way I was it running was:
 
