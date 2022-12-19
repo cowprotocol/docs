@@ -22,6 +22,15 @@
   * [Balancer External Balances](smart-contracts/vault-relayer/balancer-external-balances.md)
   * [Balancer Internal Balances](smart-contracts/vault-relayer/balancer-internal-balances.md)
   * [Fallback ERC20 Allowances](smart-contracts/vault-relayer/fallback-erc20-allowances.md)
+* [ETH Flow Contract](smart-contracts/eth-flow-contract/README.md)
+  * [High Level Description](smart-contracts/eth-flow-contract/high-level-description.md)
+  * [Interactions](smart-contracts/eth-flow-contract/interactions.md)
+  * [User and ETH Flow Contract Orders](smart-contracts/eth-flow-contract/user-and-eth-flow-contract-orders.md)
+  * [Orders in Storage](smart-contracts/eth-flow-contract/orders-in-storage.md)
+  * [Order Creation](smart-contracts/eth-flow-contract/order-creation.md)
+  * [Order Execution](smart-contracts/eth-flow-contract/order-execution.md)
+  * [Order Cancellation](smart-contracts/eth-flow-contract/order-cancellation.md)
+  * [Order Update (Unimplemented Yet)](smart-contracts/eth-flow-contract/order-update-unimplemented-yet.md)
 
 ## Off-Chain Services
 
