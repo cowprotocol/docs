@@ -2,37 +2,19 @@
 
 The user calls a function on the eth-flow contract to create an order:
 
-```
-function createOrder(EthFlowOrder.Data order) payable
-```
+* function createOrder(user order) payable;
+* user order is the parameters in the user order struct.
 
-The parameters of the order creation struct can be seen [in the source code](https://github.com/cowprotocol/ethflowcontract/blob/v1.0.0/src/libraries/EthFlowOrder.sol#L19-L45) (together with their description) and are:
+The user order parameters are used to compute the order digest. The call reverts if an order already exists or is invalidated at that order digest in the [order mapping](https://docs.google.com/document/d/1D9P6A-X\_sjZyV7i\_f7XTZx5o7znFgRbNVJghHtBcy7U/edit#heading=h.7yie1ea3yx14); otherwise a new order is added to storage:
 
-```
-IERC20 buyToken
-address receiver
-uint256 sellAmount
-uint256 buyAmount
-bytes32 appData
-uint256 feeAmount
-uint32 validTo
-bool partiallyFillable
-int64 quoteId
-```
+user order digest -> user validTo || msg.sender
 
-All parameters have the same role as their namesake in the CoW Swap order struct with the exception of `quoteId`. The latter parameter is the quote id obtained when requesting a quote for this trade from the CoW Swap API.
+We could send only the user order digest instead of the full user order when creating orders. However, in order to recover the funds on cancellation the order must be validated (since we need to check if it was matched onchain). Requiring the full order now is a way to avoid loss of funds in case the order digest on order creation is not valid.
 
-As of now, eth-flow orders are not matched by the CoW Swap infrastructure unless the quote id refers to a valid and fresh quote in the API.
+At this step, we want to validate that the amount of ETH sold in the order is consistent with msg.value. (This is done to avoid keeping track of the amount deposited by the user and make cancellation based on the sold amount.)
 
-Some checks are performed on order creation. Failing any of these checks means that the transaction reverts.
+We also want to validate that the receiver is not zero. (All other parameters that need to be validated are constant so in practice we don’t want to make them part of the function input, but this is an optimization detail.)
 
-1. The amount of ETH sent along with the transaction must be exactly what is needed to cover the sell amount plus the fees.
-2. The order must be valid at the time the transaction is mined.
-
-The order parameters are used to compute the order digest according to the [order mapping](user-and-eth-flow-contract-orders.md). As mentioned before, the call reverts if an order with the same digest already exists or is invalidated; otherwise a new order is added to storage:
-
-```
-user order digest -> validTo || msg.sender
-```
+Verifying that the order is not expired can be handled during signature verification to save gas.
 
 \

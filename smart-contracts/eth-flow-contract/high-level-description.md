@@ -1,6 +1,6 @@
 # High Level Description
 
-A smart contract handles ETH sell orders for the user.
+A smart contract handles ETH sell orders for the user (henceforth "eth-flow contract").
 
 The user interacts with it to deposit ETH and at the same time to set the parameters of the order.
 
