@@ -2,7 +2,7 @@
 
 The eth-flow contract stores user orders as a mapping:
 
-user order digest -> | either userAddress || userValidTo
+order digest -> | either userAddress || userValidTo
 
 &#x20;                    \| or     0x00…00     || anything (unset)
 
@@ -10,9 +10,10 @@ user order digest -> | either userAddress || userValidTo
 
 The same user can have multiple open orders.
 
-If the user order digest happens to be the same as that of another order&#x20;
+Every `order digest` represents a single order in the eth-flow contract. It is computed by computing the CoW Swap order digest from the contract order that is derived from the user order parameters.
 
-* user order digest: a hash of all user order parameters.\
-  For simplicity it can be the same that we use currently in our exchange but for efficiency we might want to change this.
-* userValidTo: the validity of the user order
-* userAddress: the address of the user who owns the order
+There could be two different eth-flow orders that end up having the same digest. In this case, only one of the two orders can be created and the contract would revert if trying to create the second one.&#x20;
+
+`userValidTo` is the validity of the user order (note that changing the validity does not change the order digest).
+
+`userAddress` is the address of the user who owns the order.
