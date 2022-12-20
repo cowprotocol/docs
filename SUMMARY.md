@@ -29,7 +29,7 @@
   * [Orders in Storage](smart-contracts/eth-flow-contract/orders-in-storage.md)
   * [Order Creation](smart-contracts/eth-flow-contract/order-creation.md)
   * [Order Execution](smart-contracts/eth-flow-contract/order-execution.md)
-  * [Order Invalidation](smart-contracts/eth-flow-contract/order-invalidation.md)
+  * [Order Invalidation](smart-contracts/eth-flow-contract/order-cancellation.md)
 
 ## Off-Chain Services
 

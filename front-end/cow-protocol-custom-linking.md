@@ -17,18 +17,18 @@ Even though Swap is the main page of the front end, each page can have its own s
 
 ## Example Usage\#
 
-**Sell order:**&#x20;
+**Sell order:**
 
 Input, output, amount
 
-Sell 0.3 WETH for DAI&#x20;
+Sell 0.3 WETH for DAI
 
-<mark style="color:blue;">https://swap.cow.fi/#/swap?inputCurrency=0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2\&outputCurrency=0x6b175474e89094c44da98b954eedeac495271d0f\&exactAmount=0.3</mark>&#x20;
+<mark style="color:blue;">https://swap.cow.fi</mark><mark style="color:blue;">/#/1/swap/WETH/COW?sellAmount=750.20</mark>
 
-**Buy Order:**&#x20;
+**Buy Order:**
 
-Input, output, amount, exactField=output&#x20;
+Input, output, amount, exactField=output
 
-Buy 1500 DAI with WETH&#x20;
+Buy 1500 DAI with WETH
 
-<mark style="color:blue;">https://swap.cow.fi/#/swap?inputCurrency=0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2\&outputCurrency=0x6b175474e89094c44da98b954eedeac495271d0f\&exactAmount=1500\&exactField=output</mark>
+<mark style="color:blue;">https://swap.cow.fi</mark><mark style="color:blue;">/#/1/swap/WETH/COW?buyAmount=750.20</mark>
