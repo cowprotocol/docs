@@ -166,7 +166,7 @@ The "approvals" key is a list where each entry consists of the following:
 
 * `"spender"`: the address of the target contract that we authorize to trade some token on the settlement contract's behalf.
 * `"token"`: the address of the token that we authorize.
-* `"amount"`: a stringified integer that corresponds to the (minimum) amount we authorize the target contract to use. **We stress here** that currently the behavior is the following. If there is already sufficiently large (i.e., larger than the `"amount"` entry) allowance set by a previous settlement, then the approval is ignored altogether. On the other hand, if the current allowance is lower than `"amount"`, then the driver will set a maximum value for the approval(much larger than the actual `"amount"` specified by the entry); this allows for future gas savings.\
+* `"amount"`: a stringified integer that corresponds to the (minimum) amount we authorize the target contract to use. **We stress here** that currently the behavior is the following. If there is already sufficiently large (i.e., larger than the `"amount"` entry) allowance set by a previous settlement, then the approval is ignored altogether. On the other hand, if the current allowance is lower than `"amount"`, then the driver will set a maximum value for the approval (much larger than the actual `"amount"` specified by the entry); this allows for future gas savings.\
   \
   In case full control over approvals is required, a solver can skip this field and instead use a custom [interaction](output-batch-auction-solutions.md#interaction-data) to set an exact approval.
 
