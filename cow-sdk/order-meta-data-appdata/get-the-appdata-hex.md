@@ -4,7 +4,7 @@ The `AppData` Hex points to an IPFS document with the meta-data attached to the 
 
 You can calculate the `AppData` Hex, and its corresponding `cidV0` using the SDK:
 
-```
+```javascript
 const { appDataHash, cidv0 } = await cowSdk.metadataApi.calculateAppDataHash(appDataDoc)
 ```
 

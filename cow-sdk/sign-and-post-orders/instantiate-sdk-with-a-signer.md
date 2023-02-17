@@ -1,10 +1,8 @@
 # Instantiate SDK with a signer
 
-
-
 Before you can sign any transaction, you have to instantiate the SDK with a [Ethers.JS signer](https://docs.ethers.io/v5/api/signer/):
 
-```markup
+```typescript
 import { Wallet } from 'ethers'
 import { CowSdk, OrderKind } from '@cowprotocol/cow-sdk'
 
@@ -16,8 +14,6 @@ const cowSdk = new CowSdk(
   }) 
 ```
 
-
-
 So know we have a SDK instance liked to our signer. That's great, because now creating orders will be a matter of:
 
 1. **Get Market Prices**: Fee & Price
@@ -26,4 +22,4 @@ So know we have a SDK instance liked to our signer. That's great, because now cr
 
 Let's start in next section with the first step, getting the Market Price.
 
-****
+***

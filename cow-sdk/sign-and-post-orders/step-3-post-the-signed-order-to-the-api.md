@@ -12,13 +12,13 @@ Once you have a signed order, last step is to send it to the API.
 
 Post an order using the SDK:
 
-```markup
+```javascript
 const orderId = await cowSdk.cowApi.sendOrder({
   order: { ...order, ...signedOrder },
   owner: '0x1811be0994930fe9480eaede25165608b093ad7a',
 })
 ```
 
-Success 🎉! You managed to post a new valid order. Note that even though you awaited for the `sendOrder` call, this only signals that the order was accepted by the protocol. \
+Success 🎉! You managed to post a new valid order. Note that even though you awaited for the `sendOrder` call, this only signals that the order was accepted by the protocol.\
 \
 As a bonus, next section will show you how to view the estate of the order in the explorer.

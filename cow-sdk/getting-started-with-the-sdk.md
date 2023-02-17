@@ -1,16 +1,14 @@
 # Getting Started with the SDK
 
-
-
 Install the SDK:
 
-```markup
+```bash
 yarn add @cowprotocol/cow-sdk
 ```
 
 Instantiate the SDK:
 
-```markdown
+```javascript
 import { CowSdk } from '@cowprotocol/cow-sdk'
 
 const chainId = 4 // Rinkeby

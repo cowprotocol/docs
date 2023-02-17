@@ -6,7 +6,7 @@ The SDK provides just an easy way to access all this information.
 
 You can query the Cow Subgraph either by running some common queries exposed by the `CowSubgraphApi` or by building your own ones:
 
-```markup
+```typescript
 const chainId = 1 // Mainnet
 const cowSdk = new CowSdk(chainId)
 

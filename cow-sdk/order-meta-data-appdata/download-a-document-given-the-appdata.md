@@ -2,13 +2,13 @@
 
 Given the `AppData` of a document that has been uploaded to IPFS, you can easily retrieve the document.
 
-```markup
+```javascript
 const appDataDoc = await cowSdk.metadataApi.decodeAppData('0x5ddb2c8207c10b96fac92cb934ef9ba004bc007a073c9e5b13edc422f209ed80')
 ```
 
 This will return a document similar to:
 
-```markup
+```json
 {
     "version": "0.1.0",
     "appCode": "YourApp",

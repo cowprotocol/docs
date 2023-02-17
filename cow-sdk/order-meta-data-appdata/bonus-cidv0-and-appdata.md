@@ -4,7 +4,7 @@ As explained before, the `AppData` points to an IPFS document. So given any `CID
 
 Given an IPFS CIDv0 you can convert it to an `AppData`
 
-```markup
+```typescript
 const decodedAppDataHex = await cowSdk.metadataApi.cidToAppDataHex('QmUf2TrpSANVXdgcYfAAACe6kg551cY3rAemB7xfEMjYvs')
 ```
 
@@ -14,7 +14,7 @@ This will return an `AppData` hex: `0x5ddb2c8207c10b96fac92cb934ef9ba004bc007a07
 
 Similarly, you can do the opposite and convert an `AppData` into an IPFS document:
 
-```markup
+```typescript
 const decodedAppDataHex = await cowSdk.metadataApi.appDataHexToCid(hash)
 ```
 

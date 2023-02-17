@@ -6,7 +6,7 @@ Once you know the price and fee, we can create the order and sign it:
 * As explained before, you can choose your `Limit Price`, but some general approach is to take the current Market Price and apply some slippage tolerance to it. `Received Amount = Expected Amount * (1 - Slippage Tolerance)`
 * The SDK will provide an easy way to sign orders given the raw data
 
-```markup
+```typescript
 const { sellToken, buyToken, validTo, buyAmount, sellAmount, receiver, feeAmount } = quoteResponse.quote
 
 // Prepare the RAW order

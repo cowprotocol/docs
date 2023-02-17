@@ -1,7 +1,5 @@
 # STEP 1: Get Market Price
 
-
-
 #### STEP 1: Get Market Price
 
 To create an order, you need to get a price/fee quote first:
@@ -16,7 +14,7 @@ To create an order, you need to get a price/fee quote first:
 
 To get the quote, you simply specify the trade you intent to do:
 
-```markup
+```typescript
 const quoteResponse = await cowSdk.cowApi.getQuote({
   kind: OrderKind.SELL, // Sell order (could also be BUY)
   sellToken: '0xc778417e063141139fce010982780140aa0cd5ab', // WETH

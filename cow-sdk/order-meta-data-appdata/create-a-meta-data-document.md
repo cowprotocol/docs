@@ -6,7 +6,7 @@ The SDK facilitates the creation of these documents, and getting the `AppData` H
 
 The most important thing to define in the meta-data is the name of your app, so the order-flow can be credited to it.
 
-```markup
+```typescript
 const appDataDoc = cowSdk.metadataApi.generateAppDataDoc({}, {
   appCode: 'YourApp'
 })
@@ -14,7 +14,7 @@ const appDataDoc = cowSdk.metadataApi.generateAppDataDoc({}, {
 
 This will create a document similar to:
 
-```markup
+```json
 {
   "version": "0.1.0",
   "appCode": "YourApp",
@@ -27,7 +27,7 @@ After creating the most basic document, you can see how to attach additional met
 For example, you could give information about who reffered the user creating the order.
 
 {% code title="" %}
-```markup
+```typescript
 const appDataDoc = cowSdk.metadataApi.generateAppDataDoc(
   {
     referrer: {
@@ -44,7 +44,7 @@ const appDataDoc = cowSdk.metadataApi.generateAppDataDoc(
 
 This will create a document similar to:
 
-```markup
+```json
 {
     "version": "0.1.0",
     "appCode": "YourApp",
