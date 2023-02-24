@@ -12,9 +12,9 @@ CoW Swap is the first trading interface built on top of CoW Protocol. It acts as
 
 Instead of using a central operator or a constant function market maker to determine trade settlements, CoW Protocol uses a “party” called solver, who is the party in charge of providing the settlement solution to the batch auctions. Solvers compete against each other to submit the most optimal batch settlement solution and each time a solver submits a successful batch settlement solution, the protocol rewards them with tokens, meaning that the protocol rewards solvers for solving the batch auction optimization problem. Anyone can become a solver, although, in order to become one, there are certain requirements:
 
-* To become a solver, an Ethereum address needs to deposit a bond in the form of tokens. Asset type and amounts are pending to be defined by the GnosisDAO or CowDAO.
-* Once the tokens have been staked (locked up), GnosisDAO/CowDAO has to vote to approve or reject the Ethereum address that will identify the solver. If the vote is successful, the solvers Ethereum address will be included in the allowlist (verification) solvers contract.
-* Additionally, a solver must have the technical knowledge to create the appropriate batch settlement solutions or take the risk of being slashed by the GnosisDAO/CowDAO for wrongdoing.
+* To become a solver, an Ethereum address needs to deposit a bond in the form of tokens. Asset type and amounts are pending to be defined by the CoW DAO.
+* Once the tokens have been staked (locked up), CoW DAO has to vote to approve or reject the Ethereum address that will identify the solver. If the vote is successful, the solvers Ethereum address will be included in the allowlist (verification) solvers contract.
+* Additionally, a solver must have the technical knowledge to create the appropriate batch settlement solutions or take the risk of being slashed by the CoW DAO for wrongdoing.
 
 ### Benefits
 
@@ -53,4 +53,4 @@ From a users' perspective, a full trading cycle on CoW Protocol consists of thre
 
 We believe CoW Protocol is critical infrastructure for open finance, which will see the creation of more and more tokenized assets, and will ultimately need a reliable trading mechanism that has the users best interest in mind.
 
-Ultimately, CoW Protocol is built in the spirit of permissionless innovation. Its fully decentralized architecture means you don't need Gnosis to build on our protocol.
+Ultimately, CoW Protocol is built in the spirit of permissionless innovation. Its fully decentralized architecture means you don't need CoW Swap to build on our protocol.
