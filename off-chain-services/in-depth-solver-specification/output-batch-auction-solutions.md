@@ -135,7 +135,7 @@ We now discuss some additional functionality that solvers are allowed to use. Si
 
 If both conditions are satisfied, a solver can set the `"internal"` flag to `true` in order to internalize the interaction:\
 \
-`"exec_plan": "internal"`&#x20;
+`"internal": true`&#x20;
 
 In such a case, the driver will remove the interaction, and so the solution will end up using less gas, get better ranking, and also be risk-free (at least the part involving the internalized AMM interaction). We stress that the `exec_plan` coordinates must always be provided, even if the interaction will end up being internalized.
 
