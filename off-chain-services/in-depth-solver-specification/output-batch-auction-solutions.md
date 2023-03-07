@@ -90,7 +90,7 @@ The "amms" key maps to a dictionary containing all the AMMs that were used in th
 * `"exec_buy_amount"`: a stringified integer with the amount that the AMM buys.
 * `"sell_token"`: the token id of the token that the AMM is selling (sending)
 * `"exec_sell_amount"`: a stringified integer with the amount that the AMM sells.
-* `"exec_plan"`: this entry helps to specify the order in which the different AMM interactions are to be executed. It consists of two entries (which can be thought of as coordinates), `"position"` and `"sequence"`, that are non-negative integers. The reason that two entries are used is to more precisely describe potential dependencies among AMM orders. In particular, two AMM orders that have a different `sequence` entry are independent and their relative order of execution does not matter. However, for all AMM orders with the same `sequence` entry, the order specified by the `position` entry must be respected, i.e., all such orders must be executed sequentially, in increasing order of the `position` entry.
+* `"exec_plan"`: this entry helps to specify the order in which the different AMM interactions are to be executed. It consists of two entries (which can be thought of as coordinates), `"position"` and `"sequence"`, that are non-negative integers, and a third boolean entry labeled `"internal"`; the `internal` flag is discussed in the section below. The reason that two entries/coordinates are used is to more precisely describe potential dependencies among AMM orders. In particular, two AMM orders that have a different `sequence` entry are independent and their relative order of execution does not matter. However, for all AMM orders with the same `sequence` entry, the order specified by the `position` entry must be respected, i.e., all such orders must be executed sequentially, in increasing order of the `position` entry.
 
 An example of a Constant Product AMM execution entry is given below<mark style="color:blue;">.</mark>
 
@@ -107,7 +107,8 @@ An example of a Constant Product AMM execution entry is given below<mark style="
             "exec_buy_amount": "535272056568359078",
             "exec_plan": {
                 "position": 0,
-                "sequence": 0
+                "sequence": 0,
+                "internal": false
             },
             "exec_sell_amount": "28000000000000001461",
             "sell_token": "0x88acdd2a6425c3faae4bc9650fd7e27e0bebb7ab"
@@ -132,11 +133,11 @@ We now discuss some additional functionality that solvers are allowed to use. Si
 
 2\. There is enough balance of sell token B, i.e., at least as much amount as the sell amount of the AMM interaction.
 
-If both conditions are satisfied, a solver can use the following entry in its solution in order to internalize the interaction:\
+If both conditions are satisfied, a solver can set the `"internal"` flag to `true` in order to internalize the interaction:\
 \
 `"exec_plan": "internal"`&#x20;
 
-In such a case, the driver will remove the interaction, and so the solution will end up using less gas, get better ranking, and also be risk-free (at least the part involving the internalized AMM interaction).
+In such a case, the driver will remove the interaction, and so the solution will end up using less gas, get better ranking, and also be risk-free (at least the part involving the internalized AMM interaction). We stress that the `exec_plan` coordinates must always be provided, even if the interaction will end up being internalized.
 
 ## <mark style="color:blue;">Prices of the traded tokens</mark>
 
