@@ -5,14 +5,19 @@ The SDK uses Pinata to upload it to IPFS, so you will need an API Key in order t
 Alternativelly, you can upload the document on your own using any other service.
 
 ```typescript
-// Make sure you provide the IPFS params when instantiating the SDK
-const cowSdk = new CowSdk(4, {
-  ipfs: { 
-    pinataApiKey: 'YOUR_PINATA_API_KEY', 
-    pinataApiSecret: 'YOUR_PINATA_API_SECRET'
-  },
-})
+import { MetadataApi } from '@cowprotocol/app-data'
 
-// Upload to IPFS
-const uploadedAppDataHash = await cowSdk.metadataApi.uploadMetadataDocToIpfs(appDataDoc)
+export const metadataApi = new MetadataApi()
+
+const IPFS_OPTIONS = {
+    pinataApiKey: `PINATA_API_KEY`,
+    pinataApiSecret: `PINATA_SECRET_API_KEY`,
+}
+
+const appDataDoc = await metadataApi.generateAppDataDoc(...)
+
+// Make sure you provide the IPFS params when instantiating the SDK
+const uploadedAppDataHash = await metadataApi.uploadMetadataDocToIpfs(appDataDoc, IPFS_OPTIONS)
+
+console.log(uploadedAppDataHash)
 ```

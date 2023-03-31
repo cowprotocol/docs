@@ -7,20 +7,21 @@ The SDK provides just an easy way to access all this information.
 You can query the Cow Subgraph either by running some common queries exposed by the `CowSubgraphApi` or by building your own ones:
 
 ```typescript
-const chainId = 1 // Mainnet
-const cowSdk = new CowSdk(chainId)
+import { SubgraphApi, SupportedChainId } from '@cowprotocol/cow-sdk'
+
+const subgraphApi = new SubgraphApi({ chainId: SupportedChainId.MAINNET })
 
 // Get CoW Protocol totals
 const { tokens, orders, traders, settlements, volumeUsd, volumeEth, feesUsd, feesEth } =
-  await cowSdk.cowSubgraphApi.getTotals()
+  await csubgraphApi.getTotals()
 console.log({ tokens, orders, traders, settlements, volumeUsd, volumeEth, feesUsd, feesEth })
 
 // Get last 24 hours volume in usd
-const { hourlyTotals } = await cowSdk.cowSubgraphApi.getLastHoursVolume(24)
+const { hourlyTotals } = await cowSubgraphApi.getLastHoursVolume(24)
 console.log(hourlyTotals)
 
 // Get last week volume in usd
-const { dailyTotals } = await cowSdk.cowSubgraphApi.getLastDaysVolume(7)
+const { dailyTotals } = await cowSubgraphApi.getLastDaysVolume(7)
 console.log(dailyTotals)
 
 // Get the last 5 batches
@@ -33,6 +34,6 @@ const query = `
   }
 `
 const variables = { n: 5 }
-const response = await cowSdk.cowSubgraphApi.runQuery(query, variables)
+const response = await cowSubgraphApi.runQuery(query, variables)
 console.log(response)
 ```

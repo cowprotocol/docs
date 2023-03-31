@@ -15,7 +15,11 @@ To create an order, you need to get a price/fee quote first:
 To get the quote, you simply specify the trade you intent to do:
 
 ```typescript
-const quoteResponse = await cowSdk.cowApi.getQuote({
+import { OrderBookApi, SupportedChainId } from '@cowprotocol/cow-sdk'
+
+const orderBookApi = new OrderBookApi({ chainId: SupportedChainId.MAINNET })
+
+const quoteResponse = await orderBookApi.getQuote({
   kind: OrderKind.SELL, // Sell order (could also be BUY)
   sellToken: '0xc778417e063141139fce010982780140aa0cd5ab', // WETH
   buyToken: '0x4dbcdf9b62e891a7cec5a2568c3f4faf9e8abe2b', // USDC

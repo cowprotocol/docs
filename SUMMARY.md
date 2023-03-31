@@ -68,7 +68,6 @@
   * [CoW API](cow-sdk/cow-api.md)
   * [Sign and Post orders](cow-sdk/sign-and-post-orders/README.md)
     * [Enable Tokens](cow-sdk/sign-and-post-orders/enable-tokens.md)
-    * [Instantiate SDK with a signer](cow-sdk/sign-and-post-orders/instantiate-sdk-with-a-signer.md)
     * [STEP 1: Get Market Price](cow-sdk/sign-and-post-orders/step-1-get-market-price.md)
     * [STEP 2: Sign the order](cow-sdk/sign-and-post-orders/step-2-sign-the-order.md)
     * [STEP 3: Post the signed order to the API](cow-sdk/sign-and-post-orders/step-3-post-the-signed-order-to-the-api.md)

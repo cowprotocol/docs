@@ -10,8 +10,12 @@ The SDK provides access to the CoW API. The CoW API allows you:
 For example, you can easily get the last 5 order of a trader:
 
 ```typescript
+import { OrderBookApi, SupportedChainId } from '@cowprotocol/cow-sdk'
+
+const orderBookApi = new OrderBookApi({ chainId: SupportedChainId.MAINNET })
+
 // i.e. Get last 5 orders for a given trader
-const trades = await cowSdk.cowApi.getOrders({
+const trades = orderBookApi.getOrders({
   owner: '0x00000000005ef87f8ca7014309ece7260bbcdaeb', // Trader
   limit: 5,
   offset: 0,

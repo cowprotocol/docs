@@ -7,6 +7,12 @@ Once you know the price and fee, we can create the order and sign it:
 * The SDK will provide an easy way to sign orders given the raw data
 
 ```typescript
+import { OrderSigningUtils, OrderKind, SupportedChainId } from '@cowprotocol/cow-sdk'
+import { Web3Provider } from '@ethersproject/providers'
+
+const provider = new Web3Provider(window.ethereum)
+const signer = provider.getSigner()
+
 const { sellToken, buyToken, validTo, buyAmount, sellAmount, receiver, feeAmount } = quoteResponse.quote
 
 // Prepare the RAW order
@@ -34,7 +40,9 @@ const order = {
 }
 
 // Sign the order
-const signedOrder = await cowSdk.signOrder(order)
+const signedOrder = await OrderSigningUtils.signOrder(order, SupportedChainId.MAINNET, signer)
 ```
 
 At this point, you have a signed order. So next step will be to post it to the API so it's considered by the solvers and executed.
+
+> 📚 Read more about `appData` [here](https://github.com/cowprotocol/app-data)

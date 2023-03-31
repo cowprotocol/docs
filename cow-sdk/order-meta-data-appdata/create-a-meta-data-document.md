@@ -7,18 +7,26 @@ The SDK facilitates the creation of these documents, and getting the `AppData` H
 The most important thing to define in the meta-data is the name of your app, so the order-flow can be credited to it.
 
 ```typescript
-const appDataDoc = cowSdk.metadataApi.generateAppDataDoc({}, {
-  appCode: 'YourApp'
+import { MetadataApi } from '@cowprotocol/app-data'
+
+export const metadataApi = new MetadataApi()
+
+const appCode = 'YOUR_APP_CODE'
+
+const appDataDoc = await metadataApi.generateAppDataDoc({
+    appDataParams: { appCode },
 })
+
+console.log(appDataDoc)
 ```
 
 This will create a document similar to:
 
 ```json
 {
-  "version": "0.1.0",
-  "appCode": "YourApp",
-  "metadata": {},
+  "version": "0.5.0",
+  "appCode": "YOUR_APP_CODE",
+  "metadata": {}
 } 
 ```
 
@@ -28,17 +36,20 @@ For example, you could give information about who reffered the user creating the
 
 {% code title="" %}
 ```typescript
-const appDataDoc = cowSdk.metadataApi.generateAppDataDoc(
-  {
-    referrer: {
-      address: '0x1f5B740436Fc5935622e92aa3b46818906F416E9',
-      version: '0.1.0',
-    },
-  },
-  {
-    appCode: 'YourApp',
-  }
-)
+import { MetadataApi } from '@cowprotocol/app-data'
+
+export const metadataApi = new MetadataApi()
+
+const appCode = 'YOUR_APP_CODE'
+const referrerParams = { address: '0x1f5B740436Fc5935622e92aa3b46818906F416E9' }
+
+const appDataDoc = await metadataApi.generateAppDataDoc({
+    appDataParams: { appCode },
+    metadataParams: { referrerParams },
+})
+
+console.log(appDataDoc)
+
 ```
 {% endcode %}
 
@@ -46,12 +57,12 @@ This will create a document similar to:
 
 ```json
 {
-    "version": "0.1.0",
-    "appCode": "YourApp",
+    "version": "0.5.0",
+    "appCode": "YOUR_APP_CODE",
     "metadata": {
       "referrer": {
         "address": "0x1f5B740436Fc5935622e92aa3b46818906F416E9",
-        "version": "0.1.0",
+        "version": "0.2.0"
       },
     },
 }
