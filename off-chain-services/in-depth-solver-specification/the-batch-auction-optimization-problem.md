@@ -99,6 +99,11 @@ Similarly, the terms of the objective that correspond to the total fees paid and
 \
 As a final comment, these external prices can be treated as given weights that create a weighted sum of different terms in the objective function, and allow for a simple and well-defined maximization objective function.
 
+### Ranking of solutions
+
+According to [CIP-20](https://snapshot.org/#/cow.eth/proposal/0x2d3f9bd1ea72dca84b03e97dda3efc1f4a42a772c54bd2037e8b62e7d09a491f), a second-price auction mechanism is used to rank solutions and compute the reward for the winning one. More details about the new mechanism can be found [here](solver-auction-and-rewards.md).\
+
+
 ## <mark style="color:blue;">Constraints</mark>
 
 Here, we briefly discuss all the constraints that must be satisfied so that a solution can be considered valid. Systematic violation of these rules might lead to penalizing, or even slashing (if the DAO decides so).
@@ -117,7 +122,7 @@ Here, we briefly discuss all the constraints that must be satisfied so that a so
   \
   We also note that, although the protocol's approach is to not slash solvers that unintentionally might violate this constraint, systematic and intentional violations of it might result in flagging of a solver. In other words, the protocol and the DAO expects that solvers will report traded amounts as truthfully as they can.\
   \
-  A particular instance of intentionally violating the token conservation per token constraint with the goal to win more batches is the so-called _pennying_ strategy, which has been thoroughly discussed [here](https://forum.cow.fi/t/pennying-as-a-strategy-to-win-more-auctions-and-how-to-deal-with-it/1093), and which has been banned (see [CIP-13](https://snapshot.org/#/cow.eth/proposal/0x812273c78abe1cea303d8381e1fb901a4cb701715fd24f4b769d0a0b3779b3e2)).\\
+  A particular instance of intentionally violating the token conservation per token constraint with the goal to win more batches is the so-called _pennying_ strategy, which has been thoroughly discussed [here](https://forum.cow.fi/t/pennying-as-a-strategy-to-win-more-auctions-and-how-to-deal-with-it/1093), and which has been banned (see [CIP-13](https://snapshot.org/#/cow.eth/proposal/0x812273c78abe1cea303d8381e1fb901a4cb701715fd24f4b769d0a0b3779b3e2)).
 * **Maximum size of solution:** The total number of executed orders and AMMs cannot exceed a certain number within each batch due to limitations regarding the size of a block on the blockchain.
 * **Token conservation per order:** One additional set of constraints that we impose follows as a generalization of the token conservation per token constraint, and is discussed in the next subsection.
 * **Social consensus rules:** These are "non-written" behavioral rules that solvers should follow, as voted in[ CIP-11](https://snapshot.org/#/cow.eth/proposal/0x16d8c681d52b24f1ccd854084e07a99fce6a7af1e25fd21ddae6534b411df870). We now provide some examples of them:
