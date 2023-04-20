@@ -1,19 +1,22 @@
-# Order Cancellation
+# Order Invalidation
 
-The user who owns the order calls a function on the eth-flow contract to delete an order:
+The function to invalidate an order and return the ETH to the order creator is:
 
-function deleteOrder(userOrder);
+```
+function invalidateOrder(EthFlowOrder.Data order)
+```
 
-* userOrder is the full user order struct with all order data (sellToken, buyToken...).
+`order` is the same order struct used for [order creation](order-creation.md).
 
-Then order cancellation works as follows:
+Invalidating an order also refunds all unused ETH to the original creator of the order.
 
-1. The parameters of the corresponding contract order are computed from those of the user order and the contract order digest; this is used for two things:
-   1. retrieve values validTo, owner in the [order mapping](https://docs.google.com/document/d/1D9P6A-X\_sjZyV7i\_f7XTZx5o7znFgRbNVJghHtBcy7U/edit#heading=h.7yie1ea3yx14)
-   2. retrieve filledAmount for this order from the settlement contract (note: all parameters are available to compute the orderUid from the digest)
-2. The unsettled amount is computed from the order parameters and step 1b as amount - filledAmount, amount which is sent back to the user
-3. The order is marked as invalid by setting the order mapping for the contract order digest to  invalidated&#x20;
+Order can be invalidated in two ways:
 
-New: this function should be extended so that anyone can cancel an order if the order is expired. This allows the protocol to refund the order amount without asking the user to send a transaction.
+1. The user who created the order calls this function. Every valid order can be invalidated at any time by its creator.
+2. After the order is expired, any address can trigger its invalidation. This is done to allow CoW Swap to provide a service to automatically refund unmatched orders to the users.
 
-\
+Order validity and owner are recovered from the [order mapping](orders-in-storage.md).
+
+Each order can be invalidated at most once and returns all funds that have not yet been used for trading.
+
+After invalidation, the order is marked as invalid by setting the order mapping for the contract order digest to `invalidated`.

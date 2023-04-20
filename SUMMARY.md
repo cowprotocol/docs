@@ -44,7 +44,6 @@
   * [Introduction](off-chain-services/in-depth-solver-specification/introduction.md)
   * [The Batch Auction Optimization Problem](off-chain-services/in-depth-solver-specification/the-batch-auction-optimization-problem.md)
   * [Solver Auction and Rewards](off-chain-services/in-depth-solver-specification/solver-auction-and-rewards.md)
-  * [Solver Auction and Rewards](off-chain-services/in-depth-solver-specification/solver-auction-and-rewards-1.md)
   * [Input: Batch auction instances](off-chain-services/in-depth-solver-specification/input-batch-auction-instances.md)
   * [Output: Batch auction solutions](off-chain-services/in-depth-solver-specification/output-batch-auction-solutions.md)
   * [Sample Test Instances](off-chain-services/in-depth-solver-specification/sample-test-instances.md)

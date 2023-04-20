@@ -5,7 +5,7 @@ description: >-
   and documentation, along with some convenient
 ---
 
-# 🐮 Build on top of CoW Protocol
+# Build on top of CoW Protocol
 
 ## 🏁 Get started
 

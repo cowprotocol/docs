@@ -76,4 +76,4 @@ $$\sum_o U(o)+p \cdot \sum_o f(o)$$
 
 where _p_ is a vector of externally-determined prices used to express all fees in terms of the common numeraire.&#x20;
 
-Finally, solvers compete for the right to settle a batch by participating in an auction, aiming to implement the solution with the highest quality at the lowest possible cost to the protocol. For more details, see the page [Solver Auction and Rewards](solver-auction-and-rewards-1.md).
+Finally, solvers compete for the right to settle a batch by participating in an auction, aiming to implement the solution with the highest quality at the lowest possible cost to the protocol. For more details, see the page [Solver Auction and Rewards](solver-auction-and-rewards.md).
