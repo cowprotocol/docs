@@ -2,172 +2,78 @@
 
 In this section, we describe all the different components of the optimization problem that needs to be solved within each batch.
 
-## <mark style="color:blue;">Tokens</mark>
-
-The problem considers a set of tokens that users want to buy or sell in their orders. The key quantity describing each token _t_ is its price _p(t)_, which is one of the main variables to be determined in the optimization problem.
-
 ## <mark style="color:blue;">User Orders</mark>
 
-We now turn to the type of orders that a user can submit to the Cow Protocol. The set of user orders is denoted as _O_, and a user order _o_ is described by a tuple $$o = \langle b_o, s_o, f_o, c_o, T_o, U_o \rangle$$, where:
+Suppose that there are $$\{1,2,...k\}$$ tokens. From a high-level perspective, we can define a user order as an _acceptance set_ $$S \subset \mathbb R^k$$ specifying the trades a user is willing to accept (where negative entries of a vector represent tokens sold, while positive entries represent tokens bought). So, for example, if $$k=2$$ and $$\begin{bmatrix} x \\-y \end{bmatrix}\in S$$ then a user is happy to receive _x_ units of token 1 in exchange of _y_ units of token 2 (note: this is all from the user's perspective and is therefore net of fees).
 
-* $$b_o \in \mathbb{N}_{> 0}$$ denotes the token (e.g., ETH) the user wants to buy (extract out of the market).
-* $$s_o \in \mathbb{N}_{> 0}$$ denotes the token (e.g., COW) the user wants to sell (insert into the market).
-* $$f_o \in \mathbb{N}_{\geq 0}$$ specifies the fee that is paid for the service and the transaction costs, denominated in the sell token. In principle, the fee can depend on the user order, the traded amount etc., but for simplicity, we will treat it as a predetermined fee that might be different for each order.
-* $$c_o \in \mathbb{N}_{\geq 0}$$ is a fixed cost for settling the user's trade, denominated in some predefined reference token (ETH is usually selected as the reference token).
-* $$T_o: \mathbb{R}_{\geq 0}^2 \to \{\mathtt{true}, \mathtt{false}\}$$ is the trading predicate, that determines the set of buy (_x_) and sell (_y_) amounts for which the user is willing to participate in the market; \_\_ if \_\_ $$T_o(x,y) = \mathtt{true}$$, then this means that the user is willing to sell _y_ amount of the sell token and buy _x_ amount of the buy token.
-* $$U_o: \mathbb{R}_{\geq 0}^2 \to \mathbb{R}$$ is the user's _utility function_. Utility measures how "happy" a user is with a particular buy (_x_) and sell (_y_) amount, given that $$T_o(x,y) = \mathtt{true}$$; the larger the utility, the happier the user is with the trade. We note that if the utility is equal to zero, then the user is indifferent to the trade, so such a trade might or might not be executed.
+Clearly,  $$\mathbb R^k_+ \subset S$$, that is, a user is always willing to accept an order in which they receive a positive amount of tokens without paying anything. Similarly, $$\mathbb R^k_{-} \cap S = 0$$ because no user would accept to pay tokens without receiving anything. The interesting elements of the acceptance set are, therefore, those with at least one positive entry and at least one negative entry. We also assume that $$0 \in S$$, that is, when submitting an order a user accepts that the order may not be filled.&#x20;
 
-We will now describe the different types of trading predicates that are allowed. We clarify that we always set $$T(x,y) \coloneqq \mathtt{false}$$ if _x_ = 0, and so from now on we only discuss the case where _x_ > 0.
+To each order $$S$$ we may assign a _utility function_ $$U_S:S\rightarrow \mathbb R$$ specifying a numerical value to each trade in the acceptance set, to be interpreted as "how good" a trade is from the point of view of the user who submitted order _S_. By definition $$U_S(0)=0$$.
+
+Practically speaking, CoW Protocol allows only some types of orders, which we can think of as constraints on the set _S_ that a user can submit_._ One such constraint is that only pairwise swaps are allowed, that is, all vectors in $$S$$  have zeros in $$k-2$$ dimensions. Furthermore, each order must fit within one of the categories we now discuss. To simplify notation, when discussing these categories we assume that $$k=2$$.
 
 #### Limit Sell Orders
 
-A _limit sell order_ is specified by a maximum sell amount _Y_ > 0, which indicates the maximum amount that the user is willing to sell. Moreover, there is a limit price $$\pi$$, that corresponds to the worst-case exchange rate that the user is willing to settle for. More formally, if _x_ denotes the (proposed) buy amount and _y_ denotes the (proposed) sell amount of the order, the trading predicate is defined as
+A _limit sell order_ specifies a maximum sell amount of a given token _Y_ > 0, a buy token, and a limit price $$\pi$$, that corresponds to the worst-case exchange rate that the user is willing to settle for. They can be fill-or-kill whenever the executed sell amount must be Y (or nothing). They can be partially fillable if the executed sell amount can be smaller or equal to Y.  Formally, if _x_ denotes the (proposed) buy amount and _y_ denotes the (proposed) sell amount of the order, a fill-or-kill limit sell order has the form
 
-$$T(x,y) \coloneqq \left(\frac{y}{x} = \pi\;\;\textrm{and}\;\; y < Y\right) \;\;\textrm{or}\;\; \left(\frac{y}{x} \leq \pi\;\;\textrm{and}\;\; y = Y\right).$$
+$$S=\left\{\begin{bmatrix} x \\-y \end{bmatrix}~~s.t. ~~\frac{y}{\pi}\leq x \mbox{ and } y\in\{0,Y\} \right\},$$
 
-In words, a limit sell order is _eligible for execution_ in two cases\_:\_ it either is fully executed and the limit price is respected, or it is partially executed and is traded at its limit price.
+and a partially-fillable sell order has the form
 
-A limit sell order is allowed to be Fill-or-Kill; in such a case the order is not allowed to be partially filled. For this case, the trading predicate becomes
+$$S= \left \{ \begin{bmatrix} x \\-y \end{bmatrix} ~~s.t. ~~\frac{y}{\pi} \leq x \mbox{ and } y \in [0,Y] \right \}.$$
 
-$$T(x,y) \coloneqq \left(\frac{y}{x} \leq\pi \;\;\textrm{and}\;\; y = Y\right).$$
+In both cases, the utility function is defined as
 
-Given that the order is eligible for execution, the utility of the order is defined as the value of the difference between the amount of tokens the trader receives and the minimum amount that they were expecting to receive. Formally,
+$$U(x,-y)=(x-y / \pi)p(b)$$
 
-$$U(x,y) \coloneqq \left(x - \frac{y}{\pi} \right) \cdot p(b),$$
+where $$(x-y / \pi)$$ is the additional amount of buy tokens received by the user relative to the case in which they trade at the limit price, and $$p(b)$$ is the price of the buy token relative to a numeraire (in our case ETH) and is externally provided (i.e., by an oracle). The function $$U(x,-y)$$ is therefore expressed in units of the numeraire and is always non-negative.
 
-where _p(b)_ denotes the price of the buy token.
+A final observation is that orders can be valid over multiple batches. For a fill-or-kill, this means that an order that is not filled remains valid for a certain period (specified by the user). For a partially-fillable order, this also means that only a fraction of it may be executed in any given batch.&#x20;
 
-Notice that currently all the sell orders submitted via the[ CoW Swap UI](https://swap.cow.fi/#/swap) are Fill-or-Kill orders that are specified by the maximum sell amount _Y_ and the minimum buy amount _X_. More precisely, when a user asks to sell _Y_ amount of the sell token, then they get a promise that the buy amount will be at least some quantity _X_. Thus, the limit price $$\pi$$ is only implicitly specified as $$\pi$$ _= Y/X_. Nevertheless, it is more convenient to refer to this limit price $$\pi$$ instead of the minimum buy amount _X_, as this naturally corresponds to the worst-case exchange rate that a user is willing to accept, and also allows us to generalize the concepts to partially fillable orders (i.e., orders that are not Fill-or-Kill).
+**Limit Buy Orders**
 
-#### Limit Buy Orders
+A _limit buy order_ is specified by a maximum buy amount _X_ > 0 and a limit price $$\pi$$ corresponding to the worst-case exchange rate the user is willing to settle for. With _x_ denoting the buy amount and _y_ denoting the sell amount of the order, fill-or-kill limit buy orders have the form
 
-A _limit buy order_ is specified by a maximum buy amount _X_ > 0, which indicates the maximum amount that the user is willing to buy. Much like a limit sell order, there is a limit price $$\pi$$, that corresponds to the worst-case exchange rate that the user is willing to settle for. With _x_ denoting the buy amount and _y_ denoting the sell amount of the order, the trading predicate is defined as follows:
+$$S = \left\{\begin{bmatrix} x \\-y \end{bmatrix}~~s.t.~~ y \leq x \cdot \pi \mbox{ and }\;\; x \in\{0, X\} \right\}$$
 
-$$T(x,y) \coloneqq \left(\frac{y}{x} =\pi \;\;\textrm{and}\;\; x < X\right) \;\; \textrm{or}\;\; \left(\frac{y}{x} \leq\pi \;\;\textrm{and}\;\; x = X\right).$$
+while partially-fillable limit buy orders have the form
 
-Again, limit buy orders are allowed to be Fill-or-Kill, meaning the trading predicate is restricted to
+$$S = \left\{\begin{bmatrix} x \\-y \end{bmatrix}~~s.t.~~ y \leq x \cdot \pi \mbox{ and }\;\; x \in[0, X] \right\}.$$
 
-$$T(x,y) \coloneqq \left(\frac{y}{x} \leq \pi \;\;\textrm{and}\;\; x = X\right).$$
+Again, the utility function is defined as
 
-If the conditions are met, the order can be executed. In both cases, the utility is then defined as the value of the difference between the amount of tokens that the trader would have been ready to spend and the amount they actually spend, or:
+&#x20;$$U(\{x,-y\})=(x \cdot \pi-y)p(s)$$
 
-$$U(x,y) = (x \pi - y) \cdot p(s),$$
-
-where _p(s)_ denotes the price of the sell token.
+where $$p(s)$$ is the price of the sell token relative to a numeraire and is externally provided. Also here, orders can be executed over multiple batches.
 
 ## <mark style="color:blue;">Liquidity Orders</mark>
 
-A liquidity order looks identical to a user order, except that its utility is always equal to zero. This is because a liquidity order only cares about the execution of the trade and is oblivious to any (potential) surplus they might get. The set of liquidity order is denoted with _L_.
+Liquidity orders are orders not submitted by users. They represent sources of liquidity that are available to a solver, for example, automated market makers or private liquidity pools. They look identical to user orders, in the sense that each liquidity order can be represented by an acceptance set $$L \subset \mathbb R^k$$. The main difference with users orders is that the utility function of a liquidity order is always zero.&#x20;
 
-## <mark style="color:blue;">Automated Marker Makers (AMMs)</mark>
+## <mark style="color:blue;">Fees</mark>&#x20;
 
-The set of AMMs that participate in a batch is denoted as _M._ An AMM is again described by a tuple, similar to user orders, and is determined by the trading predicate _T_ in which the sell (_y_) and buy (_x_) amounts are related by an arbitrary concave function $$G: \mathbb{R}_{\geq 0} \to \mathbb{R}_{\geq 0}$$, i.e, we have
+Each user order has an associated fee paid to the protocol. At a high level, these fees can be represented by a function that, for a given order $$S$$ maps all possible trades to a positive vector of tokens, that is $$f_S:S \rightarrow \mathbb R^k_+$$   with $$f_S(0)=0$$.
 
-$$T(x,y) \coloneqq \left(y = G(x)\right).$$
+From the practical viewpoint, for market fill-or-kill orders, the fee is always in the sell token and is pre-specified: it is an estimate of the cost of executing an order and is explicitly shown to the user before the order is submitted. Instead, (long-standing) limit orders are "feeless" from the user's perspective: users are guaranteed a limit price without specifying how fees will be calculated. For fill-or-kill limit orders, the protocol computes a fee each time such an order enters a batch auction, while for partially-fillable limit orders, solvers are the ones that need to propose a fee. In this latter case, the expectation is that this fee should equal the cost of execution of this trade in isolation. The fee of limit orders is again in the sell token.
 
-One example of such a function _G_ is the constant-product ("Uniswap") invariant
+## <mark style="color:blue;">Solution</mark>
 
-$$G(x) = \frac{xr_{y}}{x+r_{x}},$$
+Solvers propose solutions to the protocol, where a solution is a set of trades to execute. Formally, suppose that there are $$I$$ users and _J_ liquidity sources. A solution is a list of trades $$\{o_1, o_2, ...o_I, l_1, l_2, ..., l_J\}$$ one per user and one per liquidity source such that
 
-where $$r_{x},r_{y}\in\mathbb{R}^{+}$$ are the internal reserves of the token being bought and sold, respectively, by the AMM. Similar to a liquidity order, the utility function of an AMM is always equal to zero.
+* **Maximum size of solution:** The total number of executed orders and AMMs does not exceed a certain number within each batch due to limitations regarding the size of a block on the blockchain.
+* **Incentive compatibility and feasibility:** the trades respect the user and liquidity orders, that is, $$o_i\in S_i~~\forall i\leq I$$  and $$l_j \in L_j~~\forall j\leq J$$.
+* **Uniform clearing prices:** all users must face the same prices. That is, if user _i_ and _j_ trade the same tokens _x_ and _y_, then it must be the case that $$\frac{x_i}{y_i}=\frac{x_j}{y_j}\equiv p_{y,x}$$. Furthemore, prices must be consistent, in the sense that for any three  tokens x, y, and z, if $$p_{y,x},~ p_{x,z}, ~p_{y,z}$$ are well defined, then it must be that $$p_{y,x}\cdot p_{x,z}=p_{y,z}$$. Note that this implies that there exists a clearing price vector _p_ that assigns one price per token_,_ such that the exchange rate of any user order selling token _y_ and buying token _x_ is equal to $$\frac{p_x}{p_y}.$$
+* **Token conservation per token:** No token amounts can be created or destroyed. In other words, for every token, the total amount sold must be equal to the total amount bought of this token.
+* **Social consensus rules:** These are a set of principles that solvers should follow, as voted in[ CIP-11](https://snapshot.org/#/cow.eth/proposal/0x16d8c681d52b24f1ccd854084e07a99fce6a7af1e25fd21ddae6534b411df870). For example:
+  * _No provision of unfair solutions._ Uniform clearing prices computed by solvers should be in line (or even better) than what the users would get elsewhere. This becomes particularly relevant for solutions where CoWs happen, i.e., when some volume is settled as part of a CoW and not by routing through an AMM.
+  * _No malicious behavior_ such as intentionally harming users and/or the protocol.
 
-## <mark style="color:blue;">Objective Function</mark>
+Note that systematic violation of these rules might lead to penalizing or even slashing (if the DAO decides so).
 
-The key goal of a solver is to find solutions that maximize the utility of the users. However, in the objective, we also add a fee component for the service provided, and subtract costs that the transaction execution on the blockchain is expected to incur. Hence, our objective reads
+From the protocol viewpoint, each solution that satisfies the above constraints has a _quality_ given by the sum of the utility generated and the fees paid to the protocol:
 
-_maximize (total utility) + (total fees paid) - (total execution cost)._
+$$\sum_o U(o)+p \cdot \sum_o f(o)$$
 
-For a more formal description, we introduce an indicator variable _z_ per (user/liquidity) order and AMM, that indicates whether the order is executed \[_z(o)_ = 1], or not \[_z(o)_ = 0]. Thus, the objective function is the following:
+where _p_ is a vector of externally-determined prices used to express all fees in terms of the common numeraire.&#x20;
 
-_maximize_ $$\sum_{o \in O} U_o(x(o), y(o)) \cdot z(o) + \sum_{o \in O \cup L} f_o \cdot z(o) - \sum_{\alpha \in O \cup L \cup M} c_\alpha \cdot z(\alpha),$$
-
-where the underlying variables to be determined are the indicator z-variables, the buy (_x_) and sell (_y_) amounts of each order, as well as the prices of the tokens.
-
-**Note:** We stress here that in the computation of the utility of each executed order in the objective, we do not use the computed price of the traded token but an external price provided as part of the input. In other words, for an executed limit sell order, the utility is equal to\
-\
-$$U(x,y) \coloneqq \left(x - \frac{y}{\pi} \right) \cdot ext\_price(b),$$\
-\
-where _ext\_price(b)_ is provided as part of the input as an estimate of the price of token _b_. Similarly, for an executed limit buy order, the utility is equal to\
-\
-$$U(x,y) = (x \pi - y) \cdot ext\_price(s),$$\
-\
-where, again, _ext\_price(s)_ is provided as part of the input as an estimate of the price of token _s_.\
-\
-There are two reasons for using these external prices and not the computed prices in the solution. The first is that it simplifies the objective function (i.e., an order's utility is linear in the traded amounts and not quadratic in the amount and price), and, second, it ignores solutions that scale up prices of certain tokens in order to create "fake amounts of surplus".\
-\
-Similarly, the terms of the objective that correspond to the total fees paid and execution costs are also computed with respect to these external prices.\
-\
-As a final comment, these external prices can be treated as given weights that create a weighted sum of different terms in the objective function, and allow for a simple and well-defined maximization objective function.
-
-### Ranking of solutions
-
-According to [CIP-20](https://snapshot.org/#/cow.eth/proposal/0x2d3f9bd1ea72dca84b03e97dda3efc1f4a42a772c54bd2037e8b62e7d09a491f), a second-price auction mechanism is used to rank solutions and compute the reward for the winning one. More details about the new mechanism can be found [here](solver-auction-and-rewards.md).\
-
-
-## <mark style="color:blue;">Constraints</mark>
-
-Here, we briefly discuss all the constraints that must be satisfied so that a solution can be considered valid. Systematic violation of these rules might lead to penalizing, or even slashing (if the DAO decides so).
-
-* **Trading predicate:** An order or an AMM can only be executed/used if the proposed trading amounts satisfy its _trading predicate_.
-* **Uniform clearing prices:** The proposed trading amounts of all **user** orders must follow the same prices. I.e., if a user order is executed with a buy amount _x_ and a sell amount _y_, the equation $$x \cdot p(b) = y \cdot p(s)$$ must hold, where _p(b)_ denotes the price of the buy token and _p(s)_ denotes the price of the sell token. The above equation can also be rewritten as $$\frac{y}{x} = \frac{p(b)}{p(s)}$$, which explicitly states that the exchange rate that a user order perceives is determined by the token prices (and thus, all users trading on the same token pair perceive the same exchange rate).\
-  \
-  We stress here that the clearing price vector is a key component of a reported solution, as the way the smart contract computes the traded amounts is via this vector. For example, for a Fill-or-Kill sell order that sells a _y_ amount of token A for some amount of token B, and assuming that its trading predicate is satisfied, then the executed buy amount of the order is computed as follows:\
-  \
-  buy amount = $$y \cdot p(A) / p(B)$$.\
-  \
-  A similar computation is done in the case of buy orders.\\
-* **Token conservation per token:** No token amounts can be created or destroyed. In other words, for every token, the total amount sold must be equal to the total amount bought of this token.\
-  \
-  We stress here that settlements that end up violating token conservation are usually penalized in a soft way. More precisely, due to blockchain volatility, it can happen that AMM interactions do not return the exact amount that was expected. In most of these cases, this is indeed unintended (from a solver's perspective), and usually the deviations are not that large, so the protocol has chosen a soft penalty for such deviations, in the following form. A proper accounting per settled batch is done, and slippage (in both directions) is taken into account, added up (with the appropriate sign), and if the result ends up being negative (i.e., the solver "owing" money to the protocol), that amount is charged as penalty to the solver.\
-  \
-  We also note that, although the protocol's approach is to not slash solvers that unintentionally might violate this constraint, systematic and intentional violations of it might result in flagging of a solver. In other words, the protocol and the DAO expects that solvers will report traded amounts as truthfully as they can.\
-  \
-  A particular instance of intentionally violating the token conservation per token constraint with the goal to win more batches is the so-called _pennying_ strategy, which has been thoroughly discussed [here](https://forum.cow.fi/t/pennying-as-a-strategy-to-win-more-auctions-and-how-to-deal-with-it/1093), and which has been banned (see [CIP-13](https://snapshot.org/#/cow.eth/proposal/0x812273c78abe1cea303d8381e1fb901a4cb701715fd24f4b769d0a0b3779b3e2)).
-* **Maximum size of solution:** The total number of executed orders and AMMs cannot exceed a certain number within each batch due to limitations regarding the size of a block on the blockchain.
-* **Token conservation per order:** One additional set of constraints that we impose follows as a generalization of the token conservation per token constraint, and is discussed in the next subsection.
-* **Social consensus rules:** These are "non-written" behavioral rules that solvers should follow, as voted in[ CIP-11](https://snapshot.org/#/cow.eth/proposal/0x16d8c681d52b24f1ccd854084e07a99fce6a7af1e25fd21ddae6534b411df870). We now provide some examples of them:
-  * _Provision of unfair solutions._ Uniform clearing prices computed by solvers should be in line (or even better) than what the users would get elsewhere. This becomes particularly relevant for solutions where CoW's happen, i.e., when some volume is settled as part of a CoW and not by routing through an AMM.
-  * _Inflation of the objective function._ Using tokens for the sole purpose of inflating the objective value or maximizing the reward is forbidden (e.g., by creating fake tokens, or wash-trading with real tokens).
-  * _Illegal use of internal buffers._ The internal buffers may only be used to replace legitimate AMM interactions available to the general public for the purpose of saving transaction costs. We discuss internal buffers in more detail in a subsequent section ([here](https://docs.cow.fi/off-chain-services/in-depth-solver-specification/output-batch-auction-solutions#using-internal-buffers)).
-  * _Failure to report correct transacted values for encoded transactions._ Solvers may choose to include encoded transactions in their solution, by providing relevant calldata, but when doing so they must also truthfully specify the amounts transferred by each encoded transaction. This is required in order to verify token conservation constraints, and can be checked retrospectively. Again, this is discussed in more detail [here](https://docs.cow.fi/off-chain-services/in-depth-solver-specification/output-batch-auction-solutions#interaction-data).
-  * _Other malicious behavior._ Malicious solver behavior is not limited to the above examples. Slashing can still happen for other reasons where there is intentional harm caused to the user and/or the protocol at the discretion of the CoW DAO.
-
-### Token conservation per order
-
-The _uniform clearing prices_ constraint ensures that all users will see the same price for each traded token, which is a very desirable property so as to avoid cases where a user is envious of another user because of the better exchange rate they got. However, only enforcing it to user orders might lead to some undesirable solutions. More precisely, it has been observed that, although allowing liquidity/AMM orders to have different exchange rates (compared to the ones imposed by the price vector) can be beneficial, as more surplus can be extracted for the users in many cases, there is also the danger that surplus shifts from one trading cycle to another one. This can be considered unfair, since an order that was necessary for generating such surplus might not end up "receiving" it.
-
-The "token conservation per token" constraint ensures that no token is created or destroyed. However, this, in a way, is a global notion of conservation that is oblivious about what happens in certain subgraphs, and turns out not to be sufficient. As noted in the previous paragraph, at a high level, a desired notion of conservation would ensure that for any user order _o_, no external tokens "enter" or "exit" the trading cycles that contain the order _o_. For this reason, we introduce an additional constraint, which we call "token conservation per order" constraint, that prohibits solutions that violate this notion of conservation.
-
-We start with a simple example, in order to motivate this new constraint, which is arguably the most technical among all of our constraints. For that, suppose that we have a solution that consists of a single trading cycle _C_ that contains _k_ orders $$\alpha_1, \alpha_2, \ldots, \alpha_k$$. More precisely, order $$\alpha_1$$ buys token $$t_1$$ and sells token $$t_2$$, order $$\alpha_2$$ buys token $$t_2$$and sells token $$t_3$$, and so on, and finally, order $$t_k$$ buys token $$t_k$$ and sells token $$t_1$$, thus closing the cycle. If we now define the exchange rate of an order$$\alpha$$ in the standard way, i.e., $$r(\alpha)= \frac{a_s(\alpha)}{a_b(\alpha)}$$, then by the "token conservation per token" constraint, it is easy to deduce that
-
-$$r(C) \coloneqq \prod_{\alpha \in C} r(\alpha) = r(\alpha_1) \cdot r(\alpha_2) \cdot \ldots \cdot r(\alpha_k)= 1.$$
-
-Inspired by the above equation that holds for a single cycle, we now generalize this in the case where a user order is part of many trading cycles in the proposed solution. More specifically, for a user order _o_, if $$\mathcal{C}(o)$$ denotes the set of all trading cycles containing the order _o_ in a candidate solution, then, in order for that solution to be considered feasible, we require that the following condition holds:
-
-$$\sum_{C \in \mathcal{C}(o)} \lambda_C \cdot r(C) = 1,$$
-
-where $$\lambda_C \geq 0$$ is a non-negative number that is well-defined for each cycle _C_, such that $$\sum_{C \in \mathcal{C}(o)} \lambda_C= 1$$. In words, we require that a certain convex combination of the products of exchange rates over all cycles that contain a user order _o_ is equal to 1\_.\_ This can also be viewed as an average-case version of the simpler equation that holds for a single cycle and is described above.
-
-The only thing remaining to do is define these $$\lambda$$ terms that appear in the equation above. For that, we first define the execution graph _G_(_o_) of a user order _o_ as the union of all cycles containing the order _o_, where we use the following convention: we have a node for each of the traded tokens, and for each order $$\alpha$$ that buys token _u_ and sells token _v,_ we add a directed edge (_u, v_) from _u_ to _v_. Thus, we end up with a directed graph _G_(_o_). To simplify things, we also remove the edge corresponding to order _o_ from the graph, and call this updated graph the execution graph _G_(_o_) of order _o._ It is easy to see that this graph is directed and acyclic ([DAG](https://en.wikipedia.org/wiki/Directed\_acyclic\_graph)).
-
-Given this directed and acyclic graph _G_(_o_), we now associate each edge $$\alpha = (t, t')$$of the graph with the weight
-
-$$\lambda_\alpha \coloneqq \frac{a_b(\alpha)}{\sum_{\beta \in G(o):\; t_b(\beta) = t} a_b(\beta)}$$.
-
-Intuitively, this weight represents how token _t_ is "distributed" in the orders that are buying token _t_, within the graph _G_(_o_).
-
-We also define $$\lambda_o = 1$$ . Thus, we can now naturally define the $$\lambda$$ terms in the equation above as follows:
-
-$$\lambda_C \coloneqq \prod_{\alpha \in C} \lambda_\alpha,$$
-
-for every cycle containing order _o._ It is now straightforward to prove that these terms now indeed sum up to 1.
-
-To summarize, for a proposed solution, we require that for each executed user order _o_, we must have
-
-$$\sum_{C \in \mathcal{C}(o)} \lambda_C \cdot r(C) = 1,$$
-
-where the terms are defined as above.\
-\
-More details about the "token conservation per order" constraint, as well as a straightforward pseudocode implementation of a test that checks the constraint, can be found [here](https://docs.google.com/document/d/1scicpMu3TQZUatY\_\_qzVfWPBFIrmJtb9P1GTvGDkgh8/edit?usp=sharing).
-
-We stress here that the constraint is not enforced when ranking solutions, but can be checked retrospectively, by inspecting the settlement onchain. Systematic and non-trivial violations of the constraint can result to slashing of a solver.
+Finally, solvers compete for the right to settle a batch by participating in an auction, aiming to implement the solution with the highest quality at the lowest possible cost to the protocol. For more details, see the page [Solver Auction and Rewards](solver-auction-and-rewards-1.md).
