@@ -15,6 +15,7 @@ Here, we give an example of the simplest possible valid output, which correspond
   "prices": {},
   "approvals": [],
   "interaction_data": [],
+  "score": "0"
 }
 ```
 
@@ -28,16 +29,9 @@ The "orders" key contains all orders that were selected for execution, and it is
     "allow_partial_fill": false,
     "buy_amount": "88967366419390071936",
     "buy_token": "0xba100000625a3754423978a60c9317c58a424e3d",
-    "cost": {
-            "amount": "8193880727499585",
-            "token": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
-    },
     "exec_buy_amount": "88967366419390071936",
     "exec_sell_amount": "2129248125",
-    "fee": {
-            "amount": "163784016",
-            "token": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
-    },
+    "exec_fee_amount": null,
     "is_liquidity_order": true,
     "is_sell_order": false,
     "sell_amount": "2129248126",
@@ -45,6 +39,8 @@ The "orders" key contains all orders that were selected for execution, and it is
 }
 ```
 {% endcode %}
+
+**Note for partially-fillable orders.** In the case of a partially-fillable order, solvers are also required to report a fee. This is due to the fact that the fraction of the order that will be executed is decided by the solver, so having a predetermined fee assigned to the order is not reasonable. For this reason, the "exec\_fee\_amount" entry cannot be null in the case of a partially fillable order, and instead it should be a stringified integer, describing the fee amount, always denominated in the sell token.
 
 ## <mark style="color:blue;">Foreign Liquidity orders</mark>
 
@@ -226,3 +222,9 @@ An example is given below.
     }
 ]
 ```
+
+## <mark style="color:blue;">Score</mark>
+
+The score is the "bid" a solver makes for the batch, as it will get ranked according to it. The protocol picks the solution with the highest score, given that it is strictly positive. More details about the meaning of the score can be found [here](solver-auction-and-rewards.md).\
+\
+We clarify here that the score is a stringified integer, that is denominated in wei.

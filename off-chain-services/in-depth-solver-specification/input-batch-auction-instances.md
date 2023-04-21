@@ -56,11 +56,14 @@ The "orders" key maps to a dictionary containing the set of user and liquidity o
 * `"buy_amount"`: a stringified integer denoting the amount that is being bought. Similar to the sell\_amount, it is measured in terms of the smallest denomination of the token.
 * `"allow_partial_fill"`: a boolean indicating whether the order may be partially matched (_true_), or if it is Fill-or-Kill order (_false_).
 * `"is_sell_order"`: a boolean indicating whether the order is a sell (_true_) or buy (_false_) order.
-* `"fee"`: the maximum fee that can be charged to the order, if the order is eventually executed. It consists of the following:
-  * `"amount"`: a stringified integer denoting the maximum fee amount;
-  * `"token"`: the token id of the token in which the fee amount is denominated in. It always coincides with the sell token.
+*   `"fee"`: the fee that can be charged to the order, if the order is eventually executed. It consists of the following:
+
+    * `"amount"`: a stringified integer denoting the maximum fee amount;
+    * `"token"`: the token id of the token in which the fee amount is denominated in. It always coincides with the sell token.
+
+    We stress here that all fill-or-kill orders have a non-zero predetermined fee, while all partially-fillable orders have a zero fee, and the actual fee charged to the user is provided by the solvers when they propose an execution of such an order. More details are provided in the [next](output-batch-auction-solutions.md) section.
 * `"cost"`:
-  * `"amount"`: a stringified integer denoting the the cost amount; we clarify that this is only an estimate of the cost an order might incur if executed, that is provided to help guide the optimization procedure a solver might use. For the evaluation of the objective value of a proposed solution, this quantity is ignored and the total cost incurred by a solution is computed via a simulation (see [here](https://docs.cow.fi/off-chain-services/in-depth-solver-specification/the-batch-auction-optimization-problem#ranking-of-solutions) for more details).
+  * `"amount"`: a stringified integer denoting the cost/gas overhead associated with executing the order; we clarify that this is only an estimate of the cost of moving the funds from and back to the user, and not the cost of interacting with AMMs etc, and is only meant to help solvers do a preliminary cost estimation when computing their solutions.
   * `"token"`: the token id of the token in which the cost amount is denominated in. On Ethereum mainnet, it always coincides with WETH.
 * `"is_liquidity_order"`: a boolean that describes whether the order is a liquidity order.
 
@@ -97,7 +100,7 @@ On top of that, the user is willing to pay a fee of 163784016 / 10⁶ ≅ 163.78
 
 ## <mark style="color:blue;">AMMs</mark>
 
-The "amms" key describes all the automated market makers that are made available for use by the Driver. This dictionary maps an AMM id to the current state (in the blockchain) of that AMM, which depends on the type of AMM. Currently, there are 3 different types of AMMs provided by the Driver:
+The "amms" key describes all the automated market makers that are made available for use by the Driver. This dictionary maps an AMM id to the current state (in the blockchain) of that AMM, which depends on the type of AMM. Currently, there are 4 different types of AMMs provided by the Driver:
 
 #### Constant Product (Uniswap v2 pools)
 
@@ -190,3 +193,7 @@ An example of such an AMM between [DAI](https://etherscan.io/token/0x6b175474e89
     }
 }
 ```
+
+**Concentrated Pools**\
+\
+These pools correspond to Uniswap v3 pools.
