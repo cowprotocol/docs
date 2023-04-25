@@ -47,7 +47,7 @@
   * [Input: Batch auction instances](off-chain-services/in-depth-solver-specification/input-batch-auction-instances.md)
   * [Output: Batch auction solutions](off-chain-services/in-depth-solver-specification/output-batch-auction-solutions.md)
   * [Sample Test Instances](off-chain-services/in-depth-solver-specification/sample-test-instances.md)
-  * [Token conservation per order (aka Local token conservation)](off-chain-services/in-depth-solver-specification/token-conservation-per-order-aka-local-token-conservation.md)
+  * [Appendix: Token conservation per order (aka Local token conservation)](off-chain-services/in-depth-solver-specification/appendix-token-conservation-per-order-aka-local-token-conservation.md)
 
 ## Front End
 
