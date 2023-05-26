@@ -127,7 +127,7 @@ We now discuss some additional functionality that solvers are allowed to use. Si
 \
 1\. Token A is a safe token, the corresponding `"accepted_for_internalization"` flag is set to `true`. This means that the protocol is happy to store this token in the settlement contract.
 
-2\. There is enough balance of sell token B, i.e., at least as much amount as the sell amount of the AMM interaction.
+2\. There is enough balance of sell token B, i.e., at least as much amount as the sell amount of the AMM interaction. This is revealed by the `"internal_buffer"` entry in the token description.
 
 If both conditions are satisfied, a solver can set the `"internal"` flag to `true` in order to internalize the interaction:\
 \

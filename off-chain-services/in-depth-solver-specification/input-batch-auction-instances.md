@@ -17,6 +17,7 @@ The "tokens" key lists all tokens that appear in some order or AMM in the batch.
 * `"external_price"`: a float that corresponds to the price of the smallest denomination of the token with respect to a reference token. Only tokens that are traded by at least a user order will necessarily have an external price.
 * `"normalize_priority"`: an integer that expresses the preference for the token to be used as the [numeraire](https://en.wikipedia.org/wiki/Num%C3%A9raire). The token with highest priority in the solution will have price set to 1. More on this later.
 * `"accepted_for_internalization"`: this is a boolean flag that specifies whether the contract is willing to store the token as part of an internalized interaction. More information about internalizations (what they are and when they are allowed) can be found in the next section (see [here](https://docs.cow.fi/off-chain-services/in-depth-solver-specification/output-batch-auction-solutions#using-internal-buffers)).
+* "internal\_buffer": a "stringified" integer that describes the amount (in the token's lowest denomination) of the token currently stored in the settlement contract. This information is relevant when a solver attempts to internalize an interaction (see [here](https://docs.cow.fi/off-chain-services/in-depth-solver-specification/output-batch-auction-solutions#using-internal-buffers)).
 
 Following are three example token entries, corresponding to [WETH](https://etherscan.io/address/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2), [BAL](https://etherscan.io/token/0xba100000625a3754423978a60c9317c58a424e3d) and [USDC](https://etherscan.io/token/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48).
 
@@ -26,21 +27,24 @@ Following are three example token entries, corresponding to [WETH](https://ether
     "alias": "WETH",
     "external_price": 1.0,
     "normalize_priority": 1,
-    "accepted_for_internalization": true
+    "accepted_for_internalization": true,
+    "internal_buffer": "590308372204674634"
 }
 "0xba100000625a3754423978a60c9317c58a424e3d": {
    "decimals": 18,
     "alias": "BAL",
     "external_price": 0.005223351891153233,
     "normalize_priority": 0,
-    "accepted_for_internalization": true
+    "accepted_for_internalization": true,
+    "internal_buffer": "20624044361224836455"
 } 
 "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48": {
     "decimals": 6,
     "alias": "USDC",
     "external_price": 214765397.01856124,
     "normalize_priority": 0,
-    "accepted_for_internalization": true
+    "accepted_for_internalization": true,
+    "internal_buffer": "626459181"
 }
 ```
 
@@ -59,8 +63,8 @@ Note that all three tokens above are accepted for internalization. An example of
     "alias": "AXS",
     "external_price": null,
     "normalize_priority": 0,
-    "internal_buffer": "34286468895881497336",
-    "accepted_for_internalization": false
+    "accepted_for_internalization": false,
+    "internal_buffer": "34286468895881497336"
 }
 ```
 
