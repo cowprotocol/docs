@@ -46,6 +46,7 @@
   * [Solver Auction and Rewards](off-chain-services/in-depth-solver-specification/solver-auction-and-rewards.md)
   * [Input: Batch auction instances](off-chain-services/in-depth-solver-specification/input-batch-auction-instances.md)
   * [Output: Batch auction solutions](off-chain-services/in-depth-solver-specification/output-batch-auction-solutions.md)
+  * [Getting notified about the ranking](off-chain-services/in-depth-solver-specification/getting-notified-about-the-ranking.md)
   * [Sample Test Instances](off-chain-services/in-depth-solver-specification/sample-test-instances.md)
   * [Appendix: Token conservation per order (aka Local token conservation)](off-chain-services/in-depth-solver-specification/appendix-token-conservation-per-order-aka-local-token-conservation.md)
 
