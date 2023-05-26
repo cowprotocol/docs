@@ -25,19 +25,22 @@ Following are three example token entries, corresponding to [WETH](https://ether
     "decimals": 18,
     "alias": "WETH",
     "external_price": 1.0,
-    "normalize_priority": 1
+    "normalize_priority": 1,
+    "accepted_for_internalization": true
 }
 "0xba100000625a3754423978a60c9317c58a424e3d": {
    "decimals": 18,
     "alias": "BAL",
     "external_price": 0.005223351891153233,
-    "normalize_priority": 0
+    "normalize_priority": 0,
+    "accepted_for_internalization": true
 } 
 "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48": {
     "decimals": 6,
     "alias": "USDC",
     "external_price": 214765397.01856124,
-    "normalize_priority": 0
+    "normalize_priority": 0,
+    "accepted_for_internalization": true
 }
 ```
 
@@ -46,6 +49,22 @@ We clarify a few things regarding the entries above.
 * WETH is preferred as to be the reference token, since its `normalize_priority` flag is larger than any other tokens. Its `external_price` is set to 1.0, which should be interpreted as 1 wei = 1/10¹⁸ WETH (since WETH has 18 decimals) has a price of 1.0. Thus, this implies that all the `external_price` entries in all other tokens are with respect to wei.
 * The external\_price of BAL is set to 0.005223351891153233, which means that 1/10¹⁸ of BAL has a price of 0.005223351891153233 wei.
 * Finally, the external\_price of USDC is set to 214765397.01856124, which means that 1/10⁶ of USDC has a price of 214765397.01856124 wei. Note that this translates to 1 USDC having a price of 214765397.01856124 · 10⁶ / 10¹⁸ WETH, which gives that 1 USDC costs roughly 0.000214765397 WETH.
+
+Note that all three tokens above are accepted for internalization. An example of a token not accepted for internalization is the following:\
+
+
+```json
+"0xbb0e17ef65f82ab018d8edd776e8dd940327b28b": {
+    "decimals": 18,
+    "alias": "AXS",
+    "external_price": null,
+    "normalize_priority": 0,
+    "internal_buffer": "34286468895881497336",
+    "accepted_for_internalization": false
+}
+```
+
+
 
 ## <mark style="color:blue;">Orders</mark>
 
