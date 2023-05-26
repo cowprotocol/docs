@@ -125,7 +125,7 @@ An example of a Constant Product AMM execution entry is given below<mark style="
 
 We now discuss some additional functionality that solvers are allowed to use. Since the settlement contract holds balances of multiple tokens, solvers are in certain cases allowed to "internalize" an AMM interaction, in order to save on gas. More precisely, if there is an AMM interaction that buys token A and sells token B, a solver can decide to internalize the interaction if and only if the following two conditions are satisfied:\
 \
-1\. Token A is a safe token, the corresponding `"accepted_for_internalization"` flag is set to `true`. This means that the protocol is happy to store this token in the settlement contract.
+1\. Token A is a safe token, i.e., the corresponding `"accepted_for_internalization"` flag is set to `true`. This means that the protocol is happy to store this token in the settlement contract.
 
 2\. There is enough balance of sell token B, i.e., at least as much amount as the sell amount of the AMM interaction. This is revealed by the `"internal_buffer"` entry in the token description.
 
