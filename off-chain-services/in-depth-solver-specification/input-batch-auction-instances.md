@@ -16,6 +16,7 @@ The "tokens" key lists all tokens that appear in some order or AMM in the batch.
 * `"alias"`: a string denoting the shorthand name of the token (e.g., WETH, DAI)
 * `"external_price"`: a float that corresponds to the price of the smallest denomination of the token with respect to a reference token. Only tokens that are traded by at least a user order will necessarily have an external price.
 * `"normalize_priority"`: an integer that expresses the preference for the token to be used as the [numeraire](https://en.wikipedia.org/wiki/Num%C3%A9raire). The token with highest priority in the solution will have price set to 1. More on this later.
+* `"accepted_for_internalization"`: this is a boolean flag that specifies whether the contract is willing to store the token as part of an internalized interaction. More information about internalizations (what they are and when they are allowed) can be found in the next section (see [here](https://docs.cow.fi/off-chain-services/in-depth-solver-specification/output-batch-auction-solutions#using-internal-buffers)).
 
 Following are three example token entries, corresponding to [WETH](https://etherscan.io/address/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2), [BAL](https://etherscan.io/token/0xba100000625a3754423978a60c9317c58a424e3d) and [USDC](https://etherscan.io/token/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48).
 
