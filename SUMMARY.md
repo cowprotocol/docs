@@ -44,6 +44,7 @@
   * [Introduction](off-chain-services/in-depth-solver-specification/introduction.md)
   * [The Batch Auction Optimization Problem](off-chain-services/in-depth-solver-specification/the-batch-auction-optimization-problem.md)
   * [Solver Auction and Rewards](off-chain-services/in-depth-solver-specification/solver-auction-and-rewards.md)
+  * [Slippage accounting](off-chain-services/in-depth-solver-specification/slippage-accounting.md)
   * [Input: Batch auction instances](off-chain-services/in-depth-solver-specification/input-batch-auction-instances.md)
   * [Output: Batch auction solutions](off-chain-services/in-depth-solver-specification/output-batch-auction-solutions.md)
   * [Getting notified about the ranking](off-chain-services/in-depth-solver-specification/getting-notified-about-the-ranking.md)

@@ -26,7 +26,7 @@ Note that once we include the gas costs of executing a transaction, the winning 
 
 To limit currency mismatch, the solver receives $$\min(\textrm{payment}, \textrm{observedCost})$$ in ETH and $$\textrm{payment} - \min(\textrm{payment}, \textrm{observedCost})$$ in COW, using an up-to-date price. In other words, the solver payment is split into a gas reimbursement paid in ETH and a reward paid in COW.  To arrive at the budget for consistency rewards, these per-auction rewards paid in COW are deducted from the total rewards budget.
 
-Finally, the winning solver may pay additional costs, such as, for example, negative slippage once a solution is implemented. These costs are not an explicit element of the mechanism, but they are relevant in determining the solver's optimal strategy.
+Finally, the winning solver may pay additional costs, such as, for example, negative slippage once a solution is implemented. These costs are not an explicit element of the mechanism, but they are relevant in determining the solver's optimal strategy. More precisely, per [CIP-17](https://snapshot.org/#/cow.eth/proposal/0xf9c98a2710dc72c906bbeab9b8fe169c1ed2e9af6a67776cc29b8b4eb44d0fb2), solvers are responsible for managing potential slippage incurred by the settlements they settle. This is a component that affects payouts, but can be treated completely separately, and we do so in [this](https://app.gitbook.com/o/-MhNTbohYqyGgzHCBv93/s/-MfcJLF8wcqI03lmTpn8/\~/changes/167/off-chain-services/in-depth-solver-specification/slippage-accounting) section.
 
 ### Solver bidding strategies
 
