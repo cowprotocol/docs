@@ -4,9 +4,9 @@ description: FINDING THE BEST TRADING PATHS/SCENARIOS WITH YOUR SOLVER
 
 # Solver Workshop
 
-Here is a full video tutorial/workshop on how to build your own solver\
-\
-[https://www.youtube.com/watch?v=ErPJthFGKrg](https://www.youtube.com/watch?v=ErPJthFGKrg)\
+Here is a full video tutorial/workshop on how to build your own solver
+
+[https://youtu.be/ErPJthFGKrg](https://youtu.be/ErPJthFGKrg)\
 \
 At the heart of the CoW Protocol there are "solvers". In essence, a solver is a computer program that takes the orderbook as input, and computes the prices and traded amounts of all orders and liquidity sources (AMMs) that make the best possible overall trading experience. This problem, known as the batch auction problem, is an interesting and challenging optimization problem for which there is not a "perfect algorithm" for (and most likely will never be https://en.wikipedia.org/wiki/P\_versus\_NP\_problem).
 
