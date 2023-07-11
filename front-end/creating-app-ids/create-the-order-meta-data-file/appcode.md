@@ -1,6 +1,6 @@
 # AppCode
 
-**What is the AppCode?**&#x20;
+**What is the AppCode?**
 
 The code identifying the CLI, UI, service generating the order. It would be an UTF8 string of up to 50 chars
 
@@ -12,7 +12,7 @@ Just make sure you reach out to CoW Swap team before using it to avoid picking a
 
 For example, to use the AppCode "MyAwesomeUi" the JSON would look like:
 
-```
+```json
 {
   "version": "0.4.0",
   "appCode": "MyAwesomeUi",
