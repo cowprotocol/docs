@@ -17,7 +17,7 @@ Safe signature verification is done on a special EIP-712 `SafeMessage`. This jus
 3. Unlike before, we "wrap" this digest in a `SafeMessage`
 4. Like before, we generate an ECDSA signature with our EOA's private key
 
-<figure><img src="../../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 For multi-owner Safes, you would just collect a bunch of these signatures and concatenate them together.
 
