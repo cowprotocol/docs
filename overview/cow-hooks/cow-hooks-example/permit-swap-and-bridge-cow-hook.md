@@ -128,7 +128,7 @@ const bridgeHook = {
 
 Now that we have our hooks set up, it is time to create our order!
 
-First, we need to include our hooks in the order's `appData`. Hooks are specified as part of [`appData` documents](https://docs.cow.fi/front-end/creating-app-ids) in order to ensure that hook preferences are signed by the order:
+First, we need to include our hooks in the order's `appData`. Hooks are specified as part of [`appData` documents](https://docs.cow.fi/front-end/creating-app-ids)[ ](https://docs.cow.fi/front-end/creating-app-ids/create-the-order-meta-data-file/additional-order-preferences)in order to ensure that hook preferences are signed by the order:
 
 ```javascript
 orderConfig.appData = JSON.stringify({
