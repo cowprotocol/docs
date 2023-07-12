@@ -227,6 +227,8 @@ console.log("order:", orderUid);
 
 ## Ready, Action
 
+{% embed url="https://www.youtube.com/watch?v=FT36lWtC1Oc" %}
+
 [Here](https://explorer.cow.fi/orders/0xa4a6be09da793762bbeb8e55d1641c52c83e5a441388f5578f7038ab6c4073b4d0a3a35ddce358bfc4f706e6040c17a50a2e3ba564a7e172?tab=overview) is the demo executed order on Mainnet. As you can see from the [transaction](https://etherscan.io/tx/0x5c7f61a9364efdc841d680be88c0bd33ab6609b518f9c62df04e26fa356c57ac#eventlog), the USDC approval to CoW Protocol was set just-in-time for the swap to happen, and the trade proceeds were sent to the Omnibridge so that the bridging of the COW tokens that were received was initiated.
 
 [Here](https://gnosisscan.io/tx/0x9979234fb3b5416c6413f75374cbe79354bcc212fa82fb5537506afcc1693f3c) are the relayed COW tokens to the same address on Gnosis Chain.
@@ -235,4 +237,228 @@ Here is the complete code listing for the script that was used for creating the 
 
 * `index.js`
 
-{% embed url="https://www.youtube.com/watch?v=FT36lWtC1Oc" %}
+```javascript
+import { ethers } from "https://unpkg.com/ethers@5.7.2/dist/ethers.esm.js";
+
+/*** Configuration ***/
+
+const provider = new ethers.providers.JsonRpcProvider(Deno.env.get("NODE_URL"));
+const wallet = new ethers.Wallet(Deno.env.get("PRIVATE_KEY"), provider);
+
+const { chainId } = await provider.getNetwork();
+console.log(`connected to chain ${chainId} with account ${wallet.address}`);
+
+/*** Contracts ***/
+
+const SETTLEMENT = new ethers.Contract(
+  "0x9008D19f58AAbD9eD0D60971565AA8510560ab41",
+  [],
+  provider,
+);
+
+const VAULT_RELAYER = new ethers.Contract(
+  "0xC92E8bdf79f0507f65a392b0ab4667716BFE0110",
+  [],
+  provider,
+);
+
+const COW = new ethers.Contract(
+  "0xDEf1CA1fb7FBcDC777520aa7f396b4E015F497aB",
+  [],
+  provider,
+);
+
+const USDC = new ethers.Contract(
+  "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+  [
+    `
+      function decimals() view returns (uint8)
+    `,
+    `
+      function name() view returns (string)
+    `,
+    `
+      function version() view returns (string)
+    `,
+    `
+      function nonces(address owner) view returns (uint256)
+    `,
+    `
+      function permit(
+        address owner,
+        address spender,
+        uint256 value,
+        uint256 deadline,
+        uint8 v,
+        bytes32 r,
+        bytes32 s
+      )
+    `,
+  ],
+  provider,
+);
+
+const BRIDGER = new ethers.Contract(
+  "0xE71CcC8d4e0a298E1300a702ad0Ac93303dc8Ae5",
+  [
+    `
+      function getAccountAddress(address user) view returns (address)
+    `,
+    `
+      function bridgeAll(address user, address token)
+    `,
+  ],
+  provider,
+);
+
+/*** Order Configuration ***/
+
+const orderConfig = {
+  sellToken: USDC.address,
+  buyToken: COW.address,
+  sellAmount: `${ethers.utils.parseUnits("200.0", await USDC.decimals())}`,
+  kind: "sell",
+  partiallyFillable: false,
+  sellTokenBalance: "erc20",
+  buyTokenBalance: "erc20",
+};
+
+/*** EIP-2612 Permit ***/
+
+const permit = {
+  owner: wallet.address,
+  spender: VAULT_RELAYER.address,
+  value: orderConfig.sellAmount,
+  nonce: await USDC.nonces(wallet.address),
+  deadline: ethers.constants.MaxUint256,
+};
+const permitSignature = ethers.utils.splitSignature(
+  await wallet._signTypedData(
+    {
+      name: await USDC.name(),
+      version: await USDC.version(),
+      chainId,
+      verifyingContract: USDC.address,
+    },
+    {
+      Permit: [
+        { name: "owner", type: "address" },
+        { name: "spender", type: "address" },
+        { name: "value", type: "uint256" },
+        { name: "nonce", type: "uint256" },
+        { name: "deadline", type: "uint256" },
+      ],
+    },
+    permit,
+  ),
+);
+const permitParams = [
+  permit.owner,
+  permit.spender,
+  permit.value,
+  permit.deadline,
+  permitSignature.v,
+  permitSignature.r,
+  permitSignature.s,
+];
+const permitHook = {
+  target: USDC.address,
+  callData: USDC.interface.encodeFunctionData("permit", permitParams),
+  gasLimit: `${await USDC.estimateGas.permit(...permitParams)}`,
+};
+console.log("permit hook:", permitHook);
+
+/*** Bridging ***/
+
+orderConfig.receiver = await BRIDGER.getAccountAddress(wallet.address);
+const bridgeHook = {
+  target: BRIDGER.address,
+  callData: BRIDGER.interface.encodeFunctionData("bridgeAll", [
+    wallet.address,
+    COW.address,
+  ]),
+  // Approximate gas limit determined with Tenderly.
+  gasLimit: "228533",
+};
+console.log("bridge hook:", bridgeHook);
+
+/*** Order Creation ***/
+
+orderConfig.appData = JSON.stringify({
+  backend: {
+    hooks: {
+      pre: [permitHook],
+      post: [bridgeHook],
+    },
+  },
+});
+const { id: quoteId, quote } = await fetch(
+  "https://barn.api.cow.fi/mainnet/api/v1/quote",
+  {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({
+      from: wallet.address,
+      sellAmountBeforeFee: orderConfig.sellAmount,
+      ...orderConfig,
+    }),
+  },
+).then((response) => response.json());
+console.log("quote:", quoteId, quote);
+
+const orderData = {
+  ...orderConfig,
+  sellAmount: quote.sellAmount,
+  buyAmount: `${ethers.BigNumber.from(quote.buyAmount).mul(99).div(100)}`,
+  validTo: quote.validTo,
+  appData: ethers.utils.id(orderConfig.appData),
+  feeAmount: quote.feeAmount,
+};
+const orderSignature = await wallet._signTypedData(
+  {
+    name: "Gnosis Protocol",
+    version: "v2",
+    chainId,
+    verifyingContract: SETTLEMENT.address,
+  },
+  {
+    Order: [
+      { name: "sellToken", type: "address" },
+      { name: "buyToken", type: "address" },
+      { name: "receiver", type: "address" },
+      { name: "sellAmount", type: "uint256" },
+      { name: "buyAmount", type: "uint256" },
+      { name: "validTo", type: "uint32" },
+      { name: "appData", type: "bytes32" },
+      { name: "feeAmount", type: "uint256" },
+      { name: "kind", type: "string" },
+      { name: "partiallyFillable", type: "bool" },
+      { name: "sellTokenBalance", type: "string" },
+      { name: "buyTokenBalance", type: "string" },
+    ],
+  },
+  orderData,
+);
+
+const orderUid = await fetch(
+  "https://barn.api.cow.fi/mainnet/api/v1/orders",
+  {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify({
+      ...orderData,
+      from: wallet.address,
+      appData: orderConfig.appData,
+      appDataHash: orderData.appData,
+      signingScheme: "eip712",
+      signature: orderSignature,
+      quoteId,
+    }),
+  },
+).then((response) => response.json());
+console.log("order:", orderUid);
+```
