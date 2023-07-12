@@ -14,6 +14,7 @@
     * [Configuration](overview/cow-hooks/cow-hooks-example/configuration.md)
     * [Permit, Swap & Bridge CoW Hook](overview/cow-hooks/cow-hooks-example/permit-swap-and-bridge-cow-hook.md)
     * [Conclusion](overview/cow-hooks/cow-hooks-example/conclusion.md)
+  * [CoW Hooks FAQ](overview/cow-hooks/cow-hooks-faq.md)
 * [Learnings & Improvements of GPv1](overview/learnings-and-improvements-of-gpv1.md)
 * [Road to Decentralization](overview/road-to-decentralization.md)
 

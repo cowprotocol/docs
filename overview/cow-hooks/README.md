@@ -1,12 +1,12 @@
 ---
-description: Built on top of the existing onchain settlement layer
+description: Built on top of the existing on-chain settlement layer
 ---
 
 # CoW Hooks
 
 Following CoW Protocol roadmaps, we are excited to release a brand new and shiny feature: _CoW Hooks_. \
 \
-If you’re excited by Uni v4’s announcement and can’t wait to experience the power of trade hooks, wait no longer. CoW Hooks are live **now**!
+If you’re excited by Uni v4’s announcement and can’t wait to experience the power of trade hooks, wait no longer. CoW Hooks are live **now**!&#x20;
 
 These hooks allow users to specify Ethereum calls (also known as an "inner transaction") alongside their orders that execute atomically before and after a CoW Protocol swap. These hooks come in two flavors:
 
