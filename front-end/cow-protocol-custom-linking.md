@@ -24,7 +24,7 @@ _**Parameters not set with the URL parameter will be set by default.**_
 
 All parameters are optional.\
 \
-[https://swap.cow.fi](https://swap.cow.fi) - CoW Swap URL
+[https://swap.cow.fi](https://swap.cow.fi/#/1/swap/WETH?utm_source=docs.cow.fi&utm_medium=web&utm_content=custom-linking-page) - CoW Swap URL
 
 | Parameter        | Type                       | Default                                                                      | Description                                                                                                                                                                                                                                                               |
 | ---------------- | -------------------------- | ---------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -46,12 +46,12 @@ Native and wrapped currencies per network:\
 
 ## Example Usage
 
-* <mark style="color:blue;">https://swap.cow.fi</mark> - CoW Swap main page (Swap is default)
-* <mark style="color:blue;">https://swap.cow.fi/#/swap</mark> - Swap page
-* <mark style="color:blue;">https://swap.cow.fi/#/limit-orders</mark> - Limit orders page
-* <mark style="color:blue;">https://swap.cow.fi/#/5/swap</mark> - Swap page on Görli network
-* <mark style="color:blue;">https://swap.cow.fi/#/100/limit-orders</mark> - Limit orders page on Gnosis chain network
-* <mark style="color:blue;">https://swap.cow.fi/#/1/swap/COW/WETH</mark> - Swap `COW` to `WETH`
-* <mark style="color:blue;">https://swap.cow.fi/#/100/limit-orders/WXDAI/COW</mark> - Create a limit order to sell `WXDAI` for `COW`
-* <mark style="color:blue;">https://swap.cow.fi/#/1/swap/COW/WETH?sellAmount=100</mark> - Swap `100 COW` for `WETH` (by current market price)
-* <mark style="color:blue;">https://swap.cow.fi/#/100/limit-orders/WETH/WXDAI?sellAmount=2\&buyAmount=6000</mark> - Create a limit order to sell `2 WETH` for `6000 WXDAI`
+- <mark style="color:blue;">https://swap.cow.fi</mark> - CoW Swap main page (Swap is default)
+- <mark style="color:blue;">https://swap.cow.fi/#/swap</mark> - Swap page
+- <mark style="color:blue;">https://swap.cow.fi/#/limit-orders</mark> - Limit orders page
+- <mark style="color:blue;">https://swap.cow.fi/#/5/swap</mark> - Swap page on Görli network
+- <mark style="color:blue;">https://swap.cow.fi/#/100/limit-orders</mark> - Limit orders page on Gnosis chain network
+- <mark style="color:blue;">https://swap.cow.fi/#/1/swap/COW/WETH</mark> - Swap `COW` to `WETH`
+- <mark style="color:blue;">https://swap.cow.fi/#/100/limit-orders/WXDAI/COW</mark> - Create a limit order to sell `WXDAI` for `COW`
+- <mark style="color:blue;">https://swap.cow.fi/#/1/swap/COW/WETH?sellAmount=100</mark> - Swap `100 COW` for `WETH` (by current market price)
+- <mark style="color:blue;">https://swap.cow.fi/#/100/limit-orders/WETH/WXDAI?sellAmount=2\&buyAmount=6000</mark> - Create a limit order to sell `2 WETH` for `6000 WXDAI`

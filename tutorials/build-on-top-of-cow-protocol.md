@@ -25,7 +25,7 @@ Additionally, CoW Swap allows for an improved user experience by facilitating ga
 
 CoW Swap uses CoW protocol. One easy way to get familiar with the protocol is by doing one trade in CowSwap:
 
-* [https://swap.cow.fi](https://swap.cow.fi)
+- [https://swap.cow.fi](https://swap.cow.fi/#/1/swap/WETH?utm_source=docs.cow.fi&utm_medium=web&utm_content=build-on-top-cow-page)
 
 You can use it in the Görli test net if you want. Otherwise, it is available in Mainnet and Gnosis Chain.
 
@@ -52,12 +52,12 @@ This UID is a deterministic hash derived from the order information. It is retur
 
 This UID would allow you to get information about the status of the order. You can do this in two different ways:
 
-* API: Get the order details and its status from the UID (GET /orders/{UID}, see the [Swagger docs](https://api.cow.fi/docs/#/default/get\_api\_v1\_orders\_\_UID\_))
-* Smart Contract: You can watch the [Trade](https://github.com/cowprotocol/contracts/blob/main/src/contracts/GPv2Settlement.sol#L50) event.
+- API: Get the order details and its status from the UID (GET /orders/{UID}, see the [Swagger docs](https://api.cow.fi/docs/#/default/get_api_v1_orders__UID_))
+- Smart Contract: You can watch the [Trade](https://github.com/cowprotocol/contracts/blob/main/src/contracts/GPv2Settlement.sol#L50) event.
 
 It’s worth mentioning that, if you build a tool or UI that creates trades, it’s very convenient to provide the user a way to see the details of the trade that was just created. One simple way to do this, is by creating a link to the explorer:
 
-* https://explorer.cow.fi/orders/{UID}
+- https://explorer.cow.fi/orders/{UID}
 
 ### CoW Explorer
 
@@ -65,17 +65,17 @@ The explorer is a website that allows you to explore the protocol data.
 
 It’s the “Etherscan” for CoW protocol, so you will be able to find, among other things:
 
-* Order details, with trading status: You can get detailed information about executed, expired, or pending orders. This page is very convenient for directing users once they post an order ([example order](https://explorer.cow.fi/orders/0xa64f3559e33edebd2a1701050db6dff8089c7c42c4d2d842669466c4693d698100000000005ef87f8ca7014309ece7260bbcdaeb61f0377d))
-* Order for a given account: You can get detailed information about executed, expired, or pending orders for a given trader ([example orders for trader](https://explorer.cow.fi/address/0x00000000005ef87f8ca7014309ece7260bbcdaeb))
-* Orders for a batch: Given the transaction hash of a settlement, you can see all the trades in it ([example orders in batch](https://explorer.cow.fi/tx/0xd25f7457f4a2ce993a3314858f50f0144606e0c3afe7b3da6416814598afb87b))
+- Order details, with trading status: You can get detailed information about executed, expired, or pending orders. This page is very convenient for directing users once they post an order ([example order](https://explorer.cow.fi/orders/0xa64f3559e33edebd2a1701050db6dff8089c7c42c4d2d842669466c4693d698100000000005ef87f8ca7014309ece7260bbcdaeb61f0377d))
+- Order for a given account: You can get detailed information about executed, expired, or pending orders for a given trader ([example orders for trader](https://explorer.cow.fi/address/0x00000000005ef87f8ca7014309ece7260bbcdaeb))
+- Orders for a batch: Given the transaction hash of a settlement, you can see all the trades in it ([example orders in batch](https://explorer.cow.fi/tx/0xd25f7457f4a2ce993a3314858f50f0144606e0c3afe7b3da6416814598afb87b))
 
 ### Signing orders
 
 The protocol requires valid signed orders. There’s different ways in which someone could sign an order:
 
-* Off-chain signing (EIP-712): Allow gass-less trading for EOA like Metamask. Learn [how to sign orders](https://docs.cow.fi/tutorials/how-to-submit-orders-via-the-api/4.-signing-the-order)
-* Presign: Sign an order using an ethereum transaction. Convenient for Smart Contract integrations. See the [setPresign](https://github.com/cowprotocol/contracts/blob/7842d494c63224387e7e67f75bcd31775543098c/src/contracts/mixins/GPv2Signing.sol#L86) solidity function for more details
-* Smart Contract Signing (EIP-1271): Gass-less signing for smart contracts. [Here](https://docs.cow.fi/tutorials/how-to-place-erc-1271-smart-contract-orders) is a tutorial on how to use this type of signatures.
+- Off-chain signing (EIP-712): Allow gass-less trading for EOA like Metamask. Learn [how to sign orders](https://docs.cow.fi/tutorials/how-to-submit-orders-via-the-api/4.-signing-the-order)
+- Presign: Sign an order using an ethereum transaction. Convenient for Smart Contract integrations. See the [setPresign](https://github.com/cowprotocol/contracts/blob/7842d494c63224387e7e67f75bcd31775543098c/src/contracts/mixins/GPv2Signing.sol#L86) solidity function for more details
+- Smart Contract Signing (EIP-1271): Gass-less signing for smart contracts. [Here](https://docs.cow.fi/tutorials/how-to-place-erc-1271-smart-contract-orders) is a tutorial on how to use this type of signatures.
 
 For more information on Signed orders, read [here](https://docs.cow.fi/overview/signed-orders).
 
@@ -93,7 +93,7 @@ The API allows you to get direct access to the CoW protocol.
 
 The documentation is exposed using Swagger docs:
 
-* [https://api.cow.fi/docs](https://api.cow.fi/docs)
+- [https://api.cow.fi/docs](https://api.cow.fi/docs)
 
 The API is available in 3 different Networks: Mainnet, Gnosis Chain and Görli testnet.
 
@@ -115,15 +115,15 @@ More info in [https://github.com/cowprotocol/subgraph](https://github.com/cowpro
 
 ## Examples of simple integrations
 
-* CoW Protocol integration examples: Web app that shows how to integrate with CoW Protocol using the SDK [https://github.com/anxolin/cow-examples](https://github.com/anxolin/cow-examples)
-* NodeJS Trading Bot: Basic bot that creates a random trade: [https://github.com/cowprotocol/trading-bot](https://github.com/cowprotocol/trading-bot)
-* Python Trading script: [https://pastebin.com/cKXUz0SW](https://pastebin.com/cKXUz0SW)
-* Go Trading script: [https://pastebin.com/r787C2wT](https://pastebin.com/r787C2wT)
+- CoW Protocol integration examples: Web app that shows how to integrate with CoW Protocol using the SDK [https://github.com/anxolin/cow-examples](https://github.com/anxolin/cow-examples)
+- NodeJS Trading Bot: Basic bot that creates a random trade: [https://github.com/cowprotocol/trading-bot](https://github.com/cowprotocol/trading-bot)
+- Python Trading script: [https://pastebin.com/cKXUz0SW](https://pastebin.com/cKXUz0SW)
+- Go Trading script: [https://pastebin.com/r787C2wT](https://pastebin.com/r787C2wT)
 
 ## 👩‍🌾 Bonus: Join the team!
 
 There’s currently open positions for CoW Protocol.
 
-If you are looking for new challenges and opportunities, consider our [Open Positions](https://cow.fi/jobs).
+If you are looking for new challenges and opportunities, consider our [Open Positions](https://cow.fi/jobs?utm_source=docs.cow.fi&utm_medium=web&utm_content=build-on-top-cow-join-link).
 
 \

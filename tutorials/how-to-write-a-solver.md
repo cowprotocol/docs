@@ -4,7 +4,7 @@
 
 ### Idea <a href="#idea" id="idea"></a>
 
-I wanted to start with something super basic to understand all the moving pieces. In my example, I am going to build a solver for Yearn tokens. User has a token, let’s say, `USDC` and wants to buy `yvUSDC`. Right now, CoW Swap would need a LP `USDC/yvUSDC` to settle the trade, but what if the solver understands how to deposit into a yearn vault? ![:thinking\_face:](https://assets.hackmd.io/build/emojify.js/dist/images/basic/thinking\_face.png)
+I wanted to start with something super basic to understand all the moving pieces. In my example, I am going to build a solver for Yearn tokens. User has a token, let’s say, `USDC` and wants to buy `yvUSDC`. Right now, CoW Swap would need a LP `USDC/yvUSDC` to settle the trade, but what if the solver understands how to deposit into a yearn vault? ![:thinking_face:](https://assets.hackmd.io/build/emojify.js/dist/images/basic/thinking_face.png)
 
 ### The Big Picture <a href="#the-big-picture" id="the-big-picture"></a>
 
@@ -13,7 +13,7 @@ CoW Swap infrastructure is a lot of services running together, which is a bit in
 #### The Orderbook <a href="#the-orderbook" id="the-orderbook"></a>
 
 The orderbook is a service that uses a database to stores trades.\
-When you go to [https://swap.cow.fi/](https://swap.cow.fi/) and create a trade, the website uses the orderbook API to add the trade to the database. If the trade is ready to go (it might be created but missing a signature), it will be listed in the `solvable_orders` endpoint.
+When you go to [https://swap.cow.fi/](https://swap.cow.fi/#/1/swap/WETH?utm_source=docs.cow.fi&utm_medium=web&utm_content=write-solver-page) and create a trade, the website uses the orderbook API to add the trade to the database. If the trade is ready to go (it might be created but missing a signature), it will be listed in the `solvable_orders` endpoint.
 
 #### The Driver <a href="#the-driver" id="the-driver"></a>
 
@@ -38,7 +38,7 @@ You have a method called `solve()` which receives the batch `orders` and returns
 To run, exec:
 
 ```
-cargo run -v 
+cargo run -v
 ```
 
 Once the service is running you can start throwing jsons at it.\
@@ -59,9 +59,9 @@ Once I understood how a solver works, I wanted to solve a real order. To test th
 
 You have different options to create a limit oder:
 
-* [https://docs.cow.fi/tutorials/cowswap-trades-with-a-gnosis-safe-wallet](https://docs.cow.fi/tutorials/cowswap-trades-with-a-gnosis-safe-wallet)
-* [https://bafybeias5x3tgdshkhj5umriqze2wioy5mjw4fdo2zzp2sl4pacq7rnwtm.ipfs.infura-ipfs.io/?orderbook=https://barn.api.cow.fi/xdai](https://bafybeias5x3tgdshkhj5umriqze2wioy5mjw4fdo2zzp2sl4pacq7rnwtm.ipfs.infura-ipfs.io/?orderbook=https://barn.api.cow.fi/xdai)
-* You call the api by hand
+- [https://docs.cow.fi/tutorials/cowswap-trades-with-a-gnosis-safe-wallet](https://docs.cow.fi/tutorials/cowswap-trades-with-a-gnosis-safe-wallet)
+- [https://bafybeias5x3tgdshkhj5umriqze2wioy5mjw4fdo2zzp2sl4pacq7rnwtm.ipfs.infura-ipfs.io/?orderbook=https://barn.api.cow.fi/xdai](https://bafybeias5x3tgdshkhj5umriqze2wioy5mjw4fdo2zzp2sl4pacq7rnwtm.ipfs.infura-ipfs.io/?orderbook=https://barn.api.cow.fi/xdai)
+- You call the api by hand
 
 Here’s the example I created while testing:\
 [https://barn.gnosis-protocol.io/gc/orders/0xcc37de3ba70474948f838e8b4af9c6b66577c08202323a4a3060a645b2918dae2813a7e97fd0bc1b80cb63afe136510d940ddc236208633c](https://barn.gnosis-protocol.io/gc/orders/0xcc37de3ba70474948f838e8b4af9c6b66577c08202323a4a3060a645b2918dae2813a7e97fd0bc1b80cb63afe136510d940ddc236208633c)
@@ -88,12 +88,12 @@ cargo run -p solver --  --orderbook-url https://protocol-xdai.dev.gnosisdev.com 
 
 A small explanation of the parameters:
 
-* **orderbook-url**: points to the gnosis staging version
-* **node-url** connects to gnosis-chain (VERY IMPORTANT, liquidity sources are based on this)
-* **cow-dex-ag-solver-url** our running solver instance
-* **solver-account** An address that has permissions to run txs in the settlement contract
-* **solvers** just use our CowDexAg instance
-* **transaction-strategy** DryRun will give us a tenderly link after running
+- **orderbook-url**: points to the gnosis staging version
+- **node-url** connects to gnosis-chain (VERY IMPORTANT, liquidity sources are based on this)
+- **cow-dex-ag-solver-url** our running solver instance
+- **solver-account** An address that has permissions to run txs in the settlement contract
+- **solvers** just use our CowDexAg instance
+- **transaction-strategy** DryRun will give us a tenderly link after running
 
 If you got to this point, you have 99% of stuff you need to write your solver.\
 Until the trade expires, the solver will always find the crazy limit order and send it to your solver. If the solver responds with a solution, the driver will spit out a tenderly link with the execution simulation.
@@ -131,9 +131,9 @@ cargo run -p solver --  --orderbook-url http://localhost:8080 \
 
 Full process will be:
 
-* Orderbook at [http://localhost:8080](http://localhost:8080/) is returning your oder in the `solvable_orders` endpoint
-* Driver will fetch orders from your orderbook and query your
-* Solver at [http://localhost:8000](http://localhost:8000/)
+- Orderbook at [http://localhost:8080](http://localhost:8080/) is returning your oder in the `solvable_orders` endpoint
+- Driver will fetch orders from your orderbook and query your
+- Solver at [http://localhost:8000](http://localhost:8000/)
 
 ### My solver code <a href="#my-solver-code" id="my-solver-code"></a>
 

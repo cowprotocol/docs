@@ -24,9 +24,8 @@ Additionally, CoW Swap allows for an improved user experience by facilitating ga
 
 CoW Swap uses CoW protocol. One easy way to get familiar with the protocol is by doing one trade in CoW Swap:
 
-* [https://swap.cow.fi](https://swap.cow.fi/)
+- [https://swap.cow.fi](https://swap.cow.fi/#/1/swap/WETH?utm_source=docs.cow.fi&utm_medium=web&utm_content=cow-sdk-page/)
 
-You can use it in **Goerli** test net if you want. Otherwise, it is avaiable in **Mainnet** and **Gnosis Chain**.  
-
+You can use it in **Goerli** test net if you want. Otherwise, it is avaiable in **Mainnet** and **Gnosis Chain**.
 
 Now you are more familiar with the protocol and CoW Swap, let's introduce the SDK in the next section.
