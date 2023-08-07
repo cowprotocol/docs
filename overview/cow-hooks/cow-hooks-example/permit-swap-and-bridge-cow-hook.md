@@ -132,7 +132,7 @@ First, we need to include our hooks in the order's `appData`. Hooks are specifie
 
 ```javascript
 orderConfig.appData = JSON.stringify({
-  backend: {
+  metadata: {
     hooks: {
       pre: [permitHook],
       post: [bridgeHook],
@@ -385,7 +385,7 @@ console.log("bridge hook:", bridgeHook);
 /*** Order Creation ***/
 
 orderConfig.appData = JSON.stringify({
-  backend: {
+  metadata: {
     hooks: {
       pre: [permitHook],
       post: [bridgeHook],
