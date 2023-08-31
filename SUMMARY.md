@@ -111,7 +111,7 @@
     * [2. Signing the Limit Order](tutorials/submit-limit-orders-via-api/submitting-the-limit-order/2.-signing-the-limit-order.md)
     * [3. Placing the Limit Order](tutorials/submit-limit-orders-via-api/submitting-the-limit-order/3.-placing-the-limit-order.md)
     * [4. Checking Limit Order Status](tutorials/submit-limit-orders-via-api/submitting-the-limit-order/4.-checking-limit-order-status.md)
-* [CoW Protocol trades with a Gnosis Safe Wallet](tutorials/cowswap-trades-with-a-gnosis-safe-wallet/README.md)
+* [CoW Protocol trades with a Safe Wallet](tutorials/cowswap-trades-with-a-gnosis-safe-wallet/README.md)
   * [Approving the tokens to sell](tutorials/cowswap-trades-with-a-gnosis-safe-wallet/approving-the-tokens-to-sell.md)
   * [Creating the order](tutorials/cowswap-trades-with-a-gnosis-safe-wallet/creating-the-order.md)
   * [Running the tx from the safe](tutorials/cowswap-trades-with-a-gnosis-safe-wallet/running-the-tx-from-the-safe.md)
@@ -127,4 +127,3 @@
   * [Good After Time (GAT) Orders](tutorials/how-to-place-erc-1271-smart-contract-orders/good-after-time-gat-orders.md)
   * [Additional Use Cases](tutorials/how-to-place-erc-1271-smart-contract-orders/additional-use-cases.md)
 * [Build on top of CoW Protocol](tutorials/build-on-top-of-cow-protocol.md)
-* [Page 1](tutorials/page-1.md)

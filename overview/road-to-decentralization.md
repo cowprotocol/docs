@@ -1,7 +1,5 @@
 # Road to Decentralization
 
-
-
 CoW Protocol aims to be a fully decentralized protocol, but the reality is that in order to fully be decentralized, there's still a long road to walk through. Currently, the protocol has certain parts that are more decentralized than others, and if we were to decompartmentalize the protocol into pieces, we would have the following:
 
 * User Interface
@@ -13,7 +11,7 @@ Both the user interface and the smart contracts are pieces that are already at 1
 
 ### Phase 1
 
-Initially, the smart contract curates a list of trusted solvers (e.g. an account running the solver implementation in gp-v2-services). This list would be given to the CowDAO and will essentially control who gets to submit settlement solutions. People that want to implement solver strategies in this phase are invited to submit PRs to our repository to include their logic.
+Initially, the smart contract curates a list of trusted solvers (e.g. an account running the solver implementation in gp-v2-services). This list would be given to the CoW DAO and will essentially control who gets to submit settlement solutions. People that want to implement solver strategies in this phase are invited to submit PRs to our repository to include their logic.
 
 It will allow competition between different independent solver accounts that communicate via some sort of central managed channel. Each solver would announce the “objective value” (what that value should be optimised for, is a separate topic) they have computed for the current batch auction and all together they agree on who obtains the right to settle this auction. In order to compute the objective value there needs to be consensus on what the state of the auction is (all valid orders for which surplus should be achieved). This is done via a central off-chain orderbook API (more on how to decentralize this part below). We should maybe mention here that for an order to be considered valid by the Orderbook API it needs to pay a “sufficient fee” (to be discussed in a separate topic) to the protocol.
 

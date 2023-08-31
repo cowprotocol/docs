@@ -4,6 +4,8 @@ description: Built on top of the existing on-chain settlement layer
 
 # CoW Hooks
 
+<figure><img src="../../.gitbook/assets/Cow-hooks.gif" alt=""><figcaption></figcaption></figure>
+
 Following CoW Protocol roadmaps, we are excited to release a brand new and shiny feature: _CoW Hooks_. \
 \
 If you’re excited by Uni v4’s announcement and can’t wait to experience the power of trade hooks, wait no longer. CoW Hooks are live **now**!&#x20;

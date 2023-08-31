@@ -15,6 +15,6 @@ Besides being able to establish a uniform clearing price across the trades that 
 
 But the best thing is that batch auctions allow the protocol the ability to combine off-chain interactions (COWs) with on-chain interactions, all in the same transaction.
 
-![](<../.gitbook/assets/Batch Auction \_ COW.png>)
+<figure><img src="../.gitbook/assets/Batch auctions.png" alt=""><figcaption></figcaption></figure>
 
 The amount of batches the protocol executes depends on the trading frequency users choose. The shorter the expiry date of an order, the more batch auctions the protocol will conduct in order to be able to settle the orders, while if the expiry date is long enough, the amount of batch auctions can be reduced as the protocol is able to fit more trades in a single batch.
