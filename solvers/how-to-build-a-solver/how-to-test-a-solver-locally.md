@@ -16,7 +16,7 @@ Reading the state of the blockchain requires issuing RPC calls to an Ethereum no
 
 In order to start the Driver, we can execute the following command in a terminal:\
 \
-`cargo run -p solver -- --orderbook-url` [`https://api.cow.fi/mainnet`](https://api.cow.fi/mainnet)``\
+`cargo run -p solver -- --orderbook-url` [`https://api.cow.fi/mainnet`](https://api.cow.fi/mainnet)\`\`\
 `--node-url "https://mainnet.infura.io/v3/<INFURA_KEY>"`\
 `--cow-dex-ag-solver-url "http://127.0.0.1:8000"`\
 `--solver-account 0xa6DDBD0dE6B310819b49f680F65871beE85f517e`\
@@ -29,7 +29,7 @@ We clarify that the `cow-dex-ag-solver-url` is just a placeholder flag that indi
 
 ### Solver deployment
 
-Once the Driver is running, we can now locally deploy our solver server so that it can receive the instances from the Driver, solve them, and then report back the solution to the Driver. The solver receives the instance in JSON format (as described [here](../off-chain-services/in-depth-solver-specification/)) via an HTTP Get request, solves the instance and then, via an HTTP POST request, sends the solution (again in JSON format) to the Driver.
+Once the Driver is running, we can now locally deploy our solver server so that it can receive the instances from the Driver, solve them, and then report back the solution to the Driver. The solver receives the instance in JSON format (as described [here](../in-depth-solver-specification/)) via an HTTP Get request, solves the instance and then, via an HTTP POST request, sends the solution (again in JSON format) to the Driver.
 
 An example of a publicly available solver, namely the Dex Cow Solver, can be found here:
 
@@ -38,4 +38,4 @@ An example of a publicly available solver, namely the Dex Cow Solver, can be fou
 You can follow the simple instructions of the Dex Cow Solver to locally deploy that particular solver.
 
 For potential questions/issues regarding the testing of solvers, we also encourage everyone to contact our team in the CoW Swap Discord: [https://discord.com/invite/cowprotocol](https://discord.com/invite/cowprotocol)\
-\
+\\
