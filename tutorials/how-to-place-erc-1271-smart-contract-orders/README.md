@@ -1,6 +1,6 @@
 # How to place ERC-1271 (Smart Contract) Orders
 
-The following section is intended as a guide on hot to place Smart Contract orders with ERC-1271.&#x20;
+The following section is intended as a guide on how to place Smart Contract orders with ERC-1271.&#x20;
 
 All the code needed to implement such feature can be found in the following Github: [https://github.com/nlordell/dappcon-2022-smart-orders](https://github.com/nlordell/dappcon-2022-smart-orders)&#x20;
 
