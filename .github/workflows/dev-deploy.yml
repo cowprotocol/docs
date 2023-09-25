@@ -7,6 +7,11 @@ on:
     # Review gh actions docs if you want to further define triggers, paths, etc
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#on
 
+env:
+  BASE_URL: ${{ vars.BASE_URL }}
+  TRAILING_SLASH: ${{ vars.TRAILING_SLASH }}
+  URL: ${{ vars.URL }}
+
 jobs:
   deploy:
     name: Deploy to GitHub Pages
