@@ -4,6 +4,13 @@
 const lightCodeTheme = require('prism-react-renderer/themes/github');
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
+// if you are using dotenv, you can load the env vars here
+require('dotenv').config();
+
+if (!process.env.URL || !process.env.BASE_URL) {
+  throw new Error('URL and BASE_URL env vars must be set')
+}
+
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'CoW Protocol Documentation',
@@ -11,10 +18,10 @@ const config = {
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: 'https://cowprotocol.github.io/',
+  url: process.env.URL,
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/docs/',
+  baseUrl: process.env.BASE_URL,
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -23,6 +30,8 @@ const config = {
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
+
+  trailingSlash: process.env.TRAILING_SLASH === 'true',
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
