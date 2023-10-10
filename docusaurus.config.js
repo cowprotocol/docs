@@ -9,7 +9,7 @@ require('dotenv').config();
 
 const url = process.env.URL ?? 'http://localhost:3000';
 const baseUrl = process.env.BASE_URL ?? '/';
-const trailingSlash = process.env.TRAILING_SLASH ? true : false;
+const trailingSlash = process.env.TRAILING_SLASH ? process.env.TRAILING_SLASH === "true" : false;
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
