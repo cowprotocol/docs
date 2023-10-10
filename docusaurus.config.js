@@ -7,9 +7,9 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 // if you are using dotenv, you can load the env vars here
 require('dotenv').config();
 
-if (!process.env.URL || !process.env.BASE_URL) {
-  throw new Error('URL and BASE_URL env vars must be set')
-}
+const url = process.env.URL ?? 'http://localhost:3000';
+const baseUrl = process.env.BASE_URL ?? '/';
+const trailingSlash = process.env.TRAILING_SLASH ? true : false;
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -18,10 +18,10 @@ const config = {
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here
-  url: process.env.URL,
+  url,
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: process.env.BASE_URL,
+  baseUrl,
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -31,7 +31,7 @@ const config = {
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
 
-  trailingSlash: process.env.TRAILING_SLASH === 'true',
+  trailingSlash,
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
