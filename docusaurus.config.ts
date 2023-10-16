@@ -1,11 +1,9 @@
-// @ts-check
-// Note: type annotations allow type checking and IDEs autocompletion
+import {themes as prismThemes, themes} from 'prism-react-renderer';
+import type {Config} from '@docusaurus/types';
+import type * as Preset from '@docusaurus/preset-classic';
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
-
-const math = require('remark-math');
-const katex = require('rehype-katex');
+import math from 'remark-math';
+import katex from 'rehype-katex';
 
 // if you are using dotenv, you can load the env vars here
 require('dotenv').config();
@@ -14,8 +12,7 @@ const url = process.env.URL ?? 'http://localhost:3000';
 const baseUrl = process.env.BASE_URL ?? '/';
 const trailingSlash = process.env.TRAILING_SLASH ? process.env.TRAILING_SLASH === "true" : false;
 
-/** @type {import('@docusaurus/types').Config} */
-const config = {
+const config: Config = {
   title: 'CoW Protocol Documentation',
   tagline: 'Tagline here',
   favicon: 'img/favicon.ico',
@@ -52,10 +49,32 @@ const config = {
   presets: [
     [
       'classic',
-      /** @type {import('@docusaurus/preset-classic').Options} */
-      ({
+      {
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
+          sidebarItemsGenerator: async function sidebarItemsGenerator({
+                    defaultSidebarItemsGenerator,
+                    numberPrefixParser,
+                    item,
+                    version,
+                    docs,
+                    categoriesMetadata,
+                    isCategoryIndex,
+                  }) {
+                    // Get the default side bar
+                    const defaultSidebar = await defaultSidebarItemsGenerator({categoriesMetadata, item, version, docs, isCategoryIndex, numberPrefixParser});
+                    // Use a reduce to transform the defaultSidebar into a new sidebar. Do not include any
+                    // items that have the property "type" set to "doc" with the id containing "README"
+                    const noReadmeSidebar = defaultSidebar.reduce((acc, cur) => {
+                      if (cur.type === 'doc' && cur.id.includes('README')) {
+                        return acc;
+                      }
+                      acc.push(cur);
+                      return acc;
+                    }, []);
+
+                    return noReadmeSidebar;
+                  },
           remarkPlugins: [
             math,
             [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true, converters: ['yarn', 'pnpm'] }],
@@ -69,9 +88,18 @@ const config = {
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
-      }),
+      } satisfies Preset.Options,
     ],
   ],
+
+  // plugins: [
+  //   [
+  //     '@docusaurus/plugin-content-docs',
+  //     {
+  //       
+  //     },
+  //   ],
+  // ],
 
   stylesheets: [
     {
@@ -84,8 +112,7 @@ const config = {
   ],
 
   themeConfig:
-    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-    ({
+    {
       // Replace with your project's social card
       image: 'img/docusaurus-social-card.jpg',
       navbar: {
@@ -141,10 +168,24 @@ const config = {
         copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
       },
       prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
+        theme: prismThemes.github,
+        darkTheme: prismThemes.dracula,
       },
-    }),
+    } satisfies Preset.ThemeConfig,
 };
 
-module.exports = config;
+// Reverse the sidebar items ordering (including nested category items)
+function reverseSidebarItems(items) {
+  // Reverse items in categories
+  const result = items.map((item) => {
+    if (item.type === 'category') {
+      return {...item, items: reverseSidebarItems(item.items)};
+    }
+    return item;
+  });
+  // Reverse items at current level
+  result.reverse();
+  return result;
+}
+
+export default config;
