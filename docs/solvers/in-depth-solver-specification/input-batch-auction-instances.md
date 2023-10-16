@@ -132,7 +132,7 @@ A Constant Product pool describes [Uniswap v2 liquidity pools](https://docs.unis
 
 * `"kind"`: the type is set to “ConstantProduct”.
 * `"reserves"`: a dictionary describing the reserves of the two tokens of the liquidity pool. More specifically, it maps each token id's of the AMM's tradeable tokens to the corresponding stringified integer amounts contained in each of the pools.
-* `"fee"`: a stringified decimal number denoting the percent of the amount traded in the liquidity pool that must be paid for using it. For example, if we transfer an amount $$y$$ to the pool, then the amount blocked and used as a fee is equal to $$\mathrm{fee} \cdot y$$.
+* `"fee"`: a stringified decimal number denoting the percent of the amount traded in the liquidity pool that must be paid for using it. For example, if we transfer an amount $$y$$ to the pool, then the amount blocked and used as a fee is equal to $$\mathrm\{fee\} \cdot y$$.
 * `"cost"`: this entry is identical to the cost entry of an order (see above), and again is only meant to be used as an indicator of the cost. If the AMM is used, the total execution cost is computed via simulation (as described [here](https://docs.cow.fi/off-chain-services/in-depth-solver-specification/the-batch-auction-optimization-problem#ranking-of-solutions)).
 
 We now give an example entry of such an AMM, corresponding to a pool of [BAL](https://etherscan.io/address/0xba100000625a3754423978a60c9317c58a424e3d) and [WETH](https://etherscan.io/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2). We again clarify that the amounts in the entry are with respect to the smallest denomination of each token.

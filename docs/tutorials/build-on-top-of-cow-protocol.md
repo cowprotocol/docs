@@ -52,12 +52,12 @@ This UID is a deterministic hash derived from the order information. It is retur
 
 This UID would allow you to get information about the status of the order. You can do this in two different ways:
 
-- API: Get the order details and its status from the UID (GET /orders/{UID}, see the [Swagger docs](https://api.cow.fi/docs/#/default/get_api_v1_orders__UID_))
+- API: Get the order details and its status from the UID (GET /orders/\{UID\}, see the [Swagger docs](https://api.cow.fi/docs/#/default/get_api_v1_orders__UID_))
 - Smart Contract: You can watch the [Trade](https://github.com/cowprotocol/contracts/blob/main/src/contracts/GPv2Settlement.sol#L50) event.
 
 It’s worth mentioning that, if you build a tool or UI that creates trades, it’s very convenient to provide the user a way to see the details of the trade that was just created. One simple way to do this, is by creating a link to the explorer:
 
-- https://explorer.cow.fi/orders/{UID}
+- https://explorer.cow.fi/orders/\{UID\}
 
 ### CoW Explorer
 

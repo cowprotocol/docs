@@ -7,7 +7,7 @@
 
 ![](https://lh6.googleusercontent.com/a\_U3CxRMhCdpcGNUGfXjZBQygC2wP25EItlwLFtqFSaGdhdtf5eQHmlbJwlIjSQsS7cNcAsUowt3uvtgVX8L9DZi7je91GtVndDOm6Ji6erRV24RuCwpf5We6IIyCWDf39\_9hzwO)
 
-* Navigate to GET orders/{UID} where you can fetch orders by UID. Click on "Try it out", paste your OrderUid in the corresponding field and click "Execute"
+* Navigate to GET orders/\{UID\} where you can fetch orders by UID. Click on "Try it out", paste your OrderUid in the corresponding field and click "Execute"
 
 ![](https://lh4.googleusercontent.com/TbIx3bgdXqqnf1MHq4z3ZC29q8V2YHuLolAypWl8hTIEZVkqVbxbabjRPGrQeXntxy4gortkdi1KC57gzJeExG5W-fv\_Aymp8IxC1B-I5hR-LwFLMx1h4SBYlibIegyedJvlkkz6)
 
