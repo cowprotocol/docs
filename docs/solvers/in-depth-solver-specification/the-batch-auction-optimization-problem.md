@@ -6,7 +6,7 @@ In this section, we describe all the different components of the optimization pr
 
 Suppose that there are $$\{1,2,...k\}$$ tokens. From a high-level perspective, we can define a user order as an _acceptance set_ $$S \subset \mathbb R^k$$ specifying the trades a user is willing to accept (where negative entries of a vector represent tokens sold, while positive entries represent tokens bought). So, for example, if $$k=2$$ and $$\begin{bmatrix} x \\-y \end{bmatrix}\in S$$ then a user is happy to receive _x_ units of token 1 in exchange for _y_ units of token 2 (note: this is all from the user's perspective and is therefore net of fees).
 
-Clearly,  $$\mathbb R^k_+ \subset S$$, that is, a user is always willing to accept an order in which they receive a positive amount of tokens without paying anything. Similarly, $$\mathbb R^k_{-} \cap S = 0$$ because no user would accept to pay tokens without receiving anything. The interesting elements of the acceptance set are, therefore, those with at least one positive entry and at least one negative entry. We also assume that $$0 \in S$$, that is, when submitting an order a user accepts that the order may not be filled.&#x20;
+Clearly,  $$\mathbb R^k_+ \subset S$$, that is, a user is always willing to accept an order in which they receive a positive amount of tokens without paying anything. Similarly, $$\mathbb R^k_\{-\} \cap S = 0$$ because no user would accept to pay tokens without receiving anything. The interesting elements of the acceptance set are, therefore, those with at least one positive entry and at least one negative entry. We also assume that $$0 \in S$$, that is, when submitting an order a user accepts that the order may not be filled.&#x20;
 
 To each order $$S$$ we may assign a _utility function_ $$U_S:S\rightarrow \mathbb R$$ specifying a numerical value to each trade in the acceptance set, to be interpreted as "how good" a trade is from the point of view of the user who submitted order _S_. By definition $$U_S(0)=0$$.
 
@@ -16,11 +16,11 @@ Practically speaking, CoW Protocol allows only some types of orders, which we ca
 
 A _limit sell order_ specifies a maximum sell amount of a given token _Y_ > 0, a buy token, and a limit price $$\pi$$, that corresponds to the worst-case exchange rate that the user is willing to settle for. They can be fill-or-kill whenever the executed sell amount must be Y (or nothing). They can be partially fillable if the executed sell amount can be smaller or equal to Y.  Formally, if _x_ denotes the (proposed) buy amount and _y_ denotes the (proposed) sell amount of the order, a fill-or-kill limit sell order has the form
 
-$$S=\left\{\begin{bmatrix} x \\-y \end{bmatrix}~~s.t. ~~\frac{y}{\pi}\leq x \mbox{ and } y\in\{0,Y\} \right\},$$
+$$S=\left\{\begin{bmatrix} x \\-y \end{bmatrix}~~s.t. ~~\frac\{y\}\{\pi\}\leq x \mbox{ and } y\in\{0,Y\} \right\},$$
 
 and a partially-fillable sell order has the form
 
-$$S= \left \{ \begin{bmatrix} x \\-y \end{bmatrix} ~~s.t. ~~\frac{y}{\pi} \leq x \mbox{ and } y \in [0,Y] \right \}.$$
+$$S= \left \{ \begin{bmatrix} x \\-y \end{bmatrix} ~~s.t. ~~\frac\{y\}\{\pi\} \leq x \mbox{ and } y \in [0,Y] \right \}.$$
 
 In both cases, the utility function is defined as
 
@@ -72,6 +72,6 @@ From the protocol viewpoint, each solution that satisfies the above constraints 
 
 $$\sum_o ​U(o)+p\cdot \sum_o​f(o)$$,
 
-where _p_ is a vector of externally-determined prices used to express all fees in terms of the common numéraire.&#x20;
+where _p_ is a vector of externally-determined prices used to express all fees in terms of the common numéraire.
 
 Finally, solvers compete for the right to settle a batch by participating in an auction, aiming to implement the solution with the highest quality at the lowest possible cost to the protocol. For more details, see the page [Solver Auction and Rewards](solver-auction-and-rewards.md).

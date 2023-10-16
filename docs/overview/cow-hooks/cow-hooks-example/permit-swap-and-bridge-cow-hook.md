@@ -227,7 +227,7 @@ console.log("order:", orderUid);
 
 ## Ready, Action
 
-{% embed url="https://www.youtube.com/watch?v=FT36lWtC1Oc" %}
+![](https://youtu.be/FT36lWtC1Oc)
 
 [Here](https://explorer.cow.fi/orders/0xa4a6be09da793762bbeb8e55d1641c52c83e5a441388f5578f7038ab6c4073b4d0a3a35ddce358bfc4f706e6040c17a50a2e3ba564a7e172?tab=overview) is the demo executed order on Mainnet. As you can see from the [transaction](https://etherscan.io/tx/0x5c7f61a9364efdc841d680be88c0bd33ab6609b518f9c62df04e26fa356c57ac#eventlog), the USDC approval to CoW Protocol was set just-in-time for the swap to happen, and the trade proceeds were sent to the Omnibridge so that the bridging of the COW tokens that were received was initiated.
 

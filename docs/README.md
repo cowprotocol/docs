@@ -10,11 +10,3 @@ Trades can be settled via underlying on-chain AMMs directly or via DEX Aggregato
 
 In addition to that, before finding the best price for a trade from available on-chain liquidity, CoW Protocol first seeks a coincidence of wants within the existing batch to offer an even better price than any pool can.
 
-{% embed url="https://github.com/cowprotocol" %}
-
-{% embed url="https://github.com/cowprotocol/contracts" %}
-
-{% embed url="https://github.com/cowprotocol/cowswap" %}
-
-{% embed url="https://github.com/cowprotocol/cow-sdk" %}
-
