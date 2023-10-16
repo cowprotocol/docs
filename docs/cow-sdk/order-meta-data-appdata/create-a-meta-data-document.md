@@ -34,7 +34,6 @@ After creating the most basic document, you can see how to attach additional met
 
 For example, you could give information about who reffered the user creating the order.
 
-{% code title="" %}
 ```typescript
 import { MetadataApi } from '@cowprotocol/app-data'
 
@@ -51,7 +50,6 @@ const appDataDoc = await metadataApi.generateAppDataDoc({
 console.log(appDataDoc)
 
 ```
-{% endcode %}
 
 This will create a document similar to:
 

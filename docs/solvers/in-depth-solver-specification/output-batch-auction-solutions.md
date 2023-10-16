@@ -23,7 +23,6 @@ Here, we give an example of the simplest possible valid output, which correspond
 
 The "orders" key contains all orders that were selected for execution, and it is a required field. It maps to a dictionary, mapping each order id to a copy of the corresponding order input data, but containing two additional keys that specify the executed buy and sell amount. An example entry is given below.
 
-{% code overflow="wrap" %}
 ```json
 "3": {
     "allow_partial_fill": false,
@@ -38,7 +37,6 @@ The "orders" key contains all orders that were selected for execution, and it is
     "sell_token": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
 }
 ```
-{% endcode %}
 
 **Note for partially-fillable orders.** In the case of a partially-fillable order, solvers are also required to report a fee. This is due to the fact that the fraction of the order that will be executed is decided by the solver, so having a predetermined fee assigned to the order is not reasonable. For this reason, the "exec\_fee\_amount" entry cannot be null in the case of a partially fillable order, and instead it should be a stringified integer, describing the fee amount, always denominated in the sell token.
 
@@ -46,7 +44,6 @@ The "orders" key contains all orders that were selected for execution, and it is
 
 In order to allow solvers to build solutions that use additional liquidity orders, besides the ones contained in the input json, there is a "foreign\_liquidity\_orders" key that maps to a list of "orders", where each entry describes the liquidity order as well as the executed buy and sell amounts. This is a required field. An example entry is given below.
 
-{% code overflow="wrap" %}
 ```json
 "foreign_liquidity_orders": [
     {
@@ -69,7 +66,6 @@ In order to allow solvers to build solutions that use additional liquidity order
     }
 ]
 ```
-{% endcode %}
 
 We now clarify the meaning of some of the entries above:
 
@@ -90,7 +86,6 @@ The "amms" key maps to a dictionary containing all the AMMs that were used in th
 
 An example of a Constant Product AMM execution entry is given below.
 
-{% code overflow="wrap" %}
 ```json
 "7": {
     "cost": {
@@ -119,7 +114,6 @@ An example of a Constant Product AMM execution entry is given below.
     }
 }
 ```
-{% endcode %}
 
 ### **Using internal buffers**
 
@@ -152,8 +146,8 @@ An example containing the computed prices of [USDC](https://etherscan.io/token/0
 The above entries should be interpreted as follows:
 
 * 1 wei (3rd entry) has a price of 1000000000000000000 = 10¹⁸.
-* The lowest denomination of USDC (1st entry), i.e., 1 / 10⁶ of USDC, has a price of 219193245742363509576247472 relative to the price of 10¹⁸ that wei has. This translates to 1 USDC having a price of $$\frac{219193245742363509576247472 \cdot 10^6}{10^{18} \cdot 10^{18}} \approx 0.000219193$$ WETH.
-* The lowest denomination of BAL (2nd entry) is 1 / 10¹⁸ , and it has a price of 5245932598960804 relative to the price of 10¹⁸ that wei has. This translates to 1 BAL having a price of $$\frac{5245932598960804 \cdot 10^{18}}{10^{18} \cdot 10^{18}} \approx 0.005245933$$ WETH.
+* The lowest denomination of USDC (1st entry), i.e., 1 / 10⁶ of USDC, has a price of 219193245742363509576247472 relative to the price of 10¹⁸ that wei has. This translates to 1 USDC having a price of $$\frac\{219193245742363509576247472 \cdot 10^6\}\{10^\{18\} \cdot 10^\{18\}\} \approx 0.000219193$$ WETH.
+* The lowest denomination of BAL (2nd entry) is 1 / 10¹⁸ , and it has a price of 5245932598960804 relative to the price of 10¹⁸ that wei has. This translates to 1 BAL having a price of $$\frac\{5245932598960804 \cdot 10^\{18\}\}\{10^\{18\} \cdot 10^\{18\}\} \approx 0.005245933$$ WETH.
 
 ## Approvals
 
