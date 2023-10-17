@@ -131,7 +131,7 @@ const sidebars: SidebarsConfig = {
         },
         {
           type: 'category',
-          label: 'Technical Reference',
+          label: 'Technical reference',
           link: {
             type: 'doc',
             id: 'cow-protocol/reference/README'
