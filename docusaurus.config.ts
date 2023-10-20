@@ -15,7 +15,7 @@ const trailingSlash = process.env.TRAILING_SLASH ? process.env.TRAILING_SLASH ==
 const config: Config = {
   title: 'CoW Protocol Documentation',
   tagline: 'Tagline here',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/favicon.png',
 
   // Set the production url of your site here
   url,
@@ -114,12 +114,23 @@ const config: Config = {
   themeConfig:
     {
       // Replace with your project's social card
-      image: 'img/docusaurus-social-card.jpg',
+      image: 'img/og-meta-cowprotocol.png',
       navbar: {
-        title: 'CoW Protocol Documentation',
+        title: 'CoW Documentation',
         logo: {
-          alt: 'My Site Logo',
-          src: 'img/logo.svg',
+          alt: 'CoW Protocol logo',
+          src: 'img/cow-logo.svg',
+          srcDark: 'img/cow-logo-dark.svg',
+          href: 'https://docs.cow.fi/',
+          target: '_self',
+          width: 103,
+          height: 33,
+          className: 'custom-navbar-logo-class',
+          style: {    
+            width: '103px',
+            height: '33px',
+            margin: 'auto 12px auto 0',
+          },
         },
         items: [
           {
@@ -165,11 +176,16 @@ const config: Config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+        copyright: `Copyright © ${new Date().getFullYear()} CoW Protocol`,
       },
       prism: {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,
+      },
+      colorMode: {
+        defaultMode: 'light',
+        disableSwitch: false,
+        respectPrefersColorScheme: true,
       },
     } satisfies Preset.ThemeConfig,
 };

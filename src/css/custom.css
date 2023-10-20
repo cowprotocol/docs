@@ -6,25 +6,123 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-color-primary: #052B65;
+  --ifm-color-primary-dark: #071121;
+  --ifm-color-primary-darker: #000000;
+  --ifm-color-primary-darkest: #000000;
+  --ifm-color-primary-light: #08439c;
+  --ifm-color-primary-lighter: #0b64e8;
+  --ifm-color-primary-lightest: #CAE9FF;
+  --ifm-link-color: var(--ifm-color-primary-lighter);
   --ifm-code-font-size: 95%;
+  --ifm-font-size-base: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-footer-background-color: var(--ifm-background-surface-color);
+  --ifm-footer-color: var(--ifm-color-white);
+  --ifm-color-white: #052B65;
+  --ifm-color-secondary: var(--ifm-color-white);
+  --ifm-menu-color-active: var(--ifm-color-white);
+  --ifm-hover-overlay: var(--ifm-background-surface-color);
+  --ifm-background-color: #FFFFFF;
+  --ifm-background-surface-color: rgb(236, 241, 248);
+  --ifm-color-content: var(--ifm-color-primary);
+  --ifm-global-shadow-lw: rgba(5, 43, 101, 0.06) 0px 12px 12px;
+  --ifm-color-secondary-dark: var(--ifm-color-primary-dark);
+}
+
+html[data-theme='light'] .navbar {
+  background: linear-gradient(45deg, rgb(234, 233, 255) 14.64%, rgb(202, 233, 255) 85.36%) fixed;
 }
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
+html[data-theme='dark']:root {
+  --ifm-color-primary: #CAE9FF;
+  --ifm-color-primary-dark: #052B65;
+  --ifm-color-primary-darker: #052B65;
+  --ifm-color-primary-darkest: #052B65;
+  --ifm-color-primary-light: #CAE9FF;
+  --ifm-color-primary-lighter: #CAE9FF;
+  --ifm-color-primary-lightest: #CAE9FF;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-color-white: #CAE9FF;
+  --ifm-color-secondary: var(--ifm-color-white);
+  --ifm-menu-color-active: var(--ifm-color-white);
+  --ifm-hover-overlay: rgb(255 255 255 / 15%);
+  --ifm-background-color: #061224;
+  --ifm-background-surface-color: #081d39;
+  --ifm-color-content: var(--ifm-color-primary);
+  
+}
+
+.hero--primary {
+  --ifm-hero-background-color: var(--ifm-background-surface-color);
+  --ifm-hero-text-color: var(--ifm-color-white);
+}
+
+.button.button--secondary {
+  color: var(--ifm-color-primary-lightest);
+}
+
+html[data-theme='dark'] .button.button--secondary {
+  color: var(--ifm-color-primary-dark);
+}
+
+html .swagger-ui,
+html .swagger-ui .info .title,
+html .swagger-ui .opblock-tag,
+html .swagger-ui .opblock .opblock-summary-operation-id, 
+html .swagger-ui .opblock .opblock-summary-path, 
+html .swagger-ui .opblock .opblock-summary-path__deprecated,
+html .swagger-ui .opblock .opblock-summary-description,
+html .swagger-ui .opblock-description-wrapper p, 
+html .swagger-ui .opblock-external-docs-wrapper p, 
+html .swagger-ui .opblock-title_normal p,
+html .swagger-ui .tab li,
+html .swagger-ui .response-col_status,
+html .swagger-ui table thead tr td, 
+html .swagger-ui table thead tr th,
+html .swagger-ui .response-col_links,
+html .swagger-ui .parameter__name,
+html .swagger-ui .parameter__type,
+html .swagger-ui section.models h4,
+html .swagger-ui .model-title,
+html .swagger-ui .model,
+html .swagger-ui table.model tr.description {
+  color: var(--ifm-color-primary);
+}
+
+html .swagger-ui .info .title small pre {
+  background: none;
+}
+
+html .swagger-ui .scheme-container,
+html .swagger-ui section.models .model-container {
+  background: var(--ifm-background-surface-color);
+  border-radius: 12px;
+}
+
+html .swagger-ui .model-toggle:after {
+  background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9IiMwNTJCNjUiIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTEwIDYgOC41OSA3LjQxIDEzLjE3IDEybC00LjU4IDQuNTlMMTAgMThsNi02eiIvPjwvc3ZnPg==") 50% no-repeat;
+}
+
+html[data-theme='dark'] .swagger-ui .model-toggle:after {
+  background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9IiNjYWU5ZmYiIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTEwIDYgOC41OSA3LjQxIDEzLjE3IDEybC00LjU4IDQuNTlMMTAgMThsNi02eiIvPjwvc3ZnPg==") 50% no-repeat;
+}
+
+.footer--dark {
+  --ifm-footer-background-color: var(--ifm-background-surface-color);
+  --ifm-footer-color: var(--ifm-color-white);
+  --ifm-footer-link-hover-color: #fff;
+}
+
+.navbar__items {
+  justify-content: space-between;
+}
+
+html .menu_node_modules-\@docusaurus-theme-classic-lib-theme-DocSidebar-Desktop-Content-styles-module {
+  padding: 1rem 0 0.5rem 0.5rem;
+}
+
+.footer__copyright {
+  font-size: 0.7rem;
 }
