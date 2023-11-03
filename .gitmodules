@@ -1,0 +1,3 @@
+[submodule "external/cow-sdk"]
+	path = external/cow-sdk
+	url = https://github.com/cowprotocol/cow-sdk
