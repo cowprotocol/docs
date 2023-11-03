@@ -1,0 +1,21 @@
+Cancelling intents off-chain is free and does *not* require a transaction. However, there is a risk that the intent is matched between the time you cancel it and the time the cancellation is processed off-chain.
+
+:::caution
+
+Cancelling an intent off-chain is **not** guaranteed.
+
+:::
+
+To proceed with an off-chain cancellation, click "Request cancellation" as shown below.
+
+<>
+    <p><img {...props} /></p>
+</>
+
+If you wish to *guarantee* that your intent is cancelled, you may submit an on-chain cancellation transaction. This will cost gas. To do so, toggle the type of cancellation to "on-chain" by clicking on "off-chain".
+
+:::caution
+
+There is still a risk that the intent is matched between the time you submit the on-chain cancellation transaction and the time it is confirmed on-chain.
+
+:::

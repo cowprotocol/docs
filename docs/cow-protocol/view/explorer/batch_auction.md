@@ -1,5 +1,10 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
+draft: true
 ---
 
-# By Batch Auction
+# By batch auction
+
+![Batch Orders](/img/explorer/batch_orders.png)
+
+![Batch Graph](/img/explorer/batch_graph.png)
