@@ -96,6 +96,24 @@ const config = {
     ],
   ],
 
+  plugins: [
+    [
+      'docusaurus-plugin-typedoc',
+      {
+        // TypeDoc options
+        entryPoints: ['./external/cow-sdk/src/index.ts'],
+        tsconfig: './external/cow-sdk/tsconfig.json',
+
+        // Plugin options
+        out: 'cow-protocol/reference/sdks/js',
+        sidebar: {
+          categoryLabel: 'JavaScript',
+          collapsed: true,
+        }
+      }
+    ],
+  ],
+
   stylesheets: [
     {
       href: 'https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css',
@@ -149,16 +167,16 @@ const config = {
             title: 'Community',
             items: [
               {
-                label: 'Stack Overflow',
-                href: 'https://stackoverflow.com/questions/tagged/docusaurus',
+                label: 'Forum',
+                href: 'https://forum.cow.fi',
               },
               {
                 label: 'Discord',
-                href: 'https://discordapp.com/invite/docusaurus',
+                href: 'https://discord.com/invite/cowprotocol',
               },
               {
                 label: 'Twitter',
-                href: 'https://twitter.com/docusaurus',
+                href: 'https://twitter.com/CoWSwap',
               },
             ],
           },
@@ -177,7 +195,7 @@ const config = {
       prism: {
         theme: lightCodeTheme,
         darkTheme: darkCodeTheme,
-        additionalLanguages: ['solidity'],
+        additionalLanguages: ['solidity', 'json'],
       },
       colorMode: {
         defaultMode: 'light',

@@ -135,8 +135,9 @@ const sidebars = {
           type: 'category',
           label: 'Technical reference',
           link: {
-            type: 'doc',
-            id: 'cow-protocol/reference/README'
+            type: 'generated-index',
+            title: 'Technical reference',
+            slug: 'cow-protocol/reference',
           },
           items: [
             {
