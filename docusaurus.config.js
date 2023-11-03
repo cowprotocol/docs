@@ -96,6 +96,24 @@ const config = {
     ],
   ],
 
+  plugins: [
+    [
+      'docusaurus-plugin-typedoc',
+      {
+        // TypeDoc options
+        entryPoints: ['./external/cow-sdk/src/index.ts'],
+        tsconfig: './external/cow-sdk/tsconfig.json',
+
+        // Plugin options
+        out: 'cow-protocol/reference/sdks/js',
+        sidebar: {
+          categoryLabel: 'JavaScript',
+          collapsed: true,
+        }
+      }
+    ],
+  ],
+
   stylesheets: [
     {
       href: 'https://cdn.jsdelivr.net/npm/katex@0.13.24/dist/katex.min.css',
