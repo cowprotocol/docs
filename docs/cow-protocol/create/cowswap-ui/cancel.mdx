@@ -1,0 +1,36 @@
+---
+sidebar_position: 3
+---
+
+import CancellationOffChainOnChain from '../../../partials/_cancellation_offchain_versus_onchain.mdx'
+
+# Cancel
+
+:::note
+
+Before we begin, please note that our solvers can be quite quick, so it is entirely possible that your order will have already been filled before it can be invalidated.
+
+:::
+
+As CoW Protocol runs an off-chain order book, it is possible to cancel an intent before it is matched. This is done by signing an off-chain cancellation message and submitting it to the [OrderBook API](../../reference/apis/orderbook).
+
+## Finding pending intents
+
+![Finding pending intents](/img/cowswap/cancel_pending.png)
+
+![Cancelling an intent](/img/cowswap/cancel_intent.png)
+
+## Off-chain vs on-chain cancellation
+
+Off-chain cancellations are *optimistic* in that it signals to the order book that you no longer wish to trade. This is useful as it doesn't involve any on-chain transactions and is therefore free. Provided that the intent has not been settled on chain, it will be removed from the order book and will not be matched.
+
+<CancellationOffChainOnChain
+    alt="Cancel off-chain"
+    src="/img/cowswap/cancel_offchain.png"
+/>
+
+![Cancel on-chain](/img/cowswap/cancel_onchain.png)
+
+After you have selected "on-chain", click "Request cancellation" to submit the transaction. You will be prompted to sign the transaction with your wallet.
+
+![Sign on-chain cancellation](/img/cowswap/cancel_onchain_signing.png)
