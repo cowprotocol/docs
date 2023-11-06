@@ -1,6 +1,6 @@
 [submodule "external/cow-sdk"]
 	path = external/cow-sdk
-	url = https://github.com/cowprotocol/cow-sdk
+	url = https://github.com/cowprotocol/cow-sdk.git
 [submodule "external/app-data"]
 	path = external/app-data
-	url = https://github.com/cowprotocol/app-data
+	url = https://github.com/cowprotocol/app-data.git
