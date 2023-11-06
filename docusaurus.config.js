@@ -107,25 +107,9 @@ const config = {
         tsconfig: './external/cow-sdk/tsconfig.json',
 
         // Plugin options
-        out: 'cow-protocol/reference/sdks/js/cow-sdk',
+        out: 'cow-protocol/reference/sdks/cow-sdk',
         sidebar: {
           categoryLabel: 'cow-sdk',
-          collapsed: true,
-        }
-      },
-    ],
-    [
-      'docusaurus-plugin-typedoc',
-      {
-        id: 'app-data',
-        // TypeDoc options
-        entryPoints: ['./external/app-data/src/index.ts'],
-        tsconfig: './external/app-data/tsconfig.json',
-
-        // Plugin options
-        out: 'cow-protocol/reference/sdks/js/app-data',
-        sidebar: {
-          categoryLabel: 'app-data',
           collapsed: true,
           position: 1,
         }
