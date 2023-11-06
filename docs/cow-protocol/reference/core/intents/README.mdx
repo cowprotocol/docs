@@ -1,12 +1,16 @@
 # Intents
 
-Within CoW Protocol, intents are the way that a user expresses their desire to swap tokens. An intent is a combination of the tokens they wish to swap, the amount they wish to swap, and the price they wish to swap at.
+Within CoW Protocol, intents are the way that a user expresses their desired swap outcome.
 
 ## Parameters
 
-### Batch auction
+The parameters required for an intent can be broken down into three categories:
 
-The [batch-optimization problem](auctions/the-problem) requires that a user specify the:
+* [Batch auction](#batch-auction) parameters - those required to solve the [batch-optimization problem](auctions/the-problem)
+* [Co-ordination / Settlement](#co-ordination-settlement) parameters - those required for co-ordination and settlement purposes
+* [Metadata](#metadata) parameters - those required for metadata purposes
+
+### Batch auction
 
 * tokens to swap (i.e. `sellToken` and `buyToken`)
 * amounts to swap (i.e. `sellAmount` and `buyAmount`)
@@ -16,13 +20,14 @@ The [batch-optimization problem](auctions/the-problem) requires that a user spec
 
 ### Co-ordination / Settlement
 
-For co-ordination and settlement purposes, the Protocol requires the user to specify the:
-
 * address to send the tokens to (i.e. `receiver` of the `buyToken`)
 * validity of the order (i.e. `validTo`)
-* application specific data (i.e. `appData`)
 * source of the `sellToken` (i.e. `sellTokenBalance`)
 * destination of the `buyToken` (i.e. `buyTokenBalance`)
+
+### Metadata
+
+* application specific data (i.e. `appData`)
 
 :::note
 

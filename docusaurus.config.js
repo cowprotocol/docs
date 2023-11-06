@@ -107,10 +107,11 @@ const config = {
         tsconfig: './external/cow-sdk/tsconfig.json',
 
         // Plugin options
-        out: 'cow-protocol/reference/sdks/js/cow-sdk',
+        out: 'cow-protocol/reference/sdks/cow-sdk',
         sidebar: {
           categoryLabel: 'cow-sdk',
           collapsed: true,
+          position: 1,
         }
       },
     ],
@@ -123,10 +124,11 @@ const config = {
         tsconfig: './external/app-data/tsconfig.json',
 
         // Plugin options
-        out: 'cow-protocol/reference/sdks/js/app-data',
+        out: 'cow-protocol/reference/sdks/app-data',
         sidebar: {
           categoryLabel: 'app-data',
           collapsed: true,
+          position: 2,
         }
       }
     ]
