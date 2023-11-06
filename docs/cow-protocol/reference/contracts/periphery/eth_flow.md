@@ -7,9 +7,9 @@ slug: eth-flow
 
 As CoW Protocol only [supports `ERC20 tokens`](../../core/tokens), this means that if a user wants to sell `ETH` on CoW Protocol, they need to:
 
-1. convert their `ETH` into `WETH`
-2. approve the [vault relayer](../core/vault-relayer) for spending their `WETH`
-3. finally create their order
+1. Convert their `ETH` into `WETH`
+2. Approve the [vault relayer](../core/vault-relayer) for spending their `WETH`
+3. Create their order
 
 This process is time-consuming and potentially costly for the user and is why we developed Eth-flow, a contract that smooths the user experience when selling native tokens on CoW Protocol.
 
@@ -68,7 +68,7 @@ sequenceDiagram
 
 The user interacts with Eth-flow to deposit `ETH` via `createOrder`. The Eth-flow contract will then create an intent on behalf of the user that will be placed into the Order Book by the Protocol and settled by solvers - the same way as if the user had wrapped their `ETH` to `WETH` and created the intent themselves.
 
-The proceeds will go to the user and not to the exchange because we specify the user as the receiver in the Eth-flow contract intent.
+The proceeds will go to the user and not to the exchange because we specify the user as the `receiver` in the Eth-flow contract intent.
 
 ### User intent / Contract intent
 
@@ -76,7 +76,7 @@ Every `ETH` sell intent from a user ("_user intent_") is transformed into a `WET
 
 This intent is implicitly created when the user deposits `ETH`.
 
-The user's intent is a subset of the contract intent as some parameters are implicit (such as the sell token being `ETH` and the receiver being the user). The following table describes the parameters of the user intent.
+The user's intent is a subset of the contract intent as some parameters are implicit (such as the sell token being `ETH` and the `receiver` being the user). The following table describes the parameters of the user intent.
 
 :::note
 
@@ -115,7 +115,7 @@ If all verification steps succeed, Eth-flow affirmatively signs the digest with 
 
 ### Guarantees / Invariants
 
-1. A user can have multiple open intents.
+1. A user can have multiple open intents
 
 ## Data Types and Storage
 
@@ -187,14 +187,6 @@ There is a possibility of a collision in the digest. There could be two differen
 :::
 
 ## Functions
-
-A user interacts with the contracts:
-
-1. When creating an intent
-2. When cancelling an intent
-
-The CoW Protocol settlement contract interacts with the Eth-flow contract when settling an order. From the point of view of the protocol, this is just a standard order (signed with `ERC-1271`).
-
 
 :::note
 
