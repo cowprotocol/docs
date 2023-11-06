@@ -100,18 +100,35 @@ const config = {
     [
       'docusaurus-plugin-typedoc',
       {
+        id: 'cow-sdk',
         // TypeDoc options
         entryPoints: ['./external/cow-sdk/src/index.ts'],
         tsconfig: './external/cow-sdk/tsconfig.json',
 
         // Plugin options
-        out: 'cow-protocol/reference/sdks/js',
+        out: 'cow-protocol/reference/sdks/js/cow-sdk',
         sidebar: {
-          categoryLabel: 'JavaScript',
+          categoryLabel: 'cow-sdk',
+          collapsed: true,
+        }
+      },
+    ],
+    [
+      'docusaurus-plugin-typedoc',
+      {
+        id: 'app-data',
+        // TypeDoc options
+        entryPoints: ['./external/app-data/src/index.ts'],
+        tsconfig: './external/app-data/tsconfig.json',
+
+        // Plugin options
+        out: 'cow-protocol/reference/sdks/js/app-data',
+        sidebar: {
+          categoryLabel: 'app-data',
           collapsed: true,
         }
       }
-    ],
+    ]
   ],
 
   stylesheets: [
