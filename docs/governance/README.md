@@ -19,7 +19,3 @@ CoW DAO’s snapshot space is a simple voting interface that allows members to v
 ### [Discord](https://discord.gg/invite/cowprotocol)
 
 The CoW DAO Discord server is currently the main discussion hub for the CoW Community and an informal place for governance discussions. The *"governance-discussion"* channel is where the governance matters and proposals can be discussed.
-
-## Governance Parameters
-
-![Governance process](/img/governance/process.jpg)
