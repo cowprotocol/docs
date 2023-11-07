@@ -169,9 +169,15 @@ const config = {
         items: [
           {
             type: 'docSidebar',
-            sidebarId: 'tutorialSidebar',
-            position: 'left',
-            label: 'Tutorial',
+            sidebarId: 'cowProtocolSidebar',
+            position: 'right',
+            label: 'Protocol',
+          },
+          {
+            type: 'docSidebar',
+            sidebarId: 'governanceSidebar',
+            position: 'right',
+            label: 'DAO Governance',
           },
           {
             href: 'https://github.com/cowprotocol/docs',
