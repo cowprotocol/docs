@@ -2,8 +2,7 @@
 sidebar_position: 2
 ---
 
-
-#### What is CoW Protocol and What is CoW Swap?
+# What is CoW Protocol and What is CoW Swap?
 
 While they are interrelated, there are important differences between CoW Protocol and CoW Swap.
 

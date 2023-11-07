@@ -2,7 +2,7 @@
 sidebar_position: 4
 ---
 
-### Batch Auctions
+# Batch Auctions
 
 CoW Protocol relies on batch auctions as a unique price-finding mechanism. Unlike traditional DEXs, where users submit orders directly on-chain, CoW Protocol collects and aggregates orders (intents) off-chain and settles them together in groups, known as batches. Instead of relying on a central operator, the protocol fosters open competition among solvers. Solvers are entities who compete to propose the best order settlement solutions for a batch. This approach aims to standardize prices for token pairs in the same block and enhance DEX trading by combining economic mechanisms like Uniform Clearing Prices and Coincidence of Wants.
 

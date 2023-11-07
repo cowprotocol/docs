@@ -2,7 +2,7 @@
 sidebar_position: 3
 ---
 
-#### Intents as signed orders
+# Intents as signed orders
 
  As covered in the previous section, CoW Protocol relies on signed intent-to-trade messages to process user orders. While this setup is a bit more complicated than simply submitting an order on-chain, there are a number of financial and technical advantages to intents-based trading. 
  

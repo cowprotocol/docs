@@ -2,7 +2,7 @@
 sidebar_position: 5
 ---
 
-### Solvers
+# Solvers
 
 Instead of creating an Ethereum transaction for swapping token A for B (which costs gas, may fail, etc.) users sign an intent to trade the two tokens at a specified limit price. Unlike with other DEXs, users on CoW Protocol do not execute their trades themselves. Rather, trusted third parties known as “solvers” execute trades on their behalf through a delegated trade execution mechanism. 
 

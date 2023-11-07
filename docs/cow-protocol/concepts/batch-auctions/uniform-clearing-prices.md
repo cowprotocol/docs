@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-### Uniform Clearing Prices
+# Uniform Clearing Prices
 
 Even though Ethereum transactions execute atomically, the unique design of AMMs means identical tokens pairs will trade for different prices within the same block.
 

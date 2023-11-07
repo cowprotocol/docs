@@ -2,7 +2,7 @@
 sidebar_position: 3
 ---
 
-#### ERC-1271 orders (Native Flow)
+# ERC-1271 orders (Native Flow)
 
 The CoW ETH Flow Contract is a new way of trading on CoW Protocol. It’s specifically designed to handle ETH, since the CoW Protocol settlement contract is only compatible with ERC-20 tokens.
 

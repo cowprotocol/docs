@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-### Market Orders
+# Market Orders
 
 Market orders are orders to buy or sell tokens as soon as possible at the current market rate. In the context of CoW Swap, when you place a market order, you agree to get, at minimum, the current AMM on-chain price. If the solvers are able to find optimizations within the batch auction your order is settled with, you may also get a better price.
 

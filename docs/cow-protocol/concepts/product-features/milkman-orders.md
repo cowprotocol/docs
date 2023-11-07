@@ -2,7 +2,7 @@
 sidebar_position: 4
 ---
 
-### Milkman Orders
+# Milkman Orders
 
 Through Milkman, instead of specifying a ‘min out’ to receive, you specify an on-chain data source to pull the market price of your trading pair. 
 

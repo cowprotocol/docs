@@ -18,20 +18,10 @@ CoW Protocol is a fully permissionless trading protocol that leverages batch auc
 MEV Blocker is an RPC endpoint designed to protect user transactions from MEV (Maximal Extractable Value) attacks such as frontrunning and sandwiching. Aside from protecting user transactions from the dangers of MEV, MEV Blocker leverages an order flow auction of searchers and builders to offer users rebates for their trades.
 
 
-## Navigating the documentation 
+## How to use CoW DAO’s documentation
 
-CoW DAO’s documentation follows a “Concepts”, “Procedures”, “Technical Reference” methodology. For example when a user wants to learn:
+CoW DAO’s documentation follows a "Concepts", "Procedures", "Technical Reference" methodology. For example when a user wants to learn:
 
 - **_What_** something is (ie. batch Auctions) → see concepts
 - **_How_** to do something (ie. create order) → see the product specific procedure
 - **_Technical_** information (ie. such as SDKs, APIs) - see Technical Reference
-
-
-## Relevant external links:
-
-- [Website ](https://cow.fi/)
-- [Github](https://github.com/cowprotocol/)
-- [Twitter](https://twitter.com/CoWSwap)
-- [Discord](https://discord.gg/cowprotocol)
-- [Forum](https://forum.cow.fi/)
-- [Snapshot](https://snapshot.org/#/cow.eth)

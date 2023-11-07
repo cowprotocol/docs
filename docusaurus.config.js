@@ -210,9 +210,17 @@ const config = {
             title: 'More',
             items: [
               {
+                label: 'Website',
+                href: 'https://cow.fi'
+              },
+              {
                 label: 'GitHub',
                 href: 'https://github.com/cowprotocol',
               },
+              {
+                label: 'Snapshot',
+                href: 'https://snapshot.org/#/cow.eth',
+              }
             ],
           },
         ],

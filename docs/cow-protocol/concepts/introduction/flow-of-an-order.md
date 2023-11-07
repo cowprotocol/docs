@@ -2,7 +2,7 @@
 sidebar_position: 6
 ---
 
-#### Flow of an order through CoW Protocol
+# Flow of an order through CoW Protocol
 
 ****
 
