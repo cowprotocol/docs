@@ -19,3 +19,9 @@ CoW hooks allow users to specify Ethereum calls (also known as an "inner transac
 * Staking trading proceeds
 
 It is also worth noting that any additional fees for executing hooks are also charged in the sell token, just like regular order execution fees. So you don't need to hold any particular token or extra `ETH` to use this feature!
+
+:::caution
+
+When placing _partially fillable_ orders with hooks, the hook will only be executed on the first fill. Therefore, your hook should ensure that the liquidity is sufficient for the entire order to be filled.
+
+:::

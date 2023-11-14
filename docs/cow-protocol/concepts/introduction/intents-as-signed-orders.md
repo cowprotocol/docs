@@ -27,6 +27,7 @@ From a technical standpoint, CoW Protocol relies on intents as a core part of th
 * Establishing additional rules for the way in which the intents are settled on-chain, such as guaranteeing that the trade is settled at _EBBO_ (_Ethereum best bid offer_ – in other words, ensuring that the baseline price for the trade is what on-chain AMMs offer) and uniform clearing prices (where trades with the same token pair in the same batch are cleared at the same price)
 * Allowing the user to pay gas fees in their _sell token_ without needing to hold `ETH` in their wallet
 * Allowing the user the option to place as many orders as they want, as they won’t pay for failed transactions
+* Allow the user to specify _hooks_ that execute before and after the trade is settled on-chain
 
 Additionally, CoW Protocol smart contracts enforce that: 
 

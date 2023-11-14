@@ -11,14 +11,19 @@ The `GPv2VaultRelayer` contract is an important component used to protect user f
 
 The `GPv2VaultRelayer` has access to user balances through 3 mechanisms:
 
-1. [Balancer External Balances](#balancer-external-balances)
-2. [Balancer Internal Balances](#balancer-internal-balances)
-3. [Fallback ERC20 Allowances](#fallback-erc20-allowances)
+1. [Fallback ERC20 Allowances](#fallback-erc20-allowances)
+2. [Balancer External Balances](#balancer-external-balances)
+3. [Balancer Internal Balances](#balancer-internal-balances)
 
 ### Guarantees and Invariants
 
 * The `GPv2VaultRelayer` is only able to transfer `ERC20` tokens to the `GPv2Settlement` contract
 
+### Fallback ERC20 Allowances
+
+The third and final method of approving tokens for CoW protocol is to use direct `ERC20` allowances to the `GPv2VaultRelayer`. This works like most other trading protocols, where for each token you want to sell, an allowance must first be approved for the `GPv2VaultRelayer` contract.
+
+Orders with the `sellTokenBalance` flag set to `erc20` will withdraw using this process. The `buyTokenBalance` flag can also be set to `erc20` in order to receive trade proceeds directly in `ERC20` amounts.
 
 ### Balancer External Balances
 
@@ -47,12 +52,6 @@ The second mechanism is to use balances internal to the `Vault`. The Balancer V2
 Internal balances can be withdrawn from the `Vault` at any time for their `ERC20` equivalent amounts.
 
 Orders with the `sellTokenBalance` flag set to `internal` will withdraw using this process. The `buyTokenBalance` flag can also be set to `internal` in order to receive trade proceeds in internal balances instead of `ER20` token balances.
-
-### Fallback ERC20 Allowances
-
-The third and final method of approving tokens for CoW protocol is to use direct `ERC20` allowances to the `GPv2VaultRelayer`. This works like most other trading protocols, where for each token you want to sell, an allowance must first be approved for the `GPv2VaultRelayer` contract.
-
-Orders with the `sellTokenBalance` flag set to `erc20` will withdraw using this process. The `buyTokenBalance` flag can also be set to `erc20` in order to receive trade proceeds directly in `ERC20` amounts.
 
 ## Data Types and Storage
 
