@@ -84,7 +84,7 @@ The user intent described below is not a valid intent for the settlement contrac
 
 :::
 
-| **Parameter** | **User** | **Contract** | **Description** |
+| **Parameter** | **User** | **Contract** | **Limitation** |
 |---|---|---|---|
 | `sellToken` | `ETH` | `WETH` |  |
 | `buyToken` | any | same as user |  |
@@ -121,7 +121,7 @@ If all verification steps succeed, Eth-flow affirmatively signs the digest with 
 
 ### `EthFlowOrder.OnchainData`
 
-This struct is used to store the user intent in the Eth-flow contract:
+This struct contains the parts of a user intent that need to be stored on chain.
 
 ```solidity
 struct OnchainData {
@@ -132,8 +132,8 @@ struct OnchainData {
 
 For asserting the validity of the intent, the Eth-flow contract applies some assumptions to the `owner`:
 
-* `owner = address(0)` = unset
-* `owner = address(0xffffffffffffffffffffffffffffffffffffffff)` = invalidated
+* `owner = address(0)` ⇒ unset
+* `owner = address(0xffffffffffffffffffffffffffffffffffffffff)` ⇒ invalidated
 
 :::note
 
@@ -143,7 +143,7 @@ Modifying the `validTo` field does not change the contract intent digest.
 
 ### `EthFlowOrder.Data`
 
-This struct is used when interacting with the Eth-flow contract.
+This struct collects all parameters needed to describe a single user trade intent.
 
 ```solidity
 struct Data {

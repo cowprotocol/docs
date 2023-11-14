@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # Slippage accounting
 
-Slippage accounting is performed on a per settlement/transaction basis according to the following two primary components. The SQL source code can be found on [GitHub](https://github.com/cowprotocol/solver-rewards/blob/main/queries/dune_v2/period_slippage.sql) or [Dune Analytics](https://dune.com/queries/2421375)
+Slippage accounting is performed on a per settlement/transaction basis according to the following two primary components. The SQL source code can be found on [GitHub](https://github.com/cowprotocol/solver-rewards/blob/main/queries/dune_v2/period_slippage.sql) or [Dune Analytics](https://dune.com/queries/3093726)
 
 ## Batch-wise token imbalance
 
@@ -34,4 +34,4 @@ Please find the source code for internal imbalances at https://github.com/cowpro
 
 ## Evaluation in ETH (aka Token Prices)
 
-Token prices are taken as the _hourly mean_ over Dune's `prices.usd` table in combination with the "intrinsic" token prices provided in settlements. SQL code for price table is [here](https://github.com/cowprotocol/solver-rewards/blob/dd2cb170cf6c214b8c2edf1d82eec333d2fa35a1/queries/dune_v2/period_slippage.sql#L258-L324)
+Token prices are taken as the _hourly mean_ over Dune's `prices.usd` table in combination with the "intrinsic" token prices provided in settlements. SQL code for price table is [here](https://github.com/cowprotocol/solver-rewards/blob/main/queries/dune_v2/period_slippage.sql#L257-L323)
