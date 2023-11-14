@@ -5,7 +5,10 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
-    "build": "docusaurus build",
+    "build:external:cowsdk": "cd external/cow-sdk && yarn",
+    "build:external:appdata": "cd external/app-data && yarn",
+    "build:external": "yarn build:external:cowsdk && yarn build:external:appdata",
+    "build": "yarn build:external && docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
@@ -23,6 +26,7 @@
     "@docusaurus/theme-mermaid": "2.4.3",
     "@mdx-js/react": "^1.6.22",
     "clsx": "^1.2.1",
+    "docusaurus-json-schema-plugin": "^1.7.0",
     "hast-util-is-element": "1.1.0",
     "prism-react-renderer": "^1.3.5",
     "react": "^17.0.2",
@@ -39,8 +43,11 @@
     "prettier": "^3.0.3",
     "typedoc": "^0.25.3",
     "typedoc-plugin-markdown": "^3.17.0",
-    "typescript": "^4.7.4"
+    "typescript": "^4.9.5"
   },
+  "resolutions": {
+    "types-ramda": "0.29.4"
+},
   "browserslist": {
     "production": [
       ">0.5%",

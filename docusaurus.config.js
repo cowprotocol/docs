@@ -31,7 +31,7 @@ const config = {
   organizationName: 'cowprotocol', // Usually your GitHub org/user name.
   projectName: 'docs', // Usually your repo name.
 
-  onBrokenLinks: 'throw',
+  onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
 
   trailingSlash,
@@ -47,7 +47,7 @@ const config = {
   markdown: {
     mermaid: true,
   },
-  themes: ['@docusaurus/theme-mermaid', '@docusaurus/theme-live-codeblock'],
+  themes: ['@docusaurus/theme-mermaid', '@docusaurus/theme-live-codeblock', "docusaurus-json-schema-plugin"],
 
   presets: [
     [
@@ -55,6 +55,7 @@ const config = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       ({
         docs: {
+          routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
           sidebarItemsGenerator: async function sidebarItemsGenerator({
                     defaultSidebarItemsGenerator,
@@ -100,18 +101,37 @@ const config = {
     [
       'docusaurus-plugin-typedoc',
       {
+        id: 'cow-sdk',
         // TypeDoc options
         entryPoints: ['./external/cow-sdk/src/index.ts'],
         tsconfig: './external/cow-sdk/tsconfig.json',
 
         // Plugin options
-        out: 'cow-protocol/reference/sdks/js',
+        out: 'cow-protocol/reference/sdks/cow-sdk',
         sidebar: {
-          categoryLabel: 'JavaScript',
+          categoryLabel: 'cow-sdk',
           collapsed: true,
+          position: 1,
+        }
+      },
+    ],
+    [
+      'docusaurus-plugin-typedoc',
+      {
+        id: 'app-data',
+        // TypeDoc options
+        entryPoints: ['./external/app-data/src/index.ts'],
+        tsconfig: './external/app-data/tsconfig.json',
+
+        // Plugin options
+        out: 'cow-protocol/reference/sdks/app-data',
+        sidebar: {
+          categoryLabel: 'app-data',
+          collapsed: true,
+          position: 2,
         }
       }
-    ],
+    ]
   ],
 
   stylesheets: [

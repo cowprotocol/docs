@@ -1,0 +1,17 @@
+# Periphery
+
+Peripheral contracts are those that are not necessary for CoW Protocol to function, but are used to enhance user experience.
+
+## Deployments
+
+:::tip
+
+CoW Protocol contracts are generally deployed to the same addresses on their respective deployment chains. This may be done either via using determinsitic deployments (`CREATE2`), or ensuring that the deployer uses a consistent `nonce` via `CREATE` for deployment.
+
+:::
+
+| **Contracts** | **Address / Chains** |
+|---|---|
+| [`EthFlow`](periphery/eth-flow)<br />Upgradeable: No ❎<br />[GitHub](https://github.com/cowprotocol/ethflowcontract/blob/main/src/CoWSwapEthFlow.sol) | `0x40A50cf069e992AA4536211B23F286eF88752187`<br />- [Ethereum mainnet](https://etherscan.io/address/0x40A50cf069e992AA4536211B23F286eF88752187)<br />- [Gnosis chain](https://gnosisscan.io/address/0x40A50cf069e992AA4536211B23F286eF88752187)<br/>- [Goerli](https://goerli.etherscan.io/address/0x40A50cf069e992AA4536211B23F286eF88752187) |
+| [`HooksTrampoline`](periphery/hooks-trampoline)<br />Upgradeable: No ❎<br />[GitHub](https://github.com/cowprotocol/hooks-trampoline/blob/main/src/HooksTrampoline.sol) | `0x01DcB88678aedD0C4cC9552B20F4718550250574`<br />- [Ethereum mainnet](https://etherscan.io/address/0x01DcB88678aedD0C4cC9552B20F4718550250574)<br />- [Gnosis chain](https://gnosisscan.io/address/0x01DcB88678aedD0C4cC9552B20F4718550250574)<br/>- [Goerli](https://goerli.etherscan.io/address/0x01DcB88678aedD0C4cC9552B20F4718550250574) |
+| [`ComposableCoW`](periphery/composable-cow)<br />Upgradeable: No ❎<br />[GitHub](https://github.com/cowprotocol/composable-cow/blob/main/src/ComposableCoW.sol) | `0xfdaFc9d1902f4e0b84f65F49f244b32b31013b74`<br />- [Ethereum mainnet](https://etherscan.io/address/0xfdaFc9d1902f4e0b84f65F49f244b32b31013b74)<br />- [Gnosis chain](https://gnosisscan.io/address/0xfdaFc9d1902f4e0b84f65F49f244b32b31013b74)<br/>- [Goerli](https://goerli.etherscan.io/address/0xfdaFc9d1902f4e0b84f65F49f244b32b31013b74) |

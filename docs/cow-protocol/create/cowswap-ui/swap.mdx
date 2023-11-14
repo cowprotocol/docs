@@ -1,0 +1,57 @@
+---
+sidebar_position: 2
+---
+
+import TokenApprovalWarning from '../../../partials/_token_approvals.mdx'
+import ReceiverAndIntentWarning from '../../../partials/_receiver.mdx'
+
+# Swap
+
+Swapping is the bread and butter of CoW Protocol! Let's swap some tokens!
+
+## Select tokens
+
+Consider an example swapping 0.05 `WETH` for `COW`.
+
+![GPv2VaultRelayer approval required](/img/cowswap/swap_need_approval.png)
+
+Oh, it looks like we need to approve the [`GPv2VaultRelayer`](/docs/cow-protocol/reference/contracts/core#gpv2vaultrelayer) to spend our `WETH`! This is because the [`GPv2VaultRelayer`](/docs/cow-protocol/reference/contracts/core#gpv2vaultrelayer) is the one that will pull the `WETH` from our wallet and send it to the [settlement](/docs/cow-protocol/reference/contracts/core#gpv2settlement) contract that will co-ordinate the swap on our behalf.
+
+## Approve sell token
+
+:::tip
+
+Some tokens, such as `USDC`, `DAI`, and `COW` support permit-style approvals. This means that you can approve the [`GPv2VaultRelayer`](/docs/cow-protocol/reference/contracts/core#gpv2vaultrelayer) to spend your tokens without having any initial gas for an on-chain transaction. This is a great way to save on gas costs!
+
+You don't have to worry about this, as CoW Swap will automatically detect if the token supports permit-style approvals and will guide you through the process.
+
+:::
+
+![GPv2VaultRelayer default approval](/img/cowswap/swap_approval_default.png)
+
+By default, CoW Swap prompt you to approve [`GPv2VaultRelayer`](/docs/cow-protocol/reference/contracts/core#gpv2vaultrelayer) an "unlimited" allowance for the sell token. This has the benefits of:
+
+- Not having to approve multiple times
+- Save on gas costs
+
+<TokenApprovalWarning token="WETH" spender="GPv2VaultRelayer" />
+
+Once the `approve` transaction is confirmed, you can proceed to swap!
+
+![GPv2VaultRelayer approved](/img/cowswap/swap_approved.png)
+
+## Confirm swap
+
+When you're ready to swap, click the "Swap" button. You will be prompted with a confirmation dialog to confirm the swap. This is where you can review the details of the swap (ie. the quote, the slippage tolerance, etc.). If you're happy with the details, click "Confirm Swap". You will be prompted to sign the intent to swap.
+
+<ReceiverAndIntentWarning />
+
+![Confirm Swap](/img/cowswap/swap_confirm.png)
+
+At this stage, your wallet will prompt you to sign the intent to swap. The user interface for this will vary depending on your wallet. You 
+
+![Signing Swap](/img/cowswap/swap_signing.png)
+
+Once the intent has been signed, it will be submitted to CoW Protocol. You are able to [view your order](/docs/cow-protocol/view) on [CoW Explorer](https://explorer.cow.fi).
+
+![Swap confirmed](/img/cowswap/swap_confirmed.png)
