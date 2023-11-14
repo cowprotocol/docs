@@ -45,15 +45,14 @@ The following flowchart illustrates the conditional order verification flow (ass
 
 ```mermaid
 flowchart TD
-    A[Extensible Fallback Handler: SignatureVerifierMuxer] -->|isValidSafeSignature| B[Check Authorization: MerkleRoot \n Proof & ConditionalOrderParams]
-    B -->|valid| S[SwapGuard:verify]
-    S -->|invalid| I[Revert]
-    S -->|valid| V[IConditionalOrder:verify]
-    B -->|invalid| C(Check Authorization: Single Order \n ConditionalOrderParams)
-    C -->|valid| V
-    C -->|invalid| I
-    V -->|valid| T[Return ERC1271 Magic]
-    V -->|invalid| I
+    A[Extensible Fallback Handler: SignatureVerifierMuxer] -->|isValidSafeSignature| B[Check Authorization]  
+    B -->|valid single order| S[SwapGuard:verify] 
+    B -->|valid Merkle proof| S  
+    B -->|invalid| I[Revert]  
+    S -->|valid| V[IConditionalOrder:verify]  
+    S -->|invalid| I  
+    V -->|valid| T[Return ERC1271 Magic]  
+    V -->|invalid| I  
 ```
 
 #### Settlement execution path
@@ -93,7 +92,7 @@ function isValidSafeSignature(
 | `domainSeparator` | See [`EIP-712`](https://eips.ethereum.org/EIPS/eip-712#definition-of-domainseparator) |
 | `typeHash` | Not used |
 | `encodeData` | ABI-encoded [`GPv2Order.Data`](../core/settlement.md#gpv2orderdata-struct) (per [`EIP-712`](https://eips.ethereum.org/EIPS/eip-712#definition-of-encodedata)) to be settled |
-| `payload` | ABI-encoded [`PayloadStruct`](#payloadstruct) |
+| `encodeData` | ABI-encoded [`GPv2Order.Data`](../core/settlement.md#gpv2orderdata-struct) to be settled |
 
 In order to delegate signature verification to `ComposableCoW`, the delegating contract may either:
 
@@ -154,7 +153,7 @@ The `verify` method **MUST** `revert` with `OrderNotValid(string)` if the parame
 
 :::note 
 
-All values **EXCLUDING** `offchainInput` are **verified** by ComposableCoW prior to calling an order type's `verify`.
+ComposableCoW is responsible for checking that all values **EXCLUDING** `offchainInput` belong to an order that was previously registered on-chain.
 
 :::
 
@@ -207,6 +206,12 @@ function verify(
 - For merkle trees, `H(ConditionalOrderParams)` **MUST** be a member of the merkle tree `roots[owner]`
 - For single orders, `singleOrders[owner][H(ConditionalOrderParams)] == true`
 
+:::caution  
+
+While a discrete order can be filled only once on CoW Protocol, a single conditional order can be used to create many different discrete orders. It is the responsibility of the implementation to limit which and when discrete orders can be executed.  
+
+:::
+
 ## Data Types and Storage
 
 ### `ConditionalOrderParams`
@@ -243,6 +248,7 @@ When used with Merkle Trees and a cryptographically-secure random `salt`, the co
 
 * `H(ConditionalOrderParams)` **MUST** be unique
 * Not setting `salt` to a cryptographically-secure random value **MAY** result in leaking information or hash collisions
+* Single orders **MAY** leak order information on creation
 
 :::
 
@@ -267,6 +273,12 @@ struct PayloadStruct {
 By setting `proof` to zero-length, this indicates to `ComposableCoW` that the order is a single order, and not part of a Merkle Tree.
 
 ### `Proof`
+
+Some services pick up new conditional orders automatically from on-chain events.
+
+The proof data can be emitted on-chain, but it can also be retrieved from other supported on-chain services.
+
+The location field signals where this data can be retrieved. 
 
 ```solidity
 struct Proof {
@@ -331,6 +343,9 @@ It is expected that the proofs retrieved, excluding `PRIVATE` and `LOG` conform 
             ]
         },
         "offchainInput": {
+            "type": "string"
+        }
+        "description": {
             "type": "string"
         }
     },
