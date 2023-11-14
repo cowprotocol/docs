@@ -3,7 +3,11 @@ id: vault-relayer
 sidebar_position: 2
 ---
 
+import HistoricalFact from './_gpv2.md'
+
 # GPv2VaultRelayer
+
+<HistoricalFact />
 
 ## Architecture
 

@@ -2,7 +2,11 @@
 sidebar_position: 1
 ---
 
+import HistoricalFact from './_gpv2.md'
+
 # GPv2Settlement
+
+<HistoricalFact />
 
 ## Architecture
 

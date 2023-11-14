@@ -2,9 +2,9 @@
 
 The spirit of ERC-1271 support in CoW Protocol was to enable Smart Contract wallets like to be able to trade on CoW Protocol and CoW Swap. Each individual Smart Contract wallet would then be able to implement their own signature validation scheme, for example:
 
-* Wallet owner indicates that some hash is trusted by executing an on-chain transaction
-* Wallet accepts all signatures from a specific domain
-* Owner off-chain signatures that are verified by the Smart Contract wallet
+- Wallet owner indicates that some hash is trusted by executing an on-chain transaction
+- Wallet accepts all signatures from a specific domain
+- Owner off-chain signatures that are verified by the Smart Contract wallet
 
 Specifically, the Safe v1.3 uses the latter for verifying signatures. Because the Safe uses off-chain owner ECDSA signatures for signature verification, this means that it is possible to trade "gas-less-ly" on CoW Protocol with the Safe.
 

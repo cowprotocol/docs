@@ -24,6 +24,6 @@ def run_trade_sep_21():
 
 This run will not be the typical ape safe tx. When you run the code you are actually calling the api and creating an order. You can create as many orders as you want BUT they are not valid until you sign them. In our case, executing the tx in the multisign will do the trick.
 
-Once the tx is signed, you can query the `/solvable_orders` endpoint to see your trades avaiable to solvers. You can check the output from [https://api.cow.fi/mainnet/#/default/get\_api\_v1\_solvable\_orders](https://api.cow.fi/mainnet/#/default/get\_api\_v1\_solvable\_orders).
+Once the tx is signed, you can query the `/solvable_orders` endpoint to see your trades avaiable to solvers. You can check the output from [https://api.cow.fi/mainnet/#/default/get_api_v1_solvable_orders](https://api.cow.fi/mainnet/#/default/get_api_v1_solvable_orders).
 
 After a few minutes I got two transfers, the first was `yfi` and `link` converted to `gusd` and on the second one `usdc` converted to `gusd`.
