@@ -2,10 +2,10 @@
 
 CoW Protocol aims to be a fully decentralized protocol, but the reality is that in order to fully be decentralized, there's still a long road to walk through. Currently, the protocol has certain parts that are more decentralized than others, and if we were to decompartmentalize the protocol into pieces, we would have the following:
 
-* User Interface
-* Smart Contracts - Allowance & Settlement Contract
-* Order DB
-* Solvers Algorithms
+- User Interface
+- Smart Contracts - Allowance & Settlement Contract
+- Order DB
+- Solvers Algorithms
 
 Both the user interface and the smart contracts are pieces that are already at 100% level of decentralization. The UI can be used by anyone without any possible blocking as it resides in IPFS. The smart contracts have no admin key, and do not hold users' balances in them, making them fully trustless and decentralized. On the other hand, the order DB & the solvers are the parts of the protocol that need the most work to achieve decentralization, and that is why in order to do it correctly, we have decided to do it in phases rather than all at once.
 
@@ -29,6 +29,6 @@ The second, and arguably less crucial, piece of infrastructure that is centraliz
 
 In phase 3 we hope the centrally hosted orderbook changes to a distributed p2p client network. Consensus could be reached:
 
-* by a native client implementation,
-* by making Cow Protocol a first party citizen in Ethereum nodes (e.g. OpenEthereum) or
-* by piggy-backing on a cheap side chain or test network (e.g. GnosisChain) for data availability
+- by a native client implementation,
+- by making Cow Protocol a first party citizen in Ethereum nodes (e.g. OpenEthereum) or
+- by piggy-backing on a cheap side chain or test network (e.g. GnosisChain) for data availability

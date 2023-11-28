@@ -8,15 +8,13 @@ Coincidence of wants can be explained as "economic phenomenon where two parties 
 
 One of the advantages of using batch auctions is that not only can you find perfect Coincidence of Wants matching, but you can also create ring trades. Essentially, a ring trade shares liquidity across all orders, rather than a single token pair. This functionality allows the protocol to offer traders better prices as they do not need to wait to have the perfect match between trades since they can dissect the trades into pieces to improve the outcome of them. Ring trades are one of the solutions to work around the fragmented liquidity.
 
-Once we know the theory behind Coincidence of Wants, and Ring trades, let's deep dive in an [example](https://explorer.cow.fi/tx/0x71d6f5bb2f29d16a0649d2b6a2eb3fabde8040598c21e675511d54e27399f6d2?tab=graph\&vis=trades) for both of them to understand them deeper.
+Once we know the theory behind Coincidence of Wants, and Ring trades, let's deep dive in an [example](https://explorer.cow.fi/tx/0x71d6f5bb2f29d16a0649d2b6a2eb3fabde8040598c21e675511d54e27399f6d2?tab=graph&vis=trades) for both of them to understand them deeper.
 
 <figure><img src="../img/image (12).png" alt="" /><figcaption></figcaption></figure>
 
 <figure><img src="../img/image (13).png" alt="" /><figcaption></figcaption></figure>
 
 In this batch auction, CoW Protocol found a Coincidence of Wants, from multiple users' orders. In this CoW, what we can see is that 12 swaps were mixed together to share liquidity amongst all of them. This allowed the protocol to settle a portion of the trade size internally, via CoWs, while only needing to tap into two different on-chain AMMs to cover for the rest of the liquidity within the batch.
-
-
 
 Ring trades are a form of Coincidence of Wants that not only maximize the liquidity on a two dimensional orderbook, but instead maximize on a multidimensional level, meaning that the Coincidence of wants can be found in minimum three different tokens. Because of it, the protocol is able to match different trading token pairs in the same batch auction, to avoid having to interact with multiple AMM pools. One important aspect to understand the slight difference between CoWs and ring trades is that every ring trade is a CoW, but not every CoW is a ring trade. An example of a ring trade would be the following:
 

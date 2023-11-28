@@ -96,8 +96,8 @@ The user intent described below is not a valid intent for the settlement contrac
 | `feeAmount` | any | same as user |  |
 | `kind` | `sell` | `sell` | Limited to `sell` intents only as dust from `buy` intents left in the Eth-flow contract would not be economical for a user to withdraw |
 | `partiallyFillable` | any | same as user |  |
-| `sellTokenBalance` | `external` | `external` | Only `external` implemented |
-| `buyTokenBalance` | `external` | `external` | Only `external` implemented |
+| `sellTokenBalance` | `erc20` | `erc20` | Only `erc20` implemented |
+| `buyTokenBalance` | `erc20` | `erc20` | Only `erc20` implemented |
 
 ### Contract order signing
 

@@ -2,7 +2,11 @@
 sidebar_position: 3
 ---
 
+import HistoricalFact from './_gpv2.md'
+
 # GPv2AllowlistAuthentication
+
+<HistoricalFact />
 
 ## Architecture
 

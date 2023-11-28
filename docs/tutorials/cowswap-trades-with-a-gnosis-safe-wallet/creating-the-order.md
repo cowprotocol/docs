@@ -2,9 +2,9 @@
 
 Let’s do an intermediate step and create a method to submit the order. The gist of the process is the following:
 
-* Get the quote of the trade to do
-* Create an order through the api and get an order id
-* Use the order id to set a flag on-chain, saying you are ok with that trade
+- Get the quote of the trade to do
+- Create an order through the api and get an order id
+- Use the order id to set a flag on-chain, saying you are ok with that trade
 
 I tried adding comments around the code
 
