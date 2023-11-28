@@ -1,5 +1,5 @@
 <p align="center">
-  <img alt="CoW Protocol Logo" width="400" src="./.github/cow.png">
+   <img alt="CoW Protocol Logo" width="400" src="./.github/cow.png">
 </p>
 
 # CoW Protocol Documentation
