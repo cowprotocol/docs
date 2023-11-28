@@ -304,8 +304,8 @@ The `Proof.location` is intentionally not made an `enum` to allow for future ext
 |---|---|---|
 | `PRIVATE` | `0` | `bytes("")` |
 | `LOG` | `1` | `abi.encode(bytes[] order)` where `order = abi.encode(bytes32[] proof, ConditionalOrderParams params)` |
-| `WAKU` | `2` | `abi.encode(string protobufUri, string[] enrTreeOrMultiaddr, string contentTopic, bytes payload)` |
-| `SWARM` | `3` | `abi.encode(bytes32 swarmCac)` |
+| `SWARM` | `2` | `abi.encode(bytes32 swarmCac)` |
+| `WAKU` | `3` | `abi.encode(string protobufUri, string[] enrTreeOrMultiaddr, string contentTopic, bytes payload)` |
 | `IPFS` | `5` | `abi.encode(bytes32 ipfsCid)` |
 
 <details closed>
