@@ -5,8 +5,8 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
-    "git:clone:cowsdk": "cd external && git clone --depth=1 --branch=main https://github.com/cowprotocol/cow-sdk cow-sdk && rm -rf cow-sdk/.git",
-    "git:clone:appdata": "cd external && git clone --depth=1 --branch=main https://github.com/cowprotocol/app-data app-data && rm -rf app-data/.git",
+    "git:clone:cowsdk": "cd external && rm -rf cow-sdk && git clone --depth=1 --branch=main https://github.com/cowprotocol/cow-sdk cow-sdk && rm -rf cow-sdk/.git",
+    "git:clone:appdata": "cd external && rm -rf app-data &&git clone --depth=1 --branch=main https://github.com/cowprotocol/app-data app-data && rm -rf app-data/.git",
     "build:external:cowsdk": "yarn git:clone:cowsdk && cd external/cow-sdk && yarn",
     "build:external:appdata": "yarn git:clone:appdata && cd external/app-data && yarn",
     "build:external": "yarn build:external:cowsdk && yarn build:external:appdata",
