@@ -18,9 +18,9 @@ There are 5 main steps to an order on CoW Protocol:
 
 ****
 
-1. Users express an intent to trade, signing a message specifying the assets and amounts they want to trade, without committing to a specific execution path 
+1. Users express an intent to trade, sign a message specifying the assets and amounts they want to trade, without committing to a specific execution path 
 2. The protocol includes the user’s intent to trade in the CoW Protocol orderbook
-3. The Auctioneer gathers multiple intent orders and groups them into a batch auction — meaning they will all settle on-chain together
+3. The auctioneer gathers multiple intent orders and groups them into a batch auction — meaning they will all settle on-chain together
 4. Solvers receive the batch _instance_ and begin finding the most optimal execution path for the various orders. The solvers compete with each other to offer the highest surplus for the orders and win the right to settle the batch on-chain
 5. Once the batch auction time window is over, the auctioneer ranks all the received _solutions_ and selects the winning solver. The winning solver executes the orders on behalf of the users and settles the batch on-chain 
 
