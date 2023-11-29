@@ -26,7 +26,23 @@ Want to get started writing a CIP? Check out the [CIP template](template) to get
 
 The CoW DAO governance process includes two steps for proposals to get approved:
 
-![CIP Process](/img/governance/cip-process.jpg)
+```mermaid
+flowchart TD
+    Proposer[<img src='/img/governance/proposer.png'/><br/>Proposer]
+    Community[<img src='/img/governance/community.png'/><br/>CoW Community]
+    Phase1[<b>Phase 1: Draft Proposal</b><br/>Forum discussion, incorporating feedback<br/>Duration: seven days]
+    Phase2[<b>Phase 2: Consensus</b><br/>Community vote on Snapshot<br/>Duration: seven days]
+    ProposalRejected(Proposal rejected)
+    ProposalAccepted[Transaction execution and proposal implementation]
+
+    direction LR
+    Proposer -->|Submit initial proposal| Phase1
+    Phase1 --> Phase2
+    Community -->|Discussion| Phase1
+    Community -->|Voting| Phase2
+    Phase2 -->|Consensus is not reached| ProposalRejected
+    Phase2 -->|Consensus is reached| ProposalAccepted
+```
 
 ### Phase 1: Community Discussion
 
