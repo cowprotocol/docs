@@ -8,7 +8,7 @@ CoW Protocol has a wide range of benefits, both technical and functional:
 
 * Fully permissionless Meta DEX Aggregator on which anyone can trade any tokens and build integrations
 * First implementation (2nd iteration) of batch auctions promoting fair uniform clearing prices
-* Protection from MEV, including frontrunning and sandwich attacks;
+* Protection from MEV, including frontrunning and sandwich attacks
 * Access to vast liquidity: 
     * Best prices when CoWs are found
     * Aggregation of the latest on-chain liquidity sources 
