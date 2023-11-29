@@ -25,4 +25,4 @@ console.log(trades);
 
 > 💡 For more information about the API methods, you can check [api.cow.fi/docs](https://api.cow.fi/docs).
 
-Now you should be able to access the main API methods. Let's continue in next section on how to sign and post new orders.\\
+Now you should be able to access the main API methods. Let's continue in next section on how to sign and post new orders.
