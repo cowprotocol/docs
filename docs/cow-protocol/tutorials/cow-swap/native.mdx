@@ -6,7 +6,17 @@ import EthFlowTip from '../../../partials/_eth_flow.mdx'
 
 # Native tokens
 
-CoW Protocol is only capable of handling ERC20 tokens. There are two ways in which to execute a swap from native tokens on CoW Protocol:
+In blockchain networks the native token, e.g. Ether (ETH) on Ethereum & DAI (xDAI) on Gnosis Chain, is the primary digital currency. 
+It's essential for network operations, like paying transaction fees. 
+Their "wrapped" token equivalents, e.g. Wrapped Ether (WETH) & Wrapped xDAI (wxDAI), are [ERC20-compatible](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/) versions of native tokens. 
+They're created to improve interoperability with decentralized applications and always allow to "wrap" or "un-wrap" into one another at a rate of 1:1.
+
+CoW Protocol is only capable of handling ERC20 tokens.
+This is because its intent-based architecture relies on solvers, or more precisely the vault relayer, to pull in the sell token on behalf of its traders.
+Doing so is only possible thanks to ERC20's concept of approvals, which allow certain "spender" contracts to manage funds on your behalf.
+As a consequence, native tokens cannot be directly traded on CoW Protocol.
+
+However, there are two ways in which to still execute a swap from native tokens on CoW Protocol:
 
 1. Wrap the native token into an ERC20 token (eg. `ETH` to `WETH`) and then swap it on CoW Protocol; or
 2. Use the [Eth-flow](/docs/cow-protocol/reference/contracts/periphery/eth-flow) contract to place an order on your behalf.
@@ -31,12 +41,6 @@ Using Eth-flow is transparent to the user in CoW Swap, simply select the native 
 
 ![Swap Native tokens](/img/cowswap/native_swap.png)
 
-:::tip
-
-CoW Swap will prompt you with the option to wrap your ETH and use the classic WETH experience ([as detailed above](#wrap-native-tokens)).
-
-:::
-
 After selecting your tokens, CoW Swap will prompt you to confirm the swap. This will be a single on-chain transaction that will wrap your native tokens (if required) and place the swap intent on CoW Protocol.
 
 ![Confirm Native tokens](/img/cowswap/native_confirm.png)
@@ -46,3 +50,12 @@ After selecting your tokens, CoW Swap will prompt you to confirm the swap. This 
 Once you have confirmed the swap, your wallet will prompt you to the on-chain transaction interacting with Eth-flow. On completion of this transaction, your swap intent will be placed on CoW Protocol:
 
 ![Eth-flow Transaction](/img/cowswap/native_tx.png)
+
+:::note
+
+When using Eth-flow, your order is only placed once the transaction that sends your ETH into the Eth-flow contract is confirmed.
+This means you may see ETH missing in your account before the buy tokens arrive.
+Fear not, if your orders expires, your ETH can be refunded into your account.
+The refund can be triggered by any account and should happen automatically in case you used the CoW Swap UI.
+
+:::
