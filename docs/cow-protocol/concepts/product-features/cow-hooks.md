@@ -26,6 +26,13 @@ So you don't need to hold any particular token or extra `ETH` to use this featur
 
 :::caution
 
+Hook execution is not guaranteed, meaning that your order may still get matched even if the hook reverted. 
+To ensure the execution of pre-hooks, make sure the trade is only possible if the hook is executed successfully (e.g. by setting the required allowance as part of it)
+
+:::
+
+:::note
+
 When placing _partially fillable_ orders with hooks, **pre-hooks will only be executed on the first fill**.
 Therefore, your hook should ensure that the liquidity is sufficient for the entire order to be filled.
 On the other hand, **post-hooks are executed on every fill**.
