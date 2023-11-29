@@ -23,4 +23,55 @@ Solvers are services that implement different solving algorithms to optimally so
 
 # Arbitrating auctions
 
+```mermaid
+sequenceDiagram
+    participant autopilot
+    box 
+    participant driver0 
+    participant solver0
+    end
+    box
+    participant driver1
+    participant solver1
+    participant solver2
+    end
+    activate autopilot
+    Note over autopilot: Create auction
+    par 
+        autopilot->>driver0: /solve
+        activate driver0
+    and
+        autopilot->>driver1: /solve
+        activate driver1
+    end
+    driver0->>solver0: /solve
+    activate solver0
+    driver1->>solver1: /solve
+    activate solver1
+    driver1->>solver2: /solve
+    activate solver2
+    solver0-->>driver0: Proposed solution
+    deactivate solver0
+    Note over driver0: Encode, simulate and score solution
+    driver0 ->>autopilot: Scored solution
+    deactivate driver0
+    solver1-->>driver1: Proposed solution
+    deactivate solver1
+    solver2-->>driver1: Proposed solution
+    deactivate solver2
+    Note over driver1: Encode, simulate and score solutions
+    driver1 ->>autopilot: Scored solution
+    deactivate driver1
+    Note over autopilot: Pick winner
+    autopilot->>driver0: /reveal
+    activate driver0
+    driver0->>autopilot: Encoded settlement
+    deactivate driver0
+    autopilot->>driver0: /settle
+    activate driver0;
+    Note right of driver0: Settles transaction onchain
+    driver0->>autopilot: Transaction hash
+    deactivate driver0
+    Note over autopilot: End
+```
 
