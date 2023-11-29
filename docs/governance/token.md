@@ -42,18 +42,18 @@ To date, no inflationary measures have been enacted, and the current supply of C
 
 The initial distribution of COW tokens was executed with precision, aimed at establishing a balanced and sustainable ecosystem. The allocation of the initial 1 Billion COW token supply is as follows:
 
-- **CoW DAO Treasury**: 44.4% of the tokens are allocated to the CoW DAO Treasury. This significant share underscores the community’s central role in the protocol’s ongoing development and maintenance.
+- **CoW DAO Treasury**: 44.4%. This significant share underscores the community’s central role in the protocol’s ongoing development and maintenance.
   
-- **Team**: 15% of the tokens are reserved for the team, rewarding the individuals who have built and continue to enhance the CoW Protocol.
+- **Team**: 15%, rewarding the individuals who have built and continue to enhance the CoW Protocol.
   
-- **GnosisDAO**: 10% is directed towards the GnosisDAO, recognizing their partnership and collaboration in the CoW Protocol venture.
+- **GnosisDAO**: 10%, recognizing their partnership and collaboration in the CoW Protocol venture.
   
-- **CoWmunity Investment**: 10% is set aside for community investment, fostering engagement and long-term commitment from the broader CoW Protocol community.
+- **CoWmunity Airdrop**: 10%, ensuring that early users and contributors are acknowledged and retained.
   
-- **CoWmunity Airdrop**: Another 10% of tokens are distributed through an airdrop to active participants, ensuring that early users and contributors are acknowledged and retained.
+- **CoWmunity Investment**: 10%, as an option to increase early users' stakes on the protocol in exchange for a financial contribution to the protocol, fostering engagement and long-term commitment from the broader CoW Protocol community.
   
-- **CoW Advisory**: A smaller slice of 0.6% goes to advisors, rewarding strategic guidance and expertise provided to the protocol.
+- **CoW Advisory**: 0.6%, rewarding strategic guidance and expertise provided to the protocol.
   
-- **Investment Round**: The remaining 10% is allocated to investment rounds, providing necessary funding and financial support for the protocol's growth.
+- **Investment Round**: 10%, providing necessary funding and financial support for the protocol's growth.
 
-The distributed COW tokens in the form of vCOW for certain stakeholders (advisory, team, investment round, GnosisDAO, and community investment options) are subject to a vesting schedule, unlocking linearly over a period of 4 years. This vesting mechanism is designed to encourage long-term alignment between the stakeholders and the protocol's success, as the vCOW tokens are non-transferrable until they fully vest, ensuring that the interests of the token holders are closely tied to the health and prosperity of the CoW Protocol.
+The distributed COW tokens in the form of vCOW for certain stakeholders (advisory, team, investment round, GnosisDAO, and community investment options) are subject to a vesting schedule, unlocking linearly over a period of 4 years that starts at the time of deployment. This vesting mechanism is designed to encourage long-term alignment between the stakeholders and the protocol's success, as the vCOW tokens are non-transferrable until they fully vest, ensuring that the interests of the token holders are closely tied to the health and prosperity of the CoW Protocol.
