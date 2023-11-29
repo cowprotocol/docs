@@ -19,9 +19,9 @@ Once solvers have proposed their solutions, the protocol picks the "winning" sol
 ## CoW Swap
 
 To date, CoW Swap, Balancer UI, and several other protocols have integrated CoW Protocol natively in their trading interfaces. CoW Swap was the first trading interface built on top of the protocol and remains the main trading venue of choice for CoW Protocol users. Since CoW Swap is the _native_ front-end of CoW Protocol, the UI includes with some unique feature such as:  
-* Cookie fortunes
 * Wallet history
 * Overview of your tokens
 * Token page
 * Games
 * Moo sound
+* Cookie fortunes
