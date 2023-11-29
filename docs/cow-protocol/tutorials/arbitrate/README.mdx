@@ -14,7 +14,7 @@ The autopilot is a service that drives the core protocol functionalities. It is 
 
 #### The Driver
 
-The driver is a service that receives solutions from solvers and sends the best one to the autopilot. It is also responsible for encoding the solution and sending it to the blockchain.
+The driver is a service that works as a bridge between the autopilot and the solvers. It prepares all the data needed for the solvers to solve the auction and sends it to them. It also receives solutions from solvers and does a postprocessing on them before sending them to the autopilot. Postprocessing includes encoding, simulating, merging and ranking solutions. The best solution is then sent to the autopilot. If chosen as a winner of the auction, the driver is also responsible for sending the solution to the blockchain.
 
 #### Solvers
 
