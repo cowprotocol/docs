@@ -15,7 +15,10 @@ Consider an example swapping 0.05 `WETH` for `COW`.
 
 ![GPv2VaultRelayer approval required](/img/cowswap/swap_need_approval.png)
 
-Oh, it looks like we need to approve the [`GPv2VaultRelayer`](/docs/cow-protocol/reference/contracts/core#gpv2vaultrelayer) to spend our `WETH`! This is because the [`GPv2VaultRelayer`](/docs/cow-protocol/reference/contracts/core#gpv2vaultrelayer) is the one that will pull the `WETH` from our wallet and send it to the [settlement](/docs/cow-protocol/reference/contracts/core#gpv2settlement) contract that will co-ordinate the swap on our behalf.
+Oh, it looks like we need to approve the [`GPv2VaultRelayer`](/docs/cow-protocol/reference/contracts/core#gpv2vaultrelayer) to spend our `WETH`!
+This is because the [`GPv2VaultRelayer`](/docs/cow-protocol/reference/contracts/core#gpv2vaultrelayer) is the contract that will pull the `WETH` from our wallet and send it to the [settlement](/docs/cow-protocol/reference/contracts/core#gpv2settlement) contract that will co-ordinate the swap on our behalf.
+Both contracts are audited, battle-tested and non-upgradeable.
+Moreover, the settlement contract is the only address that can request the relayer to pull your funds and only after verifying both that your order was signed by you and that you will receive at least your limit execution price or better. 
 
 ## Approve sell token
 
