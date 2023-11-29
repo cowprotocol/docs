@@ -18,4 +18,4 @@ CoW Protocol has a wide range of benefits, both technical and functional:
 * Fair, decentralized settlement in which an open competition for order matching replaces a central operator or a Constant Function Market Maker (CFMM)
 * Tokenomics that ensure solvers deliver the best order settlement solution for traders in exchange for the reward of each batch auction
 * CoW Hooks, through which any user can deploy any sort of DeFi interaction in the form of intents
-* Industry-leading security since users only have to approve one smart contract and the solvers handle all other approvals (including risky ones)
+* Industry-leading security since users only have to approve one immutable smart contract and the solvers handle all other approvals (including risky ones)
