@@ -42,16 +42,16 @@ sequenceDiagram
     activate Solver
     Solver->>Settlement: settle()
     activate Settlement
-    Settlement->>EthFlow: isValidSignature()
-    activate EthFlow
-    EthFlow-->>Settlement: return
-    deactivate EthFlow
     Settlement->>EthFlow: wrapAll()
     activate EthFlow
     EthFlow->>WETH: deposit()
     activate WETH
     WETH-->>EthFlow: return
     deactivate WETH
+    EthFlow-->>Settlement: return
+    deactivate EthFlow
+    Settlement->>EthFlow: isValidSignature()
+    activate EthFlow
     EthFlow-->>Settlement: return
     deactivate EthFlow
     Settlement->>WETH: transferFrom(EthFlow)
@@ -74,7 +74,7 @@ The proceeds will go to the user and not to the exchange because we specify the 
 
 Every `ETH` sell intent from a user ("_user intent_") is transformed into a `WETH` sell intent in the Eth-flow contract ("_contract intent_").
 
-This intent is implicitly created when the user deposits `ETH`.
+This intent is implicitly created when the user deposits `ETH`, by emitting an on-chain event that is indexed by the off-chain components of the protocol.
 
 The user's intent is a subset of the contract intent as some parameters are implicit (such as the sell token being `ETH` and the `receiver` being the user). The following table describes the parameters of the user intent.
 
