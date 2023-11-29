@@ -15,8 +15,6 @@ Proposers then facilitate a second auction to decide which block will ultimately
 So users are already, in fact, participating in “block auction”-style transaction settlement. 
 CoW Protocol simply pulls this mechanism forward to the order creation stage and reverses the incentive to maximize the value the user retains instead of extracting it.
 
-![](https://lh7-eu.googleusercontent.com/6r3spKS1vtzxMz7lvkvhBialabTa-EmkxvhuxbG9ToPkwcuWnTG7LRoz8T5H0RMFzLFwbLAVTHzNVuopWHtWWgGZSSI_FbL8v--RgLGiBvTmFAo10UaggeHS51PN0k2dgfEe3uslxMCg7XQZANmMAC4)
-
 In the context of trading, batch auctions work similarly to block building auctions. 
 First, the protocol gathers intents submitted during a predetermined time window. 
 Next, solvers begin looking for the best execution path and bidding on the batch. 
