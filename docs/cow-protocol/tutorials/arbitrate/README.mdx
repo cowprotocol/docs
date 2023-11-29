@@ -37,10 +37,10 @@ sequenceDiagram
     end
     activate autopilot
     Note over autopilot: Create auction
-    par 
+    par driver0
         autopilot->>driver0: /solve
         activate driver0
-    and
+    and driver1
         autopilot->>driver1: /solve
         activate driver1
     end
