@@ -31,6 +31,7 @@ From a technical standpoint, CoW Protocol relies on intents as a core part of th
 
 Additionally, CoW Protocol smart contracts enforce that: 
 
+- An intent's execution price doesn't change between when a transaction is created and when it's executed. CoW Protocol takes all MEV risks instead of the users
 * Funds can only be transferred if a trader has approved CoW Protocol and signed an order to sell one particular token for another
 * The Limit prices and amounts of the signed order will always be satisfied
 * Signed orders have an expiry date, can be canceled on-chain, and can’t be replayed
