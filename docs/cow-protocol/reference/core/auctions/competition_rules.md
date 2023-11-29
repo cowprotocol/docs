@@ -1,19 +1,29 @@
 ---
-id: social-consensus
+id: competition-rules
 sidebar_position: 2
 ---
 
-# Social consensus rules
+# The current rules of the solver competition
 
-Social consensus rules are not enforced by the smart contract. However, by voting on them in a CoW improvement proposal (CIP), CoW DAO has decided that these rules should be followed to ensure a healthy competition. 
+All solvers participating in the solver competition must abide by certain rules. In this section, we outline all these rules, which are naturally split into two classes: (1) the ones enforced explicitly by the smart contract and the offchain protocol infrastructure, and (2) the so-called social consensus rules.
+
+## Rules enforced by the smart contract and/or the autopilot
+
+- Uniform clearing prices (UCP): this rule is an integral component of the protocol, and specifies that there is one clearing price per token per batch.
+- Limit price constraint: this rule enforces that an order cannot be executed if its limit price is violated.
+- A solution is valid only if it contains at least one user order.
+- Every solution is associated with a score, and the solutions are ranked in decreasing order of their scores. The empty solution with the zero score is always considered as a candidate solution. The solution with the highest (positive) score is declared the winner of the batch auction, and gets the right to execute onchain. The solver that provided the winning solution is then rewarded according to the rules specified in [CIP-20](https://snapshot.org/#/cow.eth/proposal/0x2d3f9bd1ea72dca84b03e97dda3efc1f4a42a772c54bd2037e8b62e7d09a491f).
+- 
+
+## Social consensus rules
+
+Social consensus rules are not enforced by the smart contract or the autopilot. However, by voting on them in a CoW improvement proposal (CIP), CoW DAO has decided that these rules should be followed to ensure a healthy competition. For that, the core team has developed monitoring tools that check every single onchain settlement and flag suspicious ones.
 
 :::caution
 
 At CoW DAO's discretion, systematic violation of these rules may lead to penalizing or slashing of the offending solver.
 
 :::
-
-## Rules by CIP
 
 - **No provision of unfair solutions** ([CIP-11](https://snapshot.org/#/cow.eth/proposal/0x16d8c681d52b24f1ccd854084e07a99fce6a7af1e25fd21ddae6534b411df870))
 
