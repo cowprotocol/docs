@@ -11,5 +11,5 @@ On CoW Protocol, users place orders off-chain which get collected and aggregated
 Using batch auctions as a price finding mechanism has several benefits:
 
 1. Allow the DeFi space to establish a uniform clearing price for any token pair within the same block
-2. Improve prices over traditional DEX offerings through new economic mechanisms such as uniform clearing prices and Coincidence of Wants (CoWs).
+2. Improve prices over traditional DEX offerings through new economic mechanisms such as uniform clearing prices and Coincidence of Wants (CoWs)
 3. MEV Protection
