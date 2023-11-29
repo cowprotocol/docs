@@ -69,4 +69,4 @@ This will create a document similar to:
 
 For a complete list of meta-data that can be attach check [@cowprotocol/app-data](https://github.com/cowprotocol/app-data)
 
-Know that you know how to create meta-data documents, let's review how to get the `appData` that we need when we post orders. Just a hint, this `appData` is deterministic based on the content of the meta-data document.
+Now that you know how to create meta-data documents, let's review how to get the `appData` that we need when we post orders. Just a hint, this `appData` is deterministic based on the content of the meta-data document.
