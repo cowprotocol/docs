@@ -1,6 +1,6 @@
 # CoW API
 
-The SDK provides access to the CoW API. The CoW API allows you:
+The SDK provides access to the CoW API. The CoW SDK allows you:
 
 - Post orders
 - Get fee quotes
