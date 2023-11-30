@@ -99,6 +99,13 @@ const config = {
 
   plugins: [
     [
+      '@docusaurus/plugin-ideal-image',
+      {
+        disableInDev: false,
+        lazyLoad: true,
+      },
+    ],
+    [
       'docusaurus-plugin-typedoc',
       {
         id: 'cow-sdk',
