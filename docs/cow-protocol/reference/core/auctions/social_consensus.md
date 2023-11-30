@@ -25,7 +25,7 @@ At CoW DAO's discretion, systematic violation of these rules may lead to penaliz
 
 - **Illegal use of internal buffers** ([CIP-11](https://snapshot.org/#/cow.eth/proposal/0x16d8c681d52b24f1ccd854084e07a99fce6a7af1e25fd21ddae6534b411df870))
 
-  The internal buffers may only be used to replace legitimate AMM interactions available to the general public for the purpose of saving transaction costs.
+  The <a href="/cow-protocol/reference/core/definitions#buffers">internal buffers</a> may only be used to replace legitimate AMM interactions available to the general public for the purpose of saving transaction costs.
 
 - **Failure to report correct transacted values for encoded transactions** ([CIP-11](https://snapshot.org/#/cow.eth/proposal/0x16d8c681d52b24f1ccd854084e07a99fce6a7af1e25fd21ddae6534b411df870))
 

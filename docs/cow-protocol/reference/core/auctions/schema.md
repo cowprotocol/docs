@@ -23,7 +23,7 @@ This key lists all tokens that appear in some order or AMM in the batch. It is a
 - `"external_price"`: a float that corresponds to the price of the smallest denomination of the token with respect to a _reference token_. Only tokens that are traded by at least a user order will necessarily have an external price.
 - `"normalize_priority"`: an integer that expresses the preference for the token to be used as the [numeraire](https://en.wikipedia.org/wiki/Num%C3%A9raire). The token with highest priority in the solution will have price set to 1. More on this later.
 - `"accepted_for_internalization"`: this is a boolean flag that specifies whether the contract is willing to store the token as part of an [internalized interaction](#using-internal-buffers).
-- `"internal_buffer"`: a "stringified" integer that describes the amount (in the token's lowest denomination) of the token currently stored in the settlement contract. This information is relevant when a solver attempts to [internalize an interaction](#using-internal-buffers).
+- `"internal_buffer"`: a "stringified" integer that describes the amount (in the token's lowest denomination) of the token currently stored in the settlement contract (<a href="/cow-protocol/reference/core/definitions#buffers">internal buffers</a>). This information is relevant when a solver attempts to [internalize an interaction](#using-internal-buffers).
 
 Following are three example token entries, corresponding to [WETH](https://etherscan.io/address/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2), [BAL](https://etherscan.io/token/0xba100000625a3754423978a60c9317c58a424e3d) and [USDC](https://etherscan.io/token/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48).
 

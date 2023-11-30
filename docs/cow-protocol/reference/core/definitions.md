@@ -17,3 +17,5 @@ sidebar_position: 1
 **Gas-less**: An expression that does not require a user make a transaction on the blockchain, and therefore does not require the user to pay gas in the native token.
 
 **EBBO**: Ethereum Best Bid and Offer. The highest bid price and lowest ask (offered) price for a token, sourced from among well known DEXs (Uniswap, Sushiswap, Balancer) as defined by the rules of the solver competition.
+
+**Internal buffers**<a name="buffers"></a>: A portfolio of tokens that is owned by the CoW Protocol in the settlement contract. They accumulate as the protocol collects fees during its standard operations. The buffers are used by solvers to facilitate trading and their total value is kept low by regular withdrawals.
