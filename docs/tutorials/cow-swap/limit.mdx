@@ -2,7 +2,7 @@
 sidebar_position: 5
 ---
 
-import CancellationOffChainOnChain from '../../../partials/_cancellation_offchain_versus_onchain.mdx'
+import CancellationOffChainOnChain from "../../partials/_cancellation_offchain_versus_onchain.mdx"
 
 # Limit orders
 
@@ -20,8 +20,8 @@ Let's assume the example that we want to sell our `COW` that we purchased previo
 
 :::info
 
-Fees for limit orders are taken from the surplus CoW Protocol generates for your order - that is, by executing your order at a better price than your limit price. 
-CoW Protocol will wait until the market price is sufficient to cover both your limit price and the network fees. 
+Fees for limit orders are taken from the surplus CoW Protocol generates for your order - that is, by executing your order at a better price than your limit price.
+CoW Protocol will wait until the market price is sufficient to cover both your limit price and the network fees.
 This means that your order may not execute exactly when the market price hits your limit price.
 
 :::
@@ -32,8 +32,8 @@ At this point, CoW Swap will prompt you to review your limit order:
 
 :::tip
 
-By default, CoW Swap sets your limit order to _partially fillable_. 
-This allows your order to fill gradually as liquidity comes available. Partially fillable orders usually complete faster than _fill or kill_ orders and also provide better prices, so they are the default mechanism used to execute limit orders. 
+By default, CoW Swap sets your limit order to _partially fillable_.
+This allows your order to fill gradually as liquidity comes available. Partially fillable orders usually complete faster than _fill or kill_ orders and also provide better prices, so they are the default mechanism used to execute limit orders.
 However, your order may not end up being filled completely, if the remaining fill amount is small compared to the required network fees of settling it.
 This can cause leftover amounts of sell token in your account.
 You can turn off partially fillable limit orders and revert back to _fill or kill_ through the swap panel settings.
@@ -50,7 +50,7 @@ Upon signing the intent with your wallet, the limit order will now appear in ope
 
 ## Cancel a limit order
 
-Now we've been doing some thinking and realised we shouldn't be selling `COW`, so we want to cancel our limit order. 
+Now we've been doing some thinking and realised we shouldn't be selling `COW`, so we want to cancel our limit order.
 We can do this by clicking the context menu on the order and selecting 'Cancel order':
 
 ![Cancel context menu](/img/cowswap/limit_cancel_context.png)
@@ -58,8 +58,8 @@ We can do this by clicking the context menu on the order and selecting 'Cancel o
 After selecting 'Cancel order`, you will be prompted to confirm this action. Cancelling orders requires signing an off-chain message that is submitted to the order-book (or alternatively this may be done using an on-chain transaction).
 
 <CancellationOffChainOnChain
-    alt="Cancel confirm"
-    src="/img/cowswap/limit_cancel_confirm.png"
+  alt="Cancel confirm"
+  src="/img/cowswap/limit_cancel_confirm.png"
 />
 
 Once the order has been cancelled, it will be removed from the open orders list:

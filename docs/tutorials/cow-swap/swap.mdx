@@ -2,8 +2,8 @@
 sidebar_position: 2
 ---
 
-import TokenApprovalWarning from '../../../partials/_token_approvals.mdx'
-import ReceiverAndIntentWarning from '../../../partials/_receiver.mdx'
+import TokenApprovalWarning from "../../partials/_token_approvals.mdx"
+import ReceiverAndIntentWarning from "../../partials/_receiver.mdx"
 
 # Swap
 
@@ -18,7 +18,7 @@ Consider an example swapping 0.05 `WETH` for `COW`.
 Oh, it looks like we need to approve the [`GPv2VaultRelayer`](/cow-protocol/reference/contracts/core#gpv2vaultrelayer) to spend our `WETH`!
 This is because the [`GPv2VaultRelayer`](/cow-protocol/reference/contracts/core#gpv2vaultrelayer) is the contract that will pull the `WETH` from our wallet and send it to the [settlement](/cow-protocol/reference/contracts/core#gpv2settlement) contract that will co-ordinate the swap on our behalf.
 Both contracts are audited, battle-tested and non-upgradeable.
-Moreover, the settlement contract is the only address that can request the relayer to pull your funds and only after verifying both that your order was signed by you and that you will receive at least your limit execution price or better. 
+Moreover, the settlement contract is the only address that can request the relayer to pull your funds and only after verifying both that your order was signed by you and that you will receive at least your limit execution price or better.
 
 ## Approve sell token
 

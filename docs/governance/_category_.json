@@ -1,3 +1,13 @@
 {
-    "label": "Governance"
+    "position": 3,
+    "label": "🗳️ Governance",
+    "collapsible": true,
+    "collapsed": true,
+    "link": {
+        "type": "generated-index",
+        "title": "🗳️ Governance"
+    },
+    "customProps": {
+        "description": "This is the governance section."
+    }
 }

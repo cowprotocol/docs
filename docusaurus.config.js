@@ -30,10 +30,8 @@ const config = {
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'cowprotocol', // Usually your GitHub org/user name.
   projectName: 'docs-v2', // Usually your repo name.
-
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'warn',
-
   trailingSlash,
 
   // Even if you don't use internalization, you can use this field to set useful
@@ -57,28 +55,13 @@ const config = {
         docs: {
           routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
-          sidebarItemsGenerator: async function sidebarItemsGenerator({
+          sidebarItemsGenerator: async function ({
                     defaultSidebarItemsGenerator,
-                    numberPrefixParser,
-                    item,
-                    version,
-                    docs,
-                    categoriesMetadata,
-                    isCategoryIndex,
+                    ...args
                   }) {
-                    // Get the default side bar
-                    const defaultSidebar = await defaultSidebarItemsGenerator({categoriesMetadata, item, version, docs, isCategoryIndex, numberPrefixParser});
-                    // Use a reduce to transform the defaultSidebar into a new sidebar. Do not include any
-                    // items that have the property "type" set to "doc" with the id containing "README"
-                    const noReadmeSidebar = defaultSidebar.reduce((acc, cur) => {
-                      if (cur.type === 'doc' && cur.id.includes('README')) {
-                        return acc;
-                      }
-                      acc.push(cur);
-                      return acc;
-                    }, []);
-
-                    return noReadmeSidebar;
+                    const sidebarItems = await defaultSidebarItemsGenerator(args);
+                    // You can add custom logic here if needed
+                    return sidebarItems;
                   },
           remarkPlugins: [
             math,
@@ -98,6 +81,13 @@ const config = {
   ],
 
   plugins: [
+    [
+      '@docusaurus/plugin-ideal-image',
+      {
+        disableInDev: false,
+        lazyLoad: true,
+      },
+    ],
     [
       'docusaurus-plugin-typedoc',
       {
@@ -166,25 +156,6 @@ const config = {
             margin: 'auto 12px auto 0',
           },
         },
-        items: [
-          {
-            type: 'docSidebar',
-            sidebarId: 'cowProtocolSidebar',
-            position: 'right',
-            label: 'Protocol',
-          },
-          {
-            type: 'docSidebar',
-            sidebarId: 'governanceSidebar',
-            position: 'right',
-            label: 'DAO Governance',
-          },
-          {
-            href: 'https://github.com/cowprotocol/docs',
-            label: 'GitHub',
-            position: 'right',
-          },
-        ],
       },
       footer: {
         style: 'dark',

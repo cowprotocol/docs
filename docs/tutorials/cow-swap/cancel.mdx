@@ -2,7 +2,7 @@
 sidebar_position: 3
 ---
 
-import CancellationOffChainOnChain from '../../../partials/_cancellation_offchain_versus_onchain.mdx'
+import CancellationOffChainOnChain from "../../partials/_cancellation_offchain_versus_onchain.mdx"
 
 # Cancel
 
@@ -22,11 +22,11 @@ As CoW Protocol runs an off-chain order book, it is possible to cancel an intent
 
 ## Off-chain vs on-chain cancellation
 
-Off-chain cancellations are *optimistic* in that it signals to the order book that you no longer wish to trade. This is useful as it doesn't involve any on-chain transactions and is therefore free. Provided that the intent has not been settled on chain, it will be removed from the order book and will not be matched.
+Off-chain cancellations are _optimistic_ in that it signals to the order book that you no longer wish to trade. This is useful as it doesn't involve any on-chain transactions and is therefore free. Provided that the intent has not been settled on chain, it will be removed from the order book and will not be matched.
 
 <CancellationOffChainOnChain
-    alt="Cancel off-chain"
-    src="/img/cowswap/cancel_offchain.png"
+  alt="Cancel off-chain"
+  src="/img/cowswap/cancel_offchain.png"
 />
 
 ![Cancel on-chain](/img/cowswap/cancel_onchain.png)

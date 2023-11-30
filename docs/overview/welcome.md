@@ -1,5 +1,6 @@
 ---
-title: Welcome
+title: CoW DAO
+slug: /
 sidebar_position: 1
 ---
 
