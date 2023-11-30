@@ -1,6 +1,5 @@
 ---
 sidebar_position: 1
-draft: true
 ---
 
 # Create a solver
@@ -24,7 +23,7 @@ Let us consider the case of [Yearn](https://yearn.fi) tokens. A user has `USDC` 
 
 :::tip Get the big picture
 
-CoW Protocol infrastructure is a lot of services running together in herd harmony, which is a bit intimidating at the beginning. Before proceeding, it would be advisable to read the [architectural overview](/cow-protocol/reference/architecture) to get a better understanding of how CoW Protocol works and its entities.
+CoW Protocol infrastructure is a lot of services running together in herd harmony, which is a bit intimidating at the beginning. Before proceeding, it would be advisable to read the architectural overview to get a better understanding of how CoW Protocol works and its entities.
 
 :::
 

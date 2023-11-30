@@ -1,4 +1,5 @@
 ---
+slug: programmatic
 sidebar_position: 4
 ---
 
@@ -16,4 +17,4 @@ For example, a user can place a TWAP order that executes over 24 hours
 
 * **Stop loss orders**: Users can place an order that executes when the price of a token falls below a certain threshold
 
-* **Native ETH orders**: Users can place orders with `ETH`, which is not supported by the CoW Protocol settlement contract, but is able to be traded through CoW Protocol thanks to an [intermediary smart contract](periphery/eth-flow) that auto-converts `ETH` into `WETH` to later place an `ERC-1271` order (intent) on the user’s behalf
+* **Native ETH orders**: Users can place orders with `ETH`, which is not supported by the CoW Protocol settlement contract, but is able to be traded through CoW Protocol thanks to an [intermediary smart contract](../../reference/contracts/periphery/eth-flow) that auto-converts `ETH` into `WETH` to later place an `ERC-1271` order (intent) on the user’s behalf

@@ -19,7 +19,7 @@ As a consequence, native tokens cannot be directly traded on CoW Protocol.
 However, there are two ways in which to still execute a swap from native tokens on CoW Protocol:
 
 1. Wrap the native token into an ERC20 token (eg. `ETH` to `WETH`) and then swap it on CoW Protocol; or
-2. Use the [Eth-flow](/docs/cow-protocol/reference/contracts/periphery/eth-flow) contract to place an order on your behalf.
+2. Use the [Eth-flow](/cow-protocol/reference/contracts/periphery/eth-flow) contract to place an order on your behalf.
 
 ## Wrapping native tokens
 
@@ -35,7 +35,7 @@ The CoW Swap UI has built-in support for wrapping native tokens. Simply select t
 
 ## Eth-flow
 
-In an attempt to smooth the user experience, CoW Protocol has introduced the [Eth-flow](/docs/cow-protocol/reference/contracts/periphery/eth-flow) contract. This allows users to automate the [above process](#wrap-native-tokens), all in one **on-chain** transaction.
+In an attempt to smooth the user experience, CoW Protocol has introduced the [Eth-flow](/cow-protocol/reference/contracts/periphery/eth-flow) contract. This allows users to automate the [above process](#wrap-native-tokens), all in one **on-chain** transaction.
 
 Using Eth-flow is transparent to the user in CoW Swap, simply select the native token you want to swap and the desired token. CoW Swap will automatically detect if the native token needs to be wrapped and will execute the Eth-flow contract on your behalf.
 
