@@ -25,6 +25,6 @@ CoW DAO is of its community, by its community, and for its community. CoW DAO us
 
 CoW DAO’s documentation follows a "Concepts", "Procedures", "Technical Reference" methodology. For example when a user wants to learn:
 
-- **_What_** something is (ie. batch auctions) → see [concepts](cow-protocol/concepts)
-- **_How_** to do something (ie. create order) → see the product specific [procedure](cow-protocol/tutorials)
+- **_What_** something is (ie. batch auctions) → see [Concepts](cow-protocol/concepts)
+- **_How_** to do something (ie. create an order) → see [Tutorials](cow-protocol/tutorials)
 - **_Technical_** information (ie. such as SDKs, APIs) - see [Technical Reference](cow-protocol/reference)
