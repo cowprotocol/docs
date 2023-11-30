@@ -1,6 +1,6 @@
 # Supported tokens
 
-CoW Protocol supports `ERC20` tokens, however not all `ERC20` token contracts are created equal, despite the idea of a standard interface. Some contracts introduce issues such as fee on transfer, or lockup periods, which make them unsuitable.
+CoW Protocol supports `ERC20` tokens. However, not all `ERC20` token contracts are created equal, despite the idea of a standard interface. Some contracts introduce issues, such as fee on transfer or lockup periods, which make them unsuitable.
 
 ## Requirements
 
@@ -22,11 +22,11 @@ Any token that does not meet these requirements will result in a `NoLiquidity` e
 
 Price estimators are a subset of solvers that are used to determine the value of a token and are able to quote trades. 
 These services themselves may have dependencies / limitations. 
-The best way to ensure a token is tradable is to bootstrap a Uni v2 (or some other well know AMM) pool with the token, as these should get indexed by most price estimators.
+The best way to ensure a token is tradeable is to bootstrap a Uni v2 (or some other well-known AMM) pool with the token, as these should get indexed by most price estimators.
 
 ### Bad token list
 
 There is an explicit bad token list, containing tokens that have been identified as incompatible with CoW Protocol due to edge cases or other issues.
 One such example is tokens that take a fee on transfer.
-The bad token list is not exhaustive and is supplemented by automated bad token detection, which may be flaky, e.g. if a token exhibits rounding issues on transfers depending on certain condition.
+The bad token list is not exhaustive and is supplemented by automated bad token detection, which may be unreliable (e.g. if a token exhibits rounding issues on transfers) depending on certain conditions.
 In any case, if a token is on the bad token list, it will result in an `UnsupportedToken` error when attempting to retrieve a quote or place an order.
