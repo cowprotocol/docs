@@ -26,7 +26,7 @@ console.log(uploadedAppDataHash)
 
 Having the JSON file, now you need to upload it to IPFS.
 
-If you are using the [Cow Protocol Explorer's tool to build the meta-data file](https://explorer.cow.fi/appdata), you'll be able to upload and pin it to IPFS using [Piñata](https://www.pinata.cloud/) from the UI, as long as you provide your own Piñata keys.
+If you are using the [Cow Protocol Explorer's tool to build the meta-data file](https://explorer.cow.fi/appdata), you'll be able to upload and pin it to IPFS using [Pinata](https://www.pinata.cloud/) from the UI, as long as you provide your own Pinata keys.
 
 Alternatively, you could upload/pin the file yourself. Read more about [IPFS pinning here](https://docs.ipfs.tech/how-to/pin-files/).
 
