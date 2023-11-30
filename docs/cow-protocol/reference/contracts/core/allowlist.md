@@ -87,6 +87,7 @@ function removeSolver(address solver) external onlyManager;
 #### `isSolver`
 
 A view function that returns whether an address is a solver.
+This method is used by the settlement contract to ensure critical functions can only be invoked by accounts passing the allow-list authentication.
 
 ```solidity
 function isSolver(
