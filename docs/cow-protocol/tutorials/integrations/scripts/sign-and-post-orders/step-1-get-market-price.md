@@ -1,7 +1,5 @@
 # STEP 1: Get Market Price
 
-#### STEP 1: Get Market Price
-
 To create an order, you need to get a price/fee quote first:
 
 - The SDK will give you easy access to the API, which returns the `Market Price` and the `Fee` for any given trade you intent to do.
