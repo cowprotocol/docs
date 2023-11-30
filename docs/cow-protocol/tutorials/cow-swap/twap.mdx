@@ -1,0 +1,98 @@
+---
+sidebar_position: 3
+---
+
+import TokenApprovalWarning from '../../../partials/_token_approvals.mdx'
+import ReceiverAndIntentWarning from '../../../partials/_receiver.mdx'
+
+# TWAP Orders
+
+Time-Weighted Average Price (TWAP) orders are an advanced feature of CoW Protocol, ideal for executing large trades with minimal price impact by distributing the order over a specified time.
+
+## Introduction to TWAP Orders
+
+TWAP orders allow you to split a large trade into smaller parts, executed at regular intervals. This helps in minimizing market impact and achieving a better average price.
+
+### Key Points
+
+- Ideal for trades over $5k on Mainnet.
+- Lower minimums ($5) on Gnosis Chain for smaller trades.
+- Reduces price impact on large orders.
+
+## Placing a TWAP Order
+
+### Step 1: Connect Your Safe Wallet
+
+Navigate to CoW Swap and connect your Safe wallet. Access TWAP orders via the “Advanced Orders” tab near the center module or the drop-down next to the CoW Swap logo.
+
+![Access TWAP Interface](/img/cowswap/swap_need_approval.png)
+
+### Step 2: Select Your Tokens
+
+Choose the token you wish to sell (e.g., `WETH`) and enter the total amount you wish to sell.
+
+![Select Tokens](/img/cowswap/swap_need_approval.png)
+
+### Step 3: Specify Order Parameters
+
+This is a critical step where you'll define how your order will be executed over time. Here’s how to fine-tune your TWAP order settings:
+
+1. **Price Protection**: This is a measure to prevent your order from being executed at a price that's too far from the market price when the order was placed. Set the percentage of price protection to define the acceptable price range for your trades. For instance, a 10% price protection means that your order will not execute if the price moves unfavorably by more than 10% from the price at the time the order was made.
+
+2. **Number of Parts**: Decide how many discrete parts you want to divide your order into. This choice will determine the granularity of your TWAP strategy. For example, if you choose to split your order into 2 parts and you are selling a total of 2 WETH, each part will involve selling 1 WETH.
+
+3. **Total Duration**: Choose the total time frame over which your order should be executed. The TWAP strategy will distribute your trades evenly across this duration. Select from predefined durations like 1 hour, or set a custom duration based on your trading strategy.
+
+4. **Part Duration**: View the duration of each individual part of your order. It is calculated automatically as the total duration divided by the number of parts. For instance, if your total duration is 1 hour and you have 2 parts, each part will have a duration of 30 minutes.
+
+5. **Sell per Part**: After setting the number of parts and the total duration, the interface will display the sell amount for each part. Ensure this aligns with your trade expectations.
+
+6. **Buy per Part**: Similarly, for a buy TWAP order, this will indicate how much of the token you are looking to purchase in each part of the order.
+
+It's important to set these parameters considering market conditions and your trading goals. Adjust them accordingly if you expect certain market movements or if you have specific timeframes in mind for your trade execution.
+
+![Specify Order Parameters](/img/cowswap/swap_need_approval.png)
+
+Make sure you review these parameters carefully, as they will dictate the execution and potential success of your TWAP strategy. Once you have configured all the details, proceed to the next step to finalize and place your order.
+
+
+### Step 4: Upgrade Safe Fallback Handler
+
+If your wallet is unsupported, upgrade to a Safe with the special fallback handler required for TWAP orders. Learn all about the new Safe fallback handler in this [article](https://blog.cow.fi/all-you-need-to-know-about-cow-swaps-new-safe-fallback-handler-8ef0439925d1) and its relevance to Safe in this [overview](https://help.safe.global/en/articles/40838-what-is-a-fallback-handler-and-how-does-it-relate-to-safe). The upgrade process has undergone extensive auditing, which you can review [here](https://github.com/cowprotocol/composable-cow/tree/ab3addad9bc05acdbf5fb040eb5c336209b58e31/audits).
+
+![Fallback Handler Upgrade](/img/cowswap/swap_need_approval.png)
+
+
+
+### Step 5: Review and Confirm Your Order
+
+Check all the details of your order, including price protection and limit price. Once you approve the details, sign the transaction in your Safe interface.
+
+<TokenApprovalWarning token="YourToken" spender="TWAPContract" />
+
+<ReceiverAndIntentWarning />
+
+![Review and Place Order](/img/cowswap/swap_need_approval.png)
+
+### Step 6: Order Finalization and Monitoring
+
+After the necessary signatures are completed, your order will be finalized and visible in the “Your Orders” section. You can get a high-level overview, see the different parts of your TWAP order, or click into the order for full details.
+
+![Finalize Order](/img/cowswap/swap_need_approval.png)
+
+## Monitoring and Managing Your Order
+
+Once your TWAP order is placed, you can monitor its progress and enjoy CoW Swap’s signature MEV protection and best prices. The interface offers several ways to view and manage your orders.
+
+![Monitor Order](/img/cowswap/swap_need_approval.png)
+
+## Conclusion
+
+TWAP orders are a strategic approach for large trades, reducing price impact and securing better average prices. Try it out and let us know your experience!
+
+---
+
+## Feedback
+
+For suggestions or feedback, please reach out on [Twitter](twitter-link) or [Discord](discord-link).
+
