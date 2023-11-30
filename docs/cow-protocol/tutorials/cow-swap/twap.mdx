@@ -78,20 +78,56 @@ Check all the details of your order, including price protection and limit price.
 
 Be careful when signing an intent to trade. All of the associated parameters are final and cannot be changed once the intent is signed and submitted to the API. If you make a mistake, you will need to cancel the intent and create a new one. You can do this in the orders overview.
 
-<Image img={require('/img/cowswap/TWAP_review.png')} alt="Review order" />
+<Image img={require('/img/cowswap/TWAP_review.png')} alt="Review order" style={{ maxWidth: '470px' }} />
 
 ---
 
 ### Step 5: Order Finalization and Monitoring
 
-After the necessary signatures are completed, your order will be finalized and visible in the “Your Orders” section. You can get a high-level overview, see the different parts of your TWAP order, or click into the order for full details.
+Once you've signed the order, the process of finalizing and monitoring your TWAP order begins. This is a multi-step process that ensures your order is securely processed and activated.
 
-<Image img={require('/img/cowswap/TWAP_orderSubmitted.png')} alt="Order successfully submitted" style={{ maxWidth: '470px' }} />
-<Image img={require('/img/cowswap/TWAP_orderSigning.png')} alt="Order signing" />
+<Image img={require('/img/cowswap/TWAP_orderSubmitted.png')} alt="Order submitted successfully" style={{ maxWidth: '470px' }} />
+
+The "Order submitted successfully" screen indicates that your order has been initially accepted.
+<br />
+
+<Image img={require('/img/cowswap/TWAP_orderSigning.png')} alt="Order in signing state" />
+
+The "Order in signing state" screen shows that your order may require additional signatures from your Safe. Ensure all necessary parties sign to proceed.
+<br />
+
 <Image img={require('/img/cowswap/TWAP_ordersOverview.png')} alt="Orders overview" />
-<Image img={require('/img/cowswap/TWAP_orderReceipt.png')} alt="Orders receipt"  style={{ maxWidth: '470px' }}/>
+<Image img={require('/img/cowswap/TWAP_orderMenu.png')} alt="Order menu" />
+<Image img={require('/img/cowswap/TWAP_partMenu.png')} alt="Order part menu" style={{ maxWidth: '470px' }} />
+
+After all signatures are collected and the transaction is submitted on-chain, your order becomes 'active'. The "Orders overview" allows you to monitor its current status and see the full list of active orders.
+<br />
+
+
+<Image img={require('/img/cowswap/TWAP_orderReceipt.png')} alt="Order receipt"  style={{ maxWidth: '470px' }}/>
+
+Finally, the "Order receipt" provides a detailed confirmation of your active TWAP order, complete with execution details and transaction details.
 
 ---
+
+### Step 6: Cancel TWAP order
+
+Canceling a TWAP order involves a few simple steps. Begin by locating your active TWAP order in the “Your Orders” section to manage it.
+
+<Image img={require('/img/cowswap/TWAP_orderMenu.png')} alt="Order menu" />
+
+Here in the order overview, find the order you intend to cancel. Click the three-dot menu icon at the end of the order's row to open up additional actions. Select "Cancel order" from the dropdown menu to initiate the cancellation process.
+
+<Image img={require('/img/cowswap/TWAP_cancelOrder.png')} alt="Cancel order" style={{ maxWidth: '470px' }} />
+
+A confirmation window will appear, summarizing the order you are about to cancel, including the swap details and the transaction type. This is your opportunity to review and ensure that you are canceling the correct order.
+
+When you confirm the cancellation by clicking "Request cancellation," a new transaction will be created in your Safe. This transaction is not final until all required parties (Safe owners) provide their signature.
+
+Once all signatures are collected, the transaction to cancel the order will be executed. It's vital to coordinate with all signers to complete this promptly, especially if the order needs to be canceled quickly due to changing market conditions or other strategic considerations. After the cancellation transaction is fully signed and submitted, the order will be removed from your active orders list and considered canceled.
+
+---
+
 
 ## Conclusion
 
