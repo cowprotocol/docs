@@ -16,12 +16,17 @@ In addition to the above requirements, a price estimator must also be able to pr
 
 :::
 
-Any token that does not meet these requirements will result in an `UnsupportedToken` error when attempting to retrieve a quote or place an order.
+Any token that does not meet these requirements will result in a `NoLiquidity` error when attempting to retrieve a quote or place an order.
 
 ### Price estimators
 
-Price estimators are external services that are used to determine the value of a token. These services themselves may have dependencies / limitations. For example, some price estimators may specialize in stablecoins, and therefore are not able to provide a valid price estimate for a token that is not a stablecoin.
+Price estimators are a subset of solvers that are used to determine the value of a token and are able to quote trades. 
+These services themselves may have dependencies / limitations. 
+The best way to ensure a token is tradable is to bootstrap a Uni v2 (or some other well know AMM) pool with the token, as these should get indexed by most price estimators.
 
 ### Bad token list
 
-There is an explicit bad token list, containing tokens that have been identified as incompatible with CoW Protocol due to edge cases or other issues. The bad token list is not exhaustive and is supplemented by automated bad token detection. In any case, if a token is on the bad token list, it will result in an `UnsupportedToken` error when attempting to retrieve a quote or place an order.
+There is an explicit bad token list, containing tokens that have been identified as incompatible with CoW Protocol due to edge cases or other issues.
+One such example is tokens that take a fee on transfer.
+The bad token list is not exhaustive and is supplemented by automated bad token detection, which may be flaky, e.g. if a token exhibits rounding issues on transfers depending on certain condition.
+In any case, if a token is on the bad token list, it will result in an `UnsupportedToken` error when attempting to retrieve a quote or place an order.
