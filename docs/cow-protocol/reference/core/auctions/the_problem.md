@@ -57,24 +57,21 @@ $$U(\{x,-y\})=(x \cdot \pi-y)p(s)$$,
 
 where $$p(s)$$ is the price of the sell token relative to a numéraire and is externally provided. Also here, orders can be executed over multiple batches.
 
-### Liquidity Orders
-
-Liquidity orders are orders not submitted by users. They represent sources of liquidity that are available to a solver, for example, automated market makers or private liquidity pools. They look identical to user orders, in the sense that each liquidity order can be represented by an acceptance set $$L \subset \mathbb R^k$$. The main difference to user orders is that the utility function of a liquidity order is always zero.
-
 ## Fees
 
 Each user order has an associated fee paid to the protocol. At a high level, these fees can be represented by a function that, for a given order $$S$$ maps all possible trades to a positive vector of tokens, that is $$f_S:S \rightarrow \mathbb R^k_+$$   with $$f_S(0)=0$$.
 
-From the practical viewpoint, for market fill-or-kill orders, the fee is always in the sell token and is pre-specified: it is an estimate of the cost of executing an order and is explicitly shown to the user before the order is submitted. Instead, (long-standing) limit orders are "feeless" from the user's perspective: users are guaranteed a limit price without specifying how fees will be calculated. For fill-or-kill limit orders, the protocol computes a fee each time such an order enters a batch auction, while for partially-fillable limit orders, solvers are the ones that need to propose a fee. In this latter case, the expectation is that this fee should equal the cost of execution of this trade in isolation. The fee of limit orders is again in the sell token.
+From the practical viewpoint, for market fill-or-kill orders, the fee is always in the sell token and is pre-specified: it is an estimate of the cost of executing an order and is explicitly shown to the user before the order is submitted. 
+Instead, (long-standing) limit orders are "feeless" from the user's perspective: users are guaranteed a limit price without specifying how fees will be calculated. Solvers are the ones proposing a fee under the expectation that this fee should equal the cost of execution of this trade in isolation. 
+The fee of limit orders is again denominated in the sell token.
 
 ## Solution
 
 Solvers propose solutions to the protocol, where a solution is a set of trades to execute. Formally, suppose that there are $$I$$ users and _J_ liquidity sources. A solution is a list of trades $$\{o_1, o_2, ...o_I, l_1, l_2, ..., l_J\}$$ one per user and one per liquidity source such that:
 
 * **Maximum size of solution**: The total number of executed orders and AMMs does not exceed a certain number within each batch due to limitations regarding the size of a block on the blockchain.
-* **Incentive compatibility and feasibility**: the trades respect the user and liquidity orders, that is, $$o_i\in S_i~~\forall i\leq I$$  and $$l_j \in L_j~~\forall j\leq J$$.
+* **Incentive compatibility and feasibility**: the trades respect the user and liquidity sources, that is, $$o_i\in S_i~~\forall i\leq I$$  and $$l_j \in L_j~~\forall j\leq J$$.
 * **Uniform clearing prices**: all users must face the same prices. Importantly, this constraint is defined at the moment when the swap occurs. So, for example, suppose user _i_ receives _x_ units of token 1 in exchange for _y_ units of token 2 and that the protocol takes a fee in the sell token $$f_2$$. Define $$p_{1,2}=\frac{y-f_2}{x}$$ as the price at which the swap occurs. Uniform clearing prices means that $$p_{1,2}$$ is the same for all users swapping token 1 and token 2. Furthermore, prices must be consistent, in the sense that for any three tokens 1, 2, and 3, if $$p_{1,2},~ p_{2,3}, ~p_{1,3}$$ are well-defined, then it must be that $$p_{1,2}\cdot p_{2,3}=p_{1,3}$$. Note that this implies that prices can be expressed with respect to a common numéraire, giving rise to a uniform price clearing vector $$p$$.
-* **Token conservation per token**: No token amounts can be created or destroyed. In other words, for every token, the total amount sold must be equal to the total amount bought of this token.
 * [**Social consensus rules**](social-consensus): These are a set of principles that solvers should follow, which were voted by CIPs.
 
 :::caution
