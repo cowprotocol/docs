@@ -11,11 +11,11 @@ It's essential for network operations, like paying transaction fees.
 "Wrapped" tokens - for example, Wrapped Ether (WETH) & Wrapped xDAI (wxDAI) - are [ERC20-compatible](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/) versions of these native tokens. 
 They're created to improve interoperability with decentralized applications. The native token and its wrapped version are equivalent to each other, and a user is always allowed to turn one into the other ("wrap" or "unwrap") at a rate of 1:1.
 
-CoW Protocol is only capable of handling ERC20 tokens.
+_Buying_ native tokens such as ETH on CoW Protocol is straightforward. However, CoW Protocol is only natively capable of _selling_ ERC20 tokens - not native tokens. 
 This is because its intent-based architecture relies on solvers to use the sell token on behalf of its traders.
 Doing so is only possible thanks to ERC20's concept of approvals, which allow certain "spender" contracts to manage funds on your behalf.
 
-However, CoW Protocol provides two ways for users to swap using native tokens:
+Despite this, CoW Protocol provides two ways for users to sell their native tokens:
 
 1. Wrap the native token into an ERC20 token (eg. `ETH` to `WETH`) and then swap it on CoW Protocol; or
 2. Use the [Eth-flow](/cow-protocol/reference/contracts/periphery/eth-flow) contract to wrap + place your order in a single transaction.
