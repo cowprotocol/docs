@@ -119,6 +119,8 @@ With the changes we now can:
 
 Nothing happens automatically on blockchain. There's no `cron` jobs, so _something_ needs to act as a keeper. This could either be run by a DAO, or the tools made to make it decentralized enough so that someone can trigger it.
 
+You can also rely on [CoW Hooks](/cow-protocol/concepts/product-features/cow-hooks), but keep in mind that hook execution isn't guaranteed by the protocol. We discuss this below.
+
 #### New Off-Chain infrastructure
 
 Extend the `Web3Actions` for Tenderly to pickup via `IPFS` / `GitHub` repo the latest proofs for all the current conditional orders for the active `root` (more on the root part below when the complete setup is walked through).

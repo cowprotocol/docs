@@ -9,7 +9,7 @@ A contract for executing a users' custom actions before and after settlement.
 
 ## Architecture
 
-The main [settlement](../core/settlement.md) contract for CoW Protocol allows for custom [interactions](../core/settlement#interactions) to be executed before and after the settlement logic. This is primarily used by solvers to access on-chain liquidity for settling batch auctions, but it can also be made available to users to perform custom actions, hereafter referred to as *hooks*.
+The main [settlement](../core/settlement.md) contract for CoW Protocol allows for custom [interactions](../core/settlement#interactions) to be executed before and after the settlement logic. This is primarily used by solvers to access on-chain liquidity for settling batch auctions, but it can also be made available to users to perform custom actions, hereafter referred to as *[hooks](/cow-protocol/concepts/product-features/cow-hooks)*.
 
 However, executing hooks from the settlement contract is not ideal for two reasons:
 
