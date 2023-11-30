@@ -56,7 +56,7 @@ Solvers are **NOT** able to directly access _user_ funds through interactions. T
 
 :::caution
 
-Allowing interactions by solvers, creates the possibility of malicious solvers that can steal funds from the settlement contract. This is why the Protocol only allows interactions to be executed by whitelisted solvers, and requires that the solver post a bond to the Protocol before it can be whitelisted.
+Allowing interactions by solvers, creates the possibility of malicious solvers that can steal funds from the settlement contract. This is why the Protocol only allows interactions to be executed by allow-listed solvers, and requires that the solver post a bond to the Protocol before it can be allowed.
 
 :::
 
@@ -110,9 +110,9 @@ struct Data {
 
   | **Value** | **Description** |
   |---|---|
-  | `erc20` | User's ERC-20 balance |
-  | `external` | User's ERC-20 balance through Balancer's vault |
-  | `internal` | User's internal Balancer balance |
+  | `erc20` | User's ERC-20 balance via approvals given to the GPv2VaultRelayer (default)|
+  | `external` | User's ERC-20 balance via approvals given to the Balancer vault |
+  | `internal` | User's internal Balancer vault balance |
 
 </details>
 
@@ -173,7 +173,7 @@ function invalidateOrder(bytes calldata orderUid) external;
 
 #### `settle`
 
-This function is permissioned and can only be called by whitelisted solvers. It executes a settlement:
+This function is permissioned and can only be called by solvers passing the allow-list authentication. It executes a settlement:
 
 ```solidity
 function settle(
