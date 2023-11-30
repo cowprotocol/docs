@@ -8,7 +8,9 @@ sidebar_position: 1
 
 **Discrete Order**: A single order submitted to the CoW Protocol API (ie. `GPv2Order.Data`)
 
-**Gas-less**: An expression that does not require a user make a transaction on the blockchain, and therefore does not require the user to pay gas.
+**EBBO**: Ethereum Best Bid and Offer. The highest bid price and lowest ask (offered) price for a token, sourced from among well known DEXs (Uniswap, Sushiswap, Balancer) as defined by the rules of the solver competition.
+
+**Gas-less**: An expression that does not require a user make a transaction on the blockchain, and therefore does not require the user to pay gas in the native token.
 
 **Intent**: A user's desire to swap `sellAmount` of `sellToken` for `buyAmount` of `buyToken`. This is non-prescriptive, and allows for the execution path to be determined by the CoW Protocol. Also known as a discrete order.
 
