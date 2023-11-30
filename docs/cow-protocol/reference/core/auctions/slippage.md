@@ -16,7 +16,7 @@ In all cases `IN` represents settlement contract as `recipient` and `OUT` as `se
 
 - `USER_{IN/OUT}` transfers are those emitted by the Settlement contract's `Trade` Event (with `USER_IN` adjusted for fees).
 - `AMM_{IN/OUT}` classification is assigned to all on-chain transfers that are **NOT** user transfers
-- `PHANTOM_TRANSFER` represents token transfers associated with _internalized buffer trades_. In brief, these are transfers related to AMM interactions that were "skipped" for the purpose of gas optimization in favour of using the settlement contract's <a href="/cow-protocol/reference/core/definitions#buffers">internal holdings</a>. The process for including this "off-chain" data is rather involved, so we dedicate an entire section to it below.
+- `PHANTOM_TRANSFER` represents token transfers associated with _internalized buffer trades_. In brief, these are transfers related to AMM interactions that were "skipped" for the purpose of gas optimization in favour of using the settlement contract's [internal holdings](/cow-protocol/reference/core/definitions#buffers). The process for including this "off-chain" data is rather involved, so we dedicate an entire section to it below.
 
 :::note
 
