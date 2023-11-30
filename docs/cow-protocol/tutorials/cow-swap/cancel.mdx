@@ -2,7 +2,8 @@
 sidebar_position: 3
 ---
 
-import CancellationOffChainOnChain from '../../../partials/_cancellation_offchain_versus_onchain.mdx'
+import CancellationOffChainOnChain from "../../../partials/_cancellation_offchain_versus_onchain.mdx"
+import Image from "@theme/IdealImage"
 
 # Cancel
 
@@ -16,21 +17,30 @@ As CoW Protocol runs an off-chain order book, it is possible to cancel an intent
 
 ## Finding pending intents
 
-![Finding pending intents](/img/cowswap/cancel_pending.png)
+<Image
+  img={require("/img/cowswap/cancel_pending.png")}
+  alt="Finding pending intents"
+/>
 
-![Cancelling an intent](/img/cowswap/cancel_intent.png)
+<Image
+  img={require("/img/cowswap/cancel_intent.png")}
+  alt="Cancelling an intent"
+/>
 
 ## Off-chain vs on-chain cancellation
 
-Off-chain cancellations are *optimistic* in that it signals to the order book that you no longer wish to trade. This is useful as it doesn't involve any on-chain transactions and is therefore free. Provided that the intent has not been settled on chain, it will be removed from the order book and will not be matched.
+Off-chain cancellations are _optimistic_ in that it signals to the order book that you no longer wish to trade. This is useful as it doesn't involve any on-chain transactions and is therefore free. Provided that the intent has not been settled on chain, it will be removed from the order book and will not be matched.
 
 <CancellationOffChainOnChain
-    alt="Cancel off-chain"
-    src="/img/cowswap/cancel_offchain.png"
+  alt="Cancel off-chain"
+  img={require("/img/cowswap/cancel_offchain.png")}
 />
 
-![Cancel on-chain](/img/cowswap/cancel_onchain.png)
+<Image img={require("/img/cowswap/cancel_onchain.png")} alt="Cancel on-chain" />
 
 After you have selected "on-chain", click "Request cancellation" to submit the transaction. You will be prompted to sign the transaction with your wallet.
 
-![Sign on-chain cancellation](/img/cowswap/cancel_onchain_signing.png)
+<Image
+  img={require("/img/cowswap/cancel_onchain_signing.png")}
+  alt="Sign on-chain cancellation"
+/>

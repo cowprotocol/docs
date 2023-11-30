@@ -3,8 +3,8 @@ sidebar_position: 2
 ---
 
 import Image from '@theme/IdealImage';
-import TokenApprovalWarning from '../../../partials/_token_approvals.mdx'
-import ReceiverAndIntentWarning from '../../../partials/_receiver.mdx'
+import TokenApprovalWarning from '../../../partials/_token_approvals.mdx';
+import ReceiverAndIntentWarning from '../../../partials/_receiver.mdx';
 
 # Swap
 
@@ -14,7 +14,7 @@ Swapping is the bread and butter of CoW Protocol! Let's swap some tokens!
 
 Consider an example swapping 0.05 `WETH` for `COW`.
 
-![GPv2VaultRelayer approval required](/img/cowswap/swap_need_approval.png)
+<Image img={require('/img/cowswap/swap_need_approval.png')} alt="GPv2VaultRelayer approval required" />
 
 Oh, it looks like we need to approve the [`GPv2VaultRelayer`](/cow-protocol/reference/contracts/core#gpv2vaultrelayer) to spend our `WETH`!
 This is because the [`GPv2VaultRelayer`](/cow-protocol/reference/contracts/core#gpv2vaultrelayer) is the contract that will pull the `WETH` from our wallet and send it to the [settlement](/cow-protocol/reference/contracts/core#gpv2settlement) contract that will co-ordinate the swap on our behalf.
@@ -31,7 +31,7 @@ You don't have to worry about this, as CoW Swap will automatically detect if the
 
 :::
 
-![GPv2VaultRelayer default approval](/img/cowswap/swap_approval_default.png)
+<Image img={require('/img/cowswap/swap_approval_default.png')} alt="GPv2VaultRelayer default approval" />
 
 By default, CoW Swap prompt you to approve [`GPv2VaultRelayer`](/cow-protocol/reference/contracts/core#gpv2vaultrelayer) an "unlimited" allowance for the sell token.
 This has the benefits of:
@@ -43,7 +43,7 @@ This has the benefits of:
 
 Once the `approve` transaction is confirmed, you can proceed to swap!
 
-![GPv2VaultRelayer approved](/img/cowswap/swap_approved.png)
+<Image img={require('/img/cowswap/swap_approved.png')} alt="GPv2VaultRelayer approved" />
 
 ## Confirm swap
 
@@ -51,13 +51,13 @@ When you're ready to swap, click the "Swap" button. You will be prompted with a 
 
 <ReceiverAndIntentWarning />
 
-![Confirm Swap](/img/cowswap/swap_confirm.png)
+<Image img={require('/img/cowswap/swap_confirm.png')} alt="Confirm Swap" />
 
 At this stage, your wallet will prompt you to sign the intent to swap. The user interface for this will vary depending on your wallet.
 
-![Signing Swap](/img/cowswap/swap_signing.png)
+<Image img={require('/img/cowswap/swap_signing.png')} alt="Signing Swap" />
 
 Once the intent has been signed, it will be submitted to CoW Protocol.
 You are able to [view your order on CoW Explorer](/cow-protocol/tutorials/cow-explorer).
 
-![Swap confirmed](/img/cowswap/swap_confirmed.png)
+<Image img={require('/img/cowswap/swap_confirmed.png')} alt="Swap confirmed" />
