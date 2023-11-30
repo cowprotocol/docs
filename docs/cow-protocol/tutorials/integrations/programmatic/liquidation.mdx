@@ -185,7 +185,7 @@ While this approach is still theoretically possible, there is a much simpler and
 The reason that lending protocols want to stay in control of the caller context is to ensure that the debt is repaid atomically in the same transaction.
 
 While performing all steps atomically is the only secure way to achieve this if arbitrary addresses are allowed to kick the liquidation, it is actually not required if the liquidation is triggered via a CoW Protocol smart order (using ERC-1271).
-CoW Protocol's [settlement contract](/docs/cow-protocol/reference/contracts/core#gpv2settlement) passes a commitment to the **order parameters (ie. buy and sell amounts)** to the verifying smart contract as part of the signature verification step and, once authorized, **guarantees that the trader will receive at least** as much of the buy token as specified in the order. Otherwise the whole settlement will revert!
+CoW Protocol's [settlement contract](/cow-protocol/reference/contracts/core#gpv2settlement) passes a commitment to the **order parameters (ie. buy and sell amounts)** to the verifying smart contract as part of the signature verification step and, once authorized, **guarantees that the trader will receive at least** as much of the buy token as specified in the order. Otherwise the whole settlement will revert!
 
 This means that as long as the liquidation protocol verifies that the maximum sell amount (collateral) covers the minimum guaranteed buy amount (debt) it can "accept" the trade and rest assured that it will receive the required proceeds to make the position whole. The solver competition will ensure that, if market price permit, the protocol will even receive **more than the limit price** (surplus).
 

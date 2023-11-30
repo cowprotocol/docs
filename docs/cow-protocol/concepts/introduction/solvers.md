@@ -10,4 +10,4 @@ Once a user submits an intent, the protocol hands it off to solvers who compete 
 
 Solvers can move tokens on behalf of the user (using the `ERC20` approvals the user granted to the vault relayer contract) while the settlement contract verifies the signature of the user's intent and ensures that execution happens according to the limit price and quantity specified by the user.
 
-Anyone with some DeFi knowledge and ability to code an optimizations algorithm can [create a solver](../../solve/create).
+Anyone with some DeFi knowledge and ability to code an optimizations algorithm can [create a solver](../../tutorials/solvers/create).

@@ -4,13 +4,13 @@ With a strong focus on welcoming builders to the protocol, CoW Protocol is desig
 
 Areas that are welcoming to builders include:
 
-- [Programmatic orders](../programmatic)
-    - [Composable CoW](composable-cow)
-- [Solvers](../../solve/create)
+- [Programmatic orders](programmatic)
+    - [Composable CoW](./builder-friendly/composable-cow)
+- [Solvers](../../tutorials/solvers/create)
 
 ## Built on CoW Protocol
 
 The Grants DAO is a community-run DAO that funds projects that build on top of CoW Protocol. Successfully funded projects include:
 
-* [Milkman](milkman) - A way for users to initiate a swap and ensure that their price is respected by the protocol
-* [Composable CoW](composable-cow) - A way for developers to build conditional orders on top of CoW Protocol's support for programmatic orders
+* [Milkman](./builder-friendly/milkman) - A way for users to initiate a swap and ensure that their price is respected by the protocol
+* [Composable CoW](./builder-friendly/composable-cow) - A way for developers to build conditional orders on top of CoW Protocol's support for programmatic orders

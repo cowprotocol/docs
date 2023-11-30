@@ -15,8 +15,8 @@ Consider an example swapping 0.05 `WETH` for `COW`.
 
 ![GPv2VaultRelayer approval required](/img/cowswap/swap_need_approval.png)
 
-Oh, it looks like we need to approve the [`GPv2VaultRelayer`](/docs/cow-protocol/reference/contracts/core#gpv2vaultrelayer) to spend our `WETH`!
-This is because the [`GPv2VaultRelayer`](/docs/cow-protocol/reference/contracts/core#gpv2vaultrelayer) is the contract that will pull the `WETH` from our wallet and send it to the [settlement](/docs/cow-protocol/reference/contracts/core#gpv2settlement) contract that will co-ordinate the swap on our behalf.
+Oh, it looks like we need to approve the [`GPv2VaultRelayer`](/cow-protocol/reference/contracts/core#gpv2vaultrelayer) to spend our `WETH`!
+This is because the [`GPv2VaultRelayer`](/cow-protocol/reference/contracts/core#gpv2vaultrelayer) is the contract that will pull the `WETH` from our wallet and send it to the [settlement](/cow-protocol/reference/contracts/core#gpv2settlement) contract that will co-ordinate the swap on our behalf.
 Both contracts are audited, battle-tested and non-upgradeable.
 Moreover, the settlement contract is the only address that can request the relayer to pull your funds and only after verifying both that your order was signed by you and that you will receive at least your limit execution price or better. 
 
@@ -24,7 +24,7 @@ Moreover, the settlement contract is the only address that can request the relay
 
 :::tip
 
-Some tokens, such as `USDC`, `DAI`, and `COW` support permit-style approvals. This means that you can approve the [`GPv2VaultRelayer`](/docs/cow-protocol/reference/contracts/core#gpv2vaultrelayer) to spend your tokens without having any initial gas for an on-chain transaction. This is a great way to save on gas costs!
+Some tokens, such as `USDC`, `DAI`, and `COW` support permit-style approvals. This means that you can approve the [`GPv2VaultRelayer`](/cow-protocol/reference/contracts/core#gpv2vaultrelayer) to spend your tokens without having any initial gas for an on-chain transaction. This is a great way to save on gas costs!
 
 You don't have to worry about this, as CoW Swap will automatically detect if the token supports permit-style approvals and will guide you through the process.
 
@@ -32,7 +32,8 @@ You don't have to worry about this, as CoW Swap will automatically detect if the
 
 ![GPv2VaultRelayer default approval](/img/cowswap/swap_approval_default.png)
 
-By default, CoW Swap prompt you to approve [`GPv2VaultRelayer`](/docs/cow-protocol/reference/contracts/core#gpv2vaultrelayer) an "unlimited" allowance for the sell token. This has the benefits of:
+By default, CoW Swap prompt you to approve [`GPv2VaultRelayer`](/cow-protocol/reference/contracts/core#gpv2vaultrelayer) an "unlimited" allowance for the sell token.
+This has the benefits of:
 
 - Not having to approve multiple times
 - Save on gas costs
@@ -55,6 +56,7 @@ At this stage, your wallet will prompt you to sign the intent to swap. The user 
 
 ![Signing Swap](/img/cowswap/swap_signing.png)
 
-Once the intent has been signed, it will be submitted to CoW Protocol. You are able to [view your order](/docs/cow-protocol/view) on [CoW Explorer](https://explorer.cow.fi).
+Once the intent has been signed, it will be submitted to CoW Protocol.
+You are able to [view your order on CoW Explorer](/cow-protocol/tutorials/cow-explorer).
 
 ![Swap confirmed](/img/cowswap/swap_confirmed.png)
