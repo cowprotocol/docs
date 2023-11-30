@@ -19,7 +19,7 @@ For the example below, we will use:
 
 ## Idea
 
-Let us consider the case of [Yearn](https://yearn.fi) tokens. A user has `USDC` and wants to buy `yvUSDC`. If no solver understands how to deposit into a yearn vault, all solutions from solvers will require an LP `USDC/yvUSDC` to settle the order. But, we know how to deposit into a yearn vault, so we can create a solver that understands how to do that.
+Let us consider the case of [Yearn](https://yearn.fi) tokens. A user has `USDC` and wants to buy `yvUSDC`. If no solver understands how to deposit into a Yearn vault, all solutions from solvers will require an LP `USDC/yvUSDC` to settle the order. But we know how to deposit into a Yearn vault, so we can create a solver that understands how to do that.
 
 :::tip Get the big picture
 
@@ -62,12 +62,12 @@ curl -vX POST "http://127.0.0.1:8000/solve" \
 You can get some inspiration from prod examples here: (insert example)
 [http://gnosis-europe-gpv2-solver.s3-website.eu-central-1.amazonaws.com/index.html#data/prod/2022/01/](http://gnosis-europe-gpv2-solver.s3-website.eu-central-1.amazonaws.com/index.html#data/prod/2022/01/)
 
-Make sure to test what happens when there is a **COW**
+Make sure to test what happens when there is a **COW**!
 
 ### My solver code
 
 I forked cow-dex-solver and wrote my first lines of rust.
-You can checkout my solver’s code at:
+You can check out my solver’s code at:
 [https://github.com/poolpitako/cow-dex-solver/pull/1](https://github.com/poolpitako/cow-dex-solver/pull/1)
 
 
