@@ -173,7 +173,7 @@ function invalidateOrder(bytes calldata orderUid) external;
 
 #### `settle`
 
-This function is permissioned and can only be called by solvers passwing the allow-list authentication. It executes a settlement:
+This function is permissioned and can only be called by solvers passing the allow-list authentication. It executes a settlement:
 
 ```solidity
 function settle(
