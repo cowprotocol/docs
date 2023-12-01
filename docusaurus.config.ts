@@ -1,11 +1,9 @@
-// @ts-check
-// Note: type annotations allow type checking and IDEs autocompletion
+import {themes as prismThemes} from 'prism-react-renderer';
+import type {Config} from '@docusaurus/types';
+import type * as Preset from '@docusaurus/preset-classic';
 
-const lightCodeTheme = require('prism-react-renderer/themes/github');
-const darkCodeTheme = require('prism-react-renderer/themes/dracula');
-
-const math = require('remark-math');
-const katex = require('rehype-katex');
+import remarkMath from 'remark-math';
+import rehypeKatex from 'rehype-katex';
 
 // if you are using dotenv, you can load the env vars here
 require('dotenv').config();
@@ -14,8 +12,7 @@ const url = process.env.URL ?? 'http://localhost:3000';
 const baseUrl = process.env.BASE_URL ?? '/';
 const trailingSlash = process.env.TRAILING_SLASH ? process.env.TRAILING_SLASH === "true" : false;
 
-/** @type {import('@docusaurus/types').Config} */
-const config = {
+const config: Config = {
   title: 'CoW Protocol Documentation',
   tagline: 'Tagline here',
   favicon: 'img/favicon.png',
@@ -45,6 +42,7 @@ const config = {
   },
 
   markdown: {
+    format: "detect",
     mermaid: true,
   },
   themes: ['@docusaurus/theme-mermaid', '@docusaurus/theme-live-codeblock', "docusaurus-json-schema-plugin"],
@@ -52,8 +50,7 @@ const config = {
   presets: [
     [
       'classic',
-      /** @type {import('@docusaurus/preset-classic').Options} */
-      ({
+      {
         docs: {
           routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
@@ -81,10 +78,10 @@ const config = {
                     return noReadmeSidebar;
                   },
           remarkPlugins: [
-            math,
+            remarkMath,
             [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true, converters: ['yarn', 'pnpm'] }],
           ],
-          rehypePlugins: [katex],
+          rehypePlugins: [rehypeKatex],
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
@@ -93,7 +90,7 @@ const config = {
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
-      }),
+      } satisfies Preset.Options,
     ],
   ],
 
@@ -152,8 +149,7 @@ const config = {
   ],
 
   themeConfig:
-    /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
-    ({
+    {
       // Replace with your project's social card
       image: 'img/og-meta-cowprotocol.png',
       navbar: {
@@ -234,8 +230,8 @@ const config = {
         copyright: `Copyright © ${new Date().getFullYear()} CoW Protocol`,
       },
       prism: {
-        theme: lightCodeTheme,
-        darkTheme: darkCodeTheme,
+        theme: prismThemes.github,
+        darkTheme: prismThemes.dracula,
         additionalLanguages: ['solidity', 'json'],
       },
       colorMode: {
@@ -243,7 +239,12 @@ const config = {
         disableSwitch: false,
         respectPrefersColorScheme: true,
       },
-    }),
+      algolia: {
+        appId: 'VTLPKRZC26',
+        apiKey: '5b23e6db64cdeeac6da5569f69d77149',
+        indexName: 'betacow',
+      }
+    } satisfies Preset.ThemeConfig,
 };
 
 module.exports = config;
