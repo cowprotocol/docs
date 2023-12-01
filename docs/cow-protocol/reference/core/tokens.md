@@ -28,5 +28,5 @@ The best way to ensure a token is tradeable is to bootstrap a Uni v2 (or some ot
 
 There is an explicit bad token list, containing tokens that have been identified as incompatible with CoW Protocol due to edge cases or other issues.
 One such example is tokens that take a fee on transfer.
-The bad token list is not exhaustive and is supplemented by automated bad token detection, which may be unreliable (e.g. if a token exhibits rounding issues on transfers) depending on certain conditions.
+The bad token list is not exhaustive and is supplemented by automated bad token detection, which may be flaky, (e.g. if a token exhibits rounding issues on transfers) depending on certain conditions.
 In any case, if a token is on the bad token list, it will result in an `UnsupportedToken` error when attempting to retrieve a quote or place an order.
