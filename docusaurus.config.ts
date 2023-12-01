@@ -239,6 +239,11 @@ const config: Config = {
         disableSwitch: false,
         respectPrefersColorScheme: true,
       },
+      algolia: {
+        appId: 'VTLPKRZC26',
+        apiKey: '5b23e6db64cdeeac6da5569f69d77149',
+        indexName: 'betacow',
+      }
     } satisfies Preset.ThemeConfig,
 };
 
