@@ -13,7 +13,7 @@ There are times when attaching additional information to an order is useful. For
 
 * An integration partner might want to track the volume they bring to the protocol
 * A user might want to include a referral address in their order
-* A user might want to specify additional order options, such as [CoW Hooks](/cow-protocol/concepts/product-features/cow-hooks)
+* A user might want to specify additional order options, such as [CoW Hooks](/cow-protocol/reference/core/intents/hooks)
 
 CoW Protocol facilitates the inclusion of this additional information to any order through a special data field known as [`appData`](../../contracts/core/settlement#gpv2-data-struct). This field is a `bytes32` that points to an IPFS document that is a JSON file containing this information. Utilizing only on-chain data and IPFS, the content of this document can be retrieved and parsed.
 
