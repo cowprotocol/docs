@@ -6,38 +6,43 @@ import EthFlowTip from '../../../partials/_eth_flow.mdx'
 
 # Native tokens
 
-In blockchain networks the native token, e.g. Ether (ETH) on Ethereum & DAI (xDAI) on Gnosis Chain, is the primary digital currency. 
+In blockchain networks the "native token" - for example, Ether (ETH) on Ethereum & xDAI (xDAI) on Gnosis Chain - is the primary digital currency. 
 It's essential for network operations, like paying transaction fees. 
-Their "wrapped" token equivalents, e.g. Wrapped Ether (WETH) & Wrapped xDAI (wxDAI), are [ERC20-compatible](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/) versions of native tokens. 
-They're created to improve interoperability with decentralized applications and always allow to "wrap" or "un-wrap" into one another at a rate of 1:1.
+"Wrapped" tokens - for example, Wrapped Ether (WETH) & Wrapped xDAI (wxDAI) - are [ERC20-compatible](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/) versions of these native tokens. 
+They're created to improve interoperability with decentralized applications. The native token and its wrapped version are equivalent to each other, and a user is always allowed to turn one into the other ("wrap" or "unwrap") at a rate of 1:1.
 
-CoW Protocol is only capable of handling ERC20 tokens.
-This is because its intent-based architecture relies on solvers, or more precisely the vault relayer, to pull in the sell token on behalf of its traders.
+_Buying_ native tokens such as ETH on CoW Protocol is straightforward. However, CoW Protocol is only natively capable of _selling_ ERC20 tokens - not native tokens. 
+This is because its intent-based architecture relies on solvers to use the sell token on behalf of its traders.
 Doing so is only possible thanks to ERC20's concept of approvals, which allow certain "spender" contracts to manage funds on your behalf.
-As a consequence, native tokens cannot be directly traded on CoW Protocol.
 
-However, there are two ways in which to still execute a swap from native tokens on CoW Protocol:
+Despite this, CoW Protocol provides two ways for users to sell their native tokens:
 
 1. Wrap the native token into an ERC20 token (eg. `ETH` to `WETH`) and then swap it on CoW Protocol; or
-2. Use the [Eth-flow](/cow-protocol/reference/contracts/periphery/eth-flow) contract to place an order on your behalf.
+2. Use the [Eth-flow](/cow-protocol/reference/contracts/periphery/eth-flow) contract to wrap + place your order in a single transaction.
 
 ## Wrapping native tokens
 
-If a user decides to wrap their native tokens to trade, they must follow three steps:
+Wrapping before swapping requires an extra step. However, users who wrap before swapping get the following benefits: 
+1. Lower overall fees
+2. Lower default slippage
+3. No fees for failed transactions
 
-1. Wrap the native token into it's wrapped ERC20 counterpart (on-chain transaction)
-2. Approve the wrapped token to be spent by the CoW Protocol (on-chain transaction)
-3. Swap the wrapped token on CoW Protocol to the desired token (off-chain signed intent)
-
-The CoW Swap UI has built-in support for wrapping native tokens. Simply select the native token you want to wrap and it's wrapped ERC20 counterpart (e.g. `ETH` and `WETH`).
+The CoW Swap UI has built-in support for wrapping native tokens. To do this, simply select the native token you want to wrap (e.g. `ETH`) as your sell token, then select its wrapped ERC20 counterpart (e.g. `WETH`) as your buy token. The button will automatically change from "Swap" to "Wrap".
 
 ![Wrapping Native tokens](/img/cowswap/native_wrap.png)
 
+Wrapping the native token is an on-chain transaction and requires a gas fee. 
+
+After wrapping the token, you can simply select the wrapped token as your sell token and continue with your swap.
+
+
 ## Eth-flow
 
-In an attempt to smooth the user experience, CoW Protocol has introduced the [Eth-flow](/cow-protocol/reference/contracts/periphery/eth-flow) contract. This allows users to automate the [above process](#wrap-native-tokens), all in one **on-chain** transaction.
+In an attempt to smooth the user experience, CoW Protocol has introduced the [Eth-flow](/cow-protocol/reference/contracts/periphery/eth-flow) contract. This allows users to automate the [above process](#wrap-native-tokens) and wrap + swap in a single **on-chain** transaction. 
 
-Using Eth-flow is transparent to the user in CoW Swap, simply select the native token you want to swap and the desired token. CoW Swap will automatically detect if the native token needs to be wrapped and will execute the Eth-flow contract on your behalf.
+Using the Eth-flow is faster than wrapping, then swapping. However, because an Eth-flow transactions is on-chain (unlike most CoW Swap swaps), the user must pay an up-front gas fee in the native token. This fee is not refunded if the order fails.
+
+To use the Eth-flow, first select the native token you want to swap (e.g. `ETH`) and the token you want to buy (e.g. `COW`). Then click "Swap". CoW Protocol will automatically detect if the native token needs to be wrapped and will execute the Eth-flow contract on your behalf.
 
 ![Swap Native tokens](/img/cowswap/native_swap.png)
 
@@ -55,7 +60,7 @@ Once you have confirmed the swap, your wallet will prompt you to the on-chain tr
 
 When using Eth-flow, your order is only placed once the transaction that sends your ETH into the Eth-flow contract is confirmed.
 This means you may see ETH missing in your account before the buy tokens arrive.
-Fear not, if your orders expires, your ETH can be refunded into your account.
-The refund can be triggered by any account and should happen automatically in case you used the CoW Swap UI.
+Fear not! If the order fails, your ETH can be refunded into your account.
+The refund can be triggered by any account and should happen automatically if you used the CoW Swap UI. If not, get in touch with us for help!
 
 :::
