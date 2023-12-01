@@ -52,7 +52,7 @@ As soon as it would revert the driver cancels the transaction to cut the losses 
 
 As you can see the driver has many responsibilities and discussing all of them in detail would be beyond the scope of this documentation but it's worth mentioning one guiding principle that applies to most of them.
 Because having more time for the solver to compute a solution leads to a more competitive solver every process in the driver should introduce as little latency as possible.
-Also the the blockchain is obviously the single source of truth for a lot of the state in the driver and fetching state from the network can be quite slow.
+Also the blockchain is obviously the single source of truth for a lot of the state in the driver and fetching state from the network can be quite slow.
 To reconcile these aspects many internal components listen for new blocks getting appended to the blockchain.
 Whenever that happens the driver fetches all the relevant information and caches it.
 When the next auction comes in and the driver actually needs that data it's already up-to-date and ready to be used.
