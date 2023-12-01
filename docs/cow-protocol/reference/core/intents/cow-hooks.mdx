@@ -1,0 +1,61 @@
+---
+id: hooks
+sidebar_position: 2
+---
+
+import HooksGuaranteesWarning from "./_hooks_guarantees_warning.md";
+
+# Hooks
+
+The [CoW Hooks feature](/cow-protocol/concepts/product-features/cow-hooks) allows users to request the solvers to execute user-defined Ethereum calls (also known as an "inner/internal transaction") before and after the execution of an order in a settlement.
+
+## Specification
+
+There are two type of hooks available: `pre` and `post`.
+_Pre_ hooks are executed before any order signature is checked (in particular, before any funds are taken from the order owner).
+_Post_ hooks are executed after all orders in a batch are settled (that is, the proceeds of the orders have already been credited to the receiver).
+
+Both `pre` and `post` hooks are specified as an array of hooks.
+
+Each hook is described by three parameters:
+
+- `target`: the target address of the Ethereum call.
+
+  Using implementing EIP-2612 approvals as an example, this would be the token contract.
+
+- `callData`: the data of the Ethereum call.
+
+  In the example above, the ABI-encoded function call to `permit`.
+
+- `gasLimit`: a hard limit on the amount of gas needed by the call.
+
+  An order quote uses this value to estimate the total fee needed to execute an order.
+  The more gas needed, the higher fee will be needed for the order to be settled.
+
+  If the call requires more gas than specified here, the Ethereum call in the hook will be internally reverting _but the order will be executed regardless_.
+
+:::note
+
+When placing _partially fillable_ orders with hooks, **pre-hooks will only be executed on the first fill**.
+Therefore, your hook should ensure that the liquidity is sufficient for the entire order to be filled.
+On the other hand, **post-hooks are executed on every fill**.
+
+:::
+
+## Creating orders with hooks
+
+Orders are linked to hooks through the [app data](./app-data).
+
+As long as the full appdata with hook information is included when posting the order to the [orderbook API](../../apis/orderbook), the order will be stored with hook information included and settlements using this order will include its pre and post hooks.
+
+## Call context
+
+Hooks are executed through the [HooksTrampoline](../../contracts/periphery/hooks-trampoline).
+
+Anyone can execute calls using the trampoline, so you must not expect a call to the trampoline to be trusted.
+
+## Security
+
+<HooksGuaranteesWarning />
+
+The parameters of a hook are signed by the user along with the order as part of the app data.
