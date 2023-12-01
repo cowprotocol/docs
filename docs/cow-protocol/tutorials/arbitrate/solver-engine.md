@@ -8,7 +8,7 @@ draft: true
 The Solver Engine implements the [matching system](https://en.wikipedia.org/wiki/Order_matching_system) of the CoW Protocol batch auction.
 As part of the auction lifecycle, it receives a request from the [driver](driver) containing a potentially pre-processed auction instance and returns information about which order to execute together with instructions on how to achieve the desired execution using on-chain liquidity "interactions". 
 
-::: note
+:::note
 
 Solver teams aiming to use the open-source driver implementation, need to implement their own solver engine.
 
@@ -16,16 +16,16 @@ Solver teams aiming to use the open-source driver implementation, need to implem
 
 ## Overview
 
-An open source implementation of a solver engine can be found in https://github.com/cowprotocol/services/tree/main/crates/solvers.
+An open source [Rust](https://rust-lang.org)implementation of a solver engine can be found in the [solvers crate](https://github.com/cowprotocol/services/tree/main/crates/solvers).
 This engine can be run in a few different "modes" to demonstrate and test the whole system end to end (cf. `solvers::infra::cli::Command`):
 
-- Baseline: Solve individual orders exclusively via onchain liquidity provided in the driver-augmented auction.
-- Naive: Optimistically batch similar orders and settle net-amounts via AMMs
-- Legacy: Forward auction to another solver-engine implementing the deprecated, legacy HTTP interface
-- Balancer: Solve individual orders using Balancer [Smart Order Router](https://docs.balancer.fi/sdk/technical-reference/smart-order-router.html)
-- ZeroEx: Solve individual orders using [0x API](https://0x.org/docs/0x-swap-api/introduction)
-- OneInch: Solve individual orders using [1Inch API](https://portal.1inch.dev/documentation/swap/introduction)
-- Paraswap: Solve individual orders using [Paraswap API](https://developers.paraswap.network/api/master)
+- **Baseline**: Solve individual orders exclusively via on-chain liquidity provided in the driver-augmented auction.
+- **Naive**: Optimistically batch similar orders and settle net-amounts via AMMs
+- **Legacy**: Forward auction to another solver-engine implementing the deprecated, legacy HTTP interface
+- **Balancer**: Solve individual orders using Balancer [Smart Order Router](https://docs.balancer.fi/sdk/technical-reference/smart-order-router.html)
+- **ZeroEx**: Solve individual orders using [0x API](https://0x.org/docs/0x-swap-api/introduction)
+- **OneInch**: Solve individual orders using [1Inch API](https://portal.1inch.dev/documentation/swap/introduction)
+- **Paraswap**: Solve individual orders using [Paraswap API](https://developers.paraswap.network/api/master)
 
 Each mode comes with its own set of configuration parameters (cf. [examples](https://github.com/cowprotocol/services/tree/main/crates/solvers/config))
 
@@ -57,7 +57,7 @@ Outputs are adjusted to consider the execution cost of updating the AMM when use
 The graph originates over a set of "base tokens" plus the buy and sell token of the order.
 It aims to find the single path from buy to sell token that maximizes the output for sell orders and minimizes the input for buy orders.
 It handles partially fillable attempting to first fill the entire order.
-It doesn't produce Coincidences of Wants
+It doesn't produce Coincidences of Wants.
 If the resulting output doesn't satisfy the limit price, it re-attempts filling the order to 50% and keeps halving its amount until a match is found.
 
 ### Naive
