@@ -2,11 +2,11 @@
 
 ## What is a Solver?
 
-At the heart of the CoW Protocol there are _solvers_. In essence, a solver is a computer program that takes the orderbook as input, and computes the prices and traded amounts of all orders and liquidity sources (AMMs) that make the best possible overall trading experience. This problem, known as the [batch auction problem](/cow-protocol/reference/core/auctions/the-problem), is an interesting and challenging optimization problem for which there is _not a perfect algorithm_ for (and most [likely will never be](https://en.wikipedia.org/wiki/P_versus_NP_problem)).
+At the heart of the CoW Protocol there are _solvers_. In essence, a solver is a computer program that takes the orderbook as input, then computes the prices and traded amounts of all orders and liquidity sources (AMMs) that make the best possible overall trading experience. This problem, known as the [batch auction problem](/cow-protocol/reference/core/auctions/the-problem), is an interesting and challenging optimization problem for which there is _not a perfect algorithm_ for (and most [likely will never be](https://en.wikipedia.org/wiki/P_versus_NP_problem)).
 
-In the spirit of decentralization, in CoW Protocol multiple independent solvers compete for finding the best solution to the batch auction problem. Every few seconds, a round of the competition takes place giving participating solvers the chance to solve a batch reflecting the most recent orderbook state. The solver that outputs the _best_ solution is rewarded, and thus its solution is the one to be settled on-chain.
+In the spirit of decentralization, on CoW Protocol multiple independent solvers compete for finding the best solution to the batch auction problem. Every few seconds, a round of the competition takes place, giving participating solvers the chance to solve a batch reflecting the most recent orderbook state. The solver that outputs the _best_ solution is rewarded, and thus its solution is the one to be settled on-chain.
 
-This reward aims at incentivizing the development of CoW Protocol solvers. More specifically, the challenge is to write a solver that finds good solutions to the batch auction problem. A good solution must comply with the solution specification, and should map to a good objective value - both of which will be formally verified by the Protocol.
+This reward aims at incentivizing the development of CoW Protocol solvers. More specifically, the challenge is to write a solver that finds good solutions to the batch auction problem. A good solution must comply with the solution specification, and should map to a good objective value - both of which will be formally verified by the protocol.
 
 There are different avenues to explore for designing a solver that is competitive, including, but not limited to:
 

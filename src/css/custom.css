@@ -41,8 +41,9 @@ html[data-theme='dark']:root {
   --ifm-color-primary-darker: #052B65;
   --ifm-color-primary-darkest: #052B65;
   --ifm-color-primary-light: #CAE9FF;
-  --ifm-color-primary-lighter: #CAE9FF;
+  --ifm-color-primary-lighter: #2b80ff;
   --ifm-color-primary-lightest: #CAE9FF;
+  --ifm-link-color: var(--ifm-color-primary-lighter);
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
   --ifm-color-white: #CAE9FF;
   --ifm-color-secondary: var(--ifm-color-white);

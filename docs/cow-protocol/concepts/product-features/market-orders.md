@@ -5,7 +5,7 @@ sidebar_position: 1
 # Market orders
 
 Market orders are orders to buy or sell tokens as soon as possible at the current market rate.
-They are essenitally limit orders where the limit price is close to or below the current market rate.
+They are essentially limit orders where the limit price is close to or below the current market rate.
 In the context of CoW Protocol, when you place a market order, you agree to get, at minimum, the best price the protocol can find by quoting solvers for your order.
 This price is reduced by a user-defined "slippage tolerance" to ensure the trade executes even in volatile market conditions.
 

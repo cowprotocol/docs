@@ -17,15 +17,13 @@ This is from the user's perspective, and is therefore net of fees.
 
 :::
 
-Clearly,  $$\mathbb R^k_+ \subset S$$, that is, a user is always willing to accept an order in which they receive a positive amount of tokens without paying anything. Similarly, $$\mathbb R^k_{-} \cap S = 0$$ because no user would accept to pay tokens without receiving anything. The interesting elements of the acceptance set are, therefore, those with at least one positive entry and at least one negative entry. We also assume that $$0 \in S$$, that is, when submitting an order a user accepts that the order may not be filled.
+We also assume that $$0 \in S$$ that is, when submitting an order a user accepts that the order may not be filled. Also, to each order $$S$$ we define _surplus_function_ $$U_S:S\rightarrow \mathbb R$$, measuring "how good" a trade is from the point of view of the user who submitted order _S_. By definition $$U_S(0)=0$$.
 
-To each order $$S$$ we may assign a _utility function_ $$U_S:S\rightarrow \mathbb R$$ specifying a numerical value to each trade in the acceptance set, to be interpreted as "how good" a trade is from the point of view of the user who submitted order _S_. By definition $$U_S(0)=0$$.
-
-Practically speaking, CoW Protocol allows only some types of orders, which we can think of as constraints on the set _S_ that a user can submit_._ One such constraint is that only pairwise swaps are allowed, that is, all vectors in $$S$$  have zeros in $$k-2$$ dimensions. Furthermore, each order must fit within one of the categories we now discuss. To simplify notation, when discussing these categories we assume that $$k=2$$.
+Practically speaking, CoW Protocol allows only some types of orders, which we can think of as constraints on the set _S_ that a user can submit. One such constraint is that only pairwise swaps are allowed, that is, all vectors in $$S$$  have zeros in $$k-2$$ dimensions. Furthermore, each order must fit within one of the categories we now discuss. To simplify notation, when discussing these categories, we assume that $$k=2$$.
 
 ### Limit Sell Orders
 
-A _limit sell order_ specifies a maximum sell amount of a given token _Y_ > 0, a buy token, and a limit price $$\pi$$, that corresponds to the worst-case exchange rate that the user is willing to settle for. They can be fill-or-kill whenever the executed sell amount must be Y (or nothing). They can be partially fillable if the executed sell amount can be smaller or equal to Y.  Formally, if _x_ denotes the (proposed) buy amount and _y_ denotes the (proposed) sell amount of the order, a fill-or-kill limit sell order has the form
+A _limit sell order_ specifies a maximum sell amount of a given token _Y_ > 0, a buy token _b_, and a limit price $$\pi$$, that corresponds to the worst-case exchange rate that the user is willing to settle for. They can be fill-or-kill whenever the executed sell amount must be Y (or nothing). They can be partially fillable if the executed sell amount can be smaller or equal to Y.  Formally, if _x_ denotes the (proposed) buy amount and _y_ denotes the (proposed) sell amount of the order, a fill-or-kill limit sell order has the form
 
 $$S=\left\{\begin{bmatrix} x \\-y \end{bmatrix}~~s.t. ~~\frac{y}{\pi}\leq x \hbox{ and } y\in\{0,Y\} \right\},$$
 
@@ -33,7 +31,7 @@ and a partially-fillable sell order has the form
 
 $$S= \left \{ \begin{bmatrix} x \\-y \end{bmatrix} ~~s.t. ~~\frac{y}{\pi} \leq x \hbox{ and } y \in [0,Y] \right \}.$$
 
-In both cases, the utility function is defined as
+In both cases, the surplus function is defined as
 
 $$U(x,-y)=(x-y / \pi)p(b)$$,
 
@@ -51,7 +49,7 @@ while partially-fillable limit buy orders have the form
 
 $$S = \left\{\begin{bmatrix} x \\-y \end{bmatrix}~~s.t.~~ y \leq x \cdot \pi \hbox{ and } x \in[0, X] \right\}.$$
 
-Again, the utility function is defined as
+Again, the surplus function is defined as
 
 $$U(\{x,-y\})=(x \cdot \pi-y)p(s)$$,
 
@@ -67,10 +65,10 @@ The fee of limit orders is again denominated in the sell token.
 
 ## Solution
 
-Solvers propose solutions to the protocol, where a solution is a set of trades to execute. Formally, suppose that there are $$I$$ users and _J_ liquidity sources. A solution is a list of trades $$\{o_1, o_2, ...o_I, l_1, l_2, ..., l_J\}$$ one per user and one per liquidity source such that:
+Solvers propose solutions to the protocol, where a solution is a set of trades to execute. Formally, suppose there are $$I$$ users and _J_ liquidity sources. A solution is a list of trades $$\{o_1, o_2, ...o_I, l_1, l_2, ..., l_J\}$$ one per user and one per liquidity source such that:
 
-* **Maximum size of solution**: The total number of executed orders and AMMs does not exceed a certain number within each batch due to limitations regarding the size of a block on the blockchain.
 * **Incentive compatibility and feasibility**: the trades respect the user and liquidity sources, that is, $$o_i\in S_i~~\forall i\leq I$$  and $$l_j \in L_j~~\forall j\leq J$$.
+* **Sufficient endowments**:  each user should have enough sell tokens in their wallet. Note that the protocol already performs this check at order creation. However, a user could move funds between order creation and execution or create multiple orders pledging the same sell amount multiple times. Hence, each solver should  also check that users' endowments are sufficient to execute the proposed solution.
 * **Uniform clearing prices**: all users must face the same prices. Importantly, this constraint is defined at the moment when the swap occurs. So, for example, suppose user _i_ receives _x_ units of token 1 in exchange for _y_ units of token 2 and that the protocol takes a fee in the sell token $$f_2$$. Define $$p_{1,2}=\frac{y-f_2}{x}$$ as the price at which the swap occurs. Uniform clearing prices means that $$p_{1,2}$$ is the same for all users swapping token 1 and token 2. Furthermore, prices must be consistent, in the sense that for any three tokens 1, 2, and 3, if $$p_{1,2},~ p_{2,3}, ~p_{1,3}$$ are well-defined, then it must be that $$p_{1,2}\cdot p_{2,3}=p_{1,3}$$. Note that this implies that prices can be expressed with respect to a common numéraire, giving rise to a uniform price clearing vector $$p$$.
 * [**Social consensus rules**](social-consensus): These are a set of principles that solvers should follow, which were voted by CIPs.
 
@@ -81,7 +79,7 @@ At CoW DAO's discretion, systematic violation of these rules may lead to penaliz
 :::
 
 
-From the protocol viewpoint, each solution that satisfies the above constraints has a _quality_ given by the sum of the utility generated, and the fees paid to the protocol:
+From the protocol viewpoint, each solution that satisfies the above constraints has a _quality_ given by the total surplus generated and the fees paid to the protocol:
 
 $$\sum_o U(o)+p\cdot \sum_of(o)$$,
 

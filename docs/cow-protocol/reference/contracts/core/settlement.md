@@ -44,7 +44,7 @@ Interactions allow solvers to execute arbitrary calls to any on-chain contract. 
 <details open>
   <summary>Protocol fee collection</summary>
   
-  Interactions are also used for accounting / bookkeeping purposes as well. As trades are executed, the Protocol collects a fee from each trade and stores this in the settlement contract (known as <em>internal buffers</em>). At regular intervals, the Protocol withdraws the fees from the settlement contract to the Protocol's treasury Safe.
+  Interactions are also used for accounting / bookkeeping purposes as well. As trades are executed, the Protocol collects a fee from each trade and stores this in the settlement contract (known as <em><a href="/cow-protocol/reference/core/definitions#buffers">internal buffers</a></em>). At regular intervals, the Protocol withdraws the fees from the settlement contract to the Protocol's treasury Safe.
 
 </details>
 
