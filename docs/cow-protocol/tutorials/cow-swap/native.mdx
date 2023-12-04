@@ -46,19 +46,19 @@ To use the Eth-flow, first select the native token you want to swap (e.g. `ETH`)
 
 ![Swap Native tokens](/img/cowswap/native_swap.png)
 
-After selecting your tokens, CoW Swap will prompt you to confirm the swap. This will be a single on-chain transaction that will wrap your native tokens (if required) and place the swap intent on CoW Protocol.
+After selecting your tokens, CoW Swap will prompt you to confirm the swap. This will be a single on-chain transaction that will wrap your native tokens (if required) and place the order on CoW Protocol.
 
 ![Confirm Native tokens](/img/cowswap/native_confirm.png)
 
 <EthFlowTip />
 
-Once you have confirmed the swap, your wallet will prompt you to the on-chain transaction interacting with Eth-flow. On completion of this transaction, your swap intent will be placed on CoW Protocol:
+Once you have confirmed the swap, your wallet will prompt you to the on-chain transaction interacting with [Eth-flow](/cow-protocol/reference/contracts/periphery/eth-flow). On completion of this transaction, your order will be placed on CoW Protocol:
 
 ![Eth-flow Transaction](/img/cowswap/native_tx.png)
 
 :::note
 
-When using Eth-flow, your order is only placed once the transaction that sends your ETH into the Eth-flow contract is confirmed.
+When using [Eth-flow](/cow-protocol/reference/contracts/periphery/eth-flow), your order is only placed once the transaction that sends your ETH into the Eth-flow contract is confirmed.
 This means you may see ETH missing in your account before the buy tokens arrive.
 Fear not! If the order fails, your ETH can be refunded into your account.
 The refund can be triggered by any account and should happen automatically if you used the CoW Swap UI. If not, get in touch with us for help!
