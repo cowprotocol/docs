@@ -1,13 +1,13 @@
-# CoW Protocol (Batch Auctions)
+# CoW Protocol
 
-CoW Protocol matches users' intents via batch auctions from a variety of on-chain liquidity sources and private market makers.
+CoW Protocol matches users' trade intents via batch auctions from a variety of on-chain liquidity sources and private market makers.
 
-When matching intents, CoW Protocol first seeks a _Coincidence of Wants_ (CoW) within the existing batch to offer an even better price than any pool/market maker can. If no CoW is found, CoW Protocol solvers then seek the best price for the trade from available on-chain liquidity.
+When matching intents, CoW Protocol first seeks a _Coincidence of Wants_ (CoW) within the existing batch to offer an even better price than any pool/market maker can. If no CoW is found, CoW Protocol solvers then seek to find the best price for a trade from available on-chain and off-chain liquidity.
 
 On-chain liquidity sources include: 
-- AMMs (e.g. Uniswap, Sushiswap, Balancer, Curve, etc).
-- DEX Aggregators (e.g. 1inch, Paraswap, Matcha, etc).
-- Private Market Makers (e.g. 0x, Hashflow, Bebop, etc).
+- AMMs (e.g. Uniswap, Sushiswap, Balancer, Curve, etc)
+- DEX Aggregators (e.g. 1inch, Paraswap, Matcha, etc)
+- Private Market Makers (e.g. 0x, Hashflow, Bebop, etc)
 
 Therefore, CoW Protocol is essentially an aggregator of aggregators.
 
