@@ -22,7 +22,6 @@ Its role can be broadly summarized into these main purposes.
 
 ```mermaid
 sequenceDiagram
-    participant orderbook
     participant database
     participant blockchain
     participant autopilot
@@ -33,9 +32,6 @@ sequenceDiagram
     end
 
     par data retrieval
-      # database orders
-      orderbook->>database: Update database
-    and
       autopilot->>+database: Get order information
       database->>-autopilot: Uids, signatures, owners...
     and
