@@ -11,7 +11,7 @@ synthesizes this data into an _auction_,
 broadcasts this auction to each of the solvers,
 and finally chooses which solution will be executed.
 
-Users don't interact with the autopilot directly: its only intended interface is with the solvers (through the driver).
+Users don't interact with the autopilot directly: its only intended interface is with the solvers.
 Unlike solvers, there is a single autopilot running for each chain[^barn].
 
 Its role can be broadly summarized into these main purposes.
@@ -29,10 +29,10 @@ sequenceDiagram
     participant database
     participant blockchain
     participant autopilot
-    box external drivers
-      participant driver 1
-      participant driver 2
-      participant driver 3
+    box external solvers
+      participant solver 1
+      participant solver 2
+      participant solver 3
     end
 
     par data retrieval
@@ -52,29 +52,29 @@ sequenceDiagram
     # auction
     Note over autopilot: Cut auction
     par broadcast current auction
-      autopilot->>driver 1: /solve
-      activate driver 1
+      autopilot->>solver 1: /solve
+      activate solver 1
     and
-      autopilot->>driver 2: /solve
-      activate driver 2
+      autopilot->>solver 2: /solve
+      activate solver 2
     and
-      autopilot->>driver 3: /solve
-      activate driver 3
+      autopilot->>solver 3: /solve
+      activate solver 3
     end
-    driver 3->>autopilot: Proposed batch
-    deactivate driver 3
-    driver 1->>autopilot: Proposed batch
-    deactivate driver 1
-    driver 2->>autopilot: Proposed batch
-    deactivate driver 2
+    solver 3->>autopilot: Proposed batch
+    deactivate solver 3
+    solver 1->>autopilot: Proposed batch
+    deactivate solver 1
+    solver 2->>autopilot: Proposed batch
+    deactivate solver 2
 
     Note over autopilot: Pick winner
-    autopilot->>+driver 2: /reveal
-    driver 2->>-autopilot: Ethereum transaction data
-    autopilot->>+driver 2: /settle
-    driver 2->>+blockchain: Execute transaction
-    blockchain->>-driver 2: Transaction receipt
-    driver 2->>-autopilot: Transaction hash
+    autopilot->>+solver 2: /reveal
+    solver 2->>-autopilot: Ethereum transaction data
+    autopilot->>+solver 2: /settle
+    solver 2->>+blockchain: Execute transaction
+    blockchain->>-solver 2: Transaction receipt
+    solver 2->>-autopilot: Transaction hash
 
     autopilot->>database: Store auction data
 ```
@@ -119,13 +119,13 @@ This steps tries to guarantees that all available orders can be settled on CoW P
 
 ## Solver competition
 
-Once an auction is ready, the autopilot sends a `/solve` request to each solver's driver.
+Once an auction is ready, the autopilot sends a `/solve` request to each solver.
 Solvers have a short amount time (seconds) to come up with a [solution](/cow-protocol/core/auctions/the-problem#solution) and return its _score_ to the autopilot.
-The autopilot selects the winner based on this score once the allotted time expires or all drivers have returned their batch proposal.
+The autopilot selects the winner based on this score once the allotted time expires or all solvers have returned their batch proposal.
 
 Up to this point, the autopilot only knows the score and not the full solution that achieves that score.
 The autopilot then asks the winning solver to reveal its score (throug `/reveal`) and then to execute the corresponding settlement transaction (`/settle`).
-The solver is responsible for executing the transaction onchain (through the driver).
+The solver is responsible for executing the transaction onchain (through the [driver](driver)).
 
 ## Auction data storage
 
