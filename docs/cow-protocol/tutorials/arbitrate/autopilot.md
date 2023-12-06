@@ -6,13 +6,10 @@ sidebar_position: 1
 
 The autopilot is the engine that drives forward CoW Protocol.
 
-Running at a regular interval, it keeps an up-to-date view on the state of the protocol,
-synthesizes this data into an _auction_,
-broadcasts this auction to each of the solvers,
-and finally chooses which solution will be executed.
+Running at a regular interval, it keeps an up-to-date view on the state of the protocol, synthesizes this data into an _auction_, broadcasts this auction to each of the solvers, and finally chooses which solution will be executed.
 
 Users don't interact with the autopilot directly: its only intended interface is with the solvers.
-Unlike solvers, there is a single autopilot running for each chain[^barn].
+There is a single autopilot running for each chain[^barn].
 
 Its role can be broadly summarized into these main purposes.
 
