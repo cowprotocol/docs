@@ -36,9 +36,6 @@ sequenceDiagram
     and
       autopilot->>+blockchain: Get order information
       blockchain->>-autopilot: Onchain cancellations, ETH flow...
-    and
-      autopilot->>+blockchain: Get liquidity
-      blockchain->>-autopilot: Uniswap, Balancer, ...
     end
 
     # auction
@@ -89,16 +86,14 @@ Other information can only be retrieved onchain and is updated every time a new 
 - Detecting if a batch has been settled and it should prepare a new auction
 
 Retrieved information isn't limited to the CoW Protocol itself.
-The aution data also contains information on which liquidity is available to the solvers to settle an auction's orders.
-Solvers may use this liquidity information to help them out with finding a solution more quickly.
-Some liquidity sources are also used to provide a reference price of each token in an order;
+The autopilot needs to provide a reference price for each token in an order (a numéraire);
 the reference price is used to normalize the value of the [surplus](/cow-protocol/reference/core/auctions/the-problem), since the surplus must be comparable for all orders and an order could use the most disparate ERC-20 tokens.
+The reference token is usually the chain's native token, since it's the token used to pay for the gas needed when executing a transaction. 
+Orders whose price can't be fetched are discarded and won't be included in an auction.
 
-Examples of liquidity sources that are tracked by the autopilot:
-- Uniswap (v2 and v3)
-- Balancer (Weighted, Weighted2Token, ComposableStable, ...)
-- SushiSwap
-- Swapr
+Native token price fetching is handled by a integrated price estimator in the autopilot.
+The price is fetched from multiple sources and may change based on the current configurations.
+Prices are both queried from a list of selected existing solvers as well as retrieved internally to the autopilot (for example, by querying some external parties like Paraswap and 1inch, but also by reading onchain pool data as Uniswap).
 
 Orders that can't be settled are filtered out: these are expired orders, those with not enough balance, with missing approvals, or that use tokens that aren't supported by the protocol.
 
