@@ -136,6 +136,8 @@ This data will be used to compute the [solver payouts](/cow-protocol/reference/c
 A typical challenge in the autopilot is handling block reorgs.
 The autopilot must be able to revert as many actions as possible in case of a reorg; everything that can't be reverted must be accounted for in the stored data.
 
+In practice this means that some information (e.g., competition data by transaction hash) is only available after a "reorg safe" threshold of blocks have been proposed.
+
 ## What the autopilot doesn't do
 
 The autopilot doesn't verify that a solver's transaction is valid, nor that it matches the score provided by the solver.
