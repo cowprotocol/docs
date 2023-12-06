@@ -7,8 +7,10 @@ import EthFlowTip from '../../../partials/_eth_flow.mdx'
 # Native tokens
 
 In blockchain networks the "native token" - for example, Ether (ETH) on Ethereum & xDAI (xDAI) on Gnosis Chain - is the primary digital currency. 
-It's essential for network operations, like paying transaction fees. 
+It's essential for network operations, like paying transaction fees.
+
 "Wrapped" tokens - for example, Wrapped Ether (WETH) & Wrapped xDAI (wxDAI) - are [ERC20-compatible](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/) versions of these native tokens. 
+
 They exist to improve interoperability with decentralized applications. The native token and its wrapped version are equivalent to each other, and a user is always allowed to turn one into the other ("wrap" or "unwrap") at a rate of 1:1.
 
 _Buying_ native tokens such as ETH on CoW Protocol is straightforward. However, CoW Protocol is only natively capable of _selling_ ERC20 tokens - not native tokens. 
@@ -17,17 +19,19 @@ Doing so is only possible thanks to ERC20's concept of approvals, which allow ce
 
 Despite this, CoW Protocol provides two ways for users to sell their native tokens:
 
-1. Wrap the native token into an ERC20 token (eg. `ETH` to `WETH`) and then swap it on CoW Protocol; or
-2. Use the [Eth-flow](/cow-protocol/reference/contracts/periphery/eth-flow) contract to wrap + place your order in a single transaction.
+* **Option 1) Wrap native tokens before swapping**: Wrap the native token into an ERC20 token (eg. `ETH` to `WETH`) and then swap WETH gass free on CoW Protocol; or
+* **Option 2) Use the [Eth-flow](/cow-protocol/reference/contracts/periphery/eth-flow)**:  Place a single transaction in a special contract that wraps + places your order.
 
-## Wrapping native tokens
+## Option 1) Wrap native tokens before swapping
 
 Wrapping before swapping requires an extra step. However, users who wrap before swapping get the following benefits: 
-1. Lower overall fees
+1. Lower overall fees (if you need to swap multiple times)
 2. Lower default slippage
-3. No fees for failed transactions
+3. No fees for failed swaps
 
-The CoW Swap UI has built-in support for wrapping native tokens. To do this, simply select the native token you want to wrap (e.g. `ETH`) as your sell token, then select its wrapped ERC20 counterpart (e.g. `WETH`) as your buy token. The button will automatically change from "Swap" to "Wrap".
+The CoW Swap UI has built-in support for wrapping native tokens. To do this, simply select the native token you want to wrap (e.g. `ETH`) as your sell token, then select its wrapped ERC20 counterpart (e.g. `WETH`) as your buy token. 
+
+The button will automatically change from "Swap" to "Wrap".
 
 ![Wrapping Native tokens](/img/cowswap/native_wrap.png)
 
@@ -36,15 +40,31 @@ Wrapping the native token is an on-chain transaction and requires a gas fee.
 After wrapping the token, you can simply select the wrapped token as your sell token and continue with your swap.
 
 
-## Eth-flow
+:::tip
+
+If you plan to sell the native tokens over multiple orders, its best to wrap all it together, so you only pay the gas fee once.
+
+If you this is a one-off swap, consider using Eth-flow instead.
+
+:::
+
+
+## Option 2) Use Eth-flow
 
 In an attempt to smoothen the user experience, CoW Protocol has introduced the [Eth-flow](/cow-protocol/reference/contracts/periphery/eth-flow) contract. This allows users to automate the [above process](#wrap-native-tokens) and wrap + swap in a single **on-chain** transaction. 
 
+Eth-flow get the following benefits:
+1. Lower overall fees (if you need to swap just once)
+2. Simpler UX (single transaction)
+3. You don't need to approve WETH explicitly in order to sell it
+
 Using the Eth-flow contract is faster than wrapping and swapping (as discussed above). However, because an Eth-flow transaction is on-chain (unlike most CoW Swap swaps), the user must pay an up-front gas fee in the native token. This fee is not refunded if the order fails.
 
-To use the Eth-flow contract, first select the native token you want to swap (e.g. `ETH`) and the token you want to buy (e.g. `COW`). Then click "Swap". CoW Protocol will automatically detect if the native token needs to be wrapped and will execute the Eth-flow contract on your behalf.
-
 ![Swap Native tokens](/img/cowswap/native_swap.png)
+
+To use the Eth-flow contract, first select the native token you want to swap (e.g. `ETH`) and the token you want to buy (e.g. `COW`). 
+
+Then click "Swap". CoW Protocol will automatically detect if the native token needs to be wrapped and will execute the Eth-flow contract on your behalf.
 
 After selecting your tokens, CoW Swap will prompt you to confirm the swap. This will be a single on-chain transaction that will wrap your native tokens (if required) and place the order on CoW Protocol.
 
@@ -59,8 +79,10 @@ Once you have confirmed the swap, your wallet will prompt you to approve the on-
 :::note
 
 When using the [Eth-flow](/cow-protocol/reference/contracts/periphery/eth-flow) contract, your order is only placed once the transaction that sends your ETH into the Eth-flow contract is confirmed.
+
 This means you may see ETH missing in your account before the buy tokens arrive.
+
 Fear not! If the order fails, your ETH can be refunded into your account.
-The refund can be triggered by any account and should happen automatically if you used the CoW Swap UI. If not, get in touch with us for help!
+The refund can be triggered by any account and should happen automatically if you used the CoW Swap UI. If not, get in touch with us for help at [info@cow.fi](mailto:info@cow.fi)!
 
 :::
