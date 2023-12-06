@@ -14,7 +14,7 @@ yarn
 
 You will also need to `build` the app, to ensure external dependent projects are cloned and setup properly.
 
-```bas
+```bash
 yarn build
 ```
 
