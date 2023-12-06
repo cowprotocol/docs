@@ -109,12 +109,12 @@ The score is the quality of the solution, which accounts for surplus and fee pai
 The autopilot selects the winner based on this score once the allotted time expires or all solvers have returned their batch proposal.
 
 Up to this point, the autopilot only knows the score and not the full solution that achieves that score.
-The autopilot then asks the winning solver to reveal its score (throug `/reveal`) and then to execute the corresponding settlement transaction (`/settle`).
+The autopilot then asks the winning solver to reveal its score (through `/reveal`) and then to execute the corresponding settlement transaction (`/settle`).
 The solver is responsible for executing the transaction onchain (through the [driver](driver)).
 
 ## Auction data storage
 
-The data returned by the solver is stored by the autopilot on the database.
+The data returned by the solver is stored by the autopilot in the database.
 Other auction data is recorded as well, for example surplus fee for limit orders and the score returned by each solver.
 It also records the result of executing the settlement onchain in order to track the difference in score caused by negative or positive slippage.
 
