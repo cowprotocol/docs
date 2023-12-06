@@ -13,12 +13,11 @@ There is a single autopilot running for each chain[^barn].
 
 Its role can be broadly summarized into these main purposes.
 
-1. Data collection, which is mainly:
-   - Liquidity gathering
-   - Order information
-2. Cutting auctions
-3. Solver competition
-4. Auction data storage
+1. Cutting auctions
+   - Data availability consensus around which orders are valid for a given batch
+   - The initial exchange rates for each traded tokens which are used to normalize surplus across different orders
+2. Solver competition
+3. Auction data storage
 
 ```mermaid
 sequenceDiagram
@@ -74,7 +73,7 @@ sequenceDiagram
 
 [^barn]: There is technically also a second autopilot running on each network for testing purposes (in the _barn_ environment), but this isn't necessary for running the protocol.
 
-## Data collection
+## Cutting auctions
 
 The autopilot builds an [auction](/cow-protocol/reference/core/auctions/schema) that includes all tradable orders.
 To handle this, it needs to maintain a complete overview of the protocol.
@@ -100,10 +99,6 @@ Examples of liquidity sources that are tracked by the autopilot:
 - Balancer (Weighted, Weighted2Token, ComposableStable, ...)
 - SushiSwap
 - Swapr
-
-## Cutting auctions
-
-The autopilot constantly updates the list of orders that can be settled based on the data retrieved above.
 
 Orders that can't be settled are filtered out: these are expired orders, those with not enough balance, with missing approvals, or that use tokens that aren't supported by the protocol.
 
