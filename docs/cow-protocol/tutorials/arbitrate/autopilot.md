@@ -101,6 +101,9 @@ Orders that can't be settled are filtered out: these are expired orders, those w
 
 The autopilot also checks that [ERC-1271](/cow-protocol/reference/core/signing-schemes#erc-1271) signatures are currently valid.
 
+More in general, the autopilot aims to remove from the auction all orders that have no chance to be settled.
+Still, this doesn't mean that all orders that appear in the auction can be settled: orders whose ability to be settled is ambigous or unclear are remitted to the solvers' own judgment.
+
 ## Solver competition
 
 Once an auction is ready, the autopilot sends a `/solve` request to each solver.
