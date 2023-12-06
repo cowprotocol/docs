@@ -17,6 +17,8 @@ Its role can be broadly summarized into these main purposes.
    - Data availability consensus around which orders are valid for a given batch
    - The initial exchange rates for each traded tokens which are used to normalize surplus across different orders
 2. Solver competition
+   - Data availability consensus around the available solution candidates and their score
+   - Notifying the winning solver to submit their solution
 3. Auction data storage
 
 ```mermaid
