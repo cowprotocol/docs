@@ -76,7 +76,8 @@ sequenceDiagram
 
 ## Data collection
 
-The autopilot needs to have a complete overview of the protocol and of many other third-party protocols in order to build an [auction](/cow-protocol/reference/core/auctions/schema) that is as complete as possible.
+The autopilot builds an [auction](/cow-protocol/reference/core/auctions/schema) that includes all tradable orders.
+To handle this, it needs to maintain a complete overview of the protocol.
 
 Much of the order data it needs is collected through the database, which is shared with the orderbook.
 The database stores the vast majority of available order information, including user signatures.
