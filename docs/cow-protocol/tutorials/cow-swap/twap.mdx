@@ -15,18 +15,23 @@ TWAP orders allow you to split a large trade into smaller parts, executed at reg
 
 ### Key Points
 
-- Ideal for trades over $5k on Mainnet.
-- Lower minimums ($5) on Gnosis Chain for smaller trades.
-- Reduces price impact on large orders.
+- **Reduce price impact on large orders**: e.g., Buy `$1M` of ETH over 3h in 6 parts; The TWAP will place an order of `$166k` every `30min` significantly reducing thr price impact and allowing the market to recover.
+- **Average buy price over time**: Reduce risk of buying at a high price by averaging the prices over a period of time.
+- **Ideal for recurring or big trades**: The minimum required part size is `$5k` on Mainnet or `$5` on Gnosis Chain.
 
 ---
 
-
 # Placing a TWAP Order
 
-### Step 1: Connect Your Safe Wallet
 
-Navigate to CoW Swap and connect your Safe wallet. Access TWAP orders via the “TWAP” tab near the center module or the drop-down menu next to the CoW Swap logo.
+### Step 1: Connect Your Safe Wallet
+CoW Swap TWAP requires a Safe wallet.
+
+* 🆕 If you don't have one, you can [create a Safe Multisig](https://app.safe.global/welcome)
+* 🔌 Once you have it, just open [CoW Swap (Safe App)](https://app.safe.global/share/safe-app?appUrl=https%3A%2F%2Fswap.cow.fi&chain=eth)
+
+
+Once CoW Swap is loaded and connected to your Safe. Access TWAP orders via the “TWAP” tab near the center module or the drop-down menu next to the CoW Swap logo.
 
 <Image img={require('/img/cowswap/TWAP_connect.png')} alt="Access TWAP Interface" />
 
@@ -48,7 +53,7 @@ This is a critical step where you'll define how your order will be executed over
 
 1. **Price Protection**: This is a measure to prevent your order from being executed at a price that's too far from the market price when the order was placed. Set the percentage of price protection to define the acceptable price range for your trades. For instance, a 10% price protection means that your order will not execute if the price moves unfavorably by more than 10% from the price at the time the order was made.
 
-2. **Number of Parts**: Decide how many discrete parts you want to divide your order into. This choice will determine the granularity of your TWAP strategy. For example, if you choose to split your order into 2 parts and you are selling a total of 2 WETH, each part will involve selling 1 WETH.
+2. **Number of Parts**: Decide how many discrete parts you want to divide your order into. This choice will determine the granularity of your TWAP strategy. For example, if you choose to split your order into 2 parts and you are selling a total of 2 WETH, each part will involve selling 1 WETH. The parts have a minimum size of `$5k` on Mainnet or `$5` on Gnosis Chain because each part will need to be executed on-chain, meaning there's a cost associated with each execution.
 
 3. **Total Duration**: Choose the total time frame over which your order should be executed. The TWAP strategy will distribute your trades evenly across this duration. Select from predefined durations like 1 hour, or set a custom duration based on your trading strategy.
 
@@ -131,4 +136,4 @@ Once all signatures are collected, the transaction to cancel the order will be e
 
 ## Conclusion
 
-TWAP orders are a strategic approach for large trades, reducing price impact and securing better average prices. Try it out and let us know your experience!
+TWAP orders are a strategic approach for large trades, reducing price impact and securing better average prices. Try it out and let us know your experience at [info@cow.fi](mailto:info@cow.fi)!
