@@ -104,7 +104,8 @@ The autopilot also checks that [ERC-1271](/cow-protocol/reference/core/signing-s
 ## Solver competition
 
 Once an auction is ready, the autopilot sends a `/solve` request to each solver.
-Solvers have a short amount time (seconds) to come up with a [solution](/cow-protocol/core/auctions/the-problem#solution) and return its _score_ to the autopilot.
+Solvers have a short amount time (seconds) to come up with a [solution](/cow-protocol/reference/core/auctions/the-problem#solution) and return its _score_ to the autopilot.
+The score is the quality of the solution, which accounts for surplus and fee paid, and represents what CoW Protocol intends to optimize with the solver competition; it's described in details in the [description of CoW Protocol's optimization problem](/cow-protocol/reference/core/auctions/the-problem).
 The autopilot selects the winner based on this score once the allotted time expires or all solvers have returned their batch proposal.
 
 Up to this point, the autopilot only knows the score and not the full solution that achieves that score.
