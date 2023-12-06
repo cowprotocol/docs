@@ -12,6 +12,13 @@ The documentation is built using [Docusaurus 2](https://docusaurus.io/), a moder
 yarn
 ```
 
+You will also need to `build` the app, to ensure external dependent projects are cloned and setup properly.
+
+```bash
+yarn build
+```
+
+
 ### Local Development
 
 ```bash
