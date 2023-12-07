@@ -49,6 +49,7 @@ The only hard requirement is that the component the autopilot interfaces with im
 
 The auctions sent to the driver by the autopilot only contain the bare minimum of information needed.
 But usually a matching engine requires more information than that so the driver pre-processes the auction before forwarding it to the matching engine.
+We also want to reduce the overall workload of a matching engine, since it's usually expensive to match an order (in terms of time, RPC requests, API calls, etc.).  
 That process includes:
 * fetching additional meta data (e.g. token decimals)
 * discarding orders that can definitely not be settled (e.g. user is missing balances)
@@ -58,7 +59,7 @@ That process includes:
 
 Unless you find a perfect CoW you'll need some sort of liquidity to settle an order with.
 To get your solver started with a good set of base liquidity the driver is able to index and encode a broad range of fundamental AMMs.
-These include `UniswapV2` and it's derivatives, `UniswapV3` as well as several liquidity sources from the `BalancerV2` family.
+These include `UniswapV2` and its derivatives, `UniswapV3` as well as several liquidity sources from the `BalancerV2` family.
 All of these can be individually configured or completely disabled if your matching engine manages liquidity on its own.
 
 #### Postprocessing Solutions
@@ -78,6 +79,7 @@ As soon as it would revert the driver cancels the transaction to cut the losses 
 ## Methodology
 
 As you can see the driver has many responsibilities and discussing all of them in detail would be beyond the scope of this documentation but it's worth mentioning one guiding principle that applies to most of them:  
+Make the driver do as little work as possible in the hot path when processing an auction.
 
 Because having more time for the solver to compute a solution leads to a more competitive solver every process in the driver should introduce as little latency as possible.
 Also the blockchain is obviously the single source of truth for a lot of the state in the driver and fetching state from the network can be quite slow.  
