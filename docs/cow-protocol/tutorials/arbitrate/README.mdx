@@ -6,7 +6,7 @@ The orderbook is the main entry point of the protocol. Clients can use the Order
 
 #### The Autopilot
 
-The autopilot is a service that drives the core protocol functionalities. It is responsible for creating and arbitrating auctions. It communicates with the driver and decides when the auction is solved and when the solution is revealed and finally settled. Besides that, autopilot is responsible for monitoring the solvers and making sure they behave correctly, and slash them if they don't.
+The autopilot is a service that drives the core protocol functionalities. It is responsible for creating and arbitrating auctions. It communicates with the driver and decides when the auction is solved and when the solution is revealed and finally settled. Besides that, autopilot is responsible for monitoring the solvers and making sure they behave correctly (and slashing them if they don't).
 
 #### The Driver
 
@@ -59,13 +59,8 @@ sequenceDiagram
     driver1 ->>autopilot: Scored solution
     deactivate driver1
     Note over autopilot: Pick winner
-    autopilot->>driver0: /reveal
-    activate driver0
-    driver0->>autopilot: Encoded settlement
-    deactivate driver0
-    autopilot->>driver0: /settle
-    activate driver0;
-    Note right of driver0: Settles transaction onchain
+    autopilot->>+driver0: Request execution
+    Note over driver0: Settles transaction onchain
     driver0->>autopilot: Transaction hash
     deactivate driver0
     Note over autopilot: End

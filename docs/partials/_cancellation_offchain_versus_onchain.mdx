@@ -1,3 +1,6 @@
+import Image from "@theme/IdealImage"
+
+
 Cancelling orders off-chain is free and does *not* require a transaction. However, there is a risk that the order is matched between the time you cancel it and the time the cancellation is processed off-chain.
 
 :::note
@@ -11,7 +14,7 @@ However, it is possible that it was already included in the current auction and 
 To proceed with an off-chain cancellation, click "Request cancellation" as shown below.
 
 <>
-    <p><img {...props} /></p>
+    <p><Image {...props} /></p>
 </>
 
 If you do not want to place trust in the API to cancel your order, you may wish to cancel your order via an on-chain cancellation transaction. 

@@ -228,7 +228,7 @@ It is of course possible to combine the traditional liquidation model with the p
 
 <details open>
   <summary>Book keeping using CoW Hooks</summary>
-  Any book-keeping to account or split the extra proceeds can happen in pre- and post-interactions (aka hooks). 
+  Any book-keeping to account or split the extra proceeds can happen in pre- and post-interactions (aka <a href="/cow-protocol/reference/core/intents/hooks">hooks</a>). 
 Note that unlike the transfer of proceeds, the settlement contract itself does not guarantee pre- and post-hooks get executed atomically with the trade. However, solvers can get slashed up to $500k in case they violate this assumption. Moreover, in particular pre-hooks can still be enforced on-chain (by checking their execution happened inside `isValidSignature`) and post-hooks can either be made permissionlessly executable by other actors and/or enforced in subsequent pre-hooks.
 </details>
 
