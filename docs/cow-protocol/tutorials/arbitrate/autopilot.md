@@ -97,7 +97,11 @@ Native token price fetching is handled by an integrated price estimator in the a
 The price is fetched from multiple sources and may change based on the current configurations.
 Prices are both queried from a list of selected existing solvers as well as retrieved internally by the autopilot (for example, by querying some external parties like Paraswap and 1inch, but also by reading onchain pool data as Uniswap).
 
-Orders that can't be settled are filtered out: these are expired orders, those with not enough balance, with missing approvals, or that use tokens that aren't supported by the protocol.
+Orders that can't be settled are filtered out. This is the case if, for example:
+* an order is expired
+* the user's balance isn't enough to settle the order
+* the approval to the vault relayer is missing
+* the involved tokens aren't supported by the protocol
 
 The autopilot also checks that [ERC-1271](/cow-protocol/reference/core/signing-schemes#erc-1271) signatures are currently valid.
 
