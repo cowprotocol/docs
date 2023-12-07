@@ -17,8 +17,10 @@ Consider an example swapping 0.05 `WETH` for `COW`.
 <Image img={require('/img/cowswap/swap_need_approval.png')} alt="GPv2VaultRelayer approval required" />
 
 When you do a swap on CoW Swap for the first time, you must give approval for the [`GPv2VaultRelayer`](/cow-protocol/reference/contracts/core#gpv2vaultrelayer) contract to spend your token (in this case, `WETH`). 
-This is because [`GPv2VaultRelayer`](/cow-protocol/reference/contracts/core#gpv2vaultrelayer) is the contract that will pull the `WETH` from our wallet and send it to the [settlement](/cow-protocol/reference/contracts/core#gpv2settlement) contract that will co-ordinate the swap on your behalf.
+This is because [`GPv2VaultRelayer`](/cow-protocol/reference/contracts/core#gpv2vaultrelayer) is the contract that will pull the `WETH` from your wallet and send it to the [settlement](/cow-protocol/reference/contracts/core#gpv2settlement) contract that will co-ordinate the swap on your behalf.
+
 Both contracts are audited, battle-tested and non-upgradeable.
+
 Moreover, the settlement contract is the only address that can request the relayer to pull your funds and only after verifying both that your order was signed by you and that you will receive at least your limit execution price or better. 
 
 ## Approve sell token
@@ -34,6 +36,7 @@ You don't have to worry about this, as CoW Swap will automatically detect if the
 <Image img={require('/img/cowswap/swap_approval_default.png')} alt="GPv2VaultRelayer default approval" />
 
 By default, CoW Swap prompts you to give [`GPv2VaultRelayer`](/cow-protocol/reference/contracts/core#gpv2vaultrelayer) an "unlimited" allowance for the sell token.
+
 This has the benefits of:
 
 - Not having to re-approve every time you trade
@@ -47,7 +50,7 @@ Once the `approve` transaction is confirmed, you can proceed to swap!
 
 ## Confirm swap
 
-When you're ready to swap, click the "Swap" button. You will be prompted to confirm the swap. This is when you can review the details of the swap (ie. the quote, the slippage tolerance, etc.). If you're happy with the details, click "Confirm Swap". You will be prompted to sign the order.
+When you're ready to swap, click the "Swap" button. You will be prompted to confirm the swap. This is when you can review the details of the swap (i.e. the quote, the slippage tolerance, etc.). If you're happy with the details, click "Confirm Swap". You will be prompted to sign the order.
 
 <ReceiverAndOrderWarning />
 
