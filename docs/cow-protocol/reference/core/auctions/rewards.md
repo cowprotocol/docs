@@ -8,7 +8,11 @@ The protocol is currently subsidizing the solver competition, by rewarding solve
 
 The annual rewards budget as of now is 20M COW, and the intended split between solver competition and price estimation rewards is currently at 80% for the solver competition (16M COW) and 20% for the price estimation competition (4M COW).
 
-Note: For the interested reader, the main source of truth for the weekly payments to solvers is this [Dune dashboard](https://dune.com/cowprotocol/cow-solver-rewards?StartTime=2023-11-28+00%3A00%3A00&EndTime=2023-12-05+00%3A00%3A00&EndTime_d3bba3=2023-12-05+00%3A00%3A00&EndTime_dd004a=2023-12-05+00%3A00%3A00&StartTime_d3f009=2023-11-28+00%3A00%3A00).
+:::note
+
+For the interested reader, the main source of truth for the weekly payments to solvers is this [Dune dashboard](https://dune.com/cowprotocol/cow-solver-rewards?StartTime=2023-11-28+00%3A00%3A00&EndTime=2023-12-05+00%3A00%3A00&EndTime_d3bba3=2023-12-05+00%3A00%3A00&EndTime_dd004a=2023-12-05+00%3A00%3A00&StartTime_d3f009=2023-11-28+00%3A00%3A00).
+
+:::
 
 ## Solver competition rewards (CIP-20)
 
