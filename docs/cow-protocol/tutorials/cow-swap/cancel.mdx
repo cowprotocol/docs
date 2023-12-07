@@ -13,23 +13,23 @@ Before we begin, please note that our solvers can be quite quick, so it is entir
 
 :::
 
-As CoW Protocol runs an off-chain order book, it is possible to cancel an intent before it is matched. This is done by signing an off-chain cancellation message and submitting it to the [OrderBook API](../../reference/apis/orderbook).
+As CoW Protocol runs an off-chain order book, it is possible to cancel an order before it is matched. This is done by signing an off-chain cancellation message and submitting it to the [OrderBook API](../../reference/apis/orderbook).
 
-## Finding pending intents
+## Finding pending orders
 
 <Image
   img={require("/img/cowswap/cancel_pending.png")}
-  alt="Finding pending intents"
+  alt="Finding pending orders"
 />
 
 <Image
-  img={require("/img/cowswap/cancel_intent.png")}
-  alt="Cancelling an intent"
+  img={require("/img/cowswap/cancel_order.png")}
+  alt="Cancelling an order"
 />
 
 ## Off-chain vs on-chain cancellation
 
-Off-chain cancellations are _optimistic_ in that it signals to the order book that you no longer wish to trade. This is useful as it doesn't involve any on-chain transactions and is therefore free. Provided that the intent has not been settled on chain, it will be removed from the order book and will not be matched.
+An off-chain cancellation is _optimistic_ in that it signals to the order book that you no longer wish to trade. This is useful as it doesn't involve any on-chain transactions and is therefore free. Provided that the order has not been settled on chain, it will be removed from the order book and will not be matched.
 
 <CancellationOffChainOnChain
   alt="Cancel off-chain"

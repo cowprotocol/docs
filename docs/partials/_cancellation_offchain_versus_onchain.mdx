@@ -1,8 +1,11 @@
-Cancelling intents off-chain is free and does *not* require a transaction. However, there is a risk that the intent is matched between the time you cancel it and the time the cancellation is processed off-chain.
+import Image from "@theme/IdealImage"
+
+
+Cancelling orders off-chain is free and does *not* require a transaction. However, there is a risk that the order is matched between the time you cancel it and the time the cancellation is processed off-chain.
 
 :::note
 
-Cancelling an intent off-chain removes your order from the off-chain orderbook.
+Cancelling an order off-chain removes your order from the off-chain orderbook.
 The order will no longer be broadcast to solvers starting with the next auction.
 However, it is possible that it was already included in the current auction and thus executed by a solver before the next auction starts.
 
@@ -11,16 +14,16 @@ However, it is possible that it was already included in the current auction and 
 To proceed with an off-chain cancellation, click "Request cancellation" as shown below.
 
 <>
-    <p><img {...props} /></p>
+    <p><Image {...props} /></p>
 </>
 
-If you do not want to place trust in the API to cancel your order, you may wish to cancel your intent via an on-chain cancellation transaction. 
+If you do not want to place trust in the API to cancel your order, you may wish to cancel your order via an on-chain cancellation transaction. 
 This will cost gas. 
 To do so, toggle the type of cancellation to "on-chain" by clicking on "off-chain".
 
 :::note
 
-Even with on-chain cancellations, there is still a risk that the intent is matched before the on-chain cancellation transaction is confirmed.
+Even with on-chain cancellations, there is still a risk that the order is matched before the on-chain cancellation transaction is confirmed.
 Make sure to set a high priority fee and sign swiftly.
 
 :::
