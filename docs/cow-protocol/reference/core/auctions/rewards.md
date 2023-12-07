@@ -18,7 +18,13 @@ For the interested reader, the main source of truth for the weekly payments to s
 
 As specified in [CIP-20](https://snapshot.org/#/cow.eth/proposal/0x2d3f9bd1ea72dca84b03e97dda3efc1f4a42a772c54bd2037e8b62e7d09a491f), solver competition rewards are split into two components: per-auction rewards and consistency rewards.
 
-The auction's goal is to reward solvers based on how much value they provide to the users. In each auction cycle, solvers compete by proposing a solution to settle the batch, and the winning solver receives a reward that is part in `ETH` and part in `COW` (see below). Note that the reward in ETH is not part of the rewards budget, and is meant to cover the costs associated with the gas spent by each solver; importantly, this ETH is obtained by converting the gas fees user orders pay and so have nothing to do with the COW rewards budget.
+The auction's goal is to reward solvers based on how much value they provide to the users. In each auction cycle, solvers compete by proposing a solution to settle the batch, and the winning solver receives a reward that is part in `ETH` and part in `COW` (see below).
+
+:::note
+
+The reward in ETH is not part of the rewards budget, and is meant to cover the costs associated with the gas spent by each solver; importantly, this ETH is obtained by converting the gas fees user orders pay and so have nothing to do with the COW rewards budget.
+
+:::
 
 As already mentioned, CoW Protocol has committed to spending a specified quantity of `COW` tokens to reward solvers. An estimated 16M COW annual budget is currently allocated for the solver competition rewards, which corresponds to an average weekly budget of 307.6k COW. The part of the rewards budget in `COW` that is not spent on per-auction rewards is used for consistency rewards. Consistency rewards are distributed weekly to each solver in proportion to the number of valid solutions submitted during the previous week.
 
