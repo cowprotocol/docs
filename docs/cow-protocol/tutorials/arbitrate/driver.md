@@ -41,7 +41,7 @@ sequenceDiagram
 Splitting the driver from the matching engine is just a design decision to keep the barrier of entry for new solvers low.
 However, there is nothing preventing you from patching, forking or reimplementing the driver.
 You can even merge the responsibilities of the driver and matching engine into one if you want to build the most optimal solver possible.  
-The only hard requirement is that the component the autopilot interfaces with implements this [interface](api/driver).
+The only hard requirement is that the component the autopilot interfaces with implements this [interface](/cow-protocol/reference/apis/driver).
 
 ### Responsibilities
 
