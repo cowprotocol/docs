@@ -28,7 +28,6 @@ The reward in ETH is not part of the rewards budget, and is meant to cover the c
 
 As already mentioned, CoW Protocol has committed to spending a specified quantity of `COW` tokens to reward solvers. An estimated 16M COW annual budget is currently allocated for the solver competition rewards, which corresponds to an average weekly budget of 307.6k COW. The part of the rewards budget in `COW` that is not spent on per-auction rewards is used for consistency rewards. Consistency rewards are distributed weekly to each solver in proportion to the number of valid solutions submitted during the previous week.
 
-
 ### Specification of per-auction rewards
 
 The per-auction rewards are computed using a mechanism akin to a second-price auction. First, each solver commits to a numerical score and a solution (which includes a price vector and a list of trades to execute). The solver with the highest score wins the right to settle their submitted solution on chain. 
