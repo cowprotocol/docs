@@ -17,7 +17,7 @@ All solvers participating in the solver competition must abide by certain rules.
 
 - A solution is valid only if it contains at least one user order.
 
-- Every solution is associated with a score, and the solutions are ranked in decreasing order of their scores. The empty solution with the zero score is always considered as a candidate solution. The solver whose solution has the highest (positive) score is declared the winner of the batch auction, and gets the right to execute its solution onchain. The solver that provided the winning solution is then rewarded according to the rules specified in [CIP-20](https://snapshot.org/#/cow.eth/proposal/0x2d3f9bd1ea72dca84b03e97dda3efc1f4a42a772c54bd2037e8b62e7d09a491f).
+- Every solution is associated with a score, and the solutions are ranked in decreasing order of their scores. The solver whose solution has the highest positive score is declared the winner of the batch auction, and gets the right to execute its solution onchain. The solver that provided the winning solution is then rewarded according to the rules specified in [CIP-20](https://snapshot.org/#/cow.eth/proposal/0x2d3f9bd1ea72dca84b03e97dda3efc1f4a42a772c54bd2037e8b62e7d09a491f).
 
 - With the exception of fees paid by users and internalized interactions (both will be clarified shortly), any token imbalance within the settlement contract that is the result of a settlement is accounted for under the term "slippage accounting", and is fully owned by the corresponding solver, as specified in [CIP-17](https://snapshot.org/#/cow.eth/proposal/0xf9c98a2710dc72c906bbeab9b8fe169c1ed2e9af6a67776cc29b8b4eb44d0fb2). The only two types of imbalances that are not accounted for are:
 
