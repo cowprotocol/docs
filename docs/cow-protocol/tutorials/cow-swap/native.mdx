@@ -22,6 +22,14 @@ Despite this, CoW Protocol provides two ways for users to sell their native toke
 * **Option 1) Wrap native tokens before swapping**: Wrap the native token into an ERC20 token (eg. `ETH` to `WETH`) and then swap WETH gass free on CoW Protocol; or
 * **Option 2) Use the [Eth-flow](/cow-protocol/reference/contracts/periphery/eth-flow)**:  Place a single transaction in a special contract that wraps + places your order.
 
+:::tip
+
+Wrapping is best for returning users. Also, if you plan to sell the native tokens over multiple orders, its best to wrap all ETH together, so you only pay the gas fee once.
+
+If this is a one-off swap, consider using Eth-flow instead.
+
+:::
+
 ## Option 1) Wrap native tokens before swapping
 
 Wrapping before swapping requires an extra step. However, users who wrap before swapping get the following benefits: 
@@ -39,14 +47,6 @@ Wrapping the native token is an on-chain transaction and requires a gas fee.
 
 After wrapping the token, you can simply select the wrapped token as your sell token and continue with your swap.
 
-
-:::tip
-
-If you plan to sell the native tokens over multiple orders, its best to wrap all it together, so you only pay the gas fee once.
-
-If this is a one-off swap, consider using Eth-flow instead.
-
-:::
 
 
 ## Option 2) Use Eth-flow
