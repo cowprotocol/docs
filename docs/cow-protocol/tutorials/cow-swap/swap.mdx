@@ -16,12 +16,12 @@ Consider an example swapping 0.05 `WETH` for `COW`.
 
 <Image img={require('/img/cowswap/swap_need_approval.png')} alt="GPv2VaultRelayer approval required" />
 
-When you do a swap on CoW Swap for the first time, you must give approval for the [Vault relayer contract](/cow-protocol/reference/contracts/core/vault-relayer) contract to spend your token (in this case, `WETH`). 
+When you do a swap on CoW Swap for the first time, you must give approval for the [_vault relayer_](/cow-protocol/reference/contracts/core/vault-relayer) contract to spend your token (in this case, `WETH`). 
 
-This is because this contract needs to pull the `WETH` from our wallet and send it to the [Settlement contract](/cow-protocol/reference/contracts/core/settlement) that will co-ordinate the swap on your behalf.
+This is because this contract needs to pull the `WETH` from our wallet and send it to the [_settlement_](/cow-protocol/reference/contracts/core/settlement) contract that will co-ordinate the swap on your behalf.
 
 Both contracts are audited, battle-tested and non-upgradeable. 
-Moreover, the settlement contract is the only address that can request the relayer to pull your funds and **only after verifying** both that:
+Moreover, the settlement contract is the only address that can request the vault relayer to pull your funds and **only after verifying** both that:
 1. Your order was signed by you
 2. and that you will receive at least your limit execution price or better
 
@@ -29,7 +29,7 @@ Moreover, the settlement contract is the only address that can request the relay
 
 :::tip
 
-Some tokens, such as `USDC`, `DAI`, and `COW` support permit-style approvals. This means that you can approve the [Vault relayer contract](/cow-protocol/reference/contracts/core/vault-relayer) to spend your tokens without having any initial gas for an on-chain transaction. This is a great way to save on gas costs!
+Some tokens, such as `USDC`, `DAI`, and `COW` support permit-style approvals. This means that you can approve the [vault relayer](/cow-protocol/reference/contracts/core/vault-relayer) contract to spend your tokens without having any initial gas for an on-chain transaction. This is a great way to save on gas costs!
 
 You don't have to worry about this, as CoW Swap will automatically detect if the token supports permit-style approvals and will guide you through the process.
 
@@ -37,7 +37,7 @@ You don't have to worry about this, as CoW Swap will automatically detect if the
 
 <Image img={require('/img/cowswap/swap_approval_default.png')} alt="GPv2VaultRelayer default approval" />
 
-By default, CoW Swap prompts you to give [Vault relayer contract](/cow-protocol/reference/contracts/core/vault-relayer) an "unlimited" allowance for the sell token.
+By default, CoW Swap prompts you to give the [vault relayer](/cow-protocol/reference/contracts/core/vault-relayer) contract an "unlimited" allowance for the sell token.
 This has the benefits of:
 
 - Not having to re-approve every time you trade
@@ -65,11 +65,11 @@ At this stage, your wallet will prompt you to sign the order. The user interface
 
 <Image img={require('/img/cowswap/swap_signing.png')} alt="Signing Swap" />
 
-Once the order has been signed, it will be submitted to CoW Protocol and ready to be executed! 🎉🎉🎉🎉
+Once the order has been signed, it will be submitted to CoW Protocol where it is now ready to be executed! 🎉
 
 <Image img={require('/img/cowswap/swap_confirmed.png')} alt="Swap confirmed" />
 
-## Follow up on your order
+## Track your order
 Your order will be in the order book and ready to be executed.
 
 * CoW Swap will automatically notify in a pop-up message once your order is executed.
