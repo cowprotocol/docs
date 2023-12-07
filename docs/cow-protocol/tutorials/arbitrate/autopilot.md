@@ -117,7 +117,7 @@ The autopilot selects the winner based on this score once the allotted time expi
 
 Up to this point, the autopilot only knows the score and not the full solution that achieves that score.
 The autopilot then asks the winning solver to reveal its score (through `/reveal`) and then to execute the corresponding settlement transaction (`/settle`).
-The solver is responsible for executing the transaction onchain (through the [driver](driver)).
+The solver is responsible for executing the transaction onchain (through the [driver](driver) if using the reference implementation).
 
 ## Auction data storage
 
