@@ -93,9 +93,9 @@ the reference price is used to normalize the value of the [surplus](/cow-protoco
 The reference token is usually the chain's native token, since it's the token used to pay for the gas needed when executing a transaction. 
 Orders whose price can't be fetched are discarded and won't be included in an auction.
 
-Native token price fetching is handled by a integrated price estimator in the autopilot.
+Native token price fetching is handled by an integrated price estimator in the autopilot.
 The price is fetched from multiple sources and may change based on the current configurations.
-Prices are both queried from a list of selected existing solvers as well as retrieved internally to the autopilot (for example, by querying some external parties like Paraswap and 1inch, but also by reading onchain pool data as Uniswap).
+Prices are both queried from a list of selected existing solvers as well as retrieved internally by the autopilot (for example, by querying some external parties like Paraswap and 1inch, but also by reading onchain pool data as Uniswap).
 
 Orders that can't be settled are filtered out: these are expired orders, those with not enough balance, with missing approvals, or that use tokens that aren't supported by the protocol.
 
