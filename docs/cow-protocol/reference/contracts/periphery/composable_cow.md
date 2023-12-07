@@ -308,6 +308,12 @@ The `Proof.location` is intentionally not made an `enum` to allow for future ext
 | `WAKU` | `3` | `abi.encode(string protobufUri, string[] enrTreeOrMultiaddr, string contentTopic, bytes payload)` |
 | `IPFS` | `5` | `abi.encode(bytes32 ipfsCid)` |
 
+:::caution
+
+Locations above are for the point of defining a standard. The provided watch-tower currently does _not_ support Merkle Tree proofs for orders.
+
+:::
+
 <details closed>
     <summary>JSON schema for proofs</summary>
 
