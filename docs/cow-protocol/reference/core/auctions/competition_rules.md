@@ -3,7 +3,7 @@ id: competition-rules
 sidebar_position: 2
 ---
 
-# Rules of the solver competition
+# Solver competition rules
 
 All solvers participating in the solver competition must abide by certain rules. In this section, we outline all these rules, which are naturally split into three classes: (1) the ones enforced explicitly by the smart contract, (2) the ones enforced by the offchain protocol infrastructure, and (3) the so-called social consensus rules.
 
