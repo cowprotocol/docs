@@ -2,15 +2,24 @@
 sidebar_position: 3
 ---
 
-# Solver auction and rewards
+# Solver rewards
 
-As specified in [CIP-20](https://snapshot.org/#/cow.eth/proposal/0x2d3f9bd1ea72dca84b03e97dda3efc1f4a42a772c54bd2037e8b62e7d09a491f), solver rewards are split into two components: per-auction rewards and consistency rewards.
+The protocol is currently subsidizing the solver competition, by rewarding solvers on a weekly basis (currently, every Tuesday) with rewards paid in COW. Solvers can be rewarded based on their performance as solvers (i.e., when participating in the standard solver competition) as specified by [CIP-20](https://snapshot.org/#/cow.eth/proposal/0x2d3f9bd1ea72dca84b03e97dda3efc1f4a42a772c54bd2037e8b62e7d09a491f), and by participating in the price estimation competition and providing quotes that are needed for the gas estimates and limit price computations of market orders [CIP-27](https://snapshot.org/#/cow.eth/proposal/0x64e061568e86e8d2eec344d4a892e4126172b992cabe59a0b24c51c4c7e6cc33).
 
-The auction's goal is to reward solvers based on how much value they provide to the users. In each auction cycle, solvers compete by proposing a solution to settle the batch, and the winning solver receives a reward that is part in `ETH` and part in `COW` (see below).
+The annual rewards budget as of now is 20M COW, and the intended split between solver competition and price estimation rewards is currently at 80% for the solver competition (16M COW) and 20% for the price estimation competition (4M COW).
 
-CoW Protocol has committed to spending a specified quantity of `COW` tokens to reward solvers; this amount will be updated every six months. The part of the rewards budget in `COW` that is not spent on per-auction rewards is used for consistency rewards. Consistency rewards are distributed weekly to each solver in proportion to the number of valid solutions submitted during the previous week.
+Note: For the interested reader, the main source of truth for the weekly payments to solvers is this [Dune dashboard](https://dune.com/cowprotocol/cow-solver-rewards?StartTime=2023-11-28+00%3A00%3A00&EndTime=2023-12-05+00%3A00%3A00&EndTime_d3bba3=2023-12-05+00%3A00%3A00&EndTime_dd004a=2023-12-05+00%3A00%3A00&StartTime_d3f009=2023-11-28+00%3A00%3A00).
 
-## Specification of per-auction rewards
+## Solver competition rewards (CIP-20)
+
+As specified in [CIP-20](https://snapshot.org/#/cow.eth/proposal/0x2d3f9bd1ea72dca84b03e97dda3efc1f4a42a772c54bd2037e8b62e7d09a491f), solver competition rewards are split into two components: per-auction rewards and consistency rewards.
+
+The auction's goal is to reward solvers based on how much value they provide to the users. In each auction cycle, solvers compete by proposing a solution to settle the batch, and the winning solver receives a reward that is part in `ETH` and part in `COW` (see below). Note that the reward in ETH is not part of the rewards budget, and is meant to cover the costs associated with the gas spent by each solver; importantly, this ETH is obtained by converting the gas fees user orders pay and so have nothing to do with the COW rewards budget.
+
+As already mentioned, CoW Protocol has committed to spending a specified quantity of `COW` tokens to reward solvers. An estimated 16M COW annual budget is currently allocated for the solver competition rewards, which corresponds to an average weekly budget of 307.6k COW. The part of the rewards budget in `COW` that is not spent on per-auction rewards is used for consistency rewards. Consistency rewards are distributed weekly to each solver in proportion to the number of valid solutions submitted during the previous week.
+
+
+### Specification of per-auction rewards
 
 The per-auction rewards are computed using a mechanism akin to a second-price auction. First, each solver commits to a numerical score and a solution (which includes a price vector and a list of trades to execute). The solver with the highest score wins the right to settle their submitted solution on chain. 
 
@@ -50,7 +59,7 @@ To limit currency mismatch, the solver receives $$\min(\textrm{payment}, \textrm
 
 Additionally, the winning solver might incur supplementary costs, such as, for example, negative slippage once a solution is settled on chain. These costs are not an explicit element of the mechanism, but they are relevant in determining the solver's optimal strategy. More precisely, per [CIP-17](https://snapshot.org/#/cow.eth/proposal/0xf9c98a2710dc72c906bbeab9b8fe169c1ed2e9af6a67776cc29b8b4eb44d0fb2), solvers are responsible for managing potential slippage incurred by the settlements they settle. This is a component that affects payouts, but can be treated completely separately, and we do so in [slippage accounting](slippage).
 
-## Solver bidding strategies
+### Solver bidding strategies
 
 Apart from submitting their solutions, solvers must decide on a score to submit as a bid in the auction. In general, this score can be chosen freely by the solver (within the restriction $$0 < \textrm{score} < \textrm{successQuality}$$). The recommended way of submitting a score is via reporting a success probability. The score is then computed as explained below.
 
@@ -81,3 +90,7 @@ p \cdot (\max(-c, \min(c + \textrm{observedCost}, \textrm{successQuality} - \tex
 $$
 
 The above equation always has a solution that is independent of $$\textrm{referenceScore}$$. This solution is, in general, unique (that is, unique except for very specific parameters, in which case the solution is a closed interval).
+
+## Price estimation competition rewards (CIP-27)
+
+As specified in [CIP-27](https://snapshot.org/#/cow.eth/proposal/0x64e061568e86e8d2eec344d4a892e4126172b992cabe59a0b24c51c4c7e6cc33), solvers that participate in the price estimation competition get rewarded as follows. Each market order is associated with a quote that is responsible for determining the gas fee attached to the order as well as the final limit price of the order. The protocol keeps track of the quote associated with each created order and the coresponding solver that provided the quote, and if and when the order getsexecuted, the solver that provided the quote (that can be different compared to the solver that ended up executing the order) gets rewarded with a fixed 9 COW reward.
