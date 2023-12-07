@@ -111,7 +111,7 @@ Still, this doesn't mean that all orders that appear in the auction can be settl
 ## Solver competition
 
 Once an auction is ready, the autopilot sends a `/solve` request to each solver.
-Solvers have a short amount time (seconds) to come up with a [solution](/cow-protocol/reference/core/auctions/the-problem#solution) and return its _score_ to the autopilot, which represents the quality of a solution.
+Solvers have a short amount of time (seconds) to come up with a [solution](/cow-protocol/reference/core/auctions/the-problem#solution) and return its _score_ to the autopilot, which represents the quality of a solution.
 The scoring process is described in detail in the [description of CoW Protocol's optimization problem](/cow-protocol/reference/core/auctions/the-problem).
 The autopilot selects the winner according to the highest score once the allotted time expires or all solvers have returned their batch proposal.
 
