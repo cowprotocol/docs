@@ -7,8 +7,6 @@ sidebar_position: 3
 
  CoW Protocol relies on signed _intent to trade_ messages to process user orders. While this setup is a bit more complicated than simply submitting an order on-chain, there are a number of financial and technical advantages to intents-based trading. 
  
- ![](https://lh7-eu.googleusercontent.com/dN0NIFnyoQhUZJ4wK8DxQIJ65E6SXBJOeWzCgi1uNrrFONHCetSO2UKtadw0QPuWwVBhN3zoclF2pLnCZx_Tmt1apxoBG6R-evWrZcNOvnEyPcFQYynrcPbVnsrPFVlv6jArQ1JySIHaOhMnoiPIXMs)
- 
  From a financial standpoint, intents are composable, whereas transactions are not. If the user has already created the transaction, a solver can only settle it using the exact AMM and pool the user specified, leaving no options to perform trade optimizations. By using intents, solvers can optimize trades to offer even better prices. Optimizations that solvers can perform to an intent include:
 
 * **CoW (Coincidence of Wants):** Direct P2P (peer-to-peer) matching for two users who have expressed a sell and a buy intent of the same (or similar) amounts and token pairs 
