@@ -54,29 +54,6 @@ const config: Config = {
         docs: {
           routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
-          sidebarItemsGenerator: async function sidebarItemsGenerator({
-                    defaultSidebarItemsGenerator,
-                    numberPrefixParser,
-                    item,
-                    version,
-                    docs,
-                    categoriesMetadata,
-                    isCategoryIndex,
-                  }) {
-                    // Get the default side bar
-                    const defaultSidebar = await defaultSidebarItemsGenerator({categoriesMetadata, item, version, docs, isCategoryIndex, numberPrefixParser});
-                    // Use a reduce to transform the defaultSidebar into a new sidebar. Do not include any
-                    // items that have the property "type" set to "doc" with the id containing "README"
-                    const noReadmeSidebar = defaultSidebar.reduce((acc, cur) => {
-                      if (cur.type === 'doc' && cur.id.includes('README')) {
-                        return acc;
-                      }
-                      acc.push(cur);
-                      return acc;
-                    }, []);
-
-                    return noReadmeSidebar;
-                  },
           remarkPlugins: [
             remarkMath,
             [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true, converters: ['yarn', 'pnpm'] }],
@@ -169,25 +146,6 @@ const config: Config = {
             margin: 'auto 12px auto 0',
           },
         },
-        items: [
-          {
-            type: 'docSidebar',
-            sidebarId: 'cowProtocolSidebar',
-            position: 'right',
-            label: 'Protocol',
-          },
-          {
-            type: 'docSidebar',
-            sidebarId: 'governanceSidebar',
-            position: 'right',
-            label: 'DAO Governance',
-          },
-          {
-            href: 'https://github.com/cowprotocol/docs',
-            label: 'GitHub',
-            position: 'right',
-          },
-        ],
       },
       footer: {
         style: 'dark',
