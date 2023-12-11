@@ -19,8 +19,8 @@ Doing so is only possible thanks to ERC20's concept of approvals, which allow ce
 
 Despite this, CoW Protocol provides two ways for users to sell their native tokens:
 
-* **Option 1) Wrap native tokens before swapping**: Wrap the native token into an ERC20 token (eg. `ETH` to `WETH`) and then swap WETH gass free on CoW Protocol; or
-* **Option 2) Use the [Eth-flow](/cow-protocol/reference/contracts/periphery/eth-flow)**:  Place a single transaction in a special contract that wraps + places your order.
+* **Option 1) [Wrap native tokens](#wrap-native-tokens) before swapping**: Wrap the native token into an ERC20 token (eg. `ETH` to `WETH`) and then swap WETH gas-lessly on CoW Protocol; or
+* **Option 2) [Use Eth-flow](#use-eth-flow)**:  Place a single transaction in a special contract that wraps + places your order.
 
 :::tip
 
@@ -30,7 +30,7 @@ If this is a one-off swap, consider using Eth-flow instead.
 
 :::
 
-## Option 1) Wrap native tokens before swapping
+## Option 1) Wrap native tokens before swapping {#wrap-native-tokens}
 
 Wrapping before swapping requires an extra step. However, users who wrap before swapping get the following benefits: 
 1. Lower overall fees (if you need to swap multiple times)
@@ -49,7 +49,7 @@ After wrapping the token, you can simply select the wrapped token as your sell t
 
 
 
-## Option 2) Use Eth-flow
+## Option 2) Use Eth-flow {#use-eth-flow}
 
 In an attempt to smoothen the user experience, CoW Protocol has introduced the [Eth-flow](/cow-protocol/reference/contracts/periphery/eth-flow) contract. This allows users to automate the [above process](#wrap-native-tokens) and wrap + swap in a single **on-chain** transaction. 
 
