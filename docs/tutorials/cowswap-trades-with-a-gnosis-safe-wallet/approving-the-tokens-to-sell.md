@@ -1,3 +1,7 @@
+---
+draft: true
+---
+
 # Approving the tokens to sell
 
 The first step is approving the tokens you want to sell to the **GPv2VaultRelayer**.

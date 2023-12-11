@@ -1,3 +1,7 @@
+---
+draft: true
+---
+
 # The Basics of ERC-1271
 
 While this works for EOAs, which have private keys, it does not work for Smart Contracts, and specifically Smart Contract Wallets. This is because Smart Contracts have no "private keys", to use for elliptic curve cryptography. Meaning, that Smart Contracts really be used for ECDSA signing. In order to work around this, a different signature is needed that does not depend on elliptic curve cryptography.

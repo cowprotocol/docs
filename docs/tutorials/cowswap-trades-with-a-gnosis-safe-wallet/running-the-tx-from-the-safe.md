@@ -1,3 +1,7 @@
+---
+draft: true
+---
+
 # Running the tx from the safe
 
 The last step is running a tx submission to the multisign using the previous method.
