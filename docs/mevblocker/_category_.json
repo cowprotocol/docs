@@ -1,0 +1,13 @@
+{
+    "position": 2,
+    "label": "☀️ MEVBlocker",
+    "collapsible": true,
+    "collapsed": true,
+    "link": {
+        "type": "generated-index",
+        "title": "☀️ MEVBlocker"
+    },
+    "customProps": {
+        "description": "This is the MEVBlocker section."
+    }
+}
