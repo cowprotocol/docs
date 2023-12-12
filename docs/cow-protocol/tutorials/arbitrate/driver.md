@@ -5,7 +5,7 @@ sidebar_position: 2
 # Driver
 
 People interested in running a solver to participate in CoW Protocol mainly want to focus on implementing the most efficient matching engine.
-However, there are also many mundane tasks that are not the real money maker but have to be done regardless.  
+However, there are also many mundane tasks that may not seem like a competitive advantage but have to be done regardless.  
 The driver is a plug-and-play component that you can run to take care of these things for you until it makes sense to actually focus on optimizing them yourself.  
 From the perspective of the protocol a `matching engine` together with its `driver` are considered a `solver`.
 
@@ -34,7 +34,8 @@ sequenceDiagram
     matching engine->>driver: set of solutions
     driver->>driver: post-process solutions
     driver->>autopilot: participate with the best solution
-    autopilot->>driver: request to publish a settlement,<br>in case this solver won
+    autopilot->>driver: request to reveal details about the settlement,<br>in case this solver won
+    autopilot->>driver: request to publish the settlement,<br>in case this solver won
     driver->>driver: publish the settlement
 ```
 
@@ -66,15 +67,21 @@ All of these can be individually configured or completely disabled if your match
 
 The driver expects the matching engine to return a recipe on how to solve a set of orders but the recipe itself could not be submitted on-chain.
 In the post-processing step the driver applies multiple sanity checks to the solution, encodes it into a transaction that could be executed on-chain and verifies that it actually simulates successfully before it considers the solution valid.
-All this is done because solvers can get slashed for misbehaving so the reference driver checks all it can to reduce the risk of running a solver as much as possible.
-If your matching engine returns multiple valid solutions the driver will pick the best one and only report that one to the autopilot to maximize the solver's chance of winning the auction.
+All this is done because solvers can get slashed for misbehaving so the reference driver checks all it can to reduce the risk of running a solver as much as possible.  
+Since the matching engine is allowed to propose multiple solutions the driver also contains some logic to pick the best one.
+First it will try to merge disjoint solutions to create bigger and more gas efficient batches.
+Afterwards it will simulate the solutions to get an accurate gas usage for them which is used to compute a score for each one.
+Finally the driver will propose only the highest scoring solution to the autopilot to maximize the solver's chance of winning the auction.
 
 #### Submitting Settlements
 
 If the solver provided the best solution the autopilot will tell the driver to actually submit it on-chain.
 This is not as straight forward as it sounds when the blockchain is congested and liquidity sources are volatile.
 To protect the solver from losing ETH by submitting solutions that revert the driver continuously verifies that the solution still works while it submits it on-chain.
-As soon as it would revert the driver cancels the transaction to cut the losses to a minimum.
+As soon as it would revert the driver cancels the transaction to cut the losses to a minimum.  
+The driver can be configured to use different submission strategies which it dynamically choses based on the potential of MEV for a settlement.
+If the settlement does not expose any MEV (e.g. it executes all trades without AMMs) it's safe and most efficient to directly submit to the public mempool.
+However, if a settlement exposes MEV the driver would submit to an MEV-protected RPC like `MevBlocker`.
 
 ## Methodology
 
