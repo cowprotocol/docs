@@ -35,8 +35,8 @@ sequenceDiagram
     driver->>driver: post-process solutions
     driver->>autopilot: participate with the best solution
     autopilot->>driver: request to reveal details about the settlement,<br>in case this solver won
-    autopilot->>driver: request to publish the settlement,<br>in case this solver won
-    driver->>driver: publish the settlement
+    autopilot->>driver: request to execute the settlement,<br>in case this solver won
+    driver->>driver: execute the settlement
 ```
 
 Splitting the driver from the matching engine is just a design decision to keep the barrier of entry for new solvers low.
