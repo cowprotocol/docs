@@ -7,11 +7,11 @@ sidebar_position: 2
 
 All solvers participating in the solver competition must abide by certain rules. In this section, we outline all these rules, which are naturally split into three classes: (1) the ones enforced explicitly by the smart contract, (2) the ones enforced by the offchain protocol infrastructure, and (3) the so-called social consensus rules.
 
-## Rules enforced by the smart contract
+## 1. Rules enforced by the smart contract
 
 - Limit price constraint: this rule enforces that an order cannot be executed if its limit price is violated.
 
-## Rules enforced by the offchain protocol infrastructure
+## 2. Rules enforced by the offchain protocol infrastructure
 
 - Uniform clearing prices (UCP): this rule is an integral component of the protocol, and specifies that there is one clearing price per token per batch.
 
@@ -19,12 +19,11 @@ All solvers participating in the solver competition must abide by certain rules.
 
 - Every solution is associated with a score, and the solutions are ranked in decreasing order of their scores. The solver whose solution has the highest positive score is declared the winner of the batch auction, and gets the right to execute its solution onchain. The solver that provided the winning solution is then rewarded according to the rules specified in [CIP-20](https://snapshot.org/#/cow.eth/proposal/0x2d3f9bd1ea72dca84b03e97dda3efc1f4a42a772c54bd2037e8b62e7d09a491f).
 
-- With the exception of fees paid by users and internalized interactions (both will be clarified shortly), any token imbalance within the settlement contract that is the result of a settlement is accounted for under the term "slippage accounting", and is fully owned by the corresponding solver, as specified in [CIP-17](https://snapshot.org/#/cow.eth/proposal/0xf9c98a2710dc72c906bbeab9b8fe169c1ed2e9af6a67776cc29b8b4eb44d0fb2). The only two types of imbalances that are not accounted for are:
+- Internalization of interactions: a solver is allowed to "internalize" publicly available AMM interactions whose buy token (i.e., the token that the AMM buys) is classified as a "safe" token by the protocol. Concretely, if there is enough balance of the sell token of such an interaction in the settlement contract, then a solver can signal an internalization of such an interaction, which effectively means that the protocol is willing to market make with the same rate specified in this interaction. 
 
-  1. gas fees, paid by user orders, that are always collected in the sell token of the order, and
-  2. internalized interactions; these are publicly available AMM interactions whose buy token (i.e., the token that the AMM buys) is classified as a "safe" token by the protocol. In such a case, if there is enough balance of the sell token of such an interaction in the settlement contract, then a solver can signal an internalization of such an interaction, which effectively means that the protocol is willing to market make with the same rate specified in this interaction. 
+- Slippage accounting: With the exception of fees paid by users and internalized interactions (both will be clarified shortly), any token imbalance within the settlement contract that is the result of a settlement is accounted for under the term "slippage accounting", and is fully owned by the corresponding solver, as specified in [CIP-17](https://snapshot.org/#/cow.eth/proposal/0xf9c98a2710dc72c906bbeab9b8fe169c1ed2e9af6a67776cc29b8b4eb44d0fb2); for more information on slippage accounting, see the [relevant](/cow-protocol/reference/core/auctions/slippage) section.
 
-## Social consensus rules
+## 3. Social consensus rules
 
 Social consensus rules are not enforced by the smart contract or the autopilot. However, by voting on them in a CoW improvement proposal (CIP), CoW DAO has decided that these rules should be followed to ensure a healthy competition. For that, the core team has developed monitoring tools that check every single onchain settlement and flag suspicious ones.
 
