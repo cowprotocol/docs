@@ -11,7 +11,7 @@ All solvers participating in the solver competition must abide by certain rules.
 
 - Limit price constraint: this rule enforces that an order cannot be executed if its limit price is violated.
 
-## 2. Rules enforced by the offchain protocol infrastructure
+## Off-chain protocol
 
 - Uniform clearing prices (UCP): this rule is an integral component of the protocol, and specifies that there is one clearing price per token per batch.
 
