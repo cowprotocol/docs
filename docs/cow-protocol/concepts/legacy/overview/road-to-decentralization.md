@@ -1,3 +1,7 @@
+---
+draft: true
+---
+
 # Road to Decentralization
 
 CoW Protocol aims to be a fully decentralized protocol, but the reality is that in order to fully be decentralized, there's still a long road to walk through. Currently, the protocol has certain parts that are more decentralized than others, and if we were to decompartmentalize the protocol into pieces, we would have the following:

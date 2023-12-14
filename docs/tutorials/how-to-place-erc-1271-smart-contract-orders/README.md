@@ -1,3 +1,7 @@
+---
+draft: true
+---
+
 # How to place ERC-1271 (Smart Contract) Orders
 
 The following section is intended as a guide on how to place Smart Contract orders with ERC-1271.&#x20;

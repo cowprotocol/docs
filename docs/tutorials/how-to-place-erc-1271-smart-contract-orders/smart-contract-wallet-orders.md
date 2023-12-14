@@ -1,3 +1,7 @@
+---
+draft: true
+---
+
 # Smart Contract Wallet Orders
 
 The spirit of ERC-1271 support in CoW Protocol was to enable Smart Contract wallets like to be able to trade on CoW Protocol and CoW Swap. Each individual Smart Contract wallet would then be able to implement their own signature validation scheme, for example:

@@ -1,3 +1,7 @@
+---
+draft: true
+---
+
 # Creating the order
 
 Let’s do an intermediate step and create a method to submit the order. The gist of the process is the following:

@@ -1,3 +1,7 @@
+---
+draft: true
+---
+
 # Coincidence of Wants
 
 CoW Protocol, because of its use of Batch Auctions, is optimized for finding Coincidence of Wants (CoWs) amongst the trades within a batch, as well as ring trades. But what exactly are Coincidence of Wants and ring trades?
