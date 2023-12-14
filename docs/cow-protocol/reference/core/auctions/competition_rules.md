@@ -23,7 +23,7 @@ All solvers participating in the solver competition must abide by certain rules.
 
 - Slippage accounting: With the exception of fees paid by users and internalized interactions, any token imbalance within the settlement contract that is the result of a settlement is accounted for under the term "slippage accounting", and is fully owned by the corresponding solver, as specified in [CIP-17](https://snapshot.org/#/cow.eth/proposal/0xf9c98a2710dc72c906bbeab9b8fe169c1ed2e9af6a67776cc29b8b4eb44d0fb2); for more information on slippage accounting, see the [relevant](/cow-protocol/reference/core/auctions/slippage) section.
 
-## 3. Social consensus rules
+## Governance
 
 Social consensus rules are not enforced by the smart contract or the autopilot. However, by voting on them in a CoW improvement proposal (CIP), CoW DAO has decided that these rules should be followed to ensure a healthy competition. For that, the core team has developed monitoring tools that check every single onchain settlement and flag suspicious ones.
 
