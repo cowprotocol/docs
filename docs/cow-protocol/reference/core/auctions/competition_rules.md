@@ -7,7 +7,7 @@ sidebar_position: 2
 
 All solvers participating in the solver competition must abide by certain rules. In this section, we outline all these rules, which are naturally split into three classes: (1) the ones enforced explicitly by the smart contract, (2) the ones enforced by the offchain protocol infrastructure, and (3) the so-called social consensus rules.
 
-## 1. Rules enforced by the smart contract
+## Smart contract
 
 - Limit price constraint: this rule enforces that an order cannot be executed if its limit price is violated.
 
