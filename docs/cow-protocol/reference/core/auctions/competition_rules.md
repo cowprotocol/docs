@@ -25,7 +25,7 @@ All solvers participating in the solver competition must abide by certain rules.
 
 - Internalization of interactions: a solver is allowed to "internalize" publicly available AMM interactions whose buy token (i.e., the token that the AMM buys) is classified as a "safe" token by the protocol. Concretely, if there is enough balance of the sell token of such an interaction in the settlement contract, then a solver can signal an internalization of such an interaction, which effectively means that the protocol is willing to market make with the same rate specified in this interaction. 
 
-- Slippage accounting: With the exception of fees paid by users and internalized interactions, any token imbalance within the settlement contract that is the result of a settlement is accounted for under the term "slippage accounting", and is fully owned by the corresponding solver, as specified in [CIP-17](https://snapshot.org/#/cow.eth/proposal/0xf9c98a2710dc72c906bbeab9b8fe169c1ed2e9af6a67776cc29b8b4eb44d0fb2); for more information on slippage accounting, see the [relevant](/cow-protocol/reference/core/auctions/slippage) section.
+- [Slippage accounting](/cow-protocol/reference/core/auctions/slippage): With the exception of fees paid by users and internalized interactions, any token imbalance within the settlement contract that is the result of a settlement is accounted for under the term "slippage accounting", and is fully owned by the corresponding solver, as specified in [CIP-17](https://snapshot.org/#/cow.eth/proposal/0xf9c98a2710dc72c906bbeab9b8fe169c1ed2e9af6a67776cc29b8b4eb44d0fb2).
 
 ## Governance
 
