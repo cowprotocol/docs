@@ -57,3 +57,83 @@ The allow-list is upgradeable to facilitate future decentralization of the proto
 The security considerations of upgradeability are discussed in the [GPv2AllowlistAuthentication](core/allowlist#guarantees-and-invariants) section.
 
 </details>
+
+## Security / Known Issues
+
+### Partially fillable orders with zero amounts
+
+If a user creates an order with:
+
+* `sellAmount = 0`
+* `buyAmount = 0`
+* `partiallyFillable = true`
+
+Then this order could be executed an arbitrary amount of times instead of just a single time.
+This means that any solver could drain the fee amount from the user until not enough funds are available anymore.
+
+:::tip
+
+Never sign orders with `sellAmount = 0` and/or `buyAmount = 0`.
+If developing smart contracts that create orders, make sure at a contract level that such orders cannot be created.
+
+:::
+
+### ERC-1271 Replayability
+
+The security of [ERC-1271](../core/signing-schemes#erc-1271) signatures depend on the developers' implementation of the _signing smart contract_.
+Different smart contract wallets sign and verify messages very differently from each other.
+
+There's a known issue in some smart-contract wallet implementations that should be known before using ERC-1271 signatures on CoW Protocol.
+
+#### Signature Replayability
+
+On some popular smart-contract wallets, the signature of an owner is replayable: this means that if an address is an owner of two smart-contract wallets then a signature for the first wallet may also be a valid signature for the second wallet.
+
+CoW Protocol only checks if the signature is valid; it doesn't know which wallet the signature was intended for.
+This means that an order signed by a wallet with replayable signatures could be executed by another wallet owned by the same owner.
+
+As a general recommendation, you should never sign any message with ERC-1271 on wallets whose signature are replayable.
+CoW Protocol can't protect your order from this attack at a protocol level.
+
+:::tip
+
+Signatures from a `Safe` wallet aren't replayable and don't require any special handling.
+
+:::
+
+#### Mitigation
+
+You are still able to create ERC-1271 orders from any wallet.
+
+The CoW Protocol API allows you to specify some signed [metadata](../core/intents/app-data) in the order. This metadata can be sent along when creating an order on the CoW Protocol API.
+
+The signer property in the `metadata` is used by the CoW Protocol API to check that the signature is meant for the specified wallet.
+If this doesn't match the order origin, the order is rejected.
+A minimal example of app data is the following:
+
+```json
+{ "metadata": { "signer": "0x291cf356e5639fb4c19ba5bfb4e2f8f82b371573" } }
+```
+
+where `0x29..73` is the address of the smart-contract wallet that uses ERC-1271 to sign the order.
+
+However, the CoW Protocol API must know the *full* metadata in advance for rejecting unknown orders, and by default you don't need to reveal the entire metadata when you submit the order, only its hash (the app data).
+Once your order is created, the metadata will be permanently stored in the database and linked to the app data; no one will be able to post a replayed order on the CoW Protocol API for a different wallet.
+
+If your signature is valid before your order is submitted and you want to make sure that the no one uses it before your order is submitted on the API, you can send the metadata to the API in advance.
+Then, any incoming order with the same app data hash will be rejected if the smart contract wallet doesn't match.
+
+The metadata can be sent in advance to the [API](/cow-protocol/reference/apis/orderbook) using the `PUT` method `/app_data/{app_data_hash}`.
+
+:::caution
+
+This process only prevents the order from being created in the CoW Protocol API.
+A malicious solver would still be able to replay a signature when submitting a transaction on-chain.
+However, as long as the metadata is known, this abuse will be detected upon inclusion of the transaction in a block and the solver will be penalized by the amount of the misused order.
+
+:::
+
+### EIP-712 cached domain separator
+
+To maximise gas efficiency the [domain separator](https://eips.ethereum.org/EIPS/eip-712#definition-of-domainseparator) for the `GPv2Settlement` contract is initialized in the constructor and cached for all subsequent invocations.
+Therefore, any signatures for a chain on which the `GPv2Settlement` contract has been deployed are replayable _on any subsequent fork of that chain_ (such as ETHPOW forking Ethereum mainnet).
