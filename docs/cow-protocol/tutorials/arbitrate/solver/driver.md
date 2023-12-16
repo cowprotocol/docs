@@ -1,12 +1,12 @@
 ---
-sidebar_position: 3
+sidebar_position: 1
 ---
 
 # Driver
 
 People interested in running a solver to participate in CoW Protocol mainly want to focus on implementing the most efficient matching engine.
 However, there are also many mundane tasks that may not seem like a competitive advantage but have to be done regardless.  
-The driver is a plug-and-play component that you can run to take care of these things for you until it makes sense to actually focus on optimizing them yourself.  
+The driver is a plug-and-play component that teams can run to take care of these things until it makes sense for them to actually focus on optimizing them.  
 From the perspective of the protocol a `matching engine` together with its `driver` are considered a `solver`.
 
 ## Overview
@@ -66,7 +66,7 @@ All of these can be individually configured or completely disabled if your match
 #### Postprocessing Solutions
 
 The driver expects the matching engine to return a recipe on how to solve a set of orders but the recipe itself could not be submitted on-chain.
-In the post-processing step the driver applies multiple sanity checks to the solution, encodes it into a transaction that could be executed on-chain and verifies that it actually simulates successfully before it considers the solution valid.
+In the post-processing step the driver applies multiple sanity checks to the solution, encodes it into a transaction that can be executed on-chain and verifies that it actually simulates successfully before it considers the solution valid.
 All this is done because solvers can get slashed for misbehaving so the reference driver checks all it can to reduce the risk of running a solver as much as possible.  
 Since the matching engine is allowed to propose multiple solutions the driver also contains some logic to pick the best one.
 First it will try to merge disjoint solutions to create bigger and more gas efficient batches.
@@ -81,7 +81,7 @@ To protect the solver from losing ETH by submitting solutions that revert the dr
 As soon as it would revert the driver cancels the transaction to cut the losses to a minimum.  
 The driver can be configured to use different submission strategies which it dynamically choses based on the potential of MEV for a settlement.
 If the settlement does not expose any MEV (e.g. it executes all trades without AMMs) it's safe and most efficient to directly submit to the public mempool.
-However, if a settlement exposes MEV the driver would submit to an MEV-protected RPC like `MevBlocker`.
+However, if a settlement exposes MEV the driver would submit to an MEV-protected RPC like [`MEVBlocker`](mevblocker).
 
 ## Methodology
 
@@ -94,8 +94,8 @@ To reconcile these aspects many internal components listen for new blocks gettin
 Whenever that happens the driver fetches all the relevant information and caches it.
 When the next auction comes in and the driver actually needs that data it's already up-to-date and ready to be used.
 
-
 ## Dependencies
 
 The driver only responds to incoming requests sent by the autopilot.
-You can easily set this up locally yourself but for a driver to participate in the competition in CoW Protocol the accompanying solver has to be bonded and registered in the official CoW Protocol off-chain infrastructure.
+You can easily set this up locally yourself but for a driver to participate in the competition in CoW Protocol the accompanying solver has to be bonded and registered in the CoW Protocol off-chain infrastructure.
+For this, please reach out via the [CoW Discord](https://discord.gg/cowprotocol).

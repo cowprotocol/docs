@@ -89,7 +89,7 @@ Other information can only be retrieved onchain and is updated every time a new 
 
 Retrieved information isn't limited to the CoW Protocol itself.
 The autopilot needs to provide a reference price for each token in an order (a numéraire);
-the reference price is used to normalize the value of the [surplus](/cow-protocol/reference/core/auctions/the-problem), since the surplus must be comparable for all orders and an order could use the most disparate ERC-20 tokens.
+the reference price is used to normalize the value of the [surplus](/cow-protocol/reference/core/auctions/the-problem), since the surplus must be comparable for all orders and two orders could use the most disparate ERC-20 tokens.
 The reference token is usually the chain's native token, since it's the token used to pay for the gas needed when executing a transaction. 
 Orders whose price can't be fetched are discarded and won't be included in an auction.
 
@@ -99,14 +99,14 @@ Prices are both queried from a list of selected existing solvers as well as retr
 
 Orders that can't be settled are filtered out. This is the case if, for example:
 * an order is expired
-* the user's balance isn't enough to settle the order
+* for fill-or-kill orders the user's balance isn't enough to settle the order
 * the approval to the vault relayer is missing
 * the involved tokens aren't supported by the protocol
 
 The autopilot also checks that [ERC-1271](/cow-protocol/reference/core/signing-schemes#erc-1271) signatures are currently valid.
 
 More in general, the autopilot aims to remove from the auction all orders that have no chance to be settled.
-Still, this doesn't mean that all orders that appear in the auction can be settled: orders whose ability to be settled is ambigous or unclear are remitted to the solvers' own judgment.
+Still, this doesn't mean that all orders that appear in the auction can be settled: orders whose ability to be settled is ambiguous or unclear are remitted to the solvers' own judgment.
 
 ## Solver competition
 
@@ -126,9 +126,10 @@ Other auction data is recorded as well, for example surplus fee for limit orders
 It also records the result of executing the settlement onchain in order to track the difference in score caused by negative or positive slippage.
 
 This data will be used to compute the [solver payouts](/cow-protocol/reference/core/auctions/rewards).
+
 ## Complexities
 
-A typical challenge in the autopilot is handling block reorgs.
+A typical challenge in the autopilot is handling block (reorgs)[https://www.alchemy.com/overviews/what-is-a-reorg].
 The autopilot must be able to revert as many actions as possible in case of a reorg; everything that can't be reverted must be accounted for in the stored data.
 
 In practice this means that some information (e.g., competition data by transaction hash) is only available after a "reorg safe" threshold of blocks have been proposed.
