@@ -25,4 +25,4 @@ As the requirements for a bonding pool are substantial, the DAO has also set up 
 
 :::
 
-Once a solver becomes part of a bonding pool, then the core team will proceed to whitelist the solver and connect it to the live competition.
+Once a solver becomes part of a bonding pool, then the core team will proceed to allow-list the solver and connect it to the live competition.
