@@ -45,7 +45,7 @@ At CoW DAO's discretion, systematic violation of these rules may lead to penaliz
   - 0xc00e94Cb662C3520282E6f5717214004A7f26888
   - 0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2
   - 0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599
-  - 0x6810e776880C02933D47DB1b9fc05908e5386b96
+  - 0x6810e776880C02933D47DB1b9fc05908e5386b96.
 
 For Gnosis Chain, the base tokens are:
   - 0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d
@@ -65,6 +65,6 @@ For Gnosis Chain, the base tokens are:
 
 - Local Token Conservation, aka illegal surplus shifts ([CIP-11](https://snapshot.org/#/cow.eth/proposal/0x16d8c681d52b24f1ccd854084e07a99fce6a7af1e25fd21ddae6534b411df870)). Due to the nature of batching, a solver can intentionally transfer surplus among orders that share a common token. This is not allowed, and non-trivial surplus shifts can be penalized and can lead to solver slashing.
 
-- Pennying/overbidding ([CIP-13](https://snapshot.org/#/cow.eth/proposal/0x812273c78abe1cea303d8381e1fb901a4cb701715fd24f4b769d0a0b3779b3e2)) (rules applies only on Ethereum Mainnet). Pennying or the evolution of it in the context of CIP-20 known as overbidding, is the intentional inflation of the surplus, or the reported score, by a solver, with the hope that their solution will win and that solver rewards, and/or the possibility of positive slippage, will cover the loss that they seem to be committing to. Such behavior does not benefit anyone and thus, systematically doing so can lead to solver slashing.
+- Pennying/overbidding ([CIP-13](https://snapshot.org/#/cow.eth/proposal/0x812273c78abe1cea303d8381e1fb901a4cb701715fd24f4b769d0a0b3779b3e2)) (rule applies only on Ethereum Mainnet). Pennying or the evolution of it in the context of CIP-20 known as overbidding, is the intentional inflation of the surplus, or the reported score, by a solver, with the hope that their solution will win and that solver rewards, and/or the possibility of positive slippage, will cover the loss that they seem to be committing to. Such behavior does not benefit anyone and thus, systematically doing so can lead to solver slashing.
 
 - Other malicious behavior ([CIP-11](https://snapshot.org/#/cow.eth/proposal/0x16d8c681d52b24f1ccd854084e07a99fce6a7af1e25fd21ddae6534b411df870)). Malicious solver behavior is not limited to the above examples. Slashing can still happen for other reasons where there is intentional harm caused to the user and/or the protocol at the discretion of the CoW DAO. A concrete example of such is a solver intentionally not including the [pre/post hooks](/cow-protocol/reference/core/intents/hooks) associated with an order.
