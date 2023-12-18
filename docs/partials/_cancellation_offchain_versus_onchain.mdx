@@ -5,9 +5,7 @@ Cancelling orders off-chain is free and does *not* require a transaction. Howeve
 
 :::note
 
-Cancelling an order off-chain removes your order from the off-chain orderbook.
-The order will no longer be broadcast to solvers starting with the next auction.
-However, it is possible that it was already included in the current auction and thus executed by a solver before the next auction starts.
+Cancellations are not immediate, and your order may settle before the cancellation goes through.
 
 :::
 
@@ -18,7 +16,7 @@ To proceed with an off-chain cancellation, click "Request cancellation" as shown
 </>
 
 If you do not want to place trust in the API to cancel your order, you may wish to cancel your order via an on-chain cancellation transaction. 
-This will cost gas. 
+This will cost gas.
 To do so, toggle the type of cancellation to "on-chain" by clicking on "off-chain".
 
 :::note
