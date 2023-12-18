@@ -2,7 +2,7 @@
 sidebar_position: 5
 ---
 
-# From the shadow competition to production: main steps
+# Integrating your solver
 
 - When a solver team has a solver prototype ready for testing, we encourage them to get in touch with the core team so that they can test their solver in the so-called shadow competition. The shadow competition is a risk-free environment that receives production orderflow but only does simulations, and is a good first step for solvers to test their matching engines against the competition.
 
