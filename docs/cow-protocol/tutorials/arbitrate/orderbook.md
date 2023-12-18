@@ -60,6 +60,7 @@ sequenceDiagram
     Database-->>Orderbook: order & trades
     Orderbook-->>User: trades
     deactivate Orderbook
+```
 
 After selecting the parameters of their trade, most Traders want to see an estimate of how much tokens they will receive in order to pick a reasonable limit price.
 For that they send a `/quote` request to the orderbook. 
