@@ -47,17 +47,17 @@ At CoW DAO's discretion, systematic violation of these rules may lead to penaliz
   - 0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599
   - 0x6810e776880C02933D47DB1b9fc05908e5386b96.
 
-For Gnosis Chain, the base tokens are:
-  - 0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d
-  - 0x71850b7e9ee3f13ab46d67167341e4bdc905eef9
-  - 0x4ECaBa5870353805a9F068101A40E0f32ed605C6
-  - 0xDDAfbb505ad214D7b80b1f830fcCc89B60fb7A83
-  - 0xB1950Fb2C9C0CbC8553578c67dB52Aa110A93393
-  - 0x8e5bbbb09ed1ebde8674cda39a0c169401db4252
-  - 0x9C58BAcC331c9aa871AFD802DB6379a98e80CEdb
-  - 0xb7D311E2Eb55F2f68a9440da38e7989210b9A05e
-  - 0x0905Ab807F8FD040255F0cF8fa14756c1D824931
-  - 0x6A023CCd1ff6F2045C3309768eAd9E68F978f6e1.
+  For Gnosis Chain, the base tokens are:
+    - 0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d
+    - 0x71850b7e9ee3f13ab46d67167341e4bdc905eef9
+    - 0x4ECaBa5870353805a9F068101A40E0f32ed605C6
+    - 0xDDAfbb505ad214D7b80b1f830fcCc89B60fb7A83
+    - 0xB1950Fb2C9C0CbC8553578c67dB52Aa110A93393
+    - 0x8e5bbbb09ed1ebde8674cda39a0c169401db4252
+    - 0x9C58BAcC331c9aa871AFD802DB6379a98e80CEdb
+    - 0xb7D311E2Eb55F2f68a9440da38e7989210b9A05e
+    - 0x0905Ab807F8FD040255F0cF8fa14756c1D824931
+    - 0x6A023CCd1ff6F2045C3309768eAd9E68F978f6e1.
 
 - Inflation of the objective function ([CIP-11](https://snapshot.org/#/cow.eth/proposal/0x16d8c681d52b24f1ccd854084e07a99fce6a7af1e25fd21ddae6534b411df870)). Using tokens for the sole purpose of inflating the objective value or maximizing the reward is forbidden (e.g., by creating fake tokens, or wash-trading with real tokens).
 
