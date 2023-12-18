@@ -21,8 +21,8 @@ sequenceDiagram
     actor User
     participant Orderbook
     participant Solver1
-    activate Orderbook
     User->>Orderbook: POST /quote
+    activate Orderbook
     Orderbook->>SolverN: quote?
     activate SolverN
     Orderbook->>Solver1: quote?
@@ -113,7 +113,7 @@ For this either the trader provided quote id is looked up or a fresh quote is cr
 
 The orderbook synchronizes state with the autopilot via a shared database.
 It communicates with solvers to produce price estimates.
-It uses IPFS to update and fetch [appData](../integrations/order-meta-data-appdata) documents.
+It uses IPFS to update and fetch [appData](../integrations/scripts/order-meta-data-appdata/create-a-meta-data-document) documents.
 It also depends on on-chain state for things like:
 - checking the Trader has sufficient balance/approval to place the order
 - simulate smart contract signatures and hooks
