@@ -2,9 +2,9 @@
 sidebar_position: 4
 ---
 
-# Slippage accounting
+# Slippage accounting (Ethereum Mainnet)
 
-Slippage accounting is performed on a per settlement/transaction basis according to the following two primary components. The SQL source code can be found on [GitHub](https://github.com/cowprotocol/solver-rewards/blob/main/queries/dune_v2/period_slippage.sql) or [Dune Analytics](https://dune.com/queries/3093726)
+Slippage accounting, currently only enabled on Ethereum Mainnet, is performed on a per settlement/transaction basis according to the following two primary components. The SQL source code can be found on [GitHub](https://github.com/cowprotocol/solver-rewards/blob/main/queries/dune_v2/period_slippage.sql) or [Dune Analytics](https://dune.com/queries/3093726)
 
 ## Batch-wise token imbalance
 
