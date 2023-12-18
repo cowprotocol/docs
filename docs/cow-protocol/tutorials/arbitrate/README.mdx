@@ -4,7 +4,7 @@ This section gives a high level overview of the different components that are in
 
 ## Architecture
 
-Four main sub-systems are required to facilitate and drive the auction.
+Three main sub-systems are required to facilitate and drive the auction.
 
 ### The Orderbook
 
@@ -27,9 +27,8 @@ For the sake of this documentation, we differentiate solvers into two sub-parts:
 #### The Driver
 
 This is the executive part of the solving process, responsible for interacting with the blockchain in order to enrich, encode and eventually execute the settlement.
-It prepares all the data needed for the engine to match order in the auction and forwards the augmented auction to the engine.
+It prepares all the data needed for the engine to match orders in the auction and forwards the augmented auction to the engine.
 In turn it receives raw solutions from the solver engine, which it post-processes, simulates, merges, encodes into a blockchain transaction and finally scores.
-Postprocessing includes encoding, simulating, merging and ranking solutions.
 The driver interfaces with the autopilot and reports the best solution's score to participate in the competition.
 If chosen as a winner of the auction, the driver is also responsible for getting the solution included in the blockchain.
 
