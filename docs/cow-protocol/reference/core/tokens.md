@@ -42,5 +42,6 @@ Have you created a new `ERC-20` and want to make it seemlessly tradeable on CoW 
 :::caution
 
 Submitting a token to the token list does **not** guarantee that it will be added to the CoW Swap token list.
+Even if it's added, doesn't mean an endorsement by the team or CoW DAO.
 
 :::
