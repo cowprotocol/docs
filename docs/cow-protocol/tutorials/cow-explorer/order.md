@@ -47,7 +47,7 @@ A more complex example may be a user who has placed a _partially fillable_ order
 
 ![Partially fillable order overview](/img/explorer/order_partial_overview.png)
 
-By clicking the 'View fills' button, the user can see the fills that have been executed for this order. Fills for the above example are show below:
+By clicking the 'View fills' button, the user can see the fills that have been executed for this order. Fills for the above example are shown below:
 
 ![Partially fillable order fills](/img/explorer/order_partial_fills.png)
 
@@ -67,4 +67,4 @@ As CoW Explorer is meant to help users visualize their signed orders, a critical
 - **Expired:** State for orders that have not been executed. Orders in this state have not been executed during the defined expiration time.
 - **Cancelled:** State for orders that have been cancelled. Orders in this state have been cancelled as per user request.
 - **Partially-filled:** State for orders that have been partially executed. Parts of the order have been executed and the corresponding funds transferred to the target account.
-- **Pre-signing:** State for orders that are to be pre-signed. Commonly used for orders submitted through the [CoW Swap](../cow-swap) `Safe` interface.
+- **Pre-signing:** State for orders that are to be pre-signed. Commonly used for orders submitted from a Smart Contract wallet, such as the [Safe](https://safe.global/) wallet.

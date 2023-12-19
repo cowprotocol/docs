@@ -12,7 +12,7 @@ https://explorer.cow.fi/gc/address/0x2557ed03e34f0141722a643589f007836a683af7) t
 
 ![User address overview](/img/explorer/address_overview.png)
 
-By default, the explorer will show all orders that have been placed by the user, regardless of their status, in reverse chronological order. The user can filter the results by status, and sort the results by any of the columns.
+By default, the explorer will show all orders that have been placed by the user, regardless of their status, in reverse chronological order.
 
 <details close>
     <summary>Understanding orders listing details</summary>
