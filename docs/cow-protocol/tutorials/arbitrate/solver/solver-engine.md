@@ -91,7 +91,7 @@ In the case of a perfect CoW, when excess demand and supply are zero, the curren
 
 The naive solver is currently not capable of matching partially fillable orders.
 
-## Dependencies / interactions
+## Dependencies
 
 Solver engines need to be "registered" inside the driver configuration file to receive requests.
 Check `driver::infra::config::file::SolverConfig` for the available configuration parameters.
