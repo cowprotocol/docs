@@ -4,7 +4,11 @@ sidebar_position: 2
 
 # Autopilot
 
+## Overview
+
 The autopilot is the engine that drives forward CoW Protocol.
+
+## Architecture
 
 Running at a regular interval, it keeps an up-to-date view on the state of the protocol, synthesizes this data into an _auction_, broadcasts this auction to each of the solvers, and finally chooses which solution will be executed.
 
@@ -13,13 +17,13 @@ There is a single autopilot running for each chain[^barn].
 
 Its role can be broadly summarized into these main purposes.
 
-1. Cutting auctions
+1. [Cutting auctions](#cutting-auctions)
    - Data availability consensus around which orders are valid for a given batch
    - The initial exchange rates for each traded tokens which are used to normalize surplus across different orders
-2. Solver competition
+2. [Solver competition](#solver-competition)
    - Data availability consensus around the available solution candidates and their score
    - Notifying the winning solver to submit their solution
-3. Auction data storage
+3. [Auction data storage](#auction-data-storage)
 
 ```mermaid
 sequenceDiagram
@@ -72,7 +76,9 @@ sequenceDiagram
 
 [^barn]: There is technically also a second autopilot running on each network for testing purposes (in the _barn_ environment), but this isn't necessary for running the protocol.
 
-## Cutting auctions
+## Methodology
+
+### Cutting auctions
 
 The autopilot builds an [auction](/cow-protocol/reference/core/auctions/schema) that includes all tradable orders.
 To handle this, it needs to maintain a complete overview of the protocol.
@@ -89,7 +95,7 @@ Other information can only be retrieved onchain and is updated every time a new 
 
 Retrieved information isn't limited to the CoW Protocol itself.
 The autopilot needs to provide a reference price for each token in an order (a numéraire);
-the reference price is used to normalize the value of the [surplus](/cow-protocol/reference/core/auctions/the-problem), since the surplus must be comparable for all orders and an order could use the most disparate ERC-20 tokens.
+the reference price is used to normalize the value of the [surplus](/cow-protocol/reference/core/auctions/the-problem), since the surplus must be comparable for all orders and two orders could use the most disparate ERC-20 tokens.
 The reference token is usually the chain's native token, since it's the token used to pay for the gas needed when executing a transaction. 
 Orders whose price can't be fetched are discarded and won't be included in an auction.
 
@@ -99,16 +105,16 @@ Prices are both queried from a list of selected existing solvers as well as retr
 
 Orders that can't be settled are filtered out. This is the case if, for example:
 * an order is expired
-* the user's balance isn't enough to settle the order
+* for fill-or-kill orders the user's balance isn't enough to settle the order
 * the approval to the vault relayer is missing
 * the involved tokens aren't supported by the protocol
 
 The autopilot also checks that [ERC-1271](/cow-protocol/reference/core/signing-schemes#erc-1271) signatures are currently valid.
 
 More in general, the autopilot aims to remove from the auction all orders that have no chance to be settled.
-Still, this doesn't mean that all orders that appear in the auction can be settled: orders whose ability to be settled is ambigous or unclear are remitted to the solvers' own judgment.
+Still, this doesn't mean that all orders that appear in the auction can be settled: orders whose ability to be settled is ambiguous or unclear are remitted to the solvers' own judgment.
 
-## Solver competition
+### Solver competition
 
 Once an auction is ready, the autopilot sends a `/solve` request to each solver.
 Solvers have a short amount of time (seconds) to come up with a [solution](/cow-protocol/reference/core/auctions/the-problem#solution) and return its _score_ to the autopilot, which represents the quality of a solution.
@@ -117,28 +123,31 @@ The autopilot selects the winner according to the highest score once the allotte
 
 Up to this point, the autopilot only knows the score and not the full solution that achieves that score.
 The autopilot then asks the winning solver to reveal its score (through `/reveal`) and then to execute the corresponding settlement transaction (`/settle`).
-The solver is responsible for executing the transaction onchain (through the [driver](driver) if using the reference implementation).
+The solver is responsible for executing the transaction onchain (through the [driver](./solver/driver) if using the reference implementation).
 
-## Auction data storage
+### Auction data storage
 
 The data returned by the solver is stored by the autopilot in the database.
 Other auction data is recorded as well, for example surplus fee for limit orders and the score returned by each solver.
 It also records the result of executing the settlement onchain in order to track the difference in score caused by negative or positive slippage.
 
 This data will be used to compute the [solver payouts](/cow-protocol/reference/core/auctions/rewards).
-## Complexities
 
-A typical challenge in the autopilot is handling block reorgs.
+## Considerations
+
+### Complexities
+
+A typical challenge in the autopilot is handling block [reorgs](https://www.alchemy.com/overviews/what-is-a-reorg).
 The autopilot must be able to revert as many actions as possible in case of a reorg; everything that can't be reverted must be accounted for in the stored data.
 
 In practice this means that some information (e.g., competition data by transaction hash) is only available after a "reorg safe" threshold of blocks have been proposed.
 
-## What the autopilot doesn't do
+### What the autopilot doesn't do
 
 The autopilot doesn't verify that a solver's transaction is valid, nor that it matches the score provided by the solver.
 For this purpose, it's only responsible for documenting the proposed solution and the effects of a settlement to the onchain state.
 Misbehavior is detected and accounted for when computing the solver payouts based on the data collected by the autopilot.
 The solver payouts are handled outside of the autopilot code.
 
-In the same way, the autopilot doesn't verify that the [rules of the game](/cow-protocol/reference/core/auctions/social-consensus) have been upheld.
+In the same way, the autopilot doesn't verify that the [rules of the game](/cow-protocol/reference/core/auctions/competition-rules) have been upheld.
 This is handled in the solver payout stage as well; in exceptional circumstances the DAO can decide to slash the amount the solver staked for vouching.
