@@ -4,7 +4,37 @@ This section gives a high level overview of the different components that are in
 
 ## Architecture
 
-Three main sub-systems are required to facilitate and drive the auction.
+Three main sub-systems are required to facilitate and drive the auction
+
+```mermaid
+sequenceDiagram
+    actor User
+    participant OrderBook
+    participant Autopilot
+    participant Solver
+
+    User->>OrderBook: POST /order
+    Autopilot->>OrderBook: Request solvable orders
+    activate Autopilot
+    activate Orderbook
+    orderbook-->>Autopilot: Response solvable orders
+    deactivate OrderBook
+    Note over Autopilot: Create auction
+    Autopilot->>Solver: /solve
+    activate Solver
+    Solver-->>Autopilot: Score
+    deactivate Solver
+    Autopilot->>Solver: /reveal
+    activate Solver
+    Solver-->>Autopilot: Solution with call data
+    deactivate Solver
+    Autopilot->>Solver: /settle
+    activate Solver
+    Note over Solver: Settles transaction onchain
+    Solver-->>Autopilot: Transaction hash
+    deactivate Solver
+    deactivate Autopilot
+```
 
 ### OrderBook
 
@@ -49,91 +79,7 @@ If chosen as a winner of the auction, the driver is also responsible for getting
 [Solver Engines](./arbitrate/solver/solver-engine) implement the pure matching logic, by employing different types of solving algorithms to optimally match traders with one another taking on-chain as well as private liquidity into account.
 They receive the pre-processed auction instance from the driver sub-component and return the solution together with instructions on how to achieve the fulfillment on-chain.
 
-## Interactions
-
-The main flow of arbitrating an auction end-to-end can be seen in the following sequence diagram:
-
-```mermaid
-sequenceDiagram
-    actor User
-    participant orderbook
-    participant autopilot
-    participant solver
-
-    User->>orderbook: POST /order
-    autopilot->>orderbook: Request solvable orders
-    activate autopilot
-    activate orderbook
-    orderbook-->>autopilot: Response solvable orders
-    deactivate orderbook
-    Note over autopilot: Create auction
-    autopilot->>solver: /solve
-    activate solver
-    solver-->>autopilot: Score
-    deactivate solver
-    autopilot->>solver: /reveal
-    activate solver
-    solver-->>autopilot: Solution with call data
-    deactivate solver
-    autopilot->>solver: /settle
-    activate solver
-    Note over solver: Settles transaction onchain
-    solver-->>autopilot: Transaction hash
-    deactivate solver
-    deactivate autopilot
-    Note over autopilot: End
-```
-
-The following sequence diagram shows the interaction between the autopilot and the solvers in more detail:
-
-```mermaid
-sequenceDiagram
-    participant autopilot
-    box 
-    participant driver0 
-    participant solver0
-    end
-    box
-    participant driver1
-    participant solver1
-    participant solver2
-    end
-    activate autopilot
-    Note over autopilot: Create auction
-    par driver0
-        autopilot->>driver0: /solve
-        activate driver0
-    and driver1
-        autopilot->>driver1: /solve
-        activate driver1
-    end
-    driver0->>solver0: /solve
-    activate solver0
-    driver1->>solver1: /solve
-    activate solver1
-    driver1->>solver2: /solve
-    activate solver2
-    solver0-->>driver0: Proposed solution
-    deactivate solver0
-    Note over driver0: Encode, simulate and score solution
-    driver0 ->>autopilot: Scored solution
-    deactivate driver0
-    solver1-->>driver1: Proposed solution
-    deactivate solver1
-    solver2-->>driver1: Proposed solution
-    deactivate solver2
-    Note over driver1: Encode, simulate and score solutions
-    driver1 ->>autopilot: Scored solution
-    deactivate driver1
-    Note over autopilot: Pick winner
-    autopilot->>+driver0: Request execution
-    Note over driver0: Settles transaction onchain
-    driver0->>autopilot: Transaction hash
-    deactivate driver0
-    Note over autopilot: End
-```
-
-## Run locally end to end
+## Arbitrating auctions locally
 
 In this tutorial we will run all the components locally on Ethereum mainnet, including the orderbook, autopilot, driver and solver engine. All these components have their own configuration parameters. For the sake of simplicity, we will use the bare minimum configuration for all of them.
 
