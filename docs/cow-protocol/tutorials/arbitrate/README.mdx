@@ -60,16 +60,16 @@ sequenceDiagram
     participant autopilot
     participant solver
 
-    User->>orderbook: /post_order
+    User->>orderbook: POST /order
     autopilot->>orderbook: Request solvable orders
     activate autopilot
     activate orderbook
-    orderbook->>autopilot: Response solvable orders
+    orderbook-->>autopilot: Response solvable orders
     deactivate orderbook
     Note over autopilot: Create auction
     autopilot->>solver: /solve
     activate solver
-    solver-->>autopilot: Solution
+    solver-->>autopilot: Score
     deactivate solver
     autopilot->>solver: /reveal
     activate solver
