@@ -55,6 +55,39 @@ The main flow of arbitrating an auction end-to-end can be seen in the following 
 
 ```mermaid
 sequenceDiagram
+    actor User
+    participant orderbook
+    participant autopilot
+    participant solver
+
+    User->>orderbook: /post_order
+    autopilot->>orderbook: Request solvable orders
+    activate autopilot
+    activate orderbook
+    orderbook->>autopilot: Response solvable orders
+    deactivate orderbook
+    Note over autopilot: Create auction
+    autopilot->>solver: /solve
+    activate solver
+    solver-->>autopilot: Solution
+    deactivate solver
+    autopilot->>solver: /reveal
+    activate solver
+    solver-->>autopilot: Solution with call data
+    deactivate solver
+    autopilot->>solver: /settle
+    activate solver
+    Note over solver: Settles transaction onchain
+    solver-->>autopilot: Transaction hash
+    deactivate solver
+    deactivate autopilot
+    Note over autopilot: End
+```
+
+The following sequence diagram shows the interaction between the autopilot and the solvers in more detail:
+
+```mermaid
+sequenceDiagram
     participant autopilot
     box 
     participant driver0 
