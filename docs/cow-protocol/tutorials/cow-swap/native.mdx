@@ -2,6 +2,7 @@
 sidebar_position: 4
 ---
 
+import Image from '@theme/IdealImage';
 import EthFlowTip from '../../../partials/_eth_flow.mdx'
 
 # Native tokens
@@ -89,12 +90,23 @@ The refund can be triggered by any account and should happen automatically if yo
 
 :::note
 
-The [Eth-flow](/cow-protocol/reference/contracts/periphery/eth-flow) option is NOT available for Smart Contract wallets **in CoW Swap**.
+The [Eth-flow](/cow-protocol/reference/contracts/periphery/eth-flow) option is ONLY available for [Swaps](/cow-protocol/tutorials/cow-swap/swap).
 
 :::
 
 :::note
 
-The [Eth-flow](/cow-protocol/reference/contracts/periphery/eth-flow) option is ONLY available for [Swaps](/cow-protocol/tutorials/cow-swap/swap).
+The [Eth-flow](/cow-protocol/reference/contracts/periphery/eth-flow) option is NOT available for Smart Contract wallets **in CoW Swap**.
+
+:::
+
+
+:::tip
+
+While the CoW Swap UI doesn't support the [Eth-flow](/cow-protocol/reference/contracts/periphery/eth-flow) contract, it's possible to bundle the **wrap**, **approval** (if needed) and **order placement** via the special integration with the [Safe](https://app.safe.global) when using [CoW Swap's Safe app](https://app.safe.global/share/safe-app?appUrl=https%3A%2F%2Fswap.cow.fi&chain=eth).
+
+<Image img={require('/img/cowswap/native_safe-bundle_1.png')} alt="Wrap and order placement bundle with Safe CoW Swap app. View of CoW Swap SWAP form." />
+
+<Image img={require('/img/cowswap/native_safe-bundle_2.png')} alt="Wrap, approval and order placement bundle with Safe CoW Swap app. View of Safe's Confirm transaction screen." />
 
 :::
