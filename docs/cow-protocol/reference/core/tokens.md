@@ -36,5 +36,11 @@ In any case, if a token is on the bad token list, it will result in an `Unsuppor
 Have you created a new `ERC-20` and want to make it seemlessly tradeable on CoW Protocol?
 
 - Bootstrap a Uni v2 (or some other well-known AMM) pool with the token (and it's minimum viable liquidity)
-- Potentially reach out to solvers (contact us via Discord) to have any optimal execution paths added to their solvers (such as a path through the newly created pool)
-- Fill out the [Add Token](https://github.com/cowprotocol/token-lists/issues/new?assignees=&labels=addToken&projects=&template=addTokenForm.yml&title=%5BAddToken%5D+%60SYMBOL%60+on+%60NETWORK%60) form if you want to have the token added to CoW Swap's token list
+- Reach out to solvers to let them know about the best liquidity source and how they can integrate it
+- Fill out the [Add Token](https://github.com/cowprotocol/token-lists/issues/new?assignees=&labels=addToken&projects=&template=addTokenForm.yml&title=%5BAddToken%5D+%60SYMBOL%60+on+%60NETWORK%60) form if you want to express your desire to have the token added to CoW Swap's token list
+
+:::caution
+
+Submitting a token to the token list does **not** guarantee that it will be added to the CoW Swap token list.
+
+:::
