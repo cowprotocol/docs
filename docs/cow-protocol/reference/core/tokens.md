@@ -30,3 +30,11 @@ There is an explicit bad token list, containing tokens that have been identified
 One such example is tokens that take a fee on transfer.
 The bad token list is not exhaustive and is supplemented by automated bad token detection, which may be flaky, (e.g. if a token exhibits rounding issues on transfers) depending on certain conditions.
 In any case, if a token is on the bad token list, it will result in an `UnsupportedToken` error when attempting to retrieve a quote or place an order.
+
+## New ERC-20 tokens
+
+Have you created a new `ERC-20` and want to make it seemlessly tradeable on CoW Protocol?
+
+- Bootstrap a Uni v2 (or some other well-known AMM) pool with the token (and it's minimum viable liquidity)
+- Potentially reach out to solvers (contact us via Discord) to have any optimal execution paths added to their solvers (such as a path through the newly created pool)
+- Fill out the [Add Token](https://github.com/cowprotocol/token-lists/issues/new?assignees=&labels=addToken&projects=&template=addTokenForm.yml&title=%5BAddToken%5D+%60SYMBOL%60+on+%60NETWORK%60) form if you want to have the token added to CoW Swap's token list
