@@ -24,7 +24,23 @@ In the "Orders" tab, the user can see all the orders that were settled in the ba
 
 This is perhaps one of the most interesting areas, where one can take what was previously an abstract concept of a batch auction, and visualise it in a way that is easy to understand.
 
-This is a visual representation of the routing that was used to settle the batch auction. The graph shows the orders that were settled in the batch auction, and the routing that was used to settle the batch auction.
+This is a visual representation of the routing that was used to settle the batch auction. 
+
+There are two types of visualizations, which can be toggled in the controls at the top right of the graph tab:
+
+![Batch graph switcher](/img/explorer/batch_graph_selector.png)
+
+### Transfer based
+
+The default visualization method.
+This graph shows the orders that were settled in the batch auction, and the routing that was used to settle the batch auction.
 The graph is interactive, and the user can hover over any of the edges to see the amount that was settled between the respective nodes of the graph.
 
-![Batch Graph](/img/explorer/batch_graph.png)
+![Batch Graph](/img/explorer/batch_graph_transfer-based.png)
+
+### Trade based
+
+This graph shows the tokens traded as nodes, and the edges are the flow between them.
+Green arrows denote protocol trades; red arrows represent token flows through the various pools/AMMs/liquidity sources which make the trades possible. 
+
+![Batch Graph](/img/explorer/batch_graph_trade-based.png)
