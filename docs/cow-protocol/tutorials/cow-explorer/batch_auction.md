@@ -16,7 +16,7 @@ Let's take a look at the example batch auction [`0x35f6...0fac`](https://explore
 
 ## Orders
 
-In the "Orders" tab, the user can see all of the orders that were settled in the batch auction. If the user clicks on the respective order ID, they will be taken to the order details page for that order.
+In the "Orders" tab, the user can see all the orders that were settled in the batch auction. If the user clicks on the respective order ID, they will be taken to the order details page for that order.
 
 ![Batch Orders](/img/explorer/batch_orders.png)
 
