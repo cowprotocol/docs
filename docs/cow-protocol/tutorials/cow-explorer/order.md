@@ -62,9 +62,11 @@ Here we can see that the order has been 100% filled, but in dozens of batches. F
 
 As CoW Explorer is meant to help users visualize their signed orders, a critical parameter to show is the _state_ of the signed order. This parameter has the following status:
 
-- **Open** (pending)**:** State for a standing order. Orders in this state are being considered by the solvers. It is the entry state for all orders, the default from the moment the order is placed. From here the order can transition to all other states.
+- **Open** (pending)**:** State for a standing order. Orders in this state are being considered by the solvers. It is the entry state for all orders[^presign], the default from the moment the order is placed. From here the order can transition to all other states.
 - **Filled:** State for an executed/settled order. Orders in this state have been executed and the corresponding funds transferred to the target account. Orders in this state will have available a link to the corresponding Etherscan settlement transaction. This settlement transaction would contain your order's execution and any other orders that are part of the same batch.
 - **Expired:** State for orders that have not been executed. Orders in this state have not been executed during the defined expiration time.
 - **Cancelled:** State for orders that have been cancelled. Orders in this state have been cancelled as per user request.
 - **Partially-filled:** State for orders that have been partially executed. Parts of the order have been executed and the corresponding funds transferred to the target account.
 - **Pre-signing:** State for orders that are to be pre-signed. Commonly used for orders submitted from a Smart Contract wallet, such as the [Safe](https://safe.global/) wallet.
+
+[^presign]: Except for pre-signed orders, where the first state is **Pre-signing**.
