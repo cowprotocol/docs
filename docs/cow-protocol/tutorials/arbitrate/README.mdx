@@ -16,8 +16,8 @@ sequenceDiagram
     User->>OrderBook: POST /order
     Autopilot->>OrderBook: Request solvable orders
     activate Autopilot
-    activate Orderbook
-    orderbook-->>Autopilot: Response solvable orders
+    activate OrderBook
+    OrderBook-->>Autopilot: Response solvable orders
     deactivate OrderBook
     Note over Autopilot: Create auction
     Autopilot->>Solver: /solve
