@@ -9,45 +9,39 @@ import TokenApprovalWarning from '../../../partials/_token_approvals.mdx'
 
 Time-Weighted Average Price (TWAP) orders are an advanced feature of CoW Protocol, ideal for executing large trades with minimal price impact by distributing the order over a specified time.
 
-## Introduction to TWAP Orders
+## Introduction
 
-TWAP orders allow you to split a large trade into smaller parts, executed at regular intervals. This helps in minimizing market impact and achieving a better average price.
+TWAP orders allow you to split a large trade into smaller parts, executed at regular intervals.
+This helps in minimizing market impact and in doing so likely achieves a better average price.
 
-### Key Points
+### Benefits
 
-- **Reduce price impact on large orders**: For example, buying `$1M` of ETH over 3 hours in 6 parts; the TWAP (Time Weighted Average Price) will place an order of `$166k` every `30min`, significantly reducing the price impact and allowing the market to recover.
+- **Reduce price impact on large orders**: For example, buying `$1M` of ETH over 3 hours in 6 parts; the TWAP will place an order of `$166k` every `30min`, significantly reducing the price impact and allowing the market to recover.
 - **Average buy price over time**: This strategy reduces the risk of buying at a high price by averaging the prices over a selected period.
 - **Ideal for recurring or big trades**: The minimum required order size is `$5k` on Mainnet or `$5` on Gnosis Chain.
 
----
+## Placing a TWAP Order
 
-# Placing a TWAP Order
+### Connect your `Safe` wallet
 
+_CoW Swap_ TWAP requires a [`Safe`](https://safe.global) wallet.
 
-### Step 1: Connect Your Safe Wallet
-CoW Swap TWAP requires a Safe wallet.
+* 🆕 If you don't have one, you can [create a `Safe`](https://app.safe.global/welcome) wallet
+* 🔌 With your `Safe` wallet, open [CoW Swap (`Safe` App)](https://app.safe.global/share/safe-app?appUrl=https%3A%2F%2Fswap.cow.fi&chain=eth)
 
-* 🆕 If you don't have one, you can [create a Safe](https://app.safe.global/welcome) wallet
-* 🔌 With your Safe wallet, open [CoW Swap (Safe App)](https://app.safe.global/share/safe-app?appUrl=https%3A%2F%2Fswap.cow.fi&chain=eth)
-
-
-Once CoW Swap is loaded and connected to your Safe you can access TWAP orders via the "TWAP" tab near the center module or the drop-down menu next to the CoW Swap logo.
+Once CoW Swap is loaded and connected to your `Safe` you can access TWAP orders via the "TWAP" tab near the center module or the drop-down menu next to the CoW Swap logo.
 
 <Image img={require('/img/cowswap/TWAP_connect.png')} alt="Access TWAP Interface" />
 
----
-
-### Step 2: Select Your Tokens
+### Select tokens
 
 Choose the token you wish to sell (e.g., `WETH`) and enter the total amount you wish to sell.
 
 <Image img={require('/img/cowswap/TWAP_selectToken.png')} alt="Select Tokens" />
 
----
+### Specify parameters
 
-### Step 3: Specify Order Parameters
-
-This is a critical step where you'll define how your order will be executed over time. Here’s how to fine-tune your TWAP order settings:
+This is a _critical_ step where you'll define how your order will be executed over time. Here's how to fine-tune your TWAP order settings:
 
 <Image img={require('/img/cowswap/TWAP_params.png')} alt="Order parameters" style={{ maxWidth: '470px' }} />
 
@@ -57,25 +51,21 @@ This is a critical step where you'll define how your order will be executed over
 
 3. **Total Duration**: Choose the total time frame over which your order should be executed. The TWAP strategy will distribute your trades evenly across this duration. Select from predefined durations like 1 hour, or set a custom duration based on your trading strategy.
 
-4. **Part Duration** (read-only): View the duration of each individual part of your order. It is calculated automatically as the total duration divided by the number of parts. For instance, if your total duration is 1 hour and you have 2 parts, each part will have a duration of 30 minutes.
+4. **Part Duration** _(read-only)_: View the duration of each individual part of your order. It is calculated automatically as the total duration divided by the number of parts. For instance, if your total duration is 1 hour and you have 2 parts, each part will have a duration of 30 minutes.
 
-5. **Sell per Part** (read-only): After setting the number of parts and the total duration, the interface will display the sell amount for each part. Ensure this aligns with your trade expectations.
+5. **Sell per Part** _(read-only)_: After setting the number of parts and the total duration, the interface will display the sell amount for each part. Ensure this aligns with your trade expectations.
 
-6. **Buy per Part** (read-only): Similarly, for a buy TWAP order, this will indicate how much of the token you are looking to purchase in each part of the order.
+6. **Buy per Part** _(read-only)_: Similarly, for a buy TWAP order, this will indicate how much of the token you are looking to purchase in each part of the order.
 
 Carefully review and adjust your order parameters to align with market conditions, anticipated movements, and your trading objectives, as they are crucial in dictating the execution and efficacy of your TWAP strategy. Once you have tailored these details to your satisfaction, you can move on to the next step to finalize and place your order.
 
----
+### Unsupported wallet? Upgrade `Safe` Fallback Handler
 
-### Unsupported wallet? Upgrade Safe Fallback Handler
-
-If your wallet is unsupported, upgrade to a Safe with the special fallback handler required for TWAP orders. Learn all about the new Safe fallback handler in this [article](https://blog.cow.fi/all-you-need-to-know-about-cow-swaps-new-safe-fallback-handler-8ef0439925d1) and its relevance to Safe in this [overview](https://help.safe.global/en/articles/40838-what-is-a-fallback-handler-and-how-does-it-relate-to-safe). The upgrade process has undergone extensive auditing, which you can review [here](https://github.com/cowprotocol/composable-cow/tree/ab3addad9bc05acdbf5fb040eb5c336209b58e31/audits).
+If your wallet is _unsupported_, upgrade to a `Safe` with the special fallback handler required for TWAP orders. [Learn all about the new `Safe` fallback handler](https://blog.cow.fi/all-you-need-to-know-about-cow-swaps-new-safe-fallback-handler-8ef0439925d1) and its relevance to `Safe` in this [overview](https://help.safe.global/en/articles/40838-what-is-a-fallback-handler-and-how-does-it-relate-to-safe). Naturally, the upgrade process has undergone [extensive auditing](https://github.com/cowprotocol/composable-cow/tree/ab3addad9bc05acdbf5fb040eb5c336209b58e31/audits) for increased peace of mind.
 
 <Image img={require('/img/cowswap/TWAP_unsupported.png')} alt="Unsupported wallet" style={{ maxWidth: '440px' }} />
 
----
-
-### Step 4: Review and Confirm Your Order
+### Review and confirm
 
 Check all the details of your order, including price protection and limit price. Once you approve the details, sign the transaction in your Safe interface.
 
@@ -85,9 +75,7 @@ Be careful when signing an order. All of the associated parameters are final and
 
 <Image img={require('/img/cowswap/TWAP_review.png')} alt="Review order" style={{ maxWidth: '470px' }} />
 
----
-
-### Step 5: Order Finalization and Monitoring
+### Finalization and monitoring
 
 Once you've signed the order, the process of finalizing and monitoring your TWAP order begins. This is a multi-step process that ensures your order is securely processed and activated.
 
@@ -98,7 +86,7 @@ The "Order submitted successfully" screen indicates that your order has been ini
 
 <Image img={require('/img/cowswap/TWAP_orderSigning.png')} alt="Order in signing state" />
 
-The "Order in signing state" screen shows that your order may require additional signatures from your Safe. Ensure all necessary parties sign to proceed.
+The "Order in signing state" screen shows that your order may require additional signatures from your `Safe`. Ensure all necessary parties sign to proceed.
 <br />
 
 <Image img={require('/img/cowswap/TWAP_ordersOverview.png')} alt="Orders overview" />
@@ -108,14 +96,11 @@ The "Order in signing state" screen shows that your order may require additional
 After all signatures are collected and the transaction is submitted on-chain, your order becomes 'active'. The "Orders overview" allows you to monitor its current status and see the full list of active orders.
 <br />
 
-
 <Image img={require('/img/cowswap/TWAP_orderReceipt.png')} alt="Order receipt"  style={{ maxWidth: '470px' }}/>
 
 Finally, the "Order receipt" provides a detailed confirmation of your active TWAP order, complete with execution details and transaction details.
 
----
-
-### Step 6: Cancel TWAP order
+### Cancelling a TWAP order
 
 Canceling a TWAP order involves a few simple steps. Begin by locating your active TWAP order in the “Your Orders” section to manage it.
 
@@ -127,12 +112,9 @@ Here in the order overview, find the order you intend to cancel. Click the three
 
 A confirmation window will appear, summarizing the order you are about to cancel, including the swap details and the transaction type. This is your opportunity to review and ensure that you are canceling the correct order.
 
-When you confirm the cancellation by clicking "Request cancellation," a new transaction will be created in your Safe. This transaction is not final until all required parties (Safe owners) provide their signature.
+When you confirm the cancellation by clicking "Request cancellation," a new transaction will be created in your Safe. This transaction is not final until all required parties (`Safe` owners) provide their signature.
 
 Once all signatures are collected, the transaction to cancel the order will be executed. It's vital to coordinate with all signers to complete this promptly, especially if the order needs to be canceled quickly due to changing market conditions or other strategic considerations. After the cancellation transaction is fully signed and submitted, the order will be removed from your active orders list and considered canceled.
-
----
-
 
 ## Conclusion
 
