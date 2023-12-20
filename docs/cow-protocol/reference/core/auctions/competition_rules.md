@@ -37,27 +37,27 @@ At CoW DAO's discretion, systematic violation of these rules may lead to penaliz
 
 :::
 
-- Provision of unfair solutions ([CIP-11](https://snapshot.org/#/cow.eth/proposal/0x16d8c681d52b24f1ccd854084e07a99fce6a7af1e25fd21ddae6534b411df870)). Uniform clearing prices computed by solvers should be in line (or even better) than what the users would get elsewhere. This becomes particularly relevant for solutions where CoWs happen, i.e., when some volume is settled as part of a CoW and not by routing through an AMM. This rule is often referenced as "EBBO" (Ethereum Best Bid and Offer), and the AMMs that "should" be considered by solvers when computing an execution route for an order are referenced as "Baseline liquidity". Baseline liquidity is defined with a set of protocols and a set of so-called base tokens, such that for every protocol and every order, the following pools are considered: sell token / base token, buy token / base token, and sell token / buy token. For Ethereum Mainnet, the protocols that are considered are Uniswap v2/v3, Sushiswap, Swapr, and Balancer v2, while for Gnosis Chain, the protocols that are considered are Honeyswap, SushiSwap, Baoswap, Swapr and BalancerV2. As for the base tokens, for Ethereum Mainnet we have:
-  - 0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2 (WETH)
-  - 0x6B175474E89094C44Da98b954EedeAC495271d0F (DAI)
-  - 0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48 (USDC)
-  - 0xdAC17F958D2ee523a2206206994597C13D831ec7 (USDT)
-  - 0xc00e94Cb662C3520282E6f5717214004A7f26888 (COMP) 
-  - 0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2 (MKR)
-  - 0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599 (WBTC)
-  - 0x6810e776880C02933D47DB1b9fc05908e5386b96 (GNO).
+- Provision of unfair solutions ([CIP-11](https://snapshot.org/#/cow.eth/proposal/0x16d8c681d52b24f1ccd854084e07a99fce6a7af1e25fd21ddae6534b411df870)). Uniform clearing prices computed by solvers should be in line (or even better) than what the users would get elsewhere. This becomes particularly relevant for solutions where CoWs happen, i.e., when some volume is settled as part of a CoW and not by routing through an AMM. This rule is often referenced as "EBBO" (Ethereum Best Bid and Offer), and the AMMs that "should" be considered by solvers when computing an execution route for an order are referenced as "Baseline liquidity". Baseline liquidity is defined with a set of protocols and a set of so-called base tokens, such that for every protocol and every order, the following pairs are considered:
 
-  For Gnosis Chain, the base tokens are:
-    - 0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d (WXDAI)
-    - 0x71850b7e9ee3f13ab46d67167341e4bdc905eef9 (HNY) 
-    - 0x4ECaBa5870353805a9F068101A40E0f32ed605C6 (USDT)
-    - 0xDDAfbb505ad214D7b80b1f830fcCc89B60fb7A83 (USDC)
-    - 0xB1950Fb2C9C0CbC8553578c67dB52Aa110A93393 (sUSD)
-    - 0x8e5bbbb09ed1ebde8674cda39a0c169401db4252 (WBTC) 
-    - 0x9C58BAcC331c9aa871AFD802DB6379a98e80CEdb (GNO)
-    - 0xb7D311E2Eb55F2f68a9440da38e7989210b9A05e (STAKE) 
-    - 0x0905Ab807F8FD040255F0cF8fa14756c1D824931 (xOWL)
-    - 0x6A023CCd1ff6F2045C3309768eAd9E68F978f6e1 (WETH).
+  - sell token / base token
+  - buy token / base token
+  - sell token / buy token
+
+  The following detail sections list the protocols and base tokens that are considered for Ethereum Mainnet and Gnosis Chain:
+
+  <details>
+    <summary>Ethereum mainnet baseline protocols and tokens</summary>
+
+    - **Protocols**: Uniswap v2/v3, Sushiswap, Swapr, Balancer v2
+    - **Base tokens**: [`WETH`](https://etherscan.io/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2), [`DAI`](https://etherscan.io/token/0x6B175474E89094C44Da98b954EedeAC495271d0F), [`USDC`](https://etherscan.io/token/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48), [`USDT`](https://etherscan.io/token/0xdAC17F958D2ee523a2206206994597C13D831ec7), [`COMP`](https://etherscan.io/token/0xc00e94Cb662C3520282E6f5717214004A7f26888), [`MKR`](https://etherscan.io/token/0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2), [`WBTC`](https://etherscan.io/token/0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599), [`GNO`](https://etherscan.io/token/0x6810e776880C02933D47DB1b9fc05908e5386b96)
+  </details>
+
+  <details>
+    <summary>Gnosis Chain baseline protocols and tokens</summary>
+
+    - **Protocols**: Honeyswap, Sushiswap, Baoswap, Swapr, Balancer v2
+    - **Base tokens**: [`WXDAI`](https://gnosisscan.io/token/0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d), [`HNY`](https://gnosisscan.io/token/0x71850b7e9ee3f13ab46d67167341e4bdc905eef9), [`USDT`](https://gnosisscan.io/token/0x4ECaBa5870353805a9F068101A40E0f32ed605C6), [`USDC`](https://gnosisscan.io/token/0xDDAfbb505ad214D7b80b1f830fcCc89B60fb7A83), [`sUSD`](https://gnosisscan.io/token/0xB1950Fb2C9C0CbC8553578c67dB52Aa110A93393), [`WBTC`](https://gnosisscan.io/token/0x8e5bbbb09ed1ebde8674cda39a0c169401db4252), [`GNO`](https://gnosisscan.io/token/0x9C58BAcC331c9aa871AFD802DB6379a98e80CEdb), [`STAKE`](https://gnosisscan.io/token/0xb7D311E2Eb55F2f68a9440da38e7989210b9A05e), [`xOWL`](https://gnosisscan.io/token/0x0905Ab807F8FD040255F0cF8fa14756c1D824931), [`WETH`](https://gnosisscan.io/token/0x6A023CCd1ff6F2045C3309768eAd9E68F978f6e1)
+  </details>
 
 - Inflation of the objective function ([CIP-11](https://snapshot.org/#/cow.eth/proposal/0x16d8c681d52b24f1ccd854084e07a99fce6a7af1e25fd21ddae6534b411df870)). Using tokens for the sole purpose of inflating the objective value or maximizing the reward is forbidden (e.g., by creating fake tokens, or wash-trading with real tokens).
 
