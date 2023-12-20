@@ -22,7 +22,7 @@ In the "Orders" tab, the user can see all the orders that were settled in the ba
 
 ## Settlement graph
 
-This is perhaps one of the most interesting areas, where one can take what was previously an abstract concept of a batch auction, and visualise it in a way that is easy to understand.
+This is perhaps one of the most interesting areas, where one can take what was previously an abstract concept of a batch auction, and visualize it in a way that is easy to understand.
 
 This is a visual representation of the routing that was used to settle the batch auction. 
 
