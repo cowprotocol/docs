@@ -5,7 +5,7 @@ id: batch-auction
 
 # By batch auction
 
-A batch auction is setlled on-chain as a single transaction, and it is this transaction hash that is used to query the details of the batch auction. By simply searching for the transaction hash, the user will be presented with an overview of the batch auction. 
+A batch auction is settled on-chain as a single transaction, and it is this transaction hash that is used to query the details of the batch auction. By simply searching for the transaction hash, the user will be presented with an overview of the batch auction. 
 
 The batch auction details page provides:
 

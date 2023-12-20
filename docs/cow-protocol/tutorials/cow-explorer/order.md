@@ -4,7 +4,9 @@ sidebar_position: 1
 
 # By order
 
-A user may want to see the details of a specific order that they have placed. They can search for this order by its unique identifier, the `orderUid`. This identifier is returned when an order is placed and can be used to query the details of the order.
+A user may want to see the details of a specific order that they have placed.
+They can search for this order by its unique identifier, the `orderUid`.
+This identifier is returned when an order is placed and can be used to query the details of the order.
 
 :::note
 
