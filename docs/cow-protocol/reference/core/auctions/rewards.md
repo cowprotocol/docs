@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # Solver rewards
 
-The protocol is currently subsidizing the solver competition, by rewarding solvers on a weekly basis (currently, every Tuesday) with rewards paid in COW. Solvers can be rewarded based on their performance as solvers (i.e., when participating in the standard solver competition) as specified by [CIP-20](https://snapshot.org/#/cow.eth/proposal/0x2d3f9bd1ea72dca84b03e97dda3efc1f4a42a772c54bd2037e8b62e7d09a491f), and by participating in the price estimation competition and providing quotes that are needed for the gas estimates and limit price computations of market orders [CIP-27](https://snapshot.org/#/cow.eth/proposal/0x64e061568e86e8d2eec344d4a892e4126172b992cabe59a0b24c51c4c7e6cc33).
+The protocol is currently subsidizing the solver competition on Ethereum Mainnet (but not on Gnosis Chain), by rewarding solvers on a weekly basis (currently, every Tuesday) with rewards paid in COW. Solvers can be rewarded based on their performance as solvers (i.e., when participating in the standard solver competition) as specified by [CIP-20](https://snapshot.org/#/cow.eth/proposal/0x2d3f9bd1ea72dca84b03e97dda3efc1f4a42a772c54bd2037e8b62e7d09a491f), and by participating in the price estimation competition and providing quotes that are needed for the gas estimates and limit price computations of market orders [CIP-27](https://snapshot.org/#/cow.eth/proposal/0x64e061568e86e8d2eec344d4a892e4126172b992cabe59a0b24c51c4c7e6cc33).
 
 The annual rewards budget as of now is 20M COW, and the intended split between solver competition and price estimation rewards is currently at 80% for the solver competition (16M COW) and 20% for the price estimation competition (4M COW).
 
