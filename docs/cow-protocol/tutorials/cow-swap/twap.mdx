@@ -89,18 +89,22 @@ The "Order submitted successfully" screen indicates that your order has been ini
 The "Order in signing state" screen shows that your order may require additional signatures from your `Safe`. Ensure all necessary parties sign to proceed.
 <br />
 
-<Image img={require('/img/cowswap/TWAP_ordersOverview.png')} alt="Orders overview" />
-<Image img={require('/img/cowswap/TWAP_orderMenu.png')} alt="Order menu" />
-<Image img={require('/img/cowswap/TWAP_partMenu.png')} alt="Order part menu" style={{ maxWidth: '470px' }} />
-
 After all signatures are collected and the transaction is submitted on-chain, your order becomes 'active'. The "Orders overview" allows you to monitor its current status and see the full list of active orders.
 <br />
 
-<Image img={require('/img/cowswap/TWAP_orderReceipt.png')} alt="Order receipt"  style={{ maxWidth: '470px' }}/>
+<Image img={require('/img/cowswap/TWAP_ordersOverview.png')} alt="Orders overview" />
+Each TWAP can be expanded to show the individual parts.
 
+<Image img={require('/img/cowswap/TWAP_orderMenu.png')} alt="Order menu" />
+The three-dot menu for the parent TWAP shows the actions available that affects all parts of a TWAP.
+
+<Image img={require('/img/cowswap/TWAP_partMenu.png')} alt="Order part menu" style={{ maxWidth: '470px' }} />
+Each individual TWAP part also have a three-dot menu with actions pertaining to that individual order.
+
+<Image img={require('/img/cowswap/TWAP_orderReceipt.png')} alt="Order receipt"  style={{ maxWidth: '470px' }}/>
 Finally, the "Order receipt" provides a detailed confirmation of your active TWAP order, complete with execution details and transaction details.
 
-### Cancelling a TWAP order
+## Cancelling a TWAP order
 
 Canceling a TWAP order involves a few simple steps. Begin by locating your active TWAP order in the “Your Orders” section to manage it.
 
