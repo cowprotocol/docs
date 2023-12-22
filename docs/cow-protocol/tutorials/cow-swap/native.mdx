@@ -4,6 +4,7 @@ sidebar_position: 4
 
 import Image from '@theme/IdealImage';
 import EthFlowTip from '../../../partials/_eth_flow.mdx'
+import CancellationNotGuaranteed from '../../../partials/_cancellation_not_guaranteed.mdx'
 
 # Native tokens
 
@@ -110,3 +111,27 @@ While the CoW Swap UI doesn't support the [Eth-flow](/cow-protocol/reference/con
 <Image img={require('/img/cowswap/native_safe-bundle_2.png')} alt="Wrap, approval and order placement bundle with Safe CoW Swap app. View of Safe's Confirm transaction screen." />
 
 :::
+
+### Cancel eth-flow order
+
+Like regular [swap](swap) orders, Eth-flow orders can also be cancelled.
+
+:::note
+
+Beware that only `on-chain` cancellation is possible.
+
+:::
+
+First, open the activity panel by clicking on your address at the top right
+
+<Image img={require('/img/cowswap/swap_activity-modal.png')} alt="Button to open activity modal" />
+
+Then, click on `Cancel order` in your pending order.
+
+<Image img={require('/img/cowswap/native_pending-order.png')} alt="Activity panel with pending eth-flow order" />
+
+Confirm the cancellation, then sign the transaction in your wallet. You are done!
+
+<CancellationNotGuaranteed />
+
+The original Eth amount will be refunded as part of the cancellation transaction.
