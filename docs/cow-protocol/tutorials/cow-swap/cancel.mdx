@@ -3,15 +3,12 @@ sidebar_position: 5
 ---
 
 import CancellationOffChainOnChain from "../../../partials/_cancellation_offchain_versus_onchain.mdx"
+import CancellationNotGuaranteed from "../../../partials/_cancellation_not_guaranteed.mdx"
 import Image from "@theme/IdealImage"
 
 # Cancel orders
 
-:::note
-
-Before we begin, please note that our solvers can be quite quick, so it is entirely possible that your order will have already been filled before it can be invalidated.
-
-:::
+<CancellationNotGuaranteed />
 
 As CoW Protocol runs an off-chain order book, it is possible to cancel an order before it is matched. This is done by signing an off-chain cancellation message and submitting it to the [OrderBook API](../../reference/apis/orderbook).
 
