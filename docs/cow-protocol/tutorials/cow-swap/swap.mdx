@@ -5,7 +5,8 @@ sidebar_position: 1
 import Image from '@theme/IdealImage';
 import TokenApprovalWarning from '../../../partials/_token_approvals.mdx';
 import ReceiverAndOrderWarning from '../../../partials/_receiver.mdx';
-import CancellationNotGuaranteed from '../../../partials/_cancellation_not_guaranteed.mdx';
+import CancellationOffChainOnChain from '../../../partials/_cancellation_offchain_versus_onchain.mdx'
+
 
 # Market orders (Swap)
 
@@ -144,12 +145,9 @@ Find your pending order in the list and click on `Cancel order`.
 
 Confirm the cancellation, picking which mode of cancellation you'd like: `off-chain` (default) or `on-chain`.
 
-|Off-chain|On-chain|
-|-|-|
-| <Image img={require('/img/cowswap/swap_off-chain-cancellation.png')} alt="Modal for off-chain cancellation" /> | <Image img={require('/img/cowswap/swap_on-chain-cancellation.png')} alt="Modal for on-chain cancellation" /> |
+<CancellationOffChainOnChain
+  alt="Confirm off-chain swap order cancellation"
+  img={require("/img/cowswap/swap_off-chain-cancellation.png")}
+/>
 
 Confirm the transaction in your wallet and you are done!
-
-<CancellationNotGuaranteed />
-
-
