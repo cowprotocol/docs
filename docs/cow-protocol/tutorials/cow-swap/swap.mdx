@@ -5,6 +5,8 @@ sidebar_position: 1
 import Image from '@theme/IdealImage';
 import TokenApprovalWarning from '../../../partials/_token_approvals.mdx';
 import ReceiverAndOrderWarning from '../../../partials/_receiver.mdx';
+import CancellationOffChainOnChain from '../../../partials/_cancellation_offchain_versus_onchain.mdx'
+
 
 # Market orders (Swap)
 
@@ -25,10 +27,11 @@ Please do your own research on the advantages and disadvantages of each wallet t
 :::
 
 
+<Image img={require('/img/cowswap/swap_connect1.png')} alt="Connect your wallet to CoW Swap" />
+Click on `Connect wallet`.
 
-<Image img={require('/img/cowswap/swap_connect1.png')} alt="GPv2VaultRelayer approval required" />
-
-<Image img={require('/img/cowswap/swap_connect2.png')} alt="GPv2VaultRelayer approval required" />
+<Image img={require('/img/cowswap/swap_connect2.png')} alt="Pick one wallet from the available methods" />
+Select one of the available wallets.
 
 
 
@@ -115,6 +118,7 @@ Once the order has been signed, it will be submitted to CoW Protocol where it is
 
 <Image img={require('/img/cowswap/swap_confirmed.png')} alt="Swap confirmed" />
 
+
 ## Track your order
 Your order will be in the order book and ready to be executed.
 
@@ -123,3 +127,27 @@ Your order will be in the order book and ready to be executed.
 * You can also view your order on [CoW Explorer](/cow-protocol/tutorials/cow-explorer).
 
 <Image img={require('/img/cowswap/swap_account.png')} alt="Check Account" />
+
+## Cancel your order
+Changed your mind? Not a problem! CoW Swap makes it easy and gas-less[^1] to cancel your order.
+
+[^1]: Only `off-chain` cancellations are gas-less. `on-chain` cancellations - as the name states - require a regular network transaction.
+
+
+First, open the activity panel by clicking on your address in the top right corner.
+
+<Image img={require('/img/cowswap/swap_activity-modal.png')} alt="Button to open activity modal" />
+
+
+Find your pending order in the list and click on `Cancel order`.
+
+<Image img={require('/img/cowswap/swap_cancel-pending-order.png')} alt="Activity panel with pending order" />
+
+Confirm the cancellation, picking which mode of cancellation you'd like: `off-chain` (default) or `on-chain`.
+
+<CancellationOffChainOnChain
+  alt="Confirm off-chain swap order cancellation"
+  img={require("/img/cowswap/swap_off-chain-cancellation.png")}
+/>
+
+Confirm the transaction in your wallet and you are done!
