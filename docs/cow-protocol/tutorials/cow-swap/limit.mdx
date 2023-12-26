@@ -48,9 +48,25 @@ Upon signing the order with your wallet, the limit order will now appear in open
 
 ## Track a limit order
 
-As mentioned above, limit orders on CoW Protocol don't always execute exactly when the limit price is reached. This is because the protocol waits for an even better price in order to cover the order's network fees. 
+As mentioned above, limit orders on CoW Protocol don't always execute exactly when the limit price is reached.
+This is because the protocol waits for an even better price in order to cover the order's network fees.
 
-The CoW Swap UI makes this explicit by showing an open order's current _execution price_ in addition to its _limit price_. Check the "Executes at" column in the open orders panel to see, based on current network conditions, what price your tokens would have to reach in order for the order to execute. 
+The CoW Swap UI makes this explicit by showing an open order's current _execution price_ in addition to its _limit price_.
+Check the "Executes at" column in the open orders panel to see, based on current network conditions, what price your tokens would have to reach in order for the order to execute.
+
+![Traffic lights on limit orders UI](/img/cowswap/limit_traffic-lights.png)
+
+The "Executes at" column has a "traffic light" system to give an estimation of how far the order is from being executed.
+It takes into the account current network fees, the size of the order and current market (spot) price.
+
+Hovering the mouse pointer over the column will give an indication of how far the price has to move for the order to enter the execution range.
+
+![Traffic lights on limit orders UI](/img/cowswap/limit_executes-at-go-down.png)
+
+Clicking on that field will invert the price display for the individual order, and the hover text will also reflect the change in direction.
+
+![Traffic lights on limit orders UI](/img/cowswap/limit_executes-at-go-up.png)
+
 
 ## Cancel a limit order
 
