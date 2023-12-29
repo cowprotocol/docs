@@ -1,13 +1,23 @@
 ---
-sidebar_position: 5
+sidebar_position: 2
 ---
 
 # Solvers
 
-Instead of creating an Ethereum transaction for swapping token A for B (which costs gas, may fail, etc.) users sign an intent to trade the two tokens at a specified limit price. Unlike with other DEXs, users on CoW Protocol do not execute their trades themselves. Rather, bonded third parties known as _solvers_ execute trades on their behalf through a delegated trade execution mechanism. 
+CoW Protocol delivers optimal price outcomes by leveraging an open solver competition for order matching. 
 
-Once a user submits an intent, the protocol hands it off to solvers who compete for the user’s order flow by trying to give them the best possible price. The solver that offers the best execution price is granted the right to settle the user's order. The actual settlement transaction is then created and signed by the solver.
+![Solvers](/img/concepts/solvers.png)
 
-Solvers can move tokens on behalf of the user (using the `ERC20` approvals the user granted to the vault relayer contract) while the settlement contract verifies the signature of the user's intent and ensures that execution happens according to the limit price and quantity specified by the user.
+Solvers are bonded third parties that execute trades on behalf of users through an [intent-based delegated execution model](cow-protocol/concepts/introduction/intents-to-trade). 
 
-Anyone with some DeFi knowledge and ability to code an optimizations algorithm can [create a solver](../../tutorials/solvers/create).
+Once a user submits an intent, the protocol groups it alongside other intents in a batch. As soon as a batch is "closed for orders", meaning that it stops considering new orders, the protocol runs a competition where solvers submit solutions for the intents in the batch. 
+
+Whichever solver offers the best solution for the batch (defined as the solver that provides the most surplus to user orders) gets to execute the orders. 
+
+Solvers are compensated in COW tokens for settling batches, incentivizing them to compete to find better prices and win the right to execute user intents. 
+
+## How Solvers Work
+
+Solvers can move tokens on behalf of the user using the ERC-20 approvals that the user granted to the vault relayer contract. The settlement contract, meanwhile, verifies the signature of the user's intent and ensures that execution happens according to the limit price and quantity specified by the user.
+
+Anyone with some DeFi knowledge and ability to code an optimizations algorithm can [create a solver](cow-protocol/tutorials/solvers/create).
