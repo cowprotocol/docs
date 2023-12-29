@@ -1,7 +1,8 @@
 ---
-id: intents
 sidebar_position: 1
 ---
+
+# Intents
 
 Rather than placing orders by ***signing a raw transaction*** that executes directly on-chain (i.e. as happens on Uniswap or SushiSwap), CoW Protocol users place orders by ***signing an “intent to trade” message*** that specifies parameters like the assets and amounts they would like to trade. The intent is a signed message which allows the protocol to execute a transaction on behalf of the user using their wallet assets. 
 
