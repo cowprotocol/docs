@@ -138,7 +138,7 @@ This key describes all the automated market makers that are made available for u
 
 A Constant Product pool describes [Uniswap v2 liquidity pools](https://docs.uniswap.org/protocol/V2/concepts/protocol-overview/how-uniswap-works), and consists of the following entries.
 
-- `"kind"`: the type is set to “ConstantProduct”.
+- `"kind"`: the type is set to "ConstantProduct".
 - `"reserves"`: a dictionary describing the reserves of the two tokens of the liquidity pool. More specifically, it maps each token id's of the AMM's tradeable tokens to the corresponding stringified integer amounts contained in each of the pools.
 - `"fee"`: a stringified decimal number denoting the percent of the amount traded in the liquidity pool that must be paid for using it. For example, if we transfer an amount $$y$$ to the pool, then the amount blocked and used as a fee is equal to $$\mathrm\{fee\} \cdot y$$.
 - `"cost"`: this entry is identical to the cost entry of an order (see above), and again is only meant to be used as an indicator of the cost. If the AMM is used, the total execution cost is computed via simulation.
@@ -164,7 +164,7 @@ We now give an example entry of such an AMM, corresponding to a pool of [BAL](ht
 
 A Weighted Product pool describes [Balancer weighted pools](https://docs.balancer.fi/products/balancer-pools/weighted-pools) and has the following differences to the Constant Product pool described above,
 
-- `"kind"`: the type is set to “WeightedProduct”.
+- `"kind"`: the type is set to "WeightedProduct".
 - `"reserves"`: a dictionary, mapping the token id of each of the AMM's tradeable tokens to its balance (a stringified integer) and weight (a stringified decimal) of that reserve in the pool.
 
 Follows an example entry of such an AMM, corresponding to a pool of [WTBC](https://etherscan.io/token/0x2260fac5e5542a773aa44fbcfedf7c193bc2c599) (of weight 0.4), [USDC](https://etherscan.io/token/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48) (of weight 0.2) [BAL](https://etherscan.io/address/0xba100000625a3754423978a60c9317c58a424e3d) and [WETH](https://etherscan.io/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2) (of weight 0.4).
@@ -198,7 +198,7 @@ Follows an example entry of such an AMM, corresponding to a pool of [WTBC](https
 
 A Stable pool corresponds to [Curve/Balancer stable pools](https://dev.balancer.fi/resources/pool-interfacing/stable-pool), and has the following differences to the Constant Product pool described above,
 
-- `"kind"`: the type is set to “Stable”.
+- `"kind"`: the type is set to "Stable".
 - `"amplification_parameter"`: See [amplification coefficient](https://curve.fi/files/stableswap-paper.pdf).
 - `"scaling_rates"`: See [getScalingFactors](https://github.com/balancer-labs/balancer-v2-monorepo/blob/80b0e1b129d575c313f59800ec7e19237a43c087/pkg/pool-utils/contracts/BasePool.sol#L523-L525).
 

@@ -28,7 +28,7 @@ Trading in CoW Protocol is done by signing off-chain transactions using your web
 You will need to:
 
 4. Enable token for trading: (only one time) Similarly to other protocols like Uniswap, you need to set an allowance. After this, you can trade. Learn more [here](https://docs.cow.fi/tutorials/how-to-submit-orders-via-the-api/1.-set-allowance-for-the-sell-token)
-5. Get a price/fee quote from the API: Fees are only paid if the trade is executed (you don’t pay for failed transactions). So this fee covers the settlement of the transaction on-chain. Learn more [here](https://docs.cow.fi/tutorials/how-to-submit-orders-via-the-api/2.-query-the-fee-endpoint)
+5. Get a price/fee quote from the API: Fees are only paid if the trade is executed (you don't pay for failed transactions). So this fee covers the settlement of the transaction on-chain. Learn more [here](https://docs.cow.fi/tutorials/how-to-submit-orders-via-the-api/2.-query-the-fee-endpoint)
 6. Sign the order using your wallet: Orders are just your signed intent to trade at a desired price or better before some expiration time. You sign orders with your web3 wallet. Learn more [here](https://docs.cow.fi/tutorials/how-to-submit-orders-via-the-api/4.-signing-the-order)
 7. Post the signed order to the API: Signed orders are posted to the API, so the order can be executed. Read more [here](https://docs.cow.fi/tutorials/how-to-submit-orders-via-the-api/5.-placing-the-order)
 
@@ -51,7 +51,7 @@ It's worth mentioning that, if you build a tool or UI that creates trades, it's 
 
 The explorer is a website that allows you to explore the protocol data.
 
-It's the “Etherscan” for CoW protocol, so you will be able to find, among other things:
+It's the "Etherscan" for CoW protocol, so you will be able to find, among other things:
 
 - Order details, with trading status: You can get detailed information about executed, expired, or pending orders. This page is very convenient for directing users once they post an order ([example order](https://explorer.cow.fi/orders/0xa64f3559e33edebd2a1701050db6dff8089c7c42c4d2d842669466c4693d698100000000005ef87f8ca7014309ece7260bbcdaeb61f0377d))
 - Order for a given account: You can get detailed information about executed, expired, or pending orders for a given trader ([example orders for trader](https://explorer.cow.fi/address/0x00000000005ef87f8ca7014309ece7260bbcdaeb))

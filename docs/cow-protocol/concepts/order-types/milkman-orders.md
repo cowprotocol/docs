@@ -6,29 +6,31 @@ sidebar_position: 5
 
 Milkman is an order placement mechanism developed by [Yearn Finance](https://yearn.fi/) in collaboration with CoW Protocol. 
 
-The contract allows users to utilize a price feed for their orders rather than specifying a fixed price. This means orders can execute at a fair market price even far into the future, making Milkman a popular choice for DAOs and governance-dependent trades. 
+The contract allows users to utilize a price feed for their orders rather than specifying a fixed price.
+This means orders can execute at a fair market price even far into the future, making Milkman a popular choice for DAOs and governance-dependent trades. 
 
 ![Milkman Order Flow](/img/concepts/milkman-order-flow.png)
 
-Let’s say a DAO wants to sell 10,000 ETH from its treasury for USDC. The DAO’s governance process dictates that the trade must first be put to a vote, but this means that the price of ETH will fluctuate significantly from the time the proposal is created to the time the trade actually executes. 
+Let's say a DAO wants to sell 10,000 ETH from its treasury for USDC.
+The DAO's governance process dictates that the trade must first be put to a vote, but this means that the price of ETH will fluctuate significantly from the time the proposal is created to the time the trade actually executes.
 
 Rather than specifying a minimum fixed number of tokens they are willing to receive for their trade, users can utilize Milkman to specify a price feed (from an oracle source such as Chainlink) that will give the order a fair market price at the time of execution. 
 
 Finally, once a user places a trade via Milkman, the order gets sent to CoW Protocol where solvers pick it up and compete to find the best execution price for it. 
 
-## Using Milkman
+## Getting started
 
-Milkman follows a UniV2-style interface. To interact with Milkman, smart contracts need only to call the following function:
+Milkman follows a UniswapV2-style interface. To interact with Milkman, smart contracts need only to call the following function:
 
-```jsx
-*function requestSwapExactTokensForTokens(
+```solidity
+function requestSwapExactTokensForTokens(
 	uint256 amountIn,
 	IERC20 fromToken,
 	IERC20 toToken,
 	address to,
 	address priceChecker,
 	bytes calldata priceCheckerData
-)*
+)
 ```
 
 The priceChecker is the data feed provider, and priceCheckerData is an array of arbitrary bytes that the function passes to the price checker (e.g. the desired slippage tolerance).

@@ -15,9 +15,9 @@ CoW Swap is a Decentralized Application (DApp) and Protocol allowing users to **
 
 Its novel design maximizes trade efficiency and provides a competitive way to ensure best prices.
 
-One of the core ideas is executing **trades in batches**, where users will trade directly using what is known as **“Coincidence of Wants”** (hence the name CoW). In the context of blockchains, batch auctions are a superior mechanism compared to continuous time trading, as they already execute transactions in discrete “blocks” every few seconds.
+One of the core ideas is executing **trades in batches**, where users will trade directly using what is known as **"Coincidence of Wants"** (hence the name CoW). In the context of blockchains, batch auctions are a superior mechanism compared to continuous time trading, as they already execute transactions in discrete "blocks" every few seconds.
 
-In consequence CoW Swap **protects users from front-running and other value extraction (known as MEV)**. The mechanism also leverages the concept of “ring trades” to boost liquidity in highly fragmented and long-tail token markets.
+In consequence CoW Swap **protects users from front-running and other value extraction (known as MEV)**. The mechanism also leverages the concept of "ring trades" to boost liquidity in highly fragmented and long-tail token markets.
 
 Additionally, CoW Swap allows for an improved user experience by facilitating gasless trades, not paying for failed transactions and adaptive routing in case of volatility.
 

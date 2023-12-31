@@ -46,7 +46,7 @@ console.log(`connected to chain ${chainId} with account ${wallet.address}`);
 
 Now that we have the setup out of the way, lets make use of CoW Hooks to set up an order that, when executed will:
 
-1. Set the required token approval to CoW Protocol - this allows the user to trade regardless of whether or not they have Ether to execute the approval transaction themselves and so that the approval is only set if the order were to execute (no reason to pay for an approval that doesn’t get used amirite?). Note that this requires a token that has EIP-2612 permit support (such as COW, USDC, and DAI; many modern tokens support this).
+1. Set the required token approval to CoW Protocol - this allows the user to trade regardless of whether or not they have Ether to execute the approval transaction themselves and so that the approval is only set if the order were to execute (no reason to pay for an approval that doesn't get used amirite?). Note that this requires a token that has EIP-2612 permit support (such as COW, USDC, and DAI; many modern tokens support this).
 2. Bridges the resulting trade proceeds to Gnosis Chain
 
 ## EIP-2612 Permit
