@@ -36,7 +36,7 @@ it is assumed you have rust setup correctly with `rustup`.
 :::
 
 
-Let’s start simple. Let’s first run a solver which solves a json we send by hand with curl.
+Let's start simple. Let's first run a solver which solves a json we send by hand with curl.
 
 Start by cloning [https://github.com/gnosis/cow-dex-solver](https://github.com/gnosis/cow-dex-solver)
 
@@ -67,7 +67,7 @@ Make sure to test what happens when there is a **COW**!
 ### My solver code
 
 I forked cow-dex-solver and wrote my first lines of rust.
-You can check out my solver’s code at:
+You can check out my solver's code at:
 [https://github.com/poolpitako/cow-dex-solver/pull/1](https://github.com/poolpitako/cow-dex-solver/pull/1)
 
 

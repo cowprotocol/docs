@@ -26,7 +26,7 @@ replaces (*optional): <CIP number(s)>
 
 ## Simple Summary
 
-If you can’t explain it simply, you don’t understand it well enough. Provide a
+If you can't explain it simply, you don't understand it well enough. Provide a
 simplified and layman-accessible explanation of the CIP.
 
 ## Motivation
@@ -66,6 +66,6 @@ Link to Tenderly simulation
 
 ## Snapshot
 
-Phase 2 Proposal: Add a link to the corresponding CoW DAO Snapshot poll you’ve
+Phase 2 Proposal: Add a link to the corresponding CoW DAO Snapshot poll you've
 created.
 ````

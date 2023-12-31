@@ -11,7 +11,7 @@ import UnauditedCaution from "/docs/partials/_unaudited.mdx";
 
 Following CoW Protocol roadmaps, we are excited to release a brand new and shiny feature: _CoW Hooks_.
 
-If you’re excited by Uni v4’s announcement and can’t wait to experience the power of trade hooks, wait no longer. CoW Hooks are live **now**!
+If you're excited by Uni v4's announcement and can't wait to experience the power of trade hooks, wait no longer. CoW Hooks are live **now**!
 
 These hooks allow users to specify Ethereum calls (also known as an "inner transaction") alongside their orders that execute atomically before and after a CoW Protocol swap. These hooks come in two flavors - pre-hooks and post-hooks - and can be used to automate a wide variety of tasks.
 

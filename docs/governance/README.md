@@ -10,11 +10,11 @@ Several governance venues are available to participate in CoW DAO governance, ea
 
 ### [Forum](https://forum.cow.fi)
 
-CoW DAO’s forum is the main venue for governance-related discussion. Signing up for the forum allows community members to post and participate in discussions.
+CoW DAO's forum is the main venue for governance-related discussion. Signing up for the forum allows community members to post and participate in discussions.
 
 ### [Snapshot](https://snapshot.org/#/cow.eth)
 
-CoW DAO’s snapshot space is a simple voting interface that allows members to vote on [CIPs](/governance/process/#cow-dao-improvement-proposals-cips). Votes on snapshot are weighted by the number of vCOW+COW held or delegated to the address used to vote. 
+CoW DAO's snapshot space is a simple voting interface that allows members to vote on [CIPs](/governance/process/#cow-dao-improvement-proposals-cips). Votes on snapshot are weighted by the number of vCOW+COW held or delegated to the address used to vote. 
 
 ### [Discord](https://discord.gg/invite/cowprotocol)
 

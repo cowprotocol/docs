@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Token
 
-At the core of CoW Protocol lies the COW token, which serves as a governance token within the CoW Protocol ecosystem, allowing stakeholders to participate directly in the decision-making processes that guide the protocol’s development and evolution. The governance framework is designed to align incentives between the protocol’s users, developers, and supporters, creating a robust and community-driven governance system.
+At the core of CoW Protocol lies the COW token, which serves as a governance token within the CoW Protocol ecosystem, allowing stakeholders to participate directly in the decision-making processes that guide the protocol's development and evolution. The governance framework is designed to align incentives between the protocol's users, developers, and supporters, creating a robust and community-driven governance system.
 
 ### Contract Address
 
@@ -42,7 +42,7 @@ To date, no inflationary measures have been enacted, and the current supply of C
 
 The initial distribution of COW tokens was executed with precision, aimed at establishing a balanced and sustainable ecosystem. The allocation of the initial 1 Billion COW token supply is as follows:
 
-- **CoW DAO Treasury**: 44.4%. This significant share underscores the community’s central role in the protocol’s ongoing development and maintenance.
+- **CoW DAO Treasury**: 44.4%. This significant share underscores the community's central role in the protocol's ongoing development and maintenance.
   
 - **Team**: 15%, rewarding the individuals who have built and continue to enhance the CoW Protocol.
   

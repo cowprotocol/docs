@@ -1,3 +1,7 @@
+---
+draft: true
+---
+
 # Builder friendly
 
 With a strong focus on welcoming builders to the protocol, CoW Protocol is designed to be as developer friendly as possible. The protocol is built with a modular architecture, allowing developers to easily build on top of the protocol and extend its functionality.
