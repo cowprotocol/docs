@@ -7,7 +7,7 @@ sidebar_position: 1
 
 CoW DAO is on a mission to innovate the most user-protective products in Ethereum. 
 
-Currently, CoW DAO’s two main products are [**CoW Protocol**](cow-protocol) and [**MEV Blocker**](https://mevblocker.io), which it supports with development and marketing resources – including the [CoW Grants Program](governance/grants), the [CoW Protocol Explorer](cow-protocol/tutorials/cow-explorer), and the [CoW Swap frontend](cow-protocol/tutorials/cow-swap).
+Currently, CoW DAO's two main products are [**CoW Protocol**](cow-protocol) and [**MEV Blocker**](https://mevblocker.io), which it supports with development and marketing resources – including the [CoW Grants Program](governance/grants), the [CoW Protocol Explorer](cow-protocol/tutorials/cow-explorer), and the [CoW Swap frontend](cow-protocol/tutorials/cow-swap).
 
 ## What is [CoW Protocol](cow-protocol)? 
 
@@ -21,9 +21,9 @@ MEV Blocker is an RPC endpoint designed to protect user transactions from MEV (M
 
 CoW DAO is of its community, by its community, and for its community. CoW DAO uses a [decentralized governance model](governance) to ensure that the community has full control over the direction of the protocol.
 
-## How to use CoW DAO’s documentation
+## How to use CoW DAO's documentation
 
-CoW DAO’s documentation follows a "Concepts", "Procedures", "Technical Reference" methodology. For example when a user wants to learn:
+CoW DAO's documentation follows a "Concepts", "Procedures", "Technical Reference" methodology. For example when a user wants to learn:
 
 - **_What_** something is (example: batch auctions) → see [Concepts](cow-protocol/concepts)
 - **_How_** to do something (example: create an order) → see [Tutorials](cow-protocol/tutorials)

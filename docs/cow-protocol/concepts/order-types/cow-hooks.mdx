@@ -1,0 +1,28 @@
+---
+sidebar_position: 6
+---
+
+# CoW Hooks
+
+CoW Hooks allow users to pair any Ethereum action (or set of actions) with an order on CoW Protocol, leveraging the [solvers](../introduction/solvers) to execute the actions together in the sequence. 
+
+Hooks come in two flavors, [**"pre-hooks"**](#pre-hooks) and [**"post-hooks"**](#post-hooks).
+
+## Pre-Hooks
+
+These are actions that execute before the swap, allowing pre-hooks to be used to "set up" an order. Some examples including:
+
+- Unstaking tokens just-in-time for trading
+- Claiming an airdrop right before dumping
+- Signing token approvals so that the approval and the trade itself are batched together as a single action
+
+## Post-Hooks
+
+These are actions that execute after the swap, taking advantage of trade proceeds. Examples include: 
+
+- Bridging funds to L2s
+- Staking funds
+
+## Getting started
+
+To get started with writing a CoW Hook, check out [our technical documentation](/cow-protocol/reference/core/intents/hooks). You can also [read more about CoW Hooks on our blog](https://blog.cow.fi/cow-hooks-you-are-in-control-480ccb40044a).

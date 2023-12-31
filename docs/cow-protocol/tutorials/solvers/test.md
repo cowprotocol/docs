@@ -14,7 +14,7 @@ You have different options to create a limit order:
 - [https://bafybeias5x3tgdshkhj5umriqze2wioy5mjw4fdo2zzp2sl4pacq7rnwtm.ipfs.infura-ipfs.io/?orderbook=https://barn.api.cow.fi/xdai](https://bafybeias5x3tgdshkhj5umriqze2wioy5mjw4fdo2zzp2sl4pacq7rnwtm.ipfs.infura-ipfs.io/?orderbook=https://barn.api.cow.fi/xdai)
 - You call the API by hand
 
-Here’s the example I created while testing:\
+Here's the example I created while testing:\
 [https://barn.gnosis-protocol.io/gc/orders/0xcc37de3ba70474948f838e8b4af9c6b66577c08202323a4a3060a645b2918dae2813a7e97fd0bc1b80cb63afe136510d940ddc236208633c](https://barn.gnosis-protocol.io/gc/orders/0xcc37de3ba70474948f838e8b4af9c6b66577c08202323a4a3060a645b2918dae2813a7e97fd0bc1b80cb63afe136510d940ddc236208633c)
 
 I am trading 10 USDC for 91.412 yvUSDC, which of course will never settle by regular solvers, since 1 `USDC == 1 yvUSDC` (price per share is 1).

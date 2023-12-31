@@ -1,5 +1,6 @@
 ---
 sidebar_position: 5
+draft: true
 ---
 
 # How batch auctions work
@@ -12,7 +13,7 @@ Ethereum has been friendly to auction mechanisms for a while.
 With the introduction of [PBS](https://ethereum.org/nl/roadmap/pbs/), Ethereum broke from a single-auction model into a two-sided marketplace that is constantly extracting value from users. 
 Builders facilitate an initial auction to determine what transaction orderings (aka bundles) will be included in a block merging mutually non-exclusive bundles to produce the highest paying block.
 Proposers then facilitate a second auction to decide which block will ultimately be committed to the chain next. 
-So users are already, in fact, participating in “block auction”-style transaction settlement. 
+So users are already, in fact, participating in "block auction"-style transaction settlement. 
 CoW Protocol simply pulls this mechanism forward to the order creation stage and reverses the incentive to maximize the value the user retains instead of extracting it.
 
 In the context of trading, batch auctions work similarly to block building auctions. 

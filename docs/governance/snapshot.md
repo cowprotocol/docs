@@ -40,7 +40,7 @@ The super admin is able to control all of the spaces' parameters including addin
 
 #### Regular admins
 
-[Regular admins](https://snapshot.org/#/cow.eth/about) can do all of what the super admin can do except adding and removing admins. As of CIP-31 CoW DAO’s snapshot space has no admins except the [CoW DAO main safe](https://app.safe.global/eth:0xcA771eda0c70aA7d053aB1B25004559B918FE662/home) as a super admin.
+[Regular admins](https://snapshot.org/#/cow.eth/about) can do all of what the super admin can do except adding and removing admins. As of CIP-31 CoW DAO's snapshot space has no admins except the [CoW DAO main safe](https://app.safe.global/eth:0xcA771eda0c70aA7d053aB1B25004559B918FE662/home) as a super admin.
 
 #### Moderators
 
@@ -48,7 +48,7 @@ Moderators can create and delete proposals but cannot change any space parameter
 
 #### Authors
 
-Authors cannot change any of the space parameters but they are able to create proposals.  As of CIP-31, there are no authors on CoW DAO’s snapshot space. Anyone with at least 10K COW holding can create proposals on snapshot according the the [governance process](process). 
+Authors cannot change any of the space parameters but they are able to create proposals.  As of CIP-31, there are no authors on CoW DAO's snapshot space. Anyone with at least 10K COW holding can create proposals on snapshot according the the [governance process](process). 
 
 ## Snapshot strategies
 
@@ -65,6 +65,6 @@ To ensure a democratic and fair voting process within the CoW DAO, the organizat
 | 7 | Balance of delegated ERC20s COW | COW | Ethereum Mainnet | Yes |
 | 8 | Balance of delegated ERC20s COW | COW | Gnosis Chain  | Yes  |
 
-The aggregate voting power of a CoW DAO member is the sum of their balances across all eight strategies. This system ensures that every token, whether it is vCOW or COW, and regardless of its location or delegation status, contributes to the overall governance process. By accounting for both vested and liquid tokens, and considering their respective delegation choices, the CoW DAO captures a complete snapshot of an individual’s vested interests and participation in the ecosystem. This comprehensive approach underlines the CoW DAO's commitment to an inclusive and representative governance structure, where each stakeholder's voice is heard and weighted accurately in the collective decision-making process.
+The aggregate voting power of a CoW DAO member is the sum of their balances across all eight strategies. This system ensures that every token, whether it is vCOW or COW, and regardless of its location or delegation status, contributes to the overall governance process. By accounting for both vested and liquid tokens, and considering their respective delegation choices, the CoW DAO captures a complete snapshot of an individual's vested interests and participation in the ecosystem. This comprehensive approach underlines the CoW DAO's commitment to an inclusive and representative governance structure, where each stakeholder's voice is heard and weighted accurately in the collective decision-making process.
 
 To confirm, the current deployed voting strategies can be found [here](https://snapshot.org/#/cow.eth/about).
