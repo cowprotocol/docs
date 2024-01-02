@@ -10,7 +10,7 @@ All orders on CoW Protocol have the ability to capture surplus.
 This means that if there is a positive difference between the quote you receive before placing your order and the price that the order executes at, you will receive the difference as surplus.
 CoW Protocol even offers surplus on [limit orders](../order-types/limit-orders) and [TWAP orders](../order-types/twap-orders)!
 
-When orders do not receive significant price surplus, [solvers](./introduction/solvers) still find the optimal execution path for each trade across all available on-chain and off-chain liquidity.
+When orders do not receive significant price surplus, [solvers](../introduction/solvers) still find the optimal execution path for each trade across all available on-chain and off-chain liquidity.
 With CoW Protocol, users can receive better prices than they would on another DEX or DEX aggregator thanks to:
 
 - **Efficient Order Routing:** Solvers search all available on-chain liquidity to get the best rates for the trades in a batch at the time the orders are executed.

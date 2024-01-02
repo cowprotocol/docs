@@ -1,4 +1,13 @@
 {
     "position": 1,
-    "label": "💡 Concepts"
+    "label": "💡 Concepts",
+    "collapsible": true,
+    "collapsed": true,
+    "link": {
+        "type": "generated-index",
+        "title": "💡 Concepts"
+    },
+    "customProps": {
+        "description": "This is the concepts section."
+    }
 }

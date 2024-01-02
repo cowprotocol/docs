@@ -65,7 +65,7 @@ sequenceDiagram
 
 After selecting the parameters of their trade, most traders want to see an estimate of how much tokens they will receive in order to pick a reasonable limit price.
 For that they send a `/quote` request to the orderbook. 
-The orderbook is connected to a subset of solvers that are participating in the competitions (technically their [**drivers**](./driver)) and creates price estimates by sending these solvers a request to solve a batch auction containing just a single order.
+The orderbook is connected to a subset of solvers that are participating in the competitions (technically their [**drivers**](./solver/driver)) and creates price estimates by sending these solvers a request to solve a batch auction containing just a single order.
 
 The orderbook may simulate quotes if possible to make sure their proposed solution would pass given the current state of the chain and picks the one maximizing the traders' output (the solver winning the quote is rewarded by the protocol). 
 The quote is turned into an order that is returned to the trader and is ready to be signed by the user.
