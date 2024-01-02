@@ -8,6 +8,6 @@ To ensure the execution of pre-hooks, make sure the trade is only possible if th
 :::caution
 
 Hook execution is not enforced by the CoW Protocol smart contracts.
-Solvers must include them as part of the [social consensus rules](../auctions/social-consensus).
+Solvers must include them as part of the [social consensus rules](../auctions/competition-rules).
 
 :::

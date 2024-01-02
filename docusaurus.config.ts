@@ -28,8 +28,8 @@ const config: Config = {
   organizationName: 'cowprotocol', // Usually your GitHub org/user name.
   projectName: 'docs-v2', // Usually your repo name.
 
-  onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'warn',
+  onBrokenLinks: 'throw',
+  onBrokenMarkdownLinks: 'throw',
 
   trailingSlash,
 

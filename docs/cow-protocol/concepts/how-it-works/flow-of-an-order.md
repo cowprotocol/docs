@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Flow of an order
 
-Rather than creating executable on-chain transactions, CoW Protocol users submit their orders as signed [*intent to trade*](../introduction/intents-to-trade) messages.
+Rather than creating executable on-chain transactions, CoW Protocol users submit their orders as signed [*intent to trade*](../introduction/intents) messages.
 This allows solvers to find the optimal execution path for the batch of orders before committing them on-chain.
 
 Let's bring all of our main concepts together by taking a look at the flow of an order through CoW Protocol.

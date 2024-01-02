@@ -18,7 +18,7 @@ The open-source Rust implementation can be found in the [driver](https://github.
 It has a few CLI parameters which can be displayed using `--help` but is mainly configured using a single `.toml` file.
 A documented example file can be found [here](https://github.com/cowprotocol/services/blob/main/crates/driver/example.toml).
 
-The `driver` sits between the [autopilot](autopilot) and a [solver engine](solver-engine) and acts as a intermediary between the two.
+The `driver` sits between the [autopilot](../autopilot) and a [solver engine](solver-engine) and acts as a intermediary between the two.
 In case you decide to run the driver for a solver engine the lifecycle of an auction looks like this.
 
 ```mermaid

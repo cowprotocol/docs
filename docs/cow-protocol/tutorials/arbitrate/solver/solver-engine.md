@@ -30,7 +30,7 @@ Each mode comes with its own set of configuration parameters (cf. [examples](htt
 
 ## Architecture
 
-Solver Engines implement the [API](../../reference/apis/solver) expected by the driver component.
+Solver Engines implement the [API](../../../reference/apis/solver) expected by the driver component.
 
 ```mermaid
 sequenceDiagram

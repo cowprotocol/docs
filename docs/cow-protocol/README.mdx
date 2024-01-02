@@ -1,12 +1,14 @@
 # CoW Protocol
 
-CoW Protocol is a meta-DEX aggregation protocol that leverages [trade intents](cow-protocol/concepts/introduction/intents) and [batch auctions](cow-protocol/concepts/introduction/batch-auctions) to find users better prices for crypto trades.
+CoW Protocol is a meta-DEX aggregation protocol that leverages [trade intents](/cow-protocol/concepts/introduction/intents) and [batch auctions](/cow-protocol/concepts/introduction/batch-auctions) to find users better prices for crypto trades.
 
 ![What is CoW Protocol](/img/what-is-cow-protocol.png)
 
-The protocol relies on third parties known as "[solvers](cow-protocol/concepts/introduction/solvers)" to find the best execution paths for trade intents — signed messages that specify conditions for executing transaction on Ethereum and EVM-compatable chains. 
+The protocol relies on third parties known as "[solvers](/cow-protocol/concepts/introduction/solvers)" to find the best execution paths for trade intents — signed messages that specify conditions for executing transaction on Ethereum and EVM-compatable chains. 
 
-Upon first receiving a user intent, the protocol groups it alongside other pending intents in a [batch](cow-protocol/concepts/introduction/batch-auctions). When executing trade intents, solvers first try to find a [*Coincidence of Wants (CoW)](cow-protocol/concepts/introduction/coincidence-of-wants)* within the existing batch to offer an optimal price over any on-chain market maker. If the protocol does not find a CoW, the solvers search all available on-chain and off-chain liquidity to find the best price for a set of trade intents within a batch.
+Upon first receiving a user intent, the protocol groups it alongside other pending intents in a [batch](/cow-protocol/concepts/introduction/batch-auctions).
+When executing trade intents, solvers first try to find a [*Coincidence of Wants (CoW)*](/cow-protocol/concepts/how-it-works/coincidence-of-wants) within the existing batch to offer an optimal price over any on-chain market maker.
+If the protocol does not find a CoW, the solvers search all available on-chain and off-chain liquidity to find the best price for a set of trade intents within a batch.
 
 Liquidity sources include:
 
@@ -16,8 +18,8 @@ Liquidity sources include:
 
 This delegated trade execution architecture makes CoW Protocol a meta-DEX aggregator, or an aggregator of aggregators.
 
-**To learn more about the concepts CoW Protocol makes use of, see [Concepts](cow-protocol/concepts).**
+**To learn more about the concepts CoW Protocol makes use of, see [Concepts](/category/-concepts).**
 
-**For more info on how to use CoW Protocol or CoW Swap, see [Tutorials](cow-protocol/tutorials).**
+**For more info on how to use CoW Protocol or CoW Swap, see [Tutorials](/category/-tutorials).**
 
-**To dive into the technical details, see [Technical reference](cow-protocol/reference).**
+**To dive into the technical details, see [Technical reference](/category/-technical-reference).**
