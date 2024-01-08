@@ -52,6 +52,7 @@ html[data-theme='dark']:root {
   --ifm-background-color: #061224;
   --ifm-background-surface-color: #081d39;
   --ifm-color-content: var(--ifm-color-primary);
+  --docsearch-highlight-color: var(--ifm-color-primary-lighter);
   
 }
 
@@ -126,4 +127,8 @@ html .menu_node_modules-\@docusaurus-theme-classic-lib-theme-DocSidebar-Desktop-
 
 .footer__copyright {
   font-size: 0.7rem;
+}
+
+div.theme-doc-markdown > div img {
+  margin-bottom: 1em!important;
 }
