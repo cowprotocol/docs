@@ -166,7 +166,7 @@ struct Data {
 
 :::note
 
-Orders are not matched by the CoW Protocol infrastructure unless the `quoteId` refers to a valid and fresh quote in the API.
+Users _should_ provide a valid `quoteId` when placing an order. This is not enforced by the Eth-flow contract, however quotes may be used as a basis to determine whether the automated refunding service should refund an order that has expired or not. In all cases, the user is able to manually refund the portion of their order that has not been matched.
 
 :::
 
