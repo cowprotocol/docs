@@ -15,7 +15,7 @@ CoW Protocol is a trading protocol that leverages [intents](../introduction/int
 The protocol groups orders together into batches and relies on a competition between third parties, known as [solvers](../introduction/solvers), to find the best execution price for each batch.
 
 Solvers search all available on-chain liquidity and even tap off-chain private inventory to fill orders.
-If two orders in a batch are swapping opposite assets, solvers match them together in a peer-to-peer [*Coincidence of Wants (CoW)*](cow-protocol/concepts/how-it-works/coincidence-of-wants) trade.
+If two orders in a batch are swapping opposite assets, solvers match them together in a peer-to-peer [*Coincidence of Wants (CoW)*](./coincidence-of-wants) trade.
 
 Once they have found their solutions, solvers compete to win the right to settle a batch of orders.
 The protocol runs a solver competition and picks the "winning" solver to settle each batch of orders, defined as the solver that can maximize surplus for traders.
