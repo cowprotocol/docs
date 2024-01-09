@@ -16,7 +16,7 @@ A settlement comprises of:
 - A list of trades to execute
 - A list of interactions
 
-A solver monitors on-chain liquidity and on receiving [batch-auction instances](../../core/auctions/schema#instances-input) from the Protocol, it determines which orders can be matched, the clearing prices of the settlement, and what extra liquidity is necessary from the blockchain.
+A solver monitors on-chain liquidity and on receiving batch-auction instances from the Protocol, it determines which orders can be matched, the clearing prices of the settlement, and what extra liquidity is necessary from the blockchain.
 
 Normally, all orders in a settlement are settled with _uniform clearing prices_, which means that every user receives the same price for the same token.
 

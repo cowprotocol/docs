@@ -80,7 +80,7 @@ sequenceDiagram
 
 ### Cutting auctions
 
-The autopilot builds an [auction](/cow-protocol/reference/core/auctions/schema) that includes all tradable orders.
+The autopilot builds an auction that includes all tradable orders.
 To handle this, it needs to maintain a complete overview of the protocol.
 
 Much of the order data it needs is collected through the database, which is shared with the orderbook.
