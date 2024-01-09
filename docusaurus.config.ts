@@ -14,7 +14,7 @@ const trailingSlash = process.env.TRAILING_SLASH ? process.env.TRAILING_SLASH ==
 
 const config: Config = {
   title: 'CoW Protocol Documentation',
-  tagline: 'Tagline here',
+  tagline: 'Better than the best prices',
   favicon: 'img/favicon.png',
 
   // Set the production url of your site here
@@ -197,11 +197,6 @@ const config: Config = {
         disableSwitch: false,
         respectPrefersColorScheme: true,
       },
-      algolia: {
-        appId: 'VTLPKRZC26',
-        apiKey: '5b23e6db64cdeeac6da5569f69d77149',
-        indexName: 'betacow',
-      }
     } satisfies Preset.ThemeConfig,
 };
 
