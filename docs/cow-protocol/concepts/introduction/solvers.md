@@ -22,4 +22,4 @@ Solvers are compensated in COW tokens for settling batches, incentivizing them t
 Solvers can move tokens on behalf of the user using the ERC-20 approvals that the user granted to the [vault relayer](/cow-protocol/reference/contracts/core/vault-relayer) contract.
 The [settlement](/cow-protocol/reference/contracts/core/settlement) contract, meanwhile, verifies the signature of the user's intent and ensures that execution happens according to the limit price and quantity specified by the user.
 
-Anyone with some DeFi knowledge and ability to code an optimizations algorithm can [create a solver](/cow-protocol/tutorials/solvers/create).
+Anyone with some DeFi knowledge and ability to code an optimizations algorithm can create a solver.

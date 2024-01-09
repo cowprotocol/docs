@@ -85,7 +85,7 @@ As soon as it would revert the driver cancels the transaction to cut the losses 
 
 The driver can be configured to use different submission strategies which it dynamically choses based on the potential of MEV for a settlement.
 If the settlement does not expose any MEV (e.g. it executes all trades without AMMs) it's safe and most efficient to directly submit to the public mempool.
-However, if a settlement exposes MEV the driver would submit to an MEV-protected RPC like [MEVBlocker](/mevblocker).
+However, if a settlement exposes MEV the driver would submit to an MEV-protected RPC like [MEVBlocker](https://mevblocker.io).
 
 ## Considerations
 
