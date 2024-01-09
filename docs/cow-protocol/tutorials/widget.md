@@ -1,3 +1,7 @@
+---
+sidebar_position: 4
+---
+
 # CoW Swap Widget
 
 Integrate the power of `CoW Swap` into your product!
