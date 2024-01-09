@@ -14,7 +14,7 @@ const trailingSlash = process.env.TRAILING_SLASH ? process.env.TRAILING_SLASH ==
 
 const config: Config = {
   title: 'CoW Protocol Documentation',
-  tagline: 'Tagline here',
+  tagline: 'Better than the best prices',
   favicon: 'img/favicon.png',
 
   // Set the production url of your site here
