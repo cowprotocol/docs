@@ -2,23 +2,24 @@
 sidebar_position: 1
 ---
 
-import Image from '@theme/IdealImage';
-import TokenApprovalWarning from '../../../partials/_token_approvals.mdx';
-import ReceiverAndOrderWarning from '../../../partials/_receiver.mdx';
-import CancellationOffChainOnChain from '../../../partials/_cancellation_offchain_versus_onchain.mdx'
-
+import Image from "@theme/IdealImage"
+import TokenApprovalWarning from "../../../partials/_token_approvals.mdx"
+import ReceiverAndOrderWarning from "../../../partials/_receiver.mdx"
+import CancellationOffChainOnChain from "../../../partials/_cancellation_offchain_versus_onchain.mdx"
 
 # Market orders (Swap)
 
 Swapping is the bread and butter of CoW Protocol! Let's swap some tokens!
 
 ## Connect wallet
-Go to [CoW Swap](https://swap.cow.fi/#/swap?utm_source=docs.cow.fi&utm_content=swap-tutorial) and connect your web3 wallet. 
+
+Go to [CoW Swap](https://swap.cow.fi/#/swap?utm_source=docs.cow.fi&utm_content=swap-tutorial) and connect your web3 wallet.
 
 :::note
 
 If you don't have a web3 wallet yet, you can easily get one! Here are some suggestions:
-- Use a browser extension wallet such as [Rabby](https://rabby.io/) or [Metamask](https://metamask.io/download.html)
+
+- Use a browser extension wallet such as [Rabby](https://rabby.io/) or [Metamask](https://metamask.io/download/)
 - A hardware wallet such as [Trezor](https://trezor.io/)
 - A Smart Contract Wallet such as [Safe](https://app.safe.global)
 
@@ -26,27 +27,34 @@ Please do your own research on the advantages and disadvantages of each wallet t
 
 :::
 
-
-<Image img={require('/img/cowswap/swap_connect1.png')} alt="Connect your wallet to CoW Swap" />
+<Image
+  img={require("/img/cowswap/swap_connect1.png")}
+  alt="Connect your wallet to CoW Swap"
+/>
 Click on `Connect wallet`.
 
-<Image img={require('/img/cowswap/swap_connect2.png')} alt="Pick one wallet from the available methods" />
+<Image
+  img={require("/img/cowswap/swap_connect2.png")}
+  alt="Pick one wallet from the available methods"
+/>
 Select one of the available wallets.
-
-
 
 ## Select tokens
 
 Consider an example swapping 0.05 `WETH` for `COW`.
 
-<Image img={require('/img/cowswap/swap_need_approval.png')} alt="GPv2VaultRelayer approval required" />
+<Image
+  img={require("/img/cowswap/swap_need_approval.png")}
+  alt="GPv2VaultRelayer approval required"
+/>
 
-When you do a swap on CoW Swap for the first time, you must give approval for the [_vault relayer_](/cow-protocol/reference/contracts/core/vault-relayer) contract to spend your token (in this case, `WETH`). 
+When you do a swap on CoW Swap for the first time, you must give approval for the [_vault relayer_](/cow-protocol/reference/contracts/core/vault-relayer) contract to spend your token (in this case, `WETH`).
 This is because this is the contract that will pull the `WETH` from your wallet and send it to the [_settlement_](/cow-protocol/reference/contracts/core/settlement) contract that will co-ordinate the swap on your behalf.
 
 Both contracts are audited, battle-tested and non-upgradeable.
 
 Moreover, the settlement contract is the only address that can request the vault relayer to pull your funds and **only after verifying** both that:
+
 1. Your order was signed by you
 2. and that you will receive at least your limit execution price or better
 
@@ -60,7 +68,10 @@ You don't have to worry about this, as CoW Swap will automatically detect if the
 
 Just look for the `Gas-free approval` flag when picking the tokens to get started:
 
-<Image img={require('/img/cowswap/swap_gas-free_approval.png')} alt="Token selector showing a list of tokens matching the filter 'DAI', where some have the tag 'Gas-free approval'" />
+<Image
+  img={require("/img/cowswap/swap_gas-free_approval.png")}
+  alt="Token selector showing a list of tokens matching the filter 'DAI', where some have the tag 'Gas-free approval'"
+/>
 
 :::
 
@@ -70,7 +81,10 @@ Trade of gas-free compatible tokens is supported on Swap and [Limit](/cow-protoc
 
 :::
 
-<Image img={require('/img/cowswap/swap_approval_default.png')} alt="GPv2VaultRelayer default approval" />
+<Image
+  img={require("/img/cowswap/swap_approval_default.png")}
+  alt="GPv2VaultRelayer default approval"
+/>
 
 By default, CoW Swap prompts you to give [vault relayer](/cow-protocol/reference/contracts/core/vault-relayer) an "unlimited" allowance for the sell token.
 
@@ -83,65 +97,76 @@ This has the benefits of:
 
 Once the `approve` transaction is confirmed, you can proceed to swap!
 
-<Image img={require('/img/cowswap/swap_approved.png')} alt="GPv2VaultRelayer approved" />
-
-
+<Image
+  img={require("/img/cowswap/swap_approved.png")}
+  alt="GPv2VaultRelayer approved"
+/>
 
 :::tip
 
 CoW Swap has a special integration with [Safe](https://app.safe.global) when opened as a [Safe app](https://app.safe.global/share/safe-app?appUrl=https%3A%2F%2Fswap.cow.fi&chain=eth), where the approval and order placement transactions can be combined into a single Safe transaction.
 
-<Image img={require('/img/cowswap/swap_safe_approval_bundle_1.png')} alt="Approval and order placement bundle with Safe CoW Swap app. View of CoW Swap SWAP form." />
+<Image
+  img={require("/img/cowswap/swap_safe_approval_bundle_1.png")}
+  alt="Approval and order placement bundle with Safe CoW Swap app. View of CoW Swap SWAP form."
+/>
 
-<Image img={require('/img/cowswap/swap_safe_approval_bundle_2.png')} alt="Approval and order placement bundle with Safe CoW Swap app. View of Safe's Confirm transaction screen." />
+<Image
+  img={require("/img/cowswap/swap_safe_approval_bundle_2.png")}
+  alt="Approval and order placement bundle with Safe CoW Swap app. View of Safe's Confirm transaction screen."
+/>
 
 :::
 
-
 ## Confirm swap
 
-When you're ready to swap, click the "Swap" button. 
+When you're ready to swap, click the "Swap" button.
 
-You will be prompted to confirm the swap. This is when you can review the details of the swap (i.e. the quote, the slippage tolerance, etc.). 
+You will be prompted to confirm the swap. This is when you can review the details of the swap (i.e. the quote, the slippage tolerance, etc.).
 
 If you're happy with the details, click "Confirm Swap". You will be prompted to sign the order.
 
 <ReceiverAndOrderWarning />
 
-<Image img={require('/img/cowswap/swap_confirm.png')} alt="Confirm Swap" />
+<Image img={require("/img/cowswap/swap_confirm.png")} alt="Confirm Swap" />
 
 At this stage, your wallet will prompt you to sign the order. The user interface for this will vary depending on your wallet.
 
-<Image img={require('/img/cowswap/swap_signing.png')} alt="Signing Swap" />
+<Image img={require("/img/cowswap/swap_signing.png")} alt="Signing Swap" />
 
 Once the order has been signed, it will be submitted to CoW Protocol where it is now ready to be executed! 🎉
 
-<Image img={require('/img/cowswap/swap_confirmed.png')} alt="Swap confirmed" />
-
+<Image img={require("/img/cowswap/swap_confirmed.png")} alt="Swap confirmed" />
 
 ## Track your order
+
 Your order will be in the order book and ready to be executed.
 
-* CoW Swap will automatically notify in a pop-up message once your order is executed.
-* You can keep track of the order status by checking the recent history (click on your connected wallet address in the top right corner).
-* You can also view your order on [CoW Explorer](/cow-protocol/tutorials/cow-explorer).
+- CoW Swap will automatically notify in a pop-up message once your order is executed.
+- You can keep track of the order status by checking the recent history (click on your connected wallet address in the top right corner).
+- You can also view your order on [CoW Explorer](/cow-protocol/tutorials/cow-explorer).
 
-<Image img={require('/img/cowswap/swap_account.png')} alt="Check Account" />
+<Image img={require("/img/cowswap/swap_account.png")} alt="Check Account" />
 
 ## Cancel your order
+
 Changed your mind? Not a problem! CoW Swap makes it easy and gas-less[^1] to cancel your order.
 
 [^1]: Only `off-chain` cancellations are gas-less. `on-chain` cancellations - as the name states - require a regular network transaction.
 
-
 First, open the activity panel by clicking on your address in the top right corner.
 
-<Image img={require('/img/cowswap/swap_activity-modal.png')} alt="Button to open activity modal" />
-
+<Image
+  img={require("/img/cowswap/swap_activity-modal.png")}
+  alt="Button to open activity modal"
+/>
 
 Find your pending order in the list and click on `Cancel order`.
 
-<Image img={require('/img/cowswap/swap_cancel-pending-order.png')} alt="Activity panel with pending order" />
+<Image
+  img={require("/img/cowswap/swap_cancel-pending-order.png")}
+  alt="Activity panel with pending order"
+/>
 
 Confirm the cancellation, picking which mode of cancellation you'd like: `off-chain` (default) or `on-chain`.
 

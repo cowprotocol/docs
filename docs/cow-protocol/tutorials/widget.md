@@ -73,7 +73,7 @@ You can pass the wallet provider from your application to seamlessly use the wid
 Also, you can not specify the provider, in this case the widget will work in standalone mode with the ability to connect
 any wallet supported in CoW Swap.
 
-A provider must comply with [EIP-1193](https://eips.ethereum.org/EIPS/eip-11930) and implement the interface:
+A provider must comply with [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) and implement the interface:
 
 ```typescript
 interface EthereumProvider {
