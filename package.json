@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@docusaurus/core": "^3.1.0",
+    "@docusaurus/plugin-google-gtag": "^3.1.0",
     "@docusaurus/plugin-ideal-image": "^3.1.0",
     "@docusaurus/preset-classic": "^3.1.0",
     "@docusaurus/remark-plugin-npm2yarn": "^3.1.0",
