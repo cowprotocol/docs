@@ -31,6 +31,7 @@
     "clsx": "^2.0.0",
     "docusaurus-json-schema-plugin": "^1.7.0",
     "hast-util-is-element": "1.1.0",
+    "node-fetch": "^3.3.2",
     "prism-react-renderer": "^2.3.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
@@ -67,5 +68,6 @@
   },
   "engines": {
     "node": ">=16.14"
-  }
+  },
+  "type": "module"
 }
