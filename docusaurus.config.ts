@@ -5,25 +5,16 @@ import type * as Preset from "@docusaurus/preset-classic"
 import remarkMath from "remark-math"
 import rehypeKatex from "rehype-katex"
 
-// if you are using dotenv, you can load the env vars here
-require("dotenv").config()
-
-const url = process.env.URL ?? "http://localhost:3000"
-const baseUrl = process.env.BASE_URL ?? "/"
-const trailingSlash = process.env.TRAILING_SLASH
-  ? process.env.TRAILING_SLASH === "true"
-  : false
-
 const config: Config = {
   title: "CoW Protocol Documentation",
   tagline: "Better than the best prices",
   favicon: "img/favicon.png",
 
   // Set the production url of your site here
-  url,
+  url: "https://docs.cow.fi",
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl,
+  baseUrl: "/",
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
@@ -33,7 +24,7 @@ const config: Config = {
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "throw",
 
-  trailingSlash,
+  trailingSlash: false,
 
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
