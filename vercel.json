@@ -83,7 +83,7 @@
         },
         {
             "source": "/overview/introduction",
-            "destination": "/cow-protocol/concepts/introduction/intents",
+            "destination": "/cow-protocol",
             "statusCode": 301
         },
         {
@@ -138,7 +138,7 @@
         },
         {
             "source": "/solvers/in-depth-solver-specification",
-            "destination": "/cow-protocol/reference/core/auctions/the-problem",
+            "destination": "/cow-protocol/reference/core/auctions",
             "statusCode": 301
         },
         {
