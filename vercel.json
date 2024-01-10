@@ -24,7 +24,7 @@
         {
             "source": "/cow-sdk/querying-the-cow-subgraph",
             "destination": "https://learn.cow.fi/tutorial/getting-started-order",
-            "statusCode": 301
+            "permanent": false
         },
         {
             "source": "/cow-sdk/sign-and-post-orders",
@@ -39,7 +39,7 @@
         {
             "source": "/front-end/cow-protocol-custom-linking",
             "destination": "/cow-protocol/tutorials/cow-swap",
-            "statusCode": 301
+            "permanent": false
         },
         {
             "source": "/front-end/cowswap",
