@@ -3,10 +3,10 @@ https://docs.cow.fi/cow-sdk,https://beta.docs.cow.fi/cow-protocol/reference/sdks
 https://docs.cow.fi/cow-sdk/cow-api,https://learn.cow.fi/tutorial/getting-started-order,https://learn.cow.fi/tutorial/getting-started-order,Y,
 https://docs.cow.fi/cow-sdk/getting-started-with-the-sdk,https://learn.cow.fi/tutorial/getting-started-order,https://learn.cow.fi/tutorial/getting-started-order,Y,
 https://docs.cow.fi/cow-sdk/order-meta-data-appdata,https://learn.cow.fi/tutorial/simple-app-data,https://learn.cow.fi/tutorial/simple-app-data,Y,
-https://docs.cow.fi/cow-sdk/querying-the-cow-subgraph,https://learn.cow.fi/tutorial/getting-started-order,https://learn.cow.fi/tutorial/getting-started-order,Y,"Doesn't exist yet, redirects to tutorial home"
+https://docs.cow.fi/cow-sdk/querying-the-cow-subgraph,https://learn.cow.fi/tutorial/getting-started-order,https://learn.cow.fi/tutorial/getting-started-order,N,"Doesn't exist yet, redirects to tutorial home"
 https://docs.cow.fi/cow-sdk/sign-and-post-orders,https://learn.cow.fi/tutorial/sign-order,https://learn.cow.fi/tutorial/sign-order,Y,
 https://docs.cow.fi/front-end/cow-explorer,https://beta.docs.cow.fi/cow-protocol/tutorials/cow-explorer,https://docs.cow.fi/cow-protocol/tutorials/cow-explorer,Y,
-https://docs.cow.fi/front-end/cow-protocol-custom-linking,https://beta.docs.cow.fi/cow-protocol/tutorials/cow-swap,https://docs.cow.fi/cow-protocol/tutorials/cow-swap,Y,New content coming soon (TM)
+https://docs.cow.fi/front-end/cow-protocol-custom-linking,https://beta.docs.cow.fi/cow-protocol/tutorials/cow-swap,https://docs.cow.fi/cow-protocol/tutorials/cow-swap,N,New content coming soon (TM)
 https://docs.cow.fi/front-end/cowswap,https://beta.docs.cow.fi/cow-protocol/tutorials/cow-swap,https://docs.cow.fi/cow-protocol/tutorials/cow-swap,Y,
 https://docs.cow.fi/front-end/creating-app-ids,https://learn.cow.fi/tutorial/simple-app-data,https://learn.cow.fi/tutorial/simple-app-data,Y,
 https://docs.cow.fi/front-end/introduction,https://beta.docs.cow.fi/cow-protocol/tutorials/cow-swap,https://docs.cow.fi/cow-protocol/tutorials/cow-swap,Y,
