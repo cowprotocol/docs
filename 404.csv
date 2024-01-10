@@ -15,7 +15,7 @@ https://docs.cow.fi/off-chain-services/introduction,https://beta.docs.cow.fi/cow
 https://docs.cow.fi/overview/batch-auctions,https://beta.docs.cow.fi/cow-protocol/concepts/introduction/batch-auctions,https://docs.cow.fi/cow-protocol/concepts/introduction/batch-auctions,Y,
 https://docs.cow.fi/overview/coincidence-of-wants,https://beta.docs.cow.fi/cow-protocol/concepts/how-it-works/coincidence-of-wants,https://docs.cow.fi/cow-protocol/concepts/how-it-works/coincidence-of-wants,Y,
 https://docs.cow.fi/overview/cow-hooks,https://beta.docs.cow.fi/cow-protocol/concepts/order-types/cow-hooks,https://docs.cow.fi/cow-protocol/concepts/order-types/cow-hooks,Y,
-https://docs.cow.fi/overview/introduction,https://beta.docs.cow.fi/cow-protocol/concepts/introduction/intents,https://docs.cow.fi/cow-protocol/concepts/introduction/intents,Y,
+https://docs.cow.fi/overview/introduction,https://beta.docs.cow.fi/cow-protocol/concepts/introduction/intents,https://docs.cow.fi/cow-protocol,Y,
 https://docs.cow.fi/overview/learnings-and-improvements-of-gpv1,https://beta.docs.cow.fi/cow-protocol,https://docs.cow.fi/cow-protocol,Y,"Doesn't exist, routed back to home"
 https://docs.cow.fi/overview/road-to-decentralization,https://beta.docs.cow.fi/cow-protocol,https://docs.cow.fi/cow-protocol,Y,"Doesn't exist, routed back to home"
 https://docs.cow.fi/overview/signed-orders,https://beta.docs.cow.fi/cow-protocol/concepts/introduction/intents#,https://docs.cow.fi/cow-protocol/concepts/introduction/intents#,Y,"Doesn't exist, routed to nearest (ie. intents)"
@@ -26,7 +26,7 @@ https://docs.cow.fi/smart-contracts/programmatic-order-framework,https://beta.do
 https://docs.cow.fi/smart-contracts/settlement-contract,https://beta.docs.cow.fi/cow-protocol/reference/contracts/core/settlement,https://docs.cow.fi/cow-protocol/reference/contracts/core/settlement,Y,
 https://docs.cow.fi/smart-contracts/vault-relayer,https://beta.docs.cow.fi/cow-protocol/reference/contracts/core/vault-relayer,https://docs.cow.fi/cow-protocol/reference/contracts/core/vault-relayer,Y,
 https://docs.cow.fi/solvers/how-to-build-a-solver,https://beta.docs.cow.fi/cow-protocol/tutorials/solvers,https://docs.cow.fi/cow-protocol/tutorials/solvers,N,"Doesn't exist yet, routed to sovlers section of tutorials (where it will be created)"
-https://docs.cow.fi/solvers/in-depth-solver-specification,https://beta.docs.cow.fi/cow-protocol/reference/core/auctions/the-problem,https://docs.cow.fi/cow-protocol/reference/core/auctions/the-problem,Y,
+https://docs.cow.fi/solvers/in-depth-solver-specification,https://beta.docs.cow.fi/cow-protocol/reference/core/auctions/the-problem,https://docs.cow.fi/cow-protocol/reference/core/auctions,Y,
 https://docs.cow.fi/solvers/solvers,https://beta.docs.cow.fi/cow-protocol/tutorials/solvers,https://docs.cow.fi/cow-protocol/tutorials/solvers,Y,
 https://docs.cow.fi/tutorials/build-on-top-of-cow-protocol,https://beta.docs.cow.fi/cow-protocol/tutorials/building,https://docs.cow.fi/cow-protocol/tutorials/building,Y,
 https://docs.cow.fi/tutorials/cowswap-trades-with-a-gnosis-safe-wallet,https://learn.cow.fi/tutorial/create-pre-signed-order,https://learn.cow.fi/tutorial/create-pre-signed-order,Y,
