@@ -28,7 +28,7 @@ const config: Config = {
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: "cowprotocol", // Usually your GitHub org/user name.
-  projectName: "docs-v2", // Usually your repo name.
+  projectName: "docs", // Usually your repo name.
 
   onBrokenLinks: "throw",
   onBrokenMarkdownLinks: "throw",
@@ -70,7 +70,7 @@ const config: Config = {
           rehypePlugins: [rehypeKatex],
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl: "https://github.com/cowprotocol/docs-v2/tree/main",
+          editUrl: "https://github.com/cowprotocol/docs/tree/main",
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
