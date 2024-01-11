@@ -117,6 +117,10 @@ html[data-theme='dark'] .swagger-ui .model-toggle:after {
   --ifm-footer-link-hover-color: #fff;
 }
 
+html[data-theme='light'] .footer--dark {
+  --ifm-footer-link-hover-color: #052B65;
+}
+
 .navbar__items {
   justify-content: space-between;
 }
