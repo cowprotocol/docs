@@ -1,3 +1,595 @@
 {
-    "cleanUrls": true
+    "cleanUrls": true,
+    "redirects": [
+        {
+            "source": "/cow-sdk",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-sdk/cow-api",
+            "destination": "https://learn.cow.fi/tutorial/getting-started-order",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-sdk/getting-started-with-the-sdk",
+            "destination": "https://learn.cow.fi/tutorial/getting-started-order",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-sdk/order-meta-data-appdata",
+            "destination": "https://learn.cow.fi/tutorial/simple-app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-sdk/querying-the-cow-subgraph",
+            "destination": "https://learn.cow.fi/tutorial/getting-started-order",
+            "permanent": false
+        },
+        {
+            "source": "/cow-sdk/sign-and-post-orders",
+            "destination": "https://learn.cow.fi/tutorial/sign-order",
+            "statusCode": 301
+        },
+        {
+            "source": "/front-end/cow-explorer",
+            "destination": "/cow-protocol/tutorials/cow-explorer",
+            "statusCode": 301
+        },
+        {
+            "source": "/front-end/cow-protocol-custom-linking",
+            "destination": "/cow-protocol/tutorials/cow-swap",
+            "permanent": false
+        },
+        {
+            "source": "/front-end/cowswap",
+            "destination": "/cow-protocol/tutorials/cow-swap",
+            "statusCode": 301
+        },
+        {
+            "source": "/front-end/creating-app-ids",
+            "destination": "https://learn.cow.fi/tutorial/simple-app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/front-end/introduction",
+            "destination": "/cow-protocol/tutorials/cow-swap",
+            "statusCode": 301
+        },
+        {
+            "source": "/off-chain-services/api",
+            "destination": "/cow-protocol/reference/apis/orderbook",
+            "statusCode": 301
+        },
+        {
+            "source": "/off-chain-services/introduction",
+            "destination": "/cow-protocol/tutorials/arbitrate",
+            "statusCode": 301
+        },
+        {
+            "source": "/overview/batch-auctions",
+            "destination": "/cow-protocol/concepts/introduction/batch-auctions",
+            "statusCode": 301
+        },
+        {
+            "source": "/overview/coincidence-of-wants",
+            "destination": "/cow-protocol/concepts/how-it-works/coincidence-of-wants",
+            "statusCode": 301
+        },
+        {
+            "source": "/overview/cow-hooks",
+            "destination": "/cow-protocol/concepts/order-types/cow-hooks",
+            "statusCode": 301
+        },
+        {
+            "source": "/overview/introduction",
+            "destination": "/cow-protocol",
+            "statusCode": 301
+        },
+        {
+            "source": "/overview/learnings-and-improvements-of-gpv1",
+            "destination": "/cow-protocol",
+            "statusCode": 301
+        },
+        {
+            "source": "/overview/road-to-decentralization",
+            "destination": "/cow-protocol",
+            "statusCode": 301
+        },
+        {
+            "source": "/overview/signed-orders",
+            "destination": "/cow-protocol/concepts/introduction/intents#",
+            "statusCode": 301
+        },
+        {
+            "source": "/smart-contracts/allow-list-authenticator-1",
+            "destination": "/cow-protocol/reference/contracts/core/allowlist",
+            "statusCode": 301
+        },
+        {
+            "source": "/smart-contracts/eth-flow-contract",
+            "destination": "/cow-protocol/reference/contracts/periphery/eth-flow",
+            "statusCode": 301
+        },
+        {
+            "source": "/smart-contracts/introduction",
+            "destination": "/cow-protocol/reference/contracts/core",
+            "statusCode": 301
+        },
+        {
+            "source": "/smart-contracts/programmatic-order-framework",
+            "destination": "/cow-protocol/reference/contracts/periphery/composable-cow",
+            "statusCode": 301
+        },
+        {
+            "source": "/smart-contracts/settlement-contract",
+            "destination": "/cow-protocol/reference/contracts/core/settlement",
+            "statusCode": 301
+        },
+        {
+            "source": "/smart-contracts/vault-relayer",
+            "destination": "/cow-protocol/reference/contracts/core/vault-relayer",
+            "statusCode": 301
+        },
+        {
+            "source": "/solvers/how-to-build-a-solver",
+            "destination": "/cow-protocol/tutorials/solvers",
+            "permanent": false
+        },
+        {
+            "source": "/solvers/in-depth-solver-specification",
+            "destination": "/cow-protocol/reference/core/auctions",
+            "statusCode": 301
+        },
+        {
+            "source": "/solvers/solvers",
+            "destination": "/cow-protocol/tutorials/solvers",
+            "statusCode": 301
+        },
+        {
+            "source": "/tutorials/build-on-top-of-cow-protocol",
+            "destination": "/cow-protocol/tutorials/building",
+            "statusCode": 301
+        },
+        {
+            "source": "/tutorials/cowswap-trades-with-a-gnosis-safe-wallet",
+            "destination": "https://learn.cow.fi/tutorial/create-pre-signed-order",
+            "statusCode": 301
+        },
+        {
+            "source": "/tutorials/how-to-place-erc-1271-smart-contract-orders",
+            "destination": "https://learn.cow.fi/tutorial/getting-started-order",
+            "permanent": false
+        },
+        {
+            "source": "/tutorials/how-to-submit-orders-via-the-api",
+            "destination": "https://learn.cow.fi/tutorial/getting-started-order",
+            "statusCode": 301
+        },
+        {
+            "source": "/tutorials/onchain-order-cancellation",
+            "destination": "https://learn.cow.fi/tutorial/cancel-on-chain-order",
+            "statusCode": 301
+        },
+        {
+            "source": "/tutorials/submit-limit-orders-via-api",
+            "destination": "https://learn.cow.fi/tutorial/submit-order",
+            "statusCode": 301
+        },
+        {
+            "source": "/widget/get-started",
+            "destination": "/cow-protocol/tutorials/widget",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-sdk/order-meta-data-appdata/bonus-cidv0-and-appdata",
+            "destination": "https://learn.cow.fi/tutorial/simple-app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-sdk/order-meta-data-appdata/create-a-meta-data-document",
+            "destination": "https://learn.cow.fi/tutorial/simple-app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-sdk/order-meta-data-appdata/download-a-document-given-the-appdata",
+            "destination": "https://learn.cow.fi/tutorial/view-app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-sdk/order-meta-data-appdata/get-the-appdata-hex",
+            "destination": "https://learn.cow.fi/tutorial/simple-app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-sdk/order-meta-data-appdata/upload-document-to-ipfs",
+            "destination": "https://learn.cow.fi/tutorial/simple-app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-sdk/sign-and-post-orders/bonus-show-link-to-explorer",
+            "destination": "https://learn.cow.fi/tutorial/view-order",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-sdk/sign-and-post-orders/enable-tokens",
+            "destination": "https://learn.cow.fi/tutorial/approve-sell-token-order",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-sdk/sign-and-post-orders/step-1-get-market-price",
+            "destination": "https://learn.cow.fi/tutorial/quote-order",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-sdk/sign-and-post-orders/step-2-sign-the-order",
+            "destination": "https://learn.cow.fi/tutorial/sign-order",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-sdk/sign-and-post-orders/step-3-post-the-signed-order-to-the-api",
+            "destination": "https://learn.cow.fi/tutorial/submit-order",
+            "statusCode": 301
+        },
+        {
+            "source": "/front-end/creating-app-ids/choose-the-appcode-for-the-app",
+            "destination": "https://learn.cow.fi/tutorial/simple-app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/front-end/creating-app-ids/create-the-order-meta-data-file",
+            "destination": "https://learn.cow.fi/tutorial/simple-app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/front-end/creating-app-ids/get-the-digest-hash-from-the-cid",
+            "destination": "https://learn.cow.fi/tutorial/simple-app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/front-end/creating-app-ids/upload-the-file-to-ipfs",
+            "destination": "https://learn.cow.fi/tutorial/simple-app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/off-chain-services/api/fee-mechanism",
+            "destination": "/cow-protocol/tutorials/arbitrate",
+            "statusCode": 301
+        },
+        {
+            "source": "/off-chain-services/api/price-estimation",
+            "destination": "/cow-protocol/tutorials/arbitrate",
+            "statusCode": 301
+        },
+        {
+            "source": "/overview/cow-hooks/cow-hooks-example",
+            "destination": "/cow-protocol/concepts/order-types/cow-hooks",
+            "permanent": false
+        },
+        {
+            "source": "/overview/cow-hooks/cow-hooks-faq",
+            "destination": "/cow-protocol/concepts/order-types/cow-hooks",
+            "permanent": false
+        },
+        {
+            "source": "/smart-contracts/allow-list-authenticator-1/guarantees",
+            "destination": "/cow-protocol/reference/contracts/core/allowlist",
+            "statusCode": 301
+        },
+        {
+            "source": "/smart-contracts/eth-flow-contract/high-level-description",
+            "destination": "/cow-protocol/reference/contracts/periphery/eth-flow",
+            "statusCode": 301
+        },
+        {
+            "source": "/smart-contracts/eth-flow-contract/interactions",
+            "destination": "/cow-protocol/reference/contracts/periphery/eth-flow",
+            "statusCode": 301
+        },
+        {
+            "source": "/smart-contracts/eth-flow-contract/order-cancellation",
+            "destination": "https://learn.cow.fi/tutorial/cancel-eth-flow",
+            "statusCode": 301
+        },
+        {
+            "source": "/smart-contracts/eth-flow-contract/order-creation",
+            "destination": "https://learn.cow.fi/tutorial/create-eth-flow",
+            "statusCode": 301
+        },
+        {
+            "source": "/smart-contracts/eth-flow-contract/order-execution",
+            "destination": "/cow-protocol/reference/contracts/periphery/eth-flow",
+            "statusCode": 301
+        },
+        {
+            "source": "/smart-contracts/eth-flow-contract/orders-in-storage",
+            "destination": "/cow-protocol/reference/contracts/periphery/eth-flow",
+            "statusCode": 301
+        },
+        {
+            "source": "/smart-contracts/eth-flow-contract/user-and-eth-flow-contract-orders",
+            "destination": "/cow-protocol/reference/contracts/periphery/eth-flow",
+            "statusCode": 301
+        },
+        {
+            "source": "/smart-contracts/settlement-contract/signature-schemes",
+            "destination": "/cow-protocol/reference/core/signing-schemes",
+            "statusCode": 301
+        },
+        {
+            "source": "/smart-contracts/vault-relayer/balancer-external-balances",
+            "destination": "/cow-protocol/reference/contracts/core/vault-relayer",
+            "statusCode": 301
+        },
+        {
+            "source": "/smart-contracts/vault-relayer/balancer-internal-balances",
+            "destination": "/cow-protocol/reference/contracts/core/vault-relayer",
+            "statusCode": 301
+        },
+        {
+            "source": "/smart-contracts/vault-relayer/fallback-erc20-allowances",
+            "destination": "/cow-protocol/reference/contracts/core/vault-relayer",
+            "statusCode": 301
+        },
+        {
+            "source": "/solvers/how-to-build-a-solver/how-to-test-a-solver-locally",
+            "destination": "/cow-protocol/tutorials/solvers",
+            "permanent": false
+        },
+        {
+            "source": "/solvers/how-to-build-a-solver/how-to-write-a-solver",
+            "destination": "/cow-protocol/tutorials/solvers",
+            "permanent": false
+        },
+        {
+            "source": "/solvers/how-to-build-a-solver/solver-workshop",
+            "destination": "/cow-protocol/tutorials/solvers",
+            "permanent": false
+        },
+        {
+            "source": "/solvers/in-depth-solver-specification/getting-notified-about-the-ranking",
+            "destination": "/cow-protocol/tutorials/solvers",
+            "permanent": false
+        },
+        {
+            "source": "/solvers/in-depth-solver-specification/input-batch-auction-instances",
+            "destination": "/cow-protocol/tutorials/solvers",
+            "permanent": false
+        },
+        {
+            "source": "/solvers/in-depth-solver-specification/introduction",
+            "destination": "/cow-protocol/reference/core/auctions/the-problem",
+            "statusCode": 301
+        },
+        {
+            "source": "/solvers/in-depth-solver-specification/output-batch-auction-solutions",
+            "destination": "/cow-protocol/tutorials/solvers",
+            "permanent": false
+        },
+        {
+            "source": "/solvers/in-depth-solver-specification/sample-test-instances",
+            "destination": "/cow-protocol/tutorials/solvers",
+            "permanent": false
+        },
+        {
+            "source": "/solvers/in-depth-solver-specification/slippage-accounting",
+            "destination": "/cow-protocol/reference/core/auctions/slippage",
+            "statusCode": 301
+        },
+        {
+            "source": "/solvers/in-depth-solver-specification/social-consensus-rules",
+            "destination": "/cow-protocol/reference/core/auctions/competition-rules",
+            "statusCode": 301
+        },
+        {
+            "source": "/solvers/in-depth-solver-specification/solver-auction-and-rewards",
+            "destination": "/cow-protocol/reference/core/auctions/rewards",
+            "statusCode": 301
+        },
+        {
+            "source": "/solvers/in-depth-solver-specification/the-batch-auction-optimization-problem",
+            "destination": "/cow-protocol/reference/core/auctions/the-problem",
+            "statusCode": 301
+        },
+        {
+            "source": "/tutorials/cowswap-trades-with-a-gnosis-safe-wallet/approving-the-tokens-to-sell",
+            "destination": "https://learn.cow.fi/tutorial/create-pre-signed-order",
+            "statusCode": 301
+        },
+        {
+            "source": "/tutorials/cowswap-trades-with-a-gnosis-safe-wallet/conclusion",
+            "destination": "https://learn.cow.fi/tutorial/create-pre-signed-order",
+            "statusCode": 301
+        },
+        {
+            "source": "/tutorials/cowswap-trades-with-a-gnosis-safe-wallet/creating-the-order",
+            "destination": "https://learn.cow.fi/tutorial/create-pre-signed-order",
+            "statusCode": 301
+        },
+        {
+            "source": "/tutorials/cowswap-trades-with-a-gnosis-safe-wallet/running-the-tx-from-the-safe",
+            "destination": "https://learn.cow.fi/tutorial/create-pre-signed-order",
+            "statusCode": 301
+        },
+        {
+            "source": "/tutorials/how-to-place-erc-1271-smart-contract-orders/additional-use-cases",
+            "destination": "https://learn.cow.fi/tutorial/create-pre-signed-order",
+            "permanent": false
+        },
+        {
+            "source": "/tutorials/how-to-place-erc-1271-smart-contract-orders/current-orders",
+            "destination": "https://learn.cow.fi/tutorial/create-pre-signed-order",
+            "permanent": false
+        },
+        {
+            "source": "/tutorials/how-to-place-erc-1271-smart-contract-orders/good-after-time-gat-orders",
+            "destination": "https://learn.cow.fi/tutorial/create-pre-signed-order",
+            "permanent": false
+        },
+        {
+            "source": "/tutorials/how-to-place-erc-1271-smart-contract-orders/security",
+            "destination": "https://learn.cow.fi/tutorial/create-pre-signed-order",
+            "permanent": false
+        },
+        {
+            "source": "/tutorials/how-to-place-erc-1271-smart-contract-orders/smart-contract-wallet-orders",
+            "destination": "https://learn.cow.fi/tutorial/create-pre-signed-order",
+            "permanent": false
+        },
+        {
+            "source": "/tutorials/how-to-place-erc-1271-smart-contract-orders/smart-orders",
+            "destination": "https://learn.cow.fi/tutorial/create-pre-signed-order",
+            "permanent": false
+        },
+        {
+            "source": "/tutorials/how-to-place-erc-1271-smart-contract-orders/the-basics-of-erc-1271",
+            "destination": "https://learn.cow.fi/tutorial/create-pre-signed-order",
+            "permanent": false
+        },
+        {
+            "source": "/tutorials/how-to-submit-orders-via-the-api/1.-set-allowance-for-the-sell-token",
+            "destination": "https://learn.cow.fi/tutorial/approve-sell-token-order",
+            "statusCode": 301
+        },
+        {
+            "source": "/tutorials/how-to-submit-orders-via-the-api/2.-query-the-fee-endpoint",
+            "destination": "https://learn.cow.fi/tutorial/quote-order",
+            "statusCode": 301
+        },
+        {
+            "source": "/tutorials/how-to-submit-orders-via-the-api/4.-signing-the-order",
+            "destination": "https://learn.cow.fi/tutorial/sign-order",
+            "statusCode": 301
+        },
+        {
+            "source": "/tutorials/how-to-submit-orders-via-the-api/5.-placing-the-order",
+            "destination": "https://learn.cow.fi/tutorial/submit-order",
+            "statusCode": 301
+        },
+        {
+            "source": "/tutorials/how-to-submit-orders-via-the-api/6.-checking-order-status",
+            "destination": "https://learn.cow.fi/tutorial/view-order",
+            "statusCode": 301
+        },
+        {
+            "source": "/tutorials/onchain-order-cancellation/submitting-invalidation",
+            "destination": "https://learn.cow.fi/tutorial/cancel-on-chain-order",
+            "statusCode": 301
+        },
+        {
+            "source": "/tutorials/onchain-order-cancellation/verifying-with-orderbook-api-services",
+            "destination": "/cow-protocol/reference/apis/orderbook",
+            "statusCode": 301
+        },
+        {
+            "source": "/tutorials/submit-limit-orders-via-api/general-overview",
+            "destination": "https://learn.cow.fi/tutorial/submit-order",
+            "statusCode": 301
+        },
+        {
+            "source": "/tutorials/submit-limit-orders-via-api/limit-order-structure",
+            "destination": "/cow-protocol/reference/core/intents",
+            "statusCode": 301
+        },
+        {
+            "source": "/tutorials/submit-limit-orders-via-api/submitting-the-limit-order",
+            "destination": "https://learn.cow.fi/tutorial/submit-order",
+            "statusCode": 301
+        },
+        {
+            "source": "/front-end/creating-app-ids/create-the-order-meta-data-file/additional-order-preferences",
+            "destination": "https://learn.cow.fi/tutorial/simple-app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/front-end/creating-app-ids/create-the-order-meta-data-file/appcode",
+            "destination": "https://learn.cow.fi/tutorial/simple-app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/front-end/creating-app-ids/create-the-order-meta-data-file/metadata",
+            "destination": "https://learn.cow.fi/tutorial/simple-app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/overview/cow-hooks/cow-hooks-example/conclusion",
+            "destination": "https://learn.cow.fi/tutorial/getting-started-order",
+            "permanent": false
+        },
+        {
+            "source": "/overview/cow-hooks/cow-hooks-example/configuration",
+            "destination": "https://learn.cow.fi/tutorial/getting-started-order",
+            "permanent": false
+        },
+        {
+            "source": "/overview/cow-hooks/cow-hooks-example/permit-swap-and-bridge-cow-hook",
+            "destination": "https://learn.cow.fi/tutorial/getting-started-order",
+            "permanent": false
+        },
+        {
+            "source": "/overview/cow-hooks/cow-hooks-example/requirements",
+            "destination": "https://learn.cow.fi/tutorial/getting-started-order",
+            "permanent": false
+        },
+        {
+            "source": "/tutorials/submit-limit-orders-via-api/submitting-the-limit-order/1.-setting-allowance-for-the-sell-token",
+            "destination": "https://learn.cow.fi/tutorial/approve-sell-token-order",
+            "statusCode": 301
+        },
+        {
+            "source": "/tutorials/submit-limit-orders-via-api/submitting-the-limit-order/2.-signing-the-limit-order",
+            "destination": "https://learn.cow.fi/tutorial/sign-order",
+            "statusCode": 301
+        },
+        {
+            "source": "/tutorials/submit-limit-orders-via-api/submitting-the-limit-order/3.-placing-the-limit-order",
+            "destination": "https://learn.cow.fi/tutorial/submit-order",
+            "statusCode": 301
+        },
+        {
+            "source": "/tutorials/submit-limit-orders-via-api/submitting-the-limit-order/4.-checking-limit-order-status",
+            "destination": "https://learn.cow.fi/tutorial/view-order",
+            "statusCode": 301
+        },
+        {
+            "source": "/tutorials/how-to-write-a-solver",
+            "destination": "/cow-protocol/tutorials/solvers",
+            "permanent": false
+        },
+        {
+            "source": "/tutorials/solver-workshop",
+            "destination": "/cow-protocol/tutorials/solvers",
+            "permanent": false
+        },
+        {
+            "source": "/tutorials/how-to-test-a-solver-locally",
+            "destination": "/cow-protocol/tutorials/solvers",
+            "permanent": false
+        },
+        {
+            "source": "/smart-contracts/eth-flow-contract",
+            "destination": "/cow-protocol/reference/contracts/periphery/eth-flow",
+            "statusCode": 301
+        },
+        {
+            "source": "/overview-1/coincidence-of-wants",
+            "destination": "/cow-protocol/concepts/how-it-works/coincidence-of-wants",
+            "statusCode": 301
+        },
+        {
+            "source": "/off-chain-services/in-depth-solver-specification/slippage-accounting",
+            "destination": "/cow-protocol/reference/core/auctions/slippage",
+            "statusCode": 301
+        },
+        {
+            "source": "/off-chain-services/in-depth-solver-specification/appendix-token-conservation-per-order-aka-local-token-conservation",
+            "destination": "/cow-protocol/reference/core/auctions/competition-rules",
+            "statusCode": 301
+        },
+        {
+            "source": "/off-chain-services/in-depth-solver-specification/getting-notified-about-the-ranking",
+            "destination": "/cow-protocol/tutorials/solvers",
+            "statusCode": 301
+        }
+    ]
 }
