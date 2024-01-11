@@ -19,7 +19,6 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --ifm-footer-background-color: var(--ifm-background-surface-color);
   --ifm-footer-color: var(--ifm-color-white);
-  --ifm-footer-link-hover-color: #052B65;
   --ifm-color-white: #052B65;
   --ifm-color-secondary: var(--ifm-color-white);
   --ifm-menu-color-active: var(--ifm-color-white);
@@ -116,6 +115,10 @@ html[data-theme='dark'] .swagger-ui .model-toggle:after {
   --ifm-footer-background-color: var(--ifm-background-surface-color);
   --ifm-footer-color: var(--ifm-color-white);
   --ifm-footer-link-hover-color: #fff;
+}
+
+html[data-theme='light'] .footer--dark {
+  --ifm-footer-link-hover-color: #052B65;
 }
 
 .navbar__items {
