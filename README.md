@@ -34,13 +34,3 @@ yarn build
 ```
 
 This command generates static content into the `build` directory and can be served using any static contents hosting service.
-
-### Deployment
-
-The website is automatically deployed to GitHub pages when a commit is pushed to the `main` branch.
-
-For additional CI/CD integration, it is possible to dynamically configure docusaurus via environment variables:
-
-- `URL`: The url for the website, such as `https://docs.cow.fi`
-- `BASE_URL`: The base URL for the website. This is useful for hosting the website at a subpath, e.g. `/docs/`.
-- `TRAILING_SLASH`: Whether to add a trailing slash to generated URLs.

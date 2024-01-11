@@ -202,6 +202,11 @@ const config: Config = {
       disableSwitch: false,
       respectPrefersColorScheme: true,
     },
+    algolia: {
+      appId: '9SHPK9O441',
+      apiKey: '03080030278ba4994327d955f694f2a4',
+      indexName: 'cow',
+    }
   } satisfies Preset.ThemeConfig,
 }
 
