@@ -15,7 +15,7 @@ Solver teams aiming to use the open-source driver implementation need to impleme
 
 ## Overview
 
-An open source [Rust](https://rust-lang.org) implementation of a solver engine can be found in the [solvers crate](https://github.com/cowprotocol/services/tree/main/crates/solvers).
+An open source [Rust](https://www.rust-lang.org/) implementation of a solver engine can be found in the [solvers crate](https://github.com/cowprotocol/services/tree/main/crates/solvers).
 This engine can be run in a few different "modes" to demonstrate and test the whole system end to end (cf. `solvers::infra::cli::Command`):
 
 - **Baseline**: Solve individual orders exclusively via on-chain liquidity provided in the driver-augmented auction.

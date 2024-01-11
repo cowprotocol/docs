@@ -18,7 +18,7 @@ For a proposal to pass, it must have a _simple majority_ of **YES** votes **and*
 
 :::tip
 
-Any change to the snapshot settings requires a CIP to change the [`snapshot` text record on cow.eth](https://app.ens.domains/name/cow.eth/details).
+Any change to the snapshot settings requires a CIP to change the [`snapshot` text record on cow.eth](https://app.ens.domains/cow.eth).
 
 :::
 
@@ -30,13 +30,13 @@ The settings are located in a JSON file that is stored on IPFS, whose hash is re
 
 ### ENS name controller
 
-Snapshot spaces are tied to ENS names. In CoW DAO's case; [cow.eth](https://app.ens.domains/name/cow.eth/details). The method of assigning the ENS name controller is by adding the address of the desired controller to the `snapshot` text record.
+Snapshot spaces are tied to ENS names. In CoW DAO's case; [cow.eth](https://app.ens.domains/cow.eth). The method of assigning the ENS name controller is by adding the address of the desired controller to the `snapshot` text record.
 
 ### Roles
 
 #### Super admin
 
-The super admin is able to control all of the spaces' parameters including adding authors, admins, changing strategies etc. The super admin role is assigned by the ENS name controller and is [currently set](https://app.ens.domains/name/cow.eth/details) to the [CoW DAO main safe](https://app.safe.global/eth:0xcA771eda0c70aA7d053aB1B25004559B918FE662/home)
+The super admin is able to control all of the spaces' parameters including adding authors, admins, changing strategies etc. The super admin role is assigned by the ENS name controller and is [currently set](https://app.ens.domains/cow.eth) to the [CoW DAO main safe](https://app.safe.global/eth:0xcA771eda0c70aA7d053aB1B25004559B918FE662/home)
 
 #### Regular admins
 

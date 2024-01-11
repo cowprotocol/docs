@@ -23,8 +23,8 @@ TWAP orders on CoW Protocol require several inputs:
 There are also several requirements for placing TWAP orders through CoW Protocol
 
 - Trades on Ethereum Mainnet must be a minimum of \$5,000 (the minimum is only $5 for trades on Gnosis chain)
-- Users must have a [Safe wallet](https://safe.global/wallet) with an [upgraded fallback handler](https://medium.com/@cow-protocol/all-you-need-to-know-about-cow-swaps-new-safe-fallback-handler-8ef0439925d1)
+- Users must have a [Safe wallet](https://safe.global/wallet) with an [upgraded fallback handler](https://blog.cow.fi/all-you-need-to-know-about-cow-swaps-new-safe-fallback-handler-8ef0439925d1)
 
 ## Getting started
 
-Wanting to place a TWAP order? Check out our [TWAP order tutorial](/cow-protocol/tutorials/cow-swap/twap). You can also [read about TWAP on our blog.](https://medium.com/@cow-protocol/cow-swap-launches-twap-orders-d5583135b472)
+Wanting to place a TWAP order? Check out our [TWAP order tutorial](/cow-protocol/tutorials/cow-swap/twap). You can also [read about TWAP on our blog.](https://blog.cow.fi/cow-swap-launches-twap-orders-d5583135b472)
