@@ -121,8 +121,29 @@ html[data-theme='light'] .footer--dark {
   --ifm-footer-link-hover-color: #052B65;
 }
 
-.navbar__items {
-  justify-content: space-between;
+html .navbar__items {
+  justify-content: flex-start;
+}
+
+html .navbar__brand {
+  display: grid;
+  width: calc(100% - 86px);
+  grid-template-columns: max-content auto;
+  padding: 0;
+  margin: 0;
+  justify-content: flex-start;
+}
+
+@media (max-width: 767px) {
+  html .navbar__logo {
+    display: flex;
+    align-items: center;
+  }
+
+  html .navbar__logo > img {
+    width: 80px!important;
+    height: auto!important;
+  }
 }
 
 html .menu_node_modules-\@docusaurus-theme-classic-lib-theme-DocSidebar-Desktop-Content-styles-module {
