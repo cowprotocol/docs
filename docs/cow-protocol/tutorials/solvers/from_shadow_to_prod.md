@@ -16,7 +16,7 @@ In order to get connected to the shadow competition, feel free to reach out to a
 
 :::note
 
-As the requirements for a bonding pool are substantial, the DAO has also set up the CoW bonding pool, currently managed by the core team, and any solver team can apply to be part of that pool. In such a case, the core team will schedule some meetings with the corresponding solver team, will do some KYC and will make an informed decision about whether the solver can join that pool or not. For more information on this and for applying to the CoW bonding pool, feel free to reach out to an admin of the ["CoW Swap Solvers"](https://t.me/+2Z_-DW57meA1MDlh) group on Telegram.
+As the requirements for a bonding pool are substantial, the DAO has also set up the CoW bonding pool, currently managed by the core team, and any solver team can apply to be part of that pool. In such a case, the core team will schedule some meetings with the corresponding solver team, will do some KYC and will make an informed decision about whether the solver can join that pool or not. As a requirement, any solver team that is part of the CoW bonding pool is required to lock 25% of the COW rewards it receives (via the solver rewards program) until they exit the CoW bonding pool. For more information about the CoW bonding pool and for applying to become part of it, feel free to reach out to an admin of the ["CoW Swap Solvers"](https://t.me/+2Z_-DW57meA1MDlh) group on Telegram.
 
 :::
 
