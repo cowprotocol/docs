@@ -65,7 +65,7 @@ const params: CowSwapWidgetParams = {
 cowSwapWidget(widgetContainer, params)
 ```
 
-> **Coming soon, please get in touch to sign up to the beta program: https://cowprotocol.typeform.com/to/rONXaxHV**
+> **Coming soon, please get in touch to sign up to the beta program [here](https://calendly.com/crystal-cow/cow-swap-widget?utm_content=widget-page-footerCTA-talk-to-us&utm_medium=web&utm_source=cow.fi) **
 
 ## Wallet provider
 
