@@ -126,7 +126,7 @@ cowSwapWidget(
 | `hideNetworkSelector` | `boolean`              | false                     | Disables an opportunity to change the network from the widget UI.                                                                                                                                  |
 | `enabledTradeTypes`   | `Array<TradeType>`     | All are enabled           | CoW Swap provides three trading widgets: `swap`, `limit` and `advanced` orders. Using this option you can narrow down the list of available trading widgets.                                       |
 | `palette`             | `CowSwapWidgetPalette` | ---                       | Using the palette you can customize the appearance of the widget. For example, you can change the main color of the background and text.                                                           |
-| `partnerFeeBips`      | `string`               | ---                       | Coming soon! You can enable a fee for all trades in the widget. Please contact https://cowprotocol.typeform.com/to/rONXaxHV to enable your partner fee.                                                                           |
+| `partnerFeeBips`      | `string`               | ---                       | Coming soon! You can enable a fee for all trades in the widget. Please contact [us](https://calendly.com/crystal-cow/cow-swap-widget) to enable your partner fee.                                                                           |
 
 ## Widget updating
 
