@@ -12,12 +12,12 @@ The purpose of this page is to let users know which fee models are active at any
 
 ## Current Fees
 
-#### Surplus fee on out-of-market limit orders[^surplus]
+### Surplus fee on out-of-market limit orders[^surplus]
 
-**Definition:** 50% of surplus on out-of-market limit orders, capped at 1% of the total volume of the order
-
-**Eligible orders:** the fee only applies to out-of-market limit orders and discrete TWAP orders where the order is not executable at the time it is generated (there are no fees charged on market orders at this point in time)
-
-**Fee calculation:** surplus * 0.5 **OR** volume * 0.01 [whichever number is lower]
+> **Definition:** 50% of surplus on out-of-market limit orders, capped at 1% of the total volume of the order
+> 
+> **Eligible orders:** the fee only applies to out-of-market limit orders and discrete TWAP orders where the order is not executable at the time it is generated (there are no fees charged on market orders at this point in time)
+> 
+> **Fee calculation:** surplus * 0.5 **OR** volume * 0.01 [whichever number is lower]
 
 [^surplus]: Surplus is defined as the difference between the minimum execution price and the executed price of an order
