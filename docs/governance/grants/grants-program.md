@@ -1,5 +1,4 @@
 ---
-id: grants
 sidebar_position: 1
 ---
 
