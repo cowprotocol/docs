@@ -8,7 +8,7 @@ Aligned with [CoW DAO mission statement](../mission) and vision the CoW Grants P
 
 - [CIP-8](https://snapshot.org/#/cow.eth/proposal/0xdc641be107f139753cea051f1bacb8b74b915713a95306c3994f5e03e20d6bef)
 - [CIP-18](https://snapshot.org/#/cow.eth/proposal/0x1b152ae847d003034e84b796ac153ab3549f69891cef49c5d915ee5930c0b256)
-- [CIP-35](https://snapshot.org/#/cow.eth/proposal/0x1ce26799df80625cb8de5e985920b5f50e890290da03776bdd934e8bd03d9014).
+- [CIP-35](https://snapshot.org/#/cow.eth/proposal/0x1ce26799df80625cb8de5e985920b5f50e890290da03776bdd934e8bd03d9014)
 
 The primary areas of focus for the CoW Grants Program are as follows:
 
@@ -78,7 +78,7 @@ As determined in [CIP-8](https://snapshot.org/#/cow.eth/proposal/0xdc641be107f13
 
 (Todo: Create a mermaid chart of Safes including committee, grants-funds, volume-grants, cow-dao)
 
-The grants committee will have a distribution of 8 community members, making a total of 7 committee members. Safe #2 (from the schematic image above) `[gno:0xCA1F000D520c21C47E6c634DD31b92b91A6338bD](https://app.safe.global/settings/setup?safe=gno:0xCA1F000D520c21C47E6c634DD31b92b91A6338bD)` will function as the Grants committee Safe and has 8 signers with a signing threshold of 5 out of 8. The specified committee members:
+The grants committee will have a distribution of 8 community members, making a total of 7 committee members. Safe #2 (from the schematic image above) [`gno:0xCA1F000D520c21C47E6c634DD31b92b91A6338bD`](https://app.safe.global/settings/setup?safe=gno:0xCA1F000D520c21C47E6c634DD31b92b91A6338bD) will function as the Grants committee Safe and has 8 signers with a signing threshold of 5 out of 8. The specified committee members:
 
 - [@netrunner.eth](https://forum.cow.fi/u/netrunner.eth) - `0xc95Fda8A94437c1B936169b62858F13aE0386307`
 - [@Kubesqrt](https://forum.cow.fi/u/kubesqrt) - `0x386b4ba873a4f423ca28a4df1b2347ca949ced0e`
