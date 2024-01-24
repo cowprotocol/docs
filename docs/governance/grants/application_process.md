@@ -3,13 +3,13 @@
 ## Application Process
 
 <aside>
-⏰ To apply for the CoW Grants program, use the **[application template](/application_template.md)** and post it in the CoW DAO's **[grants forum section](https://forum.cow.fi/c/cow-grants-program/10)**.
+⏰ To apply for the CoW Grants program, use the [application template](/governance/grants/application_template.md) and post it in the CoW DAO's [grants forum section](https://forum.cow.fi/c/cow-grants-program/10).
 
 </aside>
 
 **Public Review**
 
-1. Submit your application by completing the [application form template](/application_template.md) and posting it in the [Grants forum section](https://forum.cow.fi/c/cow-grants-program/10). Ensure your application aligns with the [Grants Program Guidelines](/grants_overview.md).
+1. Submit your application by completing the [application form template](/governance/grants/application_template.md) and posting it in the [Grants forum section](https://forum.cow.fi/c/cow-grants-program/10). Ensure your application aligns with the [Grants Program Guidelines](/grants_overview.md).
 2. The Grants Committee will review the application and provide comments on the proposal.
 3. Committee members may express support, objection, or suggest changes to the grant application.
 
