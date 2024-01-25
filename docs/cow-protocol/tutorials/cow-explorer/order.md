@@ -49,7 +49,7 @@ A more complex example may be a user who has placed a _partially fillable_ order
 
 ![Partially fillable order overview](/img/explorer/order_partial_overview.png)
 
-By clicking the 'View fills' button, the user can see the fills that have been executed for this order. Fills for the above example are shown below:
+By clicking the "View fills" button, the user can see the fills that have been executed for this order. Fills for the above example are shown below:
 
 ![Partially fillable order fills](/img/explorer/order_partial_fills.png)
 
