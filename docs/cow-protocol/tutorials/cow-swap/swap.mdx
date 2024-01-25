@@ -62,22 +62,22 @@ Moreover, the settlement contract is the only address that can request the vault
 
 :::tip
 
-Some tokens, such as `USDC`, `DAI`, `COW` and many others support gas-free approvals. This means that you can approve the [vault relayer](/cow-protocol/reference/contracts/core/vault-relayer) contract to spend your tokens without having any initial gas for an on-chain transaction. This is a great way to save on gas costs!
+Some tokens, such as `USDC`, `DAI`, `COW` and many others support gasless approvals. This means that you can approve the [vault relayer](/cow-protocol/reference/contracts/core/vault-relayer) contract to spend your tokens without having any initial gas for an on-chain transaction. This is a great way to save on gas costs!
 
-You don't have to worry about this, as CoW Swap will automatically detect if the token supports gas-free approvals and will guide you through the process.
+You don't have to worry about this, as CoW Swap will automatically detect if the token supports gasless approvals and will guide you through the process.
 
-Just look for the `Gas-free approval` flag when picking the tokens to get started:
+Just look for the `gasless approval` flag when picking the tokens to get started:
 
 <Image
-  img={require("/img/cowswap/swap_gas-free_approval.png")}
-  alt="Token selector showing a list of tokens matching the filter 'DAI', where some have the tag 'Gas-free approval'"
+  img={require("/img/cowswap/swap_gasless_approval.png")}
+  alt="Token selector showing a list of tokens matching the filter 'DAI', where some have the tag 'gasless approval'"
 />
 
 :::
 
 :::note
 
-Trade of gas-free compatible tokens is supported on Swap and [Limit](/cow-protocol/tutorials/cow-swap/limit) orders, and are NOT available for Smart Contract wallets.
+Trade of gasless compatible tokens is supported on Swap and [Limit](/cow-protocol/tutorials/cow-swap/limit) orders, and are NOT available for Smart Contract wallets.
 
 :::
 
@@ -150,9 +150,9 @@ Your order will be in the order book and ready to be executed.
 
 ## Cancel your order
 
-Changed your mind? Not a problem! CoW Swap makes it easy and gas-less[^1] to cancel your order.
+Changed your mind? Not a problem! CoW Swap makes it easy and gasless[^1] to cancel your order.
 
-[^1]: Only `off-chain` cancellations are gas-less. `on-chain` cancellations - as the name states - require a regular network transaction.
+[^1]: Only `off-chain` cancellations are gasless. `on-chain` cancellations - as the name states - require a regular network transaction.
 
 First, open the activity panel by clicking on your address in the top right corner.
 
