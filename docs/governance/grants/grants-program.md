@@ -75,8 +75,46 @@ Grants that demonstrate feasibility, have a positive impact on the ecosystem, pr
 # Committee Members and Safe Control Structure
 
 As determined in [CIP-8](https://snapshot.org/#/cow.eth/proposal/0xdc641be107f139753cea051f1bacb8b74b915713a95306c3994f5e03e20d6bef), the CoW Grants Program Safe is controlled by two signers. Safe #3 is shared with the CoW DAO (Safe #1) and the Grants Committee (Safe #2). Safe #3 holds all the grant funds. You can check the governing process in the image below:
+```mermaid
+erDiagram
+    COW-DAO ||--o{ GRANTS-PROGRAM-FUNDS-SAFE : controls
+    COMMITTEE-SAFE ||--o{ GRANTS-PROGRAM-FUNDS-SAFE : controls
+    COW-DAO ||--o{ VOLUME-REWARDS-PROGRAM-SAFE : controls
+    COMMITTEE-SAFE ||--o{ VOLUME-REWARDS-PROGRAM-SAFE : controls
+    TOKEN-HOLDER }|--|{ COW-DAO : votes
+    SIGNATORY ||--o{ COMMITTEE-SAFE : part-of
 
-(Todo: Create a mermaid chart of Safes including committee, grants-funds, volume-grants, cow-dao)
+    COW-DAO {
+        string daoAddress "0x00000"
+        string votingMechanism "Token Vote Quorum"
+    }
+    COMMITTEE-SAFE {
+        string description
+        string walletAddress
+        int totalSignatories
+        int requiredSignatures
+    }
+    GRANTS-PROGRAM-FUNDS-SAFE {
+        string description
+        string walletAddress
+        int totalSignatories
+        int requiredSignatures
+    }
+    VOLUME-REWARDS-PROGRAM-SAFE {
+        string description
+        string walletAddress
+        int totalSignatories
+        int requiredSignatures
+    }
+    TOKEN-HOLDER {
+        string publicKey
+    }
+    SIGNATORY {
+        string name
+        string publicKey
+    }
+```
+(Todo: refine the mermaid chart of Safes including committee, grants-funds, volume-grants, cow-dao)
 
 The grants committee will have a distribution of 8 community members, making a total of 7 committee members. Safe #2 (from the schematic image above) [`gno:0xCA1F000D520c21C47E6c634DD31b92b91A6338bD`](https://app.safe.global/settings/setup?safe=gno:0xCA1F000D520c21C47E6c634DD31b92b91A6338bD) will function as the Grants committee Safe and has 8 signers with a signing threshold of 5 out of 8. The specified committee members:
 
