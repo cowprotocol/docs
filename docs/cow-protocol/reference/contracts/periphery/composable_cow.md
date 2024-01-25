@@ -22,7 +22,7 @@ The following principles have been employed in the architectural design:
 1. `O(1)` gas-efficiency for `n` conditional order creation / replacement / deletion
 2. Conditional orders **SHOULD** behave the same as a discrete order for EOAs (self-custody of assets, i.e. "wrapper" contracts not required)
 3. Conditional orders **SHOULD** be optimized towards _statelessness_ - pass required data via `calldata`
-4. **MAY** enhance the [`Safe`](https://safe.global) user experience when paired with [`ExtensibleFallbackHandler`](https://hackmd.io/-nLuF3JIRyuS5w864_mbrg) 🐮🔒
+4. **MAY** enhance the [Safe](https://safe.global) user experience when paired with [`ExtensibleFallbackHandler`](https://hackmd.io/-nLuF3JIRyuS5w864_mbrg) 🐮🔒
 
 By using Merkle Trees, the gas efficiency of `O(1)` is achieved for `n` conditional orders. This is achieved by storing the Merkle Tree root on-chain, and passing the Merkle Tree proof to the `ComposableCoW` contract. This allows for `O(1)` gas efficiency for adding / removing conditional orders.
 
@@ -96,12 +96,12 @@ function isValidSafeSignature(
 
 In order to delegate signature verification to `ComposableCoW`, the delegating contract may either:
 
-1. Be a `Safe` and use `ExtensibleFallbackHandler` that allows for `EIP-712` domain delegation to a custom contract (i.e. `ComposableCoW`); or
+1. Be a Safe and use `ExtensibleFallbackHandler` that allows for `EIP-712` domain delegation to a custom contract (i.e. `ComposableCoW`); or
 2. Implement `ERC-1271` and within the `isValidSignature` method, call `ComposableCoW.isValidSafeSignature()`.
 
 :::tip
 
-ComposableCoW can also be used with contracts other than `Safe`. The [`ERC1271Forwarder`](https://github.com/cowprotocol/composable-cow/blob/main/src/ERC1271Forwarder.sol) abstract contract has been provided to allow for new contracts to easily integrate with ComposableCoW.
+ComposableCoW can also be used with contracts other than Safe. The [`ERC1271Forwarder`](https://github.com/cowprotocol/composable-cow/blob/main/src/ERC1271Forwarder.sol) abstract contract has been provided to allow for new contracts to easily integrate with ComposableCoW.
 
 :::
 

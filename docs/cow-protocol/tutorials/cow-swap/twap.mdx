@@ -22,14 +22,14 @@ This helps in minimizing market impact and in doing so likely achieves a better 
 
 ## Placing a TWAP Order
 
-### Connect your `Safe` wallet
+### Connect your Safe wallet
 
-_CoW Swap_ TWAP requires a [`Safe`](https://safe.global) wallet.
+_CoW Swap_ TWAP requires a [Safe](https://safe.global) wallet.
 
-* 🆕 If you don't have one, you can [create a `Safe`](https://app.safe.global/welcome) wallet
-* 🔌 With your `Safe` wallet, open [CoW Swap (`Safe` App)](https://app.safe.global/share/safe-app?appUrl=https%3A%2F%2Fswap.cow.fi&chain=eth)
+* 🆕 If you don't have one, you can [create a Safe](https://app.safe.global/welcome) wallet
+* 🔌 With your Safe wallet, open [CoW Swap (Safe App)](https://app.safe.global/share/safe-app?appUrl=https%3A%2F%2Fswap.cow.fi&chain=eth)
 
-Once CoW Swap is loaded and connected to your `Safe` you can access TWAP orders via the "TWAP" tab near the center module or the drop-down menu next to the CoW Swap logo.
+Once CoW Swap is loaded and connected to your Safe you can access TWAP orders via the "TWAP" tab near the center module or the drop-down menu next to the CoW Swap logo.
 
 <Image img={require('/img/cowswap/TWAP_connect.png')} alt="Access TWAP Interface" />
 
@@ -59,9 +59,9 @@ This is a _critical_ step where you'll define how your order will be executed ov
 
 Carefully review and adjust your order parameters to align with market conditions, anticipated movements, and your trading objectives, as they are crucial in dictating the execution and efficacy of your TWAP strategy. Once you have tailored these details to your satisfaction, you can move on to the next step to finalize and place your order.
 
-### Unsupported wallet? Upgrade `Safe` Fallback Handler
+### Unsupported wallet? Upgrade Safe Fallback Handler
 
-If your wallet is _unsupported_, upgrade to a `Safe` with the special fallback handler required for TWAP orders. [Learn all about the new `Safe` fallback handler](https://blog.cow.fi/all-you-need-to-know-about-cow-swaps-new-safe-fallback-handler-8ef0439925d1) and its relevance to `Safe` in this [overview](https://help.safe.global/en/articles/40838-what-is-a-fallback-handler-and-how-does-it-relate-to-safe). Naturally, the upgrade process has undergone [extensive auditing](https://github.com/cowprotocol/composable-cow/tree/ab3addad9bc05acdbf5fb040eb5c336209b58e31/audits) for increased peace of mind.
+If your wallet is _unsupported_, upgrade to a Safe with the special fallback handler required for TWAP orders. [Learn all about the new Safe fallback handler](https://blog.cow.fi/all-you-need-to-know-about-cow-swaps-new-safe-fallback-handler-8ef0439925d1) and its relevance to Safe in this [overview](https://help.safe.global/en/articles/40838-what-is-a-fallback-handler-and-how-does-it-relate-to-safe). Naturally, the upgrade process has undergone [extensive auditing](https://github.com/cowprotocol/composable-cow/tree/ab3addad9bc05acdbf5fb040eb5c336209b58e31/audits) for increased peace of mind.
 
 <Image img={require('/img/cowswap/TWAP_unsupported.png')} alt="Unsupported wallet" style={{ maxWidth: '440px' }} />
 
@@ -86,7 +86,7 @@ The "Order submitted successfully" screen indicates that your order has been ini
 
 <Image img={require('/img/cowswap/TWAP_orderSigning.png')} alt="Order in signing state" />
 
-The "Order in signing state" screen shows that your order may require additional signatures from your `Safe`. Ensure all necessary parties sign to proceed.
+The "Order in signing state" screen shows that your order may require additional signatures from your Safe. Ensure all necessary parties sign to proceed.
 <br />
 
 After all signatures are collected and the transaction is submitted on-chain, your order becomes 'active'. The "Orders overview" allows you to monitor its current status and see the full list of active orders.
@@ -116,7 +116,7 @@ Here in the order overview, find the order you intend to cancel. Click the three
 
 A confirmation window will appear, summarizing the order you are about to cancel, including the swap details and the transaction type. This is your opportunity to review and ensure that you are canceling the correct order.
 
-When you confirm the cancellation by clicking "Request cancellation," a new transaction will be created in your Safe. This transaction is not final until all required parties (`Safe` owners) provide their signature.
+When you confirm the cancellation by clicking "Request cancellation," a new transaction will be created in your Safe. This transaction is not final until all required parties (Safe owners) provide their signature.
 
 Once all signatures are collected, the transaction to cancel the order will be executed. It's vital to coordinate with all signers to complete this promptly, especially if the order needs to be canceled quickly due to changing market conditions or other strategic considerations. After the cancellation transaction is fully signed and submitted, the order will be removed from your active orders list and considered canceled.
 
