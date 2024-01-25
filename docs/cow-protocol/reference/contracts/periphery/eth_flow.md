@@ -162,7 +162,7 @@ struct Data {
 | **Field** | **Description** |
 |---|---|
 | `...` | Same as [`GPv2Order.Data`](../core/settlement#gpv2orderdata-struct) |
-| `quoteId` | `quoteId` returned by OrderBook API when requesting a quote for this order |
+| `quoteId` | `quoteId` returned by Order book API when requesting a quote for this order |
 
 :::note
 

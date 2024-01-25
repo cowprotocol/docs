@@ -134,9 +134,9 @@ CoW Protocol supports four different signing schemes. These signing schemes are 
 
 Except for the `PreSign` scheme, all signing schemes involve signing an _order digest_ that is based on the message structure of `EIP-712`. 
 
-:::tip OrderBook API
+:::tip Order book API
 
-In the expanded detail sections below, `signature` refers to the value passed to `signature` in the [OrderBook API](../apis/orderbook).
+In the expanded detail sections below, `signature` refers to the value passed to `signature` in the [Order book API](../apis/orderbook).
 
 :::
 
@@ -186,7 +186,7 @@ In order to support smart-contract orders, the trading smart contract (the user)
 signature = eip1271Signature
 ```
 
-:::tip OrderBook API
+:::tip Order book API
 
 When submitting an `ERC-1271` order to the API, the `from` field **MUST** be set to the address of the smart contract that will be signing the order. This is because the `ERC-1271` signature is not an Ethereum signature, and thus the `from` field cannot be inferred from the signature.
 
@@ -222,7 +222,7 @@ The signature is an empty `bytes` string:
 signature = 0x
 ```
 
-:::tip OrderBook API
+:::tip Order book API
 
 When submitting a `PreSign` order to the API, the `from` field **MUST** be set to the address of the order owner. This is because the `PreSign` signature is not an Ethereum signature, and thus the `from` field cannot be inferred from the signature.
 

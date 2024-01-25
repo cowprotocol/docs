@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# OrderBook
+# Order book
 
 The orderbook is the main API that traders, UIs and other integrations use to interact with CoW Protocol.
 
@@ -20,47 +20,47 @@ The standard trader interaction flow can be seen in the following sequence diagr
 ```mermaid
 sequenceDiagram
     actor User
-    participant OrderBook
+    participant Order book
     participant Solver1
-    User->>OrderBook: POST /quote
-    activate OrderBook
-    OrderBook->>SolverN: quote?
+    User->>Order book: POST /quote
+    activate Order book
+    Order book->>SolverN: quote?
     activate SolverN
-    OrderBook->>Solver1: quote?
+    Order book->>Solver1: quote?
     activate Solver1
     Solver1->>Solver1: compute matching for<br> "single order batch"
     SolverN->>SolverN: compute matching for<br> "single order batch"
-    Solver1-->>OrderBook: result
+    Solver1-->>Order book: result
     deactivate Solver1
-    SolverN-->>OrderBook: result
+    SolverN-->>Order book: result
     deactivate SolverN
-    OrderBook->>OrderBook: simulate quote
-    OrderBook->>OrderBook: pick best result
-    OrderBook->>Database: store quote
-    OrderBook-->>User: quote
-    deactivate OrderBook
+    Order book->>Order book: simulate quote
+    Order book->>Order book: pick best result
+    Order book->>Database: store quote
+    Order book-->>User: quote
+    deactivate Order book
     User->>User: 🖊 Sign order
-    User->>OrderBook: POST /order
-    activate OrderBook
-    OrderBook->>OrderBook: verify order
-    OrderBook->>Database: fetch quote
+    User->>Order book: POST /order
+    activate Order book
+    Order book->>Order book: verify order
+    Order book->>Database: fetch quote
     opt if quote not found
-      OrderBook->>Solver1: quote?
-      Solver1-->>OrderBook: result
-      OrderBook->>SolverN: quote?
-      SolverN-->>OrderBook: result
-      OrderBook->>OrderBook: smualate & pick
+      Order book->>Solver1: quote?
+      Solver1-->>Order book: result
+      Order book->>SolverN: quote?
+      SolverN-->>Order book: result
+      Order book->>Order book: smualate & pick
     end
-    OrderBook->>Database: insert order
-    OrderBook-->>User: order UID
-    deactivate OrderBook
+    Order book->>Database: insert order
+    Order book-->>User: order UID
+    deactivate Order book
     User->>User: ⏳ Wait for happy moo
-    User->>OrderBook: GET /trades
-    activate OrderBook
-    OrderBook->>Database: lookup order
-    Database-->>OrderBook: order & trades
-    OrderBook-->>User: trades
-    deactivate OrderBook
+    User->>Order book: GET /trades
+    activate Order book
+    Order book->>Database: lookup order
+    Database-->>Order book: order & trades
+    Order book-->>User: trades
+    deactivate Order book
 ```
 
 After selecting the parameters of their trade, most traders want to see an estimate of how much tokens they will receive in order to pick a reasonable limit price.
