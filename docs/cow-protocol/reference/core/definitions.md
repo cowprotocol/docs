@@ -14,7 +14,7 @@ An intent to swap `sellAmount` of `sellToken` for `buyAmount` of `buyToken`. May
 
 #### Discrete Order
 
-A single order submitted to the CoW Protocol API (ie. `GPv2Order.Data`)
+A single order submitted to the CoW Protocol API (i.e. `GPv2Order.Data`)
 
 #### Conditional Order
 

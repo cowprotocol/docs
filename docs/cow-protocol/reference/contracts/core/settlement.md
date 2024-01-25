@@ -92,7 +92,7 @@ struct Data {
 |---|---|
 | `sellToken` | ERC-20 token sell |
 | `buyToken` | ERC-20 token to buy |
-| `receiver` | The address that will receive the proceedings of the trade. If this field is `address(0)` (ie. the zero address `0x00...0`), then the user who signed the trade is going to receive the funds. |
+| `receiver` | The address that will receive the proceedings of the trade. If this field is `address(0)` (i.e. the zero address `0x00...0`), then the user who signed the trade is going to receive the funds. |
 | `sellAmount` | Amount of `sellToken` that is sold in wei. |
 | `buyAmount` | Amount of `buyToken` that is bought in wei |
 | `validTo` | UNIX timestamp (in seconds) until which the order is valid |

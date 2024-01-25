@@ -92,7 +92,7 @@ These quote auctions have a _significantly_ shorter deadline to solve "quote" au
 Quotes can be requested using either the _fast_ or _optimal_ quality type.
 
 - **Optimal quotes**: wait for all connected solvers to either return a response or time out before yielding a result
-- **Fast quotes**: return the best estimate as soon as a threshold of solvers (ie. two) have returned a successful estimate
+- **Fast quotes**: return the best estimate as soon as a threshold of solvers (i.e. two) have returned a successful estimate
 
 The API also exposes another price-related route, `/native_price`, which can be used to get an approximate estimate of the dollar (or ETH) value for a given amount of tokens.
 These price estimates use fixed amounts and are more heavily cached allowing for faster response times.
