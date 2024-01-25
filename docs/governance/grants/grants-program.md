@@ -74,37 +74,38 @@ Grants that demonstrate feasibility, have a positive impact on the ecosystem, pr
 
 # Committee Members and Safe Control Structure
 
-As determined in [CIP-8](https://snapshot.org/#/cow.eth/proposal/0xdc641be107f139753cea051f1bacb8b74b915713a95306c3994f5e03e20d6bef), the CoW Grants Program Safe is controlled by two signers. Safe #3 is shared with the CoW DAO (Safe #1) and the Grants Committee (Safe #2). Safe #3 holds all the grant funds. You can check the governing process in the image below:
+As determined in [CIP-8](https://snapshot.org/#/cow.eth/proposal/0xdc641be107f139753cea051f1bacb8b74b915713a95306c3994f5e03e20d6bef), the CoW Grants Program Safe is controlled by two signers. Safe3 is shared with the CoW DAO (Safe1) and the Grants Committee (Safe2). Safe3 holds all the grant funds, this means funds can always be clawed back by CoW DAO. Same structure applies for the Volume Rewards Program (Safe4). You can check the control structure in the diagram below:
 ```mermaid
 erDiagram
-    COW-DAO ||--o{ GRANTS-PROGRAM-FUNDS-SAFE : controls
-    COMMITTEE-SAFE ||--o{ GRANTS-PROGRAM-FUNDS-SAFE : controls
-    COW-DAO ||--o{ VOLUME-REWARDS-PROGRAM-SAFE : controls
-    COMMITTEE-SAFE ||--o{ VOLUME-REWARDS-PROGRAM-SAFE : controls
-    TOKEN-HOLDER }|--|{ COW-DAO : votes
-    SIGNATORY ||--o{ COMMITTEE-SAFE : part-of
+    Safe1 ||--o{ Safe3 : controls
+    Safe2 ||--o{ Safe3 : controls
+    Safe1 ||--o{ Safe4 : controls
+    Safe2 ||--o{ Safe4 : controls
+    TOKEN-HOLDER }|--|{ Safe1 : votes
+    SIGNATORY ||--o{ Safe2 : part-of
 
-    COW-DAO {
-        string daoAddress "0x00000"
+    Safe1 {
+        string description "CoW DAO"
+        string daoAddress "gno:0xcA771eda0c70aA7d053aB1B25004559B918FE662"
         string votingMechanism "Token Vote Quorum"
     }
-    COMMITTEE-SAFE {
-        string description
-        string walletAddress
-        int totalSignatories
-        int requiredSignatures
+    Safe2 {
+        string description "Grants Committee"
+        string walletAddress "gno:0xCA1F000D520c21C47E6c634DD31b92b91A6338bD"
+        int totalSignatories "8"
+        int requiredSignatures "5"
     }
-    GRANTS-PROGRAM-FUNDS-SAFE {
-        string description
-        string walletAddress
-        int totalSignatories
-        int requiredSignatures
+    Safe3 {
+        string description "Gants Prongram Funds"
+        string walletAddress "gno:0xDA00000B30dCf0C3f5d968e4451Ebdee6950d63e"
+        int totalSignatories "2"
+        int requiredSignatures "1"
     }
-    VOLUME-REWARDS-PROGRAM-SAFE {
-        string description
-        string walletAddress
-        int totalSignatories
-        int requiredSignatures
+    Safe4 {
+        string description "Volume Rrewards Program"
+        string walletAddress "gno:0xbD96C4Fe53f1d89a8Bdb3522BCEDfB20b5601b69"
+        int totalSignatories "2"
+        int requiredSignatures "1"
     }
     TOKEN-HOLDER {
         string publicKey
