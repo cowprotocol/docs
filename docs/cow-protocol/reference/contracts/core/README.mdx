@@ -78,12 +78,12 @@ If developing smart contracts that create orders, make sure at a contract level 
 
 :::
 
-### ERC-1271 Replayability
+### `ERC-1271` Replayability
 
-The security of [ERC-1271](../core/signing-schemes#erc-1271) signatures depend on the developers' implementation of the _signing smart contract_.
+The security of [`ERC-1271`](../core/signing-schemes#erc-1271) signatures depend on the developers' implementation of the _signing smart contract_.
 Different smart contract wallets sign and verify messages very differently from each other.
 
-There's a known issue in some smart-contract wallet implementations that should be known before using ERC-1271 signatures on CoW Protocol.
+There's a known issue in some smart-contract wallet implementations that should be known before using `ERC-1271` signatures on CoW Protocol.
 
 #### Signature Replayability
 
@@ -92,7 +92,7 @@ On some popular smart-contract wallets, the signature of an owner is replayable:
 CoW Protocol only checks if the signature is valid; it doesn't know which wallet the signature was intended for.
 This means that an order signed by a wallet with replayable signatures could be executed by another wallet owned by the same owner.
 
-As a general recommendation, you should never sign any message with ERC-1271 on wallets whose signature are replayable.
+As a general recommendation, you should never sign any message with `ERC-1271` on wallets whose signature are replayable.
 CoW Protocol can't protect your order from this attack at a protocol level.
 
 :::tip
@@ -103,7 +103,7 @@ Signatures from a `Safe` wallet aren't replayable and don't require any special 
 
 #### Mitigation
 
-You are still able to create ERC-1271 orders from any wallet.
+You are still able to create `ERC-1271` orders from any wallet.
 
 The CoW Protocol API allows you to specify some signed [metadata](../core/intents/app-data) in the order. This metadata can be sent along when creating an order on the CoW Protocol API.
 
@@ -115,7 +115,7 @@ A minimal example of app data is the following:
 { "metadata": { "signer": "0x291cf356e5639fb4c19ba5bfb4e2f8f82b371573" } }
 ```
 
-where `0x29..73` is the address of the smart-contract wallet that uses ERC-1271 to sign the order.
+where `0x29..73` is the address of the smart-contract wallet that uses `ERC-1271` to sign the order.
 
 However, the CoW Protocol API must know the *full* metadata in advance for rejecting unknown orders, and by default you don't need to reveal the entire metadata when you submit the order, only its hash (the app data).
 Once your order is created, the metadata will be permanently stored in the database and linked to the app data; no one will be able to post a replayed order on the CoW Protocol API for a different wallet.

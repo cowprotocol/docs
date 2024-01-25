@@ -1,12 +1,12 @@
 # Supported tokens
 
-CoW Protocol supports `ERC20` tokens. However, not all `ERC20` token contracts are created equal, despite the idea of a standard interface. Some contracts introduce issues, such as fee on transfer or lockup periods, which make them unsuitable.
+CoW Protocol supports `ERC-20` tokens. However, not all `ERC-20` token contracts are created equal, despite the idea of a standard interface. Some contracts introduce issues, such as fee on transfer or lockup periods, which make them unsuitable.
 
 ## Requirements
 
 For a token to be considered tradeable on CoW Protocol, it **MUST**:
 
-- be [`ERC20`](https://eips.ethereum.org/EIPS/eip-20) compliant
+- be [`ERC-20`](https://eips.ethereum.org/EIPS/eip-20) compliant
 - have a valid price provided by a _price estimator_ for **0.1 ETH** worth of the token
 - not be on the bad token list
 
@@ -31,7 +31,7 @@ One such example is tokens that take a fee on transfer.
 The bad token list is not exhaustive and is supplemented by automated bad token detection, which may be flaky, (e.g. if a token exhibits rounding issues on transfers) depending on certain conditions.
 In any case, if a token is on the bad token list, it will result in an `UnsupportedToken` error when attempting to retrieve a quote or place an order.
 
-## New ERC-20 tokens
+## New `ERC-20` tokens
 
 Have you created a new `ERC-20` and want to make it seemlessly tradeable on CoW Protocol?
 

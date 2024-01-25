@@ -95,7 +95,7 @@ Other information can only be retrieved on-chain and is updated every time a new
 
 Retrieved information isn't limited to the CoW Protocol itself.
 The autopilot needs to provide a reference price for each token in an order (a numéraire);
-the reference price is used to normalize the value of the [surplus](/cow-protocol/reference/core/auctions/the-problem), since the surplus must be comparable for all orders and two orders could use the most disparate ERC-20 tokens.
+the reference price is used to normalize the value of the [surplus](/cow-protocol/reference/core/auctions/the-problem), since the surplus must be comparable for all orders and two orders could use the most disparate `ERC-20` tokens.
 The reference token is usually the chain's native token, since it's the token used to pay for the gas needed when executing a transaction. 
 Orders whose price can't be fetched are discarded and won't be included in an auction.
 
@@ -109,7 +109,7 @@ Orders that can't be settled are filtered out. This is the case if, for example:
 * the approval to the vault relayer is missing
 * the involved tokens aren't supported by the protocol
 
-The autopilot also checks that [ERC-1271](/cow-protocol/reference/core/signing-schemes#erc-1271) signatures are currently valid.
+The autopilot also checks that [`ERC-1271`](/cow-protocol/reference/core/signing-schemes#erc-1271) signatures are currently valid.
 
 More in general, the autopilot aims to remove from the auction all orders that have no chance to be settled.
 Still, this doesn't mean that all orders that appear in the auction can be settled: orders whose ability to be settled is ambiguous or unclear are remitted to the solvers' own judgment.

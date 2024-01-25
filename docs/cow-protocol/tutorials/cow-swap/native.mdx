@@ -11,17 +11,17 @@ import CancellationNotGuaranteed from '../../../partials/_cancellation_not_guara
 In blockchain networks the "native token" - for example, Ether (ETH) on Ethereum & xDAI (xDAI) on Gnosis Chain - is the primary digital currency. 
 It's essential for network operations, like paying transaction fees.
 
-"Wrapped" tokens - for example, Wrapped Ether (WETH) & Wrapped xDAI (wxDAI) - are [ERC20-compatible](https://ethereum.org/en/developers/docs/standards/tokens/erc-20/) versions of these native tokens. 
+"Wrapped" tokens - for example, Wrapped Ether (WETH) & Wrapped xDAI (wxDAI) - are [`ERC-20`-compatible](https://ethereum.org/en/developers/docs/standards/tokens/`ERC-20`/) versions of these native tokens. 
 
 They exist to improve interoperability with decentralized applications. The native token and its wrapped version are equivalent to each other, and a user is always allowed to turn one into the other ("wrap" or "unwrap") at a rate of 1:1.
 
-_Buying_ native tokens such as ETH on CoW Protocol is straightforward. However, CoW Protocol is only natively capable of _selling_ ERC20 tokens - not native tokens. 
+_Buying_ native tokens such as ETH on CoW Protocol is straightforward. However, CoW Protocol is only natively capable of _selling_ `ERC-20` tokens - not native tokens. 
 This is because the protocol's intent-based architecture relies on solvers to trade the sell tokens on behalf of its users.
-Doing so is only possible thanks to ERC20's concept of approvals, which allow certain "spender" contracts to manage funds on the user's behalf.
+Doing so is only possible thanks to `ERC-20`'s concept of approvals, which allow certain "spender" contracts to manage funds on the user's behalf.
 
 Despite this, CoW Protocol provides two ways for users to sell their native tokens:
 
-* **Option 1) [Wrap native tokens](#wrap-native-tokens) before swapping**: Wrap the native token into an ERC20 token (e.g. `ETH` to `WETH`) and then swap WETH Gaslessly on CoW Protocol; or
+* **Option 1) [Wrap native tokens](#wrap-native-tokens) before swapping**: Wrap the native token into an `ERC-20` token (e.g. `ETH` to `WETH`) and then swap WETH Gaslessly on CoW Protocol; or
 * **Option 2) [Use Eth-flow](#use-eth-flow)**:  Place a single transaction in a special contract that wraps + places your order.
 
 :::tip
@@ -39,7 +39,7 @@ Wrapping before swapping requires an extra step. However, users who wrap before 
 2. Lower default slippage
 3. No fees for failed swaps
 
-The CoW Swap UI has built-in support for wrapping native tokens. To do this, simply select the native token you want to wrap (e.g. `ETH`) as your sell token, then select its wrapped ERC20 counterpart (e.g. `WETH`) as your buy token. 
+The CoW Swap UI has built-in support for wrapping native tokens. To do this, simply select the native token you want to wrap (e.g. `ETH`) as your sell token, then select its wrapped `ERC-20` counterpart (e.g. `WETH`) as your buy token. 
 
 The button will automatically change from "Swap" to "Wrap".
 

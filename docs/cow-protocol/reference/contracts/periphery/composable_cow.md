@@ -51,7 +51,7 @@ flowchart TD
     B -->|invalid| I[Revert]  
     S -->|valid| V[IConditionalOrder:verify]  
     S -->|invalid| I  
-    V -->|valid| T[Return ERC1271 Magic]  
+    V -->|valid| T[Return `ERC-1271` Magic]  
     V -->|invalid| I  
 ```
 

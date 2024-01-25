@@ -52,18 +52,18 @@ Authors cannot change any of the space parameters but they are able to create pr
 
 ## Snapshot strategies
 
-To ensure a democratic and fair voting process within the CoW DAO, the organization has implemented a comprehensive snapshot strategy. This strategy employs a multi-faceted approach to determine the voting power of each participant, utilizing a combination of eight strategies based on the balance of ERC20 COW and vCOW tokens across different chains and states of delegation. The following table outlines the strategies used:
+To ensure a democratic and fair voting process within the CoW DAO, the organization has implemented a comprehensive snapshot strategy. This strategy employs a multi-faceted approach to determine the voting power of each participant, utilizing a combination of eight strategies based on the balance of `ERC-20` COW and vCOW tokens across different chains and states of delegation. The following table outlines the strategies used:
 
 | Strategy Number | Strategy Description | Token Type | Chain | Delegation Status |
 |--- | --- | --- | --- | --- |
-| 1 | Balance of ERC20s vCOW | vCOW | Ethereum Mainnet | No |
-| 2 | Balance of ERC20s vCOW | vCOW | Gnosis Chain | No |
-| 3 | Balance of delegated ERC20s vCOW | vCOW | Ethereum Mainnet | Yes |
-| 4 | Balance of delegated ERC20s vCOW | vCOW | Gnosis Chain  | Yes |
-| 5 | Balance of ERC20s COW | COW | Ethereum Mainnet | No |
-| 6 | Balance of ERC20s COW | COW | Gnosis Chain  | No |
-| 7 | Balance of delegated ERC20s COW | COW | Ethereum Mainnet | Yes |
-| 8 | Balance of delegated ERC20s COW | COW | Gnosis Chain  | Yes  |
+| 1 | Balance of `ERC-20`s vCOW | vCOW | Ethereum Mainnet | No |
+| 2 | Balance of `ERC-20`s vCOW | vCOW | Gnosis Chain | No |
+| 3 | Balance of delegated `ERC-20`s vCOW | vCOW | Ethereum Mainnet | Yes |
+| 4 | Balance of delegated `ERC-20`s vCOW | vCOW | Gnosis Chain  | Yes |
+| 5 | Balance of `ERC-20`s COW | COW | Ethereum Mainnet | No |
+| 6 | Balance of `ERC-20`s COW | COW | Gnosis Chain  | No |
+| 7 | Balance of delegated `ERC-20`s COW | COW | Ethereum Mainnet | Yes |
+| 8 | Balance of delegated `ERC-20`s COW | COW | Gnosis Chain  | Yes  |
 
 The aggregate voting power of a CoW DAO member is the sum of their balances across all eight strategies. This system ensures that every token, whether it is vCOW or COW, and regardless of its location or delegation status, contributes to the overall governance process. By accounting for both vested and liquid tokens, and considering their respective delegation choices, the CoW DAO captures a complete snapshot of an individual's vested interests and participation in the ecosystem. This comprehensive approach underlines the CoW DAO's commitment to an inclusive and representative governance structure, where each stakeholder's voice is heard and weighted accurately in the collective decision-making process.
 
