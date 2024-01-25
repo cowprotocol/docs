@@ -206,7 +206,7 @@ isValidSignature(orderDigest, eip1271Signature) == MAGICVALUE
 
 This is the only signing method that supports both EOA and smart-contract traders.
 
-Together with submitting a `PreSign` order, the user must pre-approve the order on-chain. This is done by calling the settlement contract `setPreSignature` function:
+Together with submitting a `PreSign` order, the user must submit the order on-chain. This is done by calling the settlement contract `setPreSignature` function:
 
 ```solidity
 setPreSignature(orderUid, true);
