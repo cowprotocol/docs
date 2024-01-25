@@ -115,9 +115,7 @@ erDiagram
         string publicKey
     }
 ```
-(Todo: refine the mermaid chart of Safes including committee, grants-funds, volume-grants, cow-dao)
-
-The grants committee will have a distribution of 8 community members, making a total of 7 committee members. Safe #2 (from the schematic image above) [`gno:0xCA1F000D520c21C47E6c634DD31b92b91A6338bD`](https://app.safe.global/settings/setup?safe=gno:0xCA1F000D520c21C47E6c634DD31b92b91A6338bD) will function as the Grants committee Safe and has 8 signers with a signing threshold of 5 out of 8. The specified committee members:
+Safe2 (from the schematic image above) [`gno:0xCA1F000D520c21C47E6c634DD31b92b91A6338bD`](https://app.safe.global/settings/setup?safe=gno:0xCA1F000D520c21C47E6c634DD31b92b91A6338bD) will function as the Grants committee Safe and has 8 signers with a signing threshold of 5 out of 8. The specified committee members:
 
 - [@netrunner.eth](https://forum.cow.fi/u/netrunner.eth) - `0xc95Fda8A94437c1B936169b62858F13aE0386307`
 - [@Kubesqrt](https://forum.cow.fi/u/kubesqrt) - `0x386b4ba873a4f423ca28a4df1b2347ca949ced0e`
