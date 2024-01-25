@@ -41,7 +41,7 @@ sequenceDiagram
       database->>-autopilot: Uids, signatures, owners...
     and
       autopilot->>+blockchain: Get order information
-      blockchain->>-autopilot: Onchain cancellations, ETH flow...
+      blockchain->>-autopilot: On-chain cancellations, ETH flow...
     end
 
     # auction
@@ -86,7 +86,7 @@ To handle this, it needs to maintain a complete overview of the protocol.
 Much of the order data it needs is collected through the database, which is shared with the orderbook.
 The database stores the vast majority of available order information, including user signatures.
 
-Other information can only be retrieved onchain and is updated every time a new block is mined. For example, it needs to know from the protocol:
+Other information can only be retrieved on-chain and is updated every time a new block is mined. For example, it needs to know from the protocol:
 
 - Which [pre-signatures](/cow-protocol/reference/core/signing-schemes#presign) have been set
 - If new [eth-flow orders](/cow-protocol/reference/contracts/periphery/eth-flow) have been created
@@ -101,7 +101,7 @@ Orders whose price can't be fetched are discarded and won't be included in an au
 
 Native token price fetching is handled by an integrated price estimator in the autopilot.
 The price is fetched from multiple sources and may change based on the current configurations.
-Prices are both queried from a list of selected existing solvers as well as retrieved internally by the autopilot (for example, by querying some external parties like Paraswap and 1inch, but also by reading onchain pool data as Uniswap).
+Prices are both queried from a list of selected existing solvers as well as retrieved internally by the autopilot (for example, by querying some external parties like Paraswap and 1inch, but also by reading on-chain pool data as Uniswap).
 
 Orders that can't be settled are filtered out. This is the case if, for example:
 * an order is expired
@@ -123,13 +123,13 @@ The autopilot selects the winner according to the highest score once the allotte
 
 Up to this point, the autopilot only knows the score and not the full solution that achieves that score.
 The autopilot then asks the winning solver to reveal its score (through `/reveal`) and then to execute the corresponding settlement transaction (`/settle`).
-The solver is responsible for executing the transaction onchain (through the [driver](./solver/driver) if using the reference implementation).
+The solver is responsible for executing the transaction on-chain (through the [driver](./solver/driver) if using the reference implementation).
 
 ### Auction data storage
 
 The data returned by the solver is stored by the autopilot in the database.
 Other auction data is recorded as well, for example surplus fee for limit orders and the score returned by each solver.
-It also records the result of executing the settlement onchain in order to track the difference in score caused by negative or positive slippage.
+It also records the result of executing the settlement on-chain in order to track the difference in score caused by negative or positive slippage.
 
 This data will be used to compute the [solver payouts](/cow-protocol/reference/core/auctions/rewards).
 
@@ -145,7 +145,7 @@ In practice this means that some information (e.g., competition data by transact
 ### What the autopilot doesn't do
 
 The autopilot doesn't verify that a solver's transaction is valid, nor that it matches the score provided by the solver.
-For this purpose, it's only responsible for documenting the proposed solution and the effects of a settlement to the onchain state.
+For this purpose, it's only responsible for documenting the proposed solution and the effects of a settlement to the on-chain state.
 Misbehavior is detected and accounted for when computing the solver payouts based on the data collected by the autopilot.
 The solver payouts are handled outside of the autopilot code.
 
