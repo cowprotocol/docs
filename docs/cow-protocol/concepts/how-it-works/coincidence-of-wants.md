@@ -4,7 +4,9 @@ sidebar_position: 2
 
 # Coincidence of Wants
 
-**CoW (Coincidence of Wants)**: Thanks to CoW Protocol's batching mechanism, users can make  peer-to-peer swaps in cases where they're trading the same assets.
+**CoW (Coincidence of Wants)**: An economic phenomenon where two parties — each holding the asset that the other needs — exchange assets directly in an equivalent barter. 
+
+Thanks to CoW Protocol's batching mechanism, users can make  peer-to-peer swaps in cases where they're trading the same assets.
 
 For example, if one trader in a batch wants to sell \$2,000 of DAI for 0.5 ETH and another trader in the same batch wants to sell 0.5 ETH for $2,000 DAI, CoW Protocol's solvers will match both traders together so they can swap assets without tapping into on-chain liquidity - saving them from incurring liquidity provider fees.
 
@@ -22,7 +24,7 @@ CoWs can be full or partial. In a partial CoW, only one of the trades in a batch
 A simple CoW is where two traders are each selling what the other is buying.
 They swap assets with each other instead of interacting with AMM liquidity pools.
 Simple CoWs can be either *complete*, where each trader is trading exactly the same amount that the other needs, or they can be *partial* where two traders are trading opposite assets but only one can have their full liquidity met through a CoW.
-In the latter case, the rest of the trade goes on-chain to finish filling. 
+In the latter case, the rest of the trade goes to an AMM to finish filling. 
 
 ### Batching
 
@@ -30,7 +32,7 @@ In the latter case, the rest of the trade goes on-chain to finish filling.
 
 Often, a batch auction contains multiple intents from different users who all want to perform the same trade.
 Instead of sending their trades individually one by one, solvers can batch all of the intents together and execute them as a single trade on-chain.
-Although a batching CoW goes on-chain, this optimization reduces gas fees, as users trades interact with AMM smart contracts fewer times.
+Although a batching CoW goes to an AMM, this optimization reduces gas fees, as users trades interact with AMM smart contracts fewer times.
 
 ### Intermediate
 
@@ -50,4 +52,4 @@ A multidimensional CoW consists of three or more users and shares liquidity betw
 It often includes multiple assets and relies on the solvers to find the optimal path from each user to the next in order to maximize off-chain liquidity utilization. 
 
 While some orders are filled entirely through a CoW, many are only partially filled peer-to-peer.
-In these latter cases, solvers automatically go on-chain to source the rest of the liquidity necessary to finish filling the order.
+In these latter cases, solvers automatically go to an AMM to source the rest of the liquidity necessary to finish filling the order.
