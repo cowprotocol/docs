@@ -16,9 +16,17 @@ TWAP orders on CoW Protocol require several inputs:
 - **Assets**: Just like you would with a regular swap, begin by specifying the assets you want to swap
 - **Price Protection**: One of the unique parts of TWAP orders on CoW Protocol is the "price protection" option which allows you to specify the minimum market price you'd be willing to take for your order. If the price of the asset you're buying falls below what you specify for any, that part of the TWAP order will not execute until the price recovers above your threshold
 - **Number of Parts**: Here you specify how many parts you'd like to split your large order into
-- **Total Duration**: Specify the total length of time that you want all parts of your order to execute over.
+- **Total Duration**: Specify the total length of time that you want all parts of your order to execute over
 
-### TWAP Requirements
+## Benefits
+TWAP orders provide a number of benefits, especially when it comes to large orders: 
+- **Lower slippage**: Breaking up a large order into smaller pieces allows users to set a smaller slippage tolerance for each piece than if they had executed the large order as one
+- **Lower price impact**: As with slippage, breaking up a large order into small pieces allows users to spread their liquidity needs over time, reducing price impact
+- **100% of order surplus**: On CoW Swap, all order surplus is forwarded to the user. If an order executes for a price better than the quoted price — thanks to [Coincidences of Wants](../how-it-works/coincidence-of-wants) or any other price improvement that solvers are able to find — the extra price improvement will be forwarded to the user
+- **Eliminating market fluctuations**: By giving traders the time-weighted average price, TWAP orders smooth out market volatility
+- **Custom order parameters**: TWAP orders allow users to fine-tune their order by specifying the number of parts they would like it split up into, as well as the time period it’s executed over. On CoW Swap, TWAP orders also have a “price protection” option which protects orders from executing at an unfavorable price due to market volatility
+
+## TWAP Requirements
 
 There are also several requirements for placing TWAP orders through CoW Protocol
 
