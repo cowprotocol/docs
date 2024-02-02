@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Limit orders
 
-Limit orders are orders to buy or sell tokens at a fixed price before a certain expiration date.
+Limit orders are orders to buy or sell tokens at a specified price before a certain expiration date.
 
 If the market  price of the asset matches the target price at any point before the expiration date, the order executes. Otherwise, it expires. Limit orders are ideal for trades that are price-sensitive but not time-sensitive. 
 
