@@ -73,6 +73,27 @@ Both tokens above are accepted for internalization.
 
 :::
 
+### `prices`
+
+This key specifies the uniform clearing price vector (UCP) that governs the proposed solution. It is a dictionary mapping each token traded by a user order to its computed price. Each price is an stringified unsigned integer, and the whole vector is scale invariant, meaning that multiplying each entry by the same constant will not change anything; thus the scaling is chosen by the solver. We also stress that a solution need only contain prices for the tokens appearing in the executed user orders, and that solvers are free to choose the unit of measure they will use.
+
+An example containing the computed prices of [USDC](https://etherscan.io/token/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48), [COW](https://etherscan.io/token/0xDEf1CA1fb7FBcDC777520aa7f396b4E015F497aB) and [WETH](https://etherscan.io/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2) is given below.
+
+```json
+"prices": {
+    "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48": "389193245742363509576247472",
+    "0xDEf1CA1fb7FBcDC777520aa7f396b4E015F497aB": "137298311435590",
+    "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2": "1000000000000000000"
+}
+```
+
+The above entries should be interpreted as follows:
+
+- 1 wei (3rd entry) has a price of 1000000000000000000 = 10<sup>18</sup>.
+- The lowest denomination of `USDC` (1st entry), i.e., 1 / 10<sup>6</sup> of `USDC`, has a price of 389193245742363509576247472 relative to the price of 10<sup>18</sup> that wei has. This translates, for example, to 1 `WETH` having a price of $$\frac{1000000000000000000 \cdot 10^{18}}{389193245742363509576247472 \cdot 10^{6}} \approx 2569.417$$ `USDC`.
+- The lowest denomination of `COW` (2nd entry) is 1 / 10<sup>18</sup> , and it has a price of 137298311435590. This translates, for example, to 1 `COW` having a price of $$\frac{137298311435590 \cdot 10^{18}}{389193245742363509576247472 \cdot 10^{6}} \approx 0.35277$$ USDC.
+
+
 ### `orders`
 
 This key maps to a list containing the set of orders in the batch. Each entry in the dictionary corresponds to an order, which is a dictionary containing the following:
@@ -152,210 +173,37 @@ This key maps to a list of all orders that were selected for execution. Each tra
 - "kind": this is string of the set {"fulfillment", "jit"}, which corresponds to an order existing in the orderbook, or a just-in-time liquidity order placed by the solver, respectively.
 - "order": in case of a "fulillment" trade, the `uid` of the order is provided here as a string. In case it is a just-in-time liquidity order, the specifications of the order are explicitly given as a dictionary; more details can be found [here](https://docs.cow.fi/cow-protocol/reference/apis/solver).
 - "fee": this entry exists only for "fullilment" trades, and maps to a stringified integer describing the fee of the order (either pre-signed or solver computed), denominated in the sell token.
-- "executedAmount": this is a stringified integer corresponding ....
+- "executedAmount": this is a stringified integer corresponding to the sell amount (for sell orders) or the buy amount (for buy orders) that would get executed; note that this is amount is "separate" from the "fee" amount that was described above; this, for example, means that for a sell "filfillment" order, the trader will send a total of `fee + executedAmount` sell tokens to the contract. We also stress that i is this amount where uniform clearing prices are being applied to.
+- "order": this entry exists only for "jit" trades, and is a dictionary describing the created order; more details can be found [here](https://docs.cow.fi/cow-protocol/reference/apis/solver).
 
 
-EDITS STOP HERE.
+### `interactions`
 
-```json
-"3": {
-    "allow_partial_fill": false,
-    "buy_amount": "88967366419390071936",
-    "buy_token": "0xba100000625a3754423978a60c9317c58a424e3d",
-    "exec_buy_amount": "88967366419390071936",
-    "exec_sell_amount": "2129248125",
-    "exec_fee_amount": null,
-    "is_liquidity_order": true,
-    "is_sell_order": false,
-    "sell_amount": "2129248126",
-    "sell_token": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48"
-}
-```
+This key maps to a list of all interactions that are executed in the proposed solution, in the order they are provided in the list. Every interaction is either an AMM/liquidity order included in the input json sent to solvers, or a custom interaction the solver computed. Each interaction is a dictionary that contains the following entries:
 
-:::note Partially-fillable orders
+- "kind": this is a string of the set {"liquidity", "custom"}, that specifies whether the interaction refers to an AMM/liquidity order included in the input json sent to the solvers, or it is a custom interaction.
+- "internalize": this is a boolean flag that specifies whether the interaction can be internalized or not. More details about internalizations can be found in the section right below.
+- Depending on the "kind", the rest of the keys are different, and the details and specifications of those can be found [here](https://docs.cow.fi/cow-protocol/reference/apis/solver).
 
-In the case of a partially-fillable order, solvers are also required to report a fee. This is due to the fact that the fraction of the order that will be executed is decided by the solver, so having a predetermined fee assigned to the order is not reasonable. For this reason, the "exec_fee_amount" entry cannot be null in the case of a partially fillable order, and instead it should be a stringified integer, describing the fee amount, always denominated in the sell token.
-
-:::
-
-### `foreign_liquidity_orders`
-
-In order to allow solvers to build solutions that use additional liquidity orders, besides the ones contained in the input json, there is a "foreign_liquidity_orders" key that maps to a list of "orders", where each entry describes the liquidity order as well as the executed buy and sell amounts. This is a required field. An example entry is given below.
-
-```json
-"foreign_liquidity_orders": [
-    {
-        "order": {
-            "from": "0x4242424242424242424242424242424242424242",
-            "sellToken": "0x0101010101010101010101010101010101010101",
-            "buyToken": "0x0202020202020202020202020202020202020202",
-            "sellAmount": "101",
-            "buyAmount": "102",
-            "validTo": 3,
-            "appData": "0x0303030303030303030303030303030303030303030303030303030303030303",
-            "feeAmount": "13",
-            "kind": "sell",
-            "partiallyFillable": true,
-            "signingScheme": "eip1271",
-            "signature": "0x01020304"
-        },
-        "exec_sell_amount": "50",
-        "exec_buy_amount": "51"
-    }
-]
-```
-
-We now clarify the meaning of some of the entries above:
-
-- `"appData"`: this is a free 32-byte slot that does not, in any way, affect on-chain settlement. This might be utilized in the future to allow for additional functionality.
-- `"signingScheme"` and `"signature"`: These two entries contain the relevant information for signing orders; the [signature scheme](../signing-schemes) used and the signature itself.
-
-As a final comment, and similar to the liquidity orders provided by the Driver, foreign liquidity orders are always matched at limit price and do not contribute surplus to the objective function. Moreover, a solution containing only (foreign) liquidity orders is not considered valid.
-
-### `amms`
-
-This key maps to a dictionary containing all the AMMs that were used in the solution, their order of execution, as well as the traded amounts, and it is a required field. More specifically, all the information from the input is copied to the output entry, and there is an additional `execution` key that maps to a list of AMM _executions_ (note that an AMM involving 4 or more tokens may be executed more than once). Each AMM execution has the following parameters:
-
-- `"buy_token"`: the token id of the token that the AMM is buying (receiving).
-- `"exec_buy_amount"`: a stringified integer with the amount that the AMM buys.
-- `"sell_token"`: the token id of the token that the AMM is selling (sending)
-- `"exec_sell_amount"`: a stringified integer with the amount that the AMM sells.
-- `"exec_plan"`: this entry helps to specify the order in which the different AMM interactions are to be executed. It consists of two entries (which can be thought of as coordinates), `"position"` and `"sequence"`, that are non-negative integers, and a third boolean entry labeled `"internal"`; the `internal` flag is discussed in the section below. The reason that two entries/coordinates are used is to more precisely describe potential dependencies among AMM orders. In particular, two AMM orders that have a different `sequence` entry are independent and their relative order of execution does not matter. However, for all AMM orders with the same `sequence` entry, the order specified by the `position` entry must be respected, i.e., all such orders must be executed sequentially, in increasing order of the `position` entry.
-
-An example of a Constant Product AMM execution entry is given below.
-
-```json
-"7": {
-    "cost": {
-        "amount": "11700636799687864",
-        "token": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
-    },
-    "execution": [
-        {
-            "buy_token": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
-            "exec_buy_amount": "535272056568359078",
-            "exec_plan": {
-                "position": 0,
-                "sequence": 0,
-                "internal": false
-            },
-            "exec_sell_amount": "28000000000000001461",
-            "sell_token": "0x88acdd2a6425c3faae4bc9650fd7e27e0bebb7ab"
-        }
-    ],
-    "fee": "0.003000",
-    "kind": "ConstantProduct",
-    "mandatory": false,
-    "reserves": {
-        "0x88acdd2a6425c3faae4bc9650fd7e27e0bebb7ab": "2.296178e+23",
-        "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2": "4.375869e+21"
-    }
-}
-```
 
 #### Using internal buffers
 
-We now discuss some additional functionality that solvers are allowed to use. Since the settlement contract holds balances of multiple tokens, solvers are in certain cases allowed to "internalize" an AMM interaction, in order to save on gas. More precisely, if there is an AMM interaction that buys token A and sells token B, a solver can decide to internalize the interaction if and only if the following two conditions are satisfied:
+We now discuss some additional functionality that solvers are allowed to use. Since the settlement contract holds balances of multiple tokens, solvers are in certain cases allowed to "internalize" an interaction, in order to save on gas. More precisely, if there is an AMM interaction that buys token A and sells token B, a solver can decide to internalize the interaction if and only if the following two conditions are satisfied:
 
-1. Token A is a safe token, i.e., the corresponding `"accepted_for_internalization"` flag is set to `true`. This means that the protocol is happy to store this token in the settlement contract.
-2. There is enough balance of sell token B, i.e., at least as much amount as the sell amount of the AMM interaction. This is revealed by the `"internal_buffer"` entry in the token description.
+1. Token A is a trusted token, i.e., the corresponding `"trusted"` flag is set to `true`. This means that the protocol is happy to store this token in the settlement contract.
+2. There is enough balance of sell token B, i.e., at least as much amount as the sell amount of the AMM interaction. This is revealed by the `"availableBalance"` entry in the token description.
 
-If both conditions are satisfied, a solver can set the `"internal"` flag to `true` in order to internalize the interaction:
-
-```json
-"internal": true
-```
-
-In such a case, the driver will remove the interaction, and so the solution will end up using less gas, get better ranking, and also be risk-free (at least the part involving the internalized AMM interaction). We stress that the `exec_plan` coordinates must always be provided, even if the interaction will end up being internalized.
-
-### `prices`
-
-This key is a dictionary mapping each traded token id to its computed price in terms of the reference token, and it is a required field. Each price is an unsigned integer, and for scaling purposes, the numeraire is usually set to have a large enough value; usually, `WETH` is selected as the numeraire, which has 18 decimals, and so the price of 1 wei is set to 10¹⁸. We clarify here that this is arbitrary, and is just selected for convenience. We also stress that a solution need only contain prices for the tokens appearing in the executed user orders, and that solvers are free to choose the unit of measure they will use.
-
-An example containing the computed prices of [USDC](https://etherscan.io/token/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48), [BAL](https://etherscan.io/token/0xba100000625a3754423978a60c9317c58a424e3d) and [WETH](https://etherscan.io/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2), where WETH is defined as the reference token, is given below.
+If both conditions are satisfied, a solver can set the `"internalize"` flag to `true` in order to internalize the interaction:
 
 ```json
-"prices": {
-    "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48": "219193245742363509576247472",
-    "0xba100000625a3754423978a60c9317c58a424e3d": "5245932598960804",
-    "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2": "1000000000000000000"
-}
+"internalize": true
 ```
 
-The above entries should be interpreted as follows:
-
-- 1 wei (3rd entry) has a price of 1000000000000000000 = 10¹⁸.
-- The lowest denomination of `USDC` (1st entry), i.e., 1 / 10⁶ of `USDC`, has a price of 219193245742363509576247472 relative to the price of 10¹⁸ that wei has. This translates to 1 `USDC` having a price of $$\frac{219193245742363509576247472 \cdot 10^6}{10^{18} \cdot 10^{18}} \approx 0.000219193$$ `WETH`.
-- The lowest denomination of `BAL` (2nd entry) is 1 / 10¹⁸ , and it has a price of 5245932598960804 relative to the price of 10¹⁸ that wei has. This translates to 1 `BAL` having a price of $$\frac{5245932598960804 \cdot 10^{18}}{10^{18} \cdot 10^{18}} \approx 0.005245933$$ WETH.
-
-### `approvals`
-
-In order to allow solvers to propose solutions that interact with contracts/pools that are not provided by the Driver, there are 2 additional sections in the solution file. The first is the "approvals" key and the second is the "interaction_data" key (covered below). We clarify that both are required fields.
-
-The "approvals" key is a list where each entry consists of the following:
-
-- `"spender"`: the address of the target contract that we authorize to trade some token on the settlement contract's behalf.
-- `"token"`: the address of the token that we authorize.
-- `"amount"`: a stringified integer that corresponds to the (minimum) amount we authorize the target contract to use. **We stress here** that currently the behavior is the following. If there is already sufficiently large (i.e., larger than the `"amount"` entry) allowance set by a previous settlement, then the approval is ignored altogether. On the other hand, if the current allowance is lower than `"amount"`, then the driver will set a maximum value for the approval (much larger than the actual `"amount"` specified by the entry); this allows for future gas savings.
-
-  In case full control over approvals is required, a solver can skip this field and instead use a custom [interaction](#interaction_data) to set an exact approval.
-
-An example is given below.
-
-```json
-"approvals": [
-    {
-        "token": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-        "spender": "0xe592427a0aece92de3edee1f18e0157c05861564",
-        "amount": "3811321194"
-    }
-]
-```
-
-### `interaction_data`
-
-In order to allow for more interactions (e.g., interacting with AMMs that are not provided by the Driver), the "interaction_data" key (which is a required field) maps to a list of encoded interactions, each consisting of the following:
-
-- `target` : the address of contract that the solution interacts with (required field).
-- `value`: a number corresponding to the ETH amount that the sender sends to the recipient; every ethereum transaction has such an entry, and thus, this is (almost always) set to zero "0x0" (required field).
-- `call_data`: the encoded interaction data is given here as a string. (required field).
-- `inputs`: a list of the tokens and amounts sent to the target contract (required field).
-- `outputs`: a list of the tokens and amounts that are expected to be sent back to the settlement contract (required field).
-- `exec_plan`: this entry is identical to the corresponding entry in the AMMs section, specifying the order in which the interactions must be executed, and is an optional field. We note that the "internal" flag can still be used here.
-- `cost`: this entry is optional and can be used to describe the (estimated) cost of the interaction. This allows for solvers to express information regarding cost, and is mostly aimed to be used in cases where a solver is used as a price estimator as well. It consists of two keys, the "token" key that expresses the token in which the cost is express, and the "amount" key, which is the value describing the cost, in string format.
-
-An example is given below.
-
-```json
-"interaction_data": [
-    {
-        "target": "0xdef1c0ded9bec7f1a1670819833240f027b25eff",
-        "value": "0x0",
-        "call_data": "0x..."
-        "inputs": [
-            {
-                "amount": "9907695503532850274304",
-                "token": "0x853d955acef822db058eb8505911ed77f175b99e"
-            }
-        ],
-        "outputs": [
-            {
-                "amount": "6188703276265770703",
-                "token": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
-            }
-        ],
-        "exec_plan": {
-            "sequence": 0,
-            "position": 1
-        },
-        "cost": {
-            "amount": "1000000000000000",
-            "token": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
-        }
-    }
-]
-```
+In such a case, the default driver will remove the interaction, and so the solution will end up using less gas, get better ranking, and also be risk-free (at least the part involving the internalized AMM interaction).
 
 ### `score`
 
-The score is the "bid" a solver makes for the batch in the [solver auction](rewards), as it will get ranked according to it. The protocol picks the solution with the highest score, given that it is strictly positive. The score is a required stringified integer denominated in wei. 
+The score is a key that describes the "bid" a solver makes for the batch in the [solver auction](rewards), as it will get ranked according to it. The protocol picks the solution with the highest score, given that it is strictly positive. The score maps is a dictionary with two entries. The first entry is the following:
+- "kind": this is a string of the set {"solver", "riskAdjusted"}, that determines whether a solver will explicitly provide a score or will delegate the score computation to the default driver by only specifying a probability of success for the proposed solution.
+
+If we have `"kind": "solver"`, then there is a second entry, labeled "score", that corresponds to a stringified float that specifies the score attached to the solution. On the other hand, if we have `"kind": "riskAdjusted"`, then there is a second entry, labeled "successProbability", that is a a stringified float that specifies the success probability of the proposed solution.
