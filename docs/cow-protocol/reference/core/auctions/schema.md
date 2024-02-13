@@ -170,9 +170,7 @@ This key maps to a list of all orders that were selected for execution. Each tra
 - `kind`: this is string of the set {"fulfillment", "jit"}, which corresponds to an order existing in the orderbook, or a just-in-time liquidity order placed by the solver, respectively.
 - `order`: in case of a "fulillment" trade, the `uid` of the order is provided here as a string. In case it is a just-in-time liquidity order, the specifications of the order are explicitly given as a dictionary; more details can be found [here](https://docs.cow.fi/cow-protocol/reference/apis/solver).
 - `fee`: this entry exists only for "fullilment" trades, and maps to a stringified integer describing the fee of the order (either pre-signed or solver computed), denominated in the sell token.
-- `executedAmount`: this is a stringified integer corresponding to the sell amount (for sell orders) or the buy amount (for buy orders) that would get executed; note that this is amount is "separate" from the "fee" amount that was described above; this, for example, means that for a sell "filfillment" order, the trader will send a total of `fee + executedAmount` sell tokens to the contract. We also stress that i is this amount where uniform clearing prices are being applied to.
-- `order`: this entry exists only for "jit" trades, and is a dictionary describing the created order; more details can be found [here](https://docs.cow.fi/cow-protocol/reference/apis/solver).
-
+- `executedAmount`: this is a stringified integer corresponding to the sell amount (for sell orders) or the buy amount (for buy orders) that would get executed. Note that this is amount is "separate" from the "fee" amount that was described above; this, for example, means that for a sell "fulfillment" order, the trader will send a total of `fee + executedAmount` sell tokens to the contract. We also stress that ii is the executedAmount where uniform clearing prices are being applied to.
 
 ### `interactions`
 
@@ -187,10 +185,10 @@ This key maps to a list of all interactions that are executed in the proposed so
 
 We now discuss some additional functionality that solvers are allowed to use. Since the settlement contract holds balances of multiple tokens, solvers are in certain cases allowed to "internalize" an interaction, in order to save on gas. More precisely, if there is an AMM interaction that buys token A and sells token B, a solver can decide to internalize the interaction if and only if the following two conditions are satisfied:
 
-1. Token A is a trusted token, i.e., the corresponding `"trusted"` flag is set to `true`. This means that the protocol is happy to store this token in the settlement contract.
-2. There is enough balance of sell token B, i.e., at least as much amount as the sell amount of the AMM interaction. This is revealed by the `"availableBalance"` entry in the token description.
+1. Token A is a trusted token, i.e., the corresponding `trusted` flag is set to `true`. This means that the protocol is happy to store this token in the settlement contract.
+2. There is enough balance of sell token B, i.e., at least as much amount as the sell amount of the AMM interaction. This is revealed by the `availableBalance` entry in the token description.
 
-If both conditions are satisfied, a solver can set the `"internalize"` flag to `true` in order to internalize the interaction:
+If both conditions are satisfied, a solver can set the `internalize` flag to `true` in order to internalize the interaction:
 
 ```json
 "internalize": true
@@ -200,7 +198,8 @@ In such a case, the default driver will remove the interaction, and so the solut
 
 ### `score`
 
-The score is a key that describes the "bid" a solver makes for the batch in the [solver auction](rewards), as it will get ranked according to it. The protocol picks the solution with the highest score, given that it is strictly positive. The score maps is a dictionary with two entries. The first entry is the following:
-- "kind": this is a string of the set {"solver", "riskAdjusted"}, that determines whether a solver will explicitly provide a score or will delegate the score computation to the default driver by only specifying a probability of success for the proposed solution.
+The score is a key that describes the "bid" a solver makes for the batch in the [solver auction](rewards), as it will get ranked according to it. The protocol picks the solution with the highest score, given that it is strictly positive. The score maps to a dictionary with two entries. The first entry is the following:
 
-If we have `"kind": "solver"`, then there is a second entry, labeled "score", that corresponds to a stringified float that specifies the score attached to the solution. On the other hand, if we have `"kind": "riskAdjusted"`, then there is a second entry, labeled "successProbability", that is a a stringified float that specifies the success probability of the proposed solution.
+- `kind`: this is a string of the set {"solver", "riskAdjusted"}, that determines whether a solver will explicitly provide a score or will delegate the score computation to the default driver by only specifying a probability of success for the proposed solution.
+
+If we have `"kind": "solver"`, then there is a second entry, labeled `score`, that corresponds to a stringified float that specifies the score attached to the solution. On the other hand, if we have `"kind": "riskAdjusted"`, then there is a second entry, labeled `successProbability`, that is a a stringified float that specifies the success probability of the proposed solution.
