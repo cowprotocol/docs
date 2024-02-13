@@ -36,11 +36,11 @@ This key is an (internal) integer identifier for the auction, that is encoded an
 
 This key lists all tokens that appear in some order or AMM in the batch auction instance. It is a dictionary, mapping the token key (which is the smart contract address of the token) to the following information:
 
-- `"decimals"`: an integer equal to the number of decimals of the token.
-- `"symbol"`: a string denoting the shorthand name of the token (e.g., "WETH", "DAI").
-- `"referencePrice"`: a float that corresponds to the price of the smallest denomination of the token with respect to a _reference token_ (for mainnet, the reference token is WETH, and its referencePrice is 1000000000000000000). Only tokens that are traded by at least a user order will necessarily have non-null referencePrice, while the rest of the tokens are allowed to have a `null` referencePrice. These prices are used when evaluating the quality of a given solution, and can be thought of as a way of converting and expressing all relevant quantities in WETH (note that, initially, the surplus of different orders can be denominated in different tokens), and aggregating them all in a single value, denominated in WETH.
-- `"availableBalance"`: a stringified integer that describes the amount (in the token's lowest denomination) of the token currently stored in the settlement contract ([internal buffers](/cow-protocol/reference/core/definitions#buffers)). This information is relevant when a solver attempts to [internalize an interaction](#using-internal-buffers).
-- `"trusted"`: this is a boolean flag that specifies whether the contract is willing to store the token as part of an [internalized interaction](#using-internal-buffers).
+- `decimals`: an integer equal to the number of decimals of the token.
+- `symbol`: a string denoting the shorthand name of the token (e.g., "WETH", "DAI").
+- `referencePrice`: a float that corresponds to the price of the smallest denomination of the token with respect to a _reference token_ (for mainnet, the reference token is WETH, and its referencePrice is 1000000000000000000). Only tokens that are traded by at least a user order will necessarily have non-null referencePrice, while the rest of the tokens are allowed to have a `null` referencePrice. These prices are used when evaluating the quality of a given solution, and can be thought of as a way of converting and expressing all relevant quantities in WETH (note that, initially, the surplus of different orders can be denominated in different tokens), and aggregating them all in a single value, denominated in WETH.
+- `availableBalance`: a stringified integer that describes the amount (in the token's lowest denomination) of the token currently stored in the settlement contract ([internal buffers](/cow-protocol/reference/core/definitions#buffers)). This information is relevant when a solver attempts to [internalize an interaction](#using-internal-buffers).
+- `trusted`: this is a boolean flag that specifies whether the contract is willing to store the token as part of an [internalized interaction](#using-internal-buffers).
 
 We now share two example token entries corresponding to [WETH](https://etherscan.io/address/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2) and [USDC](https://etherscan.io/token/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48):
 
@@ -74,17 +74,17 @@ Both tokens above are accepted for internalization.
 
 This key maps to a list containing the set of orders in the batch. Each entry in the dictionary corresponds to an order, which is a dictionary containing the following:
 
-- `"uid"`: this is the unique identifier of the order.
-- `"sellToken"`: a string denoting the address of the sell token.
-- `"buyToken"`: a string denoting the address of the buy token.
-- `"sellAmount"`: a stringified integer denoting the limit amount that is being sold, measured in terms of the smallest denomination of the token.
-- `"buyAmount"`: a stringified integer denoting the limit amount that is being bought. Similar to the `sellAmount`, it is measured in terms of the smallest denomination of the token.
-- `"feeAmount"`: a stringified integer denoting the signed fee attached to the order, which is always denominated in the `sellToken`.
-- `"kind"`: a string of the set {"sell", "buy"}, describing whether the order is a `sell` or `buy` order.
-- `"partiallyFillable"`: a boolean indicating whether the order may be partially matched (_true_), or if it is Fill-or-Kill order (_false_).
-- `"class"`: a string of the set {"market", "limit", "liquidity"}, indicating the order class.
+- `uid`: this is the unique identifier of the order.
+- `sellToken`: a string denoting the address of the sell token.
+- `buyToken`: a string denoting the address of the buy token.
+- `sellAmount`: a stringified integer denoting the limit amount that is being sold, measured in terms of the smallest denomination of the sell token.
+- `buyAmount`: a stringified integer denoting the limit amount that is being bought. Similar to the `sellAmount`, it is measured in terms of the smallest denomination of the buy token.
+- `feeAmount`: a stringified integer denoting the signed fee attached to the order, which is always denominated in the `sellToken`.
+- `kind`: a string of the set {"sell", "buy"}, describing whether the order is a `sell` or `buy` order.
+- `partiallyFillable`: a boolean indicating whether the order may be partially matched (_true_), or if it is Fill-or-Kill order (_false_).
+- `class`: a string of the set {"market", "limit", "liquidity"}, indicating the order class.
 
-  We clarify here that all `market` and `liquidity` orders have a potentially non-zero predetermined fee, while all `limit` orders have necessarily zero signed fee, and the actual fee charged to the order is computed and provided by the solvers when they propose an execution of such an order. More details are provided in the [solutions section](#solutions-output).
+  We clarify here that all `market` and `liquidity` orders have a potentially non-zero predetermined fee, while all `limit` orders have necessarily a zero signed fee, and the actual fee charged to the order is computed and provided by the solvers when they propose an execution of such an order. More details are provided in the [solutions section](#solutions-output).
 
 An example Fill-or-Kill user limit buy order that sells 1000 [COW](https://etherscan.io/token/0xdef1ca1fb7fbcdc777520aa7f396b4e015f497ab) for at least 284.138335 USDC [USDC](https://etherscan.io/token/0xba100000625a3754423978a60c9317c58a424e3d) is given below:
 
@@ -128,7 +128,7 @@ This key is a single entry that is a string corresponding to a time stamp. This 
 
 ## Solutions (output)
 
-The response of a solver engine is a dictionary that contains all the information that is needed to execute the proposed solution. There is a single key, "solutions", that maps to a list of proposed solutions; this means that a solver can propose multiple solutions. The simplest possible solution is the _empty solution_, which corresponds to the case where no orders are executed, and corresponds to the empty list, and looks as follows:
+The response of a solver engine is a dictionary that contains all the information that is needed to execute the proposed solution. There is a single key, "solutions", that maps to a list of proposed solutions; this means that a solver can propose multiple solutions. The simplest possible response is the _empty solution_, which corresponds to the case where no orders are executed, and is described by the empty list as follows:
 
 ```json
 {
@@ -167,19 +167,19 @@ The above entries should be interpreted as follows:
 
 This key maps to a list of all orders that were selected for execution. Each trade is a dictionary that contains the following entries:
 
-- "kind": this is string of the set {"fulfillment", "jit"}, which corresponds to an order existing in the orderbook, or a just-in-time liquidity order placed by the solver, respectively.
-- "order": in case of a "fulillment" trade, the `uid` of the order is provided here as a string. In case it is a just-in-time liquidity order, the specifications of the order are explicitly given as a dictionary; more details can be found [here](https://docs.cow.fi/cow-protocol/reference/apis/solver).
-- "fee": this entry exists only for "fullilment" trades, and maps to a stringified integer describing the fee of the order (either pre-signed or solver computed), denominated in the sell token.
-- "executedAmount": this is a stringified integer corresponding to the sell amount (for sell orders) or the buy amount (for buy orders) that would get executed; note that this is amount is "separate" from the "fee" amount that was described above; this, for example, means that for a sell "filfillment" order, the trader will send a total of `fee + executedAmount` sell tokens to the contract. We also stress that i is this amount where uniform clearing prices are being applied to.
-- "order": this entry exists only for "jit" trades, and is a dictionary describing the created order; more details can be found [here](https://docs.cow.fi/cow-protocol/reference/apis/solver).
+- `kind`: this is string of the set {"fulfillment", "jit"}, which corresponds to an order existing in the orderbook, or a just-in-time liquidity order placed by the solver, respectively.
+- `order`: in case of a "fulillment" trade, the `uid` of the order is provided here as a string. In case it is a just-in-time liquidity order, the specifications of the order are explicitly given as a dictionary; more details can be found [here](https://docs.cow.fi/cow-protocol/reference/apis/solver).
+- `fee`: this entry exists only for "fullilment" trades, and maps to a stringified integer describing the fee of the order (either pre-signed or solver computed), denominated in the sell token.
+- `executedAmount`: this is a stringified integer corresponding to the sell amount (for sell orders) or the buy amount (for buy orders) that would get executed; note that this is amount is "separate" from the "fee" amount that was described above; this, for example, means that for a sell "filfillment" order, the trader will send a total of `fee + executedAmount` sell tokens to the contract. We also stress that i is this amount where uniform clearing prices are being applied to.
+- `order`: this entry exists only for "jit" trades, and is a dictionary describing the created order; more details can be found [here](https://docs.cow.fi/cow-protocol/reference/apis/solver).
 
 
 ### `interactions`
 
 This key maps to a list of all interactions that are executed in the proposed solution, in the order they are provided in the list. Every interaction is either an AMM/liquidity order included in the input json sent to solvers, or a custom interaction the solver computed. Each interaction is a dictionary that contains the following entries:
 
-- "kind": this is a string of the set {"liquidity", "custom"}, that specifies whether the interaction refers to an AMM/liquidity order included in the input json sent to the solvers, or it is a custom interaction.
-- "internalize": this is a boolean flag that specifies whether the interaction can be internalized or not. More details about internalizations can be found in the section right below.
+- `kind`: this is a string of the set {"liquidity", "custom"}, that specifies whether the interaction refers to an AMM/liquidity order included in the input json sent to the solvers, or it is a custom interaction.
+- `internalize`: this is a boolean flag that specifies whether the interaction can be internalized or not. More details about internalizations can be found in the section right below.
 - Depending on the "kind", the rest of the keys are different, and the details and specifications of those can be found [here](https://docs.cow.fi/cow-protocol/reference/apis/solver).
 
 
