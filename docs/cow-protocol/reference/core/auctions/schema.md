@@ -19,12 +19,12 @@ To avoid precision loss, some numerical literals are encoded as strings, referre
 ## Instances (input)
 
 The instance json that solver engines currently receive contains six keys:
-- "id"
-- "tokens"
-- "orders"
-- "liquidity"
-- "effectiveGasPrice"
-- "deadline"
+- `id`
+- `tokens`
+- `orders`
+- `liquidity`
+- `effectiveGasPrice`
+- `deadline`
 
 We now explain what each of these entries contains.
 
