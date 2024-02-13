@@ -30,19 +30,19 @@ We now explain what each of these entries contains.
 
 ### `id`
 
-This key is an (internal) integer identifier for the auction, that is encoded and sent as a string. In the case where the instance corresponds to a quote request, this identifier is set to ```null```.
+This key is an (internal) integer identifier for the auction, that is encoded and sent as a string. In the case where the instance corresponds to a quote request, this identifier is set to `null`.
 
 ### `tokens`
 
 This key lists all tokens that appear in some order or AMM in the batch auction instance. It is a dictionary, mapping the token key (which is the smart contract address of the token) to the following information:
 
 - `"decimals"`: an integer equal to the number of decimals of the token.
-- `"symbol"`: a string denoting the shorthand name of the token (e.g., "WETH", "DAI")
+- `"symbol"`: a string denoting the shorthand name of the token (e.g., "WETH", "DAI").
 - `"referencePrice"`: a float that corresponds to the price of the smallest denomination of the token with respect to a _reference token_ (for mainnet, the reference token is WETH, and its referencePrice is 1000000000000000000). Only tokens that are traded by at least a user order will necessarily have non-null referencePrice, while the rest of the tokens are allowed to have a `null` referencePrice. These prices are used when evaluating the quality of a given solution, and can be thought of as a way of converting and expressing all relevant quantities in WETH (note that, initially, the surplus of different orders can be denominated in different tokens), and aggregating them all in a single value, denominated in WETH.
-- `"availableBalance"`: a "stringified" integer that describes the amount (in the token's lowest denomination) of the token currently stored in the settlement contract ([internal buffers](/cow-protocol/reference/core/definitions#buffers)). This information is relevant when a solver attempts to [internalize an interaction](#using-internal-buffers).
+- `"availableBalance"`: a stringified integer that describes the amount (in the token's lowest denomination) of the token currently stored in the settlement contract ([internal buffers](/cow-protocol/reference/core/definitions#buffers)). This information is relevant when a solver attempts to [internalize an interaction](#using-internal-buffers).
 - `"trusted"`: this is a boolean flag that specifies whether the contract is willing to store the token as part of an [internalized interaction](#using-internal-buffers).
 
-We now share two example token entries corresponding to [WETH](https://etherscan.io/address/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2) and [USDC]():
+We now share two example token entries corresponding to [WETH](https://etherscan.io/address/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2) and [USDC](https://etherscan.io/token/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48):
 
 ```json
 "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2": {
