@@ -62,37 +62,13 @@ We now share two example token entries corresponding to [WETH](https://etherscan
     "trusted": true
 }
 ```
-We clarify a few things regarding the entries above.
-
-- The referencePrice of a token, viewed in isolation, is just a number and does not have inherent meaning. However, the referencePrice suggests an (approximate) exchange rate between two tokens, and this is the reason these prices are used to convert everything to WETH. Specifically, we usually have that `WETH` has a referencePrice of 1000000000000000000, which should be interpreted as 1 wei = 1/10<sup>18</sup> `WETH` (since `WETH` has 18 `decimals`) has a price of 1000000000000000000.
-- The `referencePrice` of `USDC` is set to 449666048539228625975640064, which means that one atom of USDC, i.e., 1/10<sup>6</sup> of 1 `USDC` has a price of 449666048539228625975640064, given that 1 wei has price 1000000000000000000. This suggests that 1 USDC is equal to referencePrice(USDC) * 10<sup>6</sup> / (referencePrice(WETH) * 10<sup>18</sup>) = 0.0004496660485392286 WETH, or equivalently, that 1 WETH is equal to 2223.87259 USDC.
+We clarify a few things regarding the entries above. The referencePrice of a token, viewed in isolation, is just a number and does not have inherent meaning. However, the referencePrice suggests an (approximate) exchange rate between two tokens, and this is the reason these prices are used to convert a quantity denominated in some token to WETH. Specifically, we usually have that `WETH` has a referencePrice of 1000000000000000000, which should be interpreted as 1 wei = 1/10<sup>18</sup> `WETH` (since `WETH` has 18 `decimals`) has a price of 1000000000000000000. This implies that the `referencePrice` of `USDC`, which here is set to 449666048539228625975640064, means that one atom of USDC, i.e., 1/10<sup>6</sup> of 1 `USDC` has a price of 449666048539228625975640064, given that 1 wei has price 1000000000000000000. This suggests that 1 USDC is equal to referencePrice(USDC) * 10<sup>6</sup> / (referencePrice(WETH) * 10<sup>18</sup>) = 0.0004496660485392286 WETH, or equivalently, that 1 WETH is equal to 2223.87259 USDC.
 
 :::note
 
 Both tokens above are accepted for internalization.
 
 :::
-
-### `prices`
-
-This key specifies the uniform clearing price vector (UCP) that governs the proposed solution. It is a dictionary mapping each token traded by a user order to its computed price. Each price is an stringified unsigned integer, and the whole vector is scale invariant, meaning that multiplying each entry by the same constant will not change anything; thus the scaling is chosen by the solver. We also stress that a solution need only contain prices for the tokens appearing in the executed user orders, and that solvers are free to choose the unit of measure they will use.
-
-An example containing the computed prices of [USDC](https://etherscan.io/token/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48), [COW](https://etherscan.io/token/0xDEf1CA1fb7FBcDC777520aa7f396b4E015F497aB) and [WETH](https://etherscan.io/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2) is given below.
-
-```json
-"prices": {
-    "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48": "389193245742363509576247472",
-    "0xDEf1CA1fb7FBcDC777520aa7f396b4E015F497aB": "137298311435590",
-    "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2": "1000000000000000000"
-}
-```
-
-The above entries should be interpreted as follows:
-
-- 1 wei (3rd entry) has a price of 1000000000000000000 = 10<sup>18</sup>.
-- The lowest denomination of `USDC` (1st entry), i.e., 1 / 10<sup>6</sup> of `USDC`, has a price of 389193245742363509576247472 relative to the price of 10<sup>18</sup> that wei has. This translates, for example, to 1 `WETH` having a price of $$\frac{1000000000000000000 \cdot 10^{18}}{389193245742363509576247472 \cdot 10^{6}} \approx 2569.417$$ `USDC`.
-- The lowest denomination of `COW` (2nd entry) is 1 / 10<sup>18</sup> , and it has a price of 137298311435590. This translates, for example, to 1 `COW` having a price of $$\frac{137298311435590 \cdot 10^{18}}{389193245742363509576247472 \cdot 10^{6}} \approx 0.35277$$ USDC.
-
 
 ### `orders`
 
@@ -165,6 +141,27 @@ Each entry of the `solutions` list describes a solution, which is a dictionary t
 ### `id`
 
 This key maps to a non-negative integer that can be thought of as an index of the proposed solution and must be unique for each proposed solution. E.g., if a solver decides to propose two solutions, they can use index 0 and 1.
+
+### `prices`
+
+This key specifies the uniform clearing price vector (UCP) that governs the proposed solution. It is a dictionary mapping each token traded by a user order to its computed price. Each price is an stringified unsigned integer, and the whole vector is scale invariant, meaning that multiplying each entry by the same constant will not change anything; thus the scaling is chosen by the solver. We also stress that a solution need only contain prices for the tokens appearing in the executed user orders, and that solvers are free to choose the unit of measure they will use.
+
+An example containing the computed prices of [USDC](https://etherscan.io/token/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48), [COW](https://etherscan.io/token/0xDEf1CA1fb7FBcDC777520aa7f396b4E015F497aB) and [WETH](https://etherscan.io/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2) is given below.
+
+```json
+"prices": {
+    "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48": "389193245742363509576247472",
+    "0xDEf1CA1fb7FBcDC777520aa7f396b4E015F497aB": "137298311435590",
+    "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2": "1000000000000000000"
+}
+```
+
+The above entries should be interpreted as follows:
+
+- 1 wei (3rd entry) has a price of 1000000000000000000 = 10<sup>18</sup>.
+- The lowest denomination of `USDC` (1st entry), i.e., 1 / 10<sup>6</sup> of `USDC`, has a price of 389193245742363509576247472 relative to the price of 10<sup>18</sup> that wei has. This translates, for example, to 1 `WETH` having a price of $$\frac{1000000000000000000 \cdot 10^{18}}{389193245742363509576247472 \cdot 10^{6}} \approx 2569.417$$ `USDC`.
+- The lowest denomination of `COW` (2nd entry) is 1 / 10<sup>18</sup> , and it has a price of 137298311435590. This translates, for example, to 1 `COW` having a price of $$\frac{137298311435590 \cdot 10^{18}}{389193245742363509576247472 \cdot 10^{6}} \approx 0.35277$$ USDC.
+
 
 ### `trades`
 
