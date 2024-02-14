@@ -168,7 +168,7 @@ The above entries should be interpreted as follows:
 This key maps to a list of all orders that were selected for execution. Each trade is a dictionary that contains the following entries:
 
 - `kind`: this is string of the set {"fulfillment", "jit"}, which corresponds to an order existing in the orderbook, or a just-in-time liquidity order placed by the solver, respectively.
-- `order`: in case of a "fulillment" trade, the `uid` of the order is provided here as a string. In case it is a just-in-time liquidity order, the specifications of the order are explicitly given as a dictionary; more details can be found [here](https://docs.cow.fi/cow-protocol/reference/apis/solver).
+- `order`: in case of a "fulfillment" trade, the `uid` of the order is provided here as a string. In case it is a just-in-time liquidity order, the specifications of the order are explicitly given as a dictionary; more details can be found [here](https://docs.cow.fi/cow-protocol/reference/apis/solver).
 - `fee`: this entry exists only for "fullilment" trades, and maps to a stringified integer describing the fee of the order (either pre-signed or solver computed), denominated in the sell token.
 - `executedAmount`: this is a stringified integer corresponding to the sell amount (for sell orders) or the buy amount (for buy orders) that would get executed. Note that this is amount is "separate" from the "fee" amount that was described above; this, for example, means that for a sell "fulfillment" order, the trader will send a total of `fee + executedAmount` sell tokens to the contract. We also stress that ii is the executedAmount where uniform clearing prices are being applied to.
 
