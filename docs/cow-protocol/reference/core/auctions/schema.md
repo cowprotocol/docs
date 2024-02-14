@@ -119,7 +119,7 @@ More information about the exact descriptions of these pools can be found [here]
 
 ### `effectiveGasPrice`
 
-This key is a single entry that is a stringified integer describing the current gas price in wei.
+This key is a single entry that is a stringified integer describing an estimate of the effective gas price for the winning solution, denominated in wei.
 
 ### `deadline`
 
