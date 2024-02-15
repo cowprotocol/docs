@@ -20,9 +20,9 @@ The framework makes boilerplate code for conditional orders a thing of the past,
 The following principles have been employed in the architectural design:
 
 1. `O(1)` gas-efficiency for `n` conditional order creation / replacement / deletion
-2. Conditional orders **SHOULD** behave the same as a discrete order for EOAs (self-custody of assets, ie. "wrapper" contracts not required)
+2. Conditional orders **SHOULD** behave the same as a discrete order for EOAs (self-custody of assets, i.e. "wrapper" contracts not required)
 3. Conditional orders **SHOULD** be optimized towards _statelessness_ - pass required data via `calldata`
-4. **MAY** enhance the [`Safe`](https://safe.global) user experience when paired with [`ExtensibleFallbackHandler`](https://hackmd.io/-nLuF3JIRyuS5w864_mbrg) 🐮🔒
+4. **MAY** enhance the [Safe](https://safe.global) user experience when paired with [`ExtensibleFallbackHandler`](https://hackmd.io/-nLuF3JIRyuS5w864_mbrg) 🐮🔒
 
 By using Merkle Trees, the gas efficiency of `O(1)` is achieved for `n` conditional orders. This is achieved by storing the Merkle Tree root on-chain, and passing the Merkle Tree proof to the `ComposableCoW` contract. This allows for `O(1)` gas efficiency for adding / removing conditional orders.
 
@@ -51,7 +51,7 @@ flowchart TD
     B -->|invalid| I[Revert]  
     S -->|valid| V[IConditionalOrder:verify]  
     S -->|invalid| I  
-    V -->|valid| T[Return ERC1271 Magic]  
+    V -->|valid| T[Return `ERC-1271` Magic]  
     V -->|invalid| I  
 ```
 
@@ -96,12 +96,12 @@ function isValidSafeSignature(
 
 In order to delegate signature verification to `ComposableCoW`, the delegating contract may either:
 
-1. Be a `Safe` and use `ExtensibleFallbackHandler` that allows for `EIP-712` domain delegation to a custom contract (ie. `ComposableCoW`); or
+1. Be a Safe and use `ExtensibleFallbackHandler` that allows for `EIP-712` domain delegation to a custom contract (i.e. `ComposableCoW`); or
 2. Implement `ERC-1271` and within the `isValidSignature` method, call `ComposableCoW.isValidSafeSignature()`.
 
 :::tip
 
-ComposableCoW can also be used with contracts other than `Safe`. The [`ERC1271Forwarder`](https://github.com/cowprotocol/composable-cow/blob/main/src/ERC1271Forwarder.sol) abstract contract has been provided to allow for new contracts to easily integrate with ComposableCoW.
+ComposableCoW can also be used with contracts other than Safe. The [`ERC1271Forwarder`](https://github.com/cowprotocol/composable-cow/blob/main/src/ERC1271Forwarder.sol) abstract contract has been provided to allow for new contracts to easily integrate with ComposableCoW.
 
 :::
 
@@ -179,7 +179,7 @@ A swap guard is a contract that implements the `ISwapGuard` interface, and if se
 
 This allows for `owner`-wide restrictions on the conditional order, such as:
 
-* [`receiver` lock](https://github.com/cowprotocol/composable-cow/blob/main/src/guards/ReceiverLock.sol) (ie. `receiver` **MUST** be `owner`)
+* [`receiver` lock](https://github.com/cowprotocol/composable-cow/blob/main/src/guards/ReceiverLock.sol) (i.e. `receiver` **MUST** be `owner`)
 * Token whitelist
 
 The `ISwapGuard` interface is as follows:
@@ -202,7 +202,7 @@ function verify(
 
 ### Guarantees and Invariants
 
-- CoW Protocol's settlement contract enforces single-use orders, ie. **NO** `GPv2Order` can be filled more than once
+- CoW Protocol's settlement contract enforces single-use orders, i.e. **NO** `GPv2Order` can be filled more than once
 - For merkle trees, `H(ConditionalOrderParams)` **MUST** be a member of the merkle tree `roots[owner]`
 - For single orders, `singleOrders[owner][H(ConditionalOrderParams)] == true`
 
@@ -500,7 +500,7 @@ This function will:
 Subsequently, `ComposableCoW` will:
 
 1. Check that the order is authorized.
-2. Check that the order type supports discrete order generation (ie. `IConditionalOrderGenerator`) by using `IERC165` (and `revert` if not, allowing the watch-tower to prune invalid monitored conditional orders).
+2. Check that the order type supports discrete order generation (i.e. `IConditionalOrderGenerator`) by using `IERC165` (and `revert` if not, allowing the watch-tower to prune invalid monitored conditional orders).
 3. Call `getTradeableOrder` on the handler to get the discrete order ([`GPv2Order.Data`](../core/settlement.md#gpv2orderdata-struct)).
 4. Generate the signing data as above. 
 

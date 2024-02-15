@@ -9,16 +9,16 @@ Three main sub-systems are required to facilitate and drive the auction
 ```mermaid
 sequenceDiagram
     actor User
-    participant OrderBook
+    participant Order book
     participant Autopilot
     participant Solver
 
-    User->>OrderBook: POST /order
-    Autopilot->>OrderBook: Request solvable orders
+    User->>Order book: POST /order
+    Autopilot->>Order book: Request solvable orders
     activate Autopilot
-    activate OrderBook
-    OrderBook-->>Autopilot: Response solvable orders
-    deactivate OrderBook
+    activate Order book
+    Order book-->>Autopilot: Response solvable orders
+    deactivate Order book
     Note over Autopilot: Create auction
     Autopilot->>Solver: /solve
     activate Solver
@@ -30,13 +30,13 @@ sequenceDiagram
     deactivate Solver
     Autopilot->>Solver: /settle
     activate Solver
-    Note over Solver: Settles transaction onchain
+    Note over Solver: Settles transaction on-chain
     Solver-->>Autopilot: Transaction hash
     deactivate Solver
     deactivate Autopilot
 ```
 
-### OrderBook
+### Order book
 
 The [orderbook](./arbitrate/orderbook) is the main entry point of the protocol for traders.
 Using the orderbook's API, UIs and other integrations allow traders to:
@@ -47,7 +47,7 @@ Using the orderbook's API, UIs and other integrations allow traders to:
 - Get the currently solved auction
 - Etc.
 
-For instance, when you visit [CoW Swap](https://swap.cow.fi) and place an order, the site uses the OrderBook API to add the order to a database. 
+For instance, when you visit [CoW Swap](https://swap.cow.fi) and place an order, the site uses the Order book API to add the order to a database. 
 This database with all orders is shared with the **autopilot**.
 
 ### Autopilot

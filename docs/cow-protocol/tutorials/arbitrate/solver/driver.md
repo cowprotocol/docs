@@ -54,7 +54,7 @@ The auctions sent to the driver by the autopilot only contain the bare minimum o
 But usually a solver engine requires more information than that so the driver pre-processes the auction before forwarding it to the solver engine.
 We also want to reduce the overall workload of a solver engine, since it's usually expensive to match an order (in terms of time, RPC requests, API calls, etc.).
 That process includes:
-* fetching additional meta data (e.g. token decimals)
+* fetching additional metadata (e.g. token decimals)
 * discarding orders that can definitely not be settled (e.g. user is missing balances)
 * very basic prioritization of remaining orders (e.g. orders below or close to the market price are most likely to settle)
 

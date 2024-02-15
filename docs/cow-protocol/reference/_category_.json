@@ -1,11 +1,11 @@
 {
     "position": 3,
-    "label": "📚 Technical reference",
+    "label": "Technical reference",
     "collapsible": true,
     "collapsed": true,
     "link": {
         "type": "generated-index",
-        "title": "📚 Technical reference"
+        "title": "Technical reference"
     },
     "customProps": {
         "description": "This is the technical reference section."

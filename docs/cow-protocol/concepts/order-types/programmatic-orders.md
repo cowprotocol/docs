@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # Programmatic orders
 
-In addition to normal wallets, CoW Protocol also supports smart contract wallets that implement ERC-1271.
+In addition to normal wallets, CoW Protocol also supports smart contract wallets that implement `ERC-1271`.
 This allows users to place orders through smart contracts with programmable parameters that execute based on certain conditions. 
 
 We call these types of orders "programmatic orders" and we've developed a framework for creating programmatic orders, aptly named the "Programmatic Order Framework."

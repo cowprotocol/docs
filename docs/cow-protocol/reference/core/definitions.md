@@ -14,7 +14,7 @@ An intent to swap `sellAmount` of `sellToken` for `buyAmount` of `buyToken`. May
 
 #### Discrete Order
 
-A single order submitted to the CoW Protocol API (ie. `GPv2Order.Data`)
+A single order submitted to the CoW Protocol API (i.e. `GPv2Order.Data`)
 
 #### Conditional Order
 
@@ -24,7 +24,7 @@ An intent by a smart-contract to place `0..n` discrete orders under some program
 
 The price improvement on a user's limit price.
 
-#### Gas-less
+#### Gasless
 
 An expression that does not require a user make a transaction on the blockchain, and therefore does not require the user to pay gas in the native token.
 

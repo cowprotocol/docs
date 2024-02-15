@@ -22,7 +22,7 @@ When computing the domain separator, the following parameters are used:
 {
   name: "Gnosis Protocol",
   version: "v2",
-  chainId: /* chain ID for the current network: eg. 1 for mainnet */,
+  chainId: /* chain ID for the current network: e.g. 1 for mainnet */,
   verifyingContract: "0x9008D19f58AAbD9eD0D60971565AA8510560ab41"
 }
 ```
@@ -125,7 +125,7 @@ For convenience, we also deployed a small helper contract that makes it easy to 
 
 CoW Protocol supports four different signing schemes. These signing schemes are summarized in the following table:
 
-| **Signing Scheme** | **Gas-less** | **EOA** | **Smart Contract** |
+| **Signing Scheme** | **Gasless** | **EOA** | **Smart Contract** |
 |---|---|---|---|
 | [`eth_sign`](https://ethereum.org/en/developers/docs/apis/json-rpc/#eth_sign) | ✅ | ✅ | ❌ |
 | [`EIP-712`](https://eips.ethereum.org/EIPS/eip-712) | ✅ | ✅ | ❌ |
@@ -134,9 +134,9 @@ CoW Protocol supports four different signing schemes. These signing schemes are 
 
 Except for the `PreSign` scheme, all signing schemes involve signing an _order digest_ that is based on the message structure of `EIP-712`. 
 
-:::tip OrderBook API
+:::tip Order book API
 
-In the expanded detail sections below, `signature` refers to the value passed to `signature` in the [OrderBook API](../apis/orderbook).
+In the expanded detail sections below, `signature` refers to the value passed to `signature` in the [Order book API](../apis/orderbook).
 
 :::
 
@@ -186,7 +186,7 @@ In order to support smart-contract orders, the trading smart contract (the user)
 signature = eip1271Signature
 ```
 
-:::tip OrderBook API
+:::tip Order book API
 
 When submitting an `ERC-1271` order to the API, the `from` field **MUST** be set to the address of the smart contract that will be signing the order. This is because the `ERC-1271` signature is not an Ethereum signature, and thus the `from` field cannot be inferred from the signature.
 
@@ -206,7 +206,7 @@ isValidSignature(orderDigest, eip1271Signature) == MAGICVALUE
 
 This is the only signing method that supports both EOA and smart-contract traders.
 
-Together with submitting a `PreSign` order, the user must pre-approve the order on-chain. This is done by calling the settlement contract `setPreSignature` function:
+Together with submitting a `PreSign` order, the user must submit the order on-chain. This is done by calling the settlement contract `setPreSignature` function:
 
 ```solidity
 setPreSignature(orderUid, true);
@@ -222,7 +222,7 @@ The signature is an empty `bytes` string:
 signature = 0x
 ```
 
-:::tip OrderBook API
+:::tip Order book API
 
 When submitting a `PreSign` order to the API, the `from` field **MUST** be set to the address of the order owner. This is because the `PreSign` signature is not an Ethereum signature, and thus the `from` field cannot be inferred from the signature.
 

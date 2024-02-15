@@ -5,7 +5,7 @@ slug: eth-flow
 
 # Eth-flow
 
-As CoW Protocol only [supports `ERC20 tokens`](../../core/tokens), this means that if a user wants to sell `ETH` on CoW Protocol, they need to:
+As CoW Protocol only [supports `ERC-20 tokens`](../../core/tokens), this means that if a user wants to sell `ETH` on CoW Protocol, they need to:
 
 1. Convert their `ETH` into `WETH`
 2. Approve the [vault relayer](../core/vault-relayer) for spending their `WETH`
@@ -162,7 +162,7 @@ struct Data {
 | **Field** | **Description** |
 |---|---|
 | `...` | Same as [`GPv2Order.Data`](../core/settlement#gpv2orderdata-struct) |
-| `quoteId` | `quoteId` returned by OrderBook API when requesting a quote for this order |
+| `quoteId` | `quoteId` returned by Order book API when requesting a quote for this order |
 
 :::note
 
