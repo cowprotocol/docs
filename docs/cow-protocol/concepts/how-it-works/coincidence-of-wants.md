@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # Coincidence of Wants
 
-**CoW (Coincidence of Wants)**: An economic phenomenon where two parties — each holding the asset that the other needs — exchange assets directly in an equivalent barter. 
+**CoW (Coincidence of Wants)**: An economic phenomenon where two parties - each holding the asset that the other needs - exchange assets directly in an equivalent barter. 
 
 Thanks to CoW Protocol's batching mechanism, users can make  peer-to-peer swaps in cases where they're trading the same assets.
 
