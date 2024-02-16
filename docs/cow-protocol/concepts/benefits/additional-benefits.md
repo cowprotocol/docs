@@ -18,7 +18,7 @@ The protocol's architecture also provides important "passive" benefits and suppo
 - Support for tapping straight into exotic tokens as solvers abstract away intermediate steps like depositing, minting, and staking 
 - Tighter spreads from private market makers thanks to fast settlement of off-chain orders
 - Increased gas efficiency as all trades are credited directly to user accounts without withdrawals or deposits into an exchange contract 
-- Increased security as funds can only be transferred if a trader has approved the GPv2 contract and signed an order to sell the given token for another
+- Increased security as funds can only be transferred if a trader has approved the contract and signed an order to sell the given token for another
 - A guarantee that the limit prices and amounts of any given signed order will always be satisfied
 - Signed orders have an expiry date and they can be cancelled on-chain, preventing exploits where orders can be re-executed by relying on old approvals
 - Only solvers subject to slashing can execute the batch auction settlement
