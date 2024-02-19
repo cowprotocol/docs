@@ -20,19 +20,13 @@ A single order submitted to the CoW Protocol API (i.e. `GPv2Order.Data`)
 
 An intent by a smart-contract to place `0..n` discrete orders under some programmatic logic. For example, a conditional order may only be valid if the price of an asset reaches a certain level.
 
-#### Limit Order
-An order to swap specified `sellAmount` of `sellToken` for a specified `buyAmount` of `buyToken` or better.
-
-#### TWAP Order
-Time-Weighted Average Price order. It is an algorithmic trade execution strategy that aims to achieve an average execution price close to the time-weighted average price of the specified period.
-
 #### Surplus
 
 The price improvement on a user's limit price.
 
 #### Quote deviation
 
-The price difference between the quote and the executed price. May be used interchangeably with slippage.
+The difference between the quote the user received and the price at which their discrete order was settled.
 
 #### Gasless
 
