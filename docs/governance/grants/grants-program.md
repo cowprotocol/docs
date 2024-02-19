@@ -96,13 +96,13 @@ erDiagram
         int requiredSignatures "5"
     }
     Safe3 {
-        string description "Gants Prongram Funds"
+        string description "Grants Program Funds"
         string walletAddress "gno:0xDA00000B30dCf0C3f5d968e4451Ebdee6950d63e"
         int totalSignatories "2"
         int requiredSignatures "1"
     }
     Safe4 {
-        string description "Volume Rrewards Program"
+        string description "Volume Rewards Program"
         string walletAddress "gno:0xbD96C4Fe53f1d89a8Bdb3522BCEDfB20b5601b69"
         int totalSignatories "2"
         int requiredSignatures "1"
