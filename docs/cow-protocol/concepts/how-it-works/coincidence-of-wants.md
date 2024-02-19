@@ -24,7 +24,7 @@ CoWs can be full or partial. In a partial CoW, only one of the trades in a batch
 A simple CoW is where two traders are each selling what the other is buying.
 They swap assets with each other instead of interacting with AMM liquidity pools.
 Simple CoWs can be either *complete*, where each trader is trading exactly the same amount that the other needs, or they can be *partial* where two traders are trading opposite assets but only one can have their full liquidity met through a CoW.
-In the latter case, the rest of the trade goes to an AMM to finish filling. 
+In the latter case, the rest of the trade goes on-chain to finish filling. 
 
 ### Batching
 
@@ -32,7 +32,7 @@ In the latter case, the rest of the trade goes to an AMM to finish filling.
 
 Often, a batch auction contains multiple intents from different users who all want to perform the same trade.
 Instead of sending their trades individually one by one, solvers can batch all of the intents together and execute them as a single trade on-chain.
-Although a batching CoW goes to an AMM, this optimization reduces gas fees, as users trades interact with AMM smart contracts fewer times.
+Although a batching CoW goes on-chain, this optimization reduces gas fees, as users trades interact with AMM smart contracts fewer times.
 
 ### Intermediate
 
@@ -52,4 +52,4 @@ A multidimensional CoW consists of three or more users and shares liquidity betw
 It often includes multiple assets and relies on the solvers to find the optimal path from each user to the next in order to maximize off-chain liquidity utilization. 
 
 While some orders are filled entirely through a CoW, many are only partially filled peer-to-peer.
-In these latter cases, solvers automatically go to an AMM to source the rest of the liquidity necessary to finish filling the order.
+In these latter cases, solvers automatically go on-chain to source the rest of the liquidity necessary to finish filling the order.
