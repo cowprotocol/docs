@@ -40,8 +40,6 @@ Once the above are set up and running, one can then start testing their solver e
 |-------------------------------------|--------------|-------------|
 | https://barn.api.cow.fi/mainnet/api | Mainnet      | Staging     |
 | https://api.cow.fi/mainnet/api      | Mainnet      | Production  |
-| https://barn.api.cow.fi/goerli/api  | Görli        | Staging     |
-| https://api.cow.fi/goerli/api       | Görli        | Production  |
 | https://barn.api.cow.fi/sepolia/api | Sepolia      | Staging     |
 | https://api.cow.fi/sepolia/api      | Sepolia      | Production  |
 | https://barn.api.cow.fi/xdai/api    | Gnosis Chain | Staging     |
