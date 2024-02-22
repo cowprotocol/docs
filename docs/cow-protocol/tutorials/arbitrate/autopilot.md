@@ -89,7 +89,7 @@ The database stores the vast majority of available order information, including 
 Other information can only be retrieved on-chain and is updated every time a new block is mined. For example, it needs to know from the protocol:
 
 - Which [pre-signatures](/cow-protocol/reference/core/signing-schemes#presign) have been set
-- If new [eth-flow orders](/cow-protocol/reference/contracts/periphery/eth-flow) have been created
+- If new [native token orders](/cow-protocol/reference/contracts/periphery/eth-flow) have been created
 - Tracking which orders have been [invalidated](/cow-protocol/reference/contracts/core/settlement#invalidateorder) by the user
 - Detecting if a batch has been settled and it should prepare a new auction
 
