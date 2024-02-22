@@ -1,8 +1,8 @@
 ---
-sidebar_position: 2
+sidebar_position: 6
 ---
 
-# Trading with a CoW AMM as a solver
+# CoW AMM Liquidity
 
 ## I'm a solver. How do I use CoW AMM liquidity?
 
@@ -16,17 +16,19 @@ Importantly, surplus for a CoW AMM order is measured differently when computing 
 
 ### Indexing CoW AMMs
 
-CoW AMM pairs can be detected by listening to the [`ConditionalOrderCreated` events](https://docs.cow.fi/cow-protocol/reference/contracts/periphery/composable-cow#indexing) emitted by the `ComposableCoW` instance for the current chain (see the [official docs](https://docs.cow.fi/cow-protocol/reference/contracts/periphery) for the current deployment addresses).
+CoW AMM pairs can be detected by listening to the [`ConditionalOrderCreated` events](/cow-protocol/reference/contracts/periphery/composable-cow#indexing) emitted by the `ComposableCoW` instance for the current chain (see the [official docs](/cow-protocol/reference/contracts/periphery) for the current deployment addresses).
 
-The order owner is a CoW AMM if its [handler](https://docs.cow.fi/cow-protocol/reference/contracts/periphery/composable-cow#conditionalorderparams) is the contract `ConstantProduct`. Official deployment addresses for the contracts in this repo can be found in the file [`networks.json`](../networks.json).
+The order owner is a CoW AMM if its [handler](/cow-protocol/reference/contracts/periphery/composable-cow#conditionalorderparams) is the contract `ConstantProduct`.
+Official deployment addresses for the contracts in this repo can be found in the file [`networks.json`](https://github.com/cowprotocol/cow-amm/blob/3689d24667447ac4882c8bd5d4cbce93ef8a1e86/networks.json).
 
-The field `staticInput` represents the parameters of the AMM, as for example the traded tokens. A description of each parameter can be found in the [instructions on how to create an order](#constantproduct-static-input).
+The field `staticInput` represents the parameters of the AMM, as for example the traded tokens.
+A description of each parameter can be found in the [instructions on how to create an order](#constantproduct-static-input).
 
 The AMM reserves are the owner's balance of the two tokens traded by the AMM.
 
 There are a few caveats to listening to these events:
-- CoW AMM orders can be cancelled at any time with a call to [`ComposableCoW.remove`](https://docs.cow.fi/cow-protocol/reference/contracts/periphery/composable-cow#remove).
-  There is no corresponding event onchain, but the current validity state can be tracked with [`ComposableCoW.singleOrders`](https://docs.cow.fi/cow-protocol/reference/contracts/periphery/composable-cow#singleorders).
+- CoW AMM orders can be cancelled at any time with a call to [`ComposableCoW.remove`](/cow-protocol/reference/contracts/periphery/composable-cow#remove).
+  There is no corresponding event onchain, but the current validity state can be tracked with [`ComposableCoW.singleOrders`](/cow-protocol/reference/contracts/periphery/composable-cow#singleorders).
 - While it's strongly discuraged behavior, there's nothing stopping the same CoW AMM from trading multiple pairs.
   A batch can include only a single custom order per AMM address (this is because a solver can `commit` to only a single order per AMM address).
   Moreover, if the AMM trades two overlapping pairs, settling one order may affect the reserve balance of an unrelated pair after the order is executed.

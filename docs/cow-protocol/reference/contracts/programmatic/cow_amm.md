@@ -6,17 +6,12 @@ sidebar_position: 1
 
 CoW AMM is an automated market maker running on top of CoW Protocol.
 
-> [!CAUTION]
-> CoW AMM is a proof of concept of an AMM implemented on top of CoW Protocol.
-> The code is not yet production ready and should not be used to handle large amounts of funds.
-> For technical aspects of the smart contract, reach out to us on [discord](https://discord.com/invite/cowprotocol) as we push towards production, or simply star [this](https://github.com/cowprotocol/cow-amm) repository to be informed of progress!
-
 ## Overview
 
 The AMM contract itself is a dedicated Safe multisig.
 It stores reserves of two tokens and allows anyone to create orders between these two tokens on CoW Protocol as long as the trade doesn't decrease the product of the reserves stored on the contract.
 
-The order is based on the `ComposableCoW` framework: this repository only specifies the code needed for the dedicated handler and the related price oracles.
+The order is based on the Programmatic order framework: this repository only specifies the code needed for the dedicated handler and the related price oracles.
 All the code for the `ComposableCoW` framework is [here](https://github.com/cowprotocol/composable-cow).
 
 The AMM creates a CoW Protocol order at a regular time interval.
@@ -24,7 +19,7 @@ These orders are created with a dedicated contract function `getTradeableOrder`:
 These orders are provided for convenience to CoW Swap solvers so that basic CoW AMM usage does not need any dedicated implementation to tap into its liquidity.
 More sophisticated solvers can create their own order to better suit the current market conditions.
 
-The [watch tower](https://github.com/cowprotocol/watch-tower) is responsible for automatically creating the AMM order, without any necessity for the AMM to interact with the CoW Protocol API.
+The [watch tower](/cow-protocol/reference/contracts/periphery/composable-cow#watch-tower) is responsible for automatically creating the AMM order, without any necessity for the AMM to interact with the CoW Protocol API.
 
 CoW AMM orders are executed in batches by CoW Protocol solvers.
 Only one order per AMM can be executed per batch.
@@ -52,7 +47,7 @@ Setting up a CoW AMM can be split in the following steps, which will be describe
 All these steps, with the exception of the data in the last one, aren't specific to the CoW AMM but are the same steps required for creating an order with the [`ComposableCoW`](https://github.com/cowprotocol/composable-cow) framework.
 
 You can see an example of CoW AMM trading tokens COW/WETH at address [`0xBEEf5aFE88eF73337e5070aB2855d37dBF5493A4`](https://app.safe.global/transactions/history?safe=eth:0xBEEf5aFE88eF73337e5070aB2855d37dBF5493A4).
-Example set-up transactions: [step 1](0xfb0d01c5edbf1dd80c3d9f8a54e9a4057db2419ec50045e32161044bab5a06f3), [step 2 to 4](https://app.safe.global/transactions/tx?safe=eth:0xBEEf5aFE88eF73337e5070aB2855d37dBF5493A4&id=multisig_0xBEEf5aFE88eF73337e5070aB2855d37dBF5493A4_0x2bb29ac594fd562981ac1221596ed6b471a459615bb3b8c8ebd403e9fad079af), [step 5](https://app.safe.global/transactions/tx?safe=eth:0xBEEf5aFE88eF73337e5070aB2855d37dBF5493A4&id=multisig_0xBEEf5aFE88eF73337e5070aB2855d37dBF5493A4_0x1651687da34e9a7039e3a41e81e90cde74c1bfeeb0c9ec3dac0b7432dcbb4300).
+Example set-up transactions: [step 1](https://etherscan.io/tx/0xfb0d01c5edbf1dd80c3d9f8a54e9a4057db2419ec50045e32161044bab5a06f3), [step 2 to 4](https://app.safe.global/transactions/tx?safe=eth:0xBEEf5aFE88eF73337e5070aB2855d37dBF5493A4&id=multisig_0xBEEf5aFE88eF73337e5070aB2855d37dBF5493A4_0x2bb29ac594fd562981ac1221596ed6b471a459615bb3b8c8ebd403e9fad079af), [step 5](https://app.safe.global/transactions/tx?safe=eth:0xBEEf5aFE88eF73337e5070aB2855d37dBF5493A4&id=multisig_0xBEEf5aFE88eF73337e5070aB2855d37dBF5493A4_0x1651687da34e9a7039e3a41e81e90cde74c1bfeeb0c9ec3dac0b7432dcbb4300).
 
 ### Step 1: deploy a Safe
 
@@ -70,7 +65,7 @@ The same Safe must **not** be used as the AMM for multiple simultaneous pairs.
 CoW Protocol supports validation of smart-contract orders via ERC-1271 signatures.
 Signature verification for `ComposableCoW` orders (like the order used in the CoW AMM) is handled by a dedicated [fallback handler](https://help.safe.global/en/articles/40838-what-is-a-fallback-handler-and-how-does-it-relate-to-safe), the `ExtensibleFallbackHandler`.
 
-You can find more details on the design of `ComposableCoW` in the [dedicated page of the CoW Protocol documentation](https://docs.cow.fi/cow-protocol/reference/contracts/periphery/composable-cow#conditional-order-verification-flow).
+You can find more details on the design of `ComposableCoW` in the [dedicated page of the CoW Protocol documentation](/cow-protocol/reference/contracts/periphery/composable-cow#conditional-order-verification-flow).
 
 On the AMM Safe Wallet interface, create a new transaction on the transaction builder with the following parameters:
 - Address: the address of the AMM Safe itself (confirm loading the implementation ABI once prompted)
@@ -82,7 +77,7 @@ On the AMM Safe Wallet interface, create a new transaction on the transaction bu
 
 This step is used to tell the extensible fallback handler to use `ComposableCoW` to verify CoW Protocol signatures.
 
-You can find more details on the design of `ComposableCoW` in the [dedicated page of the CoW Protocol documentation](https://docs.cow.fi/cow-protocol/reference/contracts/periphery/composable-cow#conditional-order-verification-flow).
+You can find more details on the design of `ComposableCoW` in the [dedicated page of the CoW Protocol documentation](/cow-protocol/reference/contracts/periphery/composable-cow#conditional-order-verification-flow).
 
 On the AMM Safe interface, create a new transaction on the transaction builder with the following parameters:
 - Address: the address of the `ExtensibleFallbackHandler` contract for the current chain
