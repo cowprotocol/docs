@@ -24,6 +24,10 @@ An intent by a smart-contract to place `0..n` discrete orders under some program
 
 The price improvement on a user's limit price.
 
+#### Quote deviation
+
+The difference between the quote the user received and the price at which their discrete order was settled.
+
 #### Gasless
 
 An expression that does not require a user make a transaction on the blockchain, and therefore does not require the user to pay gas in the native token.
