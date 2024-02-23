@@ -137,6 +137,7 @@ Price oracles are an abstraction that transform disparate on-chain price informa
 
 We support the following price oracles:
 - `UniswapV2PriceOracle`, based on the limit price of a predefined Uniswap v2 pair.
+- `BalancerWeightedPoolPriceOracle`, based on the limit price of a predefined Balancer weighted pool. 
 
 Contract addresses for each supported chain can be found in the file `networks.json`.
 
@@ -180,9 +181,9 @@ cast abi-encode 'f((bytes32))' "($poolId)"
 To stop trading, it's sufficient to execute a single transaction to `ComposableCoW` to the function `remove(bytes32 singleOrderHash)`.
 
 The input parameter `singleOrderHash` can be computed with the help of the view function `hash` in `ComposableCoW`.
-Its input is the same as the parameters in call to `create` of [step 5](#step-5-order-creation).
+Its input is the same as the parameters in the call to `create` of [step 5](#step-5-order-creation).
 
-You can verify that the hash is valid by querying the view function `singleOrders` on `ComposableCoW` with input the AMM Safe addess and the order hash.
+You can verify that the hash is valid by querying the view function `singleOrders` on `ComposableCoW` with input the AMM Safe address and the order hash.
 The call returns `true` if the order is currently being traded and `false` after the call to `remove` has been executed.
 
 On mainnet, you can compute the hash, as well as verify if the hash is valid, directly from Etherscan's contract [read contract page](https://etherscan.io/address/0xfdaFc9d1902f4e0b84f65F49f244b32b31013b74#readContract).
@@ -197,7 +198,7 @@ Remember to use a different value for the salt!
 
 ## Add funds after deployment
 
-You can always deposit funds to the AMM Safe with simple transfers, both to add funds and to to rebalance the AMM manually.
+You can always deposit funds to the AMM Safe with simple transfers, both to add funds and to rebalance the AMM manually.
 
 Be careful: depositing funds changes the state of the AMM.
-It's very important that you transfer both tokens at the same time with no side effects. If only one token transfer is executed, the AMM will be unbalanced until the second transfer is executed, causing the AMM to trade at an unfavorable price. 
+It's very important that you transfer both tokens at the same time with no side effects. If only one token transfer is executed, the AMM will be unbalanced until the second transfer is executed. After receiving the first transfer, the AMM may immediately rebalance by selling some of the funds just deposited. 
