@@ -27,6 +27,12 @@ For the autopilot, we run
 
 where one needs to set the NODE_URL appropriately (e.g., a free Infura endpoint).
 
+:::caution
+
+CoW Protocol services infrastructure can be very heavy on RPC resource consumption. Be careful if using with post-paid plans, it's recommended to keep a close eye on RPC resource consumption.
+
+:::
+
 For the driver, we run
 
 ```
