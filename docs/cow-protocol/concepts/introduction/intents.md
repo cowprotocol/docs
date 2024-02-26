@@ -5,7 +5,7 @@ sidebar_position: 1
 # Intents
 
 Rather than placing orders by _**signing a raw transaction**_ that executes directly on-chain (i.e. as happens on Uniswap or SushiSwap), CoW Protocol users place orders by _**signing an "intent to trade" message**_ that specifies parameters like the assets and amounts they would like to trade.
-The intent is a signed message which allows the protocol to execute a trade on behalf of the user using their wallet assets. 
+The intent is a signed message which allows the solvers to execute a trade on behalf of the user using their specified assets and amounts. 
 
 There are a number of [financial](#financial-benefits-of-intents) and [technical](#technical-benefits-of-intents) advantages to intent-based trading.
 
@@ -17,7 +17,7 @@ Thanks to its intent-based architecture, CoW Protocol delegates the job of findi
 Solvers not only scan all available on-chain liquidity (similar to a DEX aggregator) they also provide extra price improvements in several ways:
 
 - [**Coincidence of Wants**](../how-it-works/coincidence-of-wants): Direct P2P (peer-to-peer) matching for two or more users who have expressed opposite buy and sell intents for the same token pair.
-  This optimization allows users to bypass liquidity provider (LP) fees and it reduces the gas fees for trading as orders don't need to interact with other non-CoW Protocol smart contracts.
+  This optimization, enabled by intents combined with batch auctions, allows users to bypass liquidity provider (LP) fees and it reduces the gas fees for trading as orders don't need to interact with other non-CoW Protocol smart contracts.
 - **Private Market Maker Inventory**: Many solvers have access to off-chain liquidity through CEX inventory, integration with private market makers, or private liquidity of their own.
   This allows them to fill certain trades at better prices than what may be available through on-chain AMMs at any given time.
 - [**MEV Protection**](../benefits/mev-protection): On CoW Protocol, users are never exposed to MEV bots. Instead, solvers settle trades on behalf of the user, taking on all MEV risk.
