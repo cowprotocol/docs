@@ -202,3 +202,4 @@ You can always deposit funds to the AMM Safe with simple transfers, both to add 
 
 Be careful: depositing funds changes the state of the AMM.
 It's very important that you transfer both tokens at the same time with no side effects. If only one token transfer is executed, the AMM will be unbalanced until the second transfer is executed. After receiving the first transfer, the AMM may immediately rebalance by selling some of the funds just deposited. 
+
