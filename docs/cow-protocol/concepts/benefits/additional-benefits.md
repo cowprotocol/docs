@@ -22,6 +22,5 @@ The protocol's architecture also provides important "passive" benefits and suppo
 - A guarantee that the limit prices and amounts of any given signed order will always be satisfied
 - Signed orders have an expiry date and they can be cancelled on-chain, preventing exploits where orders can be re-executed by relying on old approvals
 - Only solvers subject to slashing can execute the batch auction settlement
-- In the case of multi-signature wallets, the execution quote is determined with the first signature, guaranteeing a minimum price regardless of when everyone else signs (or the transaction expires at no cost)
 - Fair, decentralized settlement in which an open competition for order matching replaces a central operator or a constant function market maker
 
