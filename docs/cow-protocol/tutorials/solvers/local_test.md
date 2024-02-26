@@ -9,7 +9,7 @@ CoW Protocol infrastructure is a lot of services running together in herd harmon
 In order to test a solver against CoW Protocol's orderflow, one needs to locally run the following components
 - autopilot, which will be configured to point, for example, to the production orderbook and to send the auctions to a local driver.
 - driver, which will receive auctions from the autopilot and forward them to the solver engine
-- the solver engine that is meant to be tested.
+- the solver engine that is meant to be tested, run as a local http server able to receive `/solve` requests from the driver and respond to them.
 
 :::caution
 
