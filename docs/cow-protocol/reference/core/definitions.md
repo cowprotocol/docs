@@ -30,7 +30,7 @@ The difference between the quote the user received and the price at which their 
 
 #### Gasless
 
-An expression that does not require a user make a transaction on the blockchain, and therefore does not require the user to pay gas in the native token.
+An expression that does not require a user to make a transaction on the blockchain, and therefore does not require the user to pay gas in the native token.
 
 #### EBBO
 
