@@ -46,7 +46,7 @@
 
 **Milestones:**
 
-Please identify the key milestones that will help track the progress of your grant. Use the provided table as a summary and expand on each milestone description and deliverables below.
+Please identify the key milestones that will help track the progress of your grant. Pay close attention to the due dates, and ensure they are realistic and align with the completion timeline clause outlined in the terms and conditions section. Use the provided table as a summary and expand on each milestone description and deliverables below.
 
 | Milestone | Due Date | Payment |
 | --- | --- | --- |
@@ -98,4 +98,4 @@ Please identify the key milestones that will help track the progress of your gra
 *Include the following line in your grant application:*
 
 > By submitting this grant application, I acknowledge and agree to be bound by the [CoW DAO Participation Agreement](https://cloudflare-ipfs.com/ipfs/Qmf9MYhcG2pFrDoVy13p6FWeVF4nG9HbJvRfYYbhazTCFe) and the [CoW Grant Terms and Conditions](https://cloudflare-ipfs.com/ipfs/Qmag8BoNWhBnJ7TFyv2hzWwtoH17Xo7m9468NY6bN8sR6U).
->
+In addition to the CoW DAO Participation Agreement and the CoW Grant Terms and Conditions, applicants must adhere to the [Completion Timeline Clause](application-process.md).
