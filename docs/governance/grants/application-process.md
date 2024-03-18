@@ -22,3 +22,17 @@ To apply for the CoW Grants program, use the [application template](application-
 
 1. After a successful snapshot vote, the committee will verify the proposed transaction for the Grants Program Safe and execute payment transactions based on achieved milestones.
 2. If milestones are not met, the Grants Committee reserves the right to withhold funding until milestones are completed, or to formally close the grant.
+
+To incorporate the adjustment you mentioned, here's a revised version of the clause that specifies the timeline is three months after the planned completion date as outlined in the grant proposal:
+
+---
+
+### Timeline and Completion Extension Clause
+
+The grantee agrees that the funded project will be completed by the planned completion date as outlined in the grant proposal submitted and approved on [Snapshot](https://snapshot.org/#/cowgrants.eth). In recognition of the complexities and potential unforeseen challenges in completing the project, a grace period of three (3) months beyond the planned completion date will be allowed for finalizing all project activities.
+
+If the project is not completed within this three-month grace period following the planned completion date, the grant will be considered canceled, and no additional payments will be issued. The planned completion date and the three-month grace period collectively constitute the "Final Completion Deadline."
+
+Failure to meet the Final Completion Deadline, without an approved extension or modification granted by the Grants Committee, will result in the automatic cancellation of the grant. In the event of cancellation, the grantee shall not be entitled to any further disbursements of funds related to this grant, unless otherwise agreed upon in writing.
+
+Requests for extensions beyond the Final Completion Deadline must be submitted in writing on the [CoW Grants Forum](https://forum.cow.fi/c/cow-grants-program/10/none) at least thirty (30) days prior to the expiration of the grace period. Such requests will be evaluated based on the merit of the reasons provided and the progress demonstrated towards achieving the project’s objectives. Approval of any extension is at the sole discretion of the Grants Committee.
