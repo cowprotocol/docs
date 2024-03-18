@@ -75,8 +75,6 @@ Once you have set up the partner fee, you will see the fee in the CoW Swap UI:
 
 ![Partner fee](/img/tutorials/partner-fee.png)
 
-> **Please get in touch to sign up to the partner fee program [here](https://calendly.com/crystal-cow/cow-swap-widget)**
-
 ## Wallet provider
 
 You can pass the wallet provider from your application to seamlessly use the widget as part of your application.
