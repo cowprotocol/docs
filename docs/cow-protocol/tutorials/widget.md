@@ -69,6 +69,9 @@ cowSwapWidget(widgetContainer, params)
 ```
 
 The fee in basis points (BPS). One basis point is equivalent to 0.01% (1/100th of a percent).  
+
+> The fee cannot exceed 1% (100 bps) of the trade amount
+
 The recipient is the address to which the fee will be sent.
 
 Once you have set up the partner fee, you will see the fee in the CoW Swap UI:
