@@ -1,5 +1,6 @@
 ---
 title: Partner fee
+id: partner-fee
 ---
 
 
