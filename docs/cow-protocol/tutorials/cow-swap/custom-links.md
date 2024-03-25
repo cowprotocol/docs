@@ -1,6 +1,5 @@
 ---
 title: Make custom links
-draft: true
 ---
 
 # Custom Links
