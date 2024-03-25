@@ -71,7 +71,11 @@ cowSwapWidget(widgetContainer, params)
 
 The fee in basis points (BPS). One basis point is equivalent to 0.01% (1/100th of a percent).  
 
-> The fee cannot exceed 1% (100 bps).
+:::note
+
+The fee cannot exceed 1% (100 bps).
+
+:::
 
 The recipient is the address to which the fee will be sent.
 
@@ -96,8 +100,12 @@ currently set at 15% of the total eligible Partner Fee amount.
 The Partner Fee net of the Service Fee is the Partner Fee amount (the “Net Partner Fee”) eligible for weekly payment.
 See here for Partner Fee calculation examples.
 
-Note: You may charge users a fee of no more than 100 bps of order volume through your Widget. Partner Fee will begin to
+:::note
+
+You may charge users a fee of no more than 100 bps of order volume through your Widget. Partner Fee will begin to
 accrue from the release date of this Partner Fee feature on 4 April 2024.
+
+:::
 
 
 ## Wallet provider
