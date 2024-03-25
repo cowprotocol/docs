@@ -85,28 +85,7 @@ Once you have set up the partner fee, you will see the fee in the CoW Swap UI:
 
 [Terms and conditions](https://cow.fi/widget/terms-and-conditions) apply.
 
-### Partner Fee Calculation
-
-Partner fee is calculated as the sum of all transactions traded through your project’s Widget with Partner Fee defined
-in the appData, multiplied by the % percentage of the Partner Fee bps defined in the appData.
-
-The Partner Fee per order is calculated based on the surplus token of the order (i.e. buy token for sell orders, and
-sell token for buy orders) and is then converted into WETH using an external price provider at the time of the
-settlement of the order.
-
-A percentage % of the Partner Fee shall be retained as a service fee to CoW Protocol (the “Service Fee”) which is
-currently set at 15% of the total eligible Partner Fee amount.
-
-The Partner Fee net of the Service Fee is the Partner Fee amount (the “Net Partner Fee”) eligible for weekly payment.
-See here for Partner Fee calculation examples.
-
-:::note
-
-You may charge users a fee of no more than 100 bps of order volume through your Widget. Partner Fee will begin to
-accrue from the release date of this Partner Fee feature on 4 April 2024.
-
-:::
-
+See [here](/cow-protocol/tutorials/widget/partner-fee) for detailed info about fee calculation and examples.
 
 ## Wallet provider
 
