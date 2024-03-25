@@ -1,6 +1,5 @@
 ---
 title: Partner fee
-draft: true
 ---
 
 
