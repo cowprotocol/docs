@@ -1,4 +1,40 @@
----
-title: MEVBlocker
-draft: true
----
+# MEV Blocker
+
+A product developed and stewarded by CoW DAO, Beaver Builder and Gnosis DAO.
+
+IMG
+
+## Overview 
+
+MEV Blocker's Order Flow Auction protects your transactions from the worst types of MEV, then takes any backrunning opportunity your transactions create – giving up to 90% back to you before MEV bots can take it for themselves.
+
+Instead of sending transactions to the Ethereum public mempool, MEV Blocker’s private mempool offers several advantages to users:
+
+  - **MEV Protection**: Transactions sent to the public pool are subject to all sorts of MEV attacks such as [Frontrunning](https://blog.cow.fi/what-is-frontrunning-b2641ad7af21) and [Sandwich Attacks](https://blog.cow.fi/what-is-a-sandwich-attack-and-how-can-you-protect-yourself-b101c9a9b9b3), which are responsible for hundreds of [millions of dollars of value lost each week](https://eigenphi.io/mev/ethereum/sandwich). By using MEV Blocker’s private pool, all transactions are de-facto protected from these MEV attacks.
+
+  - **MEV Rebates**: Searchers connected to MEV Blocker bid for the right to backrun user transactions using “append-only” bundles. 90% of these bids are paid as a rebate to the transaction originator. The remaining 10% incentivizes builders and validators to quickly include the bundle in the remaining PBS auction. Rebates are a great way to not leak value through the supply chain and get cashback for your transactions. These rebates can also be an extremely powerful way for wallets or dApp solvers to capture value and generate an extra revenue stream. If you are interested in learning the mechanics behind the MEV Blocker rebates, check out the OFA explainer page.
+
+  - **Faster Inclusion over other RPCs**: Instead of sending your transaction to the Ethereum public mempool with a low tip and waiting for it to be included, you send your transaction to MEV Blocker private pool which forwards your transactions directly to all major builders. This yields a faster inclusion rate as your transaction is already on the builders’ radar and will likely be included in the current or next block available.
+
+  - **Multiple Endpoints**: MEV Blocker provides three different RPC endpoints for you to choose based on your transaction needs. Learn more about each endpoint’s trade-offs here. 
+
+  - **Transparency**: MEV Blocker has a [Dune Dashboard](https://dune.com/cowprotocol/mev-blocker)
+where you can check all your transactions submitted through the MEV Blocker RPC. You can also follow your transactions  in detail, see all searcher bids, and calculate the overall revenue you got via MEV Blocker rebates.
+
+IMG
+
+## Supported Chains
+
+Ethereum: All features are supported on Ethereum.
+
+## For users, wallets, dApps & more
+
+Start sending transactions today using [MEV Blocker Endpoint](https://rpc.mevblocker.io). Feel free to send transactions directly or reach out for support.
+
+## For Searchers
+
+You can already bid on auctions today through MEV Blocker’s permissionless Order Flow Auction system. No KYC required.
+
+## For Builders
+
+In order to receive MEV Blocker Order Flow, your builder must meet certain requirements. You can find more information about the requirements here.
