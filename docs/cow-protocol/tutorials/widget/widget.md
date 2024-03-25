@@ -85,7 +85,7 @@ Once you have set up the partner fee, you will see the fee in the CoW Swap UI:
 
 [Terms and conditions](https://cow.fi/widget/terms-and-conditions) apply.
 
-See [here](/cow-protocol/tutorials/widget/partner-fee) for detailed info about fee calculation and examples.
+See [here](/governance/fees/partner-fee) for detailed info about fee calculation and examples.
 
 ## Wallet provider
 

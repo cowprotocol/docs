@@ -25,3 +25,8 @@ The purpose of this page is to let users know which fee models are active at any
 Surplus is defined as the difference between the minimum execution price and the executed price of an order
 
 :::
+
+### Partner fee
+
+Partners might charge a partner fee when integrating with the protocol via the [Widget](/cow-protocol/tutorials/widget).
+See [the Partner Fee](/governance/fees/partner-fee) for details on how it's calculated and examples, as well as for payment details.
