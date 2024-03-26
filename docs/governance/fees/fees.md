@@ -17,7 +17,7 @@ The purpose of this page is to let users know which fee models are active at any
 >
 > **Eligible orders:** the fee only applies to out-of-market limit orders and discrete TWAP orders where the order is not executable at the time it is generated (there are no fees charged on market orders at this point in time)
 >
-> **Fee calculation:** surplus _ 0.5 **OR** volume _ 0.01 [whichever number is lower]
+> **Fee calculation:** surplus * 0.5 **OR** volume * 0.01 [whichever number is lower]
 
 :::note
 
