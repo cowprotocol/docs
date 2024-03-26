@@ -23,9 +23,7 @@ To apply for the CoW Grants program, use the [application template](application-
 1. After a successful snapshot vote, the committee will verify the proposed transaction for the Grants Program Safe and execute payment transactions based on achieved milestones.
 2. If milestones are not met, the Grants Committee reserves the right to withhold funding until milestones are completed, or to formally close the grant.
 
----
-
-### Timeline and Completion Extension Clause
+## Timeline and Completion Extension Clause
 
 The grantee agrees that the funded project will be completed by the planned completion date as outlined in the grant proposal submitted and approved on [Snapshot](https://snapshot.org/#/cowgrants.eth). In recognition of the complexities and potential unforeseen challenges in completing the project, a grace period of three (3) months beyond the planned completion date will be allowed for finalizing all project activities.
 
