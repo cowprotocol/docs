@@ -14,7 +14,7 @@ title: Make custom links
 - [`https://swap.cow.fi/#/100/swap`](https://swap.cow.fi/#/100/swap) - `swap` page on Gnosis chain network
 - [`https://swap.cow.fi/#/100/limit/WXDAI/COW`](https://swap.cow.fi/#/100/limit/WXDAI/COW) - Create a `limit` order to sell `WXDAI` for `COW`
 - [`https://swap.cow.fi/#/1/swap/WETH/COW?sellAmount=100`](https://swap.cow.fi/#/1/swap/WETH/COW?sellAmount=100) - Swap `100 WETH` for `COW`
-- [`https://swap.cow.fi/#/1/swap/WXDAI/COW?buyAmount=10000&recipient=vitalik.eth`](https://swap.cow.fi/#/1/swap/WETH/COW?buyAmount=10000&recipient=vitalik.eth) - Buy on `swap` sending the outcome to a custom recipient (can be either address or ens)
+- [`https://swap.cow.fi/#/1/swap/WETH/COW?buyAmount=10000&recipient=vitalik.eth`](https://swap.cow.fi/#/1/swap/WETH/COW?buyAmount=10000&recipient=vitalik.eth) - Buy on `swap` sending the outcome to a custom recipient (can be either address or ens)
 - [`https://swap.cow.fi/#/100/limit/WETH/WXDAI?sellAmount=2&buyAmount=6000`](https://swap.cow.fi/#/100/limit/WETH/WXDAI?sellAmount=2&buyAmount=6000) - Create a limit order to sell `2 WETH` for `6000 WXDAI`
 
 ## Query Parameters
