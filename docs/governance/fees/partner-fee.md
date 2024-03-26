@@ -7,7 +7,7 @@ id: partner-fee
 ### Partner Fee Calculation
 
 Partner fee is calculated as the sum of all transactions traded through your project's Widget with Partner Fee defined
-in the appData, multiplied by the % percentage of the Partner Fee bps defined in the appData.
+in the `appData`, multiplied by the % percentage of the Partner Fee bps defined in the [`appData`](/cow-protocol/reference/core/intents/app-data).
 
 The Partner Fee per order is calculated based on the surplus token of the order (i.e. buy token for sell orders, and
 sell token for buy orders) and is then converted into WETH using an external price provider at the time of the
@@ -75,7 +75,7 @@ accrue from the release date of this Partner Fee feature on 4 April 2024.
 1. Upon completing the implementation of the Partner Fee parameters on your Widget, you will be eligible to receive the
 Partner Fee on trades executed by your users through the Widget.
 2. A data script will be run on a weekly basis on your project's eligible Partner Fee amount calculated based on the sum of
-all transactions traded through your project's Widget integration associated with Partner Fee defined in the appData
+all transactions traded through your project's Widget integration associated with Partner Fee defined in the [`appData`](/cow-protocol/reference/core/intents/app-data)
 your AppKey.
 3. The Net Partner Fee (refer to the Partner Fee Calculation section for details on calculations) will be transferred to
 your designated Ethereum wallet address defined under the Partner Fee Recipient parameter of the Widget on a weekly
@@ -83,6 +83,6 @@ basis.
 
 :::note
 
-Payments will be made only if the accrued fee value equals or exceeds 0.001 WETH. Any lesser amount will be voided.
+Payments will be made only if the accrued fee value equals or exceeds **0.001 WETH**. Any lesser amount will be voided.
 
 :::
