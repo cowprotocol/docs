@@ -3,11 +3,11 @@ title: Partner fee
 id: partner-fee
 ---
 
-
 ### Partner Fee Calculation
 
-Partner fee is calculated as the sum of all transactions traded through your project's Widget with Partner Fee defined
-in the `appData`, multiplied by the % percentage of the Partner Fee bps defined in the [`appData`](/cow-protocol/reference/core/intents/app-data).
+Partner fee is calculated as the sum of all transactions traded through your integration with CoW Protocol with Partner
+Fee defined in the `appData`, multiplied by the % percentage of the Partner Fee bps defined in
+the [`appData`](/cow-protocol/reference/core/intents/app-data).
 
 The Partner Fee per order is calculated based on the surplus token of the order (i.e. buy token for sell orders, and
 sell token for buy orders) and is then converted into WETH using an external price provider at the time of the
