@@ -9,15 +9,14 @@ It also directs the core team to keep the DAO up to date on the progress of the 
 
 The purpose of this page is to let users know which fee models are active at any point in time, so they know what fees they will encounter when using CoW Protocol (either directly or through CoW Swap).
 
-
 ## Current Fees
 
 ### Surplus fee on out-of-market limit orders
 
 > **Definition:** 50% of surplus on out-of-market limit orders, capped at 1% of the total volume of the order
-> 
+>
 > **Eligible orders:** the fee only applies to out-of-market limit orders and discrete TWAP orders where the order is not executable at the time it is generated (there are no fees charged on market orders at this point in time)
-> 
+>
 > **Fee calculation:** surplus * 0.5 **OR** volume * 0.01 [whichever number is lower]
 
 :::note
@@ -25,3 +24,8 @@ The purpose of this page is to let users know which fee models are active at any
 Surplus is defined as the difference between the minimum execution price and the executed price of an order
 
 :::
+
+### Partner fee
+
+Partners might charge a partner fee when integrating with the protocol.
+See the [Partner Fee](/governance/fees/partner-fee) section for details on how it's calculated and examples, as well as for payment details.

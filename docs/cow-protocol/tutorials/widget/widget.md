@@ -51,7 +51,8 @@ the [CoW Protocol Docs](https://docs.cow.fi/front-end/creating-app-ids/create-th
 
 ## Partner fee
 
-If your business model involves charging a fee for trading, you can easily do this by adding just one parameter:
+You may participate in the Partner Fee program to collect fee on trades executed by your users through the Widget by
+adding the following parameter to your Widget:
 
 ```typescript
 import {cowSwapWidget, CowSwapWidgetParams} from '@cowprotocol/widget-lib'
@@ -70,13 +71,21 @@ cowSwapWidget(widgetContainer, params)
 
 The fee in basis points (BPS). One basis point is equivalent to 0.01% (1/100th of a percent).  
 
-> The fee cannot exceed 1% (100 bps).
+:::note
+
+The fee cannot exceed 1% (100 bps).
+
+:::
 
 The recipient is the address to which the fee will be sent.
 
 Once you have set up the partner fee, you will see the fee in the CoW Swap UI:
 
 ![Partner fee](/img/tutorials/partner-fee.png)
+
+[Terms and conditions](https://cow.fi/widget/terms-and-conditions) apply.
+
+See [here](/governance/fees/partner-fee) for detailed info about fee calculation and examples.
 
 ## Wallet provider
 
