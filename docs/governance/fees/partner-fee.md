@@ -75,8 +75,7 @@ accrue from the release date of this Partner Fee feature on 4 April 2024.
 1. Upon completing the implementation of the Partner Fee parameters on your Widget, you will be eligible to receive the
 Partner Fee on trades executed by your users through the Widget.
 2. A data script will be run on a weekly basis on your project's eligible Partner Fee amount calculated based on the sum of
-all transactions traded through your project's Widget integration associated with Partner Fee defined in the [`appData`](/cow-protocol/reference/core/intents/app-data)
-your AppKey.
+all transactions traded through your project's Widget integration associated with Partner Fee defined in the [`appData`](/cow-protocol/reference/core/intents/app-data).
 3. The Net Partner Fee (refer to the [Partner Fee Calculation](#partner-fee-calculation) section for details on calculations) will be transferred to
 your designated Ethereum wallet address defined under the Partner Fee Recipient parameter of the Widget on a weekly
 basis.
