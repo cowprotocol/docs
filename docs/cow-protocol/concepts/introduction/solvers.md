@@ -15,4 +15,4 @@ As soon as a batch is "closed for orders", meaning that it stops considering new
 
 Whichever solver offers the best [solution](/cow-protocol/reference/core/auctions/the-problem#solution) for the batch auction (defined as the solver that provides the most surplus to user orders) gets to execute the orders.
 
-In order to incentivize a healthy competition and guarantee the best outcome for user orders, solvers get awarded COW tokens each time they solve a batch. 
+In order to incentivize a healthy competition and guarantee the best outcome for user orders, solvers get rewarded COW tokens each time they solve a batch. 
