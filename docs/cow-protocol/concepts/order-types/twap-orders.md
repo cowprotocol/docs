@@ -24,7 +24,7 @@ TWAP orders provide a number of benefits, especially when it comes to large orde
 - **Lower price impact**: As with slippage, breaking up a large order into small pieces allows users to spread their liquidity needs over time, reducing price impact
 - **100% of order surplus**: On CoW Swap, all order surplus is forwarded to the user. If an order executes for a price better than the quoted price - thanks to [Coincidences of Wants](../how-it-works/coincidence-of-wants) or any other price improvement that solvers are able to find - the extra price improvement will be forwarded to the user
 - **Eliminating market fluctuations**: By giving traders the time-weighted average price, TWAP orders smooth out market volatility
-- **Custom order parameters**: TWAP orders allow users to fine-tune their order by specifying the number of parts they would like it split up into, as well as the time period it's executed over. On CoW Swap, TWAP orders also have a "price protection" option which protects orders from executing at an unfavorable price due to market volatility
+- **Custom order parameters**: Users can choose how many parts to split their TWAP order into, adjust the execution timeframe, and even enable a "price protection" feature which prevents execution at unfavorable prices due to market volatility
 
 ## TWAP Requirements
 
