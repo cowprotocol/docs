@@ -25,7 +25,7 @@ npm install @cowprotocol/widget-lib
 ## Quick start
 
 ```typescript
-import {cowSwapWidget, CowSwapWidgetParams} from '@cowprotocol/widget-lib'
+import {createCowSwapWidget, CowSwapWidgetParams} from '@cowprotocol/widget-lib'
 
 // HTML element where the widget will be rendered
 const widgetContainer = document.getElementById('cowswap-widget')
@@ -38,7 +38,7 @@ const params: CowSwapWidgetParams = {
   buy: {asset: 'USDC', amount: '0.1'}
 }
 
-cowSwapWidget(widgetContainer, params)
+createCowSwapWidget(widgetContainer, { params })
 ```
 
 ## App key
@@ -55,7 +55,7 @@ You may participate in the Partner Fee program to collect fee on trades executed
 adding the following parameter to your Widget:
 
 ```typescript
-import {cowSwapWidget, CowSwapWidgetParams} from '@cowprotocol/widget-lib'
+import {createCowSwapWidget, CowSwapWidgetParams} from '@cowprotocol/widget-lib'
 
 const widgetContainer = document.getElementById('cowswap-widget')
 
@@ -66,7 +66,7 @@ const params: CowSwapWidgetParams = {
   }
 }
 
-cowSwapWidget(widgetContainer, params)
+createCowSwapWidget(widgetContainer, { params })
 ```
 
 The fee in basis points (BPS). One basis point is equivalent to 0.01% (1/100th of a percent).  
@@ -114,11 +114,12 @@ interface JsonRpcRequest {
 An example of connecting a widget to Rabby Wallet or Metamask:
 
 ```typescript
-import {cowSwapWidget, CowSwapWidgetParams} from '@cowprotocol/widget-lib'
+import {createCowSwapWidget, CowSwapWidgetParams} from '@cowprotocol/widget-lib'
 
-cowSwapWidget(
+createCowSwapWidget(
   document.getElementById('cowswap-widget'),
   {
+    params: { appCode: 'NAME-OF-YOU-APP' }, // Add here the name of your app. e.g. "Pig Swap"
     provider: window.ethereum // <-------
   }
 )
@@ -159,7 +160,7 @@ You actually can specify only 2 or 3 basic colors, the rest of the palette is ef
 Example:
 
 ```typescript
-import {cowSwapWidget, CowSwapWidgetParams, CowSwapWidgetPalette} from '@cowprotocol/widget-lib'
+import {createCowSwapWidget, CowSwapWidgetParams, CowSwapWidgetPalette} from '@cowprotocol/widget-lib'
 
 const widgetContainer = document.getElementById('cowswap-widget')
 
@@ -179,7 +180,7 @@ const params: CowSwapWidgetParams = {
   theme
 }
 
-cowSwapWidget(widgetContainer, params)
+createCowSwapWidget(widgetContainer, { params })
 ```
 
 Try it yourself: https://widget.cow.fi.
@@ -199,7 +200,7 @@ To avoid double display of notifications, enable the `disableToastMessages` opti
 ### Events usage example
 
 ```typescript
-import {cowSwapWidget, CowSwapWidgetParams, CowEventListeners, CowEvents} from '@cowprotocol/widget-lib'
+import {createCowSwapWidget, CowSwapWidgetParams, CowEventListeners, CowEvents} from '@cowprotocol/widget-lib'
 
 const params: CowSwapWidgetParams = {
     appCode: 'YOUR_APP_ID'
@@ -216,7 +217,7 @@ const listeners: CowEventListeners = [
     },
 ]
 
-const { updateListeners } = cowSwapWidget(container, { params, listeners })
+const { updateListeners } = createCowSwapWidget(container, { params, listeners })
 
 // If you want to change listeners at some point, you can do it like:
 updateListeners([{
@@ -230,7 +231,7 @@ updateListeners([{
 You can change all possible widget options on the fly:
 
 ```typescript
-import {cowSwapWidget, CowSwapWidgetParams} from '@cowprotocol/widget-lib'
+import {createCowSwapWidget, CowSwapWidgetParams} from '@cowprotocol/widget-lib'
 
 const container = document.getElementById('cowswap-widget')
 
@@ -239,7 +240,7 @@ const params: CowSwapWidgetParams = {
   logoUrl: 'YOUR_LOGO_URL'
 }
 
-const updateWidget = cowSwapWidget(container, params)
+const updateWidget = createCowSwapWidget(container, { params })
 
 // Update the widget
 updateWidget({
