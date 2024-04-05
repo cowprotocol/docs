@@ -1,0 +1,61 @@
+# Make your Safe App
+
+With over [100 Billon secured asserts](https://x.com/SchorLukas/status/1765865822797410466), Safe is a multi-signature wallet that allows users to manage their assets in a secure and decentralized way.
+
+Safe Dapps, are third party interfaces that live inside the [Safe Wallet Web](https://app.safe.global) and allow users to interact with deFI protocols with a customised user experience.
+
+[CoW Protocol Widget](https://widget.cow.fi) has a deep integration with Safe Dapps, which allows anyone building a Safe Dapp to add seamlessly add trading functionality to their interface.
+
+Safe App projects would be interested in using this feature to:
+* 🧱Cut costs by not having to build a trading interface from scratch
+* ☔️ Offer their users all CoW Protocol innovations, like protection from MEV, Just in Time Liquidity path finding (optimised for Multisig flows), batching of transactions and more.
+* 🤑 Create a revenew model for yuor Dapp by using the `partnerFee` (see [Fees](/governance/fees#partner-fees))
+
+The easiest way to get started is to explore 
+
+## Fork the project
+The simplest way to get started is to fork the boilerplate code and run it locally
+
+Go to https://github.com/cowprotocol/safe-app-example and fork it (this will create a local copy you can work with).
+
+![Fork project](/img/safe-app/fork.png)
+
+## Clone boilerplate code
+Once you have forked the project, clone it to your local machine
+```bash
+git clone <your-repo-url>
+```
+
+## Run app locally
+Launch the Dapp in port 9999 (for example).
+```bash
+PORT=9999 yarn start
+```
+
+## Add your custom dapp in Safe Wallet
+Go to https://app.safe.global and create a safe if you don't have one for Sepolia network (test net convenient for testing)
+
+
+Then navigate to "Apps > My Custom Dapps"
+
+![Safe custom dapps 1](/img/safe-app/safe-custom-apps-1.png)
+
+Add your custom dapp (http://localhost:9999)
+
+![Safe custom dapps 2](/img/safe-app/safe-custom-apps-2.png)
+
+The dapp should be added in yuour local browser.
+
+![Safe custom dapps 3](/img/safe-app/safe-custom-apps-3.png)
+
+Open the app
+
+![Safe custom dapps 4](/img/safe-app/safe-custom-apps-4.png)
+
+
+## Explore the code 
+Explore the code and try to make modifications
+
+
+## Follow Up
+From there, try to get more familiar with CoW Protocol and Safe Dapps, and enhance your application
