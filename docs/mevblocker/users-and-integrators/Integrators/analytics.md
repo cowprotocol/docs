@@ -4,7 +4,7 @@ sidebar_position: 5
 
 # Set Up Data Analytics
 
-When submitting your transaction to the API, define the custom parameter “referrer=xxx" to associate transactions on MEV Blocker's transaction origin analytics dashboard to your project:
+When submitting your transaction to the API, define the custom parameter "referrer=xxx" to associate transactions on MEV Blocker's transaction origin analytics dashboard to your project:
 
 ```
 https://rpc.mevblocker.io/?referrer=(YOUR_ADDRESS)

@@ -20,7 +20,7 @@ MEV Blocker is built by the experts in MEV supply chain Agnostic Relay, Beaver B
 
 * **MEV Protection:** MEV Blocker routes transactions through a private mempool to guard against harmful MEV attacks.
 * **Quick and reliable** Over 90% of transactions are processed in the next block, typically within 12 seconds.
-* **Earn rebates:** MEV Blocker auctions off the right to backrun users’ transactions, searchers captures backrunning opportunities and sends 90% back as rebates to transaction originators. MEV Blocker automatically captures backrunning opportunities and sends trade rebates to users (with opportunity for projects to capture such rebates).
+* **Earn rebates:** MEV Blocker auctions off the right to backrun users' transactions, searchers captures backrunning opportunities and sends 90% back as rebates to transaction originators. MEV Blocker automatically captures backrunning opportunities and sends trade rebates to users (with opportunity for projects to capture such rebates).
 
 ## How is MEV Blocker Better?
 

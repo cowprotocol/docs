@@ -10,7 +10,7 @@ Frontrunning is a particular type of MEV that affects all forms of Ethereum tran
 
 ## What is frontrunning and how does it work?
 
-Frontrunning occurs when a user makes a transaction but gets “front run” by an MEV bot who makes the same transactions ahead of them.
+Frontrunning occurs when a user makes a transaction but gets "front run" by an MEV bot who makes the same transactions ahead of them.
 
 ![Frontrunning](/img/mevblocker/Frontrunning_1.webp)
 
@@ -22,23 +22,23 @@ Frontrunning takes advantage of the open nature of the blockchain mempool, as an
 
 * **Monitoring Pending Transactions:** The first step involves monitoring the blockchain network's mempool, a holding area for pending transactions. Here, frontrunners, who are often sophisticated bots, scan the mempool to identify transactions that can carry significant value that they want to snatch away or that could influence the price of a particular asset
 * **Selecting Profitable Transactions:** The frontrunner will analyze the potential market impact once such a transaction is identified. For instance, if a large buy order for a specific token is detected, the frontrunner knows that this transaction could increase the asset's price once processed
-* **Placing a New Transaction:** The frontrunner will initiate their buy order for the same asset, intending to get their transaction processed before the initially detected transaction. They typically give the validators a higher “tip” to execute their transaction first in the block in comparison to the target transaction
+* **Placing a New Transaction:** The frontrunner will initiate their buy order for the same asset, intending to get their transaction processed before the initially detected transaction. They typically give the validators a higher "tip" to execute their transaction first in the block in comparison to the target transaction
 
 
 ## Example: Frontrunning in DeFi
-A notable example of DeFi frontrunning involves the notorious MEV bot named “jaredfromsubway.eth.” In one case, a user, [0x3a7822](https://zeromev.org/block?num=17508508), intended to trade 2 ETH for another token, $BOB.
+A notable example of DeFi frontrunning involves the notorious MEV bot named "jaredfromsubway.eth." In one case, a user, [0x3a7822](https://zeromev.org/block?num=17508508), intended to trade 2 ETH for another token, $BOB.
 
 ### How the frontrunning attack was executed
 
 This trade was noticed by the bot jaredfromsubway.eth, which monitored the mempool for transactions it could take advantage of.
 
-Once the transaction entered the mempool, Jaredfromsubway.eth quickly executed its own transaction to buy $BOB with ETH, strategically placing it as the first in the block, and knowing that he would get the assets at a discount as the transactions behind will pamp the pricer. MEV allows validators to prioritize transactions that are of the most value to them. Consequently, the bot’s transaction, being the first one in the block, was confirmed ahead of the user's transaction.
+Once the transaction entered the mempool, Jaredfromsubway.eth quickly executed its own transaction to buy $BOB with ETH, strategically placing it as the first in the block, and knowing that he would get the assets at a discount as the transactions behind will pamp the pricer. MEV allows validators to prioritize transactions that are of the most value to them. Consequently, the bot's transaction, being the first one in the block, was confirmed ahead of the user's transaction.
 
 ![Frontrunning](/img/mevblocker/Frontrunning_2.webp)
 
 ### The consequences of the frontrunning attack
 
-The frontrunning attack triggered an increase in the price of $BOB tokens due to the additional demand created before the user’s transaction was processed. When the user's original order of 145M $BOB was executed, it was conducted at this now-inflated price, leading to user 0x3a7822 receiving way fewer $BOB tokens, hence losing out on the value they could have otherwise captured.
+The frontrunning attack triggered an increase in the price of $BOB tokens due to the additional demand created before the user's transaction was processed. When the user's original order of 145M $BOB was executed, it was conducted at this now-inflated price, leading to user 0x3a7822 receiving way fewer $BOB tokens, hence losing out on the value they could have otherwise captured.
 
 Jaredfromsubway.eth completed its MEV attack by selling its $BOB tokens at an increased price, resulting in a profit, a second move that made this MEV attack a sandwich attack. In this scenario, the price slippage triggered by the frontrunning bot meant that user 0x3a7822 encountered a worse trade-off, ultimately making a loss while the MEV bot profited — an estimated gain of 0.1 ETH.
 

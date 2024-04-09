@@ -19,7 +19,7 @@ This is the first step, where the user creates the transaction:
 
 * if the highest paying bundle no longer simulates correctly on the top of the block (e.g. because the submitted transaction route is no longer available), a lower paying bid can still be included so that the user gets the highest possible reward without a delayed execution (it's also possible that a user gets multiple refunds in a single block).
 
-## MEV Blocker system mixes users’ real transactions with AI-generated fake transactions
+## MEV Blocker system mixes users' real transactions with AI-generated fake transactions
 
 The third step is unique to MEV Blocker RPC; no other existing RPC providers are doing it. In this step, the MEV Blocker system generates fake transactions to disguise searchers on the truthfulness of the transactions in such a way that they cannot try to probabilistically exploit the transactions. This step is used as an additional protection mechanism for the user, and it is used to keep the searchers onboarding fully trustless and decentralized. Additionally, depending on the type of transaction, more of the transaction details may be hidden
 
@@ -48,4 +48,4 @@ This step is where the actual auction takes place. MEV Blocker forwards all the 
 
 Once the block builders have received the transactions and decided which bundles to include in their block, the entire block is passed on via relays to the proposers (validators) who then select the highest paying block.
 
-Once they have selected their “winning” block, the proposer proposes the block into the network, and all the transactions in that block get executed on-chain.
+Once they have selected their "winning" block, the proposer proposes the block into the network, and all the transactions in that block get executed on-chain.
