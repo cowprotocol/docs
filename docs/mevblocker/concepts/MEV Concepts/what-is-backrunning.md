@@ -10,9 +10,9 @@ In practice, backrunning involves strategically executing a transaction immediat
 
 ![backrunning](/img/mevblocker/backrunning.webp)
 
-Backrunning involves the tactical use of the information contained within the Ethereum mempool — a holding area for all pending transactions — to place transactions immediately after high-value trades in order to profit.
+Backrunning involves the tactical use of the information contained within the Ethereum mempool - a holding area for all pending transactions - to place transactions immediately after high-value trades in order to profit.
 
-Out of the three types of MEV (frontrunning, sandwich attacks, and backrunning) backrunning is considered the least harmful. In fact, if performed by itself, this method simply captures the arbitrage opportunity left over by a large trade without affecting the initial trade itself. Backrunning is only harmful to the user when combined with a frontrunning attack, which results in the worst kind of MEV — the sandwich attack.
+Out of the three types of MEV (frontrunning, sandwich attacks, and backrunning) backrunning is considered the least harmful. In fact, if performed by itself, this method simply captures the arbitrage opportunity left over by a large trade without affecting the initial trade itself. Backrunning is only harmful to the user when combined with a frontrunning attack, which results in the worst kind of MEV - the sandwich attack.
 
 For advanced traders who are capable of capturing the leftover arbitrage from their trades, backrunning may be considered a missed opportunity since it is money left on the table.
 
