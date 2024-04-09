@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # Builder Fee Management Smart Contract
 
-The contract's [github repo](https://github.com/cowprotocol/mev-blocker-till/), and [mainnet deployment address](https://etherscan.io/address/0x08cd77feb3fb28cc1606a91e0ea2f5e3eaba1a9a#code) are available as of April 5th.
+The contract's source code is available on [GitHub](https://github.com/cowprotocol/mev-blocker-till/) and is deployed at [`0x08cd77feb3fb28cc1606a91e0ea2f5e3eaba1a9a`](https://etherscan.io/address/0x08cd77feb3fb28cc1606a91e0ea2f5e3eaba1a9a#code).
 :::
 
 The MEV Blocker Fee Management Smart Contract provides a framework for managing financial interactions between builders and the MEV Blocker service. This documentation guides builders through the process of engaging with MEV Blocker, from making initial deposits to managing subscription fees, and eventually withdrawing their deposits if they choose to disconnect.

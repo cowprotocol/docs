@@ -1,6 +1,7 @@
 ---
 sidebar_position: 6
 ---
+
 # What is a Sandwich Attack?
 
 [Sandwich attacks](https://twitter.com/CoWSwap/status/1498678005777973249?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1498678005777973249%7Ctwgr%5Ea123df70c36d1c50e8751632901e8fe95f16372e%7Ctwcon%5Es1_&ref_url=https%3A%2F%2Fcdn.embedly.com%2Fwidgets%2Fmedia.html%3Ftype%3Dtext2Fhtmlkey%3Da19fcc184b9711e1b4764040d3dc5c07schema%3Dtwitterurl%3Dhttps3A%2F%2Ftwitter.com%2FCoWSwap%2Fstatus%2F14986780057779732493Fs3D20image%3Dhttps3A%2F%2Fi.embed.ly%2F1%2Fimage3Furl3Dhttps253A252F252Fabs.twimg.com252Ferrors252Flogo46x38.png26key3Da19fcc184b9711e1b4764040d3dc5c07) occur when a user's transaction gets trapped, or "sandwiched," between two hostile transactions — one before and one after. As a result, the original transaction executes at a much higher price than necessary, leading to an inflated price for the original trader and a profit for the malicious trader placing the two extra trades (known as a "searcher").

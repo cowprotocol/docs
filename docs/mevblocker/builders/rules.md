@@ -6,7 +6,7 @@ sidebar_position: 1
 
 The basic technical requirement to start receiving flow is to build at least 1% of the blocks each week of the previous month. We reserve the right to disconnect a builder who drops significantly below the 1% threshold while connected to MEV blocker. Also, the fee will always be calculated as if the builder won at least 1% of blocks (see the discussion about the fee adjustment below).
 
-Connected builders who support refund bundles and replacementUuid(or uuid) for updatable bundles receive MEV Blocker transactions and bundles immediately. These builders should maximize the refunds received by MEV blocker's users. In particular, they should, for each transaction, always include the highest-paying bundles plus other bundles that do not fail (in the combination that maximizes the refund). If they comply with this rule, they can perform additional blind, end-of-block backrunning.
+Connected builders who support refund bundles and replacementUuid (or uuid) for updateable bundles receive MEV Blocker transactions and bundles immediately. These builders should maximize the refunds received by MEV blocker's users. In particular, they should, for each transaction, always include the highest-paying bundles plus other bundles that do not fail (in the combination that maximizes the refund). If they comply with this rule, they can perform additional blind, end-of-block backrunning.
 
 Connected builders who do not support refund bundles will receive transactions with a delay. The purpose is to give time for searchers connected to MEV Blocker to create bundles. These builders cannot perform any backrunning (internal, blind, whatever).
 

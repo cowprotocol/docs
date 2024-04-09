@@ -1,6 +1,7 @@
 ---
 sidebar_position: 7
 ---
+
 # What is Backrunning?
 
 Backrunning is a specific type of MEV (Maximal Extractable Value) which causes traders to miss out on potential profit from their trades.
