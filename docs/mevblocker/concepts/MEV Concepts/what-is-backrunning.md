@@ -29,6 +29,6 @@ To better understand the concept of backrunning, let's consider an example scena
 
 At the same time, an MEV bot notices Alex's large transaction and springs into action. The MEV bot acquires Alex's sell token (ETH) at this lower price and immediately turns around and sells it for a higher price on a different exchange where this price arbitrage has not yet been reflected. The bot profits from the price difference between the assets on these two exchanges.
 
-From a technical perspective, Alex's transaction doesn’t result in any realized loss for him, since he still got the price he was quoted for his trade. However, his trade created an arbitrage opportunity that he didn’t capture, leaving money on the table.
+From a technical perspective, Alex's transaction doesn't result in any realized loss for him, since he still got the price he was quoted for his trade. However, his trade created an arbitrage opportunity that he didn't capture, leaving money on the table.
 
 The actions of the MEV bot have broader implications for the DeFi ecosystem. Bots monopolize arbitrage opportunities between exchanges and deny regular users the chance to benefit from the price impact their trades create.

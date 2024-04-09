@@ -30,14 +30,14 @@ With a strong builder network, MEV Blocker acts as a builder aggregator where tr
 
 ### Superior Rebates
 
-With more robust searchers competition, MEV Blocker has been able to generate at least 10x more backrunning rebates than any other competitor solutions with over 1000 ETH rebates to users / projects to date .
+With more robust searchers competition, MEV Blocker has generated at least 10x more backrunning rebates than any other competitor solutions with over 1000 ETH rebates to users / projects to date.
 
-### Simple and No $ Cost to Integrate
+### Simple and No Cost to Integrate
 
-MEV Blocker is built by experts to be user-friendly, easy to set up, and no $ cost to integrate.
+MEV Blocker is built by experts to be user-friendly, easy to set up, and no cost to integrate.
 
 ## Growing List of Partners
 
-Top Wallets integrated MEV Blocker include Uniswap Wallet, Rabby Wallet, Crypto.com Defi Wallet, Ambire Wallet, Keepkey Wallet.
+Top Wallets integrating MEV Blocker include Uniswap Wallet, Rabby Wallet, Crypto.com Defi Wallet, Ambire Wallet, Keepkey Wallet.
 
 MEV Blocker is trusted by more than 30 prominent Ethereum projects including **Balancer, Safe, ShapeShift, Paraswap, VirtuSwap, Karpatkey, Swarm, Castle, Aura, Oasis.app, Eigenphi** and many more.

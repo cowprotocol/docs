@@ -4,9 +4,9 @@ MEV Blocker is your personal protection from frontrunning and sandwich attacks f
 
 ## Intent Based DEXs 
 
-Intent-based DEXs, such as the CoW Protocol, utilize offchain competition among solvers to secure better settlement prices for their users. These solvers, tasked with identifying the most efficient transaction paths, are responsible for submitting transactions onchain on the user's behalf.
+Intent-based DEXs, such as the CoW Protocol, utilize an off-chain competition among solvers to secure better settlement prices for their users. These solvers, tasked with identifying the most efficient transaction paths, are responsible for submitting transactions on-chain on the user's behalf.
 
-MEV Blocker serves as a critical tool for safeguarding these transactions from MEV bots' manipulation. By integrating MEV Blocker, solvers can ensure their transactions are protected from being frontrun or sandwiched, while also benefiting from additional assurances such as no reverts. Moreover, they can capture up to 90% of the backrun value their transactions might generate, thereby creating an alternative revenue stream beyond the solver competition.
+MEV Blocker serves as a critical tool for safeguarding these transactions from manipulation by MEV bots. By integrating MEV Blocker, solvers can ensure their transactions are protected from being frontrun or sandwiched, while also benefiting from additional assurances such as no reverts. Moreover, they can capture up to 90% of the backrun value their transactions might generate, thereby creating an alternative revenue stream beyond the solver competition.
 
 ## Oracle Extractable Value 
 
@@ -16,13 +16,13 @@ With MEV Blocker, Oracles can sidestep the public mempool, directing data feed u
 
 ## Transaction Relayers
 
-Transaction relayers, such as Gelato, enable projects and users to bypass the complexities of onchain transaction submission and gas management. These relayers facilitate transaction submissions on behalf of the projects and users according to predetermined preferences.
+Transaction relayers, such as Gelato, enable projects and users to bypass the complexities of on-chain transaction submission and gas management. These relayers facilitate transaction submissions on behalf of the projects and users according to predetermined preferences.
 
 Through MEV Blocker, Transaction Relayers can assure their clients of MEV-free transactions, additionally redistributing a portion of the value in cases where the transactions present backrun opportunities.
 
 ## Account Abstraction (Bundlers)
 
-In a manner akin to Transaction Relayers, wallets that implement Account Abstraction utilize bundlers to process their users' transactions. These bundlers play a pivotal role in the onchain submission of transactions.
+In a manner akin to Transaction Relayers, wallets that implement Account Abstraction utilize bundlers to process their users' transactions. These bundlers play a pivotal role in the on-chain submission of transactions.
 
 Utilizing MEV Blocker, Bundlers can provide their users with MEV-free transactions, further passing on value for transactions that offer backrun potential.
 
