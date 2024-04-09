@@ -1,0 +1,13 @@
+{
+    "position": 3,
+    "label": "Searchers",
+    "collapsible": true,
+    "collapsed": true,
+    "link": {
+        "type": "generated-index",
+        "title": "Searchers"
+    },
+    "customProps": {
+        "description": "This is the Searchers section."
+    }
+}
