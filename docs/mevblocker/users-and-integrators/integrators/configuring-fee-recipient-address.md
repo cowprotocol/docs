@@ -8,6 +8,7 @@ When submitting your transaction to the API, use the custom parameter `refundRec
 
 ```
 https://rpc.mevblocker.io/?refundRecipient=(YOUR_ADDRESS)
+```
 
 :::note
 

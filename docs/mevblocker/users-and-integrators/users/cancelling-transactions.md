@@ -12,6 +12,7 @@ Soft cancellations are an optimistic feature where MEV Blocker will stop broadca
 
 ## Preparing the transaction we want to cancel
 To increase our chances of our target transaction not getting immediately included we will submit it with no priority fee:
+
 ```typescript
 const nonce = await signer.getTransactionCount();
 const tx = {
@@ -22,17 +23,21 @@ const tx = {
 	nonce
 };
 ```
+
 ## Preparing the cancellation tx
 Cancellation transactions are calls to self without any value or calldata, that use the same nonce as the target transaction in order to invalidate it:
+
 ```typescript
 const cancellation = {
 	to: await signer.getAddress(),
 	nonce
 };
 ```
+
 MEV Blocker doesn't broadcast such transactions but instead takes it as a signal to stop broadcasting any other transactions that have the same nonce allowing for "gasless" cancellations.
 
 ## Sending and awaiting target and cancellation
+
 We need to send both transactions in short concession in order for the cancellation to take effect. There is always a chance that due to latency the cancellation arrives too late and builders end up including the target transaction. It might therefore take multiple attempts to demonstrate the exact behavior.
 
 Metamask may sometimes ask you to sign the second transaction first. Make sure you sign the transactions with non-zero value first!
@@ -44,8 +49,9 @@ const [transactionResponse, _] = await Promise.all([
 	signer.sendTransaction(tx),
 	signer.sendTransaction(cancellation)
 ]);
-```
+
 return `Cancellation sent! Check https://rpc.mevblocker.io/tx/${transactionResponse.hash}`;
+```
 
 If all goes well the target transaction should show its status as FAILED.
 

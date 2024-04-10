@@ -1,18 +1,25 @@
 # How to receive backrun bundles from MEV Blocker RPC
 
-N.B. Historical submitted bundles, including those that did not land on-chain, will not only be shared with builders but also archived and presented to the public for transparency
+:::note
+
+Historical submitted bundles, including those that did not land on-chain, will not only be shared with builders but also archived and presented to the public for transparency.
+
+:::
+
 Connect to the websocket server located at searchers.mevblocker.io
 
 ```shell
 websocat wss://searchers.mevblocker.io
 ```
-## Conecting
-Use the eth_subscribe method to subscribe to unsigned pending transactions - mevblocker_partialPendingTransactions:
+## Connecting
+Use the `eth_subscribe` method to subscribe to unsigned pending transactions - `mevblocker_partialPendingTransactions`:
+
 ```json
-{"method":"eth_subscribe",
-"params": ["mevblocker_partialPendingTransactions"]}
+{"method":"eth_subscribe","params":["mevblocker_partialPendingTransactions"]}
 ```
+
 ## Response:
+
 ```json
 {
  "jsonrpc": "2.0", 
@@ -20,7 +27,9 @@ Use the eth_subscribe method to subscribe to unsigned pending transactions - mev
  "result": "0xd58bbbc0f5190962eff01b6f0ec17724"
 }
 ```
-**You'll start receiving unsigned pending transactions (missing v, r, and s):**
+
+You'll start receiving unsigned pending transactions (missing `v`, `r`, and `s`):
+
 ```json
 {
  "jsonrpc": "2.0", 

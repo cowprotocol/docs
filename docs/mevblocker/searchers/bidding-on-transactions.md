@@ -4,20 +4,29 @@ Bids can be submitted by any client with the relay url: https://rpc.mevblocker.i
 
 However, you need to make sure that the first transaction of the bundle you send is the hash of the target transaction.
 
-Within the bundle itself, you need to make sure that the backrun transaction makes an ETH transfer to the fee recipient (which can either be tx.origin or a custom address; learn more about how to set up a custom address here), and the value of the transfer has to be the bid amount.
+Within the bundle itself, you need to make sure that the backrun transaction makes an ETH transfer to the fee recipient (which can either be `tx.origin` or a custom address; learn more about how to set up a custom address here), and the value of the transfer has to be the bid amount.
 
 To recap, a Merkle bid is a bundle with 2 transactions:
 
 - The hash of the target transaction
 - Your backrun - the backrun must pay the fee_recipient the bid with an Ether transfer
 
-Construct a back-run bundle just like you would for a target transaction from the mempool, but make the first element of the txs array in params of eth_sendBundle the hash of the pending target, instead of the fully-encoded transaction.
+Construct a back-run bundle just like you would for a target transaction from the mempool, but make the first element of the txs array in params of `eth_sendBundle` the hash of the pending target, instead of the fully-encoded transaction.
 
-N.B. The pending target transaction must be the first transaction in txs, and only one target transaction can be included per bundle, otherwise the request will be rejected. It is still possible to submit multiple bundles for the same block, containing different target transactions.
+:::note
 
-Send the back-run bundle to the same websocket connection using the eth_sendBundle method
+The pending target transaction must be the first transaction in txs, and only one target transaction can be included per bundle, otherwise the request will be rejected. It is still possible to submit multiple bundles for the same block, containing different target transactions.
 
-N.B replacementUuid is supported in this version of eth_sendBundle
+:::
+
+Send the back-run bundle to the same websocket connection using the `eth_sendBundle` method
+
+:::tip
+
+`replacementUuid` is supported in this version of `eth_sendBundle`
+
+:::
+
 ```json
 { 
     "jsonrpc": "2.0", 
@@ -34,7 +43,11 @@ N.B replacementUuid is supported in this version of eth_sendBundle
 }
 ```
 
-N.B. Historical submitted bundles, including those that did not land on-chain, will not only be shared with builders but also archived and presented to the public for transparency
+:::note
+
+Historical submitted bundles, including those that did not land on-chain, will not only be shared with builders but also archived and presented to the public for transparency.
+
+:::
 
 Connect to the websocket server located at searchers.mevblocker.io
 
@@ -42,14 +55,15 @@ Connect to the websocket server located at searchers.mevblocker.io
 websocat wss://searchers.mevblocker.io
 ```
 
-Use the eth\_subscribe method to subscribe to unsigned pending transactions - mevblocker\_partialPendingTransactions:
+Use the `eth_subscribe` method to subscribe to unsigned pending transactions - `mevblocker_partialPendingTransactions`:
 
 
 ```json
-{"method":"eth\_subscribe","params": \["mevblocker\_partialPendingTransactions"\]}
+{"method":"eth_subscribe","params": ["mevblocker_partialPendingTransactions"]}
 ```
 
 Response:
+
 ```json
 {
         "jsonrpc": "2.0", 
@@ -57,11 +71,13 @@ Response:
         "result": "0xd58bbbc0f5190962eff01b6f0ec17724"
 }
 ```
-You'll start receiving unsigned pending transactions (missing v, r, and s):
+
+You'll start receiving unsigned pending transactions (missing `v`, `r`, and `s`):
+
 ```json
 {
     "jsonrpc": "2.0", 
-    "method": "eth\_subscription", 
+    "method": "eth_subscription", 
     "params": 
         {"subscription": "0xd58bbbc0f5190962eff01b6f0ec17724", 
         "result": 
@@ -69,7 +85,7 @@ You'll start receiving unsigned pending transactions (missing v, r, and s):
             "to": "0x6215589d293fdf52886484f46f0d6a11c76b4a7e", 
             "value": "0x4fefa17b724000",
             "data": "0x", 
-            "accessList": \[\], 
+            "accessList": [], 
             "nonce": "0x10", 
             "maxPriorityFeePerGas": "0x0", 
             "maxFeePerGas": "0x7e1c65b04", 

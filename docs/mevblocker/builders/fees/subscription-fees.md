@@ -18,11 +18,11 @@ Initially, the fee will be 20% of the above value, and the length of the period 
 
 :::note Off-chain accounting
 
-Despite the fact that the fee is per block, it will not be paid with each block: we will keep track of it off-chain and settle it weekly. Hence, the settlement period for the payment (one week) differs from the frequency at which the per-block won fee is computed (one month). Builders are expected to settle their payment within 24 hours from the beginning of the new settlement period using the dedicated [smart contract](##MEV-Blocker-Fee-Management-Smart-Contract).
+Despite the fact that the fee is per block, it will not be paid with each block: we will keep track of it off-chain and settle it weekly. Hence, the settlement period for the payment (one week) differs from the frequency at which the per-block won fee is computed (one month). Builders are expected to settle their payment within 24 hours from the beginning of the new settlement period using the dedicated [smart contract](fee-management-smart-contract).
 
 :::
 
-We'll compute the value of the per-block won fee using publicly available data, in a format that is easy to verify (for example, as a Dune query). The process for [posting](####2.-Billing-and-Subscription-Fees) this value on-chain, as well as posting builder's dues and payment is documented below in the [smart contract section](##MEV-Blocker-Fee-Management-Smart-Contract).
+We'll compute the value of the per-block won fee using publicly available data, in a format that is easy to verify (for example, as a Dune query). The process for [posting](fee-management-smart-contract#billing-and-subscription-fees) this value on-chain, as well as posting builder's dues and payment is documented below in the [smart contract section](fee-management-smart-contract).
 
 Finally, for builders who won fewer than 1% of blocks during a given week, the fee will be adjusted so that these builders pay as if they won exactly 1% of blocks during the week. In practice, at the end of each week, these builders pay:
 

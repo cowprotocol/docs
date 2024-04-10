@@ -26,7 +26,7 @@ The process takes advantage of the mechanisms of [automated market makers (AMMs)
 
 ### Backrunning example
 
-To better understand the concept of backrunning, let's consider an example scenario. In this example, a user named Alex initiates a substantial trade, selling $10,000 of ETH to buy COW on Uniswap. Due to the nature of AMMs, this swap leads to a jump in the value of COW and a drop in the value of ETH on this particular exchange (Uniswap).
+To better understand the concept of backrunning, let's consider an example scenario. In this example, a user named Alex initiates a substantial trade, selling \$10,000 of ETH to buy COW on Uniswap. Due to the nature of AMMs, this swap leads to a jump in the value of COW and a drop in the value of ETH on this particular exchange (Uniswap).
 
 At the same time, an MEV bot notices Alex's large transaction and springs into action. The MEV bot acquires Alex's sell token (ETH) at this lower price and immediately turns around and sells it for a higher price on a different exchange where this price arbitrage has not yet been reflected. The bot profits from the price difference between the assets on these two exchanges.
 
