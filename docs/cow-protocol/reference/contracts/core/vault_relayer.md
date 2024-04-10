@@ -15,7 +15,7 @@ The `GPv2VaultRelayer` contract is an important component used to protect user f
 
 The `GPv2VaultRelayer` has access to user balances through 3 mechanisms:
 
-1. [Fallback `ERC-20` Allowances](#fallback-erc20-allowances)
+1. [Fallback `ERC-20` Allowances](#fallback-erc-20-allowances)
 2. [Balancer External Balances](#balancer-external-balances)
 3. [Balancer Internal Balances](#balancer-internal-balances)
 

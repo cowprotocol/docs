@@ -22,7 +22,7 @@ The order owner is a CoW AMM if its [handler](/cow-protocol/reference/contracts/
 Official deployment addresses for the contracts in this repo can be found in the file [`networks.json`](https://github.com/cowprotocol/cow-amm/blob/3689d24667447ac4882c8bd5d4cbce93ef8a1e86/networks.json).
 
 The field `staticInput` represents the parameters of the AMM, as for example the traded tokens.
-A description of each parameter can be found in the [instructions on how to create an order](#constantproduct-static-input).
+A description of each parameter can be found in the [instructions on how to create an order](/cow-protocol/reference/contracts/programmatic/cow-amm#constantproduct-static-input).
 
 The AMM reserves are the owner's balance of the two tokens traded by the AMM.
 
