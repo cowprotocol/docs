@@ -8,12 +8,11 @@ The basic technical requirement to start receiving flow is to build at least 1% 
 
 Connected builders who support refund bundles and replacementUuid (or uuid) for updateable bundles receive MEV Blocker transactions and bundles immediately. These builders should maximize the refunds received by MEV blocker's users. In particular, they should, for each transaction, always include the highest-paying bundles plus other bundles that do not fail (in the combination that maximizes the refund). If they comply with this rule, they can perform additional blind, end-of-block backrunning.
 
-Connected builders who do not support refund bundles will receive transactions with a delay. The purpose is to give time for searchers connected to MEV Blocker to create bundles. These builders cannot perform any backrunning (internal, blind, whatever).
+Connected builders who do not support refund bundles will receive transactions with a delay. The purpose is to give time for searchers connected to MEV Blocker to create bundles. These builders *cannot perform any backrunning, that is, they cannot use or share any state related to MEV blocker’s transactions for the purpose of exploiting a backrunning opportunity.*
 
 Independent of their support for bundles, all builders connected to MEV Blocker are expected to:
 
 - **Refrain from unethical activities that may hurt MEV Blocker users.** This includes (but is not limited to): no frontrunning, no sandwiching, no state or transaction sharing/leaking in any form.
-- **Provide good service.** This includes (but is not limited to) the timely inclusion of a transaction (or a bundle) if its effective gas price is larger than the lowest-paying transaction included in the block, with the exception of unavoidable technical limitations (i.e., latency) and legal requirements (i.e., OFAC).
 - **Do not take actions having the sole purpose of gaming the rules or avoiding paying the fee.** This includes (but is not limited to) creating a separate identity (a "shadow builder") that only receives MEV blocker flow.
 - **Deposit a 10 ETH bond in the MEV Blocker smart contract, administered by MEV blocker implementing partners.** These funds will be used to cover late fees and penalties. They will be returned to builders who decide to disconnect from MEV blocker and are in good standing.
 
