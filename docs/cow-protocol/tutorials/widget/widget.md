@@ -69,6 +69,7 @@ const params: CowSwapWidgetParams = {
 createCowSwapWidget(widgetContainer, { params })
 ```
 
+### Fee BPS
 The fee in basis points (BPS). One basis point is equivalent to 0.01% (1/100th of a percent).  
 
 :::note
@@ -77,7 +78,31 @@ The fee cannot exceed 1% (100 bps).
 
 :::
 
-The recipient is the address to which the fee will be sent.
+### Recipient
+
+The recipient is the address to which the fee will be sent.  
+
+Make sure that the fee recipient address exists on a specified network.  
+For example, if you use a Safe as a recipient and the Safe was created in the Ethereum network, then in the Gnosis Chain network you need to create another safe accordingly and set it as a fee recipient.  
+
+As a fee recipient, you can specify either string or a key-value pair in the format `chainId: recipientAddress`:
+
+```typescript
+import type {SupportedChainId} from '@cowprotocol/cow-sdk'
+import type {CowSwapWidgetParams} from '@cowprotocol/widget-lib'
+
+const params: CowSwapWidgetParams = {
+  partnerFee: {
+      bps: 50, // 0.5%
+      recipient: {
+          [SupportedChainId.MAINNET]: '0x0000000000000000000000000000000000000001',
+          [SupportedChainId.GNOSIS_CHAIN]: '0x0000000000000000000000000000000000000002',
+          [SupportedChainId.SEPOLIA]: '0x0000000000000000000000000000000000000003',
+      }
+  }
+}
+```
+
 
 Once you have set up the partner fee, you will see the fee in the CoW Swap UI:
 
