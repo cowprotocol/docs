@@ -1,12 +1,6 @@
-# How to receive backrun bundles from MEV Blocker RPC
+# How to receive historical backrun bundles from MEV Blocker RPC
 
-:::note
-
-Historical submitted bundles, including those that did not land on-chain, will not only be shared with builders but also archived and presented to the public for transparency.
-
-:::
-
-Connect to the websocket server located at searchers.mevblocker.io
+Submitted bundles, including those that did not land on-chain are archived and presented to the public for transparency. To access them, connect to the websocket server located at searchers.mevblocker.io
 
 ```shell
 websocat wss://searchers.mevblocker.io
