@@ -6,7 +6,7 @@ However, you need to make sure that the first transaction of the bundle you send
 
 Within the bundle itself, you need to make sure that the backrun transaction makes an ETH transfer to the fee recipient (which can either be `tx.origin` or a custom address; learn more about how to set up a custom address here), and the value of the transfer has to be the bid amount.
 
-To recap, a Merkle bid is a bundle with 2 transactions:
+To recap, a bundle has 2 transactions:
 
 - The hash of the target transaction
 - Your backrun - the backrun must pay the fee_recipient the bid with an Ether transfer
