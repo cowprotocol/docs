@@ -55,13 +55,11 @@ $$U(\{x,-y\})=(x \cdot \pi-y)p(s)$$,
 
 where $$p(s)$$ is the price of the sell token relative to a numéraire and is externally provided. Also here, orders can be executed over multiple batches.
 
-## Fees
+## Protocol Fees
 
-Each user order has an associated fee paid to the protocol. At a high level, these fees can be represented by a function that, for a given order $$S$$ maps all possible trades to a positive vector of tokens, that is $$f_S:S \rightarrow \mathbb R^k_+$$   with $$f_S(0)=0$$.
+Each user order may have an associated fee paid to the protocol. At a high level, these fees can be represented by a function that, for a given order $$S$$ maps all possible trades to a non-negative vector of tokens, that is $$f_S:S \rightarrow \mathbb R^k_+$$   with $$f_S(0)=0$$.
 
-From the practical viewpoint, for market fill-or-kill orders, the fee is always in the sell token and is pre-specified: it is an estimate of the cost of executing an order and is explicitly shown to the user before the order is submitted. 
-Instead, (long-standing) limit orders are "feeless" from the user's perspective: users are guaranteed a limit price without specifying how fees will be calculated. Solvers are the ones proposing a fee under the expectation that this fee should equal the cost of execution of this trade in isolation. 
-The fee of limit orders is again denominated in the sell token.
+Note that solvers are also expected to charge their fee to cover the cost of executing an order. We discuss such fees later in the context of solvers' optimal bidding, but we do not account for them here as they are not part of the protocol.
 
 ## Solution
 
