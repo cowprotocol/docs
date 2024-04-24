@@ -1,4 +1,9 @@
 {
     "position": 3,
-    "label": "Programmatic"
+    "label": "Programmatic",
+    "collapsible": true,
+    "collapsed": true,
+    "link": {
+        "type": "generated-index"
+    }
 }

@@ -1,4 +1,9 @@
 {
     "position": 2,
-    "label": "Integrators"
+    "label": "Integrators",
+    "collapsible": true,
+    "collapsed": true,
+    "link": {
+        "type": "generated-index"
+    }
 }

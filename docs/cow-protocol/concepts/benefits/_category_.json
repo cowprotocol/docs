@@ -1,4 +1,9 @@
 {
     "position": 4,
-    "label": "Benefits"
+    "label": "Benefits",
+    "collapsible": true,
+    "collapsed": true,
+    "link": {
+        "type": "generated-index"
+    }
 }

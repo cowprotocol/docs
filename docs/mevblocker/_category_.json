@@ -2,9 +2,5 @@
     "position": 2,
     "label": "🏖️ MEV Blocker",
     "collapsible": true,
-    "collapsed": true,
-    "customProps": {
-        "description": "This is the MEV Blocker section."
-    }
+    "collapsed": true
 }
-

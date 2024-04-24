@@ -4,10 +4,6 @@
     "collapsible": true,
     "collapsed": true,
     "link": {
-        "type": "generated-index",
-        "title": "Searchers"
-    },
-    "customProps": {
-        "description": "This is the Searchers section."
+        "type": "generated-index"
     }
 }

@@ -8,7 +8,7 @@ To apply for the CoW Grants program, use the [application template](application-
 
 ### Public Review
 
-1. Submit your application by completing the [application form template](application-template) and posting it in the [Grants forum section](https://forum.cow.fi/c/cow-grants-program/10). Ensure your application aligns with the [Grants Program](grants-program) guidelines.
+1. Submit your application by completing the [application form template](application-template) and posting it in the [Grants forum section](https://forum.cow.fi/c/cow-grants-program/10). Ensure your application aligns with the [Grants Program](/governance/grants) guidelines.
 2. The Grants Committee will review the application and provide comments on the proposal.
 3. Committee members may express support, objection, or suggest changes to the grant application.
 

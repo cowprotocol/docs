@@ -1,4 +1,9 @@
 {
     "position": 1,
-    "label": "Users"
+    "label": "Users",
+    "collapsible": true,
+    "collapsed": true,
+    "link": {
+        "type": "generated-index"
+    }
 }

@@ -1,4 +1,9 @@
 {
     "position": 4,
-    "label": "Periphery"
+    "label": "Periphery",
+    "collapsible": true,
+    "collapsed": true,
+    "link": {
+        "type": "generated-index"
+    }
 }
