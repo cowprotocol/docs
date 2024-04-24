@@ -10,10 +10,10 @@ CoW Protocol delivers optimal price outcomes by leveraging an open solver compet
 
 Solvers are bonded third parties that execute trades on behalf of users through an [intent-based delegated execution model](intents). 
 
-Once a user submits an [intent](intents), the protocol groups it alongside other intents in a batch.
+Once a user submits an [intent](intents), the protocol groups it alongside other intents in a batch auction.
 As soon as a batch is "closed for orders", meaning that it stops considering new orders, the protocol runs a [competition](/cow-protocol/reference/core/auctions) where solvers submit solutions for the intents in the batch. 
 
-Whichever solver offers the best [solution](/cow-protocol/reference/core/auctions/the-problem#solution) for the batch (defined as the solver that provides the most surplus to user orders) gets to execute the orders.
+Whichever solver offers the best [solution](/cow-protocol/reference/core/auctions/the-problem#solution) for the batch auction (defined as the solver that provides the most surplus to user orders) gets to execute the orders.
 
 Solvers are compensated in COW tokens for settling batches, incentivizing them to compete to find better prices and win the right to execute user intents. 
 
