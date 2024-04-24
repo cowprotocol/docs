@@ -12,7 +12,7 @@ While the two are intertwined, there are important differences between CoW Proto
 
 CoW Protocol is a trading protocol that leverages [intents](../introduction/intents) and [batch auctions](../introduction/batch-auctions) to find optimal prices and protect orders from Maximal Extractable Value (MEV).
 
-The protocol groups orders together into batches and relies on a competition between third parties, known as [solvers](../introduction/solvers), to find the best execution price for each batch.
+The protocol groups orders together into batches and relies on a competition between third parties, known as [solvers](../introduction/solvers), to find the best execution price for all orders in a given batch.
 
 Solvers search all available on-chain liquidity and even tap off-chain private inventory to fill orders.
 If two orders in a batch are swapping opposite assets, solvers match them together in a peer-to-peer [*Coincidence of Wants (CoW)*](./coincidence-of-wants) trade.

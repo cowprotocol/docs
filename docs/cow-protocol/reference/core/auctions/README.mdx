@@ -1,5 +1,8 @@
 # Batch Auction mechanism
 
-CoW Protocol uses batch auctions for executing trades. Within a given batch, the goal is to compute prices and traded amounts to maximize a well-defined function. This can be formulated as a concrete optimization problem that needs to be solved, and this is where the Solvers come into place.
+CoW Protocol uses batch auctions for executing trades.
+Within a given batch, the goal is to compute prices and traded amounts to maximize a well-defined function.
+This can be formulated as a concrete optimization problem that needs to be solved, and this is where the solvers come into place.
 
-Informally, a _Solver_ is an algorithm that takes as input a batch auction _instance_ and outputs a batch auction _solution_, both described precisely in a formal language. The solution is then processed by the Protocol, which validates all Solver candidate solutions and ranks them according to a well-defined objective function.
+Informally, a solver is an algorithm that takes as input a batch auction instance and outputs a batch auction solution, both described precisely in a formal language.
+The solution is then processed by the protocol, which validates all solver candidate solutions and ranks them according to a well-defined objective function.

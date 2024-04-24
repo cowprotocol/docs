@@ -4,7 +4,9 @@ sidebar_position: 2
 
 # Coincidence of Wants
 
-**CoW (Coincidence of Wants)**: Thanks to CoW Protocol's batching mechanism, users can make  peer-to-peer swaps in cases where they're trading the same assets.
+**CoW (Coincidence of Wants)**: An economic phenomenon where two parties - each holding the asset that the other needs - exchange assets directly in an equivalent barter. 
+
+Thanks to CoW Protocol's batching mechanism, users can make  peer-to-peer swaps in cases where they're trading the same assets.
 
 For example, if one trader in a batch wants to sell \$2,000 of DAI for 0.5 ETH and another trader in the same batch wants to sell 0.5 ETH for $2,000 DAI, CoW Protocol's solvers will match both traders together so they can swap assets without tapping into on-chain liquidity - saving them from incurring liquidity provider fees.
 

@@ -6,7 +6,7 @@ sidebar_position: 6
 
 CoW Hooks allow users to pair any Ethereum action (or set of actions) with an order on CoW Protocol, leveraging the [solvers](../introduction/solvers) to execute the actions together in the sequence. 
 
-Hooks come in two flavors, [**"pre-hooks"**](#pre-hooks) and [**"post-hooks"**](#post-hooks).
+Hooks execute the entire sequence as a single transaction. True to the CoW Protocol model, users pay gas fees in their sell token if, and only if, the sequence of transactions succeeds.  Under the hood, CoW Hooks are arbitrary Ethereum "calls" that attach to an order and execute before and/or after the order. Developers and advanced traders can use code to express an intent that performs some action before a swap (pre-hooks) and after a swap (post-hooks).
 
 ## Pre-Hooks
 
@@ -25,4 +25,4 @@ These are actions that execute after the swap, taking advantage of trade proceed
 
 ## Getting started
 
-To get started with writing a CoW Hook, check out [our technical documentation](/cow-protocol/reference/core/intents/hooks). You can also [read more about CoW Hooks on our blog](https://blog.cow.fi/cow-hooks-you-are-in-control-480ccb40044a).
+To get started with writing a CoW Hook, check out [our technical documentation](/cow-protocol/reference/core/intents/hooks). You can also [read more about CoW Hooks on our blog](https://blog.cow.fi/cow-hooks-you-are-in-control-480ccb40044a) or through our tutorials — [here](https://www.youtube.com/watch?v=FT36lWtC1Oc) and [here](https://www.youtube.com/watch?v=29OaasbqY_g).

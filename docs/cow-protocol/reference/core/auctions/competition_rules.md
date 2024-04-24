@@ -21,7 +21,7 @@ All solvers participating in the solver competition must abide by certain rules.
 
 - A solution is valid only if it contains at least one user order.
 
-- Every solution is associated with a score, and the solutions are ranked in decreasing order of their scores. The solver whose solution has the highest positive score is declared the winner of the batch auction, and gets the right to execute its solution onchain. Moreover, specifically for Ethereum Mainnet, the solver that provided the winning solution is also rewarded according to the rules specified in [CIP-20](https://snapshot.org/#/cow.eth/proposal/0x2d3f9bd1ea72dca84b03e97dda3efc1f4a42a772c54bd2037e8b62e7d09a491f). On the other hand, on Gnosis Chain solvers are not rewarded, and thus the score associated with a solution is simply equal to the quantity "surplus + fees - costs".
+- Every solution is associated with a score, and the solutions are ranked in decreasing order of their scores. The solver whose solution has the highest positive score is declared the winner of the batch auction, and gets the right to execute its solution on-chain. Moreover, specifically for Ethereum Mainnet, the solver that provided the winning solution is also rewarded according to the rules specified in [CIP-20](https://snapshot.org/#/cow.eth/proposal/0x2d3f9bd1ea72dca84b03e97dda3efc1f4a42a772c54bd2037e8b62e7d09a491f). On the other hand, on Gnosis Chain solvers are not rewarded, and thus the score associated with a solution is simply equal to the quantity "surplus + fees - costs".
 
 - Internalization of interactions (rule applies only on Ethereum Mainnet): a solver is allowed to "internalize" publicly available AMM interactions whose buy token (i.e., the token that the AMM buys) is classified as a "safe" token by the protocol. Concretely, if there is enough balance of the sell token of such an interaction in the settlement contract, then a solver can signal an internalization of such an interaction, which effectively means that the protocol is willing to market make with the same rate specified in this interaction. 
 
@@ -29,7 +29,7 @@ All solvers participating in the solver competition must abide by certain rules.
 
 ## Governance
 
-Social consensus rules are not enforced by the smart contract or the autopilot. However, by voting on them in a CoW improvement proposal (CIP), CoW DAO has decided that these rules should be followed to ensure a healthy competition. For that, the core team has developed monitoring tools that check every single onchain settlement and flag suspicious ones.
+Social consensus rules are not enforced by the smart contract or the autopilot. However, by voting on them in a CoW improvement proposal (CIP), CoW DAO has decided that these rules should be followed to ensure a healthy competition. For that, the core team has developed monitoring tools that check every single on-chain settlement and flag suspicious ones.
 
 :::caution
 
