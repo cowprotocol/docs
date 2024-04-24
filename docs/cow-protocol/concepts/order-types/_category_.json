@@ -1,4 +1,9 @@
 {
     "position": 3,
-    "label": "Order types"
+    "label": "Order types",
+    "collapsible": true,
+    "collapsed": true,
+    "link": {
+        "type": "generated-index"
+    }
 }

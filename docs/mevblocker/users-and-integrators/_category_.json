@@ -2,5 +2,8 @@
     "position": 4,
     "label": "Users & Integrators",
     "collapsible": true,
-    "collapsed": true
+    "collapsed": true,
+    "link": {
+        "type": "generated-index"
+    }
 }

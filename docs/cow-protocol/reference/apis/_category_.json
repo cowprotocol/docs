@@ -1,4 +1,9 @@
 {
     "label": "APIs",
-    "position": 6
+    "position": 6,
+    "collapsible": true,
+    "collapsed": true,
+    "link": {
+        "type": "generated-index"
+    }
 }

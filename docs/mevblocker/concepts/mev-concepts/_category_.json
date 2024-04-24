@@ -1,4 +1,9 @@
 {
     "position": 4,
-    "label": "MEV Concepts"
+    "label": "MEV Concepts",
+    "collapsible": true,
+    "collapsed": true,
+    "link": {
+        "type": "generated-index"
+    }
 }

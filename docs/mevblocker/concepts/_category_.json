@@ -4,10 +4,6 @@
     "collapsible": true,
     "collapsed": true,
     "link": {
-        "type": "generated-index",
-        "title": "Concepts"
-    },
-    "customProps": {
-        "description": "This is the concepts section."
+        "type": "generated-index"
     }
 }
