@@ -83,7 +83,7 @@ The fee cannot exceed 1% (100 bps).
 The recipient is the address to which the fee will be sent.  
 
 Make sure that the fee recipient address exists on the respective network defined in the parameters.
-For example, if you use a Safe as a recipient and the Safe was created in the Ethereum network, then in the Gnosis Chain network you need to create another safe accordingly and set it as a fee recipient.  
+For example, if you use a Safe as a recipient and the Safe was created on Ethereum mainnet, then for Gnosis Chain you must create **another** Safe and set it as a fee recipient.
 
 As a fee recipient, you can specify either string or a key-value pair in the format `chainId: recipientAddress`:
 
