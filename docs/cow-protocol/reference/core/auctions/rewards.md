@@ -63,25 +63,25 @@ In addition to paying for gas, the winning solver might incur additional costs, 
 
 ### Solver bidding strategies
 
-Apart from submitting their solutions, solvers must decide what quality to report in the auction. In general, the solver can choose this quality freely as long as it is smaller than some theoretical maximum, which we call $$\textrm{maxQuality}$$.
+After finding optimal routes, solvers must decide what solution to report. Call $$\textrm{successQuality}$$ the quality of the reported solution, which the solver can freely choose as long as it is smaller than some theoretical maximum, which we call $$\textrm{maxQuality}$$, with $$\textrm{maxQuality} - \textrm{successQuality} $$ constituting revenues to the solver.
 
-Let $$p$$ be the probability that a solution successfully executes, let $$\textrm{successCost}$$ be the costs that a solver pays if a solution successfully executes, and let $$\textrm{failCost}$$ be the costs that a solver pays if a solution does not execute successfully. For example, costs in case of success could include gas costs of the full settlement, while costs in case of failure could be small due to use of services like MEV Blocker.
-
-Ignoring capping of rewards, the winning solver's expected payoff is
+Suppose $$c_u$$ is large and can be ignored. In this case, the winning solver's expected payoff is
 
 $$
-p \cdot (\textrm{maxQuality} - \textrm{referenceQuality} - \textrm{successCost}) - (1 - p) \cdot (\textrm{referenceQuality} + \textrm{failCost}).
+p  (\textrm{maxQuality} - \textrm{referenceQuality} - \textrm{successCost}) - (1 - p)  (\min(c_l,\textrm{referenceQuality}) + \textrm{failCost}).
 $$
 
-The optimal reported quality is such that the solver wins if and only if it is profitable to do so, that is, the above expression should be zero when the optimal reported quality is $$\textrm{optimalQuality}=\textrm{referenceQuality}$$, which implies
-$$
-\textrm{optimalQuality} = p \cdot (\textrm{maxQuality} - \textrm{successCost}) - (1 - p) \cdot \textrm{failCost}.
-$$
-Hence, absent the cap and similarly to a second-price auction, a solvers' optimal strategy does not depend on the behavior of other solvers. 
+The key observation is that $$\textrm{successQuality}$$ doesn't affect the expected payoff in case of a win, and it only affects whether the solver wins. In particular, note that the above expression is strictly decreasing in \textrm{referenceQuality}. Hence, by choosing $$\textrm{successQuality}$$ such that
 
-The presence of the cap, however, makes the problem more complex as it introduces a "first-price auction" logic: if the difference between the best and second-best solution is very large, then the winning solver wins more when it underreports its quality. However, determining the optimal amount of underreporting is very complex, and requires each solver to make strong assumptions regarding the performance of competing solvers.
+$$
+p \cdot (\textrm{maxQuality} - \textrm{successQuality}- \textrm{successCost}) - (1 - p) \cdot (\min(c_l,\textrm{successQuality}) + \textrm{failCost})=0
+$$
 
-To summarize, there is a simple strategy that guarantees positive expected profits to solvers. This strategy may not be optimal in uncompetitive auctions when the difference between the best and second best solution may be large. However, in these cases, deriving the optimal strategy is a very complex problem. We conclude by noting that the vast majority of CoWSWAP batches are very competitive. 
+a solver wins if and only if $\textrm{referenceQuality}$$ is such the solver's expected profit from winning is strictly positive. Note that the above equation either has no solution (in which case a solver shouldn't; participate in the auction) or it has a unique solution. Such solution is simple to compute and, in a second-price logic, does not depend on the behavior of other solvers.
+
+The presence of the cap on rewards $$c_u$$, however, makes the problem more complex as it introduces a "first-price auction" logic: if the difference between the best and second-best solution is very large, then the winning solver wins more when it underreports its quality. However, determining the optimal amount of underreporting is very complex, and requires each solver to make strong assumptions regarding the performance of competing solvers.
+
+To summarize, there is a simple strategy that guarantees positive expected profits to solvers. This strategy may not be optimal in uncompetitive auctions when the difference between the best and second best solution may be large. However, in these cases, deriving the optimal strategy is a very complex problem. We conclude by noting that most CoWSWAP batches are very competitive: the cap of on rewards is binding only in about 9% of auctions. 
 
 ## Price estimation competition rewards (CIP-27)
 
