@@ -71,13 +71,13 @@ $$
 p  (\textrm{maxQuality} - \textrm{referenceQuality} - \textrm{successCost}) - (1 - p)  (\min(c_l,\textrm{referenceQuality}) + \textrm{failCost}).
 $$
 
-The key observation is that $$\textrm{successQuality}$$ doesn't affect the expected payoff in case of a win, and it only affects whether the solver wins. In particular, note that the above expression is strictly decreasing in \textrm{referenceQuality}. Hence, by choosing $$\textrm{successQuality}$$ such that
+The key observation is that $$\textrm{successQuality}$$ doesn't affect the expected payoff in case of a win, and it only affects whether the solver wins. In particular, note that the above expression is strictly decreasing in $$\textrm{referenceQuality}$$. Hence, by choosing $$\textrm{successQuality}$$ such that
 
 $$
 p \cdot (\textrm{maxQuality} - \textrm{successQuality}- \textrm{successCost}) - (1 - p) \cdot (\min(c_l,\textrm{successQuality}) + \textrm{failCost})=0
 $$
 
-a solver wins if and only if $\textrm{referenceQuality}$$ is such the solver's expected profit from winning is strictly positive. Note that the above equation either has no solution (in which case a solver shouldn't; participate in the auction) or it has a unique solution. Such solution is simple to compute and, in a second-price logic, does not depend on the behavior of other solvers.
+a solver wins if and only if $$\textrm{referenceQuality}$$ is such the solver's expected profit from winning is strictly positive. Note that the above equation either has no solution (in which case a solver shouldn't; participate in the auction) or it has a unique solution. Such solution is simple to compute and, in a second-price logic, does not depend on the behavior of other solvers.
 
 The presence of the cap on rewards $$c_u$$, however, makes the problem more complex as it introduces a "first-price auction" logic: if the difference between the best and second-best solution is very large, then the winning solver wins more when it underreports its quality. However, determining the optimal amount of underreporting is very complex, and requires each solver to make strong assumptions regarding the performance of competing solvers.
 
