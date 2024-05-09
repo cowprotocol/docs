@@ -4,6 +4,17 @@ sidebar_position: 6
 
 # CoW AMM Liquidity
 
+:::warning
+
+This documentation refers to the CoW AMM implementation based on the programmable order framework, which relies on Safe Multisigs to create and validate AMM orders.
+We are working on releasing a simpler and more efficient standalone version in the coming weeks.
+Most of this guide will still be applicable, but order signature generation will change and there will be no need to reset the commitment anymore.
+The newer version will also make it easier to retrieve and index information for all CoW AMMs.
+
+The [code for the version covered by this documentation](https://github.com/cowprotocol/cow-amm/tree/amm-based-on-safe-multisig) is tagged `amm-based-on-safe-multisig`.
+
+:::
+
 ## I'm a solver. How do I use CoW AMM liquidity?
 
 CoW AMM orders already appear in the CoW Protocol orderbook, so you're already using its liquidity.
