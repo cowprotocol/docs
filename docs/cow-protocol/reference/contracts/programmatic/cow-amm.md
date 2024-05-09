@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # CoW AMM
 
-:::warning
+:::caution
 
 This documentation refers to the CoW AMM implementation based on the programmable order framework, which relies on Safe Multisigs to create and validate AMM orders.
 We are working on releasing a simpler and more efficient standalone version in the coming weeks.
