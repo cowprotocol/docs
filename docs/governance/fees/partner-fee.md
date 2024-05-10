@@ -20,8 +20,9 @@ See the [Partner Fee calculation](#partner-fee-calculation-examples) section for
 
 :::note
 
-You may charge users a fee of no more than 100 bps of order volume through your Widget. The Partner Fee will begin to
-accrue on April 4th, 2024 (the release date of the Partner Fee feature).
+You may charge users a fee of no more than 100 bps of order volume through your Widget. 
+The Partner Fee will begin to accrue on April 4th, 2024 (the release date of the Partner Fee feature).
+The Partner Fee is currently only applicable to [Market order](https://docs.cow.fi/cow-protocol/concepts/order-types/market-orders) trades executed by your users through the Widget.
 
 :::
 
