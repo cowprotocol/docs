@@ -59,7 +59,11 @@ where $$p(s)$$ is the price of the sell token relative to a numéraire and is ex
 
 Each user order may have an associated fee paid to the protocol. At a high level, these fees can be represented by a function that, for a given order $$S$$ maps all possible trades to a non-negative vector of tokens, that is $$f_S:S \rightarrow \mathbb R^k_+$$   with $$f_S(0)=0$$.
 
-Note that solvers are also expected to charge their fee to cover the cost of executing an order. We discuss such fees later in the context of solvers' optimal bidding, but we do not account for them here as they are not part of the protocol.
+:::note
+
+Solvers are also expected to charge a fee to cover the cost of executing an order. We discuss such fees later in the context of solvers' optimal bidding, but we do not account for them here as they are not part of the protocol.
+
+:::
 
 ## Solution
 
