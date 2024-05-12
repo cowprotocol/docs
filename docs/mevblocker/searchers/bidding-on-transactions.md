@@ -89,8 +89,7 @@ You'll start receiving unsigned pending transactions (missing `v`, `r`, and `s`)
             "nonce": "0x10", 
             "maxPriorityFeePerGas": "0x0", 
             "maxFeePerGas": "0x7e1c65b04", 
-            "gas": "
-            0x5208", 
+            "gas": "0x5208", 
             "type": "0x2", 
             "hash": "0x5f08dd372fce1a44dda27bed60ca036acb4979fad6ca37b9c388e351a870fe4c", 
             "from": "0xcb1588f3f7e92a1278c68a6aed4bdcbc68534b29"
