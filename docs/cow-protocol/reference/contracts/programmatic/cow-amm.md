@@ -4,6 +4,16 @@ sidebar_position: 1
 
 # CoW AMM
 
+:::caution
+
+This documentation refers to the CoW AMM implementation based on the programmable order framework, which relies on Safe Multisigs to create and validate AMM orders.
+We are working on releasing a simpler and more efficient standalone version in the coming weeks.
+
+The [code for the version covered by this documentation](https://github.com/cowprotocol/cow-amm/tree/amm-based-on-safe-multisig) is tagged `amm-based-on-safe-multisig`.
+
+:::
+
+
 CoW AMM is an automated market maker running on top of CoW Protocol.
 
 ## Overview
