@@ -1,12 +1,16 @@
+---
+sidebar_position: 2
+---
+
 # How to send backrun bundles to MEV Blocker RPC
 
 Bids can be submitted by any client with the relay url: https://rpc.mevblocker.io. 
 
 However, you need to make sure that the first transaction of the bundle you send is the hash of the target transaction.
 
-Within the bundle itself, you need to make sure that the backrun transaction makes an ETH transfer to the fee recipient (which can either be `tx.origin` or a custom address; learn more about how to set up a custom address here), and the value of the transfer has to be the bid amount.
+Within the bundle itself, you need to make sure that the backrun transaction makes an ETH transfer to the fee recipient (which can either be `tx.origin` or a custom address; learn more about how to set up a custom address [here](../users-and-integrators/integrators/configuring-fee-recipient-address.md)), and the value of the transfer has to be the bid amount.
 
-To recap, a Merkle bid is a bundle with 2 transactions:
+To recap, a bundle has 2 transactions:
 
 - The hash of the target transaction
 - Your backrun - the backrun must pay the fee_recipient the bid with an Ether transfer
@@ -89,8 +93,7 @@ You'll start receiving unsigned pending transactions (missing `v`, `r`, and `s`)
             "nonce": "0x10", 
             "maxPriorityFeePerGas": "0x0", 
             "maxFeePerGas": "0x7e1c65b04", 
-            "gas": "
-            0x5208", 
+            "gas": "0x5208", 
             "type": "0x2", 
             "hash": "0x5f08dd372fce1a44dda27bed60ca036acb4979fad6ca37b9c388e351a870fe4c", 
             "from": "0xcb1588f3f7e92a1278c68a6aed4bdcbc68534b29"

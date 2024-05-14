@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # Cancelling MEV Blocker Submitted Transactions
 
-If you want to cancel a pending MEV Blocker transaction without paying gas, you need to be connected to either the noreverts or fullprivacy endpoint and enable the softcancel feature flag (cf. previous tutorial).
+If you want to cancel a pending MEV Blocker transaction without paying gas, you need to be connected to either the noreverts or fullprivacy endpoint and enable the softcancel feature flag.
 
 Even when soft cancellations are disabled, you can cancel a transaction by sending another transaction with equal nonce but higher priority fee. However, this will cost you transaction fees.
 
@@ -55,4 +55,4 @@ return `Cancellation sent! Check https://rpc.mevblocker.io/tx/${transactionRespo
 
 If all goes well the target transaction should show its status as FAILED.
 
-If you want to test how to cancel a transction, you can leverage in browser tutorials from CoW DAOs new [learning website](https://learn.cow.fi/tutorial/cancel-transaction-mevblocker)
+If you want to test how to cancel a transction, you can leverage in browser tutorials from CoW DAO's new [learning website](https://learn.cow.fi/tutorial/cancel-transaction-mevblocker)

@@ -1,4 +1,8 @@
-# How to receive backrun bundles from MEV Blocker RPC
+---
+sidebar_position: 1
+---
+
+# How to receive unsigned pending transactions
 
 :::note
 
