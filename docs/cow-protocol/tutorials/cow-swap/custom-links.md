@@ -70,6 +70,7 @@ Native and wrapped tokens per chain:
 
 - Ethereum Mainnet: [`WETH`](https://etherscan.io/address/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2) - wrapped `ETH`
 - Gnosis chain: [`WXDAI`](https://gnosisscan.io/address/0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d) - wrapped `XDAI`
+- Arbitrum one: [`WETH`](https://arbiscan.io/address/0x82af49447d8a07e3bd95bd0d56f35241523fbab1) - wrapped `ETH`
 - Sepolia: [`WETH`](https://sepolia.etherscan.io/address/0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14) - wrapped `ETH`
 
 :::

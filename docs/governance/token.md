@@ -10,17 +10,19 @@ At the core of CoW Protocol lies the COW token, which serves as a governance tok
 
 #### `COW` - Main token
 
-| **Chain** | **COW Token Address** |
-| --- | --- |
-| Ethereum | [`0xDEf1CA1fb7FBcDC777520aa7f396b4E015F497aB`](https://etherscan.io/token/0xDEf1CA1fb7FBcDC777520aa7f396b4E015F497aB) |
+| **Chain**    | **COW Token Address**                                                                                                  |
+|--------------|------------------------------------------------------------------------------------------------------------------------|
+| Ethereum     | [`0xDEf1CA1fb7FBcDC777520aa7f396b4E015F497aB`](https://etherscan.io/token/0xDEf1CA1fb7FBcDC777520aa7f396b4E015F497aB)  |
 | Gnosis Chain | [`0x177127622c4a00f3d409b75571e12cb3c8973d3c`](https://gnosisscan.io/token/0x177127622c4a00f3d409b75571e12cb3c8973d3c) |
+| Arbitrum One | [`0xcb8b5cd20bdcaea9a010ac1f8d835824f5c87a04`](https://arbiscan.io/token/0xcb8b5cd20bdcaea9a010ac1f8d835824f5c87a04) |
 
 #### `vCOW` - Vesting token
 
-| **Chain** | **vCOW Token Address** |
-| --- | --- |
-| Ethereum | [`0xD057B63f5E69CF1B929b356b579Cba08D7688048`](https://etherscan.io/token/0xD057B63f5E69CF1B929b356b579Cba08D7688048) |
+| **Chain**    | **vCOW Token Address**                                                                                                 |
+|--------------|------------------------------------------------------------------------------------------------------------------------|
+| Ethereum     | [`0xD057B63f5E69CF1B929b356b579Cba08D7688048`](https://etherscan.io/token/0xD057B63f5E69CF1B929b356b579Cba08D7688048)  |
 | Gnosis Chain | [`0xc20C9C13E853fc64d054b73fF21d3636B2d97eaB`](https://gnosisscan.io/token/0xc20C9C13E853fc64d054b73fF21d3636B2d97eaB) |
+| Arbitrum One | N/A                                                                                                                    |
 
 ## Supply & Inflation Schedule
 
