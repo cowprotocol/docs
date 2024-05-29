@@ -10,18 +10,14 @@ At the core of CoW Protocol lies the COW token, which serves as a governance tok
 
 #### `COW` - Main token
 
-| **Chain**    | **COW Token Address**                                                                                                     |
-|--------------|---------------------------------------------------------------------------------------------------------------------------|
-| Ethereum     | [`0xDEf1CA1fb7FBcDC777520aa7f396b4E015F497aB`](https://etherscan.io/token/0xDEf1CA1fb7FBcDC777520aa7f396b4E015F497aB)     |
-| Gnosis Chain | [`0x177127622c4a00f3d409b75571e12cb3c8973d3c`](https://gnosisscan.io/token/0x177127622c4a00f3d409b75571e12cb3c8973d3c)`*` |
-| Arbitrum One | [`0xcb8b5cd20bdcaea9a010ac1f8d835824f5c87a04`](https://arbiscan.io/token/0xcb8b5cd20bdcaea9a010ac1f8d835824f5c87a04)`*`   |
+| **Chain**    | **COW Token Address**                                                                                                                   |
+|--------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| Ethereum     | [`0xDEf1CA1fb7FBcDC777520aa7f396b4E015F497aB`](https://etherscan.io/token/0xDEf1CA1fb7FBcDC777520aa7f396b4E015F497aB)                   |
+| Gnosis Chain | [`0x177127622c4a00f3d409b75571e12cb3c8973d3c`](https://gnosisscan.io/token/0x177127622c4a00f3d409b75571e12cb3c8973d3c) [^bridgedTokens] |
+| Arbitrum One | [`0xcb8b5cd20bdcaea9a010ac1f8d835824f5c87a04`](https://arbiscan.io/token/0xcb8b5cd20bdcaea9a010ac1f8d835824f5c87a04) [^bridgedTokens]   |
 
-:::note
-
-`*` These contracts were not developed nor deployed by CoW DAO, however, they are the bridged versions of the canonical token from Ethereum, using the official bridges.
-[Omni bridge](https://gnosisscan.io/address/0xf6A78083ca3e2a662D6dd1703c939c8aCE2e268d#code) for Gnosis Chain and [Arbitrum One bridge](https://arbiscan.io/address/0x09e9222e96e7b4ae2a407b98d48e330053351eee#code) for Arbitrum one.
-
-:::
+[^bridgedTokens]: These contracts were not developed nor deployed by CoW DAO, however, they are the bridged versions of the canonical token from Ethereum, using the official bridges.
+  [Omni bridge](https://gnosisscan.io/address/0xf6A78083ca3e2a662D6dd1703c939c8aCE2e268d#code) for Gnosis Chain and [Arbitrum One bridge](https://arbiscan.io/address/0x09e9222e96e7b4ae2a407b98d48e330053351eee#code) for Arbitrum one.
 
 #### `vCOW` - Vesting token
 
