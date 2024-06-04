@@ -42,14 +42,16 @@ where one needs to configure driver.config.toml to point to their solver engine.
 
 Once the above are set up and running, one can then start testing their solver engine against one of the following orderbooks:
 
-| Orderbook URL                       | Network      | Environment |
-|-------------------------------------|--------------|-------------|
-| https://barn.api.cow.fi/mainnet/api | Mainnet      | Staging     |
-| https://api.cow.fi/mainnet/api      | Mainnet      | Production  |
-| https://barn.api.cow.fi/sepolia/api | Sepolia      | Staging     |
-| https://api.cow.fi/sepolia/api      | Sepolia      | Production  |
-| https://barn.api.cow.fi/xdai/api    | Gnosis Chain | Staging     |
-| https://api.cow.fi/xdai/api         | Gnosis Chain | Production  |
+| Orderbook URL                            | Network      | Environment |
+|------------------------------------------|--------------|-------------|
+| https://barn.api.cow.fi/mainnet/api      | Mainnet      | Staging     |
+| https://api.cow.fi/mainnet/api           | Mainnet      | Production  |
+| https://barn.api.cow.fi/xdai/api         | Gnosis Chain | Staging     |
+| https://api.cow.fi/xdai/api              | Gnosis Chain | Production  |
+| https://barn.api.cow.fi/arbitrum_one/api | Arbitrum One | Staging     |
+| https://api.cow.fi/arbitrum_one/api      | Arbitrum One | Production  |
+| https://barn.api.cow.fi/sepolia/api      | Sepolia      | Staging     |
+| https://api.cow.fi/sepolia/api           | Sepolia      | Production  |
 
 
 

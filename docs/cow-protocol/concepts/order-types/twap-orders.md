@@ -30,7 +30,7 @@ TWAP orders provide a number of benefits, especially when it comes to large orde
 
 There are also several requirements for placing TWAP orders through CoW Protocol
 
-- Trades on Ethereum Mainnet must be a minimum of \$5,000 (the minimum is only $5 for trades on Gnosis chain)
+- Trades on Ethereum Mainnet must be a minimum of \$1,000 (the minimum is only $5 for trades on Gnosis chain and Arbitrum One)
 - Users must have a [Safe wallet](https://safe.global/wallet) with an [upgraded fallback handler](https://blog.cow.fi/all-you-need-to-know-about-cow-swaps-new-safe-fallback-handler-8ef0439925d1)
 
 ## Getting started
