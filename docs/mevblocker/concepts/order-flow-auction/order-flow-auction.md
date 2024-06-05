@@ -18,7 +18,7 @@ This step is unique to MEV Blocker. After receiving a transaction, the MEV Block
 
 In order for searchers to send rebates to users, they must first create the transaction bundle that captures the value. This requires searchers to have access to transaction details, however this privileged information means that searchers could, in theory, probabilistically extract value without following the MEV Blocker OFA rules. To avoid this, MEV Blocker generates fake transactions alongside the real ones, ensuring probabilistic exploitation is too costly. This mechanism serves as an additional protection mechanism for the user, and helps keep searcher onboarding fully trustless and decentralized. 
 
-Depending on the type of transaction, additional details may be hidden: 
+Depending on the type of transaction, additional details may be hidden:  
 
 1. In the case of swaps, MEV Blocker removes some sensitive information (such as slippage tolerance) from the transaction, preventing sandwich attacks
 
