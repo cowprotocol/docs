@@ -26,9 +26,9 @@ In order for searchers to send rebates to users, they must first create the tran
 
 Depending on the type of transaction, additional details may be hidden:  
 
-1. In the case of swaps, MEV Blocker removes some sensitive information (such as slippage tolerance) from the transaction, preventing sandwich attacks
+- In the case of swaps, MEV Blocker removes some sensitive information (such as slippage tolerance) from the transaction, preventing sandwich attacks
 
-2. If the transaction is unlikely to receive a backrun, MEV Blocker doesn't share it with searchers at all 
+- If the transaction is unlikely to receive a backrun, MEV Blocker doesn't share it with searchers at all 
 
 ### 4. Transactions get forwarded to MEV Blocker searchers
  
