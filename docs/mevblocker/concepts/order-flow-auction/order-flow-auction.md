@@ -8,11 +8,17 @@ MEV Blocker's transaction flow can be broken down into 6 main steps. The image b
 
 ![The Best Protection Under the Sun](/img/mevblocker/mevblocker_ofa.png)
 
-## 1. A user submits a transaction  
+### 1. A user submits a transaction 
 
-## 2. MEV Blocker receives the transaction
+- Regular users who control 100% of their wallet settings must first have the custom MEV Blocker RPC installed in their wallets.
+- Wallets that send transactions on behalf of users must have integrated the custom MEV Blocker RPC in their code.
+- dApps that send transactions on behalf of users — such as intents protocols like CoW Swap — must also have the custom MEV Blocker RPC integrated in their code. 
 
-## 3. MEV Blocker mixes real transactions with fake, AI-generated transactions
+*If the highest paying bundle no longer simulates correctly on the top of the block (e.g. because the submitted transaction route is no longer available), a lower paying bid can still be included to ensure the user gets the highest possible reward without delaying execution. It's also possible that a user gets multiple refunds in a single block*
+
+### 2. MEV Blocker receives the transaction
+
+### 3. MEV Blocker mixes real transactions with fake, AI-generated transactions
 
 This step is unique to MEV Blocker. After receiving a transaction, the MEV Blocker system generates fake transactions to prevent probabilistic exploitation. 
 
@@ -24,7 +30,7 @@ Depending on the type of transaction, additional details may be hidden:
 
 2. If the transaction is unlikely to receive a backrun, MEV Blocker doesn't share it with searchers at all 
 
-## 4. Transactions get forwarded to MEV Blocker searchers
+### 4. Transactions get forwarded to MEV Blocker searchers
  
 The MEV Blocker system shares the transactions with all the searchers connected to the websocket. After receiving the orders, searchers proceed to crunch their numbers and give their bundles back to MEV Blocker. 
 
@@ -32,7 +38,7 @@ The searcher that provides the bundle with the highest rebate value for users ge
 
 All searchers that return in time for builders to include their bundle in the next block have a chance to have their bid selected. 
 
-## 5. Searcher bundles get forwarded to builders to be included in the next block
+### 5. Searcher bundles get forwarded to builders to be included in the next block
 
 In this step, the MEV Blocker system gathers all the searcher bundles, discards those containing fake transactions, and attaches the user signatures back to the transactions. 
 
@@ -41,12 +47,12 @@ In order to have their bundles forwarded to builders, searchers bid an arbitrary
 Once the builder has selected a searcher bundle bid, they are obligated to refund 90% of that bid's value to the user and use the remaining 10% to pay the validator/proposer. 
   
 
-## 6. Block builders propagate their block to the proposer
+### 6. Block builders propagate their block to the proposer
 
 MEV Blocker forwards the bundles to all major builders who then select from the bundles based on their value — the higher a given block's value for the validator, the more likely it is to get selected. 
 - If the highest paying bundle no longer simulates correctly on the top of the block (e.g. because the submitted transaction route is no longer available), a lower paying bid can still be included. This ensures that users get the highest possible reward without delayed execution (it's also possible for a user to get multiple refunds in a single block).  
 
-## Final: Transaction inclusion on-chain
+### Final: Transaction inclusion on-chain
 
 Once the block builders have received the transactions and decided which bundles to include in their block, the entire block is passed on via relays to the proposers (validators) who then select the highest paying block.
 
