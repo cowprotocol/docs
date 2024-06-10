@@ -10,4 +10,4 @@ When submitting your transaction to the API, define the custom parameter `referr
 https://rpc.mevblocker.io/?referrer=(YOUR_ADDRESS)
 ```
 
-By setting up a referrer address, you allow MEV Blocker team to more easily track the order flow you create and to more easily detect and fix issues.
+By setting up a referrer address, you allow the MEV Blocker team to more easily track the order flow you create and to more easily detect and fix issues.

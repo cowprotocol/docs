@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # Sending Transactions via RPC
 
-MEV Blocker supports sending transactions via multiple endpoints (as discussed [here](/mevblocker/concepts/endpoints)) using the standard `eth_sendRawTransaction` method.
+MEV Blocker supports sending transactions via multiple endpoints (as discussed [here](/mevblocker/users-and-integrators/users/available-endpoints)) using the standard `eth_sendRawTransaction` method.
 
 ## `eth_sendRawTransaction`
 
