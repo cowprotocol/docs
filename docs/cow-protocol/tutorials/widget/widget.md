@@ -69,6 +69,62 @@ const params: CowSwapWidgetParams = {
 createCowSwapWidget(widgetContainer, { params })
 ```
 
+### Flexible config
+
+Both `bps` and `recipient` can be set for different chains and different trade types (swap/limit/advanced). 
+
+Bellow you can see the `partnerFee` configuration variations:
+
+```typescript
+import {PartnerFee, SupportedChainId, TradeType} from '@cowprotocol/widget-lib'
+
+// The fee is 1% for all trades on all chains
+const a: PartnerFee = {
+    bps: 100,
+    recipient: '0x0000000000000000000000000000000000000000'
+}
+
+// Per network and per trade type
+const b: PartnerFee = {
+    bps: {
+        [SupportedChainId.MAINNET]: {
+            [TradeType.SWAP]: 100, [TradeType.LIMIT]: 50, [TradeType.ADVANCED]: 30,
+        },
+        [SupportedChainId.ARBITRUM_ONE]: {
+            [TradeType.SWAP]: 100, [TradeType.LIMIT]: 50, [TradeType.ADVANCED]: 30,
+        },
+        [SupportedChainId.GNOSIS_CHAIN]: {
+            [TradeType.SWAP]: 100, [TradeType.LIMIT]: 50, [TradeType.ADVANCED]: 30,
+        },
+        [SupportedChainId.SEPOLIA]: {
+            [TradeType.SWAP]: 100, [TradeType.LIMIT]: 50, [TradeType.ADVANCED]: 30,
+        },
+    },
+    recipient: '0x0000000000000000000000000000000000000000',
+}
+
+// Per trade type and per network
+const c: PartnerFee = {
+    bps: 100,
+    recipient: {
+        [TradeType.SWAP]: {
+            [SupportedChainId.MAINNET]: '0x...a', [SupportedChainId.ARBITRUM_ONE]: '0x...b',
+            [SupportedChainId.GNOSIS_CHAIN]: '0x...c', [SupportedChainId.SEPOLIA]: '0x...d',
+        },
+        [TradeType.LIMIT]: {
+            [SupportedChainId.MAINNET]: '0x...e', [SupportedChainId.ARBITRUM_ONE]: '0x...f',
+            [SupportedChainId.GNOSIS_CHAIN]: '0x...g', [SupportedChainId.SEPOLIA]: '0x...h',
+        },
+        [TradeType.ADVANCED]: {
+            [SupportedChainId.MAINNET]: '0x...j', [SupportedChainId.ARBITRUM_ONE]: '0x...i',
+            [SupportedChainId.GNOSIS_CHAIN]: '0x...k', [SupportedChainId.SEPOLIA]: '0x...l',
+        },
+    }
+}
+```
+
+See [FlexibleConfig](https://github.com/cowprotocol/cowswap/blob/develop/libs/widget-lib/src/types.ts) type for more information. 
+
 ### Fee BPS
 The fee in basis points (BPS). One basis point is equivalent to 0.01% (1/100th of a percent).  
 
@@ -88,8 +144,7 @@ For example, if you use a Safe as a recipient and the Safe was created on Ethere
 As a fee recipient, you can specify either string or a key-value pair in the format `chainId: recipientAddress`:
 
 ```typescript
-import type {SupportedChainId} from '@cowprotocol/cow-sdk'
-import type {CowSwapWidgetParams} from '@cowprotocol/widget-lib'
+import type {CowSwapWidgetParams, SupportedChainId} from '@cowprotocol/widget-lib'
 
 const params: CowSwapWidgetParams = {
   partnerFee: {
