@@ -84,7 +84,7 @@ const a: PartnerFee = {
     recipient: '0x0000000000000000000000000000000000000000'
 }
 
-// Per network and per trade type
+// Different fee per network and per trade type, same recipient for all
 const b: PartnerFee = {
     bps: {
         [SupportedChainId.MAINNET]: {
@@ -103,7 +103,7 @@ const b: PartnerFee = {
     recipient: '0x0000000000000000000000000000000000000000',
 }
 
-// Per trade type and per network
+// Same fee for all, different recipient per network and per trade type
 const c: PartnerFee = {
     bps: 100,
     recipient: {
@@ -124,6 +124,53 @@ const c: PartnerFee = {
 ```
 
 See [FlexibleConfig](https://github.com/cowprotocol/cowswap/blob/develop/libs/widget-lib/src/types.ts) type for more information. 
+
+### Advanced configuration
+
+The `partnerFee` parameter can be set in a more advanced way using events.
+For example, you can define different fees for different assets:
+
+```typescript
+import {createCowSwapWidget, CowSwapWidgetParams, CowEventListeners, CowEvents} from '@cowprotocol/widget-lib'
+
+let updateParams = null
+
+const recipient = '0x0000000000000000000000000000000000000000'
+
+const defaultPartnerFee = { bps: 50, recipient }
+
+const params: CowSwapWidgetParams = {
+    appCode: 'YOUR_APP_ID',
+    partnerFee: defaultPartnerFee
+}
+
+const listeners: CowEventListeners = [
+    {
+        event: CowEvents.ON_CHANGE_TRADE_PARAMS,
+        handler: (event) => {
+            if (!updateParams) return
+            
+            if (event.sellToken.symbol === 'DAI') {
+                updateParams({
+                    partnerFee: { bps: 20, recipient }
+                })
+            } else if (event.sellToken.symbol === 'USDC') {
+                updateParams({
+                    partnerFee: { bps: 10, recipient }
+                })
+            } else {
+                updateParams({
+                    partnerFee: defaultPartnerFee
+                })
+            }
+        }
+    },
+]
+
+const widget = createCowSwapWidget(container, { params, listeners })
+
+updateParams = widget.updateParams
+```
 
 ### Fee BPS
 The fee in basis points (BPS). One basis point is equivalent to 0.01% (1/100th of a percent).  
