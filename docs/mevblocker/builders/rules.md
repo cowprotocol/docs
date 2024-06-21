@@ -18,4 +18,4 @@ Independent of their support for bundles, all builders connected to MEV Blocker 
 
 We reserve the right to disconnect builders suspected of violating these rules. If wrongdoing was established, we reserve the right to charge the violating builder any damage caused and require a re-subscription fee of 2 ETH. For example, suppose a builder included only one bundle when it was possible to include two bundles for the same transaction, hence failing to maximize the refund. Such a builder may be asked to pay as damage the reward from the missing bundle (plus the reconnection fee).
 
-Finally, in the future, we may ask connected builders to submit their blocks to Agnostic relay (not exclusively and only blocks containing MEV Blocker transactions). This would allow us to create meaningful alerts and metrics by checking, for the same slot, how different builders include the same MEV Blocker's transactions/bundles. Also, in a future version of the fee mechanism, we may use data from Agnostic relay to calculate the fee (see below). However, for the moment, these tests and alerts are not in place, and hence, submitting to Agnostic relay is not a requirement.
+
