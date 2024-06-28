@@ -7,7 +7,7 @@ import rehypeKatex from 'rehype-katex'
 
 const config: Config = {
   title: 'CoW Protocol Documentation',
-  tagline: 'Better than the best prices',
+  tagline: 'The leading intents-based DEX aggregation protocol',
   favicon: 'img/favicon.png',
 
   // Set the production url of your site here
