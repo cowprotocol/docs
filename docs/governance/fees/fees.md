@@ -37,7 +37,7 @@ The purpose of this page is to let users know which fee models are active at any
 
 > **Definition:** 10 basis points on the total volume of the order
 >
-> **Eligible orders:** all market orders, limit orders, and TWAPs made on Gnosis Chain, excluding the following stablecoins, when they are traded for each other: sDAI, xDAI, wxDAI, EURe, GBPe, USDC, USDT (trading these stablecoins with each other on Gnosis Chain will incur zero fee)
+> **Eligible orders:** all market orders, limit orders, and TWAPs made on Gnosis Chain, excluding the following stablecoins, when they are traded for each other: sDAI, xDAI, wxDAI, EURe, GBPe, USDC, USDC.e, USDT (trading these stablecoins with each other on Gnosis Chain will incur zero fee)
 >
 > **Fee calculation:** volume * 0.001
 
