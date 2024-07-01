@@ -35,6 +35,9 @@ The purpose of this page is to let users know which fee models are active at any
 
 ### Volume fee on Gnosis Chain orders (excluding stable-to-stable pairs)
 
+[//]: # (If updating the list of stable coins, do not forget to update the actual code where this is handled on CoW Swap)
+[//]: # (https://github.com/cowprotocol/cowswap/blob/develop/libs/common-const/src/tokens.ts#L293-L302)
+
 > **Definition:** 10 basis points on the total volume of the order
 >
 > **Eligible orders:** all market orders, limit orders, and TWAPs made on Gnosis Chain, excluding the following stablecoins, when they are traded for each other: sDAI, xDAI, wxDAI, EURe, GBPe, USDC, USDC.e, USDT (trading these stablecoins with each other on Gnosis Chain will incur zero fee)
