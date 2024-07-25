@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # The Fee
 
-All builders connected to MEV Blocker will pay a per-block-won fee recomputed every period (for example, every month). In practice, at the beginning of period $t$ a builder decides whether to receive flow from MEV Blocker. If it decides to do so, for every block won during period $t$ it will pay a per-block fee calculated as a percentage of the the average per-block-won value of exclusive MEV Blocker transactions during the previous period. Mathematically, the per-block fee for period $t$ is a percentage of:
+All builders connected to MEV Blocker will pay a per-block-won fee recomputed every period (for example, every month). In practice, at the beginning of period $t$ a builder decides whether to receive flow from MEV Blocker. If it decides to do so, for every block won during period $t$, it will pay a per-block fee calculated as a percentage of the average per-block-won value of MEV Blocker transactions during the previous period. Mathematically, the per-block fee for period $t$ is a percentage of:
 
 $$ M_{t-1} = {A_{t-1}-B_{t-1} \over C_{t-1}} $$
 
