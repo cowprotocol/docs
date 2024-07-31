@@ -21,6 +21,7 @@
     "fmt": "prettier --write \"**/*.md\""
   },
   "dependencies": {
+    "@cookbookdev/docsbot": "^4.21.5",
     "@docusaurus/core": "^3.2.1",
     "@docusaurus/plugin-google-gtag": "^3.2.1",
     "@docusaurus/plugin-ideal-image": "^3.2.1",
