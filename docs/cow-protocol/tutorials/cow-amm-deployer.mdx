@@ -13,7 +13,10 @@ The current factory contract addresses are the following:
 
 1. In order to create a new pool, one first needs to call the `newBPool` function of the factory contract. An example transaction that creates a new pool can be found [here](https://etherscan.io/tx/0x7543a97853827e267ecd3c1309509ac7704e4f85a53fbfacd6060f461d85bad8#eventlog). The relevant `LOG_NEW_POOL` log also reveals the address of the newly created pool; in our example transaction, it is `0x81530e9B069c69F6671A0A9d7Ee337cafEF419F6`.
 
+:::note
+
 In case ABI of the factory contract is not fetched, the ABI from the Sepolia network can be used.
+:::
 
 2. Once the new pool has been created, the next step is to approve the tokens we want to add to the pool; this can be done by calling the `approve()` function of the contract of the relevant ERC-20 token we are interested in adding to the pool, where the "spender" needs to be set to the newly created address.
 
