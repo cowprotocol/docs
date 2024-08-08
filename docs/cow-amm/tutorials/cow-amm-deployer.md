@@ -1,9 +1,9 @@
 ---
-sidebar_position: 6
+sidebar_position: 1
 ---
 
 
-# Deploying a CoW AMM
+# Deploying a CoW AMM Using Balancer
 
 In this short tutorial, we describe how one can create and deploy their own Balancer CoW AMM. The proposed transactions and interactions can be executed through any smart contract or EOA transaction builder, Etherscan "Write Contract," from other UI mechanisms, or directly from the console.
 
