@@ -1,8 +1,8 @@
 ---
-sidebar_position: 6
+sidebar_position: 3
 ---
 
-# CoW AMM Liquidity
+# CoW AMM Liquidity for Solvers
 
 ## I'm a solver. How do I use CoW AMM liquidity?
 
