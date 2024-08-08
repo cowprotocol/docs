@@ -21,7 +21,7 @@ These contracts can be verified through [this](https://github.com/balancer/cow-a
 In case ABI of the factory contract is not fetched, the ABI from the Sepolia network can be used.
 :::
 
-2. Once the new pool has been created, the next step is to approve the tokens we want to add to the pool; this can be done by calling the `approve()` function of the contract of the relevant ERC-20 token we are interested in adding to the pool, where the "spender" needs to be set to the newly created address.
+2. The next step is to approve the tokens we want to add to the pool; this can be done by calling the `approve()` function on the contract of the relevant ERC-20 token that is being added to the pool, where the "spender" needs to be set to the newly created BPool address from (1).
 
 :::caution
 
