@@ -4,12 +4,15 @@ sidebar_position: 6
 
 
 # Deploying a CoW AMM
-In this short tutorial, we describe how one can create and deploy their own Balancer CoW AMM.
+
+In this short tutorial, we describe how one can create and deploy their own Balancer CoW AMM. The proposed transactions and interactions can be executed through any smart contract or EOA transaction builder, Etherscan "Write Contract," from other UI mechanisms, or directly from the console.
 
 The current factory contract addresses are the following:
-- Ethereum Mainnet: [`0x23fcC2166F991B8946D195de53745E1b804C91B7`](https://etherscan.io/address/0x23fcC2166F991B8946D195de53745E1b804C91B7#code)
-- Gnosis Chain: [`0x7573B99BC09c11Dc0427fb9c6662bc603E008304`](https://gnosisscan.io/address/0x7573B99BC09c11Dc0427fb9c6662bc603E008304#code)
-- Sepolia Testnet: [`0x9F151748595bAA8829d44448Bb3181AD6b995E8e`](https://sepolia.etherscan.io/address/0x9F151748595bAA8829d44448Bb3181AD6b995E8e#code)
+- Ethereum Mainnet: [`0xf76c421bAb7df8548604E60deCCcE50477C10462`](https://etherscan.io/address/0xf76c421bAb7df8548604E60deCCcE50477C10462#code)
+- Gnosis Chain: [`0x703Bd8115E6F21a37BB5Df97f78614ca72Ad7624`](https://gnosisscan.io/address/0x703Bd8115E6F21a37BB5Df97f78614ca72Ad7624#code)
+- Sepolia Testnet: [`0x1E3D76AC2BB67a2D7e8395d3A624b30AA9056DF9`](https://sepolia.etherscan.io/address/0x1E3D76AC2BB67a2D7e8395d3A624b30AA9056DF9#code)
+
+These contracts can be verified through [this](https://github.com/balancer/cow-amm) repository.
 
 1. In order to create a new pool, one first needs to call the `newBPool` function of the factory contract. An example transaction that creates a new pool can be found [here](https://etherscan.io/tx/0x7543a97853827e267ecd3c1309509ac7704e4f85a53fbfacd6060f461d85bad8#eventlog). The relevant `LOG_NEW_POOL` log also reveals the address of the newly created pool; in our example transaction, it is `0x81530e9B069c69F6671A0A9d7Ee337cafEF419F6`.
 
@@ -33,7 +36,7 @@ One needs to taken the token's decimals into account in order to set the correct
 
 :::caution
 
-The fee parameter is an unsigned integer where 10^18 corresponds to 100% of fee. Note that 100% is actually not a valid value though, but one can set up to 99.99% (this needs to be verified).
+The fee parameter is an unsigned integer where 10^18 corresponds to 100% of fee. Note that 100% is actually not a valid value though, but one can set up to 99.99%.
 :::
 
 
