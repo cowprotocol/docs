@@ -49,15 +49,22 @@ You also need to compute:
 - the order hash `hash` as defined in the library `GPv2Order`, and
 - the order signature
 
-Example code that generates an order can be found in `order` function of the BCoWHelper contract
+Example code that generates an order can be found in [the `order` function of the BCoWHelper contract](https://github.com/balancer/cow-amm/blob/04c915d1ef6150b5334f4b69c7af7ddd59e050e2/src/contracts/BCoWHelper.sol).
 
 This order can be included in a batch as any other CoW Protocol orders with two extra conditions:
-- One of the pre-interaction must set the commitment by calling `BCoWPool.commit(hash)`.
+- One of the pre-interactions must set the commitment by calling `BCoWPool.commit(hash)`.
 - Must contain at most one order from the AMM in the same batch.
+
+::note
+
+Solvers using the non co-located driver should add a [`JitTrade`](https://github.com/cowprotocol/services/blob/95ecc4e01b7fd06ec0b71c6486cb2cdd962e5040/crates/solvers/openapi.yml#L744C1-L774C52) and a [`preInteraction`](https://github.com/cowprotocol/services/blob/95ecc4e01b7fd06ec0b71c6486cb2cdd962e5040/crates/solvers/openapi.yml#L920C1-L925C46) to their solution.
+
+::
+
 
 ### Surplus
 
-The surplus for a CoW AMM order is measured exactly as for other orders by comparing the traded amounts to limit amounts.
+The surplus for a CoW AMM order is measured the same way as other orders, by comparing the traded amounts to limit amounts.
 
 When creating a CoW AMM order it is therefore encouraged to use the smallest possible limit amount which does not violate the invariant of the pool. 
 
