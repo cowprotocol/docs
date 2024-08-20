@@ -34,6 +34,11 @@ One needs to taken the token's decimals into account in order to set the correct
 
 4. We can then set the swap fee; this is the fee trades will pay if they trade permissionlessly (i.e., outside of the batch), and this is done by calling the `setSwapFee()` function of the pool contract. The fee parameter needs to be specified in wei, hence, a 10% fee would be 100000000000000000 (i.e., 10^17)
 
+:::note
+
+In order to guarantee full LVR protection, the fee should be set to 100%. 
+:::
+
 :::caution
 
 The fee parameter is an unsigned integer where 10^18 corresponds to 100% of fee. Note that 100% is actually not a valid value though, but one can set up to 99.99%.
