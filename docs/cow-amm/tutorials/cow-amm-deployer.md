@@ -4,7 +4,12 @@ sidebar_position: 1
 
 # Deploying a CoW AMM Using Balancer
 
-In this short tutorial, we describe how one can create and deploy their own Balancer CoW AMM. The proposed transactions and interactions can be executed through any smart contract or EOA transaction builder, Etherscan "Write Contract," from other UI mechanisms, or directly from the console.
+In this short tutorial, we describe how one can create and deploy their own Balancer CoW AMM. 
+
+**You may also deploy a CoW AMM through the Balancer UI using [this guide.](https://cow.fi/learn/how-to-create-a-lvr-protected-liquidity-pool-on-cowamm)**
+
+
+The proposed transactions and interactions can be executed through any smart contract or EOA transaction builder, Etherscan "Write Contract," from other UI mechanisms, or directly from the console.
 
 The current factory contract addresses are the following:
 - Ethereum Mainnet: [`0xf76c421bAb7df8548604E60deCCcE50477C10462`](https://etherscan.io/address/0xf76c421bAb7df8548604E60deCCcE50477C10462#code)
