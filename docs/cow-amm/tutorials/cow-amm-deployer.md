@@ -1,11 +1,15 @@
 ---
-sidebar_position: 6
+sidebar_position: 1
 ---
 
+# Deploying a CoW AMM Using Balancer
 
-# Deploying a CoW AMM
+In this short tutorial, we describe how one can create and deploy their own Balancer CoW AMM. 
 
-In this short tutorial, we describe how one can create and deploy their own Balancer CoW AMM. The proposed transactions and interactions can be executed through any smart contract or EOA transaction builder, Etherscan "Write Contract," from other UI mechanisms, or directly from the console.
+**You may also deploy a CoW AMM through the Balancer UI using [this guide.](https://cow.fi/learn/how-to-create-a-lvr-protected-liquidity-pool-on-cowamm)**
+
+
+The proposed transactions and interactions can be executed through any smart contract or EOA transaction builder, Etherscan "Write Contract," from other UI mechanisms, or directly from the console.
 
 The current factory contract addresses are the following:
 - Ethereum Mainnet: [`0xf76c421bAb7df8548604E60deCCcE50477C10462`](https://etherscan.io/address/0xf76c421bAb7df8548604E60deCCcE50477C10462#code)
@@ -33,6 +37,11 @@ One needs to taken the token's decimals into account in order to set the correct
 
 
 4. We can then set the swap fee; this is the fee trades will pay if they trade permissionlessly (i.e., outside of the batch), and this is done by calling the `setSwapFee()` function of the pool contract. The fee parameter needs to be specified in wei, hence, a 10% fee would be 100000000000000000 (i.e., 10^17)
+
+:::note
+
+In order to guarantee full LVR protection, the fee should be set to 100%. 
+:::
 
 :::caution
 
