@@ -64,7 +64,6 @@ sequenceDiagram
     deactivate solver 2
 
     Note over autopilot: Pick winner
-    autopilot->>+solver 2: /reveal
     solver 2->>-autopilot: Ethereum transaction data
     autopilot->>+solver 2: /settle
     solver 2->>+blockchain: Execute transaction
@@ -122,7 +121,6 @@ The scoring process is described in detail in the [description of CoW Protocol's
 The autopilot selects the winner according to the highest score once the allotted time expires or all solvers have returned their batch proposal.
 
 Up to this point, the autopilot only knows the score and not the full solution that achieves that score.
-The autopilot then asks the winning solver to reveal its score (through `/reveal`) and then to execute the corresponding settlement transaction (`/settle`).
 The solver is responsible for executing the transaction on-chain (through the [driver](./solver/driver) if using the reference implementation).
 
 ### Auction data storage
