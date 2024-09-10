@@ -61,10 +61,8 @@ sequenceDiagram
     solver 1->>autopilot: Proposed batch
     deactivate solver 1
     solver 2->>autopilot: Proposed batch
-    deactivate solver 2
 
     Note over autopilot: Pick winner
-    solver 2->>-autopilot: Ethereum transaction data
     autopilot->>+solver 2: /settle
     solver 2->>+blockchain: Execute transaction
     blockchain->>-solver 2: Transaction receipt
