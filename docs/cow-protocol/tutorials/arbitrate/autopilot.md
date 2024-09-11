@@ -118,7 +118,8 @@ Solvers have a short amount of time (seconds) to come up with a [solution](/cow-
 The scoring process is described in detail in the [description of CoW Protocol's optimization problem](/cow-protocol/reference/core/auctions/the-problem).
 The autopilot selects the winner according to the highest score once the allotted time expires or all solvers have returned their batch proposal.
 
-Up to this point, the autopilot only knows the score and not the full solution that achieves that score.
+Up to this point, the autopilot only knows the score.
+The autopilot then execute the corresponding settlement transaction (`/settle`).
 The solver is responsible for executing the transaction on-chain (through the [driver](./solver/driver) if using the reference implementation).
 
 ### Auction data storage
