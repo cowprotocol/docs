@@ -24,8 +24,6 @@ sequenceDiagram
     activate Solver
     Solver-->>Autopilot: Score
     deactivate Solver
-    activate Solver
-    deactivate Solver
     Autopilot->>Solver: /settle
     activate Solver
     Note over Solver: Settles transaction on-chain
