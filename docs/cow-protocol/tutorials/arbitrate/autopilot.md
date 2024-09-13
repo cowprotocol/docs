@@ -119,7 +119,7 @@ The scoring process is described in detail in the [description of CoW Protocol's
 The autopilot selects the winner according to the highest score once the allotted time expires or all solvers have returned their batch proposal.
 
 Up to this point, the autopilot only knows the score.
-The autopilot then execute the corresponding settlement transaction (`/settle`).
+The autopilot then tells the winning driver to execute the settlement (`/settle`).
 The solver is responsible for executing the transaction on-chain (through the [driver](./solver/driver) if using the reference implementation).
 
 ### Auction data storage
