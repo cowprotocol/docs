@@ -145,7 +145,7 @@ Starting from this hash, we can use the competition endpoint:
 
 [https://api.cow.fi/mainnet/api/v1/solver_competition/by_tx_hash/0x17271e39305217d36635afbcc882e9431f9195d561d814aba96986cdd12dd240](https://api.cow.fi/mainnet/api/v1/solver_competition/by_tx_hash/0x17271e39305217d36635afbcc882e9431f9195d561d814aba96986cdd12dd240)
 
-and then we can see that the auction id was 6462225. Note also that the competition endpoint reveals the calldata of all submitted solutions that successfully simulated and got ranked.
+and then we can see that the auction id was 6462225.
 
 Using this id, we can now recover the instance.json of that auction:
 
