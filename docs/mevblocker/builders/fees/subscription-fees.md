@@ -14,7 +14,7 @@ $A_{t-1}$  = Total MEV Blocker transaction value during period $t-1$, excluding 
 $B_{t-1}$  = Total value of MEV Blocker transactions also in the mempool during period $t-1$.
 $C_{t-1}$  = Number of blocks mined by builders receiving MEV Blocker transactions during period $t-1$.
 
-Currently, the fee is 20% of the above value, and the length of the period is one month. Builders who wish to connect or disconnect should announce their intention at least 24 hours before the beginning of the new period (i.e., 24 hours before the fee update).
+Currently, the fee is 20% of the above value, and the length of the period is one month. Builders who wish to connect or disconnect should announce their intention at least 48 hours before the beginning of the new period (i.e., 24 hours before the fee update).
 
 :::note Off-chain accounting
 
