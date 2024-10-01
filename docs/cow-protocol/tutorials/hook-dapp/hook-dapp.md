@@ -2,10 +2,10 @@
 sidebar_position: 5
 ---
 
-# CoW Hook Dapp
+# CoW Hook dApp
 
 
-### [What CoW Hooks are?](/cow-protocol/concepts/order-types/cow-hooks)
+### [What are CoW Hooks?](/cow-protocol/concepts/order-types/cow-hooks)
 ### [Technical specification](/cow-protocol/reference/core/intents/hooks)
 
 | <img alt="Demo" src="/img/tutorials/hooks-store.png" width="300"/> | <img alt="Demo" src="/img/tutorials/hooks-store-list.png" width="300"/> |
