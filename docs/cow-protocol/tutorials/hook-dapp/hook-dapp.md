@@ -11,28 +11,27 @@ sidebar_position: 5
 | <img alt="Demo" src="/img/tutorials/hooks-store.png" width="300"/> | <img alt="Demo" src="/img/tutorials/hooks-store-list.png" width="300"/> |
 |-----|----|
 
-**Hook Dapp (hook decentralized application)** - is an application that allows you to conveniently program an order to perform any action before and/or after the swap.  
+**Hook dApp** - is an application that allows you to conveniently program an order to perform any action before or after a swap.  
 
-In the CoW Swap interface you can find several hook options for different tasks, for example you can claim the GNO from the Gnosis validators before the swap.  
-Or you can build an arbitrary call using "Build your own hook" dapp, where you can specify a call to some smart-contract.  
+In the CoW Swap interface you can find several hooks for different tasks. For example, you can claim GNO from Gnosis validators before your swap. You can also specify an arbitrary call to a smart contract before or after your swap using the "Build your own hooks" dApp.  
 
 But that's not all. You can also develop your own application that will install a hook in CoW Swap!
-For this purpose, there is a mechanism of custom applications based on [iframe](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe).
+For this purpose, there is a custom application based on [iframe](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe).
 
 In order to add a custom hook, you need to:
- - click "add Pre/Post-Hook Action"
- - go to "My Custom Hooks" tab
- - paste a URL of the hook dapp
+ - Click "add Pre/Post-Hook Action"
+ - Go to "My Custom Hooks" tab
+ - Paste a URL of the hook dApp
 
-> CoW Hooks are still in development process! The feature is not enabled in production environment yet.  
-> You can test in https://barn.cow.fi.
+> CoW Hooks are still under development! The feature is not enabled in tbe production environment just yet.  
+> You can test CoW Hooks at https://barn.cow.fi.
 
 <img alt="Demo" src="/img/tutorials/hooks-store-custom-hooks.png" width="300"/>
 
-## How to develop CoW Hook Dapps
+## How to develop CoW Hook dApps
 
-CoW Hook Dapp is a web application that communicates with CoW Swap using [post-messages](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage).  
-For your convenience there is a npm library [`@cowprotocol/hook-dapp-lib`](https://www.npmjs.com/package/@cowprotocol/hook-dapp-lib) which provides everything necessary.  
+CoW Hook dApp is a web application that communicates with CoW Swap using [post-messages](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage).  
+For your convenience there is a npm library [`@cowprotocol/hook-dapp-lib`](https://www.npmjs.com/package/@cowprotocol/hook-dapp-lib) which provides everything necessary to get started with your hook dApp development.  
 
 ### Install
 
@@ -49,13 +48,13 @@ It provides:
 - `HookDappContext` which contains environment parameters (chainId, account, etc.) and current order parameters (sell token, validTo, etc.)
 
 And it expects calling following callbacks:
-- `addHook` when a hook data is ready and can be added to an order.
-- `editHook` when hook parameters were changed (edit mode).
-- `setSellToken / setBuyToken` if you want to change the trade assets.
+- `addHook` when a hook data is ready and can be added to an order
+- `editHook` when hook parameters were changed (edit mode)
+- `setSellToken / setBuyToken` if you want to change the trade assets
 
 ### Quick start
 
-Let's create a simple hook-dapp that checks the COW token balance of the order creator.
+Let's create a simple hook dApp that checks the COW token balance of the order creator.
 
 ```html
 <html>
@@ -125,9 +124,9 @@ const { actions, provider } = initCoWHookDapp({ onContext(context: HookDappConte
 | Parameter | Type                          | Optional | Description                                                                                                                                                                                                                      |
 | --- |-------------------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `chainId` | `number`                      | false    | Current chainId in CoW Swap.                                                                                                                                                                                                     |
-| `account` | `string`                      | true     | The user's account address, if not set, then the wallet is not connected yet.                                                                                                                                                    |
+| `account` | `string`                      | true     | The user's account address. If not set, the wallet is not connected yet.                                                                                                                                                    |
 | `orderParams` | `HookDappOrderParams \| null` | false    | The parameters for the order. If value is `null`, the order is not ready yet. See [HookDappOrderParams](https://github.com/cowprotocol/cowswap/blob/develop/libs/hook-dapp-lib/src/types.ts#L29) for more details.               |
-| `hookToEdit` | `CowHookDetails`              | true     | CoW Swap supports editing already created hooks. If the parameter is set, then now in edit mode. See [CowHookDetails](https://github.com/cowprotocol/cowswap/blob/develop/libs/hook-dapp-lib/src/types.ts#L18) for more details. |
+| `hookToEdit` | `CowHookDetails`              | true     | CoW Swap supports editing hooks that have been created already. If the parameter is set, then now in edit mode. See [CowHookDetails](https://github.com/cowprotocol/cowswap/blob/develop/libs/hook-dapp-lib/src/types.ts#L18) for more details. |
 | `isSmartContract` | `boolean \| undefined`        | true     | Whether the account is a smart contract. `undefined` if unknown.                                                                                                                                                                 |
 | `isPreHook` | `boolean`                     | false    | Indicates the position of the hook.                                                                                                                                                                                              |
 
@@ -138,12 +137,12 @@ const { actions, provider } = initCoWHookDapp({ onContext(context: HookDappConte
 | Parameter          | Type                                   | Description                                                        |
 |--------------------|----------------------------------------|--------------------------------------------------------------------|
 | `addHook`          | `(payload: CowHookCreation) => void`   | The callback should be executed once the hook is ready to be added. |
-| `editHook`         | `(payload: CowHookDetails) => void`    | The callback should be executed when a hook data is changed.       |
+| `editHook`         | `(payload: CowHookDetails) => void`    | The callback should be executed when the hook data is changed.       |
 | `setSellToken / setBuyToken` | `(token: { address: string }) => void` | Optionally you can change the asset for sell/buy.                  |
 
 ### Manifest
 
-As stated at the beginning of this document, in CoW Swap interface you can add your application as a custom application.  
+As stated at the beginning of this document, in the CoW Swap interface you can add your application as a custom application.  
 To do this, the application must contain `manifest.json` file with following structure:
 
 ```json
