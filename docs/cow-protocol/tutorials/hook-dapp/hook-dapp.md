@@ -148,6 +148,7 @@ To do this, the application must contain `manifest.json` file with following str
 ```json
 {
   "cow_hook_dapp": {
+    "id": "06a2747d08f0026f47aebb91ac13172a318eb3f6116f742751e2d83cc61b8753",
     "name": "Your Hook Dapp",
     "descriptionShort": "Your Hook Dapp short description",
     "description":  "Your Hook Dapp full description",
@@ -164,17 +165,18 @@ To do this, the application must contain `manifest.json` file with following str
 
 ```
 
-| Parameter                          | Type                  | Description                                                                                                                                                                                           |
-|-------------------------------------|-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `name`                              | `string`              | The name of the Hook Dapp.                                                                                                                                                                            |
-| `descriptionShort`                  | `string`              | A short description.                                                                                                                                                                                  |
-| `description`                       | `string`              | A full, detailed description of the Hook Dapp.                                                                                                                                                        |
-| `version`                           | `string`              | The version number of the Hook Dapp, typically following semantic versioning.                                                                                                                         |
-| `website`                           | `string` (URL)        | The URL link to the Hook Dapp's official website.                                                                                                                                                     |
-| `image`                             | `string` (URL)        | The URL link to the Hook Dapp's logo or representative image.                                                                                                                                         |
-| `conditions.position`               | `pre \| post`         | Specifies the execution position of the hook, `pre` or `post`. If not set, then the Hook Dapp supports both positions.                                                                                |
-| `conditions.smartContractWalletSupported` | `boolean`             | Indicates whether the Hook Dapp supports smart contract wallets (`true` or `false`).                                                                                                                  |
-| `conditions.supportedNetworks`      | `array` of `integers` | List of supported network IDs (e.g., `1` for Ethereum mainnet, `100` for Gnosis chain, `42161` for Arbitrum). If not set, then the Hook Dapp will be available for any network supported by CoW Swap. |
+| Parameter                        | Type                            | Description                                                                                                                                                                                           |
+|----------------------------------|---------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `id`                             | `string`                        | 64-bit hex application identifier `(keccak256(YOUR_APP_NAME))`. This value is used to match hooks in an order with the dApp that generated the hook.                                                  |
+| `name`                           | `string`                        | The name of the Hook Dapp.                                                                                                                                                                            |
+| `descriptionShort`               | `string`                        | A short description.                                                                                                                                                                                  |
+| `description`                    | `string`                        | A full, detailed description of the Hook Dapp.                                                                                                                                                        |
+| `version`                        | `string`                        | The version number of the Hook Dapp, typically following semantic versioning.                                                                                                                         |
+| `website`                        | `string` (URL)                  | The URL link to the Hook Dapp's official website.                                                                                                                                                     |
+| `image`                          | `string` (URL)                  | The URL link to the Hook Dapp's logo or representative image.                                                                                                                                         |
+| `conditions.position`            | `pre \| post`                   | Specifies the execution position of the hook, `pre` or `post`. If not set, then the Hook Dapp supports both positions.                                                                                |
+| `conditions.walletCompatibility` | `HookDappWalletCompatibility[]` | Indicates whether the Hook Dapp supports smart contract wallets or EOAs.                                                                                                                              |
+| `conditions.supportedNetworks`   | `array` of `integers`           | List of supported network IDs (e.g., `1` for Ethereum mainnet, `100` for Gnosis chain, `42161` for Arbitrum). If not set, then the Hook Dapp will be available for any network supported by CoW Swap. |
 
 ## Advanced Hook Dapps
 
