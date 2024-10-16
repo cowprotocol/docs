@@ -9,13 +9,13 @@ The protocol is currently subsidizing the solver competition on Ethereum Mainnet
 
 :::note
 
-For the interested reader, the main source of truth for the weekly payments to solvers is this [Dune dashboard](https://dune.com/cowprotocol/cow-solver-rewards?StartTime=2023-11-28+00%3A00%3A00&EndTime=2023-12-05+00%3A00%3A00&EndTime_d3bba3=2023-12-05+00%3A00%3A00&EndTime_dd004a=2023-12-05+00%3A00%3A00&StartTime_d3f009=2023-11-28+00%3A00%3A00). The dashboard is populated with data aggregated by scripts within the [solver-rewards](https://github.com/cowprotocol/solver-rewards) and [dune-sync](https://github.com/cowprotocol/dune-sync/) repositories.
+For the interested reader, the main source of truth for the weekly payments to solvers is this [Dune dashboard](https://dune.com/cowprotocol/cow-solver-rewards). The dashboard is populated with data aggregated by scripts within the [solver-rewards](https://github.com/cowprotocol/solver-rewards) and [dune-sync](https://github.com/cowprotocol/dune-sync/) repositories.
 
 :::
 
 ## Solver competition rewards (CIP-20 & CIP-36 & CIP-38 & CIP-48)
 
-Solvers' rewards are computed using a mechanism akin to a second-price auction. First, each solver commits a solution, which includes a price vector and a list of trades to execute. The solver proposing the solution with the highest quality wins the right to settle their submitted solution on chain, where quality is the sum of surplus delivered to users and fees paid to the protocol.
+Solver rewards are computed using a mechanism akin to a second-price auction. First, each solver commits a solution, which includes a price vector and a list of trades to execute. The solver proposing the solution with the highest quality wins the right to settle their submitted solution on chain, where quality is the sum of surplus delivered to users and fees paid to the protocol.
 
 :::note
 
