@@ -23,7 +23,7 @@ The purpose of this page is to let users know which fee models are active at any
 >
 > **Eligible orders:** the fee only applies to out-of-market limit orders and discrete TWAP orders where the order is not executable at the time it is generated
 >
-> **Fee calculation:** surplus * 0.5 **OR** volume * 0.01 [whichever number is lower]
+> **Fee calculation:** surplus _0.5 **OR** volume_ 0.01 [whichever number is lower]
 
 ### Quote improvement fee on market orders
 
@@ -31,19 +31,23 @@ The purpose of this page is to let users know which fee models are active at any
 >
 > **Eligible orders:** all market orders (including in-market limit and TWAP orders) where the user receives a better price than they were quoted
 >
-> **Fee calculation:** quote improvement * 0.5 **OR** volume * 0.01 [whichever number is lower]
+> **Fee calculation:** quote improvement _0.5 **OR** volume_ 0.01 [whichever number is lower]
 
-### Volume fee on Gnosis Chain orders (excluding stable-to-stable pairs)
+### Volume fee on Gnosis Chain and Arbitrum One orders (excluding stable-to-stable pairs)
 
-[//]: # (If updating the list of stable coins, do not forget to update the actual code where this is handled on CoW Swap)
-[//]: # (https://github.com/cowprotocol/cowswap/blob/develop/libs/common-const/src/tokens.ts#L293-L302)
+[//]: # 'If updating the list of stable coins, do not forget to update the actual code where this is handled on CoW Swap'
+[//]: # 'https://github.com/cowprotocol/cowswap/blob/develop/libs/common-const/src/tokens.ts#L293-L302'
 
 > **Definition:** 10 basis points on the total volume of the order
 >
-> **Eligible orders:** all market orders, limit orders, and TWAPs made on Gnosis Chain, excluding the following stablecoins, when they are traded for each other: sDAI, xDAI, wxDAI, EURe, GBPe, USDC, USDC.e, USDT (trading these stablecoins with each other on Gnosis Chain will incur zero fee)
+> **Eligible orders:** all market orders, limit orders, and TWAPs made on Gnosis Chain and Arbitrum One, excluding the following stablecoins, when they are traded for each other:
 >
-> **Fee calculation:** volume * 0.001
+> - **Gnosis Chain**: sDAI, xDAI, wxDAI, EURe, GBPe, USDC, USDC.e, USDT (trading these stablecoins with each other on Gnosis Chain will incur zero fee)
+> - **Arbitrum One**: USDC, DAI, USDT, USDe, USDM, FRAX, MIM (trading these stablecoins with each other on Arbitrum One will incur zero fee)
 
+> **Fee calculation:** volume \* 0.001
+
+At first, only a subset of Arbitrum One orders will have the fee applied.
 
 :::note
 
