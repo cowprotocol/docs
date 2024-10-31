@@ -44,7 +44,7 @@ The purpose of this page is to let users know which fee models are active at any
 >
 > - **Gnosis Chain**: sDAI, xDAI, wxDAI, EURe, GBPe, USDC, USDC.e, USDT (trading these stablecoins with each other on Gnosis Chain will incur zero fee)
 > - **Arbitrum One**: USDC, DAI, USDT, USDe, USDM, FRAX, MIM (trading these stablecoins with each other on Arbitrum One will incur zero fee)
-
+>
 > **Fee calculation:** volume \* 0.001
 
 At first, only a subset of Arbitrum One orders will have the fee applied.
