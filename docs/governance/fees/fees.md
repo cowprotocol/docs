@@ -23,7 +23,7 @@ The purpose of this page is to let users know which fee models are active at any
 >
 > **Eligible orders:** the fee only applies to out-of-market limit orders and discrete TWAP orders where the order is not executable at the time it is generated
 >
-> **Fee calculation:** surplus _0.5 **OR** volume_ 0.01 [whichever number is lower]
+> **Fee calculation:** surplus \* 0.5 **OR** volume \* 0.01 [whichever number is lower]
 
 ### Quote improvement fee on market orders
 
@@ -31,7 +31,7 @@ The purpose of this page is to let users know which fee models are active at any
 >
 > **Eligible orders:** all market orders (including in-market limit and TWAP orders) where the user receives a better price than they were quoted
 >
-> **Fee calculation:** quote improvement _0.5 **OR** volume_ 0.01 [whichever number is lower]
+> **Fee calculation:** quote improvement \* 0.5 **OR** volume \* 0.01 [whichever number is lower]
 
 ### Volume fee on Gnosis Chain and Arbitrum One orders (excluding stable-to-stable pairs)
 
