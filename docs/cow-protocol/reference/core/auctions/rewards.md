@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # Solver rewards
 
-The protocol is currently subsidizing the solver competition on Ethereum Mainnet (but not on Gnosis Chain nor Arbitrum One), by rewarding solvers on a weekly basis (currently, every Tuesday) with rewards paid in COW. Solvers are rewarded based on their performance as solvers (i.e. when participating in the standard solver competition) as specified by [CIP-20](https://snapshot.org/#/cow.eth/proposal/0x2d3f9bd1ea72dca84b03e97dda3efc1f4a42a772c54bd2037e8b62e7d09a491f), [CIP-36](https://snapshot.org/#/cow.eth/proposal/0x4e58f9c1208121c0e06282b5541b458bc8c8b76090263e25448848f3194df986), and [CIP-38](https://snapshot.org/#/cow.eth/proposal/0xfb81daea9be89f4f1c251d53fd9d1481129b97c6f38caaddc42af7f3ce5a52ec). Solver rewards for participating in the price estimation competition and providing quotes that are needed for the gas estimates and limit price computations of market orders are specified in [CIP-27](https://snapshot.org/#/cow.eth/proposal/0x64e061568e86e8d2eec344d4a892e4126172b992cabe59a0b24c51c4c7e6cc33) and [CIP-36](https://snapshot.org/#/cow.eth/proposal/0x4e58f9c1208121c0e06282b5541b458bc8c8b76090263e25448848f3194df986).
+The protocol is currently subsidizing the solver competition on Ethereum Mainnet (but not on Gnosis Chain, Arbitrum One nor Base), by rewarding solvers on a weekly basis (currently, every Tuesday) with rewards paid in COW. Solvers are rewarded based on their performance as solvers (i.e. when participating in the standard solver competition) as specified by [CIP-20](https://snapshot.org/#/cow.eth/proposal/0x2d3f9bd1ea72dca84b03e97dda3efc1f4a42a772c54bd2037e8b62e7d09a491f), [CIP-36](https://snapshot.org/#/cow.eth/proposal/0x4e58f9c1208121c0e06282b5541b458bc8c8b76090263e25448848f3194df986), and [CIP-38](https://snapshot.org/#/cow.eth/proposal/0xfb81daea9be89f4f1c251d53fd9d1481129b97c6f38caaddc42af7f3ce5a52ec). Solver rewards for participating in the price estimation competition and providing quotes that are needed for the gas estimates and limit price computations of market orders are specified in [CIP-27](https://snapshot.org/#/cow.eth/proposal/0x64e061568e86e8d2eec344d4a892e4126172b992cabe59a0b24c51c4c7e6cc33) and [CIP-36](https://snapshot.org/#/cow.eth/proposal/0x4e58f9c1208121c0e06282b5541b458bc8c8b76090263e25448848f3194df986).
 
 The annual rewards budget as of now is 16M COW, and the intended split between solver competition and price estimation rewards is currently 80% for the solver competition (12.8M COW) and 20% for the price estimation competition (3.2M COW).
 
@@ -16,7 +16,7 @@ For the interested reader, the main source of truth for the weekly payments to s
 
 ## Solver competition rewards (CIP-20 & CIP-36 & CIP-38)
 
-Solver competition rewards are split into two components: per-auction rewards and consistency rewards. 
+Solver competition rewards are split into two components: per-auction rewards and consistency rewards.
 
 ### Per-auction rewards
 
@@ -44,14 +44,13 @@ The payment calculation can result in a negative figure, in which case the solve
 
 The payment is capped from above and below using the function $$\textrm{cap}(x) = \max(-c_l, \min(c_u, x))$$ with $$c_l = 0.010 \;\textrm{ETH}$$ and $$c_u = 0.012 \;\textrm{ETH}$$.
 
-Submitted scores that are non-positive will be ignored. If only one solution is submitted, $$\textrm{referenceQuality}$$ is set to zero. Formally, this corresponds to always considering the empty solution which does not settle any trades and has quality zero as part of the submitted solutions. 
+Submitted scores that are non-positive will be ignored. If only one solution is submitted, $$\textrm{referenceQuality}$$ is set to zero. Formally, this corresponds to always considering the empty solution which does not settle any trades and has quality zero as part of the submitted solutions.
 
 :::note
 
 There is no guarantee that the per-auction rewards are greater than the gas costs of executing a transaction. Hence, solvers cover these costs by adjusting their reported quality. Of course, a solver who adjusts quality downward too aggressively is then at a disadvantage in the auction. The mechanism, therefore, incentivizes the accurate estimation of gas costs.
 
 :::
-
 
 ### Specification of consistency rewards
 
@@ -81,7 +80,7 @@ a solver wins if and only if $$\textrm{referenceQuality}$$ is such that the solv
 
 The presence of the cap on rewards $$c_u$$, however, makes the problem more complex as it introduces a "first-price auction" logic: if the difference between the best and second-best solution is very large, then the winning solver wins more when it underreports its quality. However, determining the optimal amount of underreporting is very complex, and requires each solver to make strong assumptions regarding the performance of competing solvers.
 
-To summarize, there is a simple strategy that guarantees positive expected profits to solvers. This strategy may not be optimal in uncompetitive auctions when the difference between the best and second best solution may be large. However, in these cases, deriving the optimal strategy is a very complex problem. We conclude by noting that most CoW Protocol batches are very competitive: the cap of on rewards is binding only in about 9% of auctions. 
+To summarize, there is a simple strategy that guarantees positive expected profits to solvers. This strategy may not be optimal in uncompetitive auctions when the difference between the best and second best solution may be large. However, in these cases, deriving the optimal strategy is a very complex problem. We conclude by noting that most CoW Protocol batches are very competitive: the cap of on rewards is binding only in about 9% of auctions.
 
 ## Price estimation competition rewards (CIP-27)
 
