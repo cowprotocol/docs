@@ -141,7 +141,7 @@ const config: Config = {
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'twitter:site', content: '@CoWSwap' },
       { name: 'twitter:title', content: 'Documentation - CoW DAO' },
-      { name: 'twitter:image', content: 'img/og-meta-cowprotocol.png' },
+      { name: 'twitter:image', content: 'https://docs.cow.fi/img/og-meta-cowprotocol.png' },
     ],
     // Replace with your project's social card
     image: 'img/og-meta-cowprotocol.png',
