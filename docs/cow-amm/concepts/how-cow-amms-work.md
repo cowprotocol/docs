@@ -16,6 +16,6 @@ CoW AMM pools are optimal for every token pair that is not stable-to-stable. Sin
 
 ## Getting Started with CoW AMM
 
-To faciliate easy liquidity providing, CoW DAO has partnered with Balancer to implement CoW AMMs into the Balancer ecosystem. LPs can [use the Balancer app](https://balancer.fi/pools/cow) to LP direclty on one of over a dozen liquidity pools. 
+To facilitate easy liquidity providing, CoW DAO has partnered with Balancer to implement CoW AMMs into the Balancer ecosystem. LPs can [use the Balancer app](https://balancer.fi/pools/cow) to LP direclty on one of over a dozen liquidity pools. 
 
 In the next section, LPs can learn how to create their own CoW AMM pools for brand new assets either on Balancer or outside the platform. 
