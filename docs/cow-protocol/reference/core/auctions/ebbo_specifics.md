@@ -1,3 +1,7 @@
+---
+id: ebbo-rules
+---
+
 # EBBO violations: details
 
 In this section, we will elaborate on the details about what consistutes an EBBO violation, and what actions are taken by the DAO in case such a violation occurs. The content of this section is based on [CIP-52](https://snapshot.org/#/cow.eth/proposal/0x0f2f1fde68d85081a7d60f7ac99dafbdabdbf8c8cf55961f2609b3dff429a24a).
