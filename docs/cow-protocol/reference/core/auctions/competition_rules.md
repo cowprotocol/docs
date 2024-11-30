@@ -67,7 +67,7 @@ At CoW DAO's discretion, systematic violation of these rules may lead to penaliz
     - **Base tokens**: [`WETH`](https://arbiscan.io/token/0x82af49447d8a07e3bd95bd0d56f35241523fbab1), [`USDC`](https://arbiscan.io/token/0xaf88d065e77c8cc2239327c5edb3a432268e5831), [`USDT`](https://arbiscan.io/token/0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9), [`DAI`](https://arbiscan.io/token/0xda10009cbd5d07dd0cecc66161fc93d7c9000da1), [`GNO`](https://arbiscan.io/token/0xa0b862f60edef4452f25b4160f177db44deb6cf1)
   </details>
 
-More details about how a certificate of an EBBO violation is computed, and what are the steps taken in case such a violation occurs can be found in [this](/cow-protocol/reference/core/auction/ebbo-rules) section.
+More details about how a certificate of an EBBO violation is computed, and what are the steps taken in case such a violation occurs can be found in [this](/cow-protocol/reference/core/auctions/ebbo-rules) section.
 
 - Inflation of the objective function ([CIP-11](https://snapshot.org/#/cow.eth/proposal/0x16d8c681d52b24f1ccd854084e07a99fce6a7af1e25fd21ddae6534b411df870)). Using tokens for the sole purpose of inflating the objective value or maximizing the reward is forbidden (e.g., by creating fake tokens, or wash-trading with real tokens).
 
