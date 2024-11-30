@@ -9,7 +9,7 @@ In this section, we will elaborate on the details about what consistutes an EBBO
 
 ## Certificate of EBBO violation
 
-A certificate for an EBBO violation consists of a reference routing on a block (and log index) between the start of the auction and when the settlement happened onchain. A reference routing for a trade at a given block (and index) is an execution of that trade which only uses liquidity from base protocols and routes through base tokens (see [here](/cow-protocol/reference/core/auctions/competition-rules#base-tokens) for the definition of base protocols and base tokens). The surplus received by users in this routing is used as reference surplus. The difference between the reference surplus and the surplus actually received by the user is the size of the EBBO violation. This amount needs to be reimbursed to a user.
+A certificate for an EBBO violation consists of a reference routing on a block (and log index) between the start of the auction and when the settlement happened onchain. A reference routing for a trade at a given block (and index) is an execution of that trade which only uses liquidity from base protocols and routes through base tokens (see the "Base protocols and tokens" section [here](/cow-protocol/reference/core/auctions/competition-rules) for the definition of base protocols and base tokens). The surplus received by users in this routing is used as reference surplus. The difference between the reference surplus and the surplus actually received by the user is the size of the EBBO violation. This amount needs to be reimbursed to a user.
 
 A certificate for an EBBO violation can be challenged by the solver who is accused of the EBBO violation by providing a different block (and index), within 72 hours of the notification of the violation. In this case, a reference routing on this block (and index) might be proposed by the core team and used as certificate instead. The new certificate, if any, cannot be challenged again.
 
@@ -41,9 +41,3 @@ A solver with a slashed bond can resume activity if the solver bond is replenish
 The CIP vote is then binding for all parties.
 
 We also clarify that if a solver would like to stop operating and obtain the (remainder) of their bond back - which requires a CIP - they can ask to have this transaction included in the same CIP.
-
-## Note for non-colocated drivers
-
-For all CoW DAO bonded and non co-located drivers, MEV blocker rebates from trade settlements are accumulated in the CoW DAO owned MEV Blocker Rebates Safe. As per decision of CoW DAO, the rebates from the MEV Blocker Rebates Safe are redirected to the CoW DAO Treasury Core unit (cf. CIP-33), which is also a one-out-of-two owner of the MEV Blocker Rebates Safe next to CoW DAO itself.
-
-With the successful passing of this proposal, the MEV blocker rebate that is directly associated with the execution of the order in question, if any, shall be used to refund the solver (to clarify: if the MEV blocker rebate is smaller than the solver’s reimbursement to the user, it is used fully to refund the solver to that extent. If the MEV blocker rebate is bigger than the solver’s reimbursement to the user, only the actually reimbursed amount is refunded to the solver). Refunds will be handled by the CoW DAO Treasury Core Unit within a few weeks after the reimbursement is made, and will be sent to the solver address from which the reimbursement has happened. For avoidance of doubt, the CoW DAO Treasury Core unit has autonomy on selecting any position to be liquidated for this purpose in case the MEV Blocker Rebates Safe does not have sufficient accumulated funds.

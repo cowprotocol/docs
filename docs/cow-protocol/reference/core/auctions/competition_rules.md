@@ -44,7 +44,6 @@ At CoW DAO's discretion, systematic violation of these rules may lead to penaliz
   - sell token / buy token
 
   ### Base protocols and tokens
-  <a id="base-tokens"></a>
   The following detail sections list the protocols and base tokens that are considered for Ethereum Mainnet and Gnosis Chain:
 
   <details>
