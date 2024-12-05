@@ -1,3 +1,9 @@
+---
+sidebar_position: 1
+---
+
+# Getting New Routes Integrated Into CoW Protocol
+
 ## Overview
 
 This guide is designed for teams building in DeFi who want to get their routes integrated and supported by CoW Protocol. Integration of new liquidity sources enables CoW Protocol's solvers to access more trading opportunities, potentially leading to better prices for users.
