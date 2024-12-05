@@ -52,7 +52,7 @@ Instead of waiting for solver teams to have the capacity and resources to delive
 
 1. **Submit Integration Proposal**
     - Use the integration proposal template and make sure to add all necessary information.
-    - Post on CoW DAO forum, and engage with any followup questions
+    - Post on CoW DAO forum, and engage with any follow-up questions.
 2. **Solver Integration**
     - Solver teams evaluate integration opportunity
     - Development and testing
