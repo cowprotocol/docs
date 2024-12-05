@@ -4,7 +4,7 @@ This guide is designed for teams building in DeFi who want to get their routes i
 
 ## Why integrate with CoW Protocol?
 
-CoW Protocol's uses a unique batch auction mechanism and competition between multiple solvers.
+CoW Protocol uses a unique batch auction mechanism and competition between multiple solvers.
 
 - Access to a growing user base of traders and integrators
 - Increase your volumes by integrating into the leading trading protocol on Ethereum
