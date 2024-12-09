@@ -137,3 +137,27 @@ However, as long as the metadata is known, this abuse will be detected upon incl
 
 To maximise gas efficiency the [domain separator](https://eips.ethereum.org/EIPS/eip-712#definition-of-domainseparator) for the `GPv2Settlement` contract is initialized in the constructor and cached for all subsequent invocations.
 Therefore, any signatures for a chain on which the `GPv2Settlement` contract has been deployed are replayable _on any subsequent fork of that chain_ (such as ETHPOW forking Ethereum mainnet).
+
+### Loss of surplus if `ERC-1271` order allows arbitrary app data
+
+An adversary can manipulate vulnerable [`ERC-1271`](../core/signing-schemes#erc-1271) orders, thereby transferring part of the expected surplus from the user order to an address that the adversary controls.
+
+This applies to all `ERC-1271` orders where the [app data](/cow-protocol/reference/core/intents/app-data) field can be changed by an adversary in a way that keeps the signature valid for that order (for example, because `isValidSignature` ignores the `appData` field in the order).
+
+All `ERC-1271` smart-contract order types that can be found in these docs are not affected by this vulnerability.
+However, custom smart-contract order implementations may be affected: as usual, users should exercise caution when trading through unvetted smart-contract orders.
+
+This vulnerability is particularly relevant to developers who are implementing their own smart-contract order type.
+Possibly the easiest way to avoid being affected by this issue is:
+
+1. making the app data immutable at deployment time (or equal to `bytes(0)`), and
+2. have `isValidSignature` reject an order if the app data doesn't match.
+
+But as long as untrusted parties cannot manipulate the app data of a valid `ERC-1271` order, an implementation is not affected.
+
+The mechanism that allows surplus extraction from arbitrary app data possible is [partner fees](/governance/fees/partner-fee).
+Partner fees are encoded in the app data struct and are accounted for once the order is included in the settlement.
+
+From the perspective of the API, two orders with the same parameters and the same owner but different app data are two different valid orders.
+It can happen that the order that is part of the final settlement is the one controlled by the adversary, especially if other order parameters can be changed to create the appearence of an inflated surplus.
+In this case, the order surplus decreases as partner fees are taken from the surplus.
