@@ -13,7 +13,7 @@ For the interested reader, the main source of truth for the weekly payments to s
 
 :::
 
-## Solver competition rewards (CIP-20 & CIP-36 & CIP-38 & CIP-48)
+## Solver competition rewards (CIPs 20, 36, 38, 48, 57)
 
 Solver rewards are computed using a mechanism akin to a second-price auction. First, each solver commits a solution, which includes a price vector and a list of trades to execute. The solver proposing the solution with the highest quality wins the right to settle their submitted solution on chain, where quality is the sum of surplus delivered to users and fees paid to the protocol.
 
@@ -77,13 +77,13 @@ The presence of the cap on rewards $$c_u$$, however, makes the problem more comp
 
 To summarize, there is a simple strategy that guarantees positive expected profits to solvers. This strategy may not be optimal in uncompetitive auctions when the difference between the best and second best solution may be large. However, in these cases, deriving the optimal strategy is a very complex problem. We conclude by noting that most CoW Protocol batches are very competitive: the cap of on rewards is binding only in about 9% of auctions. 
 
-## Price estimation competition rewards (CIP-27)
+## Price estimation competition rewards (CIPs 27, 57)
 
 The price estimation competition is a separate competition where solvers compete to provide the best response to a quote request. Quote requests look almost identical to single-order batch auctions, where there is only one order with a trivial limit price, and solvers propose executions of this order with the goal to maximize "out amount minus gas costs", in the case of a sell request, or minimize "in amount + gas costs" in the case of a buy request.
 
 As specified in [CIP-27](https://snapshot.org/#/cow.eth/proposal/0x64e061568e86e8d2eec344d4a892e4126172b992cabe59a0b24c51c4c7e6cc33), [CIP-36](https://snapshot.org/#/cow.eth/proposal/0x4e58f9c1208121c0e06282b5541b458bc8c8b76090263e25448848f3194df986) and [CIP-57](https://snapshot.box/#/s:cow.eth/proposal/0x46d4fea1492207cf400fcb7a01141a7d4c730791d658cc77236941fc9eb7dccb), solvers that participate in the price estimation competition are rewarded for each order that is within the market price, is associated with a quote that was computed as part of the price estimation competition, and was used in order to compute the limit price of the order. The protocol keeps track of the quote associated with each created order and the corresponding solver that provided the quote. If and when the order gets executed, the solver that provided the quote (which can be different than the solver that ended up executing the order) gets rewarded as follows:
-- Ethereum mainnet: $$min\{0.0006 ~\textrm{ETH}, 6 ~\textrm{COW}\}$$,
-- Arbitrum: $$min\{0.0002 ~\textrm{ETH}, 6 ~\textrm{COW}\}$$,
-- Gnosis Chain: $$min\{0.15 ~\textrm{xDAI}, 6 ~\textrm{COW}\}$$,
+- Ethereum mainnet: $$\min\{0.0006 ~\textrm{ETH}, 6 ~\textrm{COW}\}$$,
+- Arbitrum: $$\min\{0.0002 ~\textrm{ETH}, 6 ~\textrm{COW}\}$$,
+- Gnosis Chain: $$\min\{0.15 ~\textrm{xDAI}, 6 ~\textrm{COW}\}$$,
 
 where, again, the conversion from ETH and xDAI to COW is done by using an up-to-date price.
