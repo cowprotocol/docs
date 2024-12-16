@@ -21,7 +21,7 @@ The vouching contract addresses are the following:
 # Setting up a bonding pool
 The first step for setting up a bonding pool is to deploy a Gnosis safe on Mainnet with only [the CoW DAO safe](https://etherscan.io/address/0xcA771eda0c70aA7d053aB1B25004559B918FE662) as a signer as is described in [CIP-7](https://snapshot.box/#/s:cow.eth/proposal/0x267edf7a0bd3c771cfca763322f011ee106d8d5158612c11da29183260d1dba7).
 
-Once this safe has been confirmed by the CoW DAO team, the safe should be funded with $500.000 USD in stable coins and 1.500.000 COW tokens. After this is done, the bonding pool can be used to vouch for solvers in the solver competition.
+Once this safe has been confirmed by the CoW DAO team, the safe should be funded with $500.000 USD in yield bearing stable coins and 1.500.000 COW tokens. After this is done, the bonding pool can be used to vouch for solvers in the solver competition.
 
 # Setting up a reduced bonding pool
 Solvers that are currently vouched under the CoW Bonding pool may decide to set up a reduced bonding pool according to [CIP-44](https://snapshot.box/#/s:cow.eth/proposal/0x1b6f1171633ec3d20c4370db37074aa1bd830486d4d0d6c26165915cc42d9412).
@@ -29,7 +29,7 @@ Solvers that are currently vouched under the CoW Bonding pool may decide to set 
 The first step for setting up a reduced bonding pool is to deploy a Gnosis safe on Mainnet that has only one signer ([the CoW DAO Solver Payouts safe](0xA03be496e67Ec29bC62F01a428683D7F9c204930)). After this is done and has been confirmed by the CoW DAO team, the solver will deposit $50.000 in yield bearing stable coins or ETH and 500.000 COW tokens to the newly created safe.
 
 # How to join a bonding pool
-This is done by vouching for a solver's submission address and rewards address with the bonding pool address. This is done by calling the `Vouch` method on the [VouchRegister contract](https://etherscan.io/address/0xb422f2520b0b7fd86f7da61b32cc631a59ed7e8f) using the address that owns the bonding pool (the address that sent the full initial funding to the bonding pool). 
+This is done by vouching for a solver's submission address and rewards address with the bonding pool address. This is done by calling the `Vouch` method on the [VouchRegister contract](https://etherscan.io/address/0xb422f2520b0b7fd86f7da61b32cc631a59ed7e8f) using the address that owns the bonding pool (the address that created the bonding pool). 
 
 Vouching contracts:
 - [Mainnet](https://etherscan.io/address/0xb422f2520b0b7FD86f7DA61b32Cc631A59ed7E8F)
