@@ -21,6 +21,19 @@ All addresses of Balancer CoW AMMs are sent as part of the auction instance as `
 
 The AMM reserves are the balance of the two tokens traded by the AMM.
 
+### Creating CoW AMM orders with the helper contract
+
+[The source code for the helper contract can be found here.](https://github.com/balancer/cow-amm/blob/main/src/contracts/BCoWHelper.sol) The `orderFromBuyAmount` and 'orderFromSellAmount' methods return the  order, preInteractions, postInteractions, and signature. This can be used to generate the order with the CoW AMM and check the prices that the CoW AMM would provide for the order you would like to settle.
+
+Doing this will generate additional surplus in the solver competition. For example, if a solver would like to settle a user using outside liquidity that trades a pair for which there is a CoW AMM, then that solver can compare those prices with that of the CoW AMM. This (or part of this) interaction can then be replaced with the CoW AMM to generate additional surplus. This way the solver can integrate CoW AMMs by solving as if these CoW AMM's do not exist, and then check whether some of the outside interactions can be replaced by CoW AMMs (note: UPC and EBBO apply to CoW AMMs as well).
+
+Another way that a solver can use CoW AMM's is by using outside liquidity from the competition/auction to trade with the CoW AMM, thereby re-balancing the AMM and receiving an additional surplus for doing so if the prices of the CoW AMM is off relative to the outside world.
+
+The helper contracts are deployed here:
+- [Mainnet](https://etherscan.io/address/0x03362f847b4fabc12e1ce98b6b59f94401e4588e#code)
+- [Arbitrum](https://arbiscan.io/address/0xdb2aeab529c035469e190310def9957ef0398ba8#code)
+- [Gnosis](https://gnosisscan.io/address/0xdb2aeab529c035469e190310def9957ef0398ba8#code)
+
 ### Settling a custom order
 
 You need to choose a valid CoW Swap order with the following restrictions:
