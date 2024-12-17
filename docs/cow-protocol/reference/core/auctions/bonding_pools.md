@@ -8,7 +8,7 @@ The first step for setting up a bonding pool is to deploy a Gnosis safe on Mainn
 Once this safe has been confirmed by the CoW DAO team, the safe should be funded with $500.000 USD in yield bearing stable coins and 1.500.000 COW tokens. After this is done, the bonding pool can be used to vouch for solvers in the solver competition.
 
 # Setting up a reduced bonding pool
-Solvers that are currently vouched under the CoW Bonding pool may decide to set up a reduced bonding pool according to [CIP-44](https://snapshot.box/#/s:cow.eth/proposal/0x1b6f1171633ec3d20c4370db37074aa1bd830486d4d0d6c26165915cc42d9412).
+Solvers that are currently vouched under the CoW DAO Bonding pool may decide to set up a reduced bonding pool according to [CIP-44](https://snapshot.box/#/s:cow.eth/proposal/0x1b6f1171633ec3d20c4370db37074aa1bd830486d4d0d6c26165915cc42d9412). Note that the interested solver team first needs to coordinate with the core team, that is currently managing the CoW DAO bonding pool, and the core team maintains the right to reject such a reduced pool setup.
 
 The first step for setting up a reduced bonding pool is to deploy a Gnosis safe on Mainnet that has only one signer ([the CoW DAO Solver Payouts safe](0xA03be496e67Ec29bC62F01a428683D7F9c204930)). After this is done and has been confirmed by the CoW DAO team, the solver will deposit $50.000 in yield bearing stable coins or ETH and 500.000 COW tokens to the newly created safe.
 
