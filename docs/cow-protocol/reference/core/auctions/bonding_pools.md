@@ -21,7 +21,7 @@ Vouching contracts:
 - [Arbitrum](https://arbiscan.io/address/0xAAA4De096D02AE21729aA31D967E148D4e3Ae501)
 - [Base](https://basescan.org/address/0xAAA4De096D02AE21729aA31D967E148D4e3Ae501)
 
-The `Vouch` method receives a list as an argument and can vouch for multiple submission addresses in a single transaction. The transaction must contain: the submission address for the solver, the bonding pool that is vouching for the solver, and the rewards address that the solver would like to use to receive their [rewards](https://docs.cow.fi/cow-protocol/reference/core/auctions/rewards).
+The `Vouch` method receives a list as an argument and can vouch for multiple submission addresses in a single transaction. The transaction must contain: the submission address for the solver, the bonding pool that is vouching for the solver, and the rewards address that the solver would like to use to receive their [rewards](/cow-protocol/reference/core/auctions/rewards).
 
 # How to leave a bonding pool
 Leaving a bonding pool involves the same process as joining a bonding pool, except that the owner of the bonding pool will call the `invalidateVouching` method instead with the solver's submission address and the bonding pool that vouched for the solver as arguments.
