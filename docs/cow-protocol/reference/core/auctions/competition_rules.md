@@ -14,6 +14,7 @@ All solvers participating in the solver competition must abide by certain rules.
 ## Smart contract
 
 - Limit price constraint: this rule enforces that an order cannot be executed if its limit price is violated.
+- Solver submitting a transaction needs to be whitelisted (the process about how a solver can get whitelisted is described [here](/cow-protocol/reference/core/auctions/bonding-pools)).
 
 ## Off-chain protocol
 
