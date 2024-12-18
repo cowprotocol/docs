@@ -97,6 +97,11 @@ const b: PartnerFee = {
       [TradeType.LIMIT]: 50,
       [TradeType.ADVANCED]: 30,
     },
+    [SupportedChainId.BASE]: {
+      [TradeType.SWAP]: 100,
+      [TradeType.LIMIT]: 50,
+      [TradeType.ADVANCED]: 30,
+    },
     [SupportedChainId.GNOSIS_CHAIN]: {
       [TradeType.SWAP]: 100,
       [TradeType.LIMIT]: 50,
@@ -118,18 +123,21 @@ const c: PartnerFee = {
     [TradeType.SWAP]: {
       [SupportedChainId.MAINNET]: '0x...a',
       [SupportedChainId.ARBITRUM_ONE]: '0x...b',
+      [SupportedChainId.BASE]: '0x...bb',
       [SupportedChainId.GNOSIS_CHAIN]: '0x...c',
       [SupportedChainId.SEPOLIA]: '0x...d',
     },
     [TradeType.LIMIT]: {
       [SupportedChainId.MAINNET]: '0x...e',
       [SupportedChainId.ARBITRUM_ONE]: '0x...f',
+      [SupportedChainId.BASE]: '0x...ff',
       [SupportedChainId.GNOSIS_CHAIN]: '0x...g',
       [SupportedChainId.SEPOLIA]: '0x...h',
     },
     [TradeType.ADVANCED]: {
       [SupportedChainId.MAINNET]: '0x...j',
       [SupportedChainId.ARBITRUM_ONE]: '0x...i',
+      [SupportedChainId.BASE]: '0x...ii',
       [SupportedChainId.GNOSIS_CHAIN]: '0x...k',
       [SupportedChainId.SEPOLIA]: '0x...l',
     },
@@ -275,7 +283,7 @@ createCowSwapWidget(document.getElementById('cowswap-widget'), {
 | `maxHeight`                           | `number`               | ---                    | The widget automatically adjusts its height depending on the content. By default, the maximum height is `body.offsetHeight`, but it might be customized using the `maxHeight` parameter.                                                                                                                                                                                                     |
 | `appCode`                             | `string`               | ---                    | The unique identifier of the widget consumer. Please fill the for to let us know a little about you: <https://cowprotocol.typeform.com/to/rONXaxHV>.                                                                                                                                                                                                                                         |
 | `provider`                            | `EthereumProvider`     | ---                    | The Ethereum provider to be used for interacting with a wallet. To connect, for example, to Rabby Wallet or Metamask, just set `window.ethereum`. You also might like to use <https://web3modal.com>.                                                                                                                                                                                        |
-| `chainId`                             | `number`               | 1                      | The blockchain ID on which the trade will take place. Currently supported: 1 (Mainnet), 100 (Gnosis chain), 42161 (Arbitrum one), 11155111 (Sepolia).                                                                                                                                                                                                                                        |
+| `chainId`                             | `number`               | 1                      | The blockchain ID on which the trade will take place. Currently supported: 1 (Mainnet), 100 (Gnosis chain), 42161 (Arbitrum one), 8453 (Base), 11155111 (Sepolia).                                                                                                                                                                                                                           |
 | `tradeType`                           | `TradeType`            | 'swap'                 | The type of trade. Can be `swap` or `limit` or `advanced`.                                                                                                                                                                                                                                                                                                                                   |
 | `env`                                 | `CowSwapWidgetEnv`     | 'prod'                 | The environment of the widget (`local` , `prod` , `dev` , `pr`). See [`COWSWAP_URLS`](https://github.com/cowprotocol/cowswap/blob/develop/libs/widget-lib/src/consts.ts) const value for urls.                                                                                                                                                                                               |
 | `sell`                                | `TradeAsset`           | Same as in swap.cow.fi | An object containing information about the sell asset. Example: `{ asset: 'WBTC', amount: 12 }` or `{ asset: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48' }`.                                                                                                                                                                                                                                |
