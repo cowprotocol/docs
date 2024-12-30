@@ -1,5 +1,5 @@
 <p align="center">
-   <img alt="CoW Protocol Logo" width="600" src="./static/img/og-meta-cowprotocol.png">
+   <img alt="Documentation - CoW DAO" width="600" src="./static/img/og-meta-cowprotocol.png">
 </p>
 
 # CoW Protocol Documentation

@@ -125,12 +125,30 @@ const config: Config = {
   ],
 
   themeConfig: {
+    metadata: [
+      {
+        name: 'description',
+        content: 'Documentation for CoW Protocol, CoW AMM, MEV blocker and other CoW DAO products.',
+      },
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'og:type', content: 'website' },
+      { name: 'og:image', content: 'img/og-meta-cowprotocol.png' },
+      { name: 'og:title', content: 'Documentation - CoW DAO' },
+      {
+        name: 'og:description',
+        content: 'Documentation for CoW Protocol, CoW AMM, MEV blocker and other CoW DAO products.',
+      },
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:site', content: '@CoWSwap' },
+      { name: 'twitter:title', content: 'Documentation - CoW DAO' },
+      { name: 'twitter:image', content: 'https://docs.cow.fi/img/og-meta-cowprotocol.png' },
+    ],
     // Replace with your project's social card
     image: 'img/og-meta-cowprotocol.png',
     navbar: {
-      title: 'Documentation',
+      title: 'Documentation - CoW DAO',
       logo: {
-        alt: 'CoW Protocol logo',
+        alt: 'Documentation - CoW DAO',
         src: 'img/cow-logo.svg',
         srcDark: 'img/cow-logo-dark.svg',
         href: '/',
