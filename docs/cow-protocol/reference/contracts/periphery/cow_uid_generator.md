@@ -31,6 +31,12 @@ interface GPv2SettlementContract {
 ### `getUid`
 Constructs an order, determines if it is a sell or buy order, then computes the same EIP-712 hash used by CoW Protocol for verifying signatures. Returns both the EIP-712 digest and the ABI-encoded order.
 
+:::tip
+
+Note: The digest being returned is only the order digest, not the actual order uid. In order to get the order uid this must be concatenated with the address of the order owner and the timestamp until which the order is valid ([reference](../settlement.md#orderuid)).
+
+:::
+
 ```solidity
 getUid(
     address sellToken,
@@ -51,11 +57,11 @@ public view returns (bytes32 hash,  bytes memory encoded)
 | `sellToken` | The token address being sold if the order is a sell order, or the token that the user owes if the order is a buy order |
 | `buyToken` | The token the user will receive if the order is a sell order, or the token the user wants to buy if if the order is a buy order |
 | `receiver` | The address to receive the bought tokens |
-| `sellAmount` | The amount of `sellToken` being transferred |
-| `buyAmount` | The amount of `buyToken` being transferred |
+| `sellAmount` | The amount of `sellToken` being transferred (cannot be 0) |
+| `buyAmount` | The amount of `buyToken` being transferred (cannot be 0) |
 | `validTo` | Timestamp after which the order expires |
 | `appData` |  Optional field used by users/dapps/wallets to attach meta-information to orders |
-| `feeAmount` | Amount of fee to be charged. For sell orders the  |
+| `feeAmount` | Amount of fee to be charged (currently hardcoded to 0)  |
 | `isSell` | Indicates whether the order is a buy or sell |
 | `partiallyFillable` | Indicates whether the order is partially fillable or fill-or-kill |
 
