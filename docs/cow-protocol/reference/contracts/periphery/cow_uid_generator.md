@@ -33,7 +33,7 @@ Constructs an order, determines if it is a sell or buy order, then computes the 
 
 :::tip
 
-Note: The digest being returned is only the order digest, not the actual order uid. In order to get the order uid this must be concatenated with the address of the order owner and the timestamp until which the order is valid ([reference](../settlement.md#orderuid)).
+Note: The digest being returned is only the order digest, not the actual order uid. In order to get the order uid this must be concatenated with the address of the order owner and the timestamp until which the order is valid ([reference](../core/settlement.md#orderuid)).
 
 :::
 
