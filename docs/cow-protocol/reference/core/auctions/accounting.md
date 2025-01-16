@@ -10,15 +10,19 @@ There is a formal and quite involved accounting process in place for the solver 
 - calculation of total network fees (meant to cover gas) that solvers deposit in the settlement contract (if they decide to do so)
 - slippage accounting, for solvers that choose the settlement contract as their execution layer.
 
-A summary of those can be found in this Dune dashboard: https://dune.com/cowprotocol/cow-solver-rewards
+A summary of the above, that is used to verify the accounting process each week, can be found in this Dune dashboard: https://dune.com/cowprotocol/cow-solver-rewards.
 
 ## Auction rewards and penalties
 
-Each auction with s a winner has a reward/penalty associated with it, that is computed after the auction deadline passes. In the case of a successful submission onchain within the auction deadline, a reward is computed, originally in the native token of the chain, that is determined by the mechanism. On the other hand, in the case of an unsuccessful execution (e.g., revert or delayed execution), a penalty is computed, originally expressed in the native token of the chain, that again is determined by the mechanism.
+Each auction with a winner has a reward/penalty associated with it, that is computed after the auction deadline passes. In the case of a successful submission onchain within the auction deadline, a reward is computed, originally in the native token of the chain, as determined by the [mechanism](/cow-protocol/reference/core/auctions/rewards). On the other hand, in the case of an unsuccessful execution (e.g., revert or delayed execution), a penalty is computed, originally expressed in the native token of the chain, that again is determined by the mechanism.
+
+In each accounting week, we first identify all auctions that took place within that week. Specifically:
+- we identify all blocks with a timestamp that is at least as large as the starting Tuesday, 00:00 UTC timestamp and strictly smaller than the ending Teusday, 00:00 UTC timestamp; let [X,Y] denote this interval
+- we then look at all auctions whose block deadline (i.e., the latest block for which the onchain submission is considered valid/on-time) is larger or equal than X and smaller or equal than Y, and these are the auctions for which we compute rewards for that particular accounting week.
 
 At the end of each accounting week, for each solver, the rewards and penalties are aggregated, and we have a performance reward per solver; note this can be negative in the case where penalties exceed rewards. The reward, naturally expressed in the native token, for each auction can be found in this Dune table: https://dune.com/queries/4351957 (see `capped_payment` column).
 
-Moreover, for each order executed onchain, the solver that provided the quote that led to the order creation is rewarded, as determined by the mechanism of the price estimation competition. The solver that provided the winning quote for each order can be found in this Dune table: https://dune.com/queries/4364122 (see `quote_solver` column).
+Moreover, for each order executed onchain, the solver that provided the quote that led to the order creation is rewarded, as determined by the mechanism of the price estimation competition. The solver that provided the winning quote for each order can be found in this Dune table: https://dune.com/queries/4364122 (see `quote_solver` column). We clarify here that for quote rewards, we consider all orders that got executed in a block that is larger or equal to X and smallrt or equal to Y, where X and Y are defined as above. Note that this is slightly different compared to the auctions considered in the same time interval, as we use block deadlines for auctions while execution blocks for orders.
 
 We stress that performance rewards and quote rewards are kept separate in the accounting.
 
