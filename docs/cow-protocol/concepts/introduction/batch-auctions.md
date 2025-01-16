@@ -5,7 +5,7 @@ sidebar_position: 3
 # Batch auctions
 
 CoW Protocol collects and aggregates [intents](./intents) off-chain and settles them together in groups, known as *batches*.
-These batches are then "auctioned off" through a competition to the [solver](./solvers) offering the most surplus for the orders in the batch. 
+The right to settle the orders in a batch is then "auctioned off" through a competition to the [solver](./solvers) offering the most surplus for the orders in the batch. 
 
 ![Batch Auctions](/img/concepts/batch-auctions.png)
 
