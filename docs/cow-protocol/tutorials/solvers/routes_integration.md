@@ -10,12 +10,12 @@ This guide is designed for teams building in DeFi who want to get their routes i
 
 ## Why integrate with CoW Protocol?
 
-- CoW Protocol uses a unique batch auction mechanism and competition between multiple solvers.
-- Access to a growing user base of traders and integrators
-- Increase your volumes by integrating into the leading trading protocol on Ethereum
-- Finding the best prices across different liquidity sources
-- MEV protection through batch auctions
-- Gas optimization through order batching
+CoW Protocol's unique batch auction mechanism and competition between multiple solvers provides several advantages:
+
+- Gain access to our growing ecosystem of traders and protocol integrators
+- The protocol finds optimal prices by aggregating liquidity across multiple sources
+- Trades gain protection from MEV through our batch auction system
+- Users benefit from reduced gas costs through our order batching mechanism
 
 ## Integration Requirements
 
@@ -56,8 +56,8 @@ Instead of waiting for solver teams to have the capacity and resources to delive
 ## Integration Process
 
 1. **Submit Integration Proposal**
-    - Use the integration proposal template and make sure to add all necessary information.
-    - Post on CoW DAO forum, and engage with any follow-up questions.
+    - Use the integration proposal template and make sure to add all necessary information
+    - Post on CoW DAO forum, and engage with any follow-up questions
 2. **Solver Integration**
     - Solver teams evaluate integration opportunity
     - Development and testing
