@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Getting New Routes Integrated Into CoW Protocol
+# Getting new routes integrated Into CoW Protocol
 
 ## Overview
 
