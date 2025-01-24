@@ -5,7 +5,7 @@ sidebar_position: 4
 
 # Solver competition accounting process
 
-There is a formal and quite involved accounting process in place for the solver competition on each chain.  Currently, the execution of the accounting process takes place once a week for all chains the protocol operates on, and each accounting week starts on Tuesday at midnight UTC and concludes a week later at midnight UTC. This accounting process consists of the following:
+There is an accounting process in place for the solver competition. It is performed separately on each chain. Currently, the execution of the accounting process takes place once a week for all chains the protocol operates on, and each accounting week starts on Tuesday at midnight UTC and concludes a week later at midnight UTC. This accounting process consists of the following:
 - calculation of total rewards/penalties, as specified by the [mechanism](/cow-protocol/reference/core/auctions/rewards);
 - calculation of protocol and partner fees that solvers might deposit in the settlement contract;
 - calculation of network fees (meant to cover gas) that solvers might deposit in the settlement contract;
