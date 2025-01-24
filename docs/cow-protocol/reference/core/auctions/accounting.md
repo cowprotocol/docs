@@ -7,9 +7,8 @@ sidebar_position: 4
 
 There is an accounting process in place for the solver competition. It is performed separately on each chain. Currently, the execution of the accounting process takes place once a week for all chains the protocol operates on, and each accounting week starts on Tuesday at midnight UTC and concludes a week later at midnight UTC. This accounting process consists of the following:
 - calculation of total rewards/penalties, as specified by the [mechanism](/cow-protocol/reference/core/auctions/rewards);
-- calculation of protocol and partner fees that solvers might deposit in the settlement contract;
-- calculation of network fees (meant to cover gas) that solvers might deposit in the settlement contract;
-- slippage accounting, for solvers that choose the settlement contract as their execution layer.
+- calculation of protocol and partner fees;
+- settlement contract buffers accounting, which consists of (1) calculation of network fees (meant to cover gas) that solvers might deposit in the settlement contract, (2) calculation of protocol and partner fees that solvers might deposit in the settlement contract, and (3) all other imbalances appearing in the settlement contract after a transaction gets executed, for solvers that choose the settlement contract as their execution layer.
 
 A summary of the above, that is used to verify the accounting process each week, can be found in this Dune dashboard: https://dune.com/cowprotocol/cow-solver-rewards.
 
