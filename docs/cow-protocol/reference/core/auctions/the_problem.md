@@ -3,7 +3,7 @@ id: the-problem
 sidebar_position: 1
 ---
 
-# The Optimization problem
+# Optimization problem
 
 In this section, we describe all the different components of the optimization problem that needs to be solved within each batch.
 
