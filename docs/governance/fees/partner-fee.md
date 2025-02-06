@@ -13,7 +13,7 @@ The Partner Fee per order is calculated based on the surplus token of the order 
 sell token for buy orders) and is then converted into WETH using an external price provider at the time of order settlement.
 
 A percentage of the Partner Fee shall be retained as a service fee to CoW Protocol (the "Service Fee") which is
-currently set at 15% of the total eligible Partner Fee amount.
+currently set at 25% of the total eligible Partner Fee amount.
 
 The Partner Fee net of the Service Fee is the Partner Fee amount (the "Net Partner Fee") eligible for weekly payment.
 See the [Partner Fee calculation](#partner-fee-calculation-examples) section for examples.
