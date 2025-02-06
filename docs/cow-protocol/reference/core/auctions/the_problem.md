@@ -87,4 +87,4 @@ $$\sum_o U(o)+p\cdot \sum_of(o)$$,
 
 where _p_ is a vector of prices used to express all fees in terms of the common numéraire.
 
-Finally, solvers compete for the right to settle a batch by participating in an auction, aiming to implement the solution with the highest quality at the lowest possible cost to the protocol. The [solver that wins the auction is rewarded](rewards) by the protocol.
+Finally, solvers compete for the right to settle a batch by participating in an auction, aiming to implement the solution that generates the most amount of surplus for the user(s). The [solver that wins the auction is rewarded](rewards) by the protocol.
