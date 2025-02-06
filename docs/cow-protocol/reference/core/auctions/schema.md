@@ -18,13 +18,12 @@ To avoid precision loss, some numerical literals are encoded as strings, referre
 
 ## Instances (input)
 
-The instance json that solver engines currently receive contains six keys:
+The instance json that solver engines currently receive contains five keys:
 - `id`
 - `tokens`
 - `orders`
-- `liquidity`
-- `effectiveGasPrice`
 - `deadline`
+- `surplusCapturingJitOrderOwners`
 
 We now explain what each of these entries contains.
 
@@ -79,10 +78,23 @@ This key maps to a list containing the set of orders in the batch. Each entry in
 - `buyToken`: a string denoting the address of the buy token.
 - `sellAmount`: a stringified integer denoting the limit amount that is being sold, measured in terms of the smallest denomination of the sell token.
 - `buyAmount`: a stringified integer denoting the limit amount that is being bought. Similar to the `sellAmount`, it is measured in terms of the smallest denomination of the buy token.
-- `feeAmount`: a stringified integer denoting the signed fee attached to the order, which is always denominated in the `sellToken`.
+- `created`: creation time of the order, denominated in epoch seconds.
+- `validTo`: integer indicating the time until which the order is valid.
 - `kind`: a string of the set {"sell", "buy"}, describing whether the order is a `sell` or `buy` order.
+- `receiver`: the address that should receive the bought tokens.
+- `owner`: the address that created the order.
 - `partiallyFillable`: a boolean indicating whether the order may be partially matched (_true_), or if it is Fill-or-Kill order (_false_).
-- `class`: a string of the set {"market", "limit", "liquidity"}, indicating the order class.
+- `executed`: the token amount that has already been filled.
+- `preInteractions: an array of interactions that must be executed before the order can be filled.
+- `postInteractions: an array of interactions that must be executed after the order has been filled.
+- `sellTokenBalance`: a string of the set {"erc20", "internal", "external"}
+- `buyTokenBalance`: a string of the set {"erc20", "internal"}
+- `class`: a string of the set {"market", "limit"}, indicating the order class.
+- `appData`: 32 bytes encoded as hex with `0x` prefix.
+- `signingScheme`: a string of the set {"eip712", "ethsign", "presign", "eip1271"}.
+- `signature`: hex encoded bytes with `0x` prefix.
+- `protocolFees`: array of any protocol fee policies that apply to the order.
+- `quote`: the winning quote for that order.
 
   We clarify here that all `market` and `liquidity` orders have a potentially non-zero predetermined fee, while all `limit` orders have necessarily a zero signed fee, and the actual fee charged to the order is computed and provided by the solvers when they propose an execution of such an order. More details are provided in the [solutions section](#solutions-output).
 
@@ -104,22 +116,6 @@ An example Fill-or-Kill user limit buy order that sells 1000 [COW](https://ether
 
 The above entry should be interpreted as follows. It is a Fill-or-Kill order since the flag `partiallyFillable` is set to `false`. Moreover, it is a sell order since its `kind` is set to `sell`. Finally, this is a `limit` order, meaning that it has a zero-signed fee, which implies that the solver is free to choose an appropriate fee to cover its execution cost. This means that, if executed, the user will send a total of 1000000000000000000000 COW atoms to the settlement contract and, no matter how much fee the solver will charge, the user is guaranteed to receive at least 284138335 USDC atoms.
 
-
-### `liquidity`
-
-This key is a list of all the publicly available AMMs/limit orders that are made available for use by the default implementation of the Driver, available to the solver engines that request such liquidity. Internally, this is also known as _baseline_ liquidity. Each entry describes the current state of an AMM or an existing public limit order. Currently, there are 5 different types of liquidity provided by the Driver:
-
-- constant product pools, i.e., Uniswap v2 type pools on 2 tokens.
-- weighted Product pools, i.e., Balancer type weighted product pools on N tokens.
-- stable pools, i.e., Curve type stable pools on N tokens.
-- concentrated liquidity pools, i.e., Uniswap v3 type concentrated liquidity pools on 2 tokens.
-- foreign limit orders, i.e., external 0x type limit orders on 2 tokens.
-
-More information about the exact descriptions of these pools can be found [here](https://docs.cow.fi/cow-protocol/reference/apis/solver).
-
-### `effectiveGasPrice`
-
-This key is a single entry that is a stringified integer describing an estimate of the effective gas price for the winning solution, denominated in wei.
 
 ### `deadline`
 
@@ -207,3 +203,7 @@ If we have `"kind": "solver"`, then there is a second entry, labeled `score`, th
 :::note
 All solvers are encouraged to submit a score via `"kind": "riskAdjusted"` and `successProbability`, as it has been observed to be more accurate and fully protects solvers from overbidding (which is prohibited by social consensus rules; see [here](/cow-protocol/reference/core/auctions/competition-rules#governance) for more information).
 :::
+
+### `surplusCapturingJitOrderOwners`
+
+A list of all addresses that are allowed to capture surplus through JIT orders. At the moment, these are all Balancer CoW AMM's.

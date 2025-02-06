@@ -38,7 +38,7 @@ The payment calculation can result in a negative figure, in which case the solve
 
 The payment is capped from above and below using the function $$\textrm{cap}(x) = \max(-c_l, \min(c_u, x))$$ that is chain-specific, and is determined by the following values:
 
-- Ethereum mainnet and Arbitrum: $$c_l = 0.010 \;\textrm{ETH}$$ and $$c_u = 0.012 \;\textrm{ETH}$$,
+- Ethereum mainnet, Arbitrum, and Base chain: $$c_l = 0.010 \;\textrm{ETH}$$ and $$c_u = 0.012 \;\textrm{ETH}$$,
 - Gnosis Chain: $$c_l = c_u = 10 \;\textrm{xDAI}$$.
 
 Submitted scores that are non-positive will be ignored. If only one solution is submitted, $$\textrm{referenceQuality}$$ is set to zero. Formally, this corresponds to always considering the empty solution which does not settle any trades and has quality zero as part of the submitted solutions.
@@ -84,5 +84,6 @@ As specified in [CIP-27](https://snapshot.org/#/cow.eth/proposal/0x64e061568e86e
 - Ethereum mainnet: $$\min\{0.0006 ~\textrm{ETH}, 6 ~\textrm{COW}\}$$,
 - Arbitrum: $$\min\{0.0002 ~\textrm{ETH}, 6 ~\textrm{COW}\}$$,
 - Gnosis Chain: $$\min\{0.15 ~\textrm{xDAI}, 6 ~\textrm{COW}\}$$,
+- Base Chain: $$\min\{0.0002 ~\textrm{ETH}, 6 ~\textrm{COW}\}$$,
 
 where, again, the conversion from ETH and xDAI to COW is done by using an up-to-date price (specifically, the average ETH/xDAI/COW Dune prices of the past 24h before the payout are used to determine these exchange rates).
