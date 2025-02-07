@@ -28,7 +28,18 @@ All solvers participating in the solver competition must abide by certain rules.
 
 - Slippage accounting: With the exception of protocol, partner and network fees paid by users, any token imbalance within the settlement contract that is the result of a settlement is accounted for under the term "slippage accounting", and is fully owned by the corresponding solver, as specified in [CIP-17](https://snapshot.org/#/cow.eth/proposal/0xf9c98a2710dc72c906bbeab9b8fe169c1ed2e9af6a67776cc29b8b4eb44d0fb2). More information on the full accounting process, including slippage, can be found [here](/cow-protocol/reference/core/auctions/accounting).
 
-- Deadline: Solvers that win an auction will receive a deadline by which they must settle the auction on-chain. The deadline for solutions is 5 blocks after the current block at the time of sending the settle request to the solver. If the transaction is not observed on chain before the block is mined then the solution will count as not submitted and the solver will be penalized.
+- Deadline: Solvers that win an auction will receive a deadline by which they must settle the auction on-chain. If the transaction is not observed on chain before the deadline block is mined, then the solution will count as not submitted and the solver will be penalized.
+
+:::note
+
+The deadline for solutions depends on the network and is set a specific number of blocks after the current block at the time of sending the settle request to the solver:
+
+- Mainnet: 3 blocks
+- Arbitrum: 40 blocks
+- Gnosis chain: 5 blocks
+- Base: 20 blocks
+
+:::
 
 ## Governance
 
