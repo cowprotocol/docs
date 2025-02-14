@@ -96,7 +96,7 @@ This key maps to a list containing the set of orders in the batch. Each entry in
 - `protocolFees`: array of any protocol fee policies that apply to the order.
 - `quote`: the winning quote for that order.
 
-  We clarify here that all `market` and `liquidity` orders have a potentially non-zero predetermined fee, while all `limit` orders have necessarily a zero signed fee, and the actual fee charged to the order is computed and provided by the solvers when they propose an execution of such an order. More details are provided in the [solutions section](#solutions-output).
+  We clarify here that all `market` orders have a potentially non-zero predetermined fee, while all `limit` orders have necessarily a zero signed fee, and the actual fee charged to the order is computed and provided by the solvers when they propose an execution of such an order. More details are provided in the [solutions section](#solutions-output).
 
 An example Fill-or-Kill user limit buy order that sells 1000 [COW](https://etherscan.io/token/0xdef1ca1fb7fbcdc777520aa7f396b4e015f497ab) for at least 284.138335 USDC [USDC](https://etherscan.io/token/0xba100000625a3754423978a60c9317c58a424e3d) is given below:
 
@@ -199,10 +199,6 @@ The score is a key that describes the "bid" a solver makes for the batch in the 
 - `kind`: this is a string of the set {"solver", "riskAdjusted"}, that determines whether a solver will explicitly provide a score or will delegate the score computation to the default driver by only specifying a probability of success for the proposed solution.
 
 If we have `"kind": "solver"`, then there is a second entry, labeled `score`, that corresponds to a stringified float that specifies the score attached to the solution. On the other hand, if we have `"kind": "riskAdjusted"`, then there is a second entry, labeled `successProbability`, that is a stringified float that specifies the success probability of the proposed solution.
-
-:::note
-All solvers are encouraged to submit a score via `"kind": "riskAdjusted"` and `successProbability`, as it has been observed to be more accurate and fully protects solvers from overbidding (which is prohibited by social consensus rules; see [here](/cow-protocol/reference/core/auctions/competition-rules#governance) for more information).
-:::
 
 ### `surplusCapturingJitOrderOwners`
 
