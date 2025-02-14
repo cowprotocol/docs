@@ -34,7 +34,7 @@ All solvers participating in the solver competition must abide by certain rules.
 
 :::note
 
-The deadline for solutions depends on the network and is set a specific number of blocks after the current block at the time of sending the settle request to the solver:
+The deadline for solutions depends on the network and is set as a specific number of blocks after the current block at the time of sending the settle request to the solver:
 
 - Mainnet: 3 blocks
 - Arbitrum: 40 blocks
