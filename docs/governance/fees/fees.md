@@ -40,7 +40,7 @@ The purpose of this page is to let users know which fee models are active at any
 
 > **Definition:** 10 basis points on the total volume of the order
 >
-> **Eligible orders:** all market orders, limit orders, and TWAPs made on Gnosis Chain and Arbitrum One, excluding tokens with correlated prices, when they are traded for each other.
+> **Eligible orders:** all market orders, limit orders, and TWAPs made on Gnosis Chain and Arbitrum One, excluding tokens with correlated prices when traded for each other.
 >
 > **Fee calculation:** volume \* 0.001
 
