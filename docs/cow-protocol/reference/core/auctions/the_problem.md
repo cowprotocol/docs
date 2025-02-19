@@ -35,7 +35,7 @@ In both cases, the surplus function is defined as
 
 $$U(x,-y)=(x-y / \pi)p(b)$$,
 
-where $$(x-y / \pi)$$ is the additional amount of buy tokens received by the user relative to the case in which they trade at the limit price, and $$p(b)$$ is the price of the buy token relative to a numéraire (in our case ETH) and is externally provided (i.e., by an oracle). The function $$U(x,-y)$$ is therefore expressed in units of the numéraire and is always non-negative.
+where $$(x-y / \pi)$$ is the additional amount of buy tokens received by the user relative to the case in which they trade at the limit price, and $$p(b)$$ is the price of the buy token relative to a numéraire (in our case ETH) and is externally provided (i.e., by solvers). The function $$U(x,-y)$$ is therefore expressed in units of the numéraire and is always non-negative.
 
 A final observation is that orders can be valid over multiple batches. For a fill-or-kill, this means that an order that is not filled remains valid for a certain period (specified by the user). For a partially-fillable order, this also means that only a fraction of it may be executed in any given batch.
 
@@ -53,7 +53,7 @@ Again, the surplus function is defined as
 
 $$U(\{x,-y\})=(x \cdot \pi-y)p(s)$$,
 
-where $$p(s)$$ is the price of the sell token relative to a numéraire and is externally provided. Also here, orders can be executed over multiple batches.
+where $$p(s)$$ is the price of the sell token relative to a numéraire. Also here, orders can be executed over multiple batches.
 
 ## Protocol Fees
 
@@ -85,6 +85,6 @@ From the protocol viewpoint, each solution that satisfies the above constraints 
 
 $$\sum_o U(o)+p\cdot \sum_of(o)$$,
 
-where _p_ is a vector of externally-determined prices used to express all fees in terms of the common numéraire.
+where _p_ is a vector of prices used to express all fees in terms of the common numéraire.
 
-Finally, solvers compete for the right to settle a batch by participating in an auction, aiming to implement the solution with the highest quality at the lowest possible cost to the protocol. The [solver that wins the auction is rewarded](rewards) by the protocol.
+Finally, solvers compete for the right to settle a batch by participating in an auction, aiming to implement the solution that generates the most amount of surplus for the user(s). The [solver that wins the auction is rewarded](rewards) by the protocol.
