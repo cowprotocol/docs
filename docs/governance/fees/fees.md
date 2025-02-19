@@ -33,17 +33,14 @@ The purpose of this page is to let users know which fee models are active at any
 >
 > **Fee calculation:** quote improvement \* 0.5 **OR** volume \* 0.01 [whichever number is lower]
 
-### Volume fee on Gnosis Chain and Arbitrum One orders (excluding stable-to-stable pairs)
+### Volume fee on Gnosis Chain and Arbitrum One orders (excluding token pairs with correlated prices)
 
 [//]: # 'If updating the list of stable coins, do not forget to update the actual code where this is handled on CoW Swap'
 [//]: # 'https://github.com/cowprotocol/cowswap/blob/develop/libs/common-const/src/tokens.ts#L293-L302'
 
 > **Definition:** 10 basis points on the total volume of the order
 >
-> **Eligible orders:** all market orders, limit orders, and TWAPs made on Gnosis Chain and Arbitrum One, excluding the following stablecoins, when they are traded for each other:
->
-> - **Gnosis Chain**: sDAI, xDAI, wxDAI, EURe, GBPe, USDC, USDC.e, USDT (trading these stablecoins with each other on Gnosis Chain will incur zero fee)
-> - **Arbitrum One**: USDC, DAI, USDT, USDe, USDM, FRAX, MIM (trading these stablecoins with each other on Arbitrum One will incur zero fee)
+> **Eligible orders:** all market orders, limit orders, and TWAPs made on Gnosis Chain and Arbitrum One, excluding tokens with correlated prices when traded for each other.
 >
 > **Fee calculation:** volume \* 0.001
 
