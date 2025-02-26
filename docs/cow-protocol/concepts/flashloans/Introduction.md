@@ -8,7 +8,7 @@ A flash loan is a unique type of loan that is borrowed and repaid within a singl
 
 Flash loans allow anyone with access to the blockchain to borrow assets without the need for collateral, provided that the loan is repaid before the transaction ends. If the loan is not repaid, the entire transaction is reverted, effectively canceling the loan.
 
-Flashloans have been standardized in [EIP-3156](https://eips.ethereum.org/EIPS/eip-3156). Many smart contracts which hold significant amounts of funds allow users to draw on them in a single transaction:
+Flashloans have been standardized in [EIP-3156](https://eips.ethereum.org/EIPS/eip-3156), but not all the providers follow this EIP. Many smart contracts which hold significant amounts of funds allow users to draw on them in a single transaction:
 
 | Protocol | Fee Percentage | ERC-3156 Compliant | Documentation Link |
 | --- | --- | --- | --- |
@@ -21,15 +21,9 @@ Flashloans have been standardized in [EIP-3156](https://eips.ethereum.org/EIPS/e
 # Key features
 
 - **Uncollateralized:** Unlike traditional loans, flash loans do not require any collateral, as they are designed to be repaid within the same transaction.
-- **Instantaneous:** Flash loans are executed and settled almost instantly. They are typically used for arbitrage, collateral swapping, or liquidity provision.
-- **Single Transaction Block:** The loan is borrowed and repaid in one atomic transaction, meaning if the loan is not repaid, the entire transaction is canceled, ensuring no risk to the lender.
-
-# How Flash Loans Work
-
-- **Borrowing Funds:** A user borrows funds from a decentralized lending protocol.
-- **Using the Funds:** The user can perform various actions with the borrowed funds during the same transaction block, such as arbitrage, debt refinancing, or liquidating positions.
-- **Repaying the Loan:** Before the transaction concludes, the user must repay the loan amount, along with any fees associated with the transaction.
 - **Transaction Reverts if Not Repaid:** If the loan is not repaid in full, the entire transaction (including borrowing and usage of funds) is reverted to the initial state, ensuring no loss for the lender.
+- **Instantaneous:** Flash loans are executed and settled almost instantly. They are typically used for arbitrage, collateral swapping, or liquidity provision.
+- **Using the Funds:** The user can perform various actions with the borrowed funds during the same transaction block, such as arbitrage, debt refinancing, or liquidating positions.
 
 ## Getting started
 
