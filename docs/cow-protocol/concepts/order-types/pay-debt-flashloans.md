@@ -66,4 +66,4 @@ State after the order's execution
 
 - Some portion of the 1 ETH is left as surplus in the user account
 - The user either has USDC dust in their account or USDC debt dust in the debt position (depending on how the flashloan size buffer was chosen)
-- The flashloan provider got their 2100 USDC back
+- The flashloan provider got their 2101 USDC back
