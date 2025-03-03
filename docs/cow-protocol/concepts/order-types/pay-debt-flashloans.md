@@ -28,7 +28,7 @@ Let's say the user `0x123...321` borrowed 2000 USDC against 1 ETH of collateral 
   "sellToken": "ETH", // collateral token (unlocked by repaying the debt)
   "sellAmount": 1e18, // we are willing to sell the entire collateral if necessary
   "buyToken": "USDC", // originally borrowed token that was now advanced by the flashloan
-  "buyAmount": "2101", // see appData.flashloan.amount
+  "buyAmount": 2101000000, // see appData.flashloan.amount
   "receiver": "settlementContract", // this is for repaying the flashloan
   "validTo": "now + 5m", // managing risk can be done by having a short validity
   "kind": "buy", // buy exactly the flashloaned amount and keep the surplus in the collateral token
@@ -41,7 +41,7 @@ Let's say the user `0x123...321` borrowed 2000 USDC against 1 ETH of collateral 
     },
     "flashloan": {
       "token": "USDC",
-      "amount": "2101" 
+      "amount": 2101000000 // 2101 USDC in atoms
     }
   }
 }
