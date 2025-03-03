@@ -18,8 +18,8 @@ The flashloan is encoded into the [appData](/cow-protocol/reference/core/intents
 }
 ````
 
-- **lender (optional):** the contract that could be used to borrow the funds from.
-- **borrower (optional):** who should get the proceeds of the trader.
+- **lender (optional):** the contract that could be used to borrow the funds from. For example `0x60744434d6339a6B27d73d9Eda62b6F66a0a04FA` for Maker DAO, or `0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2` for AAVE.
+- **borrower (optional):** who should receive the borrowed tokens.
 - **token:** wthen token that needs to get borrowed.
 - **amount:** how many atoms of the token need to get borrowed (e.g., 1 `WETH` would be 10¹⁸).
 

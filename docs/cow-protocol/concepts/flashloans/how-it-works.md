@@ -29,7 +29,7 @@ sequenceDiagram
     FlashloanSettlementWrapper-->>User: loan token
     FlashloanSettlementWrapper->>+Settlement: settle
     Settlement->>+User: preInteraction
-    User->>Personal: personalOperation
+    User->>Personal: repay debt
     Personal-->>User: collateral token
     User-->>-Settlement: collateral token
     Settlement->>+User: order execution
