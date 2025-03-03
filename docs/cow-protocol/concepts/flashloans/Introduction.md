@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # What is a flashloan?
 
-A flash loan is a unique type of loan that is borrowed and repaid within a single transaction block on the blockchain.
+A flash loan is a unique type of loan that is borrowed and repaid atomically within a single transaction on the blockchain.
 
 Flash loans allow anyone with access to the blockchain to borrow assets without the need for collateral, provided that the loan is repaid before the transaction ends. If the loan is not repaid, the entire transaction is reverted, effectively canceling the loan.
 
