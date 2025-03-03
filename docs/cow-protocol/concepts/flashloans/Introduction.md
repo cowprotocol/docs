@@ -10,19 +10,21 @@ Flash loans allow anyone with access to the blockchain to borrow assets without 
 
 Flashloans have been standardized in [EIP-3156](https://eips.ethereum.org/EIPS/eip-3156), but not all the providers follow this EIP. Many smart contracts which hold significant amounts of funds allow users to draw on them in a single transaction:
 
-| Protocol | Fee Percentage | ERC-3156 Compliant | Documentation Link |
-| --- | --- | --- | --- |
-| **Aave V3** | 0.09% | No | [Aave Flash Loans](https://aave.com/docs/developers/flash-loans) |
-| **Uniswap (FlashSwap)** | swap fee | No | [Uniswap V3 Overview](https://docs.uniswap.org/contracts/v3/guides/flash-integrations/inheritance-constructors) |
-| **Balancer V2** | 0% | Yes | [Balancer Flash Loans](https://docs.balancer.fi/guides/arbitrageurs/flash-loans.html#flash-loans) |
-| **MakerDAO** | 0% | Yes | [MakerDAO DSS Flash](https://docs.makerdao.com/smart-contract-modules/flash-mint-module) |
-| **Euler** | 0% | Yes (via adapter) | [Euler Flash Loans](https://docs-v1.euler.finance/developers/getting-started/integration-guide#eip-3156-flash-loans) |
+| Protocol                | Fee Percentage | ERC-3156 Compliant | Documentation Link                                                                                                   |
+|-------------------------|----------------|--------------------|----------------------------------------------------------------------------------------------------------------------|
+| **Aave V3**             | 0.09%*         | No                 | [Aave Flash Loans](https://aave.com/docs/developers/flash-loans)                                                     |
+| **Uniswap (FlashSwap)** | swap fee       | No                 | [Uniswap V3 Overview](https://docs.uniswap.org/contracts/v3/guides/flash-integrations/inheritance-constructors)      |
+| **Balancer V3**         | 0%             | Yes                | [Balancer Flash Loans](https://docs.balancer.fi/concepts/vault/flash-loans.html)                                     |
+| **MakerDAO**            | 0%             | Yes                | [MakerDAO DSS Flash](https://docs.makerdao.com/smart-contract-modules/flash-mint-module)                             |
+| **Euler**               | 0%             | Yes (via adapter)  | [Euler Flash Loans](https://docs-v1.euler.finance/developers/getting-started/integration-guide#eip-3156-flash-loans) |
+
+* this fee could be potentially disabled
 
 # Key features
 
 - **Uncollateralized:** Unlike traditional loans, flash loans do not require any collateral, as they are designed to be repaid within the same transaction.
 - **Transaction Reverts if Not Repaid:** If the loan is not repaid in full, the entire transaction (including borrowing and usage of funds) is reverted to the initial state, ensuring no loss for the lender.
-- **Instantaneous:** Flash loans are executed and settled almost instantly. They are typically used for arbitrage, collateral swapping, or liquidity provision.
+- **Instantaneous:** Flash loans are executed and settled instantly. They are typically used for arbitrage, collateral swapping, or liquidity provision.
 - **Using the Funds:** The user can perform various actions with the borrowed funds during the same transaction block, such as arbitrage, debt refinancing, or liquidating positions.
 
 ## Getting started
