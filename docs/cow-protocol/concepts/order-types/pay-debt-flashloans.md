@@ -12,14 +12,16 @@ This approach eliminates the need for users to preemptively sell assets or find 
 
 ### How to do it
 
-The user can sign a pre-hook that deploys a cowshed which pays back the debt using the flashloaned tokens. The underlying user order then it is just for paying back the required flashloan.
+The user can sign a pre-hook that deploys a [cowshed](../../reference/sdks/cow-sdk/classes/CowShedHooks.md) which pays back the debt using the flashloaned tokens. The underlying user order then it is just for paying back the required flashloan.
 
-This can be done with a buy order with flashloaned tokens by selling at most X collateral tokens. The receiver has to be always the settlement contract. The driver will take care of sending the funds to the appropriate address.
+This can be achieved through a buy order where the **buy token** is the flash-loaned asset, the **sell token** is the asset used as collateral, and the **sell amount** equals the full collateral amount. The receiver must always be the settlement contract, while the protocol ensures that the funds are sent to the appropriate address.
 
-Let's say the user `0x123...321` borrowed 2000 USDC against 1 ETH of collateral and wants to repay their debt position.
-1. The user needs to determine how much interest their debt position accumulated already: let’s say they now have to pay 2100 USDC to get back their 1 ETH.
-2. Therefore, the user could set the buy amount to 2101 USDC. The reason is that if a small buffer is added, the debt will be wiped out completely, but there might remain some USDC dust,
-   but if a buffer is not added, the user will end up with remaining debt dust (but no USDC dust).
+Let's say user `0x123...321` borrowed 2000 USDC against 1 ETH of collateral and now wants to repay their debt position:
+1. The user first needs to determine the total repayment amount including accumulated interest: in this case, 2100 USDC is required to reclaim their 1 ETH collateral.
+2. To ensure complete debt repayment, the user should set the buy amount to 2101 USDC (adding a small buffer). This approach:
+   - Guarantees the debt is fully repaid
+   - May result in a small amount of unused USDC ("dust") returned to the user
+   - Prevents the scenario where the user ends up with remaining debt dust and must make an additional transaction
 3. The user places a buy order:
 
 ```json
