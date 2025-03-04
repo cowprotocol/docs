@@ -16,35 +16,20 @@ The user can sign a pre-hook that deploys a [cowshed](../../reference/sdks/cow-s
 
 This can be achieved through a buy order where the **buy token** is the flash-loaned asset, the **sell token** is the asset used as collateral, and the **sell amount** equals the full collateral amount. The receiver must always be the settlement contract, while the protocol ensures that the funds are sent to the appropriate address.
 
-Let's say user `0x123...321` borrowed 2000 USDC against 1 ETH of collateral in AAVE, and now wants to repay their debt position:
+In case of AAVE is a little bit different, the AAVE contract does not allow you to withdraw tokens on behalf of somebody else. Therefore, the `cowshed` approach mentioned would not work. But, this can be achieved if the user is a SAFE wallet, because the SAFE is the owner of the debt position and can also be instructed via hooks.
+
+#### AAVE example: Repay debt with collateral using flashloans
+
+Let's say user (SAFE with address `0x123...321`) borrowed 2000 USDC against 1 ETH of collateral in AAVE, and now wants to repay their debt position:
 1. The user first needs to determine the total repayment amount including accumulated interest: in this case, 2100 USDC is required to reclaim their 1 ETH collateral.
 2. To ensure complete debt repayment, the user should set the buy amount to 2101 USDC (adding a small buffer). This approach:
    - Guarantees the debt is fully repaid
    - May result in a small amount of unused USDC ("dust") returned to the user
    - Prevents the scenario where the user ends up with remaining debt dust and must make an additional transaction
-3. Define the [cowshed](../../reference/sdks/cow-sdk/classes/CowShedHooks.md) by calling the `executeHooks` call of the cowshed factory contract (`0x00E989b87700514118Fa55326CD1cCE82faebEF6`), and encode its encoded abi:
-```json
-{
-   "user": "0x123...321",
-   "calls": [
-     {
-       "target": "0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2", // AAVE pool address
-       "value": 0,
-       "callData": {
-         "asset": "USDC address",
-         "amount": 2101000000, // 2101 USDC in atoms
-         "interestRateMode": 2,
-         "onBehalfOf": "0x123...321"
-       }
-     }
-   ],
-   "deadline": 1741095615,
-   "nonce": 0,
-   "signature": "signature" 
-}
-```
-4. Get the user's cowshed proxy address by calling `proxyOf` with the user address as an input (`"0x123...321"`).
-5. The user places a buy order:
+3. The user needs to define two pre-hooks: one to repay the debt with collateral and the other for withdrawing the collateral repaid. In order to define both pre-hooks, the user needs to build both transactions with their SAFE:
+   - Repay the debt by calling the [repay](https://etherscan.io/address/0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2#writeProxyContract#F17) function of the AAVE's contract.
+   - Withdraw the collateral by calling the [withdraw](https://etherscan.io/address/0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2#writeProxyContract#F33) function of the AAVE's contract.
+4. The user places a buy order:
 
 ```json
 {
@@ -59,14 +44,22 @@ Let's say user `0x123...321` borrowed 2000 USDC against 1 ETH of collateral in A
   "partiallyFillable": false, // if an order is partially fillable, then it is not ensured the debt will be paid
   "appData": {
     "hooks": {
-      "pre": [{
-         "target": "0x00E989b87700514118Fa55326CD1cCE82faebEF6", // cowshed factory address
-         "value": "0",
-         "callData": "cowshedFactoryCallEncoded"
-      }],
+      "pre": [
+         // First: Repay the debt
+         {
+            "target": "0x123...321",
+            "value": "0",
+            "callData": "signedRepayCall"
+         },
+         // Then: Withdraw the collateral
+         {
+            "target": "0x123...321",
+            "value": "0",
+            "callData": "signedWithdrawCall"
+         }
+      ]
     },
     "flashloan": {
-      "borrower": "cowshedUserProxyAddress", // user's cowshed proxy addressed obtained from the proxyOf call
       "token": "USDC",
       "amount": 2101000000 // 2101 USDC in atoms
     }
