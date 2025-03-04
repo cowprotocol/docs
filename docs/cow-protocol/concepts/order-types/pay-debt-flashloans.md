@@ -16,20 +16,42 @@ The user can sign a pre-hook that deploys a [cowshed](../../reference/sdks/cow-s
 
 This can be achieved through a buy order where the **buy token** is the flash-loaned asset, the **sell token** is the asset used as collateral, and the **sell amount** equals the full collateral amount. The receiver must always be the settlement contract, while the protocol ensures that the funds are sent to the appropriate address.
 
-Let's say user `0x123...321` borrowed 2000 USDC against 1 ETH of collateral and now wants to repay their debt position:
+Let's say user `0x123...321` borrowed 2000 USDC against 1 ETH of collateral in AAVE, and now wants to repay their debt position:
 1. The user first needs to determine the total repayment amount including accumulated interest: in this case, 2100 USDC is required to reclaim their 1 ETH collateral.
 2. To ensure complete debt repayment, the user should set the buy amount to 2101 USDC (adding a small buffer). This approach:
    - Guarantees the debt is fully repaid
    - May result in a small amount of unused USDC ("dust") returned to the user
    - Prevents the scenario where the user ends up with remaining debt dust and must make an additional transaction
-3. The user places a buy order:
+3. Define the [cowshed](../../reference/sdks/cow-sdk/classes/CowShedHooks.md) by calling the `executeHooks` call of the cowshed factory contract (`0x00E989b87700514118Fa55326CD1cCE82faebEF6`), and encode its encoded abi:
+```json
+{
+   "user": "0x123...321",
+   "calls": [
+     {
+       "target": "0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2", // AAVE pool address
+       "value": 0,
+       "callData": {
+         "asset": "USDC address",
+         "amount": 2101000000, // 2101 USDC in atoms
+         "interestRateMode": 2,
+         "onBehalfOf": "0x123...321"
+       }
+     }
+   ],
+   "deadline": 1741095615,
+   "nonce": 0,
+   "signature": "signature" 
+}
+```
+4. Get the user's cowshed proxy address by calling `proxyOf` with the user address as an input (`"0x123...321"`).
+5. The user places a buy order:
 
 ```json
 {
   "from": "0x123...321",
-  "sellToken": "ETH", // collateral token (unlocked by repaying the debt)
+  "sellToken": "ETH address", // collateral token (unlocked by repaying the debt)
   "sellAmount": 1e18, // we are willing to sell the entire collateral if necessary
-  "buyToken": "USDC", // originally borrowed token that was now advanced by the flashloan
+  "buyToken": "USDC address", // originally borrowed token that was now advanced by the flashloan
   "buyAmount": 2101000000, // see appData.flashloan.amount
   "receiver": "settlementContract", // this is for repaying the flashloan
   "validTo": "now + 5m", // managing risk can be done by having a short validity
@@ -38,10 +60,13 @@ Let's say user `0x123...321` borrowed 2000 USDC against 1 ETH of collateral and 
   "appData": {
     "hooks": {
       "pre": [{
-          // repay the outstanding debt
+         "target": "0x00E989b87700514118Fa55326CD1cCE82faebEF6", // cowshed factory address
+         "value": "0",
+         "callData": "cowshedFactoryCallEncoded"
       }],
     },
     "flashloan": {
+      "borrower": "cowshedUserProxyAddress", // user's cowshed proxy addressed obtained from the proxyOf call
       "token": "USDC",
       "amount": 2101000000 // 2101 USDC in atoms
     }
