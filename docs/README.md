@@ -19,7 +19,7 @@ MEV Blocker is an RPC endpoint designed to protect user transactions from MEV (M
 
 ## What is [CoW AMM](https://cow.fi/cow-amm)?
 
-CoW AMM is a new type of AMM built from the group up to protect LPs from price exploitation in the form of [LVR](https://cow.fi/learn/what-is-loss-versus-rebalancing-lvr). Liquidity providers expect their tokens to earn yield, but most liquidity pools are actually not profitable after accounting for stale prices. Arbitrageurs exploit these stale prices at the expense of LPs. CoW AMM fixes LVR once and for all, with liquidity pools proven to outperform reference Balancer and Uniswap pools. 
+CoW AMM is a new type of AMM built from the ground up to protect LPs from price exploitation in the form of [LVR](https://cow.fi/learn/what-is-loss-versus-rebalancing-lvr). Liquidity providers expect their tokens to earn yield, but most liquidity pools are actually not profitable after accounting for stale prices. Arbitrageurs exploit these stale prices at the expense of LPs. CoW AMM fixes LVR once and for all, with liquidity pools proven to outperform reference Balancer and Uniswap pools. 
 
 ## [Governance](governance)
 
