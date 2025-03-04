@@ -26,7 +26,7 @@ We compute the value of the per-block won fee using publicly available data, in 
 
 Finally, for builders who won fewer than 1% of blocks during a given week, the fee is adjusted so that these builders pay as if they won exactly 1% of blocks during the week. In practice, at the end of each week, these builders pay:
 
-$$ 1\% (total\ blocks\ mined\ during\ the\ previous\ week) * 20\% M_{t-1} $$
+$$ 1\% (total\ blocks\ mined\ during\ the\ previous\ week) * 50\% M_{t-1} $$
 
 The rationale for this adjustment is that connecting a builder to MEV Blocker poses a risk because of the potential leaking of transactions to the public mempool, which should be evaluated against the benefit of faster inclusion of MEV Blocker transactions. We believe the risk outweighs the benefit for builders who win less than 1% of blocks. Although we do not want to penalize builders who may temporarily fall below this threshold too harshly, we also want to discourage builders who pose a risk to the MEV Blocker service from connecting in the first place.
 
