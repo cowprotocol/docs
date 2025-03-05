@@ -14,7 +14,14 @@ This approach eliminates the need for users to preemptively sell assets or find 
 
 The user can sign a pre-hook that deploys a [cowshed](../../reference/sdks/cow-sdk/classes/CowShedHooks.md) which pays back the debt using the flashloaned tokens. The underlying user order then it is just for paying back the required flashloan.
 
-This can be achieved through a buy order where the **buy token** is the flash-loaned asset, the **sell token** is the asset used as collateral, and the **sell amount** equals the full collateral amount. The receiver must always be the settlement contract, while the protocol ensures that the funds are sent to the appropriate address.
+This can be achieved using a buy order where:
+
+- The **buy token** is the flashloaned asset.
+- The **buy amount** is the exact amount needed to repay the debt (it must be sufficient to complete the transaction; otherwise, the transaction will revert!).
+- The **sell token** is the asset used as collateral.
+- The **sell amount** is the full collateral amount.
+
+The receiver must always be the settlement contract, while the protocol ensures that the funds are properly directed to the appropriate address.
 
 In case of AAVE is a little bit different, the AAVE contract does not allow you to withdraw tokens on behalf of somebody else. Therefore, the `cowshed` approach mentioned would not work. But, this can be achieved if the user is a SAFE wallet, because the SAFE is the owner of the debt position and can also be instructed via hooks.
 
