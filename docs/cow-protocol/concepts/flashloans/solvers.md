@@ -4,7 +4,11 @@ sidebar_position: 4
 
 # Solvers
 
-The solver receives for each order an optional object indicating the flashloan's hints. This information serves as a hint for the solver, but the solver ultimately can modify this data in order to make the operation more optimal.
+The solver can receive an optional object with each order that provides hints for using flashloans. These hints act as guidance, but the solver is free to return a different list of flashloan objects in their solution. The solver has three options:
+
+- Provide no hint: In this case, the driver will assume the flashloan hint attached to the order gets settled in the solution.
+- Use the provided hint: The solver can directly copy the flashloan hint included with the order.
+- Define a custom hint: The solver can specify a different flashloan hint, allowing for better optimization of flashloan usage.
 
 ## How to get the flashloan's hints
 
