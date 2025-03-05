@@ -11,34 +11,32 @@ The flashloan's flow can be summarized to:
 3. Return the funds to the lender.
 4. Verify that the full amount has been repaid.
 
-If any step fails, the entire transaction is reverted, ensuring that no funds are moved. This makes flash loans risk-free, even without collateral.
+If any step fails, the entire transaction is reverted, ensuring that no funds are moved. This makes flash loans risk-free, even without collateral. 
 
-A key requirement for flashloans is that all steps must take place within the same caller context. By maintaining this context, flashloans remain risk-free, as the transaction can be reverted if the tokens cannot be returned at the end. However, CoW Protocol cannot hold on to this context directly. To ensure that all steps execute within the same caller context, the GPv2 Settlement contract's `settle()` function is called from within the [IFlashLoanRouter](../../reference/contracts/periphery/flashloans.md#iflashloanrouter-contract) contract callback. Rather than directly calling the GPv2 Settlement contract, the solver first interacts with the Flashloan Settlement Wrapper contract.
-
-The user specifies which operations to execute with the loaned tokens in the pre-hook (e.g., repay a debt with collateral), and then in the user order, the user must return the loaned token.
+The user must ensure that by the end of the order execution, the settlement contract has sufficient funds to repay the lender. For example, the user can define operations in the pre-hook that utilize the loaned tokens (e.g., repaying a debt using collateral). Then, within the user order, they can perform a swap to obtain the required loaned tokens for repayment.
 
 ```mermaid
 sequenceDiagram
     activate Solver
-    Solver->>+FlashloanSettlementWrapper: flashloanAndSettle
-    FlashloanSettlementWrapper->>+FlashloanProvider: flashloan
-    FlashloanProvider-->>FlashloanSettlementWrapper: loan token
-    FlashloanProvider->>+FlashloanSettlementWrapper: onFlashloan
+    Solver->>+IFlashLoanRouter: flashloanAndSettle
+    IFlashLoanRouter->>+FlashloanProvider: flashloan
+    FlashloanProvider-->>IFlashLoanRouter: loan token
+    FlashloanProvider->>+IFlashLoanRouter: onFlashloan
     participant Settlement
     actor User
-    FlashloanSettlementWrapper-->>User: loan token
-    FlashloanSettlementWrapper->>+Settlement: settle
+    IFlashLoanRouter-->>User: loan token
+    IFlashLoanRouter->>+Settlement: settle
     Settlement->>+User: preInteraction
     User->>Personal: repay debt
     Personal-->>User: collateral token
     User-->>-Settlement: collateral token
     Settlement->>+User: order execution
     User-->>-Settlement: return loaned token
-    Settlement-->>-FlashloanSettlementWrapper: return loaned token
-    deactivate FlashloanSettlementWrapper
-    FlashloanSettlementWrapper-->>FlashloanProvider: return loaned token
+    Settlement-->>-IFlashLoanRouter: return loaned token
+    deactivate IFlashLoanRouter
+    IFlashLoanRouter-->>FlashloanProvider: return loaned token
     deactivate FlashloanProvider
-    deactivate FlashloanSettlementWrapper
+    deactivate IFlashLoanRouter
     deactivate Solver
 ```
 

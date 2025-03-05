@@ -91,6 +91,16 @@ In the case of a perfect CoW, when excess demand and supply are zero, the curren
 
 The naive solver is currently not capable of matching partially fillable orders.
 
+## Flashloans
+
+The solver can receive an optional object with each order that provides hints for using flashloans. These hints act as guidance, but the solver is free to return a different list of flashloan objects in their solution. The solver has three options:
+
+- Provide no hint: In this case, the driver will assume the flashloan hint attached to the order gets settled in the solution.
+- Use the provided hint: The solver can directly copy the flashloan hint included with the order.
+- Define a custom hint: The solver can specify a different flashloan hint, allowing for better optimization of flashloan usage.
+
+A key requirement for flashloans is that all steps must take place within the same caller context. By maintaining this context, flashloans remain risk-free, as the transaction can be reverted if the tokens cannot be returned at the end. However, CoW Protocol cannot hold on to this context directly. To ensure that all steps execute within the same caller context, the GPv2 Settlement contract's `settle()` function is called from within the [IFlashLoanRouter](../../../reference/contracts/periphery/flashloans.md#iflashloanrouter-contract) contract callback. Rather than directly calling the GPv2 Settlement contract, the solver first interacts with the IFlashLoanRouter contract.
+
 ## Dependencies
 
 Solver engines need to be "registered" inside the driver configuration file to receive requests.
