@@ -29,7 +29,7 @@ In this case, the user can sign a pre-hook that deploys a [cowshed](../../refere
 
 #### Lender does not allow a third-party to repay your debt
 
-If the lender does not allow third-party debt repayment, the process becomes more involved. In this case, the repayment must come directly from the owner's account, meaning the owner cannot simply be an EOA (Externally Owned Account). Instead, it must be a smart contract (e.g.,a SAFE wallet), which can execute more complex transactions atomically. This is important because a contract can facilitate operations such as selling assets and repaying the debt in a single transaction, something an EOA cannot do efficiently.
+If the lender does not allow third-party debt repayment, the process becomes more involved. In this case, the repayment must come directly from the owner's account, meaning the owner cannot simply be an EOA (Externally Owned Account). Instead, it must be a smart contract (e.g.,a SAFE wallet), which can execute more complex transactions atomically. This is important because a contract can facilitate operations such as selling assets and repaying the debt in a single transaction, something an EOA cannot do.
 
 Additionally, repayment might not always involve selling the collateral token directly. In some cases, the protocol requires selling an interest-bearing version of the token instead. For example, if the collateral is aUSDC (which represents USDC deposited in Aave and earning interest), selling aUSDC instead of withdrawing and selling USDC directly ensures a more seamless repayment process. Understanding these trade-offs helps determine the correct approach based on the specific requirements of the lending protocol.
 
