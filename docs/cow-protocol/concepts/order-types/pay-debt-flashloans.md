@@ -4,15 +4,13 @@ sidebar_position: 6
 
 # Repay debt with collateral using flashloans
 
-A key advantage of flashloans is the ability to repay debt with collateral, since flashloans allow users to close or reduce their debt positions without needing upfront liquidity.
+A key use case of flashloans is the ability to repay debt with collateral, since flashloans allow users to close or reduce their debt positions without needing upfront liquidity.
 
 Instead of requiring users to have assets readily available to repay their loans, flashloans enable them to temporarily borrow the needed funds, use those funds to repay their debt, and immediately reclaim their locked collateral. Once the collateral is received, it can be swapped or liquidated to cover the borrowed amount, ensuring the loan is repaid within the same transaction.
 
 This approach eliminates the need for users to preemptively sell assets or find external liquidity, making it a highly flexible and efficient way to manage debt positions.
 
 ### How to do it
-
-The user can sign a pre-hook that deploys a [cowshed](../../reference/sdks/cow-sdk/classes/CowShedHooks.md) which pays back the debt using the flashloaned tokens. The underlying user order then it is just for paying back the required flashloan.
 
 This can be achieved using a buy order where:
 
@@ -23,9 +21,19 @@ This can be achieved using a buy order where:
 
 The receiver must always be the settlement contract, while the protocol ensures that the funds are properly directed to the appropriate address.
 
-In case of AAVE is a little bit different, the AAVE contract does not allow you to withdraw tokens on behalf of somebody else. Therefore, the `cowshed` approach mentioned would not work. But, this can be achieved if the user is a SAFE wallet, because the SAFE is the owner of the debt position and can also be instructed via hooks.
+When it comes to repaying debt, the approach depends on the lender's contract terms. Some lenders allow a third party to pay off the debt and transfer the unlocked funds to the owner's account, while others may not.
 
-#### AAVE example: Repay debt with collateral using flashloans
+#### Lender allows a third-party to repay your debt
+
+In this case, the user can sign a pre-hook that deploys a [cowshed](../../reference/sdks/cow-sdk/classes/CowShedHooks.md) to repay the debt using flash-loaned tokens. The underlying user order is then solely for repaying the required flash loan. Since the repayment is handled via `cowshed`, the user can be either an EOA (Externally Owned Account) or a contract (e.g., a SAFE wallet).
+
+#### Lender does not allow a third-party to repay your debt
+
+If the lender does not allow third-party debt repayment, the process becomes more involved. In this case, the repayment must come directly from the owner's account, meaning the owner cannot simply be an EOA (Externally Owned Account). Instead, it must be a smart contract (e.g.,a SAFE wallet), which can execute more complex transactions atomically. This is important because a contract can facilitate operations such as selling assets and repaying the debt in a single transaction, something an EOA cannot do efficiently.
+
+Additionally, repayment might not always involve selling the collateral token directly. In some cases, the protocol requires selling an interest-bearing version of the token instead. For example, if the collateral is aUSDC (which represents USDC deposited in Aave and earning interest), selling aUSDC instead of withdrawing and selling USDC directly ensures a more seamless repayment process. Understanding these trade-offs helps determine the correct approach based on the specific requirements of the lending protocol.
+
+##### Example
 
 Let's say user (SAFE with address `0x123...321`) borrowed 2000 USDC against 1 ETH of collateral in AAVE, and now wants to repay their debt position:
 1. The user first needs to determine the total repayment amount including accumulated interest: in this case, 2100 USDC is required to reclaim their 1 ETH collateral.
