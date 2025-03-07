@@ -109,7 +109,7 @@ The reference driver facilitates this process by pulling funds from the `IFlashL
 
 If a solver's solution involves flash-loaned operations, the solver must call the `IFlashLoanRouter` contract's [flashLoanAndSettle](../../../reference/contracts/periphery/flashloans.md#flashloanandsettle) function instead of the settlement contract's [settle](../../../reference/contracts/core/settlement.md#settle) function. The solver must provide all necessary flashloan inputs for the settlement, as well as the settle calldata, which will be executed within the same context by the `IFlashLoanRouter` contract. The `IFlashLoanRouter` contract will then request the specified flashloans and, once received, execute the settlement as instructed.
 
-Since the [flashLoanAndSettle](../../../reference/contracts/periphery/flashloans.md#flashloanandsettle) function supports an array input for flashloans, the solver can request multiple flashloans within a single settlement. The solver can also use multiple flashloans for a single order.
+Since the [flashLoanAndSettle](../../../reference/contracts/periphery/flashloans.md#flashloanandsettle) function supports an array input for flashloans, the solver can request multiple flashloans within a single settlement.
 
 ## Dependencies
 
