@@ -5,7 +5,7 @@ id: flashloans
 
 # Flashloans
 
-There are two main flashloans contracts: `IBorrower` and `IFlashLoanRouter`.
+Flashloans are handled through contracts implementing the following two interfaces: `IBorrower` and `IFlashLoanRouter`.
 
 ## `IBorrower` contract
 
