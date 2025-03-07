@@ -11,33 +11,25 @@ The flashloan's flow can be summarized to:
 3. Return the funds to the lender.
 4. Verify that the full amount has been repaid.
 
-If any step fails, the entire transaction is reverted, ensuring that no funds are moved. This makes flash loans risk-free, even without collateral. 
+If any step fails, the entire transaction is reverted, ensuring that no funds are moved. This makes flashloans risk-free, even without collateral. 
 
 The user must ensure that by the end of the order execution, the settlement contract has sufficient funds to repay the lender. For example, the user can define operations in the pre-hook that utilize the loaned tokens (e.g., repaying a debt using collateral). Then, within the user order, they can perform a swap to obtain the required loaned tokens for repayment.
 
 ```mermaid
 sequenceDiagram
-    activate Solver
-    Solver->>+IFlashLoanRouter: flashloanAndSettle
-    IFlashLoanRouter->>+FlashloanProvider: flashloan
-    FlashloanProvider-->>IFlashLoanRouter: loan token
-    FlashloanProvider->>+IFlashLoanRouter: onFlashloan
-    participant Settlement
+    participant Personal
     actor User
-    IFlashLoanRouter-->>User: loan token
-    IFlashLoanRouter->>+Settlement: settle
-    Settlement->>+User: preInteraction
-    User->>Personal: repay debt
-    Personal-->>User: collateral token
-    User-->>-Settlement: collateral token
-    Settlement->>+User: order execution
-    User-->>-Settlement: return loaned token
-    Settlement-->>-IFlashLoanRouter: return loaned token
-    deactivate IFlashLoanRouter
-    IFlashLoanRouter-->>FlashloanProvider: return loaned token
-    deactivate FlashloanProvider
-    deactivate IFlashLoanRouter
-    deactivate Solver
+    participant CoW Protocol
+    participant Flashloan Provider
+    User->>+CoW Protocol: order with flashloan
+    CoW Protocol->>+Flashloan Provider: flashloan
+    Flashloan Provider-->>CoW Protocol: loan token
+    CoW Protocol->>Personal: repay debt
+    Personal-->>CoW Protocol: collateral token
+    CoW Protocol-->>Flashloan Provider: return loaned token
+    CoW Protocol-->>User: order executed
+    deactivate CoW Protocol
+    deactivate Flashloan Provider
 ```
 
 ## Flashloans Use Cases

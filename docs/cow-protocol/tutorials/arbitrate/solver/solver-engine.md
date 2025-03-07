@@ -111,6 +111,31 @@ If a solver's solution involves flash-loaned operations, the solver must call th
 
 Since the [flashLoanAndSettle](../../../reference/contracts/periphery/flashloans.md#flashloanandsettle) function supports an array input for flashloans, the solver can request multiple flashloans within a single settlement.
 
+```mermaid
+sequenceDiagram
+    activate Solver
+    Solver->>+IFlashLoanRouter: flashloanAndSettle
+    IFlashLoanRouter->>+FlashloanProvider: flashloan
+    FlashloanProvider-->>IFlashLoanRouter: loan token
+    FlashloanProvider->>+IFlashLoanRouter: onFlashloan
+    participant Settlement
+    actor User
+    IFlashLoanRouter-->>User: loan token
+    IFlashLoanRouter->>+Settlement: settle
+    Settlement->>+User: preInteraction
+    User->>Personal: repay debt
+    Personal-->>User: collateral token
+    User-->>-Settlement: collateral token
+    Settlement->>+User: order execution
+    User-->>-Settlement: return loaned token
+    Settlement-->>-IFlashLoanRouter: return loaned token
+    deactivate IFlashLoanRouter
+    IFlashLoanRouter-->>FlashloanProvider: return loaned token
+    deactivate FlashloanProvider
+    deactivate IFlashLoanRouter
+    deactivate Solver
+```
+
 ## Dependencies
 
 Solver engines need to be "registered" inside the driver configuration file to receive requests.
