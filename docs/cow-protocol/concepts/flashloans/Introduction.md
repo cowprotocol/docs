@@ -14,7 +14,7 @@ Flashloans have been standardized in [EIP-3156](https://eips.ethereum.org/EIPS/e
 |-------------------------|----------------|--------------------|----------------------------------------------------------------------------------------------------------------------|
 | **Aave V3**             | 0.09%*         | No                 | [Aave Flash Loans](https://aave.com/docs/developers/flash-loans)                                                     |
 | **Uniswap (FlashSwap)** | swap fee       | No                 | [Uniswap V3 Overview](https://docs.uniswap.org/contracts/v3/guides/flash-integrations/inheritance-constructors)      |
-| **Balancer V3**         | 0%             | Yes                | [Balancer Flash Loans](https://docs.balancer.fi/concepts/vault/flash-loans.html)                                     |
+| **Balancer V3**         | 0%             | No                 | [Balancer Flash Loans](https://docs.balancer.fi/concepts/vault/flash-loans.html)                                     |
 | **MakerDAO**            | 0%             | Yes                | [MakerDAO DSS Flash](https://docs.makerdao.com/smart-contract-modules/flash-mint-module)                             |
 | **Euler**               | 0%             | Yes (via adapter)  | [Euler Flash Loans](https://docs-v1.euler.finance/developers/getting-started/integration-guide#eip-3156-flash-loans) |
 
