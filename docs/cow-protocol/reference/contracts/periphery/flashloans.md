@@ -94,10 +94,10 @@ Request all flash loan specified in the input and, after that, executes the spec
 flashLoanAndSettle(Loan.Data[] calldata loans, bytes calldata settlement) external;
 ```
 
-| **Parameter** | **Description**                                                                                                                |
-|---------------|--------------------------------------------------------------------------------------------------------------------------------|
-| `loans`       | The list of flash loans to be requested before the settlement are executed. The loans will be requested in the specified order |
-| `settlement`  | The ABI-encoded bytes for a call to `settle()` (as in `abi.encodeCall`)                                                        |
+| **Parameter** | **Description**                                                                                                               |
+|---------------|-------------------------------------------------------------------------------------------------------------------------------|
+| `loans`       | The list of flash loans to be requested before the settlement is executed. The loans will be requested in the specified order |
+| `settlement`  | The ABI-encoded bytes for a call to `settle()` (as in `abi.encodeCall`)                                                       |
 
 #### `borrowerCallBack`
 
