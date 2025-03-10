@@ -3,9 +3,9 @@ sidebar_position: 5
 id: flashloans
 ---
 
-# Flashloans
+# Flash loans
 
-Flashloans are handled through contracts implementing the following two interfaces: `IBorrower` and `IFlashLoanRouter`.
+Flash loans are handled through contracts implementing the following two interfaces: `IBorrower` and `IFlashLoanRouter`.
 
 ## `IFlashLoanRouter` contract
 
@@ -26,20 +26,20 @@ interface IFlashLoanRouter {
 
 #### `flashLoanAndSettle`
 
-Request all flashloan specified in the input and, after that, executes the specified settlement.
+Request all flash loan specified in the input and, after that, executes the specified settlement.
 
 ```solidity
 flashLoanAndSettle(Loan.Data[] calldata loans, bytes calldata settlement) external;
 ```
 
-| **Parameter** | **Description**                                                                                                              |
-|---------------|------------------------------------------------------------------------------------------------------------------------------|
-| `loans`       | The list of flashloans to be requested before the settlement is executed. The loans will be requested in the specified order |
-| `settlement`  | The ABI-encoded bytes for a call to `settle()` (as in `abi.encodeCall`)                                                      |
+| **Parameter** | **Description**                                                                                                               |
+|---------------|-------------------------------------------------------------------------------------------------------------------------------|
+| `loans`       | The list of flash loans to be requested before the settlement is executed. The loans will be requested in the specified order |
+| `settlement`  | The ABI-encoded bytes for a call to `settle()` (as in `abi.encodeCall`)                                                       |
 
 #### `borrowerCallBack`
 
-Once a borrower has received the proceeds of a flashloan, it calls back the router through this function.
+Once a borrower has received the proceeds of a flash loan, it calls back the router through this function.
 
 ```solidity
 borrowerCallBack(bytes calldata encodedLoansWithSettlement) external;
@@ -84,7 +84,7 @@ interface IBorrower {
 
 #### `flashLoanAndCallBack`
 
-Requests a flashloan with the specified parameters from the lender and, once the funds have been received, call back the router while passing through the specified custom data. The flash-loan repayment is expected to take place during the final settlement in the router.
+Requests a flash loan with the specified parameters from the lender and, once the funds have been received, call back the router while passing through the specified custom data. The flash-loan repayment is expected to take place during the final settlement in the router.
 
 ```solidity
 flashLoanAndCallBack(address lender, IERC20 token, uint256 amount, bytes calldata callBackData) external;
@@ -93,7 +93,7 @@ flashLoanAndCallBack(address lender, IERC20 token, uint256 amount, bytes calldat
 | **Parameter**  | **Description**                                                         |
 |----------------|-------------------------------------------------------------------------|
 | `lender`       | The address of the flash-loan lender from which to borrow               |
-| `token`        | The token that is requested in the flashloan                            |
+| `token`        | The token that is requested in the flash loan                           |
 | `amount`       | The amount of funds requested from the lender                           |
 | `callBackData` | The data to send back when calling the router once the loan is received |
 
@@ -121,7 +121,7 @@ settlementContract() external view returns (ICowSettlement);
 
 #### `router`
 
-The router contract that manages this borrower contract. It will be called back once the flash-loan proceeds are received and is the only address that can trigger a flashloan request.
+The router contract that manages this borrower contract. It will be called back once the flash-loan proceeds are received and is the only address that can trigger a flash loan request.
 
 ```solidity
 router() external view returns (IFlashLoanRouter);

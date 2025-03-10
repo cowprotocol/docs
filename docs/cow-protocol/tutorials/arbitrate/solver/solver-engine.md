@@ -91,33 +91,33 @@ In the case of a perfect CoW, when excess demand and supply are zero, the curren
 
 The naive solver is currently not capable of matching partially fillable orders.
 
-## Flashloans
+## Flash loans
 
-The solver can receive an optional object with each order that provides hints for using flashloans. These hints act as guidance, but the solver is free to return a different list of flashloan objects in their solution. The solver has three options:
+The solver can receive an optional object with each order that provides hints for using flash loans. These hints act as guidance, but the solver is free to return a different list of flash loan objects in their solution. The solver has three options:
 
-- Provide no hint: In this case, the driver will assume the flashloan hint attached to the order gets settled in the solution.
-- Use the provided hint: The solver can directly copy the flashloan hint included with the order.
-- Define a custom hint: The solver can specify a different flashloan hint, allowing for better optimization of flashloan usage.
+- Provide no hint: In this case, the driver will assume the flash loan hint attached to the order gets settled in the solution.
+- Use the provided hint: The solver can directly copy the flash loan hint included with the order.
+- Define a custom hint: The solver can specify a different flash loan hint, allowing for better optimization of flash loan usage.
 
-A key requirement for flashloans is that all steps must take place within the same caller context. By maintaining this context, flashloans remain risk-free, as the transaction can be reverted if the tokens cannot be returned at the end. However, CoW Protocol cannot hold on to this context directly. To ensure that all steps execute within the same caller context, the GPv2 Settlement contract's [settle](../../../reference/contracts/core/settlement.md#settle) function is called from within the [IFlashLoanRouter](../../../reference/contracts/periphery/flashloans.md#iflashloanrouter-contract) contract callback. Rather than directly calling the GPv2 Settlement contract, the solver first interacts with the `IFlashLoanRouter` contract.
+A key requirement for flash loans is that all steps must take place within the same caller context. By maintaining this context, flash loans remain risk-free, as the transaction can be reverted if the tokens cannot be returned at the end. However, CoW Protocol cannot hold on to this context directly. To ensure that all steps execute within the same caller context, the GPv2 Settlement contract's [settle](../../../reference/contracts/core/settlement.md#settle) function is called from within the [IFlashLoanRouter](../../../reference/contracts/periphery/flash-loans.md#iflashloanrouter-contract) contract callback. Rather than directly calling the GPv2 Settlement contract, the solver first interacts with the `IFlashLoanRouter` contract.
 
-The solver must consider the gas cost implications of using a flashloan, as the associated overhead is non-negligible.
+The solver must consider the gas cost implications of using a flash loan, as the associated overhead is non-negligible.
 
-The settlement contract will receive the swap order funds, but it is the solver’s responsibility to ensure the flashloan is fully repaid within the same transaction. Additionally, the solver needs to account for when the funds will become available, factoring in any user-defined pre-hooks.
+The settlement contract will receive the swap order funds, but it is the solver’s responsibility to ensure the flash loan is fully repaid within the same transaction. Additionally, the solver needs to account for when the funds will become available, factoring in any user-defined pre-hooks.
 
-The reference driver facilitates this process by pulling funds from the `IFlashLoanRouter` contract and transferring them to the user, so they can be used for the order swap. Since the settlement contract is the recipient of the swap, the driver must then move the funds back to the `IFlashLoanRouter` contract, ensuring that the flashloan lender can retrieve the required repayment from it. If a solver chooses to implement a custom driver, they are responsible for managing this behavior as they deem appropriate.
+The reference driver facilitates this process by pulling funds from the `IFlashLoanRouter` contract and transferring them to the user, so they can be used for the order swap. Since the settlement contract is the recipient of the swap, the driver must then move the funds back to the `IFlashLoanRouter` contract, ensuring that the flash loan lender can retrieve the required repayment from it. If a solver chooses to implement a custom driver, they are responsible for managing this behavior as they deem appropriate.
 
-If a solver's solution involves flash-loaned operations, the solver must call the `IFlashLoanRouter` contract's [flashLoanAndSettle](../../../reference/contracts/periphery/flashloans.md#flashloanandsettle) function instead of the settlement contract's [settle](../../../reference/contracts/core/settlement.md#settle) function. The solver must provide all necessary flashloan inputs for the settlement, as well as the settle calldata, which will be executed within the same context by the `IFlashLoanRouter` contract. The `IFlashLoanRouter` contract will then request the specified flashloans and, once received, execute the settlement as instructed.
+If a solver's solution involves flash-loaned operations, the solver must call the `IFlashLoanRouter` contract's [flashLoanAndSettle](../../../reference/contracts/periphery/flash-loans.md#flashloanandsettle) function instead of the settlement contract's [settle](../../../reference/contracts/core/settlement.md#settle) function. The solver must provide all necessary flash loan inputs for the settlement, as well as the settle calldata, which will be executed within the same context by the `IFlashLoanRouter` contract. The `IFlashLoanRouter` contract will then request the specified flash loans and, once received, execute the settlement as instructed.
 
-Since the [flashLoanAndSettle](../../../reference/contracts/periphery/flashloans.md#flashloanandsettle) function supports an array input for flashloans, the solver can request multiple flashloans within a single settlement.
+Since the [flashLoanAndSettle](../../../reference/contracts/periphery/flash-loans.md#flashloanandsettle) function supports an array input for flash loans, the solver can request multiple flash loans within a single settlement.
 
 ```mermaid
 sequenceDiagram
     activate Solver
     Solver->>+IFlashLoanRouter: flashloanAndSettle
-    IFlashLoanRouter->>+FlashloanProvider: flashloan
+    IFlashLoanRouter->>+FlashloanProvider: flash loan
     FlashloanProvider-->>IFlashLoanRouter: loan token
-    FlashloanProvider->>+IFlashLoanRouter: onFlashloan
+    FlashloanProvider->>+IFlashLoanRouter: flash loan
     participant Settlement
     actor User
     IFlashLoanRouter-->>User: loan token
