@@ -21,7 +21,7 @@ jobs:
           FILTERED=$(echo "$JSON" | jq '[.[] | select(.isDraft == false)]')
           echo "open_prs=$FILTERED" >> "$GITHUB_OUTPUT"
   
-     - name: Create Slack message
+      - name: Create Slack message
         id: pr_list_message
         run: |
           PRS='${{ steps.open_prs.outputs.open_prs }}'
