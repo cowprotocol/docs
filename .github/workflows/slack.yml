@@ -40,5 +40,5 @@ jobs:
           #C04N05LJK54
           #"${{ steps.open_prs.outputs.message }}"
           payload: |
-            channel: D0361RLSRRS
+            channel: C08HBESPRLL
             text: "test"
