@@ -14,6 +14,8 @@ jobs:
           
       - name: Retrieve open (non-draft) PRs
         id: open_prs
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           JSON=$(gh pr list --state open --json number,title,isDraft,url)
           
@@ -31,7 +33,7 @@ jobs:
           MESSAGE=$(echo "$PRS" | jq -r '.[] | "• PR #\(.number): \(.title) (\(.url))"' )
           
           # Join them into a single multiline string
-          echo "message=Here are the open pull requests requiring review:\n$MESSAGE" >> $GITHUB_OUTPUT
+          echo "message=Hi @marketing-squad, there are some open pull requests requiring review. Please work with the author to get them merged or closed:\n$MESSAGE" >> $GITHUB_OUTPUT
 
       - name: Post to a Slack channel
         uses: slackapi/slack-github-action@v2.0.0
