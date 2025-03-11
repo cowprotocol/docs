@@ -21,16 +21,10 @@ jobs:
           
           # Filter out draft pull requests
           FILTERED=$(echo "$JSON" | jq '[.[] | select(.isDraft == false)]')
-          echo "open_prs=$FILTERED" >> "$GITHUB_OUTPUT"
-  
-      - name: Create Slack message
-        id: pr_list_message
-        run: |
-          PRS='${{ steps.open_prs.outputs.open_prs }}'
           
           # Transform into Slack-friendly text:
           # e.g. "• PR #123: My Pull Request Title (<URL>)"
-          MESSAGE=$(echo "$PRS" | jq -r '.[] | "• PR #\(.number): \(.title) (\(.url))"' )
+          MESSAGE=$(echo "$FILTERED" | jq -r '.[] | "• PR #\(.number): \(.title) (\(.url))"' )
           
           # Join them into a single multiline string
           echo "message=Hi @marketing-squad, there are some open pull requests requiring review. Please work with the author to get them merged or closed:\n$MESSAGE" >> $GITHUB_OUTPUT
