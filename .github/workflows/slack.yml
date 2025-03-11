@@ -28,8 +28,8 @@ jobs:
           
           # Join them into a single multiline string
           EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
-          echo "text<<$EOF" >> $GITHUB_OUTPUT
-          echo "message=Hi @marketing-squad, there are some open pull requests requiring review. Please work with the author to get them merged or closed:\n$MESSAGE" >> $GITHUB_OUTPUT
+          echo "message<<$EOF" >> $GITHUB_OUTPUT
+          echo "Hi @marketing-squad, there are some open pull requests requiring review. Please work with the author to get them merged or closed:\n$MESSAGE" >> $GITHUB_OUTPUT
           echo "$EOF" >> $GITHUB_OUTPUT
 
       - name: Post to a Slack channel
