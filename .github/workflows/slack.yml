@@ -37,6 +37,8 @@ jobs:
         with:
           method: chat.postMessage
           token: ${{ secrets.SLACK_TOKEN }}
+          #C04N05LJK54
+          #"${{ steps.open_prs.outputs.message }}"
           payload: |
-            channel: D0361RLSRRS #C04N05LJK54
-            text: "test" #"${{ steps.open_prs.outputs.message }}"
+            channel: D0361RLSRRS
+            text: "test"
