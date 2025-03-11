@@ -2,7 +2,6 @@ on:
   # Run every Monday at 9:00 UTC (adjust as needed)
   schedule:
     - cron: "0 9 * * 1"
-  push: #TODO remove
 
 jobs:
   send-reminder:
@@ -37,7 +36,6 @@ jobs:
         with:
           method: chat.postMessage
           token: ${{ secrets.SLACK_TOKEN }}
-          #C04N05LJK54
           payload: |
-            channel: C08HBESPRLL
+            channel: C04N05LJK54
             text: "${{ steps.open_prs.outputs.message }}"
