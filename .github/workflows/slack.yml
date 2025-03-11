@@ -39,4 +39,4 @@ jobs:
           token: ${{ secrets.SLACK_TOKEN }}
           payload: |
             channel: D0361RLSRRS #C04N05LJK54
-            text: "${{ steps.open_prs.outputs.message }}"
+            text: "test" #"${{ steps.open_prs.outputs.message }}"
