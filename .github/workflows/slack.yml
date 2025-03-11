@@ -1,0 +1,44 @@
+on:
+  # Run every Monday at 9:00 UTC (adjust as needed)
+  schedule:
+    - cron: "0 9 * * 1"
+  push: #TODO remove
+
+jobs:
+  send-reminder:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v3
+          
+      - name: Retrieve open (non-draft) PRs
+        id: open_prs
+        run: |
+          JSON=$(gh pr list --state open --json number,title,isDraft,url)
+          
+          # Filter out draft pull requests
+          FILTERED=$(echo "$JSON" | jq '[.[] | select(.isDraft == false)]')
+          echo "open_prs=$FILTERED" >> "$GITHUB_OUTPUT"
+  
+     - name: Create Slack message
+        id: pr_list_message
+        run: |
+          PRS='${{ steps.open_prs.outputs.open_prs }}'
+          
+          # Transform into Slack-friendly text:
+          # e.g. "• PR #123: My Pull Request Title (<URL>)"
+          MESSAGE=$(echo "$PRS" | jq -r '.[] | "• PR #\(.number): \(.title) (\(.url))"' )
+          
+          # Join them into a single multiline string
+          echo "message=Here are the open pull requests requiring review:\n$MESSAGE" >> $GITHUB_OUTPUT
+
+      - name: Send Slack message
+      - name: Post to a Slack channel
+        uses: slackapi/slack-github-action@v2.0.0
+        with:
+          method: chat.postMessage
+          token: ${{ secrets.SLACK_TOKEN }}
+          payload: |
+            channel: D0361RLSRRS #C04N05LJK54
+            text: "${{ steps.pr_list_message.outputs.message }}"
