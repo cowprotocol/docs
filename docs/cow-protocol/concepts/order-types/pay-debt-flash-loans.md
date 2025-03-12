@@ -19,7 +19,7 @@ This can be achieved using a buy order where:
 - The **sell token** is the asset used as collateral.
 - The **sell amount** is the full collateral amount.
 
-The receiver must always be the settlement contract, while the protocol ensures that the funds are properly directed to the appropriate address.
+The receiver must always be the settlement contract, to let the protocol handle repaying the appropriate address for you.
 
 When it comes to repaying debt, the approach depends on the lender's contract terms. Some lenders allow a third party to pay off the debt and transfer the unlocked funds to the owner's account, while others may not.
 
