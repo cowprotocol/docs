@@ -46,7 +46,7 @@ Let's say user (SAFE with address `0x123...321`) borrowed 2000 USDC against 1 ET
    - Withdraw the collateral by calling the [withdraw](https://etherscan.io/address/0x87870Bca3F3fD6335C3F4ce8392D69350B4fA4E2#writeProxyContract#F33) function of the AAVE's contract.
 4. The user places a buy order:
 
-```json
+```json5
 {
   "from": "0x123...321",
   "sellToken": "ETH address", // collateral token (unlocked by repaying the debt)
