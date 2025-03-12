@@ -35,7 +35,7 @@ Additionally, repayment might not always involve selling the collateral token di
 
 ##### Example
 
-Let's say user (SAFE with address `0x123...321`) borrowed 2000 USDC against 1 ETH of collateral in AAVE, and now wants to repay their debt position:
+Let's say a user (SAFE with address `0x123...321`) borrowed 2000 USDC against 1 ETH of collateral in AAVE, and now wants to repay their debt position.
 1. The user first needs to determine the total repayment amount including accumulated interest: in this case, 2100 USDC is required to reclaim their 1 ETH collateral.
 2. To ensure complete debt repayment, the user should set the buy amount to 2101 USDC (adding a small buffer). This approach:
    - Guarantees the debt is fully repaid
