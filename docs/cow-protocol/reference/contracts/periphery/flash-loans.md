@@ -59,7 +59,7 @@ settlementContract() external returns (ICowSettlement);
 
 #### `settlementAuthentication`
 
-The settlement authenticator contract for CoW Protocol. This contract determines who the solvers for CoW Protocol are.
+The settlement authenticator contract for CoW Protocol. This contract determines whether CoW protocol considers an address an eligible solver.
 
 ```solidity
 settlementAuthentication() external returns (ICowAuthentication);
