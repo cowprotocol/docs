@@ -15,7 +15,7 @@ This approach eliminates the need for users to preemptively sell assets or find 
 This can be achieved using a buy order where:
 
 - The **buy token** is the flash loaned asset that needs to be repaid.
-- The **buy amount** is the exact amount needed to repay the debt (it must be sufficient to complete the transaction; otherwise, the transaction will revert!).
+- The **buy amount** is the exact amount needed to repay the flash loan (it must be sufficient to complete the transaction; otherwise, the transaction will revert!).
 - The **sell token** is the asset used as collateral.
 - The **sell amount** is the full collateral amount.
 
