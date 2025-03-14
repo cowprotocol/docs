@@ -29,4 +29,4 @@ Flash loans are standardized in [EIP-3156](https://eips.ethereum.org/EIPS/eip-31
 
 ## Getting started
 
-Wanting to place a flash loan order? Check out our [flash loan tutorial](/cow-protocol/tutorials/cow-swap/flash-loans). 
+Want to place a flash loan order? Check out our [flash loan tutorial](/cow-protocol/tutorials/cow-swap/flash-loans). 
