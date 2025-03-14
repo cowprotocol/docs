@@ -91,7 +91,7 @@ In the case of a perfect CoW, when excess demand and supply are zero, the curren
 
 The naive solver is currently not capable of matching partially fillable orders.
 
-## Flash loans
+## Flash Loans
 
 The solver can receive an optional object with each order that provides hints for using flash loans. These hints act as guidance, but the solver is free to return a different list of flash loan objects in their solution. The solver has three options:
 

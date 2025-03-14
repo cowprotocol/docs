@@ -20,16 +20,16 @@ sequenceDiagram
     participant Personal
     actor User
     participant CoW Protocol
-    participant Flash loan Provider
+    participant Flash Loan Provider
     User->>+CoW Protocol: order with flash loan
-    CoW Protocol->>+Flash loan Provider: flash loan
-    Flash loan Provider-->>CoW Protocol: loan token
+    CoW Protocol->>+Flash Loan Provider: flash loan
+    Flash Loan Provider-->>CoW Protocol: loan token
     CoW Protocol->>Personal: repay debt
     Personal-->>CoW Protocol: collateral token
-    CoW Protocol-->>Flash loan Provider: return loaned token
+    CoW Protocol-->>Flash Loan Provider: return loaned token
     CoW Protocol-->>User: order executed
     deactivate CoW Protocol
-    deactivate Flash loan Provider
+    deactivate Flash Loan Provider
 ```
 
 ## Flash loans Use Cases

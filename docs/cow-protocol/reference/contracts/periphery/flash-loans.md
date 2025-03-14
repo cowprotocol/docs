@@ -3,7 +3,7 @@ sidebar_position: 5
 id: flashloans
 ---
 
-# Flash loans
+# Flash Loans
 
 Flash loans are handled through contracts implementing the following two interfaces: `IBorrower` and `IFlashLoanRouter`.
 

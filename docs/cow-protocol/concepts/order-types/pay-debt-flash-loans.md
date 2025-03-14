@@ -25,7 +25,7 @@ When it comes to repaying debt, the approach depends on the lender's contract te
 
 #### Lender allows a third-party to repay your debt
 
-In this case, the user can sign a pre-hook that deploys a [cowshed](../../reference/sdks/cow-sdk/classes/CowShedHooks.md) to repay the debt using flash-loaned tokens. The underlying user order is then solely for repaying the required flash loan. Since the repayment is handled via `cowshed`, the user can be either an EOA (Externally Owned Account) or a contract (e.g., a SAFE wallet).
+In this case, the user can sign a pre-hook that deploys a `cowshed` to repay the debt using flash-loaned tokens. The underlying user order is then solely for repaying the required flash loan. Since the repayment is handled via `cowshed`, the user can be either an EOA (Externally Owned Account) or a contract (e.g., a SAFE wallet).
 
 #### Lender does not allow a third-party to repay your debt
 
