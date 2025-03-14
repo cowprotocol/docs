@@ -8,7 +8,7 @@ A flash loan is a unique type of loan that is borrowed and repaid atomically wit
 
 Flash loans allow anyone with access to the blockchain to borrow assets without the need for collateral, provided that the loan is repaid before the transaction ends. If the loan is not repaid, the entire transaction is reverted, effectively canceling the loan.
 
-Flash loans were standardized in [EIP-3156](https://eips.ethereum.org/EIPS/eip-3156), but not all providers follow this EIP. Many smart contracts that hold significant amounts of funds allow users to draw on them in flash loans:
+Flash loans are standardized in [EIP-3156](https://eips.ethereum.org/EIPS/eip-3156), but not all providers follow this EIP. Many smart contracts that hold significant amounts of funds allow users to draw on them in flash loans:
 
 | Protocol                | Fee Percentage | ERC-3156 Compliant | Documentation Link                                                                                                   |
 |-------------------------|----------------|--------------------|----------------------------------------------------------------------------------------------------------------------|
