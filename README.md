@@ -6,6 +6,10 @@
 
 The documentation is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
+### Devcontainer
+
+The easiest way to run this repo, is to open it in a Github Devcontainer. Wait for the container to build (this can take some time)
+
 ### Installation
 
 ```bash
@@ -22,7 +26,7 @@ yarn build
 ### Local Development
 
 ```bash
-yarn start
+yarn serve
 ```
 
 This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
