@@ -9,6 +9,5 @@
 				]
 			}
 		},
-	"postCreateCommand": "yarn install && yarn build",
-	"postStartCommand": "yarn serve --build"
+	"postCreateCommand": "yarn install && yarn build"
 }
