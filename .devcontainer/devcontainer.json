@@ -1,16 +1,14 @@
 {
 	"name": "Node",
 	"image": "mcr.microsoft.com/devcontainers/javascript-node",
-
-  "customizations": {
-		"vscode": {
-			"settings": {},
-			"extensions": [
-				"streetsidesoftware.code-spell-checker"
-			]
-		}
-	},
-
-	"postCreateCommand": "yarn install",
-  "postStartCommand": "yarn serve --build"
+	"customizations": {
+			"vscode": {
+				"settings": {},
+				"extensions": [
+					"streetsidesoftware.code-spell-checker"
+				]
+			}
+		},
+	"postCreateCommand": "yarn install && yarn build",
+	"postStartCommand": "yarn serve --build"
 }
