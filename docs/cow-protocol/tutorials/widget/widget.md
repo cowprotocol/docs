@@ -51,7 +51,7 @@ the [CoW Protocol Docs](https://docs.cow.fi/front-end/creating-app-ids/create-th
 
 ## Partner fee
 
-You may participate in the Partner Fee program to collect fee on trades executed by your users through the Widget by
+You may participate in the Partner Fee program to collect fee on [Market order](https://docs.cow.fi/cow-protocol/concepts/order-types/market-orders) trades executed by your users through the Widget by
 adding the following parameter to your Widget:
 
 ```typescript
