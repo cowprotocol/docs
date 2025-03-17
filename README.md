@@ -6,11 +6,28 @@
 
 The documentation is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
+### Devcontainer
+
+The easiest way to run this repo, is to open it in a Github Devcontainer from the main github page.
+
+![create a devcontainer](.devcontainer/devcontainer.png)
+
+Wait for the container to build (this can take some time).
+Then either preview the current version, or make a change and then build an updated preview by typing
+
+```bash
+yarn serve --build
+```
+
+The preview should load in a new tab
+
 ### Installation
 
 ```bash
 yarn
 ```
+
+### Build
 
 You will also need to `build` the app, to ensure external dependent projects are cloned and setup properly.
 
@@ -18,19 +35,14 @@ You will also need to `build` the app, to ensure external dependent projects are
 yarn build
 ```
 
+This command generates static content into the `build` directory and can be served using any static contents hosting service.
 
 ### Local Development
 
 ```bash
-yarn start
+yarn serve --build
 ```
 
 This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
 
-### Build
 
-```bash
-yarn build
-```
-
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
