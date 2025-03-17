@@ -6,9 +6,10 @@ CoW Protocol supports `ERC-20` tokens. However, not all `ERC-20` token contracts
 
 For a token to be considered tradeable on CoW Protocol, it **MUST**:
 
-- be [`ERC-20`](https://eips.ethereum.org/EIPS/eip-20) compliant
-- have a valid price provided by a _price estimator_ for **0.1 ETH** worth of the token
-- not be on the bad token list
+- Be [`ERC-20`](https://eips.ethereum.org/EIPS/eip-20) compliant
+- Have a valid price provided by a _price estimator_ for an order worth **0.1 ETH** of the token (For Ethereum mainnet and Arbitrum One)
+- Have a valid price provided by a _price estimator_ for an order worth **1 xDAI** of the token (For Gnosis)
+- Not be on the bad token list
 
 :::note
 
@@ -23,6 +24,7 @@ Any token that does not meet these requirements will result in a `NoLiquidity` e
 Price estimators are a subset of solvers that are used to determine the value of a token and are able to quote trades. 
 These services themselves may have dependencies / limitations. 
 The best way to ensure a token is tradeable is to bootstrap a Uni v2 (or some other well-known AMM) pool with the token, as these should get indexed by most price estimators.
+Some of the AMMs that are automatically indexed are UniswapV2, Honeyswap, SushiSwap, BalancerV2 (different weighted and stable pool versions), Baoswap, Swapr, UniswapV3.
 
 ### Bad token list
 
