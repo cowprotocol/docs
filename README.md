@@ -14,6 +14,7 @@ The easiest way to run this repo, is to open it in a Github Devcontainer from th
 
 > [!IMPORTANT]  
 > Under options, make sure to select the branch you want to preview (or `main` if you are starting a new PR from scratch).
+> If you cannot find the branch, you can also go to the existing PR and launch a codespace directly from there.
 
 Wait for the container to build (this can take some time).
 Then either preview the current version, or make a change and then build an updated preview by typing
