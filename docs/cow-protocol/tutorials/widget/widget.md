@@ -69,6 +69,8 @@ const params: CowSwapWidgetParams = {
 createCowSwapWidget(widgetContainer, { params })
 ```
 
+This configuration will apply a partner fee for all networks and trade types (swaps, limit orders, TWAPs, etc.). You can use [Flexible config](#flexible-config) for having more flexibility, or [Advanced configuration](#advanced-configuration) to have even more control over the partner fee configuration parameters.
+
 ### Flexible config
 
 Both `bps` and `recipient` can be set for different chains and different trade types (swap/limit/advanced).
