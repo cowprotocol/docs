@@ -12,6 +12,9 @@ The easiest way to run this repo, is to open it in a Github Devcontainer from th
 
 ![create a devcontainer](.devcontainer/devcontainer.png)
 
+> [!IMPORTANT]  
+> Under options, make sure to select the branch you want to preview (or `main` if you are starting a new PR from scratch).
+
 Wait for the container to build (this can take some time).
 Then either preview the current version, or make a change and then build an updated preview by typing
 
@@ -19,7 +22,7 @@ Then either preview the current version, or make a change and then build an upda
 yarn serve --build
 ```
 
-The preview should load in a new tab
+The preview should load in a new tab.
 
 ### Installation
 
