@@ -25,7 +25,7 @@ Flash loans are standardized in [EIP-3156](https://eips.ethereum.org/EIPS/eip-31
 - **Uncollateralized:** Unlike traditional loans, flash loans do not require any collateral, as they are designed to be repaid within the same transaction.
 - **Transaction Reverts if Not Repaid:** If the loan is not repaid in full, the entire transaction (including borrowing and usage of funds) is reverted to the initial state, ensuring no loss for the lender.
 - **Instantaneous:** Flash loans are executed and settled instantly. They are typically used for arbitrage, collateral swapping, or liquidity provision.
-- **Using the Funds:** The user can perform various actions with the borrowed funds during the same transaction block, such as arbitrage, debt refinancing, or liquidating positions.
+- **Using the Funds:** The user can perform various actions with the borrowed funds during the same transaction block using pre/post-hooks, such as arbitrage, debt refinancing, or liquidating positions.
 
 ## Getting started
 
