@@ -1,0 +1,15 @@
+---
+sidebar_position: 5
+---
+
+# Flash loans
+
+There is an [automated script](https://github.com/mrnaveira/cow-flashloan-tester) that places and signs a flash loan order on the Sepolia network.
+
+The setup for executing a flash loan is explained in detail in the testing script documentation. In general, it requires:
+* A smart contract wallet (e.g. Safe Wallet).
+* A flash loan lender (e.g. Aave).
+* A use case for the funds (e.g. repaying a debt in Aave using a deposit as collateral).
+* The necessary `ERC-20` approvals: to CoW's Vault Relayer contract, as well as any additional approvals related to the use case (e.g. Aave pools).
+
+There is an example of a [successful flash loan order](https://explorer.cow.fi/sepolia/orders/0x86ff28a37bf70c549edfe753d899d44307b1b4c3ae943c6f5bdfe271942fd4f135ed9a9d1122a1544e031cc92fcc7ea599e28d9c67dc66ab) on Sepolia, including the [executed onchain transaction](https://sepolia.etherscan.io/tx/0x6f4fc9b450e08dab0ab2d935e7c7dcade9e44e330e484657e5b1fadb6c6e8851) that repaid a 5,000 USDT debt on Aave using USDC as collateral.
