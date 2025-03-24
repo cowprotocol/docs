@@ -86,6 +86,48 @@ The driver can be configured to use different submission strategies which it dyn
 If the settlement does not expose any MEV (e.g. it executes all trades without AMMs) it's safe and most efficient to directly submit to the public mempool.
 However, if a settlement exposes MEV the driver would submit to an MEV-protected RPC like [MEVBlocker](https://mevblocker.io).
 
+### Flash Loans
+
+The user is able to create a flash loan order's hint by attaching to the `appData` the specified metadata. The autopilot reads the order and cuts it into a [batch auction](../../../concepts/introduction/batch-auctions). Then the driver fetches the `appData` by calling the orderbook with `GET /v1/app_data/<app_data_hash>` for every order and caches them in memory. The driver should include the flash loan information into the batch auction's order before sending it to the solver(s).
+
+
+```mermaid
+sequenceDiagram
+    actor User
+    box protocol
+        participant Orderbook
+        participant Autopilot
+    end
+    box solver
+        participant Driver
+        participant Solver(s)
+    end
+
+    User->>+Orderbook: placeOrder
+    activate Orderbook
+    Orderbook-->>-User: orderPlaced
+    deactivate Orderbook
+
+    Autopilot->>+Orderbook: readOrder
+    activate Orderbook
+    Orderbook-->>-Autopilot: orderData
+    deactivate Orderbook
+
+    Autopilot->>+Driver: solve
+    activate Driver
+    Driver->>+Orderbook: getAppData
+    activate Orderbook
+    Orderbook-->>-Driver: appData
+    deactivate Orderbook
+
+    Driver->>+Solver(s): solve (order with flash loan's information)
+    activate Solver(s)
+    Solver(s)-->>-Driver: solution
+    deactivate Solver(s)
+    Driver->>+Autopilot: solution
+    deactivate Driver
+```
+
 ## Considerations
 
 As you can see the driver has many responsibilities and discussing all of them in detail would be beyond the scope of this documentation but it's worth mentioning one guiding principle that applies to most of them: 
