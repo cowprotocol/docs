@@ -19,7 +19,7 @@ This can be achieved using a buy order where:
 - The **sell token** is the asset used as collateral.
 - The **sell amount** is the full collateral amount.
 
-The receiver must always be the settlement contract, to let the protocol handle repaying the appropriate amount for you.
+The flash loan receiver must always be the settlement contract, to let the protocol handle repaying the appropriate amount for you.
 
 When it comes to repaying debt, the approach depends on the lender's contract terms. Some lenders allow a third party to initiate the transfer of collateral tokens from the lending pool to the trader's address, while others may not.
 
