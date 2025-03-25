@@ -11,7 +11,7 @@ The example was executed using an [automated script](https://github.com/mrnaveir
 
 ## Setup
 The setup for the flash loan example is as follows:
-* A safe Wallet at address `0x35eD9A9D1122A1544e031Cc92fCC7eA599e28D9C`. 
+* A Safe wallet at address 0x35eD9A9D1122A1544e031Cc92fCC7eA599e28D9C. We use a smart contract wallet so that smart contracts can initiate the withdrawal of the collateral token.
 * The Safe borrows 10,000 USDT on Aave using 500,000 USDC as collateral.
 * Aave is used as the flash loan lender.
 * The necessary `ERC-20` approvals are set in the wallet — to CoW's Vault Relayer contract and to the relevant Aave pool contracts.
@@ -74,6 +74,8 @@ In a production network (e.g. mainnet), these considerations generally won’t a
   }
 }
 ```
+
+This example relies on a pre-signature, but a valid EIP-1271 contract signature could also be used.
 
 Check the [flash loan tester script](https://github.com/mrnaveira/cow-flashloan-tester) for more details on how this order is constructed.
 
