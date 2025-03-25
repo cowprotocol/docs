@@ -21,25 +21,24 @@ The example was executed using an [automated script](https://github.com/mrnaveir
 ### Test setup
 The setup for the flash loan example is as follows:
 * A safe Wallet on address `0x35eD9A9D1122A1544e031Cc92fCC7eA599e28D9C`.
-* The Safe borrows 10,000 USDT on Aave using 400,000+ USDC as collateral.
+* The Safe borrows 10,000 USDT on Aave using 500,000 USDC as collateral.
 
 The order itself intends to:
 1. Request a flash loan to Aave of 5,000 USDT.
 2. Use those 5,000 to partially repay the 10,000 USDT debt on Aave.
 3. Withdraw 400,000 USDC from Aave.
-4. Perform a trade on CoW Swap, selling up to 400,000 USDC for 5,002.5 USDT (borrowed amount + [0.05% flash loan fee on Aaave](https://aave.com/docs/concepts/flash-loans)).
+4. Perform a trade on CoW Swap, selling up to 400,000 USDC for 5,002.5 USDT (borrowed amount + [0.05% flash loan fee on Aave](https://aave.com/docs/concepts/flash-loans)).
 2. Use the 5,002.5 USDT from the trade to fully repay the flash loan (including the fee).
 
 :::info
 
-Liquidity and exchange ratios on the Sepolia network can be very inconsistent. To ensure successful execution of the order, we use a high amount of USDC (both as collateral and as the token being traded).
+Exchange ratios on the Sepolia network can be very inconsistent. To ensure successful execution of the order, a large amount of USDC is withdrawn from Aave and used in the trade.
 
 General considerations when testing flash loans on Sepolia and Aave:
-- [Token names in Aaave may not correspond](https://github.com/mrnaveira/cow-flashloan-tester?tab=readme-ov-file#2-select-aave-tokens) with tokens names in other dapps.
+- [Token addresses in Aave may not correspond](https://github.com/mrnaveira/cow-flashloan-tester?tab=readme-ov-file#2-select-aave-tokens) with tokens names in other dapps.
 - [Token ratios](https://github.com/mrnaveira/cow-flashloan-tester?tab=readme-ov-file#4-determine-token-amounts-needed-to-trade-and-deposit) may need to be balanced, and trading amounts adjusted accordingly.
 - Tokens in Aave can be [obtained from the faucet](https://github.com/mrnaveira/cow-flashloan-tester?tab=readme-ov-file#5-get-tokens-from-the-faucet).
 - Check [withdrawal and borrowing availability](https://github.com/mrnaveira/cow-flashloan-tester?tab=readme-ov-file#7-check-aaves-withdrawalborrow-availability) of the tokens on Aave.
-- Try a different RPC in case of transaction submission issues.
 
 In a production network (e.g. mainnet), these considerations generally won’t apply.
 
