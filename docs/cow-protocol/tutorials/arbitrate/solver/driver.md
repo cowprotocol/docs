@@ -165,7 +165,7 @@ For each flash loan, the following encoding has to be added:
 - Allow settlement contract to pull borrowed tokens from flash loan wrapper.
 - Transfer tokens from flash loan wrapper to user (i.e. borrower).
 - Since the order receiver is expected to be the settlement contract, it is needed to transfer the tokens from the settlement contract to the flash loan wrapper.
-- Allow flash loan lender to take tokens from wrapper contract
+- Allow flash loan lender to take tokens from wrapper contract.
 
 ## Considerations
 
