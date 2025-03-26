@@ -6,8 +6,8 @@ sidebar_position: 5
 
 We’ll walk through a concrete example of a debt repayment using flash loans on Sepolia.
 
-There is an [example order](https://explorer.cow.fi/sepolia/orders/0x86ff28a37bf70c549edfe753d899d44307b1b4c3ae943c6f5bdfe271942fd4f135ed9a9d1122a1544e031cc92fcc7ea599e28d9c67dc66ab) for this particular case on Sepolia, including the [corresponding onchain transaction](https://sepolia.etherscan.io/tx/0x6f4fc9b450e08dab0ab2d935e7c7dcade9e44e330e484657e5b1fadb6c6e8851).
-The example was executed using an [automated script](https://github.com/mrnaveira/cow-flashloan-tester) that places and signs a flash loan order on the Sepolia network.
+There is an [example order](https://explorer.cow.fi/sepolia/orders/0x86ff28a37bf70c549edfe753d899d44307b1b4c3ae943c6f5bdfe271942fd4f135ed9a9d1122a1544e031cc92fcc7ea599e28d9c67dc66ab) for this particular case on Sepolia, including the [corresponding on-chain transaction](https://sepolia.etherscan.io/tx/0x6f4fc9b450e08dab0ab2d935e7c7dcade9e44e330e484657e5b1fadb6c6e8851).
+The example was executed using an [automated script](https://github.com/mrnaveira/cow-flashloan-tester) that places and signs a flash loan order on the Sepolia network. The following sections of the tutorial include code snippets from this tool.
 
 ## Setup
 The setup for the flash loan example is as follows:
@@ -36,6 +36,99 @@ General considerations when testing flash loans on Sepolia and Aave:
 
 In a production network (e.g. mainnet), these considerations generally won’t apply.
 
+:::
+
+## Aave repay pre-hook
+We need to define a [pre-hook](/cow-protocol/reference/core/intents/hooks) to repay the 5,000 USDT debt on Aave.
+
+As part of the settlement, we want to call the [`repay` function on Aave's pool](https://aave.com/docs/developers/smart-contracts/pool#write-methods-repay):
+```solidity
+function repay(
+    address asset,
+    uint256 amount,
+    uint256 interestRateMode,
+    address onBehalfOf
+) public virtual override returns (uint256)
+```
+
+The following Typescript code generates the corresponding function data using [`viem`](https://viem.sh/):
+```typescript
+const repayTxData = encodeFunctionData({
+    abi, // ABI definition for the repay function
+    functionName: 'repay',
+    args: [
+      '0xaA8E23Fb1079EA71e0a56F48a2aA51851D8433D0', // asset: USDT
+      '5000000000', // amount: 5,000 USDT (USDT has 6 decimals)
+      2, // interestRateMode: 2 for variable
+      '0x35eD9A9D1122A1544e031Cc92fCC7eA599e28D9C', // onBehalfOf: Safe address
+    ]
+  });
+```
+
+The `repay` call must be executed during the order settlement process. To enable this, the pre-hook defines a transaction that will be sent to the Safe wallet. The Safe then executes the actual repay call to the Aave pool.
+The transaction can be built as shown below:
+```typescript
+  const repaySafeTxData: SafeTransactionDataPartial = {
+    to: '0x6Ae43d3271ff6888e7Fc43Fd7321a503ff738951', // Aave pool address in Sepolia,
+    value: '0',
+    data: repayTxData, // created previously
+    operation: OperationType.Call,
+    nonce, // current Safe nonce + 1
+  };
+
+  const safeTransaction = await safe.createTransaction({ transactions: [repaySafeTxData] });
+  const signedSafeTransaction = await safe.signTransaction(safeTransaction, SigningMethod.ETH_SIGN);
+  const encodedSafeTransaction = await safe.getEncodedTransaction(signedSafeTransaction);
+```
+
+:::note
+For this example, the `nonce` should be offset by 1 from the current Safe's nonce, as this transaction will be executed in the future.
+This is needed to avoid using the same nonce twice, as we will send another transaction for the pre-signature in following sections.
+:::
+
+## Aave withdraw pre-hook
+We need to define another pre-hook to withdraw 400,000 USDC from the Aave deposit, needed for the trade.
+
+For this, we need to call the [`withdraw` function on Aave's pool](https://aave.com/docs/developers/smart-contracts/pool#write-methods-withdraw):
+```solidity
+function withdraw(
+    address asset,
+    uint256 amount,
+    address to
+) public virtual override returns (uint256)
+```
+
+The corresponding function data can be created as follows:
+```typescript
+  const txData = encodeFunctionData({
+    abi, // ABI definition for the withdraw function
+    functionName: 'withdraw',
+    args: [
+      '0x94a9d9ac8a22534e3faca9f4e7f2e2cf85d5e4c8', // asset: USDC
+      '400000000000', // amount: 400,000 USDC (USDC has 6 decimals)
+      '0x35eD9A9D1122A1544e031Cc92fCC7eA599e28D9C', // to: Safe address
+    ]
+  });
+```
+
+Like in the previous section, the `withdraw` call will be executed during the order settlement process via a Safe transaction, and can be built with:
+```typescript
+  const safeTxData: SafeTransactionDataPartial = {
+    to: '0x6Ae43d3271ff6888e7Fc43Fd7321a503ff738951', // Aave pool address in Sepolia,
+    value: '0',
+    data: txData, // created previously
+    operation: OperationType.Call,
+    nonce, // current Safe nonce + 2
+  }
+
+  const safeTransaction = await safe.createTransaction({ transactions: [safeTxData] })
+  const signedSafeTransaction = await safe.signTransaction(safeTransaction, SigningMethod.ETH_SIGN);
+  const encodedSafeTransaction = await safe.getEncodedTransaction(signedSafeTransaction);
+
+  return encodedSafeTransaction;
+```
+:::note
+Just like the `repay` pre-hook, the `nonce` should be incremented to ensure it doesn't conflict with other transactions. Here, we increase it by 2 because there are two preceding transactions: the pre-signature and the `repay` pre-hook.
 :::
 
 ## Order construction
