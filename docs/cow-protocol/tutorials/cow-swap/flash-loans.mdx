@@ -39,7 +39,7 @@ In a production network (e.g. mainnet), these considerations generally won’t a
 :::
 
 ## Aave repay pre-hook
-We need to define a [pre-hook](/cow-protocol/reference/core/intents/hooks) to repay the 5,000 USDT debt on Aave.
+We need to define a [pre-hook](/cow-protocol/reference/core/intents/hooks) to repay the 5,000 USDT debt on Aave, ensuring the Aave pool allows us to withdraw the associated collateral.
 
 As part of the settlement, we want to call the [`repay` function on Aave's pool](https://aave.com/docs/developers/smart-contracts/pool#write-methods-repay):
 ```solidity
@@ -65,7 +65,9 @@ const repayTxData = encodeFunctionData({
   });
 ```
 
-The `repay` call must be executed during the order settlement process. To enable this, the pre-hook defines a transaction that will be sent to the Safe wallet. The Safe then executes the actual repay call to the Aave pool.
+The `repay` call (as well as the `withdraw` call later on) must be executed as a pre-hook during the order settlement process. This ensures that the user has the collateral tokens available before the settlement contract pulls in the sell tokens from all settled orders.
+
+To enable this, the pre-hook defines a transaction that will be sent to the Safe wallet. The Safe then executes the actual repay call to the Aave pool.
 The transaction can be built using the [Safe Protocol Kit](https://docs.safe.global/sdk/protocol-kit) as shown below:
 ```typescript
   const repaySafeTxData: SafeTransactionDataPartial = {
@@ -82,12 +84,12 @@ The transaction can be built using the [Safe Protocol Kit](https://docs.safe.glo
 ```
 
 :::note
-For this example, the `nonce` should be offset by 1 from the current Safe's nonce, as this transaction will be executed in the future.
-This is needed to avoid using the same nonce twice, as we will send another transaction for the pre-signature in following sections.
+For this example, the `nonce` should be offset by 1 from the current Safe's nonce.
+This is necessary to avoid reusing the same nonce, since a separate transaction will be sent to emit the pre-signature for our order, which is required to make it executable in the first place.
 :::
 
 ## Aave withdraw pre-hook
-We need to define another pre-hook to withdraw 400,000 USDC from the Aave deposit, needed for the trade.
+We need to define another pre-hook to withdraw 400,000 USDC from the Aave deposit. This ensures that our Safe wallet holds the necessary sell tokens for the order. Otherwise, the settlement contract would be unable to pull the funds from the Safe, causing the settlement to revert.
 
 For this, we need to call the [`withdraw` function on Aave's pool](https://aave.com/docs/developers/smart-contracts/pool#write-methods-withdraw):
 ```solidity
