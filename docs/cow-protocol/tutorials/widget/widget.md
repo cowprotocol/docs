@@ -63,7 +63,7 @@ const params: CowSwapWidgetParams = {
   partnerFee: {
     bps: 50, // 0.5%
     recipient: '0x0000000000000000000000000000000000000000', // Fee destination address
-  },
+  }
 }
 
 createCowSwapWidget(widgetContainer, { params })
