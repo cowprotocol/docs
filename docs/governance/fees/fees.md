@@ -44,6 +44,7 @@ The purpose of this page is to let users know which fee models are active at any
 >
 > **Fee calculation:** volume \* 0.001
 
+
 :::note
 
 **Surplus** is defined as the difference between the executed price and the minimum execution price for an order
