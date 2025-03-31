@@ -7,7 +7,7 @@ sidebar_position: 5
 We’ll walk through a concrete example of a debt repayment using flash loans on Sepolia.
 
 There is an [example order](https://explorer.cow.fi/sepolia/orders/0x86ff28a37bf70c549edfe753d899d44307b1b4c3ae943c6f5bdfe271942fd4f135ed9a9d1122a1544e031cc92fcc7ea599e28d9c67dc66ab) for this particular case on Sepolia, including the [corresponding on-chain transaction](https://sepolia.etherscan.io/tx/0x6f4fc9b450e08dab0ab2d935e7c7dcade9e44e330e484657e5b1fadb6c6e8851).
-The example was executed using an [automated script](https://github.com/mrnaveira/cow-flashloan-tester) that places and signs a flash loan order on the Sepolia network. The following sections of the tutorial include code snippets from this tool.
+The example was executed using an [automated script](https://github.com/cowprotocol/cow-flashloan-tester) that places and signs a flash loan order on the Sepolia network. The following sections of the tutorial include code snippets from this tool.
 
 ## Setup
 The setup for the flash loan example is as follows:
@@ -31,10 +31,10 @@ The order itself intends to:
 Exchange ratios on the Sepolia network can be very inconsistent. To ensure successful execution of the order, a large amount of USDC is withdrawn from Aave and used in the trade.
 
 General considerations when testing flash loans on Sepolia and Aave:
-- [Token addresses in Aave may not correspond](https://github.com/mrnaveira/cow-flashloan-tester?tab=readme-ov-file#2-select-aave-tokens) with tokens names in other dapps.
-- [Token ratios](https://github.com/mrnaveira/cow-flashloan-tester?tab=readme-ov-file#4-determine-token-amounts-needed-to-trade-and-deposit) may need to be balanced, and trading amounts adjusted accordingly.
-- Tokens in Aave can be [obtained from the faucet](https://github.com/mrnaveira/cow-flashloan-tester?tab=readme-ov-file#5-get-tokens-from-the-faucet).
-- Check [withdrawal and borrowing availability](https://github.com/mrnaveira/cow-flashloan-tester?tab=readme-ov-file#7-check-aaves-withdrawalborrow-availability) of the tokens on Aave.
+- [Token addresses in Aave may not correspond](https://github.com/cowprotocol/cow-flashloan-tester?tab=readme-ov-file#2-select-aave-tokens) with tokens names in other dapps.
+- [Token ratios](https://github.com/cowprotocol/cow-flashloan-tester?tab=readme-ov-file#4-determine-token-amounts-needed-to-trade-and-deposit) may need to be balanced, and trading amounts adjusted accordingly.
+- Tokens in Aave can be [obtained from the faucet](https://github.com/cowprotocol/cow-flashloan-tester?tab=readme-ov-file#5-get-tokens-from-the-faucet).
+- Check [withdrawal and borrowing availability](https://github.com/cowprotocol/cow-flashloan-tester?tab=readme-ov-file#7-check-aaves-withdrawalborrow-availability) of the tokens on Aave.
 
 In a production network (e.g. mainnet), these considerations generally won’t apply.
 
