@@ -15,7 +15,7 @@ The setup for the flash loan example is as follows:
 * The Safe borrows 10,000 USDT on Aave using 500,000 USDC as collateral.
 * Aave is used as the flash loan lender.
 * The necessary `ERC-20` approvals are set in the wallet — to CoW's Vault Relayer contract and to the relevant Aave pool contracts.
-* Some non-zero amount of the order's buy token in the Safe's balance, to pass CoW Swap order validation.
+* The Safe must have a non-zero balance of the order's buy token to pass CoW Swap order validation, which serves as a spam protection measure.
 
 The order itself intends to:
 1. Request a flash loan to Aave of 5,000 USDT.
@@ -185,7 +185,7 @@ To programmatically create and submit a CoW Swap order, we can use [cow-sdk](htt
     amount: '5002500000', // 5,002.5 USDT (borrowed amount + 0.05% Aaave flash loan fee)
     // receiver is always the settlement contract because the driver takes
     // funds from the settlement contract to pay back the loan
-    receiver: '0x9008D19f58AAbD9eD0D60971565AA8510560ab41', // cow settlement contract address in sepolia
+    receiver: '0x9008D19f58AAbD9eD0D60971565AA8510560ab41', // cow settlement contract address on sepolia
   }
 
   const advancedParameters: SwapAdvancedSettings = {
