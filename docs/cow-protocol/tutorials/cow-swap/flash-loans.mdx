@@ -11,10 +11,12 @@ The example was executed using an [automated script](https://github.com/mrnaveir
 
 ## Setup
 The setup for the flash loan example is as follows:
-* A Safe wallet at address 0x35eD9A9D1122A1544e031Cc92fCC7eA599e28D9C. We use a smart contract wallet so that smart contracts can initiate the withdrawal of the collateral token.
+* A Safe wallet at address `0x35eD9A9D1122A1544e031Cc92fCC7eA599e28D9C`. We use a smart contract wallet [so that smart contracts can initiate the withdrawal](/cow-protocol/concepts/order-types/pay-debt-flash-loans#lender-does-not-allow-a-third-party-to-initiate-the-transfer-of-collateral-tokens) of the collateral token.
 * The Safe borrows 10,000 USDT on Aave using 500,000 USDC as collateral.
 * Aave is used as the flash loan lender.
-* The necessary `ERC-20` approvals are set in the wallet — to CoW's Vault Relayer contract and to the relevant Aave pool contracts.
+* The necessary `ERC-20` approvals are set in the wallet:
+    * The collateral token (USDC) is approved for CoW's Vault Relayer contract to facilitate the trade.
+    * The borrowed token (USDT) is approved for the Aave pool contract to enable debt repayment.
 * The Safe must have a non-zero balance of the order's buy token to pass CoW Swap order validation, which serves as a spam protection measure.
 
 The order itself intends to:
@@ -245,7 +247,7 @@ With an EIP-1271 signature, the `setPreSignature` transaction would not be neces
 
 Once an order is placed within the CoW Protocol, it enters an auction batch. When a solution is found, the following steps occur:
 
-1. The winning solver calls the flash loan `IFlashLoanRouter` contract.
+1. The winning solver calls the flash loan [`IFlashLoanRouter`](/cow-protocol/reference/contracts/periphery/flashloans#iflashloanrouter-contract) contract.
 2. The 5,000 USDT gets transferred to the flash loan `IFlashLoanRouter` contract.
 3. In the pre-hook:
     - Transfer 5,000 USDC from the flash loan `IFlashLoanRouter` contract to the user.
