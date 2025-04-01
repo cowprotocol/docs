@@ -17,7 +17,7 @@ The setup for the flash loan example is as follows:
 * The necessary `ERC-20` approvals are set in the wallet:
     * The collateral token (USDC) is approved for CoW's Vault Relayer contract to facilitate the trade.
     * The borrowed token (USDT) is approved for the Aave pool contract to enable debt repayment.
-* The Safe must have a non-zero balance of the order's buy token to pass CoW Swap order validation, which serves as a spam protection measure.
+* The Safe must have a non-zero balance of the order's sell token (USDC in this case) to pass CoW Swap order validation, which serves as a spam protection measure.
 
 The order itself intends to:
 1. Request a flash loan to Aave of 5,000 USDT.
