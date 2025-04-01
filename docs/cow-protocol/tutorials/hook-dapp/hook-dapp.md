@@ -24,10 +24,12 @@ In order to add a custom hook, you need to:
 - Go to "My Custom Hooks" tab
 - Paste a URL of the hook dApp
 
+<img alt="Demo" src="/img/tutorials/hooks-store-custom-hooks.png" width="300"/>
+
 > CoW Hooks are still under development!   
 > But you can test it by switching "Enable hooks" toggle ON in the Swap settings. 
 
-<img alt="Demo" src="/img/tutorials/hooks-store-custom-hooks.png" width="300"/>
+
 
 ## How to develop CoW Hook dApps
 
