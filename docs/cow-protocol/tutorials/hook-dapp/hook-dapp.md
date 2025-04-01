@@ -26,6 +26,7 @@ In order to add a custom hook, you need to:
 
 <img alt="Demo" src="/img/tutorials/hooks-store-custom-hooks.png" width="300"/>
 
+
 > CoW Hooks are still under development!   
 > But you can test it by switching "Enable hooks" toggle ON in the Swap settings. 
 
