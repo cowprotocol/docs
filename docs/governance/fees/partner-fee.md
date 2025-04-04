@@ -15,7 +15,7 @@ Per [CIP-61](https://snapshot.box/#/s:cow.eth/proposal/0xbafee087f3a1d5757e44a72
 The Partner Fee net of the Service Fee is the Partner Fee amount (the "Net Partner Fee") eligible for weekly payment.
 See the [Partner Fee calculation](#partner-fee-calculation-examples) section for examples.
 
-:::note
+:::notes
 
 You may charge users a fee of no more than 100 bps of order volume through your Widget. 
 The Partner Fee will begin to accrue on April 4th, 2024 (the release date of the Partner Fee feature).
@@ -75,6 +75,7 @@ The Partner Fee is currently only applicable to [Market order](https://docs.cow.
 
 :::note
 
-Payments will be made only if the accrued fee value equals or exceeds **0.001 WETH**. Any lesser amount will be voided.
+1. Payments will be made only if the accrued fee value equals or exceeds **0.001 WETH**. Any lesser amount will be voided.
+2. In case of differentiated Fee Policies negotiated with the CoW Foundation, the Partner is required to provide two distinct destination addresses (per network). In case of failure to do so, the lower PartnerFee percentage will apply to all integrations by the Partner.
 
 :::
