@@ -16,31 +16,28 @@ In order to test a solver against CoW Protocol's orderflow, one needs to locally
 
 It is assumed you have rust setup correctly with `rustup`.
 
-:::
-
-The repository where all the backend services can be found is this one: [https://github.com/cowprotocol/services](https://github.com/cowprotocol/services). Here are the main instructions to run the autopilot and the driver.
-
-For the autopilot, we run
-
-```
-    cargo run --bin autopilot -- --native-price-estimators "baseline|http://driver/baseline" --skip-event-sync true --node-url $NODE_URL --shadow https://api.cow.fi/mainnet --drivers "mysolver1|http://localhost:11088/mysolver1"
-```
-
-where one needs to set the NODE_URL appropriately (e.g., a free Infura endpoint).
-
-:::caution
-
 CoW Protocol services infrastructure can be very heavy on RPC resource consumption. Be careful if using with post-paid plans, it's recommended to keep a close eye on RPC resource consumption.
 
 :::
 
+The repository where all the backend services can be found is this one: [https://github.com/cowprotocol/services](https://github.com/cowprotocol/services). Here are the main instructions to run the driver and the autopilot.
+
 For the driver, we run
 
 ```
-    cargo run -p driver -- --config driver.config.toml --ethrpc $NODE_URL
+    cargo run -p driver -- --config crates/driver/example.toml --ethrpc $NODE_URL
 ```
 
 where one needs to configure driver.config.toml to point to their solver engine. A sample such file can be found [here](https://github.com/cowprotocol/services/blob/main/crates/driver/example.toml).
+
+For the autopilot, we run
+
+```
+    cargo run --bin autopilot -- --native-price-estimators "baseline|http://driver/baseline" --skip-event-sync true --node-url $NODE_URL --shadow https://api.cow.fi/mainnet --drivers "mysolver|http://localhost:11088/mysolver|$ADDRESS"
+```
+
+where one needs to set the NODE_URL appropriately (e.g., a free Infura endpoint) and the corresponding H160 ADDRESS.
+
 
 Once the above are set up and running, one can then start testing their solver engine against one of the following orderbooks:
 
