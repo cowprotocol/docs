@@ -25,14 +25,14 @@ When it comes to repaying debt, the approach depends on the lender's contract te
 
 #### Lender allows a third-party to initiate the transfer of collateral tokens
 
-In this case, the user can sign a pre-hook that deploys a [COWShed](https://github.com/cowdao-grants/cow-shed) to repay the debt using flash-loaned tokens. `COWShed` is a user owned ERC1967 proxy deployed at a deterministic address. This deterministic deployment allows users to set the proxy address as the receiver for cowswap orders with pre/post-hooks. The user signs a EIP712 message for the pre/post-hooks which gets validated and only user signed hooks are executed on the user's proxy. This allows users to confidently perform permissioned actions in the hooks like:
+In this case, the user can sign a pre-hook that deploys a [COWShed](https://github.com/cowdao-grants/cow-shed) to repay the debt using flash-loaned tokens. `COWShed` is a user owned ERC-1967 proxy deployed at a deterministic address. This deterministic deployment allows users to set the proxy address as the receiver for cowswap orders with pre/post-hooks. The user signs a EIP-712 message for the pre/post-hooks which gets validated. Only user signed hooks are executed on the user's proxy. This allows users to confidently perform permissioned actions in the hooks such as:
 
 - transferring assets from the proxy to someone else.
 - use the proxy to add collateral or repay debt on a maker CDP or an AAVE debt position, etc.
 
 In order to create the `COWShed`, the user can use the [COWShed SDK](https://github.com/cowprotocol/cow-sdk/tree/main/src/cow-shed).
 
-Then, the underlying user order is then solely for repaying the required flash loan. Since the repayment is handled via `COWShed`, the user can be either an EOA (Externally Owned Account) or a contract (e.g., a SAFE wallet).
+The underlying user order is only used to repay the required flash loan. Since the repayment is handled via `COWShed`, the user can be either an EOA (Externally Owned Account) or a contract (e.g., a SAFE wallet).
 
 #### Lender does not allow a third-party to initiate the transfer of collateral tokens
 

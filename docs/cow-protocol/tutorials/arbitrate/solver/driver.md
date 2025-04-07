@@ -143,11 +143,11 @@ It also takes the exact call data for a call to `settle`.
 The flash-loan router is a solver for CoW Protocol and calls `settle` directly once the flash loans have been obtained.
 Only CoW-Protocol solvers can call this function.
 
-Tokens and lenders are external contracts, while the router and each specific borrowers are dedicated contract implemented by CoW Protocol.
+Tokens and lenders are external contracts, while the router and borrowers have a dedicated contract implemented by CoW Protocol.
 
 The borrowers are the contracts that are called back by the lender once the flash loan is initiated; they are the contracts that receive the flash-loan proceeds and that are eventually responsible to repay the loan.
 
-The only way to move funds out of a borrower is through an ERC-20 approval for some spender.
+The only way to move funds out of a borrower is through an ERC-20 approval transaction from the spender.
 Approvals can be set by calling the [approve](../../../reference/contracts/periphery/flash-loans.md#approve) function on the borrower contract ([IBorrower](../../../reference/contracts/periphery/flash-loans.md#iborrower-contract)) from the context of a settlement.
 For safe operations, like an approval for the settlement contract to spend the funds of the borrower, it's enough to set the approval once for an unlimited amount and reuse the same approval in future settlements.
 
