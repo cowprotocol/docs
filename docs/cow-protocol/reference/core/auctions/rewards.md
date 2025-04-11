@@ -14,7 +14,7 @@ For the interested reader, the main source of truth for the weekly payments to s
 
 ## Solver competition rewards (CIPs 20, 36, 38, 48, 57)
 
-Solver rewards are computed using a mechanism akin to a second-price auction. First, each solver commits a solution, which includes a price vector and a list of trades to execute. The solver proposing the solution with the highest quality wins the right to settle their submitted solution on chain, where quality is the sum of surplus delivered to users and fees paid to the protocol.
+Solver rewards are computed using a mechanism akin to a second-price auction. First, each solver commits a solution, which includes a price vector and a list of trades to execute. The solver proposing the solution with the highest score wins the right to settle their submitted solution on chain, where, as a reminder, score is the sum of surplus delivered to users and fees paid to the protocol.
 
 :::note
 
@@ -25,10 +25,10 @@ From the protocol's perspective, the solution executed on chain must equal the s
 The payment to the winning solver is
 
 $$
-\textrm{payment} = \textrm{cap}(\textrm{observedQuality} - \textrm{referenceQuality}).
+\textrm{payment} = \textrm{cap}(\textrm{observedScore} - \textrm{referenceScore}).
 $$
 
-Here, $$\textrm{referenceQuality}$$ refers to the quality of the second-best solution, and $$\textrm{observedQuality}$$ denotes the settlement's quality as observed on chain. More precisely, in case of a successful settlement, the $$\textrm{observedQuality}$$ is equal to the sum of the surplus generated for users and fees paid to the protocol, while in the case of a failed settlement (e.g. one that reverted), the $$\textrm{observedQuality}$$ is zero.
+Here, $$\textrm{referenceScore}$$ refers to the score of the second-best solution, and $$\textrm{observedScore}$$ denotes the settlement's score as observed on chain. More precisely, in case of a successful settlement, the $$\textrm{observedScore}$$ is equal to the sum of the surplus generated for users and fees paid to the protocol, while in the case of a failed settlement (e.g. one that reverted), the $$\textrm{observedScore}$$ is zero.
 
 :::note
 
@@ -41,11 +41,11 @@ The payment is capped from above and below using the function $$\textrm{cap}(x) 
 - Ethereum mainnet, Arbitrum, and Base chain: $$c_l = 0.010 \;\textrm{ETH}$$ and $$c_u = 0.012 \;\textrm{ETH}$$,
 - Gnosis Chain: $$c_l = c_u = 10 \;\textrm{xDAI}$$.
 
-Submitted scores that are non-positive will be ignored. If only one solution is submitted, $$\textrm{referenceQuality}$$ is set to zero. Formally, this corresponds to always considering the empty solution which does not settle any trades and has quality zero as part of the submitted solutions.
+Submitted scores that are non-positive will be ignored. If only one solution is submitted, $$\textrm{referenceScore}$$ is set to zero. Formally, this corresponds to always considering the empty solution which does not settle any trades and has score equal to zero as part of the submitted solutions.
 
 :::note
 
-There is no guarantee that the per-auction rewards are greater than the gas costs of executing a transaction. Hence, solvers cover these costs by adjusting their reported quality. Of course, a solver who adjusts quality downward too aggressively is then at a disadvantage in the auction. The mechanism, therefore, incentivizes the accurate estimation of gas costs.
+There is no guarantee that the per-auction rewards are greater than the gas costs of executing a transaction. Hence, solvers cover these costs by adjusting their reported score. Of course, a solver who adjusts score downward too aggressively is then at a disadvantage in the auction. The mechanism, therefore, incentivizes the accurate estimation of gas costs.
 
 :::
 
@@ -55,23 +55,23 @@ In addition to paying for gas, the winning solver might incur additional costs, 
 
 ### Solver bidding strategies
 
-After finding optimal routes, solvers must decide what solution to report. Call $$\textrm{successQuality}$$ the quality of the reported solution, which the solver can freely choose as long as it is smaller than some theoretical maximum, which we call $$\textrm{maxQuality}$$, with $$\textrm{maxQuality} - \textrm{successQuality} $$ constituting revenues to the solver.
+After finding optimal routes, solvers must decide what solution to report. Call $$\textrm{successScore}$$ the score of the reported solution, which the solver can freely choose as long as it is smaller than some theoretical maximum, which we call $$\textrm{Score}$$, with $$\textrm{maxScore} - \textrm{successScore} $$ constituting revenues to the solver.
 
-Suppose $$c_u$$ is large and can be ignored. In this case, the winning solver's expected payoff is
-
-$$
-p  (\textrm{maxQuality} - \textrm{referenceQuality} - \textrm{successCost}) - (1 - p)  (\min(c_l,\textrm{referenceQuality}) + \textrm{failCost}).
-$$
-
-The key observation is that $$\textrm{successQuality}$$ doesn't affect the expected payoff in case of a win, and it only affects whether the solver wins. In particular, note that the above expression is strictly decreasing in $$\textrm{referenceQuality}$$. Hence, by choosing $$\textrm{successQuality}$$ such that
+Suppose $$c_u$$ is large and can be ignored. Let $$p$$ be the (estimated) probability of successfully landing a solution on chain and within the deadline. In this case, the winning solver's expected payoff is
 
 $$
-p \cdot (\textrm{maxQuality} - \textrm{successQuality}- \textrm{successCost}) - (1 - p) \cdot (\min(c_l,\textrm{successQuality}) + \textrm{failCost})=0
+p  (\textrm{maxScore} - \textrm{referenceScore} - \textrm{successCost}) - (1 - p)  (\min(c_l,\textrm{referenceScore}) + \textrm{failCost}).
 $$
 
-a solver wins if and only if $$\textrm{referenceQuality}$$ is such that the solver's expected profit from winning is strictly positive. Note that the above equation either has no solution (in which case a solver shouldn't participate in the auction) or it has a unique solution. Such a solution is simple to compute and, in a second-price logic, does not depend on the behavior of other solvers.
+The key observation is that $$\textrm{successScore}$$ doesn't affect the expected payoff in case of a win, and it only affects whether the solver wins. In particular, note that the above expression is strictly decreasing in $$\textrm{referenceScore}$$. Hence, by choosing $$\textrm{successScore}$$ such that
 
-The presence of the cap on rewards $$c_u$$, however, makes the problem more complex as it introduces a "first-price auction" logic: if the difference between the best and second-best solution is very large, then the winning solver wins more when it underreports its quality. However, determining the optimal amount of underreporting is very complex, and requires each solver to make strong assumptions regarding the performance of competing solvers.
+$$
+p \cdot (\textrm{maxScore} - \textrm{successScore}- \textrm{successCost}) - (1 - p) \cdot (\min(c_l,\textrm{successScore}) + \textrm{failCost}) = 0
+$$
+
+a solver wins if and only if $$\textrm{referenceScore}$$ is such that the solver's expected profit from winning is strictly positive. Note that the above equation either has no solution (in which case a solver shouldn't participate in the auction) or it has a unique solution. Such a solution is simple to compute and, in a second-price logic, does not depend on the behavior of other solvers.
+
+The presence of the cap on rewards $$c_u$$, however, makes the problem more complex as it introduces a "first-price auction" logic: if the difference between the best and second-best solution is very large, then the winning solver wins more when it underreports its score. However, determining the optimal amount of underreporting is very complex, and requires each solver to make strong assumptions regarding the performance of competing solvers.
 
 To summarize, there is a simple strategy that guarantees positive expected profits to solvers. This strategy may not be optimal in uncompetitive auctions when the difference between the best and second best solution may be large. However, in these cases, deriving the optimal strategy is a very complex problem. We conclude by noting that most CoW Protocol batches are very competitive: the cap of on rewards is binding only in about 9% of auctions.
 
