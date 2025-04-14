@@ -41,11 +41,11 @@ The payment is capped from above and below using the function $$\textrm{cap}(x) 
 - Ethereum mainnet, Arbitrum, and Base chain: $$c_l = 0.010 \;\textrm{ETH}$$ and $$c_u = 0.012 \;\textrm{ETH}$$,
 - Gnosis Chain: $$c_l = c_u = 10 \;\textrm{xDAI}$$.
 
-Submitted scores that are non-positive will be ignored. If only one solution is submitted, $$\textrm{referenceScore}$$ is set to zero. Formally, this corresponds to always considering the empty solution which does not settle any trades and has score equal to zero as part of the submitted solutions.
+Submitted scores that are non-positive will be ignored. If only one solution is submitted, $$\textrm{referenceScore}$$ is set to zero. Formally, this corresponds to always considering the empty solution which does not settle any trades and has a score equal to zero as part of the submitted solutions.
 
 :::note
 
-There is no guarantee that the per-auction rewards are greater than the gas costs of executing a transaction. Hence, solvers cover these costs by adjusting their reported score. Of course, a solver who adjusts score downward too aggressively is then at a disadvantage in the auction. The mechanism, therefore, incentivizes the accurate estimation of gas costs.
+There is no guarantee that the per-auction rewards are greater than the gas costs of executing a transaction. Hence, solvers cover these costs by adjusting their reported score. Of course, a solver who adjusts their score downward too aggressively is then at a disadvantage in the auction. The mechanism, therefore, incentivizes the accurate estimation of gas costs.
 
 :::
 
