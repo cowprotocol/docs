@@ -81,10 +81,10 @@ At CoW DAO's discretion, systematic violation of these rules may lead to penaliz
 :::
 
 
-From the protocol viewpoint, each solution that satisfies the above constraints has a _quality_ given by the total surplus generated and the fees paid to the protocol:
+From the protocol viewpoint, each solution that satisfies the above constraints has a _score_ given by the total surplus generated and the fees paid to the protocol:
 
 $$\sum_o U(o)+p\cdot \sum_of(o)$$,
 
 where _p_ is a vector of prices used to express all fees in terms of the common numéraire.
 
-Finally, solvers compete for the right to settle a batch by participating in an auction, aiming to implement the solution that generates the most amount of surplus for the user(s). The [solver that wins the auction is rewarded](rewards) by the protocol.
+Finally, solvers compete for the right to settle a batch by participating in an auction, aiming to implement the solution that generates the largest possible score. The [solver that wins the auction is rewarded](rewards) by the protocol.
