@@ -84,7 +84,7 @@ At CoW DAO's discretion, systematic violation of these rules may lead to penaliz
 From the protocol viewpoint, each solution that satisfies the above constraints has a _score_ that is given, roughly speaking, by the total surplus generated and the fees paid to the protocol, all aggregated and denominated in some numéraire. More specifically, the score of a solution is equal to the sum of scores of the orders the solution proposes to execute, where the score of an order $$o$$ is defined as:
 
 * $$o$$ is a sell order: $$\mathrm{score}(o) = (U(o)+ f(o)) \cdot p(b)$$, where $$p(b)$$ is an externally provided price of the buy token relative to a numéraire.
-* $$o$$ is a buy order:  $$\mathrm{score}(o) = (U(o)+ f(o)) \cdot p(b) / \pi$$, where $$p(b)$$ is an externally provided price of the buy token relative to a numéraire and $$\pi$ is the limit price of the order.
+* $$o$$ is a buy order:  $$\mathrm{score}(o) = (U(o)+ f(o)) \cdot p(b) / \pi$$, where $$p(b)$$ is an externally provided price of the buy token relative to a numéraire and $$\pi$$ is the limit price of the order.
 
 We stress that in the above definition of score, we have assumed that potential protocol fees associated with a trade are always captured in the surplus token of the order. In case there is need in the future for a more general protocol fee, the above definition of score will need to be reworked.
 
