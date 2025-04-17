@@ -33,9 +33,9 @@ $$S= \left \{ \begin{bmatrix} x \\-y \end{bmatrix} ~~s.t. ~~\frac{y}{\pi} \leq x
 
 In both cases, the surplus function is defined as
 
-$$U(x,-y)=(x-y / \pi)p(b)$$,
+$$U(x,-y)= x-y / \pi$$,
 
-where $$(x-y / \pi)$$ is the additional amount of buy tokens received by the user relative to the case in which they trade at the limit price, and $$p(b)$$ is the price of the buy token relative to a numéraire (in our case ETH) and is externally provided (i.e., by solvers). The function $$U(x,-y)$$ is therefore expressed in units of the numéraire and is always non-negative.
+i.e., it is the additional amount of buy tokens received by the user relative to the case in which they trade at the limit price, and is naturally expressed in units of the buy token.
 
 A final observation is that orders can be valid over multiple batches. For a fill-or-kill, this means that an order that is not filled remains valid for a certain period (specified by the user). For a partially-fillable order, this also means that only a fraction of it may be executed in any given batch.
 
@@ -51,9 +51,9 @@ $$S = \left\{\begin{bmatrix} x \\-y \end{bmatrix}~~s.t.~~ y \leq x \cdot \pi \hb
 
 Again, the surplus function is defined as
 
-$$U(\{x,-y\})=(x \cdot \pi-y)p(s)$$,
+$$U(\{x,-y\})= x \cdot \pi - y$$.
 
-where $$p(s)$$ is the price of the sell token relative to a numéraire. Also here, orders can be executed over multiple batches.
+Also here, orders can be executed over multiple batches.
 
 ## Protocol Fees
 
@@ -81,10 +81,11 @@ At CoW DAO's discretion, systematic violation of these rules may lead to penaliz
 :::
 
 
-From the protocol viewpoint, each solution that satisfies the above constraints has a _score_ given by the total surplus generated and the fees paid to the protocol:
+From the protocol viewpoint, each solution that satisfies the above constraints has a _score_ given, roughly speaking, by the total surplus generated and the fees paid to the protocol, all aggregated and denominated in some numéraire. More specifically, the score of a solution is equal to the sum of scores of the orders the solution proposes to execute, where the score of an order $$o$$ is defined as:
 
-$$\sum_o U(o)+p\cdot \sum_of(o)$$,
+* $$o$$ is a§ sell order: $$\mathrm{score}(o) = (U(o)+ f(o)) \cdot p(b)$$, where $$p(b)$$ is an externally provided price of the buy token relative to a numéraire.
+* $$o$$ is buy order with limit price $$ \pi$$:  $$\mathrm{score}(o) = (U(o)+ f(o)) \cdot p(b) / \pi$$, where $$p(b)$$ is an externally provided price of the buy token relative to a numéraire and $$\pi$ is the limit price of the order.
 
-where _p_ is a vector of prices used to express all fees in terms of the common numéraire.
+We stress that in the above definition of score, we have assumed that potential protocol fees associated with a trade are always captured in the surplus token of the order. In case there is need in the future for a more general protocol fee, the above definition of score will need to be reworked.
 
 Finally, solvers compete for the right to settle a batch by participating in an auction, aiming to implement the solution that generates the largest possible score. The [solver that wins the auction is rewarded](rewards) by the protocol.
