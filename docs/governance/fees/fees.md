@@ -10,9 +10,6 @@ This documentation refers to CoW Protocol fees. Builders connected to MEV blocke
 
 :::
 
-[CIP-34](https://snapshot.org/#/cow.eth/proposal/0xe358941aa3f3aeaf94d40e6904c9bb530c98f88e363c2f309d9898b0ffb16c1f) directs the core team of CoW DAO to spend 6 months testing fee models for the purpose of generating revenue from CoW Protocol (starting January 16, 2024).
-It also directs the core team to keep the DAO up to date on the progress of the testing.
-
 The purpose of this page is to let users know which fee models are active at any point in time, so they know what fees they will encounter when using CoW Protocol (either directly or through CoW Swap).
 
 ## Current Fees
