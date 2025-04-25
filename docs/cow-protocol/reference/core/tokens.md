@@ -9,7 +9,7 @@ For a token to be considered tradeable on CoW Protocol, it **MUST**:
 - Be [`ERC-20`](https://eips.ethereum.org/EIPS/eip-20) compliant
 - Have a valid price provided by a _price estimator_ for an order worth **0.1 ETH** of the token (For Ethereum mainnet and Arbitrum One)
 - Have a valid price provided by a _price estimator_ for an order worth **1 xDAI** of the token (For Gnosis)
-- The most reliable way to meet the above requirements is to bootstrap a direct liquidity pool (e.g., Uni v2) with the required minimum
+- The most reliable way to meet the above requirements is to bootstrap a direct liquidity pool with the appropriate native token for the chain(e.g., a WETH<>TOKEN pool on Univ2 for Ethereum mainnet) with at least the minimum liquidity required to support price estimation as described above
 - Not be on the bad token list
 
 :::note
