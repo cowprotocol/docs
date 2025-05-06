@@ -139,11 +139,9 @@ It takes a list of loans with the following entries for each loan:
 - The flash-loan lender (e.g., Balancer, Aave, Maker, ...).
 - The _borrower_, which is an adapter contract that makes the specific lender implementation compatible with the router.
 
+Only CoW-Protocol solvers can call this function.
 It also takes the exact call data for a call to `settle`.
 The flash-loan router is a solver for CoW Protocol and calls `settle` directly once the flash loans have been obtained.
-Only CoW-Protocol solvers can call this function.
-
-Tokens and lenders are external contracts, while the router and borrowers have a dedicated contract implemented by CoW Protocol.
 
 The borrowers are the contracts that are called back by the lender once the flash loan is initiated; they are the contracts that receive the flash-loan proceeds and that are eventually responsible to repay the loan.
 
@@ -157,15 +155,12 @@ In general, solvers have full flexibility in deciding how loaned funds are alloc
 
 The settlement is also responsible for repaying the flash loans.
 The specific repayment mechanism depends on the lender, but a common process is having the settlement contract send back the borrowed funds to the borrower and set an approval to the lender for spending the funds of the borrower: then the lender is going to pull back the funds with an ERC-20 `transferFrom` after the settlement is terminated.
-Inability to pay for a flash loan will result in a reverting transaction.
-The flash loans must be executed before any pre-interaction, so the funds are available before the pre-interactions are executed.
 
 For each flash loan, the following encoding has to be added:
 
 - Allow settlement contract to pull borrowed tokens from flash loan wrapper.
 - Transfer tokens from flash loan wrapper to user (i.e. borrower).
-- Since the order receiver is expected to be the settlement contract, it is needed to transfer the tokens from the settlement contract to the flash loan wrapper.
-- Allow flash loan lender to take tokens from wrapper contract.
+- Repayment: Repay the borrowed tokens. For example, the tokens can be transferred from the settlement contract to the flash loan wrapper. Then, the flash loan wrapper can approve the flash loan lender to withdraw the tokens directly from it.
 
 ## Considerations
 
