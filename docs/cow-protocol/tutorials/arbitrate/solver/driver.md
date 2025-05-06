@@ -157,7 +157,7 @@ In general, solvers have full flexibility in deciding how loaned funds are alloc
 
 The settlement is also responsible for repaying the flash loans.
 The specific repayment mechanism depends on the lender, but a common process is having the settlement contract send back the borrowed funds to the borrower and set an approval to the lender for spending the funds of the borrower: then the lender is going to pull back the funds with an ERC-20 `transferFrom` after the settlement is terminated.
-Inability to pay for a flash loan will most likely be met by a reverting transaction.
+Inability to pay for a flash loan will result in a reverting transaction.
 The flash loans must be executed before any pre-interaction, so the funds are available before the pre-interactions are executed.
 
 For each flash loan, the following encoding has to be added:
