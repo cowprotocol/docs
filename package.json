@@ -37,7 +37,7 @@
     "react-dom": "^18.0.0",
     "rehype-katex": "7",
     "remark-math": "6",
-    "swagger-ui-react": "4.15.5"
+    "swagger-ui-react": "5.11.0"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.7.0",
