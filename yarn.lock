@@ -5670,15 +5670,15 @@ dns-packet@^5.2.2:
   dependencies:
     "@leichtgewicht/ip-codec" "^2.0.1"
 
-docusaurus-json-schema-plugin@^1.7.0:
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/docusaurus-json-schema-plugin/-/docusaurus-json-schema-plugin-1.7.0.tgz#e001e1089f13eeca61db9d552cff6e3a520d9576"
-  integrity sha512-Q9m6kIcCzA3CEtzaWBsgXbve8dWHInhO2XRvmJfFM6PYxcabGnmYBgJ13gI3PaIrt8SdBebc9v2ewj2Y0XfpLQ==
+docusaurus-json-schema-plugin@^1.14.0:
+  version "1.14.0"
+  resolved "https://registry.yarnpkg.com/docusaurus-json-schema-plugin/-/docusaurus-json-schema-plugin-1.14.0.tgz#56068280de5ace928a7704b65c48d99341185c04"
+  integrity sha512-TyXIVqAr+rKXhRQqq/IElUogl5ABSDV+PoiHcB6+Jroy2RMsimHkvz3OyfYpxTPDVGetSlX9TvuYJgLVBLIe/w==
   dependencies:
     "@stoplight/json-ref-resolver" "^3.1.5"
-    monaco-editor "^0.39.0"
-    monaco-editor-webpack-plugin "^7.0.1"
-    react-monaco-editor "^0.54.0"
+    monaco-editor "^0.52.2"
+    monaco-editor-webpack-plugin "^7.1.0"
+    react-monaco-editor "^0.58.0"
 
 docusaurus-plugin-typedoc@^0.21.0:
   version "0.21.0"
@@ -8719,17 +8719,17 @@ mlly@^1.7.4:
     pkg-types "^1.3.0"
     ufo "^1.5.4"
 
-monaco-editor-webpack-plugin@^7.0.1:
+monaco-editor-webpack-plugin@^7.1.0:
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/monaco-editor-webpack-plugin/-/monaco-editor-webpack-plugin-7.1.0.tgz#16f265c2b5dbb5fe08681b6b3b7d00d3c5b2ee97"
   integrity sha512-ZjnGINHN963JQkFqjjcBtn1XBtUATDZBMgNQhDQwd78w2ukRhFXAPNgWuacaQiDZsUr4h1rWv5Mv6eriKuOSzA==
   dependencies:
     loader-utils "^2.0.2"
 
-monaco-editor@^0.39.0:
-  version "0.39.0"
-  resolved "https://registry.yarnpkg.com/monaco-editor/-/monaco-editor-0.39.0.tgz#3cf8e3718d6aac347d374516a6837d1c13d967d2"
-  integrity sha512-zhbZ2Nx93tLR8aJmL2zI1mhJpsl87HMebNBM6R8z4pLfs8pj604pIVIVwyF1TivcfNtIPpMXL+nb3DsBmE/x6Q==
+monaco-editor@^0.52.2:
+  version "0.52.2"
+  resolved "https://registry.yarnpkg.com/monaco-editor/-/monaco-editor-0.52.2.tgz#53c75a6fcc6802684e99fd1b2700299857002205"
+  integrity sha512-GEQWEZmfkOGLdd3XK8ryrfWz3AIP8YymVXiPHEdewrUq7mh0qrKrfHLNCXcbB6sTnMLnOZ3ztSiKcciFUkIJwQ==
 
 mrmime@^1.0.0:
   version "1.0.1"
@@ -10299,12 +10299,10 @@ react-loadable-ssr-addon-v5-slorber@^1.0.1:
   dependencies:
     "@types/react" "*"
 
-react-monaco-editor@^0.54.0:
-  version "0.54.0"
-  resolved "https://registry.yarnpkg.com/react-monaco-editor/-/react-monaco-editor-0.54.0.tgz#ec9293249a991b08264be723c1ec0ca3a6d480d8"
-  integrity sha512-9JwO69851mfpuhYLHlKbae7omQWJ/2ICE2lbL0VHyNyZR8rCOH7440u+zAtDgiOMpLwmYdY1sEZCdRefywX6GQ==
-  dependencies:
-    prop-types "^15.8.1"
+react-monaco-editor@^0.58.0:
+  version "0.58.0"
+  resolved "https://registry.yarnpkg.com/react-monaco-editor/-/react-monaco-editor-0.58.0.tgz#da2285d27d29be1080b7558c25e0fc5050e3fdfb"
+  integrity sha512-e8JH0TQEzO96Wd/EXgzc9M9tQK1pxBECD+8GNob9slMURcCM36TiVrgc4topWCDGYxRuMj8IEkaX+s3eQcUUqw==
 
 react-redux@^9.0.4:
   version "9.2.0"
