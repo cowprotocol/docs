@@ -234,9 +234,46 @@ An intent's validity and owner are recovered from the [intent mapping](#orders).
 
 Each intent can be invalidated at most once and returns all funds that have not yet been used for trading. After invalidation, the intent is marked as invalid by setting the intent mapping for the intent digest to `invalidated`.
 
+## Automatic Refund Service
+
+CoW Protocol operates an automatic refund service that monitors expired Eth-flow orders and refunds unmatched ETH back to users. However, this service has specific criteria to ensure it only refunds orders that had reasonable execution parameters.
+
+### Slippage Tolerance Requirements
+
+The automatic refund service will **only refund orders that were created with a minimum slippage tolerance of 2%**. This requirement exists because:
+
+- Orders with very low slippage tolerance have a higher probability of expiring without execution
+- The 2% threshold helps distinguish between orders that failed due to market conditions versus those with unrealistic execution parameters
+
+#### Automatic Refund Eligibility
+
+**Automatically refunded:**
+- Eth-flow orders with 2% or higher slippage tolerance
+- Orders that expire without being matched
+- Orders created through CoW Swap interface (uses 2% default)
+- Orders created through CoW Widget (uses 2% default)
+
+**Requires manual refund:**
+- Eth-flow orders with less than 2% slippage tolerance
+- Users must use the manual refund tool to recover their ETH
+
+### Default Settings
+
+#### CoW Swap Interface & CoW Widget
+Both the CoW Swap interface and CoW Widget set **2% slippage tolerance as the default** for Eth-flow orders. Users who don't modify this default setting will automatically qualify for the refund service if their orders expire.
+
+#### For Integrators
+If you're integrating CoW Protocol and want your users' Eth-flow orders to be eligible for automatic refunds, ensure that:
+
+- The default slippage tolerance is set to at least 2%
+- Users are informed about the slippage requirements for automatic refunds
+- Consider displaying a warning if users set slippage below 2% that they may need to manually refund expired orders
+
+Integrators can also utilize the manual refund functionality by directing users to the [manual refund tool](https://manual-ethflow-refunder.cowdev.eth.limo/) when needed, or by running their own refund service using the [open-source code](https://github.com/cowprotocol/manual-ethflow-refunder) to automatically refund users' expired orders regardless of slippage tolerance.
+
 :::tip
 
-Do you need to **manually recover funds from an Eth-flow intent**? There's a [tool for that](https://manual-ethflow-refunder.cowdev.eth.limo/). Simply enter the TX hash of the Eth-flow intent creation transaction and the tool will generate a transaction that will invalidate the intent and return the funds to the user.
+Do you need to manually recover funds from an Eth-flow intent? Use the [manual refund tool](https://manual-ethflow-refunder.cowdev.eth.limo/). Simply enter the TX hash of the Eth-flow intent creation transaction and the tool will generate a transaction that will invalidate the intent and return the funds to the user. For more details about automatic vs manual refunds, see the Automatic Refund Service section above.
 
 :::
 
