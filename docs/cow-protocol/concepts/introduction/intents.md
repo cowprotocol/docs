@@ -32,4 +32,4 @@ The intent-based architecture of CoW Protocol also provides a number of technica
 - Allowing users to pay gas fees in their *sell token* without needing to hold the chain-native token (like ETH) in their wallet
 - Eliminating fees for failed transactions
 - Allowing users to place multiple orders at once
-- Allowing the protocol to implement [batch auctions](./batch-auctions) and, therefore, all of the benefits that come from settling orders in batches
+- Allowing the protocol to settle orders in batches, generating efficiencies from [Coincidence of Wants](../how-it-works/coincidence-of-wants) or gas savings.
