@@ -71,7 +71,7 @@ Solvers propose solutions to the protocol, where a solution is a set of trades t
 
 * **Incentive compatibility and feasibility**: the trades respect the user and liquidity sources, that is, $$o_i\in S_i~~\forall i\leq I$$  and $$l_j \in L_j~~\forall j\leq J$$.
 * **Sufficient endowments**:  each user should have enough sell tokens in their wallet. Note that the protocol already performs this check at order creation. However, a user could move funds between order creation and execution or create multiple orders pledging the same sell amount multiple times. Hence, each solver should  also check that users' endowments are sufficient to execute the proposed solution.
-* **Uniform clearing prices**: all users must face the same prices. Importantly, this constraint is defined at the moment when the swap occurs. So, for example, suppose user _i_ receives _x_ units of token 1 in exchange for _y_ units of token 2 and that the protocol takes a fee in the sell token $$f_2$$. Define $$p_{1,2}=\frac{y-f_2}{x}$$ as the price at which the swap occurs. Uniform clearing prices means that $$p_{1,2}$$ is the same for all users swapping token 1 and token 2. Furthermore, prices must be consistent, in the sense that for any three tokens 1, 2, and 3, if $$p_{1,2},~ p_{2,3}, ~p_{1,3}$$ are well-defined, then it must be that $$p_{1,2}\cdot p_{2,3}=p_{1,3}$$. Note that this implies that prices can be expressed with respect to a common numéraire, giving rise to a uniform price clearing vector $$p$$.
+* **Uniform directional clearing prices**: all users trading the same token pair in the same direction must face the same prices. Importantly, this constraint is defined at the moment when the swap occurs. So, for example, suppose user _i_ receives _x_ units of token 1 in exchange for _y_ units of token 2 and that the protocol takes a fee in the sell token $$f_2$$. Define $$p_{1,2}=\frac{y-f_2}{x}$$ as the price at which the swap occurs. Uniform directional clearing prices means that $$p_{1,2}$$ is the same for all users buying token 1 and selling token 2. Deviations from uniform directional prices are allowed to account for the extra gas cost of orders triggering hooks.
 * [**Social consensus rules**](competition-rules): These are a set of principles that solvers should follow, which were voted by CIPs.
 
 :::caution
@@ -81,11 +81,11 @@ At CoW DAO's discretion, systematic violation of these rules may lead to penaliz
 :::
 
 
-From the protocol viewpoint, each solution that satisfies the above constraints has a _score_ that is given, roughly speaking, by the total surplus generated and the fees paid to the protocol, all aggregated and denominated in some numéraire. More specifically, the score of a solution is equal to the sum of scores of the orders the solution proposes to execute, where the score of an order $$o$$ is defined as:
+From the protocol viewpoint, each solution that satisfies the above constraints has a _score_ that is given by the total surplus generated and the fees paid to the protocol, all aggregated and denominated in some numéraire. More specifically, the score of a solution is equal to the sum of scores of the orders the solution proposes to execute, where the score of an order $$o$$ is defined as:
 
 * $$o$$ is a sell order: $$\mathrm{score}(o) = (U(o)+ f(o)) \cdot p(b)$$, where $$p(b)$$ is an externally provided price of the buy token relative to a numéraire.
-* $$o$$ is a buy order:  $$\mathrm{score}(o) = (U(o)+ f(o)) \cdot p(b) / \pi$$, where $$p(b)$$ is an externally provided price of the buy token relative to a numéraire and $$\pi$$ is the limit price of the order.
+* $$o$$ is a buy order:  $$\mathrm{score}(o) = (U(o)+ f(o)) \cdot p(b) \cdot \pi$$, where $$p(b)$$ is an externally provided price of the buy token relative to a numéraire and $$\pi$$ is the limit price of the order.
 
-We stress that in the above definition of score, we have assumed that potential protocol fees associated with a trade are always captured in the surplus token of the order. In case there is need in the future for a more general protocol fee, the above definition of score will need to be reworked.
+Note that the above definition assumes that fees are specified in the surplus token of the order (i.e., in the buy token for sell orders and in the sell token for buy orders), which is currently the case. 
 
-Finally, solvers compete for the right to settle a batch by participating in an auction, aiming to implement the solution that generates the largest possible score. The [solver that wins the auction is rewarded](rewards) by the protocol.
+Finally, solvers compete for the right to settle their solutions by participating in an auction, aiming to implement the combination of solutions that generates the largest possible total score while also being "fair" (see [here](competition-rules#off-chain-protocol)). The [solver that wins the auction is rewarded](rewards) by the protocol.
