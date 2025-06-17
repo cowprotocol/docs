@@ -54,5 +54,9 @@ Once the above are set up and running, one can then start testing their solver e
 | <https://api.cow.fi/arbitrum_one/api>      | Arbitrum One | Production  |
 | <https://barn.api.cow.fi/base/api>         | Base         | Staging     |
 | <https://api.cow.fi/base/api>              | Base         | Production  |
+| <https://barn.api.cow.fi/avax/api>         | Avalanche    | Staging     |
+| <https://api.cow.fi/avax/api>              | Avalanche    | Production  |
+| <https://barn.api.cow.fi/pol/api>          | Polygon      | Staging     |
+| <https://api.cow.fi/pol/api>               | Polygon      | Production  |
 | <https://barn.api.cow.fi/sepolia/api>      | Sepolia      | Staging     |
 | <https://api.cow.fi/sepolia/api>           | Sepolia      | Production  |
