@@ -70,6 +70,12 @@ The driver expects the solver engine to return a recipe on how to solve a set of
 In the post-processing step the driver applies multiple sanity checks to the solution, encodes it into a transaction that can be executed on-chain and verifies that it actually simulates successfully before it considers the solution valid.
 All this is done because solvers can get slashed for misbehaving so the reference driver checks all it can to reduce the risk of running a solver as much as possible.
 
+:::note
+
+The driver runs pre- and post-hooks for the solver, don't execute these yourself in your solver code.
+
+:::
+
 Since the solver engine is allowed to propose multiple solutions the driver also contains some logic to pick the best one.
 First it will try to merge disjoint solutions to create bigger and more gas efficient batches.
 Afterwards it will simulate the solutions to get an accurate gas usage for them which is used to compute a score for each one.
@@ -164,7 +170,7 @@ For each flash loan, the following encoding has to be added:
 
 ## Considerations
 
-As you can see the driver has many responsibilities and discussing all of them in detail would be beyond the scope of this documentation but it's worth mentioning one guiding principle that applies to most of them: 
+As you can see the driver has many responsibilities and discussing all of them in detail would be beyond the scope of this documentation but it's worth mentioning one guiding principle that applies to most of them:
 make the driver do as _little_ work as possible in the hot path when processing an auction.
 
 Because having more time for the solver to compute a solution leads to a more competitive solver every process in the driver should introduce as little latency as possible.
