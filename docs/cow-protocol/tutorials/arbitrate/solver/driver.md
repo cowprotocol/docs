@@ -72,7 +72,7 @@ All this is done because solvers can get slashed for misbehaving so the referenc
 
 :::note
 
-The driver runs pre- and post-hooks for the solver, don't execute these yourself in your solver code.
+The driver encodes all matched orders' pre- and post-hooks for the solver, the solver does not have to add them in its solution. The `preInteractions` and `postInteractions` that can be added to a solution are only needed for additional calls the solver needs to execute to make the solution work.
 
 :::
 
