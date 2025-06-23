@@ -1,45 +1,37 @@
 # Overview
 
-**MEV Blocker is the #1 leading MEV-protection RPC solution by transaction volume and rebates. A product developed and stewarded by CoW DAO, Beaver Builder and Gnosis DAO.**
+## MEV Blocker is the #1 leading MEV-protection RPC solution by transaction volume and rebates.
 
-MEV Blocker is built to:
+![MEV Blocker](/img/mevblocker/concept1-1200x630.png) 
 
-* Protect users from frontrunning & sandwich attacks
-* Give users a rebate from backrunning opportunities created by the their trades
-* Provide fast trade settlement
+### MEV Blocker is Built to:
 
-![The Best Protection Under the Sun](/img/mevblocker/mevblocker_tagline.png)
+* Protect users from frontrunning & sandwich attacks (MEV Attacks)
+*  Give users/integrators a rebate from backrunning opportunities created by the their flow
+*  Provide the fastest inclusion time
 
-MEV Blocker's order flow auction protects user transactions from frontrunning and sandwich attacks — the worst types of MEV — by sending transactions to a private mempool of trusted searchers. These searchers then capture any backrunning opportunities left by user transactions and give up to 90% of their value back to the users. 
+### Key Advantages
 
-## MEV Blocker Offers Important Advantages to Users
+The key advantages that MEV Blocker offers in comparison to other RPCs are the following?
 
-* **MEV Protection**: Transactions sent to the public mempool are subject to all sorts of MEV attacks including [frontrunning](https://blog.cow.fi/what-is-frontrunning-b2641ad7af21) and [sandwich attacks](https://blog.cow.fi/what-is-a-sandwich-attack-and-how-can-you-protect-yourself-b101c9a9b9b3). MEV bots are responsible for [millions of dollars of value lost each week](https://eigenphi.io/mev/ethereum/sandwich). By using MEV Blocker's private pool, all transactions are de-facto protected from harmful MEV.
+* **Inclusion time →** MEV Blocker is the fastest RPC across the market due to is innovative Builder fee mechanism.
+* **Backrun Rebates →** MEV Blocker is the RPC with the highest rebates across the market due to its strongest and most robust OFA, which is why it gets the highest rebates in comparison to other RPCs
+* **Transparent →** All our data is public within in a 30s delay. Unlike other RPCs we dont play games with your flow and we stand by the data we pubslish.
+* **Customizable →** MEV Blocker offers five different RPC endpoints that users/integrators can choose from based on their individual needs.
+* **Permissionless →** All endpoints, and features are fully permissionless, no gate keeping.  MEV Blocker is built by experts to be user-friendly, easy to set up, and free for users to integrate.
 
-* **MEV Rebates**: Searchers connected to MEV Blocker bid for the right to backrun user transactions using "append-only" bundles. 90% of these bids are paid as a rebate to the transaction originator (the user). The remaining 10% incentivizes builders and validators to quickly include the bundle in the remaining PBS auction. Rebates are a great way to ensure no value leaks through the supply chain and users re-capture value they left on the table. These rebates can also be an extremely powerful way for wallets or dApp solvers to capture value and generate extra revenue. If you are interested in learning the mechanics behind the MEV Blocker rebates, check out the MEV Blocker order flow auction explainer page.
+### MEV Blocker Beats the Competition
 
-* **Faster Inclusion Than Traditional RPCs**: Instead of waiting on the public Ethereum mempool, transactions sent through MEV Blocker get forwarded directly to all major builders, resulting in a faster inclusion rate. 
+Check out our RPC Benchmark Comparison study to see how MEV Blocker performance across speed, backruns, and success, compares to other RPCs.
 
-* **Multiple Endpoints**: MEV Blocker offers five different RPC endpoints that users can choose from based on their individual needs. 
+![Guide](/img/mevblocker/mevblocker_comparison.png)
 
-![Endpoints](/img/mevblocker/Endpoints_protection.png)
+### [Comparison Study](/mevblocker/rpc-performance)
 
-* **Transparency**: A [Dune Dashboard](https://dune.com/cowprotocol/mev-blocker) allows anyone to check the transactions submitted through the MEV Blocker RPC. Users can follow their transactions in detail, see all searcher bids, and calculate the overall revenue they have received from MEV Blocker rebates.
-
-## MEV Blocker Beats the Competition
-
-* **Low Latency and Fast Inclusion Time**: With a strong builder network, MEV Blocker acts as a builder aggregator that forwards transactions directly to all major builders. Over 90% of transactions are processed in the next block, typically within 12 seconds.
-
-* **Superior Rebates**: Thanks to its robust searcher competition, MEV Blocker has been able to generate more than 10x  the backrunning rebates of any other RPC solution — which is great news for users. 
-
-* **Simple and Free to Integrate**: MEV Blocker is built by experts to be user-friendly, easy to set up, and free for users to integrate.
-
-## Growing List of Partners
-
-Wallets that have integrated MEV Blocker include **Uniswap Wallet, Rabby Wallet, Crypto.com Defi Wallet, Ambire Wallet, Keepkey Wallet.**
-
-MEV Blocker is trusted by more than 30 prominent Ethereum projects including **Balancer, Safe, ShapeShift, Paraswap, VirtuSwap, Karpatkey, Swarm, Castle, Aura, Oasis.app, Eigenphi, and many more.**
-
-## Supported Chains
+### Supported Chains
 
 Ethereum: All features are supported on Ethereum.
+
+import DocCardList from '@theme/DocCardList';
+
+<DocCardList />
