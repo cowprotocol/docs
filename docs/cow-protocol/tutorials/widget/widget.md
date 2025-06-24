@@ -109,6 +109,16 @@ const b: PartnerFee = {
       [TradeType.LIMIT]: 50,
       [TradeType.ADVANCED]: 30,
     },
+    [SupportedChainId.AVALANCHE]: {
+      [TradeType.SWAP]: 100,
+      [TradeType.LIMIT]: 50,
+      [TradeType.ADVANCED]: 30,
+    },
+    [SupportedChainId.POLYGON]: {
+      [TradeType.SWAP]: 100,
+      [TradeType.LIMIT]: 50,
+      [TradeType.ADVANCED]: 30,
+    },
     [SupportedChainId.SEPOLIA]: {
       [TradeType.SWAP]: 100,
       [TradeType.LIMIT]: 50,
@@ -127,6 +137,8 @@ const c: PartnerFee = {
       [SupportedChainId.ARBITRUM_ONE]: '0x...b',
       [SupportedChainId.BASE]: '0x...bb',
       [SupportedChainId.GNOSIS_CHAIN]: '0x...c',
+      [SupportedChainId.AVALANCHE]: '0x...c',
+      [SupportedChainId.POLYGON]: '0x...c',
       [SupportedChainId.SEPOLIA]: '0x...d',
     },
     [TradeType.LIMIT]: {
@@ -134,6 +146,8 @@ const c: PartnerFee = {
       [SupportedChainId.ARBITRUM_ONE]: '0x...f',
       [SupportedChainId.BASE]: '0x...ff',
       [SupportedChainId.GNOSIS_CHAIN]: '0x...g',
+      [SupportedChainId.AVALANCHE]: '0x...x',
+      [SupportedChainId.POLYGON]: '0x...y',
       [SupportedChainId.SEPOLIA]: '0x...h',
     },
     [TradeType.ADVANCED]: {
@@ -141,6 +155,8 @@ const c: PartnerFee = {
       [SupportedChainId.ARBITRUM_ONE]: '0x...i',
       [SupportedChainId.BASE]: '0x...ii',
       [SupportedChainId.GNOSIS_CHAIN]: '0x...k',
+      [SupportedChainId.AVALANCHE]: '0x...z',
+      [SupportedChainId.POLYGON]: '0x...t',
       [SupportedChainId.SEPOLIA]: '0x...l',
     },
   },
