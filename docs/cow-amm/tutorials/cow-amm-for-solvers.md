@@ -40,8 +40,8 @@ The helper contracts are deployed here:
 - [Arbitrum](https://arbiscan.io/address/0xdb2aeab529c035469e190310def9957ef0398ba8#code)
 - [Gnosis](https://gnosisscan.io/address/0xdb2aeab529c035469e190310def9957ef0398ba8#code)
 - [Base](https://basescan.org/address/0x467665d4ae90e7a99c9c9af785791058426d6ea0#code)
-- [Avalanche](https://snowtrace.io/address/??)
-- [Polygon](https://polygonscan.com/address/??)
+- Avalanche N/A
+- Polygon N/A
 
 ### Settling a custom order
 

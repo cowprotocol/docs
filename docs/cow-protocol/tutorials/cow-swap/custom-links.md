@@ -72,7 +72,7 @@ Native and wrapped tokens per chain:
 - Gnosis chain: [`WXDAI`](https://gnosisscan.io/address/0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d) - wrapped `XDAI`
 - Arbitrum one: [`WETH`](https://arbiscan.io/address/0x82af49447d8a07e3bd95bd0d56f35241523fbab1) - wrapped `ETH`
 - Base: [`WETH`](https://basescan.org/address/0x4200000000000000000000000000000000000006) - wrapped `ETH`
-- Avalanche: [`WAVAX`](https://snowtrace.io/address/0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7) - wrapped `AVAX`
+- Avalanche: [`WAVAX`](https://snowscan.xyz/address/0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7) - wrapped `AVAX`
 - Polygon: [`WPOL`](https://polygonscan.com/address/0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270) - wrapped `POL`
 - Sepolia: [`WETH`](https://sepolia.etherscan.io/address/0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14) - wrapped `ETH`
 
