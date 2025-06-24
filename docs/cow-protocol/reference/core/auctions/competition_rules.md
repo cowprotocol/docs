@@ -81,29 +81,29 @@ At CoW DAO's discretion, systematic violation of these rules may lead to penaliz
   <details>
     <summary>Arbitrum baseline protocols and tokens</summary>
 
-    - **Protocols**:  Uniswap v2/v3, Sushiswap, Swapr, Balancer v2, Pancakeswap
+    - **Protocols**: Uniswap v2/v3, Sushiswap, Swapr, Balancer v2, Pancakeswap
     - **Base tokens**: [`WETH`](https://arbiscan.io/token/0x82af49447d8a07e3bd95bd0d56f35241523fbab1), [`USDC`](https://arbiscan.io/token/0xaf88d065e77c8cc2239327c5edb3a432268e5831), [`USDT`](https://arbiscan.io/token/0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9), [`DAI`](https://arbiscan.io/token/0xda10009cbd5d07dd0cecc66161fc93d7c9000da1), [`GNO`](https://arbiscan.io/token/0xa0b862f60edef4452f25b4160f177db44deb6cf1)
   </details>
 
   <details>
     <summary>Base chain baseline protocols and tokens</summary>
 
-    - **Protocols**:  Uniswap v2/v3, Balancer v2
+    - **Protocols**: Uniswap v2/v3, Balancer v2
     - **Base tokens**: [`WETH`](https://basescan.org/address/0x420000000000000000000000000000000000000), [`USDC`](https://basescan.org/address/0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913), [`DAI`](https://basescan.org/address/0x50c5725949A6F0c72E6C4a641F24049A917DB0Cb)
   </details>
 
   <details>
     <summary>Avalanche chain baseline protocols and tokens</summary>
 
-    - **Protocols**:  Uniswap v2/v3, Balancer v2
+    - **Protocols**: Uniswap v2/v3, Balancer v2
     - **Base tokens**: [`WAVAX`](https://snowscan.xyz/address/0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7), [`USDC`](https://snowscan.xyz/address/0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e), [`USDT`](https://snowscan.xyz/address/0x9702230a8ea53601f5cd2dc00fdbc13d4df4a8c7)
   </details>
 
   <details>
     <summary>Polygon chain baseline protocols and tokens</summary>
 
-    - **Protocols**:  Uniswap v2/v3, Balancer v2
-    - **Base tokens**: [`WPOL`](https://snowscan.xyz/address/0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270), [`USDC`](https://polygonscan.com/address/0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359), [`USDT`](https://polygonscan.com/address/0xc2132d05d31c914a87c6611c10748aeb04b58e8f)
+    - **Protocols**: Uniswap v2/v3, Balancer v2
+    - **Base tokens**: [`WPOL`](https://polygonscan.com/address/0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270), [`USDC`](https://polygonscan.com/address/0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359), [`USDT`](https://polygonscan.com/address/0xc2132d05d31c914a87c6611c10748aeb04b58e8f)
   </details>
 
 More details about how a certificate of an EBBO violation is computed, and what are the steps taken in case such a violation occurs can be found in [this](/cow-protocol/reference/core/auctions/ebbo-rules) section.
