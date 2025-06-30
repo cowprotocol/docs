@@ -85,7 +85,5 @@ As specified in [CIP-27](https://snapshot.org/#/cow.eth/proposal/0x64e061568e86e
 - Arbitrum: $$\min\{0.0002 ~\textrm{ETH}, 6 ~\textrm{COW}\}$$,
 - Gnosis Chain: $$\min\{0.15 ~\textrm{xDAI}, 6 ~\textrm{COW}\}$$,
 - Base Chain: $$\min\{0.0002 ~\textrm{ETH}, 6 ~\textrm{COW}\}$$,
-- Avalanche Chain: $$\min\{0.0002 ~\textrm{ETH}, 6 ~\textrm{COW}\}$$,
-- Polygon Chain: $$\min\{0.0002 ~\textrm{ETH}, 6 ~\textrm{COW}\}$$,
 
 where, again, the conversion from ETH and xDAI to COW is done by using an up-to-date price (specifically, the average ETH/xDAI/COW Dune prices of the past 24h before the payout are used to determine these exchange rates).

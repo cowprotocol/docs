@@ -56,7 +56,7 @@ Once the above are set up and running, one can then start testing their solver e
 | <https://api.cow.fi/base/api>              | Base         | Production  |
 | <https://barn.api.cow.fi/avalanche/api>    | Avalanche    | Staging     |
 | <https://api.cow.fi/avalanche/api>         | Avalanche    | Production  |
-| <https://barn.api.cow.fi/pol/api>          | Polygon      | Staging     |
-| <https://api.cow.fi/pol/api>               | Polygon      | Production  |
+| <https://barn.api.cow.fi/polygon/api>      | Polygon      | Staging     |
+| <https://api.cow.fi/polygon/api>           | Polygon      | Production  |
 | <https://barn.api.cow.fi/sepolia/api>      | Sepolia      | Staging     |
 | <https://api.cow.fi/sepolia/api>           | Sepolia      | Production  |
