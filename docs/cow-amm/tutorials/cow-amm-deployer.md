@@ -16,6 +16,8 @@ The current factory contract addresses are the following:
 - Gnosis Chain: [`0x703Bd8115E6F21a37BB5Df97f78614ca72Ad7624`](https://gnosisscan.io/address/0x703Bd8115E6F21a37BB5Df97f78614ca72Ad7624#code)
 - Arbitrum One: [`0xE0e2Ba143EE5268DA87D529949a2521115987302`](https://arbiscan.io/address/0xe0e2ba143ee5268da87d529949a2521115987302#code)
 - Base: [`0x03362f847B4fAbC12e1Ce98b6b59F94401E4588e`](https://basescan.org/address/0x03362f847b4fabc12e1ce98b6b59f94401e4588e#code)
+- Avalanche: N/A
+- Polygon: N/A
 - Sepolia Testnet: [`0x1E3D76AC2BB67a2D7e8395d3A624b30AA9056DF9`](https://sepolia.etherscan.io/address/0x1E3D76AC2BB67a2D7e8395d3A624b30AA9056DF9#code)
 
 These contracts can be verified through [this](https://github.com/balancer/cow-amm) repository.

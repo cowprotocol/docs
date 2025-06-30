@@ -16,6 +16,8 @@ At the core of CoW Protocol lies the COW token, which serves as a governance tok
 | Gnosis Chain | [`0x177127622c4a00f3d409b75571e12cb3c8973d3c`](https://gnosisscan.io/token/0x177127622c4a00f3d409b75571e12cb3c8973d3c) [^bridgedTokens] |
 | Arbitrum One | [`0xcb8b5cd20bdcaea9a010ac1f8d835824f5c87a04`](https://arbiscan.io/token/0xcb8b5cd20bdcaea9a010ac1f8d835824f5c87a04) [^bridgedTokens]   |
 | Base         | [`0xc694a91e6b071bf030a18bd3053a7fe09b6dae69`](https://basescan.org/token/0xc694a91e6b071bf030a18bd3053a7fe09b6dae69) [^bridgedTokens]  |
+| Polygon      | [`0x2f4efd3aa42e15a1ec6114547151b63ee5d39958`](https://polygonscan.com/token/0x2f4efd3aa42e15a1ec6114547151b63ee5d39958) [^bridgedTokens]  |
+| Avalanche    | N/A |
 
 [^bridgedTokens]:
     These contracts were not developed nor deployed by CoW DAO, however, they are the bridged versions of the canonical token from Ethereum, using the official bridges.
@@ -29,6 +31,8 @@ At the core of CoW Protocol lies the COW token, which serves as a governance tok
 | Gnosis Chain | [`0xc20C9C13E853fc64d054b73fF21d3636B2d97eaB`](https://gnosisscan.io/token/0xc20C9C13E853fc64d054b73fF21d3636B2d97eaB) |
 | Arbitrum One | N/A                                                                                                                    |
 | Base         | N/A                                                                                                                    |
+| Avalanche    | N/A                                                                                                                    |
+| Polygon      | N/A                                                                                                                    |
 
 ## Supply & Inflation Schedule
 
