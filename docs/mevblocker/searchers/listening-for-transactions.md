@@ -1,8 +1,9 @@
 ---
 sidebar_position: 1
 ---
+# Listen to Transactions
 
-# How to receive unsigned pending transactions
+## How to receive unsigned pending transactions
 
 :::note
 
