@@ -322,7 +322,7 @@ const params: CowSwapWidgetParams = {
 |-----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Ranges**                  | `min ≥ 0`, `max ≤ 5000` (50 %), `min ≤ defaultValue ≤ max`, `min < max`                                                                                                                         |
 | **Defaults**                | If the user doesn’t specify a slippage, the widget falls back to `defaultValue`                                                                                                                 |
-| **Auto slippage**           | If the auto-slippage is less than or equal to `defaultSlippage`, the swap will use `defaultSlippage`                                                                                            |
+| **Auto slippage**           | If the auto-slippage is less than or equal to `defaultValue`, the swap will use `defaultValue`                                                                                                  |
 | **ETH‑Flow floor**          | When `defaultValue < 200` bps (2 %) for Ethereum Mainnet or `defaultValue < 50` (0.5 %) for other networks and the trade is *ETH‑Flow*, the widget will force the slippage to **2 %**/**0.5 %** |
 
 ### Example JSON (Configurator ready)
