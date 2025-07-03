@@ -21,7 +21,7 @@ At the core of CoW Protocol lies the COW token, which serves as a governance tok
 
 [^bridgedTokens]:
     These contracts were not developed nor deployed by CoW DAO, however, they are the bridged versions of the canonical token from Ethereum, using the official bridges.
-    [Omni bridge](https://gnosisscan.io/address/0xf6A78083ca3e2a662D6dd1703c939c8aCE2e268d#code) for Gnosis Chain, [Arbitrum One bridge](https://arbiscan.io/address/0x09e9222e96e7b4ae2a407b98d48e330053351eee#code) for Arbitrum one, [Superbridge](https://basescan.org/tx/0xf76a915b7db279a4e559dbc382462e23cb63615f3d3a87ddf36bd96cedf4ca56) for Base, and [Polygon One Bridge](https://portal.polygon.technology/bridge) for Polygon.
+    [Omni bridge](https://gnosisscan.io/address/0xf6A78083ca3e2a662D6dd1703c939c8aCE2e268d#code) for Gnosis Chain, [Arbitrum One bridge](https://arbiscan.io/address/0x09e9222e96e7b4ae2a407b98d48e330053351eee#code) for Arbitrum one, [Superbridge](https://basescan.org/tx/0xf76a915b7db279a4e559dbc382462e23cb63615f3d3a87ddf36bd96cedf4ca56) for Base, and [Polygon Bridge](https://portal.polygon.technology/bridge) for Polygon.
 
 #### `vCOW` - Vesting token
 
