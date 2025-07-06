@@ -25,7 +25,7 @@ From the protocol's perspective, a solution executed on chain must equal the sol
 The payment to the winning solver $$i$$ is
 
 $$
-\textrm{payment}_i = \textrm{cap}(\textrm{TotalScore} - \textrm{referenceScore}_i-\textrm{missingScore}_i).
+\textrm{payment}_i = \textrm{cap}(\textrm{totalScore} - \textrm{referenceScore}_i-\textrm{missingScore}_i).
 $$
 
 Here $$\textrm{TotalScore}$$ is the sum of the scores of all winning solutions in the auction and $$\textrm{missingScore}_i$$ is the sum of the scores of solver $$i$$'s winning solutions that reverted. Finally, $$\textrm{referenceScore}_i$$ is the  $$\textrm{TotalScore}$$ of a counterfactual auction in which all bids from solver $$i$$ are removed from the set of bids that survive the fairness filtering. 
