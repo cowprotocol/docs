@@ -1,8 +1,9 @@
 ---
 sidebar_position: 2
 ---
+# Bid on Transactions
 
-# How to send backrun bundles to MEV Blocker RPC
+## How to send backrun bundles to MEV Blocker RPC
 
 Bids can be submitted by any client with the relay url: https://rpc.mevblocker.io. 
 
