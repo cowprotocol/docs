@@ -1,3 +1,38 @@
+/* Import Bitte AI Chat widget styles */
+@import '@bitte-ai/chat/styles.css';
+
+/**
+ * Creating a sidebar
+ *
+ * @see https://infima.dev/docs/layout/sidebar
+ */
+
+.heroBanner {
+  padding: 4rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+@media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 2rem;
+  }
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.features {
+  display: flex;
+  align-items: center;
+  padding: 2rem 0;
+  width: 100%;
+}
+
 /**
  * Any CSS included here will be global. The classic template
  * bundles Infima by default. Infima is a CSS framework designed to
@@ -6,24 +41,24 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #052B65;
+  --ifm-color-primary: #052b65;
   --ifm-color-primary-dark: #071121;
   --ifm-color-primary-darker: #000000;
   --ifm-color-primary-darkest: #000000;
   --ifm-color-primary-light: #08439c;
   --ifm-color-primary-lighter: #0b64e8;
-  --ifm-color-primary-lightest: #CAE9FF;
+  --ifm-color-primary-lightest: #cae9ff;
   --ifm-link-color: var(--ifm-color-primary-lighter);
   --ifm-code-font-size: 95%;
   --ifm-font-size-base: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
   --ifm-footer-background-color: var(--ifm-background-surface-color);
   --ifm-footer-color: var(--ifm-color-white);
-  --ifm-color-white: #052B65;
+  --ifm-color-white: #052b65;
   --ifm-color-secondary: var(--ifm-color-white);
   --ifm-menu-color-active: var(--ifm-color-white);
   --ifm-hover-overlay: var(--ifm-background-surface-color);
-  --ifm-background-color: #FFFFFF;
+  --ifm-background-color: #ffffff;
   --ifm-background-surface-color: rgb(236, 241, 248);
   --ifm-color-content: var(--ifm-color-primary);
   --ifm-global-shadow-lw: rgba(5, 43, 101, 0.06) 0px 12px 12px;
@@ -36,16 +71,16 @@ html[data-theme='light'] .navbar {
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 html[data-theme='dark']:root {
-  --ifm-color-primary: #CAE9FF;
-  --ifm-color-primary-dark: #052B65;
-  --ifm-color-primary-darker: #052B65;
-  --ifm-color-primary-darkest: #052B65;
-  --ifm-color-primary-light: #CAE9FF;
+  --ifm-color-primary: #cae9ff;
+  --ifm-color-primary-dark: #052b65;
+  --ifm-color-primary-darker: #052b65;
+  --ifm-color-primary-darkest: #052b65;
+  --ifm-color-primary-light: #cae9ff;
   --ifm-color-primary-lighter: #2b80ff;
-  --ifm-color-primary-lightest: #CAE9FF;
+  --ifm-color-primary-lightest: #cae9ff;
   --ifm-link-color: var(--ifm-color-primary-lighter);
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
-  --ifm-color-white: #CAE9FF;
+  --ifm-color-white: #cae9ff;
   --ifm-color-secondary: var(--ifm-color-white);
   --ifm-menu-color-active: var(--ifm-color-white);
   --ifm-hover-overlay: rgb(255 255 255 / 15%);
@@ -53,7 +88,6 @@ html[data-theme='dark']:root {
   --ifm-background-surface-color: #081d39;
   --ifm-color-content: var(--ifm-color-primary);
   --docsearch-highlight-color: var(--ifm-color-primary-lighter);
-  
 }
 
 .hero--primary {
@@ -72,16 +106,16 @@ html[data-theme='dark'] .button.button--secondary {
 html .swagger-ui,
 html .swagger-ui .info .title,
 html .swagger-ui .opblock-tag,
-html .swagger-ui .opblock .opblock-summary-operation-id, 
-html .swagger-ui .opblock .opblock-summary-path, 
+html .swagger-ui .opblock .opblock-summary-operation-id,
+html .swagger-ui .opblock .opblock-summary-path,
 html .swagger-ui .opblock .opblock-summary-path__deprecated,
 html .swagger-ui .opblock .opblock-summary-description,
-html .swagger-ui .opblock-description-wrapper p, 
-html .swagger-ui .opblock-external-docs-wrapper p, 
+html .swagger-ui .opblock-description-wrapper p,
+html .swagger-ui .opblock-external-docs-wrapper p,
 html .swagger-ui .opblock-title_normal p,
 html .swagger-ui .tab li,
 html .swagger-ui .response-col_status,
-html .swagger-ui table thead tr td, 
+html .swagger-ui table thead tr td,
 html .swagger-ui table thead tr th,
 html .swagger-ui .response-col_links,
 html .swagger-ui .parameter__name,
@@ -104,11 +138,13 @@ html .swagger-ui section.models .model-container {
 }
 
 html .swagger-ui .model-toggle:after {
-  background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9IiMwNTJCNjUiIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTEwIDYgOC41OSA3LjQxIDEzLjE3IDEybC00LjU4IDQuNTlMMTAgMThsNi02eiIvPjwvc3ZnPg==") 50% no-repeat;
+  background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9IiMwNTJCNjUiIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTEwIDYgOC41OSA3LjQxIDEzLjE3IDEybC00LjU4IDQuNTlMMTAgMThsNi02eiIvPjwvc3ZnPg==')
+    50% no-repeat;
 }
 
 html[data-theme='dark'] .swagger-ui .model-toggle:after {
-  background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9IiNjYWU5ZmYiIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTEwIDYgOC41OSA3LjQxIDEzLjE3IDEybC00LjU4IDQuNTlMMTAgMThsNi02eiIvPjwvc3ZnPg==") 50% no-repeat;
+  background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGZpbGw9IiNjYWU5ZmYiIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTEwIDYgOC41OSA3LjQxIDEzLjE3IDEybC00LjU4IDQuNTlMMTAgMThsNi02eiIvPjwvc3ZnPg==')
+    50% no-repeat;
 }
 
 .footer--dark {
@@ -118,7 +154,7 @@ html[data-theme='dark'] .swagger-ui .model-toggle:after {
 }
 
 html[data-theme='light'] .footer--dark {
-  --ifm-footer-link-hover-color: #052B65;
+  --ifm-footer-link-hover-color: #052b65;
 }
 
 html .navbar__items {
@@ -141,8 +177,8 @@ html .navbar__brand {
   }
 
   html .navbar__logo > img {
-    width: 80px!important;
-    height: auto!important;
+    width: 80px !important;
+    height: auto !important;
   }
 }
 
@@ -155,5 +191,5 @@ html .menu_node_modules-\@docusaurus-theme-classic-lib-theme-DocSidebar-Desktop-
 }
 
 div.theme-doc-markdown > div img {
-  margin-bottom: 1em!important;
+  margin-bottom: 1em !important;
 }

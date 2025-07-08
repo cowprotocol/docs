@@ -13,7 +13,7 @@ const config: Config = {
   // Set the production url of your site here
   url: 'https://docs.cow.fi',
   // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
+  // For GitHub pages deployment, it is often '/<baseUrl>/'
   baseUrl: '/',
 
   // GitHub pages deployment config.
@@ -113,6 +113,14 @@ const config: Config = {
         anonymizeIP: true,
       },
     ],
+  ],
+
+  scripts: [
+    // Load polyfills before other scripts
+    {
+      src: '/js/polyfills.js',
+      async: false,
+    },
   ],
 
   stylesheets: [

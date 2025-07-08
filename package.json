@@ -21,6 +21,7 @@
     "fmt": "prettier --write \"**/*.md\""
   },
   "dependencies": {
+    "@bitte-ai/chat": "^0.14.1",
     "@docusaurus/core": "^3.8.0",
     "@docusaurus/plugin-google-gtag": "^3.8.0",
     "@docusaurus/plugin-ideal-image": "^3.8.0",
