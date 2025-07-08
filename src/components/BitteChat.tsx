@@ -53,7 +53,7 @@ export default function BitteChat() {
       agentId="near-cow-agent-git-docs-bitteprotocol.vercel.app"
       options={{
         agentName: 'CoW Swap Assistant',
-        agentImage: '/favicon-dark-mode.png',
+        agentImage: '/img/favicon-dark-mode.png',
       }}
       apiUrl="/api/bitte/chat"
       historyApiUrl="/api/bitte/history"
