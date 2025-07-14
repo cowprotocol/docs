@@ -6,7 +6,7 @@ sidebar_position: 2
 
 ## **Introduction to Ethereum Gas Fees**
 
-All Ethereum transaction requires a gas fee to get included onchain. This gas fee can be broken down into two categories: 
+All Ethereum transaction require a gas fee to get included onchain. This gas fee can be broken down into two categories: 
 
 - **Base Fee**: A required network fee that automatically adjusts based on network demand for blockspace. The baseFee ensures that if transactions pay such fee, they are processed and included in a block.
 - **Priority Fee**: An optional additional payment for builders to include your transaction faster than others. The priorityFee allows builders to tip make a more valuable block and hence, gives you a higher chance of fast inclusion in a block.
