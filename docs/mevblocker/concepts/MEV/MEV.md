@@ -15,11 +15,11 @@ Ethereum’s default mempool is a wild west where MEV bots (aka searchers) can e
 3. MEV bots exploit mempool transactions for profit, targeting slippage exploitation.
 4. MEV bots create bundles and submit them to builders with a bribe to enforce the order.
 5. Builders assemble the most valuable bundles to create the most profitable block for validators.
-6. Validators choose the most valuable block from builders to maximize earnings. Once selected, all txs (user, MEV, bribes) are executed on-chain.
+6. Validators choose the most valuable block from builders to maximize earnings. Once selected, all txs (user, MEV, bribes) are executed onchain.
 
 ## **With MEV Blocker**
 
-The structured mempool incentivizes searchers to bundle transactions for builders so they’re included in the next block without frontrunning or sandwich -ing traders (by giving searchers a cut of backrun opportunities)
+The structured mempool incentivizes searchers to bundle transactions for builders so they’re included in the next block without frontrunning or sandwiching traders (by giving searchers a cut of backrun opportunities)
 
 ![image.png](/img/mevblocker/mevblocker_2.png)
 
@@ -29,5 +29,5 @@ The structured mempool incentivizes searchers to bundle transactions for builder
 4. MEV Blocker shares txs with searchers via backrun bundles, returning 90% to the user.
 5. MEV bots create bundles and submit them to builders with a bribe to enforce the order.
 6. Builders assemble the most valuable bundles to create the most profitable block for validators.
-7. Validators choose the most valuable block from builders to maximize earnings. Once selected, all txs (user, MEV, bribes) are executed on-chain.
+7. Validators choose the most valuable block from builders to maximize earnings. Once selected, all txs (user, MEV, bribes) are executed onchain.
 8. MEV Blocker shares 50% of the subscription fee from builders with wallet flow originators.
