@@ -2,7 +2,7 @@
 sidebar_position: 13
 ---
 
-# Custom Benifeciary
+# Custom Beneficiary
 
 When submitting your transaction to the API, use the custom parameter `refundRecipient` to define a different wallet address from the transaction originator address for receiving the rebate:
 
