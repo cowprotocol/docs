@@ -16,7 +16,7 @@ Connected builders pay a weekly fee for MEV Blocker access, calculated per block
 
 Order flow originators can submit transactions via public endpoints without an API key or third-party permission.
 
-### 3. MEV Blocker Private Mempool Action - Hiding txs from searchers
+### 3 MEV Blocker Private Mempool Action - Hiding txs from searchers
 
 MEV Blocker RPC shares the transaction (without signature) with a permissioned or permission-less set of searchers (depending on the endpoint). It enhances security by mixing real and AI-generated fake transactions together.
 
@@ -28,11 +28,11 @@ Depending on the type of transaction, additional details may be hidden:
 
 In a permissionless environment, searchers can’t be prevented from misusing shared data, so fake transactions add uncertainty to the data. Since searchers can’t distinguish real from fake, they risk acting on transactions that may never reach the chain, discouraging frontrunning attempts.
 
-### 4. Transactions get forwarded to MEV Blocker connected Searchers & Builders
+#### 3.1 Transactions get forwarded to MEV Blocker connected Searchers & Builders
 
 Transactions are shared with searchers for backrunning and sent directly to builders for the fastest inclusion.
  
-### 5. Searchers provide Backrunning Bids for the flow
+### 4. Searchers provide Backrunning Bids for the flow
 
 After receiving the orders, searchers proceed to crunch their numbers and give their bundles back to MEV Blocker. Searchers are competing for the most profitable option and if they spot a backrun opportunity (real or fake), they submit a bundle to MEV Blocker RPC.
 
