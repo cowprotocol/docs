@@ -2,7 +2,7 @@
 sidebar_position: 3
 ---
 
-# Fair Combinatorial Auction
+# Fair Combinatorial Batch Auction
 
 CoW Protocol collects and aggregates [intents](./intents) off-chain and auctions them off to [solvers](./solvers). The auction is combinatorial because each solver can submit multiple bids. A solver can submit multiple bids on individual orders, in which case each "bid" represents the best price this solver can provide to an individual order. However, a solver can also submit "batched" bids, that is, bids on groups of orders. 
 
