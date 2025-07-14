@@ -6,7 +6,7 @@ sidebar_position: 3
 
 CoW Protocol collects and aggregates [intents](./intents) off-chain and auctions them off to [solvers](./solvers). The auction is combinatorial because each solver can submit multiple bids. A solver can submit multiple bids on individual orders, in which case each "bid" represents the best price this solver can provide to an individual order. However, a solver can also submit "batched" bids, that is, bids on groups of orders. 
 
-The protocol filters our ``unfair'' batched bids, which are those delivering less to an order than some available "non-batched" bids. It then selects the combination of winning bids that maximizes the surplus received by the orders that are part of the auction (subject to some computational constraints due to the combinatorial nature of the problem).
+The protocol filters out ``unfair'' batched bids, which are those delivering less to an order than some available "non-batched" bids. It then selects the combination of winning bids that maximizes the surplus received by the orders that are part of the auction (subject to some computational constraints due to the combinatorial nature of the problem).
 
 ![The Auctions](/img/concepts/batch-auctions.png)
 
