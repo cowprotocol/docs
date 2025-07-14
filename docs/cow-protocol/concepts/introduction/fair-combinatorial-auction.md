@@ -12,7 +12,7 @@ The protocol filters out ``unfair'' batched bids, which are those delivering les
 
 The fair combinatorial auction provide several benefits:
 
-- [**MEV Protection**](../benefits/mev-protection): Batch auctions allow for Uniform Clearing Prices (UCPs), where an asset that appears multiple times across orders in the same batch settles for a consistent price.
+- [**MEV Protection**](../benefits/mev-protection): Fair combinatorial auctions allow for Uniform Directing Clearing Prices (UDP), where a directed asset pair that appears multiple times across orders in the same auction settles for a consistent price.
   This makes transaction order irrelevant within the block, undermining the ability for MEV bots to extract value.
 - **[Coincidence of Wants](../how-it-works/coincidence-of-wants)**: When multiple orders trade the same assets within an auction, there may be an opportunity for a peer-to-peer swap that doesn't tap on-chain liquidity, which a solver could exploit by submitting a batched bid.
 - **Fairness**: Ensuring that each order receives as much as it would have received had that order been auctioned off alone.
