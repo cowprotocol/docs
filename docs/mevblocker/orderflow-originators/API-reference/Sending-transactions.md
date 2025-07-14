@@ -4,7 +4,7 @@ sidebar_position: 9
 
 # Sending transactions
 
-MEV Blocker  supports sending transactions via the standard eth_sendRawTransaction method through its multiple endpoints. If you would rather send to custom endpoint instead of the default, you can be found the list of available endpoints in here.
+MEV Blocker  supports sending transactions via the standard eth_sendRawTransaction method through its multiple endpoints. If you prefer sending to a custom endpoint instead of the default, you can find the list of available endpoints here.
 
 ## eth_sendRawTransaction
 
