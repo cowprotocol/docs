@@ -32,4 +32,4 @@ https://rpc.mevblocker.io
 ```
 
 4. **Track Your Activity**
-Want visibility into flows, usage, and rewards? Ping us on Telegram — we’ll help you set up a custom Dune dashboard to transparently track everything.
+Want visibility into flows, usage, and rewards? Ping us on [Telegram](https://t.me/mevblocker) — we’ll help you set up a custom Dune dashboard to transparently track everything.
