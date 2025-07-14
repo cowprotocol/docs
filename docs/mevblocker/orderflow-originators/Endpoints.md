@@ -40,11 +40,11 @@ https://rpc.mevblocker.io/nochecks
 
 ## Restrictred Searcher Configuration
 
-As you might have read in ##concepts, MEV Blocker shares transactions information with all permissionlessly connected searchers because it mixes real transactions with fake transactions. In the event of using "vanila AMM swaps"", the fake transaction are good enough to spoof searchers to not not know which of the transactions share are real or fake. However, if you participate in more "advanced swaps protocols" such as CoW Swap, 1inch fusion, or Uniswap X, your solution might be a bit more complex than the "vanialla swaps", and hence the fake transactions might not be as good at spoffing real transaction information from searchers.
+As you might have read in ##concepts, MEV Blocker shares transaction information with all permissionlessly connected searchers because it mixes real transactions with fake transactions. In the event of using "vanila AMM swaps", the fake transactions are good enough to spoof searchers to not not know which of the transactions are real or fake. However, if you participate in more "advanced swaps protocols" such as CoW Swap, 1inch fusion, or Uniswap X, your solution might be a bit more complex than the "vanialla swaps", and hence the fake transactions might not be as good at spoofing real transaction information from searchers.
 
 Because of this, we enabled the option for you to choose between sharing the transactions with all permissionlessly connected searchers, for which we know nothing about, or to share the transactions with a curated list of searchers with whom the team might have a bit more background.*
 
-*Note that the absence of this parameter specific configuration makes all the flow to go via the default endpoint
+*Note that the absence of this parameter specific configuration makes all the flow go via the default endpoint
 
 For sharing with ALL connected searchers leverage this:
 
@@ -64,7 +64,7 @@ This endpoints forces RPC to share transactions only with registered / curated s
 
 ## MEV Blocker Boost
 
-However, if you do not want to relay on MEV Blocker being up 100% on the time and failing to submit your transactions, you can leverage our Boost services which in the event of MEV Blocker RPC being down, forwards traffic to Flashbots RPC so that your transactions lands onchain. In this case the endpoints to chose are the following:
+However, if you do not want to rely on MEV Blocker being up 100% of the time and failing to submit your transactions, you can leverage our Boost services which in the event of MEV Blocker RPC being down, forwards traffic to Flashbots RPC so that your transactions land on-chain.
 
 [**Fast - https://boost.rpc.mevblocker.io/fast**](https://rpc.mevblocker.io/fast) - Used to get transactions included on-chain as fast as possible while also finding users a rebate.
 
