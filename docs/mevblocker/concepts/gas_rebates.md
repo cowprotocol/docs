@@ -9,11 +9,11 @@ sidebar_position: 2
 All Ethereum transaction requires a gas fee to get included onchain. This gas fee can be broken down into two categories: 
 
 - **Base Fee**: A required network fee that automatically adjusts based on network demand for blockspace. The baseFee ensures that if transactions pay such fee, they are processed and included in a block.
-- **Priority Fee**: An optional additional payment to for builders to include your transaction faster than others. The priorityFee allows builders to tip make a more valuable block and hence, gives you a higher chance of fast inclusion in a block.
+- **Priority Fee**: An optional additional payment for builders to include your transaction faster than others. The priorityFee allows builders to tip make a more valuable block and hence, gives you a higher chance of fast inclusion in a block.
 
 ## **How MEV Blocker Recovers Priority Fees**
 
-MEV blocker is the only RPC who has a permissionless Order Flow Auction for which both searchers and builders are bound to public rules. To this date, MEV Blocker processes around 10% of dailty Etherem transcations, and 
+MEV blocker is the only RPC that has a permissionless Order Flow Auction for which both searchers and builders are bound to public rules. To this date, MEV Blocker processes around 10% of dailty Etherem transcations, and 
 
 MEV Blocker currently protects and routes over 20% of all Ethereum mainnet transactions daily. It maintains strong relationships with top block builders — the entities responsible for selecting and packaging transactions into Ethereum blocks.
 
