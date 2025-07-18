@@ -253,6 +253,101 @@ Once you have set up the partner fee, you will see the fee in the CoW Swap UI:
 
 See [here](/governance/fees/partner-fee) for detailed info about fee calculation and examples.
 
+---
+
+## Slippage configuration
+
+The widget supports declarative slippage settings. This allows you to fine‑tune the minimum, maximum and default slippage per network.
+
+### Types
+
+```ts
+/** Slippage expressed in basis points (1 % = 100 bps) */
+export interface SlippageConfig {
+  /** Lower bound. Values below this will be clamped */
+  min?: number
+  /** Upper bound. Values above this will be clamped */
+  max?: number
+  /** Default slippage */
+  defaultValue?: number
+}
+
+export type FlexibleSlippageConfig = FlexibleConfig<SlippageConfig>
+```
+
+*All values are **basis points** (bps).*
+
+### Parameter
+
+Add the `slippage` field to `CowSwapWidgetParams`:
+
+```ts
+import { createCowSwapWidget, CowSwapWidgetParams } from '@cowprotocol/widget-lib'
+
+const params: CowSwapWidgetParams = {
+  appCode: 'YOUR_APP_ID',
+  slippage: {
+    // Global rule – applies to every network
+    min: 50,        // 0.50 %
+    max: 300,       // 3.00 %
+    defaultValue: 100, // 1.00 %
+  },
+}
+```
+
+Or configure per‑network rules using the same [FlexibleConfig](https://github.com/cowprotocol/cowswap/blob/develop/libs/widget-lib/src/types.ts) pattern as `partnerFee`:
+
+```ts
+import { SupportedChainId } from '@cowprotocol/widget-lib'
+
+const params: CowSwapWidgetParams = {
+  slippage: {
+    [SupportedChainId.MAINNET]: {
+      min: 1,
+      max: 3900,
+      defaultValue: 3000,
+    },
+    [SupportedChainId.BASE]: {
+      min: 500,
+      max: 5000,
+      defaultValue: 600,
+    },
+  },
+}
+```
+
+### Behaviour & validation
+
+| Rule                        | Description                                                                                                                                                                                     |
+|-----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Ranges**                  | `min ≥ 0`, `max ≤ 5000` (50 %), `min ≤ defaultValue ≤ max`, `min < max`                                                                                                                         |
+| **Defaults**                | If the user doesn’t specify a slippage, the widget falls back to `defaultValue`                                                                                                                 |
+| **Auto slippage**           | If the auto-slippage is less than or equal to `defaultValue`, the swap will use `defaultValue`                                                                                                  |
+| **ETH‑Flow floor**          | When `defaultValue < 200` bps (2 %) for Ethereum Mainnet or `defaultValue < 50` (0.5 %) for other networks and the trade is *ETH‑Flow*, the widget will force the slippage to **2 %**/**0.5 %** |
+
+### Example JSON (Configurator ready)
+
+```json
+{
+  "slippage": {
+    "1": {
+      "min": 1,
+      "max": 3900,
+      "defaultValue": 3000
+    },
+    "8453": {
+      "min": 500,
+      "max": 5000,
+      "defaultValue": 600
+    }
+  }
+}
+```
+
+Paste the snippet into **RAW JSON params** → open the **Swap** form → check that the Settings panel reflects the configured slippage.
+
+---
+
 ## Wallet provider
 
 You can pass the wallet provider from your application to seamlessly use the widget as part of your application.
@@ -323,6 +418,7 @@ createCowSwapWidget(document.getElementById('cowswap-widget'), {
 | `enabledTradeTypes`                   | `Array<TradeType>`     | All are enabled        | CoW Swap provides three trading widgets: `swap`, `limit` and `advanced` orders. Using this option you can narrow down the list of available trading widgets.                                                                                                                                                                                                                                 |
 | `partnerFee`                          | `PartnerFee`           | ---                    | You can enable a fee for all trades in the widget. See [Partner fee](#partner-fee) section for more details.                                                                                                                                                                                                                                                                                 |
 | `forcedOrderDeadline`                 | `ForcedOrderDeadline`  | ---                    | Order deadline in minutes. Either a single value applied to each individual order type accordingly or an optional individual value per order type. The app will use the appropriated min/max value per order type. When set, user's won't be able to edit the deadline. Accepted values: single for all `123` OR per TradeType `{"swap": 15, "limit": 666}` OR per network `{1: 35, 100: 5}` |
+| `slippage`                            | `SlippageConfig`       | ---                    | You can set up a slippage settings for all networks in the widget. See [Slippage configuration](#slippage-configuration) section for more details.                                                                                                                                                                                                                                           |
 
 ## Custom theme
 
