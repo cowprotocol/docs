@@ -72,7 +72,7 @@ However, if you do not want to rely on MEV Blocker being up 100% of the time and
 https://boost.rpc.mevblocker.io/maxbackruns
 ```
 
-[**No Revert - https://rpc.mevblocker.io/noreverts**](https://boost.rpc.mevblocker.io/noreverts) - Used to get transactions included onchain without any possibility of reverting. If a transaction is no longer valid, it will stop being broadcast to builders at no extra cost to the user. _The transactions sent to this endpoint get simulated in pending block._
+[**No Revert - https://boost.rpc.mevblocker.io/noreverts**](https://boost.rpc.mevblocker.io/noreverts) - Used to get transactions included onchain without any possibility of reverting. If a transaction is no longer valid, it will stop being broadcast to builders at no extra cost to the user. _The transactions sent to this endpoint get simulated in pending block._
 
 ```jsx
 https://boost.rpc.mevblocker.io/noreverts
