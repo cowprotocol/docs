@@ -6,7 +6,7 @@ sidebar_position: 1
 
 MEV Blocker users can choose from several different endpoints depending on their particular needs.
 
-![The Best Protection Under the Sun](/img/mevblocker/Endpoints_Protection.png)
+![The Best Protection Under the Sun](/img/mevblocker/endpointsProtection.png)
 
 [**Fast - https://rpc.mevblocker.io/fast**](https://rpc.mevblocker.io/fast) - Used to get transactions included on-chain as fast as possible while also finding users a rebate. *The transactions sent to this endpoint get simulated in pending block.*
 
