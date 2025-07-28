@@ -3,7 +3,7 @@ id: the-problem
 sidebar_position: 1
 ---
 
-# The Optimization problem
+# Optimization problem
 
 In this section, we describe all the different components of the optimization problem that needs to be solved within each batch.
 
@@ -33,9 +33,9 @@ $$S= \left \{ \begin{bmatrix} x \\-y \end{bmatrix} ~~s.t. ~~\frac{y}{\pi} \leq x
 
 In both cases, the surplus function is defined as
 
-$$U(x,-y)=(x-y / \pi)p(b)$$,
+$$U(x,-y)= x-y / \pi$$,
 
-where $$(x-y / \pi)$$ is the additional amount of buy tokens received by the user relative to the case in which they trade at the limit price, and $$p(b)$$ is the price of the buy token relative to a numéraire (in our case ETH) and is externally provided (i.e., by an oracle). The function $$U(x,-y)$$ is therefore expressed in units of the numéraire and is always non-negative.
+i.e., it is the additional amount of buy tokens received by the user relative to the case in which they trade at the limit price, and is naturally expressed in units of the buy token.
 
 A final observation is that orders can be valid over multiple batches. For a fill-or-kill, this means that an order that is not filled remains valid for a certain period (specified by the user). For a partially-fillable order, this also means that only a fraction of it may be executed in any given batch.
 
@@ -51,17 +51,19 @@ $$S = \left\{\begin{bmatrix} x \\-y \end{bmatrix}~~s.t.~~ y \leq x \cdot \pi \hb
 
 Again, the surplus function is defined as
 
-$$U(\{x,-y\})=(x \cdot \pi-y)p(s)$$,
+$$U(\{x,-y\})= x \cdot \pi - y$$.
 
-where $$p(s)$$ is the price of the sell token relative to a numéraire and is externally provided. Also here, orders can be executed over multiple batches.
+Also here, orders can be executed over multiple batches.
 
-## Fees
+## Protocol Fees
 
-Each user order has an associated fee paid to the protocol. At a high level, these fees can be represented by a function that, for a given order $$S$$ maps all possible trades to a positive vector of tokens, that is $$f_S:S \rightarrow \mathbb R^k_+$$   with $$f_S(0)=0$$.
+Each user order may have an associated fee paid to the protocol. At a high level, these fees can be represented by a function that, for a given order $$S$$ maps all possible trades to a non-negative vector of tokens, that is $$f_S:S \rightarrow \mathbb R^k_+$$   with $$f_S(0)=0$$.
 
-From the practical viewpoint, for market fill-or-kill orders, the fee is always in the sell token and is pre-specified: it is an estimate of the cost of executing an order and is explicitly shown to the user before the order is submitted. 
-Instead, (long-standing) limit orders are "feeless" from the user's perspective: users are guaranteed a limit price without specifying how fees will be calculated. Solvers are the ones proposing a fee under the expectation that this fee should equal the cost of execution of this trade in isolation. 
-The fee of limit orders is again denominated in the sell token.
+:::note
+
+Solvers are also expected to charge a fee to cover the cost of executing an order. We discuss such fees later in the context of solvers' optimal bidding, but we do not account for them here as they are not part of the protocol.
+
+:::
 
 ## Solution
 
@@ -69,7 +71,7 @@ Solvers propose solutions to the protocol, where a solution is a set of trades t
 
 * **Incentive compatibility and feasibility**: the trades respect the user and liquidity sources, that is, $$o_i\in S_i~~\forall i\leq I$$  and $$l_j \in L_j~~\forall j\leq J$$.
 * **Sufficient endowments**:  each user should have enough sell tokens in their wallet. Note that the protocol already performs this check at order creation. However, a user could move funds between order creation and execution or create multiple orders pledging the same sell amount multiple times. Hence, each solver should  also check that users' endowments are sufficient to execute the proposed solution.
-* **Uniform clearing prices**: all users must face the same prices. Importantly, this constraint is defined at the moment when the swap occurs. So, for example, suppose user _i_ receives _x_ units of token 1 in exchange for _y_ units of token 2 and that the protocol takes a fee in the sell token $$f_2$$. Define $$p_{1,2}=\frac{y-f_2}{x}$$ as the price at which the swap occurs. Uniform clearing prices means that $$p_{1,2}$$ is the same for all users swapping token 1 and token 2. Furthermore, prices must be consistent, in the sense that for any three tokens 1, 2, and 3, if $$p_{1,2},~ p_{2,3}, ~p_{1,3}$$ are well-defined, then it must be that $$p_{1,2}\cdot p_{2,3}=p_{1,3}$$. Note that this implies that prices can be expressed with respect to a common numéraire, giving rise to a uniform price clearing vector $$p$$.
+* **Uniform directional clearing prices**: all users trading the same token pair in the same direction must face the same prices. Importantly, this constraint is defined at the moment when the swap occurs. So, for example, suppose user _i_ receives _x_ units of token 1 in exchange for _y_ units of token 2 and that the protocol takes a fee in the sell token $$f_2$$. Define $$p_{1,2}=\frac{y-f_2}{x}$$ as the price at which the swap occurs. Uniform directional clearing prices means that $$p_{1,2}$$ is the same for all users buying token 1 and selling token 2. Deviations from uniform directional prices are allowed to account for the extra gas cost of orders triggering hooks.
 * [**Social consensus rules**](competition-rules): These are a set of principles that solvers should follow, which were voted by CIPs.
 
 :::caution
@@ -79,10 +81,11 @@ At CoW DAO's discretion, systematic violation of these rules may lead to penaliz
 :::
 
 
-From the protocol viewpoint, each solution that satisfies the above constraints has a _quality_ given by the total surplus generated and the fees paid to the protocol:
+From the protocol viewpoint, each solution that satisfies the above constraints has a _score_ that is given by the total surplus generated and the fees paid to the protocol, all aggregated and denominated in some numéraire. More specifically, the score of a solution is equal to the sum of scores of the orders the solution proposes to execute, where the score of an order $$o$$ is defined as:
 
-$$\sum_o U(o)+p\cdot \sum_of(o)$$,
+* $$o$$ is a sell order: $$\mathrm{score}(o) = (U(o)+ f(o)) \cdot p(b)$$, where $$p(b)$$ is an externally provided price of the buy token relative to a numéraire.
+* $$o$$ is a buy order:  $$\mathrm{score}(o) = (U(o)+ f(o)) \cdot p(b) \cdot \pi$$, where $$p(b)$$ is an externally provided price of the buy token relative to a numéraire and $$\pi$$ is the limit price of the order.
 
-where _p_ is a vector of externally-determined prices used to express all fees in terms of the common numéraire.
+Note that the above definition assumes that fees are specified in the surplus token of the order (i.e., in the buy token for sell orders and in the sell token for buy orders), which is currently the case. 
 
-Finally, solvers compete for the right to settle a batch by participating in an auction, aiming to implement the solution with the highest quality at the lowest possible cost to the protocol. The [solver that wins the auction is rewarded](rewards) by the protocol.
+Finally, solvers compete for the right to settle their solutions by participating in an auction, aiming to implement the combination of solutions that generates the largest possible total score while also being "fair" (see [here](competition-rules#off-chain-protocol)). The [solver that wins the auction is rewarded](rewards) by the protocol.

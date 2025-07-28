@@ -7,7 +7,7 @@ import rehypeKatex from 'rehype-katex'
 
 const config: Config = {
   title: 'CoW Protocol Documentation',
-  tagline: 'Better than the best prices',
+  tagline: 'The leading intents-based DEX aggregation protocol',
   favicon: 'img/favicon.png',
 
   // Set the production url of your site here
@@ -23,6 +23,7 @@ const config: Config = {
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'throw',
+  onBrokenAnchors: 'throw',
 
   trailingSlash: false,
 
@@ -124,22 +125,40 @@ const config: Config = {
   ],
 
   themeConfig: {
+    metadata: [
+      {
+        name: 'description',
+        content: 'Documentation for CoW Protocol, CoW AMM, MEV blocker and other CoW DAO products.',
+      },
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'og:type', content: 'website' },
+      { name: 'og:image', content: 'img/og-meta-cowprotocol.png' },
+      { name: 'og:title', content: 'Documentation - CoW DAO' },
+      {
+        name: 'og:description',
+        content: 'Documentation for CoW Protocol, CoW AMM, MEV blocker and other CoW DAO products.',
+      },
+      { name: 'twitter:card', content: 'summary_large_image' },
+      { name: 'twitter:site', content: '@CoWSwap' },
+      { name: 'twitter:title', content: 'Documentation - CoW DAO' },
+      { name: 'twitter:image', content: 'https://docs.cow.fi/img/og-meta-cowprotocol.png' },
+    ],
     // Replace with your project's social card
     image: 'img/og-meta-cowprotocol.png',
     navbar: {
-      title: 'Documentation',
+      title: 'Documentation - CoW DAO',
       logo: {
-        alt: 'CoW Protocol logo',
+        alt: 'Documentation - CoW DAO',
         src: 'img/cow-logo.svg',
         srcDark: 'img/cow-logo-dark.svg',
         href: '/',
         target: '_self',
-        width: 103,
-        height: 33,
+        width: 160,
+        height: 30,
         className: 'custom-navbar-logo-class',
         style: {
-          width: '103px',
-          height: '33px',
+          width: '160px',
+          height: '30px',
           margin: 'auto 12px auto 0',
         },
       },

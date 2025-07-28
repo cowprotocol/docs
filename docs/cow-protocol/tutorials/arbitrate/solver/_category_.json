@@ -1,5 +1,9 @@
 {
     "label": "Solver",
     "collapsible": false,
-    "collapsed": false
+    "collapsed": false,
+    "link": {
+        "type": "generated-index",
+        "title": "Solver"
+    }
 }

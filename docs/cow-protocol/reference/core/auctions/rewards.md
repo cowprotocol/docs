@@ -4,47 +4,31 @@ sidebar_position: 3
 
 # Solver rewards
 
-The protocol is currently subsidizing the solver competition on Ethereum Mainnet (but not on Gnosis Chain), by rewarding solvers on a weekly basis (currently, every Tuesday) with rewards paid in COW. Solvers are rewarded based on their performance as solvers (i.e., when participating in the standard solver competition) as specified by [CIP-20](https://snapshot.org/#/cow.eth/proposal/0x2d3f9bd1ea72dca84b03e97dda3efc1f4a42a772c54bd2037e8b62e7d09a491f) and [CIP-36](https://snapshot.org/#/cow.eth/proposal/0x4e58f9c1208121c0e06282b5541b458bc8c8b76090263e25448848f3194df986), and by participating in the price estimation competition and providing quotes that are needed for the gas estimates and limit price computations of market orders, as specified by [CIP-27](https://snapshot.org/#/cow.eth/proposal/0x64e061568e86e8d2eec344d4a892e4126172b992cabe59a0b24c51c4c7e6cc33) and [CIP-36](https://snapshot.org/#/cow.eth/proposal/0x4e58f9c1208121c0e06282b5541b458bc8c8b76090263e25448848f3194df986).
-
-The annual rewards budget as of now is 16M COW, and the intended split between solver competition and price estimation rewards is currently at 80% for the solver competition (12.8M COW) and 20% for the price estimation competition (3.2M COW).
+The protocol is currently subsidizing the solver competition on all chains it operates on, by rewarding solvers on a weekly basis (currently, every Tuesday) with rewards paid in COW. Solvers are rewarded based on their performance as solvers (i.e., when participating in the standard solver competition) as specified by [CIP-20](https://snapshot.org/#/cow.eth/proposal/0x2d3f9bd1ea72dca84b03e97dda3efc1f4a42a772c54bd2037e8b62e7d09a491f), [CIP-36](https://snapshot.org/#/cow.eth/proposal/0x4e58f9c1208121c0e06282b5541b458bc8c8b76090263e25448848f3194df986), [CIP-38](https://snapshot.org/#/cow.eth/proposal/0xfb81daea9be89f4f1c251d53fd9d1481129b97c6f38caaddc42af7f3ce5a52ec), [CIP-48](https://snapshot.org/#/cow.eth/proposal/0x563ab9a66265ad72c47a8e55f620f927685dd07d4d49f6d1812905c683f05805) [CIP-57](https://snapshot.box/#/s:cow.eth/proposal/0x46d4fea1492207cf400fcb7a01141a7d4c730791d658cc77236941fc9eb7dccb) and [CIP-67](https://snapshot.box/#/s:cow.eth/proposal/0xf9ecb08c4738f04c4525373d6b78085d16635f86adacd1b8ea77b2c176c99d32). Solver rewards for participating in the price estimation competition and providing quotes that are needed for the gas estimates and limit price computations of market orders are specified in [CIP-27](https://snapshot.org/#/cow.eth/proposal/0x64e061568e86e8d2eec344d4a892e4126172b992cabe59a0b24c51c4c7e6cc33) and [CIP-36](https://snapshot.org/#/cow.eth/proposal/0x4e58f9c1208121c0e06282b5541b458bc8c8b76090263e25448848f3194df986).
 
 :::note
 
-For the interested reader, the main source of truth for the weekly payments to solvers is this [Dune dashboard](https://dune.com/cowprotocol/cow-solver-rewards?StartTime=2023-11-28+00%3A00%3A00&EndTime=2023-12-05+00%3A00%3A00&EndTime_d3bba3=2023-12-05+00%3A00%3A00&EndTime_dd004a=2023-12-05+00%3A00%3A00&StartTime_d3f009=2023-11-28+00%3A00%3A00). The dashboard is populated with data aggregated by scripts within the [solver-rewards](https://github.com/cowprotocol/solver-rewards) and [dune-sync](https://github.com/cowprotocol/dune-sync/) repositories.
+For the interested reader, the main source of truth for the weekly payments to solvers is this [Dune dashboard](https://dune.com/cowprotocol/cow-solver-rewards). The dashboard is populated with data aggregated by scripts within the [solver-rewards](https://github.com/cowprotocol/solver-rewards) repository.
 
 :::
 
-## Solver competition rewards (CIP-20 & CIP-36)
+## Solver competition rewards (CIPs 20, 36, 38, 48, 57, 67)
 
-As specified in [CIP-20](https://snapshot.org/#/cow.eth/proposal/0x2d3f9bd1ea72dca84b03e97dda3efc1f4a42a772c54bd2037e8b62e7d09a491f), solver competition rewards are split into two components: per-auction rewards and consistency rewards.
-
-The auction's goal is to reward solvers based on how much value they provide to the users. In each auction cycle, solvers compete by proposing a solution to settle the batch, and the winning solver receives a reward that is part in `ETH` and part in `COW` (see below).
+Solver rewards are computed using a mechanism akin to a Vickrey–Clarke–Groves mechanism (a generalization of a second-price auction to combinatorial auctions). First, each solver proposes multiple solutions. Each solution contains a price vector and a list of trades to execute, which can be used to compute the solution's score. The protocol then selects the winning solutions (and winning solvers) using a fair combinatorial auction, which first filters out the solutions deemed unfair and then selects the combination of fair solutions that maximizes the total score of the auction (see [here](competition-rules#off-chain-protocol) for more details). 
 
 :::note
 
-The reward in ETH is not part of the rewards budget, and is meant to cover the costs associated with the gas spent by each solver; importantly, this ETH is obtained by converting the gas fees user orders pay and so have nothing to do with the COW rewards budget.
+From the protocol's perspective, a solution executed on chain must equal the solver's initial commitment.
 
 :::
 
-As already mentioned, CoW Protocol has committed to spending a specified quantity of `COW` tokens to reward solvers. An estimated 12.8M COW annual budget is currently allocated for the solver competition rewards, which corresponds to an average weekly budget of ~250k COW. The part of the rewards budget in `COW` that is not spent on per-auction rewards is used for consistency rewards. Consistency rewards are distributed weekly to each solver in proportion to the number of valid solutions submitted during the previous week.
-
-### Specification of per-auction rewards
-
-The per-auction rewards are computed using a mechanism akin to a second-price auction. First, each solver commits to a numerical score and a solution (which includes a price vector and a list of trades to execute). The solver with the highest score wins the right to settle their submitted solution on chain. 
-
-:::note
-
-From the protocol's perspective, the solution executed on chain must equal the solver's initial commitment.
-
-:::
-
-The payment to the winning solver is
+The payment to the winning solver $$i$$ is
 
 $$
-\textrm{payment} = \textrm{cap}(\textrm{observedQuality} - \textrm{referenceScore}).
+\textrm{payment}_i = \textrm{cap}(\textrm{totalScore} - \textrm{referenceScore}_i-\textrm{missingScore}_i).
 $$
 
-Here, $$\textrm{referenceScore}$$ refers to the second-highest submitted $$\textrm{score}$$, and $$\textrm{observedQuality}$$ denotes the settlement's quality as observed on chain. More precisely, in case of a successful settlement, the $$\textrm{observedQuality}$$ is equal to the sum of the surplus generated for users and fees paid to the protocol, while in the case of a failed settlement (e.g., one that reverted), the $$\textrm{observedQuality}$$ is zero.
+Here $$\textrm{totalScore}$$ is the sum of the scores of all winning solutions in the auction and $$\textrm{missingScore}_i$$ is the sum of the scores of solver $$i$$'s winning solutions that reverted. Finally, $$\textrm{referenceScore}_i$$ is the total score of a counterfactual auction in which all bids from solver $$i$$ are removed from the set of bids that survive the fairness filtering. 
 
 :::note
 
@@ -52,62 +36,44 @@ The payment calculation can result in a negative figure, in which case the solve
 
 :::
 
-The payment is capped from above and below using the function $$\textrm{cap}(x) = \max(-c_l, \min(c_u + \textrm{observedCost}, x))$$ with $$c_l = 0.010 \;\textrm{ETH}$$ and $$c_u = 0.012 \;\textrm{ETH}$$, where $$\textrm{observedCost}$$ is the gas cost of executing the settlement (which the solver pays).
+The payment is capped from above and below using the function $$\textrm{cap}(x) = \max(-c_l, \min(c_u, x))$$ that is chain-specific, and is determined by the following values:
 
-Submitted scores that are non-positive will be ignored. If only one solution is submitted, $$\textrm{referenceScore}$$ is set to zero. Formally, this corresponds to always considering the empty solution which does not settle any trades and has quality zero as part of the submitted solutions. Then one cannot win with a non-positive score and the reference score is at least zero.
+- Ethereum mainnet, Arbitrum, and Base chain: $$c_l = 0.010 \;\textrm{ETH}$$ and $$c_u = 0.012 \;\textrm{ETH}$$,
+- Gnosis Chain: $$c_l = c_u = 10 \;\textrm{xDAI}$$.
 
-Moreover, the score a solver reports is required to be smaller than the solution's $$\textrm{successQuality}$$, defined as the $$\textrm{observedQuality}$$ when the solution successfully executes. Since solvers are currently submitting the full solution along with their score, this is very easily checked; if the solution successfully settles on chain, its $$\textrm{successQuality}$$ is equal to the sum of the total surplus generated and the fees collected, and both are fully determined from the set of orders the solution intends to execute and the clearing price vector it reports.
+Solutions with scores that are non-positive will be ignored. If only one solver submits solutions, $$\textrm{referenceScore}_i$$ is, by definition, zero. Formally, this corresponds to always considering the empty solution which does not settle any trades and has a score equal to zero as part of the submitted solutions.
 
 :::note
 
-When including the gas costs of executing a transaction, the winning solver's payoff is bounded above by $$c_u$$. However, it is not bounded below because, in case of a revert, the solver pays at most $$c_l$$ to the protocol and may also incur gas costs.
+There is no guarantee that the per-auction rewards are greater than the gas costs of executing a transaction. Hence, solvers cover these costs by adjusting their reported score. Of course, a solver who adjusts their score downward too aggressively is then at a disadvantage in the auction. The mechanism, therefore, incentivizes the accurate estimation of gas costs.
 
 :::
 
-To limit currency mismatch, the solver receives $$\min(\textrm{payment}, \textrm{observedCost})$$ in `ETH` and $$\textrm{payment} - \min(\textrm{payment}, \textrm{observedCost})$$ in `COW`, using an up-to-date price. In other words, the solver payment is split into a gas reimbursement paid in `ETH` and a reward paid in `COW`. To arrive at the budget for consistency rewards, these per-auction rewards paid in `COW` are deducted from the total rewards budget.
+### Additional solver costs (slippage)
 
-### Specification of consistency rewards
+In addition to paying for gas, the winning solver might incur additional costs, such as, for example, negative slippage once a solution is settled on chain. These costs are not an explicit element of the mechanism, but they are relevant in determining the solver's optimal strategy. More precisely, per [CIP-17](https://snapshot.org/#/cow.eth/proposal/0xf9c98a2710dc72c906bbeab9b8fe169c1ed2e9af6a67776cc29b8b4eb44d0fb2), solvers are responsible for managing potential slippage incurred by the settlements they settle. This is a component that affects payouts, but can be treated completely separately, and we do so in the [accounting section](/cow-protocol/reference/core/auctions/accounting).
 
-Besides the per-auction rewards, solvers are rewarded for their consistency by distributing some additional COW to them proportionally to the number of auctions they provided valid solutions for. Specifically, suppose that the total per-auction rewards have been determined and expressed in COW and amount to some number $$X$$ of COW, as described above. Then, if $$X < 250,000$$, the budget that will be distributed as consistency rewards is $$\min\{250,000 - X \textrm{ COW}, 6 \textrm{ ETH} \}$$, where again, to compare the two quantities, we use an up-to-date price.
+### Solver's strategy
 
-### Additional solver costs 
+The recommended strategy for a solver is to start by dividing the available orders into groups of orders on the same directed token pairs --- i.e., in each group, all orders have the same sell and buy tokens. The next step is to compute the best possible routing for each group and submit it as a solution. Note that, by construction, each of these solutions will use outside liquidity. Finally, a solver should check whether it is possible to improve these solutions by creating batched solutions containing orders on different directed token pairs. These additional efficiencies may come from, for example, exploiting liquidity already available on the protocol --- using one order as liquidity for the other (in a CoW) or using CoW AMM liquidity --- or from gas savings. Solvers should submit an additional solution for every combination of groups of orders for which additional efficiencies are possible. When submitting such a solution, they should pay attention to sharing the additional efficiencies among all orders in the batch; otherwise, the batched solution may be filtered out as unfair. 
 
-Additionally, the winning solver might incur supplementary costs, such as, for example, negative slippage once a solution is settled on chain. These costs are not an explicit element of the mechanism, but they are relevant in determining the solver's optimal strategy. More precisely, per [CIP-17](https://snapshot.org/#/cow.eth/proposal/0xf9c98a2710dc72c906bbeab9b8fe169c1ed2e9af6a67776cc29b8b4eb44d0fb2), solvers are responsible for managing potential slippage incurred by the settlements they settle. This is a component that affects payouts, but can be treated completely separately, and we do so in [slippage accounting](slippage).
+As already discussed, solvers are responsible for paying the gas cost of a solution. Also, if a solution reverts, a solver may incur a penalty. Hence, when reporting their solution, solvers should adjust their reported score downward to account for the expected costs of settling a solution on the chain.  
 
-### Solver bidding strategies
+Finally, the protocol rewards are specified so that solvers can participate in an auction without misreporting the score they can generate (net of expected costs). This is easy to see if the cap is not binding, and misreporting does not affect $$\textrm{referenceScore}_i$$. Then, by reducing the reported score of a solution, solver $$i$$ does not affect its payoff if this solution is among the winners (which only shifts from protocol rewards to pocketed slippage), while reducing the probability that this solution is a winner. It is therefore a dominant strategy to bid truthfully.
 
-Apart from submitting their solutions, solvers must decide on a score to submit as a bid in the auction. In general, this score can be chosen freely by the solver (within the restriction $$0 < \textrm{score} < \textrm{successQuality}$$). The recommended way of submitting a score is via reporting a success probability. The score is then computed as explained below.
+The presence of the cap on rewards $$c_u$$, however, makes the problem more complex as it introduces a "first-price auction" logic: if the difference between the best and second-best solution is very large, then the winning solver wins more when it underreports its score. However, determining the optimal amount of underreporting is very complex and requires each solver to make strong assumptions regarding the performance of competing solvers. There are also some edge cases in which by reducing the score of a solution, solver $i$ can benefit by making the filtering steps less stringent for its opponents (see [here](https://forum.cow.fi/t/combinatorial-auctions-from-theory-to-practice-via-some-more-theory-about-rewards/2877) for a discussion).
 
-Let $$p$$ be the probability that a solution successfully executes, let $$\textrm{successCost}$$ be the costs that a solver pays if a solution successfully executes, and let $$\textrm{failCost}$$ be the costs that a solver pays if a solution does not execute successfully. For example, costs in case of success could include gas costs of the full settlement, while costs in case of failure could be small due to use of services like MEV Blocker.
+To summarize, truthfully revealing the (cost-adjusted) score that a solver can generate for each submitted solution is optimal if the cap is not binding, and misreporting does not affect $$\textrm{referenceScore}_i$$. It is not necessarily optimal in uncompetitive auctions when the difference between the best and second-best solution may be large, and in some edge cases in which a solver may benefit from making the filtering step less stringent. However, in these cases, deriving the optimal strategy is a very complex problem. We conclude by noting that most CoW Protocol batches are very competitive --- the cap on rewards is binding only in about 9% of auctions --- and that a solver benefits by making the filtering steps less stringent for its opponents only in sporadic cases.  
 
-Ignoring capping of rewards, the winning solver's expected payoff is
-
-$$
-p \cdot (\textrm{successQuality} - \textrm{referenceScore} - \textrm{successCost}) - (1 - p) \cdot (\textrm{referenceScore} + \textrm{failCost}).
-$$
-
-The optimal score is such that the solver wins if and only if it is profitable to do so, and is given by
-
-$$
-\textrm{optimalScore} = p \cdot (\textrm{successQuality} - \textrm{successCost}) - (1 - p) \cdot \textrm{failCost}.
-$$
-
-Accounting for the cap, the winning solver's expected payoff now is
-
-$$
-p \cdot (\max(-c_l, \min(c_u + \textrm{observedCost}, \textrm{successQuality} - \textrm{referenceScore})) - \textrm{successCost}) \\ - (1 - p) \cdot \min(c_l, \textrm{referenceScore} + \textrm{failCost}).
-$$
-
-If there is no value of $$\textrm{referenceScore}$$ such that the above expression is strictly positive, then a solver does not want to participate. If, instead, there are values of $$\textrm{referenceScore}$$ such that profits are strictly positive, then the logic discussed earlier continues to apply: each solver wants to win if and only if $$\textrm{referenceScore}$$ is such that profits are strictly positive. Since the above expression is monotonic decreasing in $$\textrm{referenceScore}$$, a solver should compute the $$\textrm{referenceScore}$$ such that the above expression is zero and submit that value as a score. Formally, the optimal score is now implicitly defined by
-
-$$
-p \cdot (\max(-c_l, \min(c_u + \textrm{observedCost}, \textrm{successQuality} - \textrm{referenceScore})) - \textrm{successCost}) \\ - (1 - p) \cdot \min(c_l, \textrm{referenceScore} + \textrm{failCost}) = 0.
-$$
-
-The above equation always has a solution that is independent of $$\textrm{referenceScore}$$. This solution is, in general, unique (that is, unique except for very specific parameters, in which case the solution is a closed interval).
-
-## Price estimation competition rewards (CIP-27)
+## Price estimation competition rewards (CIPs 27, 57)
 
 The price estimation competition is a separate competition where solvers compete to provide the best response to a quote request. Quote requests look almost identical to single-order batch auctions, where there is only one order with a trivial limit price, and solvers propose executions of this order with the goal to maximize "out amount minus gas costs", in the case of a sell request, or minimize "in amount + gas costs" in the case of a buy request.
 
-As specified in [CIP-27](https://snapshot.org/#/cow.eth/proposal/0x64e061568e86e8d2eec344d4a892e4126172b992cabe59a0b24c51c4c7e6cc33) and [CIP-36](https://snapshot.org/#/cow.eth/proposal/0x4e58f9c1208121c0e06282b5541b458bc8c8b76090263e25448848f3194df986), solvers that participate in the price estimation competition get rewarded as follows. Each order that is within market price, is associated with a quote that was computed as part of the price estimation competition, and was used in order to compute the limit price of the order. The protocol keeps track of the quote associated with each created order and the corresponding solver that provided the quote, and if and when the order gets executed, the solver that provided the quote (that can be different compared to the solver that ended up executing the order) gets rewarded with $$min{0.0006 ETH, 6 COW}$$, where again, the conversion from ETH to COW is done by using an up-to-date price.
+As specified in [CIP-27](https://snapshot.org/#/cow.eth/proposal/0x64e061568e86e8d2eec344d4a892e4126172b992cabe59a0b24c51c4c7e6cc33), [CIP-36](https://snapshot.org/#/cow.eth/proposal/0x4e58f9c1208121c0e06282b5541b458bc8c8b76090263e25448848f3194df986) and [CIP-57](https://snapshot.box/#/s:cow.eth/proposal/0x46d4fea1492207cf400fcb7a01141a7d4c730791d658cc77236941fc9eb7dccb), solvers that participate in the price estimation competition are rewarded for each order that is within the market price, is associated with a quote that was computed as part of the price estimation competition, and was used in order to compute the limit price of the order. The protocol keeps track of the quote associated with each created order and the corresponding solver that provided the quote. If and when the order gets executed, the solver that provided the quote (which can be different than the solver that ended up executing the order) gets rewarded as follows:
+
+- Ethereum mainnet: $$\min\{0.0006 ~\textrm{ETH}, 6 ~\textrm{COW}\}$$,
+- Arbitrum: $$\min\{0.0002 ~\textrm{ETH}, 6 ~\textrm{COW}\}$$,
+- Gnosis Chain: $$\min\{0.15 ~\textrm{xDAI}, 6 ~\textrm{COW}\}$$,
+- Base Chain: $$\min\{0.0002 ~\textrm{ETH}, 6 ~\textrm{COW}\}$$,
+
+where, again, the conversion from ETH and xDAI to COW is done by using an up-to-date price (specifically, the average ETH/xDAI/COW Dune prices of the past 24h before the payout are used to determine these exchange rates).

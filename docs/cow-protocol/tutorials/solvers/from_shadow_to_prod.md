@@ -17,7 +17,7 @@ In order to get connected to the shadow competition, feel free to reach out to a
 
 ## Live competition (production)
 
-- To connect to the live competition, each solver is required to be part of a "bonding pool", as specified by [CIP-7](https://snapshot.org/#/cow.eth/proposal/0x267edf7a0bd3c771cfca763322f011ee106d8d5158612c11da29183260d1dba7). The main rationale behind this is that a solver in the live competition gets access to the settlement contract, its buffers and the orderflow of the protocol. For the protocol to be protected from a potentially malicious solver, a substantial bonding pool is required so that in case of misbehavior, there are sufficient funds to reimburse the affected parties (users and/or the DAO).
+- To connect to the live competition, each solver is required to be part of a "bonding pool", as specified by [CIP-7](https://snapshot.org/#/cow.eth/proposal/0x267edf7a0bd3c771cfca763322f011ee106d8d5158612c11da29183260d1dba7); see [this section](/cow-protocol/reference/core/auctions/bonding-pools) for more details.
 
 :::note
 

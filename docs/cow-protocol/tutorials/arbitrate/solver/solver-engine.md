@@ -91,6 +91,52 @@ In the case of a perfect CoW, when excess demand and supply are zero, the curren
 
 The naive solver is currently not capable of matching partially fillable orders.
 
+## Flash Loans
+
+The solver can receive an optional object with each order that provides hints for using flash loans. These hints act as guidance, but the solver is free to return a different list of flash loan objects in their solution. The solver has three options:
+
+- Provide no hint: In this case, the driver will assume the flash loan hint attached to the order gets settled in the solution.
+- Use the provided hint: The solver can directly copy the flash loan hint included with the order.
+- Define a custom hint: The solver can specify a different flash loan hint, allowing for better optimization of flash loan usage.
+
+A key requirement for flash loans is that all steps must take place within the same caller context. By maintaining this context, flash loans remain risk-free, as the transaction can be reverted if the tokens cannot be returned at the end. However, CoW Protocol cannot hold on to this context directly. To ensure that all steps execute within the same caller context, the GPv2 Settlement contract's [settle](../../../reference/contracts/core/settlement.md#settle) function is called from within the [IFlashLoanRouter](../../../reference/contracts/periphery/flash-loans.md#iflashloanrouter-contract) contract callback. Rather than directly calling the GPv2 Settlement contract, the solver first interacts with the `IFlashLoanRouter` contract.
+
+The solver must consider the gas cost implications of using a flash loan, as the associated overhead is non-negligible.
+
+The settlement contract will receive the swap order funds, but it is the solver’s responsibility to ensure the flash loan is fully repaid within the same transaction. Additionally, the solver needs to account for when the funds will become available, factoring in any user-defined pre-hooks.
+
+The reference driver facilitates this process by pulling funds from the `IFlashLoanRouter` contract and transferring them to the user, so they can be used for the order swap. Since the settlement contract is the recipient of the swap, the driver must then move the funds back to the `IFlashLoanRouter` contract, ensuring that the flash loan lender can retrieve the required repayment from it. If a solver chooses to implement a custom driver, they are responsible for managing this behavior as they deem appropriate.
+
+We support the following flash-loan lenders:
+
+- Any lender that is compatible with [ERC-3156](https://eips.ethereum.org/EIPS/eip-3156) interface (for example [Maker](https://docs.makerdao.com/smart-contract-modules/flash-mint-module)).
+- [Aave](https://aave.com/docs/developers/flash-loans#overview).
+
+```mermaid
+sequenceDiagram
+    activate Solver
+    Solver->>+IFlashLoanRouter: flashloanAndSettle
+    IFlashLoanRouter->>+FlashloanProvider: flash loan
+    FlashloanProvider-->>IFlashLoanRouter: loan token
+    FlashloanProvider->>+IFlashLoanRouter: flash loan
+    participant Settlement
+    actor User
+    IFlashLoanRouter-->>User: loan token
+    IFlashLoanRouter->>+Settlement: settle
+    Settlement->>+User: preInteraction
+    User->>Personal: repay debt
+    Personal-->>User: collateral token
+    User-->>-Settlement: collateral token
+    Settlement->>+User: order execution
+    User-->>-Settlement: return loaned token
+    Settlement-->>-IFlashLoanRouter: return loaned token
+    deactivate IFlashLoanRouter
+    IFlashLoanRouter-->>FlashloanProvider: return loaned token
+    deactivate FlashloanProvider
+    deactivate IFlashLoanRouter
+    deactivate Solver
+```
+
 ## Dependencies
 
 Solver engines need to be "registered" inside the driver configuration file to receive requests.

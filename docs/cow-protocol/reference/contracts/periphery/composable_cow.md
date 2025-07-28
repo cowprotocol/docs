@@ -197,7 +197,7 @@ function verify(
 |---|---|
 | `order` | Proposed discrete order |
 | `ctx` | [Execution context](#execution-context) |
-| `params` | [`ConditionalOrderParams`](#conditionalorderparams-struct) |
+| `params` | [`ConditionalOrderParams`](#conditionalorderparams) |
 | `offchainInput` | Conditional order type-specific data **NOT** known at time of creation for a **specific** discrete order (or zero-length bytes if not applicable) |
 
 ### Guarantees and Invariants
@@ -267,7 +267,7 @@ struct PayloadStruct {
 | **Field** | **Description** |
 |---|---|
 | `proof` | Merkle Tree proof (if applicable, zero length otherwise) |
-| `params` | [`ConditionalOrderParams`](#conditionalorderparams-struct) |
+| `params` | [`ConditionalOrderParams`](#conditionalorderparams) |
 | `offchainInput` | Off-chain input (if applicable, zero length otherwise) |
 
 By setting `proof` to zero-length, this indicates to `ComposableCoW` that the order is a single order, and not part of a Merkle Tree.
@@ -448,7 +448,7 @@ function createWithContext(
 
 | **Parameter** | **Description** |
 |---|---|
-| `params` | [`ConditionalOrderParams`](#conditionalorderparams-struct) |
+| `params` | [`ConditionalOrderParams`](#conditionalorderparams) |
 | `factory` | An `IValueFactory` that will be used to populate the `ctx` storage slot (if applicable) |
 | `data` | Data to be passed to the `factory` to populate the `ctx` storage slot (if applicable) |
 | `dispatch` | If `true`, broadcast the `ConditionalOrderCreated` event |

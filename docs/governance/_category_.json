@@ -1,9 +1,6 @@
 {
-    "position": 3,
+    "position": 4,
     "label": "🗳️ Governance",
     "collapsible": true,
-    "collapsed": true,
-    "customProps": {
-        "description": "This is the governance section."
-    }
+    "collapsed": true
 }

@@ -6,7 +6,9 @@ sidebar_position: 2
 
 One of the main benefits of CoW Protocol is comprehensive MEV protection for every order. 
 
-There are three main features that protect users from MEV:
+MEV, or maximal extractable value, is a form of price exploitation that affects token swaps and other types of transactions on Ethereum. MEV attacks happen when malicious traders (usually MEV bots) strategically place transactions before and after a user's order, manipulating the price of assets at the expense of the user — this is commonly known as a "[sandwich attack](https://blog.cow.fi/what-is-a-sandwich-attack-and-how-can-you-protect-yourself-b101c9a9b9b3)". To date, MEV is responsible for over a billion dollars in losses for everyday traders. 
+
+MEV attacks happen on most major exchanges. However, CoW Protocol's unique trading model protects users from MEV in three main ways:
 
 - **Uniform Clearing Prices**: If the same token pair (such as ETH-USDC) is traded multiple times in the same [batch](../introduction/batch-auctions), the assets will clear for the same market prices for each trade.
   This mechanism is called a "uniform clearing price" and it makes transaction order irrelevant, so MEV bots cannot re-order trades in order to extract a profit.
@@ -15,7 +17,6 @@ There are three main features that protect users from MEV:
   This means that users are never directly exposed to MEV on-chain (though the solvers may be).
   The winning solver is required to give users the price they signed or greater, meaning that solvers take on all price risk from potential MEV attacks.
   Solvers are professional parties, so they calculate the optimal slippage for each trade and match liquidity off-chain through CoWs or private market makers when possible in order to reduce MEV risk.
-- **MEV Blocker Integration:** As a final defense against MEV, CoW Protocol utilizes [MEV Blocker](https://mevblocker.io/) for all order settlements on Ethereum.
-  MEV Blocker is an RPC endpoint that bypasses the public mempool, protecting orders from MEV exploitation
+- **Coincidence of Wants**: MEV attacks rely on the dynamics of automated market makers (AMMs) for their price exploitation. When orders are matched peer-to-peer through a CoW, however, they don't tap into on-chain liquidity, and are therefore protected from MEV 
 
-Read more about CoW Protocol's unparalleled MEV protection [on our blog](https://blog.cow.fi/how-cow-swap-solves-the-mev-problem-fd35b0127390).
+Read more about CoW Protocol's unparalleled MEV protection [on our blog](https://blog.cow.fi/how-cow-swap-solves-the-mev-problem-fd35b0127390). 

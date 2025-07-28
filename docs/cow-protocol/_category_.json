@@ -2,8 +2,5 @@
     "position": 2,
     "label": "🐮 CoW Protocol",
     "collapsible": true,
-    "collapsed": true,
-    "customProps": {
-        "description": "This is the CoW Protocol section."
-    }
+    "collapsed": true
 }

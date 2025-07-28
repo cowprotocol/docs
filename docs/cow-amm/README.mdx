@@ -1,0 +1,20 @@
+# CoW AMM: The First MEV-capturing AMM
+
+CoW AMM protects LPs from LVR so they can provide liquidity with less risk and more return. CoW AMM achieves close to 5% more in TVL compared to reference pools, protects millions from LVR, and has captured over $100,000 in surplus for LPs to date. 
+
+## AMMs don't want you to know about LVR
+
+Liquidity providers expect their tokens to earn yield, but the dirty little secret of AMMs is that most liquidity pools lose money. In fact, hundreds of millions of dollars of LP funds are stolen by arbitrageurs every year. These losses are known as loss-versus-rebalancing (LVR). LVR is a bigger source of MEV than frontrunning and sandwich attacks combined.
+
+## An AMM designed with LPs in mind
+
+CoW AMM eliminates LVR once and for all by using batch auctions to send surplus to LPs
+
+1. Liquidity providers deposit tokens into protected CoW AMM liquidity pools, where traders can access the liquidity
+2. Solvers bid to rebalance CoW AMM pools whenever there is an arbitrage opportunity
+3. The solver that offers the most surplus to the pool wins the right to rebalance the pool
+4. CoW AMM eliminates LVR by capturing arbitrage value for LPs and shielding it from MEV bots
+
+## Deploy liquidity on CoW AMM
+
+Thanks to CoW AMM's integration with Balancer, LPs can now [deploy their liquidity or create a brand new pool in just a few clicks](https://balancer.fi/pools/cow). 

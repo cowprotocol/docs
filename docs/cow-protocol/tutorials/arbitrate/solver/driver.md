@@ -37,7 +37,6 @@ sequenceDiagram
     solver engine-->>driver: set of solutions
     driver->>driver: post-process solutions
     driver-->>autopilot: participate with the best solution
-    autopilot->>driver: request to reveal details about the settlement,<br>in case this solver won
     autopilot->>driver: request to execute the settlement,<br>in case this solver won
     driver->>driver: execute the settlement
 ```
@@ -71,6 +70,12 @@ The driver expects the solver engine to return a recipe on how to solve a set of
 In the post-processing step the driver applies multiple sanity checks to the solution, encodes it into a transaction that can be executed on-chain and verifies that it actually simulates successfully before it considers the solution valid.
 All this is done because solvers can get slashed for misbehaving so the reference driver checks all it can to reduce the risk of running a solver as much as possible.
 
+:::note
+
+The driver encodes all matched orders' pre- and post-hooks for the solver, so the solver does not have to add them in its solution. The `preInteractions` and `postInteractions` that can be added to a solution are only needed for additional calls that the solver needs to execute to make the solution work.
+
+:::
+
 Since the solver engine is allowed to propose multiple solutions the driver also contains some logic to pick the best one.
 First it will try to merge disjoint solutions to create bigger and more gas efficient batches.
 Afterwards it will simulate the solutions to get an accurate gas usage for them which is used to compute a score for each one.
@@ -87,9 +92,85 @@ The driver can be configured to use different submission strategies which it dyn
 If the settlement does not expose any MEV (e.g. it executes all trades without AMMs) it's safe and most efficient to directly submit to the public mempool.
 However, if a settlement exposes MEV the driver would submit to an MEV-protected RPC like [MEVBlocker](https://mevblocker.io).
 
+### Flash Loans
+
+The user is able to create a flash loan order's hint by attaching to the `appData` the specified metadata. The autopilot reads the order and cuts it into a [batch auction](../../../concepts/introduction/batch-auctions). Then the driver fetches the `appData` by calling the orderbook with `GET /v1/app_data/<app_data_hash>` for every order and caches them in memory. The driver should include the flash loan information into the batch auction's order before sending it to the solver(s).
+
+
+```mermaid
+sequenceDiagram
+    actor User
+    box protocol
+        participant Orderbook
+        participant Autopilot
+    end
+    box solver
+        participant Driver
+        participant Solver(s)
+    end
+
+    User->>+Orderbook: placeOrder
+    activate Orderbook
+    Orderbook-->>-User: orderPlaced
+    deactivate Orderbook
+
+    Autopilot->>+Orderbook: readOrder
+    activate Orderbook
+    Orderbook-->>-Autopilot: orderData
+    deactivate Orderbook
+
+    Autopilot->>+Driver: solve
+    activate Driver
+    Driver->>+Orderbook: getAppData
+    activate Orderbook
+    Orderbook-->>-Driver: appData
+    deactivate Orderbook
+
+    Driver->>+Solver(s): solve (order with flash loan's information)
+    activate Solver(s)
+    Solver(s)-->>-Driver: solution
+    deactivate Solver(s)
+    Driver->>+Autopilot: solution
+    deactivate Driver
+```
+
+#### Flash Loans Encoding
+
+If a solver decides to encode the transaction without the help of the reference driver, the solver must call the `IFlashLoanRouter` contract's [flashLoanAndSettle](../../../reference/contracts/periphery/flash-loans.md#flashloanandsettle) function instead of the settlement contract's [settle](../../../reference/contracts/core/settlement.md#settle) function. The solver must provide all necessary flash loan inputs for the settlement, as well as the settle calldata, which will be executed within the same context by the `IFlashLoanRouter` contract. The `IFlashLoanRouter` contract will then request the specified flash loans and, once received, execute the settlement as instructed.
+
+The entry point to the router contract ([IFlashLoanRouter](../../../reference/contracts/periphery/flash-loans.md#iflashloanrouter-contract)) is the function `flashLoanAndSettle`.
+It takes a list of loans with the following entries for each loan:
+
+- The loaned amount and ERC-20 token.
+- The flash-loan lender (e.g., Balancer, Aave, Maker, ...).
+- The _borrower_, which is an adapter contract that makes the specific lender implementation compatible with the router.
+
+Only CoW-Protocol solvers can call this function.
+It also takes the exact call data for a call to `settle`.
+The flash-loan router is a solver for CoW Protocol and calls `settle` directly once the flash loans have been obtained.
+
+The borrowers are the contracts that are called back by the lender once the flash loan is initiated; they are the contracts that receive the flash-loan proceeds and that are eventually responsible to repay the loan.
+
+The only way to move funds out of a borrower is through an ERC-20 approval transaction from the spender.
+Approvals can be set by calling the [approve](../../../reference/contracts/periphery/flash-loans.md#approve) function on the borrower contract ([IBorrower](../../../reference/contracts/periphery/flash-loans.md#iborrower-contract)) from the context of a settlement.
+For safe operations, like an approval for the settlement contract to spend the funds of the borrower, it's enough to set the approval once for an unlimited amount and reuse the same approval in future settlements.
+
+At the start of the settlement, it's expected that the loaned funds are transferred from the borrowers to where they are needed. For example, this can be the settlement contract itself, or the address of a user who wants to use the loan to retrieve the collateral needed to avoid liquidations.
+
+In general, solvers have full flexibility in deciding how loaned funds are allocated.
+
+The settlement is also responsible for repaying the flash loans.
+The specific repayment mechanism depends on the lender, but a common process is having the settlement contract send back the borrowed funds to the borrower and set an approval to the lender for spending the funds of the borrower: then the lender is going to pull back the funds with an ERC-20 `transferFrom` after the settlement is terminated.
+
+For each flash loan, the following encoding has to be added:
+
+- Allow settlement contract to pull borrowed tokens from flash loan wrapper.
+- Transfer tokens from flash loan wrapper to user (i.e. borrower).
+- Repayment: Repay the borrowed tokens. For example, the tokens can be transferred from the settlement contract to the flash loan wrapper. Then, the flash loan wrapper can approve the flash loan lender to withdraw the tokens directly from it.
+
 ## Considerations
 
-As you can see the driver has many responsibilities and discussing all of them in detail would be beyond the scope of this documentation but it's worth mentioning one guiding principle that applies to most of them: 
+As you can see the driver has many responsibilities and discussing all of them in detail would be beyond the scope of this documentation but it's worth mentioning one guiding principle that applies to most of them:
 make the driver do as _little_ work as possible in the hot path when processing an auction.
 
 Because having more time for the solver to compute a solution leads to a more competitive solver every process in the driver should introduce as little latency as possible.

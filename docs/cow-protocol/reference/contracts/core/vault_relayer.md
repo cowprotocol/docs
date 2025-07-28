@@ -15,7 +15,7 @@ The `GPv2VaultRelayer` contract is an important component used to protect user f
 
 The `GPv2VaultRelayer` has access to user balances through 3 mechanisms:
 
-1. [Fallback `ERC-20` Allowances](#fallback-erc20-allowances)
+1. [Fallback `ERC-20` Allowances](#fallback-erc-20-allowances)
 2. [Balancer External Balances](#balancer-external-balances)
 3. [Balancer Internal Balances](#balancer-internal-balances)
 
@@ -25,13 +25,13 @@ The `GPv2VaultRelayer` has access to user balances through 3 mechanisms:
 
 ### Fallback `ERC-20` Allowances
 
-The third and final method of approving tokens for CoW protocol is to use direct `ERC-20` allowances to the `GPv2VaultRelayer`. This works like most other trading protocols, where for each token you want to sell, an allowance must first be approved for the `GPv2VaultRelayer` contract.
+The first mechanism of approving tokens for CoW protocol is to use direct `ERC-20` allowances to the `GPv2VaultRelayer`. This works like most other trading protocols, where for each token you want to sell, an allowance must first be approved for the `GPv2VaultRelayer` contract.
 
 Orders with the `sellTokenBalance` flag set to `erc20` will withdraw using this process. The `buyTokenBalance` flag can also be set to `erc20` in order to receive trade proceeds directly in `ERC-20` amounts.
 
 ### Balancer External Balances
 
-The first mechanism that the `GPv2VaultRelayer` contract can use to withdraw user `ERC-20` tokens is through `Vault` external balances. This works by having an `ERC-20` allowance for the Balancer Vault, and a relayer approval for the `GPv2VaultRelayer` contract.
+The second mechanism that the `GPv2VaultRelayer` contract can use to withdraw user `ERC-20` tokens is through `Vault` external balances. This works by having an `ERC-20` allowance for the Balancer Vault, and a relayer approval for the `GPv2VaultRelayer` contract.
 
 This allowance and approval combination allows the `GPv2VaultRelayer` contract to transfer `ERC-20` tokens through the `Vault`. Roughly speaking, the process works in the following way:
 
@@ -51,7 +51,7 @@ Orders with the `sellTokenBalance` flag set to `external` will withdraw using th
 
 ### Balancer Internal Balances
 
-The second mechanism is to use balances internal to the `Vault`. The Balancer V2 vault can accrue `ERC-20` token balances and keep track of them internally in order to allow extremely gas-efficient transfers and swaps. The CoW Protocol contracts can make use of this in order to decrease the gas cost of settling a user order on-chain. In order for this to work, the user must approve the `GPv2VaultRelayer` contract and have internal `Vault` balances available.
+The third and final method is to use balances internal to the `Vault`. The Balancer V2 vault can accrue `ERC-20` token balances and keep track of them internally in order to allow extremely gas-efficient transfers and swaps. The CoW Protocol contracts can make use of this in order to decrease the gas cost of settling a user order on-chain. In order for this to work, the user must approve the `GPv2VaultRelayer` contract and have internal `Vault` balances available.
 
 Internal balances can be withdrawn from the `Vault` at any time for their `ERC-20` equivalent amounts.
 

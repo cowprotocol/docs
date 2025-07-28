@@ -7,15 +7,19 @@ sidebar_position: 1
 
 CoW DAO is on a mission to innovate the most user-protective products in Ethereum. 
 
-Currently, CoW DAO's two main products are [**CoW Protocol**](cow-protocol) and [**MEV Blocker**](https://mevblocker.io), which it supports with development and marketing resources – including the [CoW Grants Program](https://grants.cow.fi), the [CoW Protocol Explorer](cow-protocol/tutorials/cow-explorer), and the [CoW Swap frontend](cow-protocol/tutorials/cow-swap).
+Currently, CoW DAO's three main products are [**CoW Protocol**](cow-protocol), [**MEV Blocker**](https://mevblocker.io), and [CoW AMM](https://cow.fi/cow-amm), which it supports with development and marketing resources – including the [CoW Grants Program](https://grants.cow.fi), the [CoW Protocol Explorer](cow-protocol/tutorials/cow-explorer), and the [CoW Swap frontend](cow-protocol/tutorials/cow-swap).
 
 ## What is [CoW Protocol](cow-protocol)? 
 
 CoW Protocol is a fully permissionless trading protocol that leverages [batch auctions](cow-protocol/concepts/introduction/batch-auctions) as its price finding mechanism. CoW Protocol uses batch auctions to maximize liquidity via Coincidence of Wants (CoWs) in addition to tapping all available on-chain liquidity whenever needed.
 
-## What is MEV Blocker?
+## What is [MEV Blocker](https://mevblocker.io)?
 
 MEV Blocker is an RPC endpoint designed to protect user transactions from MEV (Maximal Extractable Value) attacks such as frontrunning and sandwiching. Aside from protecting user transactions from the dangers of MEV, MEV Blocker leverages an order flow auction of searchers and builders to offer users rebates from backrunning for their trades.
+
+## What is [CoW AMM](https://cow.fi/cow-amm)?
+
+CoW AMM is a new type of AMM built from the ground up to protect LPs from price exploitation in the form of [LVR](https://cow.fi/learn/what-is-loss-versus-rebalancing-lvr). Liquidity providers expect their tokens to earn yield, but most liquidity pools are actually not profitable after accounting for stale prices. Arbitrageurs exploit these stale prices at the expense of LPs. CoW AMM fixes LVR once and for all, with liquidity pools proven to outperform reference Balancer and Uniswap pools. 
 
 ## [Governance](governance)
 
@@ -23,7 +27,7 @@ CoW DAO is of its community, by its community, and for its community. CoW DAO us
 
 ## How to use CoW DAO's documentation
 
-CoW DAO's documentation follows a "Concepts", "Procedures", "Technical Reference" methodology. For example when a user wants to learn:
+CoW DAO's documentation follows a "Concepts", "Tutorials", "Technical Reference" methodology. For example when a user wants to learn:
 
 - **_What_** something is (example: batch auctions) → see [Concepts](/category/concepts)
 - **_How_** to do something (example: create an order) → see [Tutorials](/category/tutorials)

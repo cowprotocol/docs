@@ -1,6 +1,5 @@
 ---
 title: Make custom links
-draft: true
 ---
 
 # Custom Links
@@ -15,6 +14,7 @@ draft: true
 - [`https://swap.cow.fi/#/100/swap`](https://swap.cow.fi/#/100/swap) - `swap` page on Gnosis chain network
 - [`https://swap.cow.fi/#/100/limit/WXDAI/COW`](https://swap.cow.fi/#/100/limit/WXDAI/COW) - Create a `limit` order to sell `WXDAI` for `COW`
 - [`https://swap.cow.fi/#/1/swap/WETH/COW?sellAmount=100`](https://swap.cow.fi/#/1/swap/WETH/COW?sellAmount=100) - Swap `100 WETH` for `COW`
+- [`https://swap.cow.fi/#/1/swap/WETH/COW?buyAmount=10000&recipient=vitalik.eth`](https://swap.cow.fi/#/1/swap/WETH/COW?buyAmount=10000&recipient=vitalik.eth) - Buy on `swap` sending the outcome to a custom recipient (can be either address or ens)
 - [`https://swap.cow.fi/#/100/limit/WETH/WXDAI?sellAmount=2&buyAmount=6000`](https://swap.cow.fi/#/100/limit/WETH/WXDAI?sellAmount=2&buyAmount=6000) - Create a limit order to sell `2 WETH` for `6000 WXDAI`
 
 ## Query Parameters
@@ -35,9 +35,9 @@ Fortunately, the `swap` and `limit` pages have the same URL query parameters!
 
 ### Global parameters
 
-| **Parameter** | **Type** | **Default** | **Description** |
-| --- | --- | --- | --- |
-| `theme` | String | (determined by browser) | Sets theme to `dark` or `light` mode. |
+| **Parameter** | **Type** | **Default**             | **Description**                       |
+| ------------- | -------- | ----------------------- | ------------------------------------- |
+| `theme`       | String   | (determined by browser) | Sets theme to `dark` or `light` mode. |
 
 ### Swap / limit parameters
 
@@ -47,14 +47,14 @@ All parameters are optional. If a parameter is not set, the default value will b
 
 :::
 
-| **Parameter** | **Type** | **Default** | **Description** |
-| --- | --- | --- | --- |
-| `chainId` | Integer | `1` - Ethereum Mainnet | [Supported blockchains](/cow-protocol/reference/contracts/core#deployments) |
-| `sellTokenSymbolOrAddress` | Token `symbol` or `address` | Wrapped native token symbol for the current network (for Mainnet: `WETH`) | Sell token `symbol` or `address` |
-| `buyTokenSymbolOrAddress` | Token `symbol` or `address` |  | Buy token `symbol` or `address` |
-| `recipient` | `address` | `undefined` | Valid Ethereum account address |
-| `sellAmount` | Integer or Float | `undefined` | Amount of sell token to sell |
-| `buyAmount` | Integer or Float | `undefined` | Amount of buy token to buy |
+| **Parameter**              | **Type**                    | **Default**                                                               | **Description**                                                             |
+| -------------------------- | --------------------------- | ------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| `chainId`                  | Integer                     | `1` - Ethereum Mainnet                                                    | [Supported blockchains](/cow-protocol/reference/contracts/core#deployments) |
+| `sellTokenSymbolOrAddress` | Token `symbol` or `address` | Wrapped native token symbol for the current network (for Mainnet: `WETH`) | Sell token `symbol` or `address`                                            |
+| `buyTokenSymbolOrAddress`  | Token `symbol` or `address` |                                                                           | Buy token `symbol` or `address`                                             |
+| `recipient`                | `address`                   | `undefined`                                                               | Valid Ethereum account address                                              |
+| `sellAmount`               | Integer or Float            | `undefined`                                                               | Amount of sell token to sell                                                |
+| `buyAmount`                | Integer or Float            | `undefined`                                                               | Amount of buy token to buy                                                  |
 
 :::caution
 
@@ -70,7 +70,10 @@ Native and wrapped tokens per chain:
 
 - Ethereum Mainnet: [`WETH`](https://etherscan.io/address/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2) - wrapped `ETH`
 - Gnosis chain: [`WXDAI`](https://gnosisscan.io/address/0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d) - wrapped `XDAI`
-- Görli: [`WETH`](https://goerli.etherscan.io/address/0xb4fbf271143f4fbf7b91a5ded31805e42b2208d6) - wrapped `ETH`
+- Arbitrum one: [`WETH`](https://arbiscan.io/address/0x82af49447d8a07e3bd95bd0d56f35241523fbab1) - wrapped `ETH`
+- Base: [`WETH`](https://basescan.org/address/0x4200000000000000000000000000000000000006) - wrapped `ETH`
+- Avalanche: [`WAVAX`](https://snowscan.xyz/address/0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7) - wrapped `AVAX`
+- Polygon: [`WPOL`](https://polygonscan.com/address/0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270) - wrapped `POL`
 - Sepolia: [`WETH`](https://sepolia.etherscan.io/address/0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14) - wrapped `ETH`
 
 :::

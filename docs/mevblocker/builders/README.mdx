@@ -1,0 +1,39 @@
+# Builders
+
+Builders receiving MEV blocker transactions should adhere to certain rules and also pay a fee to MEV blocker. The proceeds of the fee are used to support MEV blocker technical development and drive continuous growth in users' adoption. 
+
+To connect to MEV Blocker and start receiving private order flow, builders must meet the following basic requirements:
+
+- **Build ≥1% of mainnet blocks consistently**  
+  You must have built at least 1% of Ethereum mainnet blocks *per week* during the past month.  
+  We reserve the right to disconnect builders who drop significantly below this threshold.
+
+- **Post a 10 ETH bond**  
+  A refundable security deposit is required to join the network.  
+  It is held in the MEV Blocker contract and covers potential penalties or late fees.
+
+- **Support for core features**  
+  Builders must implement:
+  - **Refund bundles**
+  - **`replacementUuid` (or `uuid`)** for updateable bundles
+  - **Tx hash dropping** (to support dynamic bundle resolution)
+
+- **Maintain ethical execution**  
+  Builders must refrain from any behavior that harms MEV Blocker users, including but not limited to:
+  - Frontrunning or sandwiching  
+  - Sharing or leaking transaction/state data  
+  - Selectively including transactions or manipulating refund outcomes
+
+- **No shadow identities or fee evasion**  
+  Builders must not attempt to bypass the fee mechanism by operating "shadow builders" or other manipulative schemes.
+
+- **Reach out to get started**  
+  Final onboarding and access to flow are coordinated via the MEV Blocker Telegram group.
+
+---
+
+This is a high-level summary — each requirement is explained in detail in the sections that follow.
+
+import DocCardList from '@theme/DocCardList';
+
+<DocCardList />
