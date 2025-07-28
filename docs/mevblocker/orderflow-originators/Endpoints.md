@@ -38,9 +38,9 @@ https://rpc.mevblocker.io/maxbackruns
 https://rpc.mevblocker.io/nochecks
 ```
 
-## Restrictred Searcher Configuration
+## Restricted Searcher Configuration
 
-As you might have read in ##concepts, MEV Blocker shares transaction information with all permissionlessly connected searchers because it mixes real transactions with fake transactions. In the event of using "vanila AMM swaps", the fake transactions are good enough to spoof searchers to not not know which of the transactions are real or fake. However, if you participate in more "advanced swaps protocols" such as CoW Swap, 1inch fusion, or Uniswap X, your solution might be a bit more complex than the "vanialla swaps", and hence the fake transactions might not be as good at spoofing real transaction information from searchers.
+As you might have read in ##concepts, MEV Blocker shares transaction information with all permissionlessly connected searchers because it mixes real transactions with fake transactions. In the event of using "vanilla AMM swaps", the fake transactions are good enough to spoof searchers to not not know which of the transactions are real or fake. However, if you participate in more "advanced swaps protocols" such as CoW Swap, 1inch fusion, or Uniswap X, your solution might be a bit more complex than the "vanilla swaps", and hence the fake transactions might not be as good at spoofing real transaction information from searchers.
 
 Because of this, we enabled the option for you to choose between sharing the transactions with all permissionlessly connected searchers, for which we know nothing about, or to share the transactions with a curated list of searchers with whom the team might have a bit more background.\*
 
