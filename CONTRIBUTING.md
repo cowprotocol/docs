@@ -2,6 +2,14 @@
 
 There are many ways to contribute to CoW Protocol. We welcome contributions of all kinds from anyone, whether you've been a long-time user or you are just getting started with development.
 
+## Prerequisites
+
+Before contributing, make sure you have the following installed:
+
+- **Node.js** (version 22.14.0 or higher)
+- **Yarn** (package manager)
+- **pnpm** (required for external dependencies): `npm install -g pnpm`
+
 ## Troubleshooting
 
 You can help other users in the community to solve their issues in the [CoW Protocol Discord].

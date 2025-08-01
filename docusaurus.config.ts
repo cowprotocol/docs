@@ -77,9 +77,11 @@ const config: Config = {
       {
         id: 'cow-sdk',
         // TypeDoc options
-        entryPoints: ['./external/cow-sdk/src/index.ts'],
-        tsconfig: './external/cow-sdk/tsconfig.json',
-
+        entryPoints: [
+          './external/cow-sdk/packages/sdk/src/typedoc-entry.ts',
+        ],
+        tsconfig: './external/cow-sdk/packages/sdk/tsconfig.json',
+    
         // Plugin options
         out: 'cow-protocol/reference/sdks/cow-sdk',
         sidebar: {
@@ -92,17 +94,257 @@ const config: Config = {
     [
       'docusaurus-plugin-typedoc',
       {
+        id: 'sdk-trading',
+        // TypeDoc options
+        entryPoints: ['./external/cow-sdk/packages/trading/src/index.ts'],
+        tsconfig: './external/cow-sdk/packages/trading/tsconfig.json',
+
+        // Plugin options
+        out: 'cow-protocol/reference/sdks/protocol-components/sdk-trading',
+        sidebar: {
+          categoryLabel: 'sdk-trading',
+          collapsed: true,
+          position: 1,
+        },
+      },
+    ],
+    [
+      'docusaurus-plugin-typedoc',
+      {
+        id: 'sdk-order-book',
+        // TypeDoc options
+        entryPoints: ['./external/cow-sdk/packages/order-book/src/index.ts'],
+        tsconfig: './external/cow-sdk/packages/order-book/tsconfig.json',
+
+        // Plugin options
+        out: 'cow-protocol/reference/sdks/protocol-components/sdk-order-book',
+        sidebar: {
+          categoryLabel: 'sdk-order-book',
+          collapsed: true,
+          position: 2,
+        },
+      },
+    ],
+    [
+      'docusaurus-plugin-typedoc',
+      {
+        id: 'contracts-ts',
+        // TypeDoc options
+        entryPoints: ['./external/cow-sdk/packages/contracts-ts/src/index.ts'],
+        tsconfig: './external/cow-sdk/packages/contracts-ts/tsconfig.json',
+        excludeNotDocumented: true,
+
+        // Plugin options
+        out: 'cow-protocol/reference/sdks/core-utilities/sdk-contracts-ts',
+        sidebar: {
+          categoryLabel: 'sdk-contracts-ts',
+          collapsed: true,
+          position: 3,
+        },
+      },
+    ],
+    [
+      'docusaurus-plugin-typedoc',
+      {
+        id: 'sdk-order-signing',
+        // TypeDoc options
+        entryPoints: ['./external/cow-sdk/packages/order-signing/src/index.ts'],
+        tsconfig: './external/cow-sdk/packages/order-signing/tsconfig.json',
+
+        // Plugin options
+        out: 'cow-protocol/reference/sdks/protocol-components/sdk-order-signing',
+        sidebar: {
+          categoryLabel: 'sdk-order-signing',
+          collapsed: true,
+          position: 3,
+        },
+      },
+    ],
+    [
+      'docusaurus-plugin-typedoc',
+      {
+        id: 'sdk-cow-shed',
+        // TypeDoc options
+        entryPoints: ['./external/cow-sdk/packages/cow-shed/src/index.ts'],
+        tsconfig: './external/cow-sdk/packages/cow-shed/tsconfig.json',
+
+        // Plugin options
+        out: 'cow-protocol/reference/sdks/protocol-components/sdk-cow-shed',
+        sidebar: {
+          categoryLabel: 'sdk-cow-shed',
+          collapsed: true,
+          position: 4,
+        },
+      },
+    ],
+    [
+      'docusaurus-plugin-typedoc',
+      {
+        id: 'sdk-composable',
+        // TypeDoc options
+        entryPoints: ['./external/cow-sdk/packages/composable/src/index.ts'],
+        tsconfig: './external/cow-sdk/packages/composable/tsconfig.json',
+
+        // Plugin options
+        out: 'cow-protocol/reference/sdks/protocol-components/sdk-composable',
+        sidebar: {
+          categoryLabel: 'sdk-composable',
+          collapsed: true,
+          position: 5,
+        },
+      },
+    ],
+    [
+      'docusaurus-plugin-typedoc',
+      {
+        id: 'sdk-bridging',
+        // TypeDoc options
+        entryPoints: ['./external/cow-sdk/packages/bridging/src/index.ts'],
+        tsconfig: './external/cow-sdk/packages/bridging/tsconfig.json',
+
+        // Plugin options
+        out: 'cow-protocol/reference/sdks/protocol-components/sdk-bridging',
+        sidebar: {
+          categoryLabel: 'sdk-bridging',
+          collapsed: true,
+          position: 6,
+        },
+      },
+    ],
+    [
+      'docusaurus-plugin-typedoc',
+      {
+        id: 'sdk-subgraph',
+        // TypeDoc options
+        entryPoints: ['./external/cow-sdk/packages/subgraph/src/index.ts'],
+        tsconfig: './external/cow-sdk/packages/subgraph/tsconfig.json',
+
+        // Plugin options
+        out: 'cow-protocol/reference/sdks/protocol-components/sdk-subgraph',
+        sidebar: {
+          categoryLabel: 'sdk-subgraph',
+          collapsed: true,
+          position: 7,
+        },
+      },
+    ],
+    [
+      'docusaurus-plugin-typedoc',
+      {
+        id: 'sdk-weiroll',
+        // TypeDoc options
+        entryPoints: ['./external/cow-sdk/packages/weiroll/src/index.ts'],
+        tsconfig: './external/cow-sdk/packages/weiroll/tsconfig.json',
+
+        // Plugin options
+        out: 'cow-protocol/reference/sdks/protocol-components/sdk-weiroll',
+        sidebar: {
+          categoryLabel: 'sdk-weiroll',
+          collapsed: true,
+          position: 8,
+        },
+      },
+    ],
+    [
+      'docusaurus-plugin-typedoc',
+      {
+        id: 'sdk-common',
+        // TypeDoc options
+        entryPoints: ['./external/cow-sdk/packages/common/src/index.ts'],
+        tsconfig: './external/cow-sdk/packages/common/tsconfig.json',
+
+        // Plugin options
+        out: 'cow-protocol/reference/sdks/core-utilities/sdk-common',
+        sidebar: {
+          categoryLabel: 'sdk-common',
+          collapsed: true,
+          position: 1,
+        },
+      },
+    ],
+    [
+      'docusaurus-plugin-typedoc',
+      {
+        id: 'sdk-config',
+        // TypeDoc options
+        entryPoints: ['./external/cow-sdk/packages/config/src/index.ts'],
+        tsconfig: './external/cow-sdk/packages/config/tsconfig.json',
+
+        // Plugin options
+        out: 'cow-protocol/reference/sdks/core-utilities/sdk-config',
+        sidebar: {
+          categoryLabel: 'sdk-config',
+          collapsed: true,
+          position: 2,
+        },
+      },
+    ],
+    [
+      'docusaurus-plugin-typedoc',
+      {
+        id: 'sdk-ethers-v5-adapter',
+        // TypeDoc options
+        entryPoints: ['./external/cow-sdk/packages/providers/ether-v5-adapter/src/index.ts'],
+        tsconfig: './external/cow-sdk/packages/providers/ether-v5-adapter/tsconfig.json',
+
+        // Plugin options
+        out: 'cow-protocol/reference/sdks/provider-adapters/sdk-ethers-v5-adapter',
+        sidebar: {
+          categoryLabel: 'sdk-ethers-v5-adapter',
+          collapsed: true,
+          position: 1,
+        },
+      },
+    ],
+    [
+      'docusaurus-plugin-typedoc',
+      {
+        id: 'sdk-ethers-v6-adapter',
+        // TypeDoc options
+        entryPoints: ['./external/cow-sdk/packages/providers/ether-v6-adapter/src/index.ts'],
+        tsconfig: './external/cow-sdk/packages/providers/ether-v6-adapter/tsconfig.json',
+
+        // Plugin options
+        out: 'cow-protocol/reference/sdks/provider-adapters/sdk-ethers-v6-adapter',
+        sidebar: {
+          categoryLabel: 'sdk-ethers-v6-adapter',
+          collapsed: true,
+          position: 2,
+        },
+      },
+    ],
+    [
+      'docusaurus-plugin-typedoc',
+      {
+        id: 'sdk-viem-adapter',
+        // TypeDoc options
+        entryPoints: ['./external/cow-sdk/packages/providers/viem-adapter/src/index.ts'],
+        tsconfig: './external/cow-sdk/packages/providers/viem-adapter/tsconfig.json',
+
+        // Plugin options
+        out: 'cow-protocol/reference/sdks/provider-adapters/sdk-viem-adapter',
+        sidebar: {
+          categoryLabel: 'sdk-viem-adapter',
+          collapsed: true,
+          position: 3,
+        },
+        excludeExternals: true,
+      },
+    ],
+    [
+      'docusaurus-plugin-typedoc',
+      {
         id: 'app-data',
         // TypeDoc options
-        entryPoints: ['./external/app-data/src/index.ts'],
-        tsconfig: './external/app-data/tsconfig.json',
+        entryPoints: ['./external/cow-sdk/packages/app-data/src/index.ts'],
+        tsconfig: './external/cow-sdk/packages/app-data/tsconfig.json',
 
         // Plugin options
         out: 'cow-protocol/reference/sdks/app-data',
         sidebar: {
           categoryLabel: 'app-data',
           collapsed: true,
-          position: 2,
+          position: 5,
         },
       },
     ],
