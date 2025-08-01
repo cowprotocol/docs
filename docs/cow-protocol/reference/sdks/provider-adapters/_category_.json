@@ -1,0 +1,8 @@
+{
+  "label": "Provider Adapters",
+  "position": 2,
+  "link": {
+    "type": "generated-index",
+    "description": "Provider adapters for different Ethereum libraries"
+  }
+}
