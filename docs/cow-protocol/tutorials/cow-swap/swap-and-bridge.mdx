@@ -30,6 +30,12 @@ This guide will walk you through the process step-by-step, from setting up your 
 
 <img src={SwapFormImg.src} style={{ maxWidth: 500 }} alt="Swap and Bridge trade" />
 
+:::note
+
+Currently, the Swap & Bridge functionality is limited to swap orders and is not available for smart contract wallets. Support for these features is currently under development.
+
+:::
+
 ---
 
 ## 1. Setting up a Swap with Different Network Assets
@@ -99,6 +105,12 @@ Approvals can happen through:
 <img src={SignPostHookImg.src} alt="Sign a post-hook" />
 <img src={SignOrderImg.src} alt="Sign an order" />
 
+:::note
+
+If a token to sell does not have an approved permit, the process will involve three signing steps, beginning with the permit signature.
+
+:::
+
 ---
 
 ## 3. Using a Custom Recipient
@@ -107,7 +119,7 @@ By default, your connected wallet address will be set as the recipient on the de
 If you want to send funds to another address:
 
 * Enable **Custom recipient** in the settings (same place as in the regular Swap).
-* Enter the desired address.
+* Enter a resipient address.
 * **Note:** ENS names are **not** supported here — you must use a full wallet address.
 
 <img src={CustomRecipientImg.src} style={{ maxWidth: 600 }} alt="Custom recipient" />
@@ -118,13 +130,12 @@ If you want to send funds to another address:
 
 In the Swap form you can see a detailed breakdown of the expected swap and bridge:
 
-* **Expected deposit amount** → This is equal to the “Expected to receive” amount from the swap stage.
-* **Bridge cost** → A fee charged by the bridge provider for processing your transfer.
-* **Estimated bridging time** → Pulled directly from the bridge provider (varies by network and provider).
-* **Minimum to receive**:
-
-  - Calculated as: `(Swap min. to receive)` - `(Bridge provider cost)`
-  - `Swap min. to receive` = final amount after all swap fees, gas costs, and slippage tolerance.
+* Swap **Min. to receive** → final amount after all swap costs and a slippage tolerance.
+* **Expected deposit amount** → This is equal to the “Expected to receive” amount from the swap step.
+* **Bridge cost** → A fee charged by a bridge provider for processing your transfer.
+* **Estimated bridging time** → Pulled directly from a bridge provider (varies by a network and a provider).
+* Bridge **Min. to receive** → Calculated as: `(Swap min. to receive)` - `(Bridge provider cost)`
+ 
 
 <img src={QuotePreviewImg.src} style={{ maxWidth: 500 }} alt="Quote preview" />
 
@@ -152,6 +163,7 @@ If anything goes wrong during execution, your assets will be sent to your person
 
 2. Once the swap completes:
 
+* The order goes into 'Bridging in progress' status.
 * The received amount is sent to your **Account Proxy**.
 * From there, it’s deposited into the bridge provider’s smart contract.
 * These steps happen within **one transaction**.
@@ -180,7 +192,7 @@ Expiration time varies by provider. For example, **Across** provider usually ref
 Once the refund arrives in your Account Proxy:
 
 * Go to the CoW Swap [**Account Proxy**](https://swap.cow.fi/#/1/account-proxy/help) page and withdraw to your wallet.
-* There is a list of Account Proxy versions, in the most cases you need to use **latest** one unless told otherwise.
+* There is a list of Account Proxy versions, in the most cases you need to use the **latest** one unless told otherwise.
 
 <img src={AccountProxyListImg.src} style={{ maxWidth: 450 }} alt="Account proxies" />
 <img src={AccountProxyCardImg.src} style={{ maxWidth: 450 }} alt="Account proxy" />
