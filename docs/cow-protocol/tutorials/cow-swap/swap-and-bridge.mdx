@@ -1,0 +1,198 @@
+---
+sidebar_position: 2
+---
+
+import Image from '@theme/IdealImage';
+
+import SwapFormImg from '/img/cowswap/bridging/swap-form.png'
+import SourceTokenSelectorPlaceImg from '/img/cowswap/bridging/source-token-selector-place.png'
+import SourceTokenSelectorImg from '/img/cowswap/bridging/source-token-selector.png'
+import DestinationTokenSelectorImg from '/img/cowswap/bridging/destination-token-selector.png'
+import SignApprovalImg from '/img/cowswap/bridging/sign-approval.png'
+import SignPostHookImg from '/img/cowswap/bridging/sign-post-hook.png'
+import SignOrderImg from '/img/cowswap/bridging/sign-order.png'
+import CustomRecipientImg from '/img/cowswap/bridging/custom-recipient.png'
+import QuotePreviewImg from '/img/cowswap/bridging/quote-preview.png'
+import ActivitiesListImg from '/img/cowswap/bridging/activities-list.png'
+import ActivitiesButtonImg from '/img/cowswap/bridging/activities-button.png'
+import BridgingInProgressImg from '/img/cowswap/bridging/bridging-in-progress.png'
+import BridgingSuccessImg from '/img/cowswap/bridging/bridging-success.png'
+import SwapSuccessImg from '/img/cowswap/bridging/swap-success.png'
+import AccountProxyCardImg from '/img/cowswap/bridging/account-proxy-card.png'
+import AccountProxyListImg from '/img/cowswap/bridging/account-proxy-list.png'
+import CoWExplorerImg from '/img/cowswap/bridging/cow-explorer.png'
+
+# Swap & Bridge
+
+The **Swap & Bridge** feature on [swap.cow.fi](https://swap.cow.fi) lets you swap a token on one network and receive a different token on another network — all in one seamless transaction.
+
+This guide will walk you through the process step-by-step, from setting up your trade to tracking it in the explorer.
+
+<img src={SwapFormImg.src} style={{ maxWidth: 500 }} alt="Swap and Bridge trade" />
+
+---
+
+## 1. Setting up a Swap with Different Network Assets
+
+When using **Swap & Bridge**, you’ll start by selecting the tokens you want to trade — just like a regular swap — but with the option to choose a different destination chain.
+
+### Source Token Selector
+
+Open a source token selector:
+
+<img src={SourceTokenSelectorPlaceImg.src} style={{ maxWidth: 500 }} alt="Open source token selector" />
+
+Select the network and token you want to sell:
+
+<img src={SourceTokenSelectorImg.src} style={{ maxWidth: 500 }} alt="Source token selector" />
+
+### Destination Token Selector
+
+Similarly to Source Token Selector, open the selector, choose a network and token you would like to buy
+
+<img src={DestinationTokenSelectorImg.src} style={{ maxWidth: 500 }} alt="Destination token selector" />
+
+:::tip
+
+The list of available destination networks depends on the source token you’ve selected.
+
+If you choose a destination network different from the source token’s network:
+- You will only see tokens supported by the bridge provider for that chain.
+
+If the destination network is the same as the source network:
+- You’ll see the regular list of tokens from the token lists.
+
+:::
+
+:::note
+
+**Tokens must be different.** Bridging the same token between two networks is not yet supported. This feature is under development.
+
+:::
+
+---
+
+## 2. Creating a Swap & Bridge Trade
+
+Once your tokens and networks are set, you can proceed to create the order.
+
+### Token Approval
+
+If it’s your first time selling this token through CoW Swap, you’ll need to approve it.
+This is the standard ERC-20 approval process that allows CoW Protocol to use your tokens for the trade.
+
+Approvals can happen through:
+
+* Regular ERC-20 allowance transactions
+* [EIP-6963](https://eips.ethereum.org/EIPS/eip-6963) permit flow (when supported)
+
+<img src={SignApprovalImg.src} alt="Sign an approval" />
+
+### Signing Steps
+
+1. **Sign the post-hook call** for the bridge provider.
+2. **Sign the order**:
+
+* Sign an off-chain order (ERC-20 token selling).
+* Sign a transaction (Native tokens (e.g., ETH) selling).
+
+<img src={SignPostHookImg.src} alt="Sign a post-hook" />
+<img src={SignOrderImg.src} alt="Sign an order" />
+
+---
+
+## 3. Using a Custom Recipient
+
+By default, your connected wallet address will be set as the recipient on the destination chain.
+If you want to send funds to another address:
+
+* Enable **Custom recipient** in the settings (same place as in the regular Swap).
+* Enter the desired address.
+* **Note:** ENS names are **not** supported here — you must use a full wallet address.
+
+<img src={CustomRecipientImg.src} style={{ maxWidth: 600 }} alt="Custom recipient" />
+
+---
+
+## 4. Previewing Your Quote
+
+In the Swap form you can see a detailed breakdown of the expected swap and bridge:
+
+* **Expected deposit amount** → This is equal to the “Expected to receive” amount from the swap stage.
+* **Bridge cost** → A fee charged by the bridge provider for processing your transfer.
+* **Estimated bridging time** → Pulled directly from the bridge provider (varies by network and provider).
+* **Minimum to receive**:
+
+  - Calculated as: `(Swap min. to receive)` - `(Bridge provider cost)`
+  - `Swap min. to receive` = final amount after all swap fees, gas costs, and slippage tolerance.
+
+<img src={QuotePreviewImg.src} style={{ maxWidth: 500 }} alt="Quote preview" />
+
+---
+
+## 5. Understanding the Account Proxy
+
+The **Account Proxy** (also known as **CoW Shed**) is a helper contract that powers advanced features like [**CoW Hooks**](/cow-protocol/reference/core/intents/hooks).
+
+* **CoW Hooks** allow solvers to execute additional Ethereum calls before or after your order is settled.
+* Your funds are safe:
+If anything goes wrong during execution, your assets will be sent to your personal proxy account. You can withdraw them to your wallet at any time.
+
+>More detailed information can be found in [Account Proxy page](https://swap.cow.fi/#/1/account-proxy/help).
+
+---
+
+## 6. How Bridging Execution Works
+
+1. The bridge step will only start **after** a successful swap.
+
+<img src={SwapSuccessImg.src} style={{ maxWidth: 500 }} alt="Swap is finished" />
+
+>If your order expires, is canceled, or fails, bridging will not start — your funds will remain in your wallet.
+
+2. Once the swap completes:
+
+* The received amount is sent to your **Account Proxy**.
+* From there, it’s deposited into the bridge provider’s smart contract.
+* These steps happen within **one transaction**.
+
+3. When the bridging completes, you’ll see a **“Bridging completed!”** status along with the final amount received on the destination chain.
+4. You’ll always get a link to the bridge provider’s explorer to track your order progress.
+
+<img src={BridgingInProgressImg.src} style={{ maxWidth: 450 }} alt="Bridging in progress" />
+<img src={BridgingSuccessImg.src} style={{ maxWidth: 450 }} alt="Bridging success" />
+
+5. Your Swap & Bridge order history is available in the **Account modal** on CoW Swap.
+
+<img src={ActivitiesButtonImg.src} style={{ maxWidth: 600 }} alt="Activities button" />
+<img src={ActivitiesListImg.src} alt="Activities list" />
+
+---
+
+## 7. If Bridging Fails — Getting a Refund
+
+In rare cases, the bridging step may fail. Don’t worry — your funds are safe.
+
+Most bridge providers will automatically send your funds back to your **Account Proxy** once the deposit expires.
+
+Expiration time varies by provider. For example, **Across** provider usually refunds after \~3 hours if the deposit hasn’t been completed.
+
+Once the refund arrives in your Account Proxy:
+
+* Go to the CoW Swap [**Account Proxy**](https://swap.cow.fi/#/1/account-proxy/help) page and withdraw to your wallet.
+* There is a list of Account Proxy versions, in the most cases you need to use **latest** one unless told otherwise.
+
+<img src={AccountProxyListImg.src} style={{ maxWidth: 450 }} alt="Account proxies" />
+<img src={AccountProxyCardImg.src} style={{ maxWidth: 450 }} alt="Account proxy" />
+
+---
+
+## 8. Tracking Your Orders in the Explorer
+
+You can view all your Swap & Bridge orders on [explorer.cow.fi](https://explorer.cow.fi).
+
+* The explorer shows orders in all states:
+**In progress**, **Completed**, **Cancelled**, and more.
+* You can filter and check full details of each trade.
+
+<img src={CoWExplorerImg.src} alt="CoW Explorer" />
