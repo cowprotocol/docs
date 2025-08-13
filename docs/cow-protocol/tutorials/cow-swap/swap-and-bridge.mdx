@@ -143,7 +143,7 @@ In the Swap form you can see a detailed breakdown of the expected swap and bridg
 
 ## 5. Understanding the Account Proxy
 
-The **Account Proxy** (also known as **CoW Shed**) is a helper contract that powers advanced features like [**CoW Hooks**](/cow-protocol/reference/core/intents/hooks).
+The [**Account Proxy**]((https://swap.cow.fi/#/1/account-proxy)) (also known as **CoW Shed**) is a helper contract that powers advanced features like [**CoW Hooks**](/cow-protocol/reference/core/intents/hooks).
 
 * **CoW Hooks** allow solvers to execute additional Ethereum calls before or after your order is settled.
 * Your funds are safe:
@@ -159,12 +159,22 @@ If anything goes wrong during execution, your assets will be sent to your person
 
 <img src={SwapSuccessImg.src} style={{ maxWidth: 500 }} alt="Swap is finished" />
 
->If your order expires, is canceled, or fails, bridging will not start — your funds will remain in your wallet.
+:::note
+
+If your order expires, is canceled, or fails, bridging will not start — your funds will remain in your wallet.
+
+:::
+
+:::note
+
+You can only soft‑cancel your order during the swap phase. Once the swap has executed and the bridge deposit has been submitted by your Account Proxy, the bridge transfer cannot be canceled. It will complete on the destination chain or be refunded per the provider’s policy.
+
+:::
 
 2. Once the swap completes:
 
 * The order goes into 'Bridging in progress' status.
-* The received amount is sent to your **Account Proxy**.
+* The received amount is sent to your [**Account Proxy**](https://swap.cow.fi/#/1/account-proxy).
 * From there, it’s deposited into the bridge provider’s smart contract.
 * These steps happen within **one transaction**.
 
@@ -174,7 +184,7 @@ If anything goes wrong during execution, your assets will be sent to your person
 <img src={BridgingInProgressImg.src} style={{ maxWidth: 450 }} alt="Bridging in progress" />
 <img src={BridgingSuccessImg.src} style={{ maxWidth: 450 }} alt="Bridging success" />
 
-5. Your Swap & Bridge order history is available in the **Account modal** on CoW Swap.
+5. Your Swap & Bridge order history is available in the **Account modal** on CoW Swap. It displays only last 10 orders, you can find the whole orders history in [CoW Explorer](https://explorer.cow.fi).
 
 <img src={ActivitiesButtonImg.src} style={{ maxWidth: 600 }} alt="Activities button" />
 <img src={ActivitiesListImg.src} alt="Activities list" />
@@ -185,7 +195,7 @@ If anything goes wrong during execution, your assets will be sent to your person
 
 In rare cases, the bridging step may fail. Don’t worry — your funds are safe.
 
-Most bridge providers will automatically send your funds back to your **Account Proxy** once the deposit expires.
+Most bridge providers will automatically send your funds back to your [**Account Proxy**]((https://swap.cow.fi/#/1/account-proxy)) once the deposit expires.
 
 Expiration time varies by provider. For example, **Across** provider usually refunds after \~3 hours if the deposit hasn’t been completed.
 
