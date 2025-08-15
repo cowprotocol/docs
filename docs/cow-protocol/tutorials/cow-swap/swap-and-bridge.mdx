@@ -97,6 +97,10 @@ Approvals can happen through:
 ### Signing Steps
 
 1. **Sign the post-hook call** for the bridge provider.
+
+* The post-hook might include a call to approve an `intermediate token` in the Account Proxy, allowing it to be transferred to the deposit smart contract.
+* The post-hook always includes a call to the bridge provider’s smart contract, which transfers the swapped amount to the deposit smart contract.
+
 2. **Sign the order**:
 
 * Sign an off-chain order (ERC-20 token selling).
@@ -104,6 +108,13 @@ Approvals can happen through:
 
 <img src={SignPostHookImg.src} alt="Sign a post-hook" />
 <img src={SignOrderImg.src} alt="Sign an order" />
+
+:::note
+
+**Intermediate token** — the currency received on the source chain as the result of a swap, which is then deposited to the bridge provider.
+It is usually the same currency as on the destination chain, but issued on the source blockchain.
+
+:::
 
 :::note
 
