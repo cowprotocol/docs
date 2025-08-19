@@ -69,11 +69,20 @@ To summarize, truthfully revealing the (cost-adjusted) score that a solver can g
 
 The price estimation competition is a separate competition where solvers compete to provide the best response to a quote request. Quote requests look almost identical to single-order batch auctions, where there is only one order with a trivial limit price, and solvers propose executions of this order with the goal to maximize "out amount minus gas costs", in the case of a sell request, or minimize "in amount + gas costs" in the case of a buy request.
 
-As specified in [CIP-27](https://snapshot.org/#/cow.eth/proposal/0x64e061568e86e8d2eec344d4a892e4126172b992cabe59a0b24c51c4c7e6cc33), [CIP-36](https://snapshot.org/#/cow.eth/proposal/0x4e58f9c1208121c0e06282b5541b458bc8c8b76090263e25448848f3194df986) and [CIP-57](https://snapshot.box/#/s:cow.eth/proposal/0x46d4fea1492207cf400fcb7a01141a7d4c730791d658cc77236941fc9eb7dccb), solvers that participate in the price estimation competition are rewarded for each order that is within the market price, is associated with a quote that was computed as part of the price estimation competition, and was used in order to compute the limit price of the order. The protocol keeps track of the quote associated with each created order and the corresponding solver that provided the quote. If and when the order gets executed, the solver that provided the quote (which can be different than the solver that ended up executing the order) gets rewarded as follows:
+As specified in [CIP-27](https://snapshot.org/#/cow.eth/proposal/0x64e061568e86e8d2eec344d4a892e4126172b992cabe59a0b24c51c4c7e6cc33), [CIP-36](https://snapshot.org/#/cow.eth/proposal/0x4e58f9c1208121c0e06282b5541b458bc8c8b76090263e25448848f3194df986) and [CIP-57](https://snapshot.box/#/s:cow.eth/proposal/0x46d4fea1492207cf400fcb7a01141a7d4c730791d658cc77236941fc9eb7dccb), solvers that participate in the price estimation competition are rewarded for each order that is within the market price, is associated with a quote that was computed as part of the price estimation competition, and was used in order to compute the limit price of the order. [CIP-72](https://snapshot.box/#/s:cow.eth/proposal/0xc1b1252f0c99126b4e09730022faa31a7bb58073a3dc064c19b74d44164c39a7) has imposed additional constraints on the quotes that are rewarded. Specifically, if a solver provides the winning quote that results in an order being created, then the quote is rewarded only if all of the following conditions are satisfied:
 
-- Ethereum mainnet: $$\min\{0.0006 ~\textrm{ETH}, 6 ~\textrm{COW}\}$$,
-- Arbitrum: $$\min\{0.0002 ~\textrm{ETH}, 6 ~\textrm{COW}\}$$,
+1. The order is a fill-or-kill market order;
+2. The quote is verified (i.e., its calldata successfully simulated in the autopilot);
+3. The order was executed (not necessarily by the quoting solver);
+4. The solver that provided the winning quote during order creation proposed an execution of the order (in at least one auction) that is at least as good as the quote, and that execution was not filtered out by the fairness filtering of the fair combinatorial auction mechanism.
+
+The current rewards for eligble quotes are as follows:
+
+- Ethereum mainnet: $$\min\{0.0007 ~\textrm{ETH}, 6 ~\textrm{COW}\}$$,
 - Gnosis Chain: $$\min\{0.15 ~\textrm{xDAI}, 6 ~\textrm{COW}\}$$,
-- Base Chain: $$\min\{0.0002 ~\textrm{ETH}, 6 ~\textrm{COW}\}$$,
+- Arbitrum: $$\min\{0.00024 ~\textrm{ETH}, 6 ~\textrm{COW}\}$$,
+- Base Chain: $$\min\{0.00024 ~\textrm{ETH}, 6 ~\textrm{COW}\}$$,
+- Avalanche-C Chain: $$\min\{0.006 ~\textrm{AVAX}, 6 ~\textrm{COW}\}$$,
+- Polygon Chain: $$\min\{0.6 ~\textrm{POL}, 6 ~\textrm{COW}\}$$
 
-where, again, the conversion from ETH and xDAI to COW is done by using an up-to-date price (specifically, the average ETH/xDAI/COW Dune prices of the past 24h before the payout are used to determine these exchange rates).
+where, again, the conversion from Native Token and xDAI to COW is done by using an up-to-date price (specifically, the average Native Token/COW Dune prices of the past 24h before the payout are used to determine these exchange rates).
