@@ -68,7 +68,7 @@ sequenceDiagram
 
 ### Relying on the trampoline contract address
 
-Most solvers will use the `HooksTrampoline` contract to execute hooks, as it offers strong security guarantees. However, the protocol does not mandate any specific implementation. In fact, solvers are not required to use an intermediary contract at all if they can ensure the security of their hooks by other means, they may do so and save gas.
+Solvers may use the `HooksTrampoline` contract to execute hooks, as it offers a pragmatic way to meet many of the security guarantees required of hook execution while still keeping the settlement submission logic relatively simple. However, the protocol does not mandate any specific implementation. In fact, solvers are not required to use an intermediary contract at all if they can ensure the security of their hooks by other means, they may do so and save gas.
 
 
 :::warning
