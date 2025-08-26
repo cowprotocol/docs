@@ -5,7 +5,7 @@ sidebar_position: 2
 
 # HooksTrampoline
 
-A helper contract used by solvers, to securely execute user's [hooks](/cow-protocol/reference/core/intents/hooks) with the settlement transaction.
+A helper contract that may be used by solvers to securely execute user's [hooks](/cow-protocol/reference/core/intents/hooks) within the settlement transaction.
 
 ## Architecture
 
