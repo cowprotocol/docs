@@ -76,7 +76,7 @@ As specified in [CIP-27](https://snapshot.org/#/cow.eth/proposal/0x64e061568e86e
 3. The order was executed (not necessarily by the quoting solver);
 4. The solver that provided the winning quote during order creation proposed an execution of the order (in at least one auction) that is at least as good as the quote, and that execution was not filtered out by the fairness filtering of the fair combinatorial auction mechanism.
 
-The current rewards for eligble quotes are as follows:
+The current rewards for eligible quotes are as follows:
 
 - Ethereum mainnet: $$\min\{0.0007 ~\textrm{ETH}, 6 ~\textrm{COW}\}$$,
 - Gnosis Chain: $$\min\{0.15 ~\textrm{xDAI}, 6 ~\textrm{COW}\}$$,
