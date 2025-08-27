@@ -85,4 +85,4 @@ The current rewards for eligible quotes are as follows:
 - Avalanche-C Chain: $$\min\{0.006 ~\textrm{AVAX}, 6 ~\textrm{COW}\}$$,
 - Polygon Chain: $$\min\{0.6 ~\textrm{POL}, 6 ~\textrm{COW}\}$$
 
-where, again, the conversion from Native Token to COW is done by using an up-to-date price (specifically, the average Native Token/COW Dune prices of the past 24h before the payout are used to determine these exchange rates).
+where, again, the conversion from native token to COW is done by using an up-to-date price (specifically, the average native token/COW Dune prices of the past 24h before the payout are used to determine these exchange rates).
