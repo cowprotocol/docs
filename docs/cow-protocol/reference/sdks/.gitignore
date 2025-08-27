@@ -1,3 +1,10 @@
 **/*
 !_category_.json
+!_category_.yml
+!provider-adapters/
+!provider-adapters/_category_.json
+!core-utilities/
+!core-utilities/_category_.json
+!protocol-components/
+!protocol-components/_category_.json
 !.gitignore

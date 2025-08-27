@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # Fees
 
-:::Note
+:::note
 
 This documentation refers to CoW Protocol fees. Builders connected to MEV blocker also pay a fee, which is discussed [here](/mevblocker/builders/fees/subscription-fees).
 
