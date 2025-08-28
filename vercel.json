@@ -67,16 +67,14 @@
             "statusCode": 301
         },
         {
-       {
-         "source": "/overview/fair-combinatorial-auction",
-         "destination": "/cow-protocol/concepts/introduction/fair-combinatorial-auction",
-         "statusCode": 301
-       },
-       {
-         "source": "/overview/batch-auctions",
-         "destination": "/cow-protocol/concepts/introduction/fair-combinatorial-auction",
-         "statusCode": 301
-       },
+            "source": "/overview/fair-combinatorial-auction",
+            "destination": "/cow-protocol/concepts/introduction/fair-combinatorial-auction",
+            "statusCode": 301
+        },
+        {
+            "source": "/overview/batch-auctions",
+            "destination": "/cow-protocol/concepts/introduction/fair-combinatorial-auction",
+            "statusCode": 301
         },
         {
             "source": "/overview/coincidence-of-wants",
