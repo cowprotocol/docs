@@ -14,7 +14,7 @@ Let's bring all of our main concepts together by taking a look at the flow of an
 There are 4 main steps to an order on CoW Protocol:
 
 1. Users express their trade intents by signing messages that specify the assets and amounts they want to trade, alongside other parameters.
-2. The protocol gathers the intents of multiple users into a [batch auction](../introduction/fair-combinatorial-auction).
+2. The protocol gathers the intents of multiple users into a [fair combinatorial batch auction](../introduction/fair-combinatorial-auction).
 3. Solvers have a set amount of time to propose settlements for the batch. The solver that is able to generate the highest amount of surplus for the batch is declared the winner.
 4. The winning solver submits the batch transaction on-chain on behalf of the users.
 
