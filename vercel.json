@@ -67,8 +67,8 @@
             "statusCode": 301
         },
         {
-            "source": "/overview/batch-auctions",
-            "destination": "/cow-protocol/concepts/introduction/batch-auctions",
+            "source": "/overview/fair-combinatorial-auction",
+            "destination": "/cow-protocol/concepts/introduction/fair-combinatorial-auction",
             "statusCode": 301
         },
         {

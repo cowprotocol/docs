@@ -10,9 +10,9 @@ MEV, or maximal extractable value, is a form of price exploitation that affects 
 
 MEV attacks happen on most major exchanges. However, CoW Protocol's unique trading model protects users from MEV in three main ways:
 
-- **Uniform Clearing Prices**: If the same token pair (such as ETH-USDC) is traded multiple times in the same [batch](../introduction/batch-auctions), the assets will clear for the same market prices for each trade.
-  This mechanism is called a "uniform clearing price" and it makes transaction order irrelevant, so MEV bots cannot re-order trades in order to extract a profit.
-  Uniform clearing prices enable the Ethereum DeFi ecosystem to establish consistent prices for identical token pairs within the same block, addressing the inconsistency caused by the design of Constant Function Market Makers (CFMMs) like traditional Uniswap liquidity pools.
+- **Uniform Clearing Prices**: If the same token pair (such as ETH-USDC) is traded multiple times in the same [batch](../introduction/fair-combinatorial-auction), the assets will clear for the same market prices for each trade in the same direction.
+  This mechanism is called a "uniform directed clearing price" and it makes transaction order irrelevant, so MEV bots cannot re-order trades in order to extract a profit.
+  Uniform directed clearing prices enable the Ethereum DeFi ecosystem to establish consistent prices for identical directed token pairs within the same block, addressing the inconsistency caused by the design of Constant Function Market Makers (CFMMs) like traditional Uniswap liquidity pools.
 - **Delegated Trade Execution**: On CoW Protocol, bonded third parties known as [solvers](../introduction/solvers) execute trades on behalf of users.
   This means that users are never directly exposed to MEV on-chain (though the solvers may be).
   The winning solver is required to give users the price they signed or greater, meaning that solvers take on all price risk from potential MEV attacks.
