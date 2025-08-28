@@ -103,7 +103,7 @@
         },
         {
             "source": "/overview/signed-orders",
-            "destination": "/cow-protocol/concepts/introduction/intents#",
+            "destination": "/cow-protocol/concepts/introduction/intents",
             "statusCode": 301
         },
         {
