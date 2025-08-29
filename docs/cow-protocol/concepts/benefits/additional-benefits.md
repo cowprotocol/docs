@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # Additional benefits
 
-CoW Protocol's [intent-based trading model](/cow-protocol/concepts/introduction/intents) and [its auction mechanism](/cow-protocol/concepts/introduction/batch-auctions) that allows for batching provide a number of benefits, including support for expressing any intent, MEV protection, and price improvement. 
+CoW Protocol's [intent-based trading model](/cow-protocol/concepts/introduction/intents) and [its auction mechanism](/cow-protocol/concepts/introduction/fair-combinatorial-auction) that allows for batching provide a number of benefits, including support for expressing any intent, MEV protection, and price improvement. 
 
 There are also several additional benefits unique to CoW Protocol that every order inherits: 
 - Gasless trades (users pay settlement fees in their sell token; settlement fees can be lower than gas fees if the trade is included in a batch)
