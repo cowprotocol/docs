@@ -10833,10 +10833,10 @@ swagger-client@^3.35.5:
     ramda "^0.30.1"
     ramda-adjunct "^5.1.0"
 
-swagger-ui-react@5.26.2:
-  version "5.26.2"
-  resolved "https://registry.yarnpkg.com/swagger-ui-react/-/swagger-ui-react-5.26.2.tgz#5e19f453f597bf03987ce35c1e527dac39bf1053"
-  integrity sha512-2QHyN/vl3HaihXpBhJm7du7gfSibM3T3cSdk7Od98u2oFtraNTAe1r1k9cw/XBKBpl5XTye6rvACe8VP/NO2og==
+swagger-ui-react@5.27.1:
+  version "5.27.1"
+  resolved "https://registry.yarnpkg.com/swagger-ui-react/-/swagger-ui-react-5.27.1.tgz#315b59970c33933a5f62ca0f702789741dcedc7c"
+  integrity sha512-wwDoavIeJI/Pwiavn32FMJ5dfptz0BAOKjSrj7EdU22QdP3gdk9+MZHdzzjxWURmVj0kc0XoQfsFgjln0toJaw==
   dependencies:
     "@babel/runtime-corejs3" "^7.27.1"
     "@scarf/scarf" "=1.4.0"
@@ -11143,17 +11143,10 @@ typedoc@^0.25.3:
     minimatch "^9.0.3"
     shiki "^0.14.7"
 
-types-ramda@0.29.4:
+types-ramda@0.29.4, types-ramda@^0.30.1:
   version "0.29.4"
   resolved "https://registry.yarnpkg.com/types-ramda/-/types-ramda-0.29.4.tgz#8d9b51df2e550a05cedab541cc75dcd72972c625"
   integrity sha512-XO/820iRsCDwqLjE8XE+b57cVGPyk1h+U9lBGpDWvbEky+NQChvHVwaKM05WnW1c5z3EVQh8NhXFmh2E/1YazQ==
-  dependencies:
-    ts-toolbelt "^9.6.0"
-
-types-ramda@^0.30.1:
-  version "0.30.1"
-  resolved "https://registry.yarnpkg.com/types-ramda/-/types-ramda-0.30.1.tgz#03d255128e3696aeaac76281ca19949e01dddc78"
-  integrity sha512-1HTsf5/QVRmLzcGfldPFvkVsAdi1db1BBKzi7iW3KBUlOICg/nKnFS+jGqDJS3YD8VsWbAh7JiHeBvbsw8RPxA==
   dependencies:
     ts-toolbelt "^9.6.0"
 
