@@ -94,7 +94,7 @@ const config: Config = {
       {
         id: 'app-data',
         // TypeDoc options
-        entryPoints: ['./external/app-data/src/index.ts'],
+        entryPoints: ['./external/app-data/src/latest.ts'],
         tsconfig: './external/app-data/tsconfig.json',
 
         // Plugin options
