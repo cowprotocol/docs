@@ -10,7 +10,7 @@ The CoW Grants Program operates under a structured governance framework as defin
 
 The Grants Committee consists of five members:
 - **3 Community Members**:
-  - [@Kubesqrt](https://forum.cow.fi/u/kubesqrt)
+  - [@Sov](https://forum.cow.fi/u/sov/summary)
   - [@Chim9](https://forum.cow.fi/u/chim9)
   - [@mfw78](https://forum.cow.fi/u/mfw78)
 
