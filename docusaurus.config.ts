@@ -284,8 +284,8 @@ const config: Config = {
       {
         id: 'sdk-ethers-v5-adapter',
         // TypeDoc options
-        entryPoints: ['./external/cow-sdk/packages/providers/ether-v5-adapter/src/index.ts'],
-        tsconfig: './external/cow-sdk/packages/providers/ether-v5-adapter/tsconfig.json',
+        entryPoints: ['./external/cow-sdk/packages/providers/ethers-v5-adapter/src/index.ts'],
+        tsconfig: './external/cow-sdk/packages/providers/ethers-v5-adapter/tsconfig.json',
 
         // Plugin options
         out: 'cow-protocol/reference/sdks/provider-adapters/sdk-ethers-v5-adapter',
@@ -301,8 +301,8 @@ const config: Config = {
       {
         id: 'sdk-ethers-v6-adapter',
         // TypeDoc options
-        entryPoints: ['./external/cow-sdk/packages/providers/ether-v6-adapter/src/index.ts'],
-        tsconfig: './external/cow-sdk/packages/providers/ether-v6-adapter/tsconfig.json',
+        entryPoints: ['./external/cow-sdk/packages/providers/ethers-v6-adapter/src/index.ts'],
+        tsconfig: './external/cow-sdk/packages/providers/ethers-v6-adapter/tsconfig.json',
 
         // Plugin options
         out: 'cow-protocol/reference/sdks/provider-adapters/sdk-ethers-v6-adapter',
