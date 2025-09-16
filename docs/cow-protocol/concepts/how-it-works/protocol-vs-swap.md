@@ -10,7 +10,7 @@ While the two are intertwined, there are important differences between CoW Proto
 
 ## CoW Protocol
 
-CoW Protocol is a trading protocol that leverages [intents](../introduction/intents) and [batch auctions](../introduction/batch-auctions) to find optimal prices and protect orders from Maximal Extractable Value (MEV).
+CoW Protocol is a trading protocol that leverages [intents](../introduction/intents) and [fair combinatorial batch auctions](../introduction/fair-combinatorial-auction) to find optimal prices and protect orders from Maximal Extractable Value (MEV).
 
 The protocol groups orders together into batches and relies on a competition between third parties, known as [solvers](../introduction/solvers), to find the best execution price for all orders in a given batch.
 

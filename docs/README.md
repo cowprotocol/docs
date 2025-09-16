@@ -11,7 +11,7 @@ Currently, CoW DAO's three main products are [**CoW Protocol**](cow-protocol), [
 
 ## What is [CoW Protocol](cow-protocol)? 
 
-CoW Protocol is a fully permissionless trading protocol that leverages [batch auctions](cow-protocol/concepts/introduction/batch-auctions) as its price finding mechanism. CoW Protocol uses batch auctions to maximize liquidity via Coincidence of Wants (CoWs) in addition to tapping all available on-chain liquidity whenever needed.
+CoW Protocol is a fully permissionless trading protocol that leverages [fair combinatorial batch auctions](cow-protocol/concepts/introduction/fair-combinatorial-auction) as its price finding mechanism. CoW Protocol uses fair combinatorial auctions to maximize liquidity via Coincidence of Wants (CoWs) in addition to tapping all available on-chain liquidity whenever needed.
 
 ## What is [MEV Blocker](https://mevblocker.io)?
 
