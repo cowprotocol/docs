@@ -1,5 +1,6 @@
 {
     "cleanUrls": true,
+    "buildCommand": "npm install -g pnpm && yarn build",
     "redirects": [
         {
             "source": "/cow-sdk",

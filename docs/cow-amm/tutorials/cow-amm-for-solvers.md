@@ -77,11 +77,11 @@ This order can be included in a batch as any other CoW Protocol orders with two 
 - One of the pre-interactions must set the commitment by calling `BCoWPool.commit(hash)`.
 - Must contain at most one order from the AMM in the same batch.
 
-::note
+:::note
 
 Solvers using the non co-located driver should add a [`JitTrade`](https://github.com/cowprotocol/services/blob/95ecc4e01b7fd06ec0b71c6486cb2cdd962e5040/crates/solvers/openapi.yml#L744C1-L774C52) and a [`preInteraction`](https://github.com/cowprotocol/services/blob/95ecc4e01b7fd06ec0b71c6486cb2cdd962e5040/crates/solvers/openapi.yml#L920C1-L925C46) to their solution.
 
-::
+:::
 
 
 ### Surplus

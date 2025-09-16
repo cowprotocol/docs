@@ -27,19 +27,29 @@ The preview should load in a new tab.
 
 ### Installation
 
+This project requires both Yarn and pnpm to be installed:
+
 ```bash
+# Install pnpm globally (required for external dependencies)
+npm install -g pnpm
+
+# Install project dependencies
 yarn
 ```
 
 ### Build
 
-You will also need to `build` the app, to ensure external dependent projects are cloned and setup properly.
+You will also need to `build` the app, to ensure external dependent projects are cloned and setup properly. This process requires pnpm to be installed globally.
 
 ```bash
 yarn build
 ```
 
 This command generates static content into the `build` directory and can be served using any static contents hosting service.
+
+### Deployment
+
+This documentation site is automatically deployed using Vercel. When changes are pushed to the main branch, Vercel automatically builds and deploys the updated documentation.
 
 ### Local Development
 
