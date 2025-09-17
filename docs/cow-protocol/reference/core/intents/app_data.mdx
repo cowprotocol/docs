@@ -4,8 +4,7 @@ sidebar_position: 1
 ---
 
 import CodeBlock from '@theme/CodeBlock';
-import appDataSchema from '/external/cow-sdk/packages/app-data/schemas/v1.3.0.json';
-import JSONSchemaViewer from '@theme/JSONSchemaViewer';
+import { AppDataJsonView } from '../../../../../src/components/app-data-json-view/AppDataJsonView.js';
 
 # Application specific data
 
@@ -25,7 +24,7 @@ An example of an AppData document is:
 
 ```json
 {
-  "version": "1.3.0",
+  "version": "1.6.0",
   "appCode": "MyAwesomeUi",
   "metadata": {
     "referral": "0x1234567890123456789012345678901234567890"
@@ -38,7 +37,7 @@ An example of an AppData document is:
 Avoid all the pain of creating and parsing `appData` by using either the:
 
 * [CoW Explorer appData utility](https://explorer.cow.fi/appdata?tab=encode); or
-* [app-data](../../sdks/app-data) SDK
+* [app-data](https://github.com/cowprotocol/cow-sdk/blob/main/packages/app-data/README.md) SDK
 
 :::
 
@@ -50,6 +49,6 @@ If not using the CoW Explorer appData utility or the app-data SDK, make sure to 
 
 ## Schema
 
-The schema for the AppData document is defined in [JSON schema](https://json-schema.org/). The schema is available in the [app-data](../../sdks/app-data) SDK. The schema is shown below:
+The schema for the AppData document is defined in [JSON schema](https://json-schema.org/). The schema is available in the [app-data](https://github.com/cowprotocol/cow-sdk/blob/main/packages/app-data/README.md) SDK. The schema is shown below:
 
-<JSONSchemaViewer schema={ appDataSchema } />
+<AppDataJsonView url="https://cdn.jsdelivr.net/npm/@cowprotocol/sdk-app-data@4.1.7-beta.0/schemas/v1.6.0.json" />

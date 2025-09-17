@@ -5,10 +5,8 @@
   "scripts": {
     "docusaurus": "docusaurus",
     "start": "docusaurus start",
-    "git:clone:cowsdk": "cd external && rm -rf cow-sdk && git clone --depth=1 --branch=main https://github.com/cowprotocol/cow-sdk cow-sdk && rm -rf cow-sdk/.git",
-    "build:external:cowsdk": "cd external/cow-sdk && pnpm install && pnpm run build",
-    "build:external": "yarn build:external:cowsdk",
-    "build": "yarn build:external && NODE_OPTIONS=\"--max-old-space-size=8192\" docusaurus build",
+    "prebuild": "node scripts/fetch-sdk-readme.js",
+    "build": "NODE_OPTIONS=\"--max-old-space-size=8192\" docusaurus build",
     "swizzle": "docusaurus swizzle",
     "deploy": "docusaurus deploy",
     "clear": "docusaurus clear",
@@ -28,7 +26,7 @@
     "@docusaurus/theme-mermaid": "^3.8.0",
     "@mdx-js/react": "^3.1.0",
     "clsx": "^2.1.1",
-    "docusaurus-json-schema-plugin": "^1.14.0",
+    "docusaurus-json-schema-plugin": "^1.15.0",
     "hast-util-is-element": "1.1.0",
     "prism-react-renderer": "^2.4.1",
     "react": "^18.3.1",
@@ -65,7 +63,7 @@
     ]
   },
   "engines": {
-    "node": ">=16.14"
+    "node": ">18"
   },
   "scarfSettings": {
     "_comment": "https://github.com/swagger-api/swagger-ui/releases/tag/v5.18.0",
