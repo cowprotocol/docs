@@ -5327,15 +5327,15 @@ dns-packet@^5.2.2:
   dependencies:
     "@leichtgewicht/ip-codec" "^2.0.1"
 
-docusaurus-json-schema-plugin@^1.14.0:
-  version "1.14.0"
-  resolved "https://registry.yarnpkg.com/docusaurus-json-schema-plugin/-/docusaurus-json-schema-plugin-1.14.0.tgz#56068280de5ace928a7704b65c48d99341185c04"
-  integrity sha512-TyXIVqAr+rKXhRQqq/IElUogl5ABSDV+PoiHcB6+Jroy2RMsimHkvz3OyfYpxTPDVGetSlX9TvuYJgLVBLIe/w==
+docusaurus-json-schema-plugin@^1.15.0:
+  version "1.15.0"
+  resolved "https://registry.yarnpkg.com/docusaurus-json-schema-plugin/-/docusaurus-json-schema-plugin-1.15.0.tgz#d0c13291f58751832ca3f48a2f049d8eb9846fd0"
+  integrity sha512-NFu0N96FyQyqmjk+hV6klFDo+61sDyTYcG6HPHb1Zb6VdYpdo1rb71dza94ND8DElD7PxQWrZqUm2mNO9Hfsig==
   dependencies:
     "@stoplight/json-ref-resolver" "^3.1.5"
     monaco-editor "^0.52.2"
     monaco-editor-webpack-plugin "^7.1.0"
-    react-monaco-editor "^0.58.0"
+    react-monaco-editor "^0.59.0"
 
 docusaurus-plugin-typedoc@^0.21.0:
   version "0.21.0"
@@ -9647,10 +9647,10 @@ react-loadable-ssr-addon-v5-slorber@^1.0.1:
   dependencies:
     "@types/react" "*"
 
-react-monaco-editor@^0.58.0:
-  version "0.58.0"
-  resolved "https://registry.yarnpkg.com/react-monaco-editor/-/react-monaco-editor-0.58.0.tgz#da2285d27d29be1080b7558c25e0fc5050e3fdfb"
-  integrity sha512-e8JH0TQEzO96Wd/EXgzc9M9tQK1pxBECD+8GNob9slMURcCM36TiVrgc4topWCDGYxRuMj8IEkaX+s3eQcUUqw==
+react-monaco-editor@^0.59.0:
+  version "0.59.0"
+  resolved "https://registry.yarnpkg.com/react-monaco-editor/-/react-monaco-editor-0.59.0.tgz#a3cdef4a47fd0cb899f412c9d66b365c51a76096"
+  integrity sha512-SggqfZCdUauNk7GI0388bk5n25zYsQ1ai1i+VhxAgwbCH+MTGl7L1fBNTJ6V+oXeUApf+bpzikprHJEZm9J/zA==
 
 react-redux@^9.2.0:
   version "9.2.0"
@@ -11143,17 +11143,10 @@ typedoc@^0.25.3:
     minimatch "^9.0.3"
     shiki "^0.14.7"
 
-types-ramda@0.29.4:
+types-ramda@0.29.4, types-ramda@^0.30.1:
   version "0.29.4"
   resolved "https://registry.yarnpkg.com/types-ramda/-/types-ramda-0.29.4.tgz#8d9b51df2e550a05cedab541cc75dcd72972c625"
   integrity sha512-XO/820iRsCDwqLjE8XE+b57cVGPyk1h+U9lBGpDWvbEky+NQChvHVwaKM05WnW1c5z3EVQh8NhXFmh2E/1YazQ==
-  dependencies:
-    ts-toolbelt "^9.6.0"
-
-types-ramda@^0.30.1:
-  version "0.30.1"
-  resolved "https://registry.yarnpkg.com/types-ramda/-/types-ramda-0.30.1.tgz#03d255128e3696aeaac76281ca19949e01dddc78"
-  integrity sha512-1HTsf5/QVRmLzcGfldPFvkVsAdi1db1BBKzi7iW3KBUlOICg/nKnFS+jGqDJS3YD8VsWbAh7JiHeBvbsw8RPxA==
   dependencies:
     ts-toolbelt "^9.6.0"
 
