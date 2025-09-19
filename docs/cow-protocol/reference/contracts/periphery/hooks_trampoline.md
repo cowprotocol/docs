@@ -60,10 +60,16 @@ sequenceDiagram
 3. Enough gas is forwarded to the hooks to execute the logic
 
 :::warning
-
+As a hook **developer**, you should:
 * Beware of leaving any funds in the trampoline contract. These are accessible to anyone.
 * Do **NOT** grant any permissions to the trampoline contract. These are accessible to anyone.
 
+:::
+
+:::warning
+As a **solver**, you are responsible for:
+* Executing the hook. Whether via the HooksTrampoline contract or any alternative mechanism
+* Outcomes of that execution including any violation of CoW Protocol rules success (i.e. take buffers from settlement contract).
 :::
 
 ### Relying on the trampoline contract address
