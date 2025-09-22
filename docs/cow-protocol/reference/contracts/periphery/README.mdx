@@ -2,6 +2,7 @@
 
 Peripheral contracts are those that are not necessary for CoW Protocol to function, but are used to enhance user experience.
 
+
 ## Deployments
 
 :::tip
@@ -27,7 +28,16 @@ CoW Protocol contracts are generally deployed to the same addresses on their res
 **Upgradeable**: No ❎  
 **GitHub**: [HooksTrampoline.sol](https://github.com/cowprotocol/hooks-trampoline/blob/main/src/HooksTrampoline.sol)
 
-**Address**: `0x60bf78233f48ec42ee3f101b9a05ec7878728006`
+**Address**: `0x60bf78233f48ec42ee3f101b9a05ec7878728006` 
+
+
+:::warning
+
+You should not assume that the HooksTrampoline contract address will remain fixed. Each solver may choose to use this implementation or another one, as long as it fulfills the hook intent.
+
+:::
+
+
 
 **Networks**: 
 [Mainnet](https://etherscan.io/address/0x60bf78233f48ec42ee3f101b9a05ec7878728006), 
