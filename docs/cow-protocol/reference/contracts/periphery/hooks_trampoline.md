@@ -69,7 +69,7 @@ As a hook **developer**, you should:
 :::warning
 As a **solver**, you are responsible for:
 * Executing the hook. Whether via the HooksTrampoline contract or any alternative mechanism
-* Outcomes of that execution including any violation of CoW Protocol rules success (i.e. take buffers from settlement contract).
+* Outcomes of that execution, including any violation of CoW Protocol rules (e.g., taking buffers from the settlement contract) attributable to the solver's execution.
 :::
 
 ### Relying on the trampoline contract address
