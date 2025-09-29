@@ -119,6 +119,16 @@ const b: PartnerFee = {
       [TradeType.LIMIT]: 50,
       [TradeType.ADVANCED]: 30,
     },
+    [SupportedChainId.LENS]: {
+      [TradeType.SWAP]: 100,
+      [TradeType.LIMIT]: 50,
+      [TradeType.ADVANCED]: 30,
+    },
+    [SupportedChainId.BNB]: {
+      [TradeType.SWAP]: 100,
+      [TradeType.LIMIT]: 50,
+      [TradeType.ADVANCED]: 30,
+    },
     [SupportedChainId.SEPOLIA]: {
       [TradeType.SWAP]: 100,
       [TradeType.LIMIT]: 50,
@@ -139,6 +149,8 @@ const c: PartnerFee = {
       [SupportedChainId.GNOSIS_CHAIN]: '0x...c',
       [SupportedChainId.AVALANCHE]: '0x...c',
       [SupportedChainId.POLYGON]: '0x...c',
+      [SupportedChainId.LENS]: '0x...c',
+      [SupportedChainId.BNB]: '0x...c',
       [SupportedChainId.SEPOLIA]: '0x...d',
     },
     [TradeType.LIMIT]: {
@@ -148,6 +160,8 @@ const c: PartnerFee = {
       [SupportedChainId.GNOSIS_CHAIN]: '0x...g',
       [SupportedChainId.AVALANCHE]: '0x...x',
       [SupportedChainId.POLYGON]: '0x...y',
+      [SupportedChainId.LENS]: '0x...y',
+      [SupportedChainId.BNB]: '0x...y',
       [SupportedChainId.SEPOLIA]: '0x...h',
     },
     [TradeType.ADVANCED]: {
@@ -157,6 +171,8 @@ const c: PartnerFee = {
       [SupportedChainId.GNOSIS_CHAIN]: '0x...k',
       [SupportedChainId.AVALANCHE]: '0x...z',
       [SupportedChainId.POLYGON]: '0x...t',
+      [SupportedChainId.LENS]: '0x...t',
+      [SupportedChainId.BNB]: '0x...t',
       [SupportedChainId.SEPOLIA]: '0x...l',
     },
   },
@@ -275,7 +291,7 @@ export interface SlippageConfig {
 export type FlexibleSlippageConfig = FlexibleConfig<SlippageConfig>
 ```
 
-*All values are **basis points** (bps).*
+_All values are **basis points** (bps)._
 
 ### Parameter
 
@@ -288,8 +304,8 @@ const params: CowSwapWidgetParams = {
   appCode: 'YOUR_APP_ID',
   slippage: {
     // Global rule – applies to every network
-    min: 50,        // 0.50 %
-    max: 300,       // 3.00 %
+    min: 50, // 0.50 %
+    max: 300, // 3.00 %
     defaultValue: 100, // 1.00 %
   },
 }
@@ -318,12 +334,12 @@ const params: CowSwapWidgetParams = {
 
 ### Behaviour & validation
 
-| Rule                        | Description                                                                                                                                                                                     |
-|-----------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Ranges**                  | `min ≥ 0`, `max ≤ 5000` (50 %), `min ≤ defaultValue ≤ max`, `min < max`                                                                                                                         |
-| **Defaults**                | If the user doesn’t specify a slippage, the widget falls back to `defaultValue`                                                                                                                 |
-| **Auto slippage**           | If the auto-slippage is less than or equal to `defaultValue`, the swap will use `defaultValue`                                                                                                  |
-| **ETH‑Flow floor**          | When `defaultValue < 200` bps (2 %) for Ethereum Mainnet or `defaultValue < 50` (0.5 %) for other networks and the trade is *ETH‑Flow*, the widget will force the slippage to **2 %**/**0.5 %** |
+| Rule               | Description                                                                                                                                                                                     |
+| ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Ranges**         | `min ≥ 0`, `max ≤ 5000` (50 %), `min ≤ defaultValue ≤ max`, `min < max`                                                                                                                         |
+| **Defaults**       | If the user doesn’t specify a slippage, the widget falls back to `defaultValue`                                                                                                                 |
+| **Auto slippage**  | If the auto-slippage is less than or equal to `defaultValue`, the swap will use `defaultValue`                                                                                                  |
+| **ETH‑Flow floor** | When `defaultValue < 200` bps (2 %) for Ethereum Mainnet or `defaultValue < 50` (0.5 %) for other networks and the trade is _ETH‑Flow_, the widget will force the slippage to **2 %**/**0.5 %** |
 
 ### Example JSON (Configurator ready)
 
@@ -390,7 +406,7 @@ createCowSwapWidget(document.getElementById('cowswap-widget'), {
 > All params are optional
 
 | Parameter                             | Type                   | Default                | Description                                                                                                                                                                                                                                                                                                                                                                                  |
-|---------------------------------------|------------------------|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ------------------------------------- | ---------------------- | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `width`                               | `string`               | 400px                  | The width of the widget in css values (px, vh, etc.).                                                                                                                                                                                                                                                                                                                                        |
 | `height`                              | `string`               | 600px                  | The height of the widget in css values (px, vh, etc.).                                                                                                                                                                                                                                                                                                                                       |
 | `maxHeight`                           | `number`               | ---                    | The widget automatically adjusts its height depending on the content. By default, the maximum height is `body.offsetHeight`, but it might be customized using the `maxHeight` parameter.                                                                                                                                                                                                     |
