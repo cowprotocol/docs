@@ -20,7 +20,7 @@ All solvers participating in the solver competition must abide by certain rules.
 
 - A solution is valid only if it contains at least one user or CoW AMM order and respects Uniform Directional Clearing Prices (UDCP): all orders trading the same tokens in the same direction must receive the same price (with an exception for orders containing hooks to account for the cost of gas). Importantly, each solution must respect UDCP, but there is no obligation to respect UDCP across solutions, even if submitted by the same solver.
 
-- Every valid solution is associated with a score relative to the amount of surplus it generates for the users, as described in [CIP-38](https://snapshot.box/#/s:cow.eth/proposal/0xfb81daea9be89f4f1c251d53fd9d1481129b97c6f38caaddc42af7f3ce5a52ec) and [CIP-65](https://snapshot.box/#/s:cow.eth/proposal/0xd172281444c48254398881c57a57a2acbf0802a385e6c94384fd358b943aa4f4). The set of winning solutions (and corresponding winning solvers) is chosen using a Fair Combinatorial Auction (see [CIP-67](https://snapshot.box/#/s:cow.eth/proposal/0xf9ecb08c4738f04c4525373d6b78085d16635f86adacd1b8ea77b2c176c99d32). At a high level, the protocol first considers bids containing only orders on the same token pair and in the same direction and computes the best bid on each directed token pair, where the best bid is the one generating the highest score. The collection of these best bids is the reference outcome for each directed token pair, representing the best possible execution against outside liquidity. The protocol then uses the reference outcome to filter out the remaining batched bids (batched because, by definition, they contain orders on multiple directed token pairs). A batched bid is filtered out whenever it generates lower score for a given directed token pair than the reference outcome. In the final step, the protocol considers all the batched bids that survived the filtering and the best bids on individual directed token pairs. It computes the collection of winning bids, under the constraint that all orders on the same directed token pair must be part of the same winning bid. 
+- Every valid solution is associated with a score relative to the amount of surplus it generates for the users, as described in [CIP-38](https://snapshot.box/#/s:cow.eth/proposal/0xfb81daea9be89f4f1c251d53fd9d1481129b97c6f38caaddc42af7f3ce5a52ec) and [CIP-65](https://snapshot.box/#/s:cow.eth/proposal/0xd172281444c48254398881c57a57a2acbf0802a385e6c94384fd358b943aa4f4). The set of winning solutions (and corresponding winning solvers) is chosen using a Fair Combinatorial Auction (see [CIP-67](https://snapshot.box/#/s:cow.eth/proposal/0xf9ecb08c4738f04c4525373d6b78085d16635f86adacd1b8ea77b2c176c99d32). At a high level, the protocol first considers bids containing only orders on the same token pair and in the same direction and computes the best bid on each directed token pair, where the best bid is the one generating the highest score. The collection of these best bids is the reference outcome for each directed token pair, representing the best possible execution against outside liquidity. The protocol then uses the reference outcome to filter out the remaining batched bids (batched because, by definition, they contain orders on multiple directed token pairs). A batched bid is filtered out whenever it generates lower score for a given directed token pair than the reference outcome. In the final step, the protocol considers all the batched bids that survived the filtering and the best bids on individual directed token pairs. It computes the collection of winning bids, under the constraint that all orders on the same directed token pair must be part of the same winning bid.
 
 - Deadline: Solvers that win an auction will receive a deadline by which they must settle the auction on-chain. If the transaction is not observed on chain before the deadline block is mined, then the solution will count as not submitted and the solver will be penalized.
 
@@ -40,6 +40,8 @@ The deadline for solutions depends on the network and is set as a specific numbe
 - Base: 20 blocks
 - Avalanche: 20 blocks
 - Polygon: 20 blocks
+- Lens: 20 blocks
+- BNB: 20 blocks
 
 :::
 
@@ -60,48 +62,49 @@ At CoW DAO's discretion, systematic violation of these rules may lead to penaliz
   - sell token / buy token
 
   ### Base protocols and tokens
+
   The following detail sections list the protocols and base tokens that are considered for Ethereum Mainnet and Gnosis Chain:
 
   <details>
     <summary>Ethereum mainnet baseline protocols and tokens</summary>
 
-    - **Protocols**: Uniswap v2/v3, Sushiswap, Swapr, Balancer v2, Pancakeswap
-    - **Base tokens**: [`WETH`](https://etherscan.io/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2), [`DAI`](https://etherscan.io/token/0x6B175474E89094C44Da98b954EedeAC495271d0F), [`USDC`](https://etherscan.io/token/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48), [`USDT`](https://etherscan.io/token/0xdAC17F958D2ee523a2206206994597C13D831ec7), [`COMP`](https://etherscan.io/token/0xc00e94Cb662C3520282E6f5717214004A7f26888), [`MKR`](https://etherscan.io/token/0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2), [`WBTC`](https://etherscan.io/token/0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599), [`GNO`](https://etherscan.io/token/0x6810e776880C02933D47DB1b9fc05908e5386b96)
+  - **Protocols**: Uniswap v2/v3, Sushiswap, Swapr, Balancer v2, Pancakeswap
+  - **Base tokens**: [`WETH`](https://etherscan.io/token/0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2), [`DAI`](https://etherscan.io/token/0x6B175474E89094C44Da98b954EedeAC495271d0F), [`USDC`](https://etherscan.io/token/0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48), [`USDT`](https://etherscan.io/token/0xdAC17F958D2ee523a2206206994597C13D831ec7), [`COMP`](https://etherscan.io/token/0xc00e94Cb662C3520282E6f5717214004A7f26888), [`MKR`](https://etherscan.io/token/0x9f8F72aA9304c8B593d555F12eF6589cC3A579A2), [`WBTC`](https://etherscan.io/token/0x2260FAC5E5542a773Aa44fBCfeDf7C193bc2C599), [`GNO`](https://etherscan.io/token/0x6810e776880C02933D47DB1b9fc05908e5386b96)
   </details>
 
   <details>
     <summary>Gnosis Chain baseline protocols and tokens</summary>
 
-    - **Protocols**: Honeyswap, Sushiswap, Baoswap, Swapr, Balancer v2
-    - **Base tokens**: [`WXDAI`](https://gnosisscan.io/token/0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d), [`HNY`](https://gnosisscan.io/token/0x71850b7e9ee3f13ab46d67167341e4bdc905eef9), [`USDT`](https://gnosisscan.io/token/0x4ECaBa5870353805a9F068101A40E0f32ed605C6), [`USDC`](https://gnosisscan.io/token/0xDDAfbb505ad214D7b80b1f830fcCc89B60fb7A83), [`sUSD`](https://gnosisscan.io/token/0xB1950Fb2C9C0CbC8553578c67dB52Aa110A93393), [`WBTC`](https://gnosisscan.io/token/0x8e5bbbb09ed1ebde8674cda39a0c169401db4252), [`GNO`](https://gnosisscan.io/token/0x9C58BAcC331c9aa871AFD802DB6379a98e80CEdb), [`STAKE`](https://gnosisscan.io/token/0xb7D311E2Eb55F2f68a9440da38e7989210b9A05e), [`xOWL`](https://gnosisscan.io/token/0x0905Ab807F8FD040255F0cF8fa14756c1D824931), [`WETH`](https://gnosisscan.io/token/0x6A023CCd1ff6F2045C3309768eAd9E68F978f6e1), [`wstETH`](https://gnosisscan.io/address/0x6c76971f98945ae98dd7d4dfca8711ebea946ea6), [`sDAI`](https://gnosisscan.io/address/0xaf204776c7245bf4147c2612bf6e5972ee483701), [`USDC.e`](https://gnosisscan.io/address/0x2a22f9c3b484c3629090FeED35F17Ff8F88f76F0)
+  - **Protocols**: Honeyswap, Sushiswap, Baoswap, Swapr, Balancer v2
+  - **Base tokens**: [`WXDAI`](https://gnosisscan.io/token/0xe91D153E0b41518A2Ce8Dd3D7944Fa863463a97d), [`HNY`](https://gnosisscan.io/token/0x71850b7e9ee3f13ab46d67167341e4bdc905eef9), [`USDT`](https://gnosisscan.io/token/0x4ECaBa5870353805a9F068101A40E0f32ed605C6), [`USDC`](https://gnosisscan.io/token/0xDDAfbb505ad214D7b80b1f830fcCc89B60fb7A83), [`sUSD`](https://gnosisscan.io/token/0xB1950Fb2C9C0CbC8553578c67dB52Aa110A93393), [`WBTC`](https://gnosisscan.io/token/0x8e5bbbb09ed1ebde8674cda39a0c169401db4252), [`GNO`](https://gnosisscan.io/token/0x9C58BAcC331c9aa871AFD802DB6379a98e80CEdb), [`STAKE`](https://gnosisscan.io/token/0xb7D311E2Eb55F2f68a9440da38e7989210b9A05e), [`xOWL`](https://gnosisscan.io/token/0x0905Ab807F8FD040255F0cF8fa14756c1D824931), [`WETH`](https://gnosisscan.io/token/0x6A023CCd1ff6F2045C3309768eAd9E68F978f6e1), [`wstETH`](https://gnosisscan.io/address/0x6c76971f98945ae98dd7d4dfca8711ebea946ea6), [`sDAI`](https://gnosisscan.io/address/0xaf204776c7245bf4147c2612bf6e5972ee483701), [`USDC.e`](https://gnosisscan.io/address/0x2a22f9c3b484c3629090FeED35F17Ff8F88f76F0)
   </details>
 
   <details>
     <summary>Arbitrum baseline protocols and tokens</summary>
 
-    - **Protocols**: Uniswap v2/v3, Sushiswap, Swapr, Balancer v2, Pancakeswap
-    - **Base tokens**: [`WETH`](https://arbiscan.io/token/0x82af49447d8a07e3bd95bd0d56f35241523fbab1), [`USDC`](https://arbiscan.io/token/0xaf88d065e77c8cc2239327c5edb3a432268e5831), [`USDT`](https://arbiscan.io/token/0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9), [`DAI`](https://arbiscan.io/token/0xda10009cbd5d07dd0cecc66161fc93d7c9000da1), [`GNO`](https://arbiscan.io/token/0xa0b862f60edef4452f25b4160f177db44deb6cf1)
+  - **Protocols**: Uniswap v2/v3, Sushiswap, Swapr, Balancer v2, Pancakeswap
+  - **Base tokens**: [`WETH`](https://arbiscan.io/token/0x82af49447d8a07e3bd95bd0d56f35241523fbab1), [`USDC`](https://arbiscan.io/token/0xaf88d065e77c8cc2239327c5edb3a432268e5831), [`USDT`](https://arbiscan.io/token/0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9), [`DAI`](https://arbiscan.io/token/0xda10009cbd5d07dd0cecc66161fc93d7c9000da1), [`GNO`](https://arbiscan.io/token/0xa0b862f60edef4452f25b4160f177db44deb6cf1)
   </details>
 
   <details>
     <summary>Base chain baseline protocols and tokens</summary>
 
-    - **Protocols**: Uniswap v2/v3, Balancer v2
-    - **Base tokens**: [`WETH`](https://basescan.org/address/0x420000000000000000000000000000000000000), [`USDC`](https://basescan.org/address/0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913), [`DAI`](https://basescan.org/address/0x50c5725949A6F0c72E6C4a641F24049A917DB0Cb)
+  - **Protocols**: Uniswap v2/v3, Balancer v2
+  - **Base tokens**: [`WETH`](https://basescan.org/address/0x420000000000000000000000000000000000000), [`USDC`](https://basescan.org/address/0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913), [`DAI`](https://basescan.org/address/0x50c5725949A6F0c72E6C4a641F24049A917DB0Cb)
   </details>
 
   <details>
     <summary>Avalanche chain baseline protocols and tokens</summary>
 
-    - **Protocols**: Uniswap v2/v3, Balancer v2
-    - **Base tokens**: [`WAVAX`](https://snowscan.xyz/address/0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7), [`USDC`](https://snowscan.xyz/address/0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e), [`USDT`](https://snowscan.xyz/address/0x9702230a8ea53601f5cd2dc00fdbc13d4df4a8c7)
+  - **Protocols**: Uniswap v2/v3, Balancer v2
+  - **Base tokens**: [`WAVAX`](https://snowscan.xyz/address/0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7), [`USDC`](https://snowscan.xyz/address/0xb97ef9ef8734c71904d8002f8b6bc66dd9c48a6e), [`USDT`](https://snowscan.xyz/address/0x9702230a8ea53601f5cd2dc00fdbc13d4df4a8c7)
   </details>
 
   <details>
     <summary>Polygon chain baseline protocols and tokens</summary>
 
-    - **Protocols**: Uniswap v2/v3, Balancer v2
-    - **Base tokens**: [`WPOL`](https://polygonscan.com/address/0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270), [`USDC`](https://polygonscan.com/address/0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359), [`USDT`](https://polygonscan.com/address/0xc2132d05d31c914a87c6611c10748aeb04b58e8f)
+  - **Protocols**: Uniswap v2/v3, Balancer v2
+  - **Base tokens**: [`WPOL`](https://polygonscan.com/address/0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270), [`USDC`](https://polygonscan.com/address/0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359), [`USDT`](https://polygonscan.com/address/0xc2132d05d31c914a87c6611c10748aeb04b58e8f)
   </details>
 
 More details about how a certificate of an EBBO violation is computed, and what are the steps taken in case such a violation occurs can be found in [this](/cow-protocol/reference/core/auctions/ebbo-rules) section.
