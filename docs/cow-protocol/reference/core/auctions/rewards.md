@@ -84,7 +84,7 @@ The current rewards for eligible quotes are as follows:
 - Base Chain: $$\min\{0.00024 ~\textrm{ETH}, 6 ~\textrm{COW}\}$$,
 - Avalanche-C Chain: $$\min\{0.006 ~\textrm{AVAX}, 6 ~\textrm{COW}\}$$,
 - Polygon Chain: $$\min\{0.6 ~\textrm{POL}, 6 ~\textrm{COW}\}$$
-- Lens Chain: $$\min\{0.6 ~\textrm{GHO}, 6 ~\textrm{COW}\}$$
+- Lens Chain: $$\min\{0.15 ~\textrm{GHO}, 6 ~\textrm{COW}\}$$
 - BNB Chain: $$\min\{0.6 ~\textrm{BNB}, 6 ~\textrm{COW}\}$$
 
 where, again, the conversion from native token to COW is done by using an up-to-date price (specifically, the average native token/COW Dune prices of the past 24h before the payout are used to determine these exchange rates).
