@@ -40,6 +40,10 @@ The payment is capped from above and below using the function $$\textrm{cap}(x) 
 
 - Ethereum mainnet, Arbitrum, and Base chain: $$c_l = 0.010 \;\textrm{ETH}$$ and $$c_u = 0.012 \;\textrm{ETH}$$,
 - Gnosis Chain: $$c_l = c_u = 10 \;\textrm{xDAI}$$.
+- Avalanche: $$c_l = 0.3 \;\textrm{AVX}$$, $$c_u 0.4 \;\textrm{AVX}$$.
+- Polygon: $$c_l = 30 \;\textrm{POL}$$, $$c_u = 40 \;\textrm{POL}$$.
+- Lens: $$c_l = c_u = 10 \;\textrm{GHO}$$.
+- BNB: $$c_l = 0.04 \;\textrm{BNB}$$, $$c_u = 0.048 \;\textrm{BNB}$$.
 
 Solutions with scores that are non-positive will be ignored. If only one solver submits solutions, $$\textrm{referenceScore}_i$$ is, by definition, zero. Formally, this corresponds to always considering the empty solution which does not settle any trades and has a score equal to zero as part of the submitted solutions.
 
