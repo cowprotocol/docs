@@ -7,7 +7,7 @@ sidebar_position: 3
 ## I'm a solver. How do I use CoW AMM liquidity?
 
 CoW AMM orders already appear in the CoW Protocol orderbook, so you're already using its liquidity.
-However, CoW AMMs allow solvers to specify custom buy and sell amounts, as long as the order preserves or increase the constant product invariant of the token reserves.
+However, CoW AMMs allow solvers to specify custom buy and sell amounts, as long as the order preserves or increases the constant product invariant of the token reserves.
 
 CoW AMMs can be treated as a liquidity source akin to Uniswap or Balancer weighted pools with uniform weights.
 Each CoW AMM is a pair that trades two tokens.

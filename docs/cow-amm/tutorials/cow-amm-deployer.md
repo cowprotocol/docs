@@ -35,7 +35,7 @@ In case ABI of the factory contract is not fetched, the ABI from the Sepolia net
 
 :::caution
 
-One needs to taken the token's decimals into account in order to set the correct approval.
+One needs to take the token's decimals into account in order to set the correct approval.
 :::
 
 3. The next step is to bind the approved tokens to the pool, by using the `bind()` function of the newly created pool contract. We need to do one bind per token that will be added to the pool. Note that the `denorm` parameter should always be set to 1000000000000000000 (i.e., 10^18).
