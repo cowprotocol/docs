@@ -110,14 +110,14 @@ At CoW DAO's discretion, systematic violation of these rules may lead to penaliz
   <details>
     <summary>Lens chain baseline protocols and tokens</summary>
 
-  - **Protocols**: Uniswap v2/v3, Balancer v2
+  - **Protocols**: Uniswap v3
   - **Base tokens**: [`WGHO`](https://explorer.lens.xyz/address/0x6bdc36e20d267ff0dd6097799f82e78907105e2f), [`USDC`](https://explorer.lens.xyz/address/0x88f08e304ec4f90d644cec3fb69b8ad414acf884), [`WETH`](https://explorer.lens.xyz/address/0xe5ecd226b3032910ceaa43ba92ee8232f8237553), [`BONSAI`](https://explorer.lens.xyz/address/0xb0588f9a9cade7cd5f194a5fe77acd6a58250f82)
   </details>
 
   <details>
     <summary>BNB chain baseline protocols and tokens</summary>
 
-  - **Protocols**: Uniswap v2/v3, Balancer v2
+  - **Protocols**: Uniswap v2/v3, Pancake Swap
   - **Base tokens**: [`WBNB`](https://bnbscan.com/address/0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c), [`BUSD`](https://bnbscan.com/address/0xe9e7cea3dedca5984780bafc599bd69add087d56), [`USDT`](https://bnbscan.com/address/0x55d398326f99059ff775485246999027b3197955), [`WETH`](https://bnbscan.com/address/0x2170ed0880ac9a755fd29b2688956bd959f933f8)
   </details>
 
