@@ -40,8 +40,8 @@ The deadline for solutions depends on the network and is set as a specific numbe
 - Base: 20 blocks
 - Avalanche: 20 blocks
 - Polygon: 20 blocks
-- Lens: 20 blocks
-- BNB: 20 blocks
+- Lens: 40 blocks
+- BNB: 40 blocks
 
 :::
 
