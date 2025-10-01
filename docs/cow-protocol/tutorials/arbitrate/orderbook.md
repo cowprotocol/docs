@@ -49,7 +49,7 @@ sequenceDiagram
       Solver1-->>Order book: result
       Order book->>SolverN: quote?
       SolverN-->>Order book: result
-      Order book->>Order book: smualate & pick
+      Order book->>Order book: simulate & pick
     end
     Order book->>Database: insert order
     Order book-->>User: order UID
