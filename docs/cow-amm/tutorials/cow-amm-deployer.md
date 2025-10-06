@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Deploying a CoW AMM Using Balancer
 
-In this short tutorial, we describe how one can create and deploy their own Balancer CoW AMM.
+In this short tutorial, we describe how you can create and deploy their own Balancer CoW AMM.
 
 **You may also deploy a CoW AMM through the Balancer UI using [this guide.](https://cow.fi/learn/how-to-create-a-lvr-protected-liquidity-pool-on-cowamm)**
 

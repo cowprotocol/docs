@@ -40,7 +40,7 @@ At the core of CoW Protocol lies the COW token, which serves as a governance tok
 
 ## Supply & Inflation Schedule
 
-The COW token is engineered to support the long-term sustainability and autonomy of the CoW Protocol. The maximum inflation rate is capped at 3% per annum, and any inflationary measures can only be enacted with a minimum frequency of once every 365 days. This cautious approach to inflation ensures that any increase in the token supply is both measured and deliberate, guarding against the potential dilutive effects of unchecked token issuance.
+The COW token is engineered to support the long-term sustainability and autonomy of CoW Protocol. The maximum inflation rate is capped at 3% per annum, and any inflationary measures can only be enacted with a minimum frequency of once every 365 days. This cautious approach to inflation ensures that any increase in the token supply is both measured and deliberate, guarding against the potential dilutive effects of unchecked token issuance.
 
 ## How many tokens were issued?
 
