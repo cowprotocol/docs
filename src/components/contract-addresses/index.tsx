@@ -27,11 +27,13 @@ export function explorerUrl(chain: string, address: string) {
  * explorer for the given address.
  */
 export function explorerLinks(chains: string[], address: string) {
-  const componentsByChain = chains.map(
-    (chain, index) => {
-      const link = <Link to={explorerUrl(chain, address)}>{chain}</Link>;
-      return (index == 0) ? [link] : [", ", link];
-    }  
-  );
-  return componentsByChain.flat();
+  return chains.reduce(
+    (acc, chain) => {
+      if (acc.length) {
+        acc.push(', ')
+      }
+      acc.push(<Link to={explorerUrl(chain, address)}>{chain}</Link>)
+      return acc
+    }
+  , []);
 }
