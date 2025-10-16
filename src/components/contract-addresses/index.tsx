@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Link from '@docusaurus/Link';
 
 export const explorerByChain = {
@@ -34,7 +34,7 @@ interface ExplorerLinksOptions {
    * Which string or React component to insert between links.
    * Defaults to the string ", ".
    */
-  separator?: string | Component | undefined;
+  separator?: React.ReactNode | undefined;
   /**
    * Which parameters to append after the URL. For example, #code points to the
    * contract code.
@@ -47,7 +47,7 @@ interface ExplorerLinksOptions {
  * chains separated by a comma. All chain names are links to that chain's
  * explorer for the given address.
  */
-export function explorerLinks(chains: string[] | string, address: string, options?: ExplorerLinksOptions): Component[] {
+export function explorerLinks(chains: string[] | string, address: string, options?: ExplorerLinksOptions): React.ReactNode {
   chains = (typeof chains == "string")? [chains] : chains;
   const separator = options?.separator ?? ", ";
   const urlTrailing = options?.urlTrailing ?? "#code";
