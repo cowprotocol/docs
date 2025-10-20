@@ -6,22 +6,25 @@ Peripheral contracts are those that are not necessary for CoW Protocol to functi
 
 ## Deployments
 
-:::tip
-
-CoW Protocol contracts are generally deployed to the same addresses on their respective deployment chains. This may be done either via using determinsitic deployments (`CREATE2`), or ensuring that the deployer uses a consistent `nonce` via `CREATE` for deployment.
-
-:::
-
 ### EthFlow
 
 **Documentation**: [`EthFlow`](periphery/eth-flow)  
 **Upgradeable**: No ❎  
 **GitHub**: [CoWSwapEthFlow.sol](https://github.com/cowprotocol/ethflowcontract/blob/main/src/CoWSwapEthFlow.sol)
 
-| Environment | Address                                      | Networks                                                                                                                                         |
-| ----------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Production  | `0xbA3cB449bD2B4ADddBc894D8697F5170800EAdeC` | {explorerLinks(["Ethereum","Gnosis","Arbitrum One","Base","Avalanche","Polygon","BNB","Sepolia"], "0xbA3cB449bD2B4ADddBc894D8697F5170800EAdeC")} |
-| Staging     | `0x04501b9b1D52e67f6862d157E00D13419D2D6E95` | {explorerLinks(["Ethereum","Gnosis","Arbitrum One","Base","Avalanche","Polygon","BNB","Sepolia"], "0x04501b9b1D52e67f6862d157E00D13419D2D6E95")} |
+| Environment              | Address                                      | Networks                                                                                                                                                        |
+| ------------------------ | -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Production (most chains) | `0xbA3cB449bD2B4ADddBc894D8697F5170800EAdeC` | {explorerLinks(["Ethereum","Gnosis","Arbitrum One","Base","Avalanche","Polygon","BNB","Sepolia"], "0xbA3cB449bD2B4ADddBc894D8697F5170800EAdeC")}, but not Lens! |
+| Staging (most chains)    | `0x04501b9b1D52e67f6862d157E00D13419D2D6E95` | {explorerLinks(["Ethereum","Gnosis","Arbitrum One","Base","Avalanche","Polygon","BNB","Sepolia"], "0x04501b9b1D52e67f6862d157E00D13419D2D6E95")}, but not Lens! |
+| Production (Lens)        | `0x5A5b8aE7a0b4C0EAf453d10DCcfbA413f07ebdC2` | {explorerLinks("Lens", "0x5A5b8aE7a0b4C0EAf453d10DCcfbA413f07ebdC2")} only!                                                                                     |
+| Staging (Lens)           | `0xFb337f8a725A142f65fb9ff4902d41cc901de222` | {explorerLinks("Lens", "0xFb337f8a725A142f65fb9ff4902d41cc901de222")} only!                                                                                     |
+
+:::warning
+
+Sending native tokens to the EthFlow contract in the wrong chain leads to **irrecoverable loss of funds**!
+Be very careful to choose the right address in the chains you're currently using.
+
+:::
 
 ### HooksTrampoline
 
