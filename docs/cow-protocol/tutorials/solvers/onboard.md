@@ -78,7 +78,7 @@ The main goal of the onboarding call is to both make sure that your team underst
 ## 5. Joining the staging (barn) competition
 After the onboarding call, the CoW team will begin preparing the required infrastructure for your solver to join the solver competition. If you are joining the solver competition under the CoW DAO bonding pool, then this will involve setting up and managing the driver on your behalf and setting up and managing the submission keys on your behalf. 
 
-To do this, the team will generate keys for your solver to use for settling auctions on-chain and whitelisting those for the solver competition. In order to do this you will need to send a `rewards address` that you would like to use to receive weekly rewards on the chain that you are solving on. This means that rewards and slippage for solving on Arbitrum, will be sent to this rewards address on the Arbitrum network. Please make sure that your address is ready to receive funds on this network that you are solving on.
+To do this, the team will generate keys for your solver to use for settling auctions on-chain and whitelisting those for the solver competition. In order to do this you will need to send a `rewards address` that you would like to use to receive weekly rewards on the chain that you are solving on. The rewards address needs to be controlled by the relevant solver team on both chain X and mainnet, as we send native token transfers to chain X while we send COW rewards to the mainnet address always
 
 After this process is done, the team will send you the submission addresses that your solver will use to settle auctions on chain. While this is managed by the CoW team, it will be your responsibility to monitor this and make sure that is holds enough funds to cover gas fees. The driver has a minimum threshold for gas that it applies to make sure that the address holds (more than) enough funds to pay the required gas fees. Therefore we recommend these balances:
 
@@ -123,7 +123,7 @@ In this situation, if the settlement contract has enough of the tokens in its bu
 These will be converted to native currencies (ETH or xDAI) and transferred to your solver at the end of the week. If the settlement contract received more tokens in total over the week than what was borrowed, then you will receive this amount to your rewards address. But if more was borrowed from the settlement contract than what was returned, then your solver will be asked to reimburse the difference.
 
 ## 9. Moving to other networks
-After joining the solver competition on Arbitrum we can enable your solver on Gnosis chain and Base network relatively soon. For this we will go through the same process of generating addresses, vouching for them, and whitelisting them. For each new chain that we deploy your solver on we will need:
+After joining the solver competition on Arbitrum we can enable your solver on other chains relatively soon. For this we will go through the same process of generating addresses, vouching for them, and whitelisting them. For each new chain that we deploy your solver on we will need:
 
 - A rewards address for receiving the weekly COW rewards associated with that network
 - An endpoint that you would like to use for staging ad production
@@ -133,8 +133,6 @@ We usually wait a bit before migrating solvers to mainnet. After your solver has
 
 ## 11. Joining the quoting competition
 Besides the solving competition, there is also a quoting competition. This involves responding to a single order batch with a proposed execution for the order and a price that could be delivered to the user. 
-
-If your solver provides the best price for the user, and that quote then leads to an order that is settled on chain. Then your solver will receive a fixed reward for providing this quote, regardless of which solver won the associated auction and settled the order on chain.
 
 [More information about the quoting competition can be found here.](https://docs.cow.fi/cow-protocol/reference/core/auctions/rewards#price-estimation-competition-rewards-cips-27-57)
 
