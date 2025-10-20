@@ -146,7 +146,7 @@ Yes, we can whitelist solvers so that they can have access to the orderbook API.
 [We have a section in the documentation about integrating CoW AMM's.](https://docs.cow.fi/cow-amm/tutorials/cow-amm-for-solvers)
 
 ### Is there a way to find out the cow reward in real time immediately after the trade?
-This table should contain the data you're looking for: https://dune.com/queries/4351957 data is updated every 2 hours
+[This table](https://dune.com/queries/5270914) contains reward data per solver and per auction (denominated in the native token of the chain). Note that data is updated every 2 hours.
 
 ### What are the environments?
 There are three environments: shadow, staging, and production.
@@ -157,4 +157,4 @@ In the staging (barn) competition settling happens on-chain but the volume is mu
 Finally, production is where the solver is participating in the main solver competition.
 
 ### Are there any prerequisites in the shadow environment that we must meet before being allowed to join staging?
-No, there are no prerequisites (other than KYC if solving on Cow bonding pool) but its recommended that the solver manages to submit and settle solutions on shadow before staging.
+No, there are no prerequisites (other than KYC if joining the Cow DAO bonding pool) but it is recommended that the solver manages to submit and win solutions on shadow before staging.
