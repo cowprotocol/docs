@@ -22,7 +22,7 @@
 ### Requirements for joining the CoW DAO bonding pool
 The general KYC requirements are to send us documentation proving that you are the beneficial owners of the company behind the solver and 1-2 passports of some of the main developers of the solver. Do not send this before the meeting, we will explain the process during the meeting so that you can send the documents afterwards.
 
-Given the risk that will be carried by the CoW bonding pool we also ask that solvers who join the solver competition through the CoW Bonding pool start solving on Arbitrum first. After being in production on Arbitrum solvers can move to other L2's relatively easily. But joining the mainnet competition will require further evaluation after some time of solving on L2's.
+Given the risk that will be carried by the CoW DAO bonding pool we also ask that solvers who join the solver competition through the CoW DAO Bonding pool start solving on Arbitrum first. After being in production on Arbitrum solvers can move to other L2's relatively easily. But joining the mainnet competition will require further evaluation after some time of solving on L2's.
 
 ### Service fees
 As specified in [CIP-48](https://snapshot.box/#/s:cow.eth/proposal/0x563ab9a66265ad72c47a8e55f620f927685dd07d4d49f6d1812905c683f05805) solvers who are in the CoW bonding pool will be charged a service fee that is withheld from their weekly rewards. These fees will begin six months after the solver has joined the CoW Bonding pool and will encompass 15% of the weekly COW rewards that the solver would have received.
