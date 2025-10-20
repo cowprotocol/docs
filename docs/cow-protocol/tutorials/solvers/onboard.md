@@ -75,7 +75,7 @@ The main goal of the onboarding call is to both make sure that your team underst
 - The slippage accounting process and weekly rewards
 
 ## 5. Joining the staging (barn) competition
-After the onboarding call, the CoW team will begin preparing the required infrastructure for your solver to join the solver competition. If you are joining the solver competition under the CoW bonding pool, then this will involve setting up and managing the driver on your behalf and setting up and managing the submission keys on your behalf. 
+After the onboarding call, the CoW team will begin preparing the required infrastructure for your solver to join the solver competition. If you are joining the solver competition under the CoW DAO bonding pool, then this will involve setting up and managing the driver on your behalf and setting up and managing the submission keys on your behalf. 
 
 To do this, the team will generate keys for your solver to use for settling auctions on-chain and whitelisting those for the solver competition. In order to do this you will need to send a `rewards address` that you would like to use to receive weekly rewards on the chain that you are solving on. This means that rewards and slippage for solving on Arbitrum, will be sent to this rewards address on the Arbitrum network. Please make sure that your address is ready to receive funds on this network that you are solving on.
 
