@@ -44,7 +44,7 @@ envName values: shadow, staging, prod
 There are various configurations for your solver in the driver to help you optimize your solver: 
 
 #### - Wrapping / unwrapping native tokens
-The default behaviour for the driver is to set the native token address to `0xeee` and to insert interactions into your solution to unwrap the native token. It's also possible to configure this to either send the wrapped token address (WETH) and unwrap the native token, or send the wrapped token address and not unwrap the native token.
+The default behavior for the driver is to set the native token address to `0xeee` and to insert interactions into your solution to unwrap the native token. It's also possible to configure this to either send the wrapped token address (WETH) and unwrap the native token, or send the wrapped token address and not unwrap the native token.
 
 #### - Liquidity fetching
 It is possible to enable or disable liquidity fetching for your solver. If this is enabled, the driver will search for on-chain liquidity sources for your solver to use and send them to your solver. [Docs](https://docs.cow.fi/cow-protocol/tutorials/arbitrate/solver/driver#fetching-liquidity)
@@ -55,7 +55,7 @@ To ensure a fair execution for the users there are several EBBO rules that are m
 In the event of an EBBO violation the team will reach out and ask you to reimburse the user. [Docs](https://docs.cow.fi/cow-protocol/reference/core/auctions/ebbo-rules)
 
 #### - Merging disjoint solutions
-It is possible for your solver to submit multiple solutions for a single auction and let the driver select the solution with the highest score to submit to the auction. It is possible to enable the driver to merge disjoint solutions in to a single solution for the auction. [Docs](https://docs.cow.fi/cow-protocol/tutorials/arbitrate/solver/driver#postprocessing-solutions)
+It is possible for your solver to submit multiple solutions for a single auction and let the driver select the solution with the highest score to submit to the auction. It is possible to enable the driver to merge disjoint solutions into a single solution for the auction. [Docs](https://docs.cow.fi/cow-protocol/tutorials/arbitrate/solver/driver#postprocessing-solutions)
 
 ## 4. KYC checks and onboarding call
 Once your solver is tested and ready to join the solver competition, it is time to start the onboarding process. At this point, it would be best to reach out to the team on Telegram to schedule an onboarding call. During this call the team will go over the onboarding process and discuss the next steps.
@@ -99,7 +99,7 @@ After your solver is live and begins settling transactions, it will be your resp
 In order to create some volume to test your solver, you can create orders on staging by using our barn swap interface ([https://barn.cow.fi](https://barn.cow.fi)).
 
 ## 6. Moving to production
-Once your solver has moved to staging we can deploy your solver on production. Usually the team will schedule your solver to go live with the next release (on Tuesday) after you are deployed on staging. This gives your team a few days to test your solver by settling some transactions on chain before going live on production.
+Once your solver has moved to staging we can deploy your solver on production. Usually the team will schedule your solver to go live with the next release (on Tuesday) after you are deployed on staging. This gives your team a few days to test your solver by settling some transactions on-chain before going live on production.
 
 ## 7. Weekly rewards and accounting
 Every week on Tuesday your solver will receive payments and rewards for settling auctions. Rewards in COW will be sent to the rewards address on mainnet, and reimbursements for network fees and slippage will be distributed on the same network as where the solving took place.
@@ -122,10 +122,10 @@ Besides the solving competition, there is also a quoting competition. More infor
 
 ## 11. F.A.Q.
 ### Can we get access to the orderbook API?
-Yes, we can whitelist solvers so that they can have access to the orderbook API. Although we generally wait with this until your solver is live and settling orders on chain.
+Yes, we can whitelist solvers so that they can have access to the orderbook API. Although we generally wait with this until your solver is live and settling orders on-chain.
 
-### How do we integrate CoW AMM's?
-[We have a section in the documentation about integrating CoW AMM's.](https://docs.cow.fi/cow-amm/tutorials/cow-amm-for-solvers)
+### How do we integrate CoW AMMs?
+[We have a section in the documentation about integrating CoW AMMs.](https://docs.cow.fi/cow-amm/tutorials/cow-amm-for-solvers)
 
 ### Is there a way to find out the COW reward in real time immediately after the trade?
 [This table](https://dune.com/queries/5270914) contains reward data per solver and per auction (denominated in the native token of the chain). Note that data is updated every 2 hours.
@@ -139,4 +139,4 @@ In the staging (barn) competition settling happens on-chain but the volume is mu
 Finally, production is where the solver is participating in the main solver competition.
 
 ### Are there any prerequisites in the shadow environment that we must meet before being allowed to join staging?
-No, there are no prerequisites (other than KYC if joining the Cow DAO bonding pool) but it is recommended that the solver manages to submit and win solutions on shadow before staging.
+No, there are no prerequisites (other than KYC if joining the CoW DAO bonding pool) but it is recommended that the solver manages to submit and win solutions on shadow before staging.
