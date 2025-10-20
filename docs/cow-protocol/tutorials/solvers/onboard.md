@@ -28,7 +28,7 @@ Given the risk that will be carried by the CoW DAO bonding pool we also ask that
 As specified in [CIP-48](https://snapshot.box/#/s:cow.eth/proposal/0x563ab9a66265ad72c47a8e55f620f927685dd07d4d49f6d1812905c683f05805) solvers that are part of the CoW DAO bonding pool will be charged a service fee that is withheld from their weekly rewards. This fee will begin six months after the solver has joined the CoW Bonding pool and will encompass 15% of the weekly COW rewards that the solver would have received.
 
 ## 2. Locally developing your solver
-The first step to joining the solver competition is to set up a solver. We have a [local set up guide](https://docs.cow.fi/cow-protocol/tutorials/solvers/local_test) that can help you set up a solver locally. There are also open source example solvers available in the [solvers crate](https://github.com/cowprotocol/services/tree/main/crates/solvers) that you can use as a starting point for developing your solver.
+The first step to joining the solver competition is to set up a solver. We have a [local set up guide](https://docs.cow.fi/cow-protocol/tutorials/solvers/local_test) that can help you set up a solver locally. There are also open-source example solvers available in the [solvers crate](https://github.com/cowprotocol/services/tree/main/crates/solvers) that you can use as a starting point for developing your solver.
 
 API specification: https://github.com/cowprotocol/services/blob/main/crates/solvers/openapi.yml
 
