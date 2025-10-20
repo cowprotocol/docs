@@ -48,7 +48,7 @@ There are various configurations for your solver in the driver to help you optim
 The default behaviour for the driver is to set the native token address to `0xeee` and to insert interactions into your solution to unwrap the native token. It's also possible to configure this to either send the wrapped token address (WETH) and unwrap the native token, or send the wrapped token address and not unwrap the native token.
 
 #### - Liquidity fetching
-It is possible to enable or disable liquidity fetching for your solver. In the event that this is enabled, the driver will search for on chain liquidity sources for your solver to use and send them to your solver. [Docs](https://docs.cow.fi/cow-protocol/tutorials/arbitrate/solver/driver#fetching-liquidity)
+It is possible to enable or disable liquidity fetching for your solver. If this is enabled, the driver will search for on-chain liquidity sources for your solver to use and send them to your solver. [Docs](https://docs.cow.fi/cow-protocol/tutorials/arbitrate/solver/driver#fetching-liquidity)
 
 #### - Fairness checks for EBBO
 To ensure a fair execution for the users there are several EBBO rules that are maintained in the auction. Usually, an EBBO violation means that a reference pool from the base protocol would have given the user a better price than what they ended up receiving. 
