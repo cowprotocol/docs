@@ -41,7 +41,7 @@ If you would like to secure your solver, you can set up a firewall and only acce
 The exposed endpoint provided must be of the following format: {base_url}/${envName}/${network} - for example: https://api.mysolver.io/staging/mainnet
 
 ### Driver configuration for your solver
-There are various configurations we can change for your solver in the driver to help you optimize your solver: 
+There are various configurations for your solver in the driver to help you optimize your solver: 
 
 #### - Wrapping / unwrapping native tokens
 The default behaviour for the driver is to set the native token address to `0xeee` and to insert interactions into your solution to unwrap the native token. It's also possible to configure this to either send the wrapped token address (WETH) and unwrap the native token, or send the wrapped token address and not unwrap the native token.
