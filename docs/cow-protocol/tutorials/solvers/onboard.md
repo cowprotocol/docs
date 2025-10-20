@@ -39,6 +39,7 @@ If you would like to secure your solver, you can set up a firewall and only acce
 
 ### Exposed Endpoint
 The exposed endpoint provided must be of the following format: {base_url}/\${envName}/\${network} - for example: https://api.mysolver.io/staging/mainnet
+envName values: shadow, staging, prod
 
 ### Driver configuration for your solver
 There are various configurations for your solver in the driver to help you optimize your solver: 
