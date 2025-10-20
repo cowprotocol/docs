@@ -120,7 +120,7 @@ We usually wait a bit before migrating solvers to mainnet. After your solver has
 ## 10. Joining the quoting competition
 Besides the solving competition, there is also a quoting competition. This involves responding to a single order batch with a proposed execution for the order and a price that could be delivered to the user. 
 
-[More information about the quoting competition can be found here.](https://docs.cow.fi/cow-protocol/reference/core/auctions/rewards#price-estimation-competition-rewards-cips-27-57)
+More information about the quoting competition can be found [here](https://docs.cow.fi/cow-protocol/reference/core/auctions/rewards#price-estimation-competition-rewards-cips-27-57-72).
 
 ## 11. F.A.Q.
 ### Can we get access to the orderbook API?
