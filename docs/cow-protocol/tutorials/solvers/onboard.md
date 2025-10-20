@@ -1,5 +1,5 @@
 # Joining The CoW Protocol Solver Competition
-> **_NOTE:_** Most of this document assumes that you will be joining the solver competition under the CoW Bonding pool. If you were to set up your own bonding pool then most of the information in this document is either optional or irrelevant. To join the solver competition under your own bonding pool refer to [this document](https://docs.cow.fi/cow-protocol/reference/core/auctions/bonding-pools) to set up the bonding pool and reach out to help set up the bonding pool and whitelist your solver's address.
+> **_NOTE:_** Most of this document assumes that you will be joining the solver competition under the CoW Bonding pool. If you were to set up your own bonding pool then most of the information in this document is either optional or irrelevant. To join the solver competition under your own bonding pool refer to [this document](https://docs.cow.fi/cow-protocol/reference/core/auctions/bonding-pools) and reach out to help set up the bonding pool and whitelist your solver's address.
 
 ![General process for joining the solver competition](solver_onboarding_process.jpg)
 
