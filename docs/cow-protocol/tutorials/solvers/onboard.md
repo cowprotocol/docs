@@ -38,7 +38,7 @@ Once you have a solver running locally you can join the shadow competition to st
 If you would like to secure your solver, you can set up a firewall and only accept requests from IP addresses that you whitelist beforehand. Contact us for the IP addresses that we use to send requests to your solver that you can whitelist.
 
 ### Exposed Endpoint
-The exposed endpoint provided must be of the following format: {base_url}/${envName}/${network} - for example: https://api.mysolver.io/staging/mainnet
+The exposed endpoint provided must be of the following format: {base_url}/\${envName}/\${network} - for example: https://api.mysolver.io/staging/mainnet
 
 ### Driver configuration for your solver
 There are various configurations for your solver in the driver to help you optimize your solver: 
