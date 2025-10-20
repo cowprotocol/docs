@@ -10,8 +10,7 @@
 4. KYC checks and onboarding call
 5. Joining the staging competition
 6. Moving to production
-7. Weekly rewards
-8. Slippage accounting
+7. Weekly rewards and accounting
 9. Moving to other networks
 10. Joining the mainnet competition
 11. Joining the quoting competition
@@ -102,12 +101,12 @@ In order to create some volume to test your solver, you can create orders on sta
 ## 6. Moving to production
 Once your solver has moved to staging we can deploy your solver on production. Usually the team will schedule your solver to go live with the next release (on Tuesday) after you are deployed on staging. This gives your team a few days to test your solver by settling some transactions on chain before going live on production.
 
-## 7. Weekly rewards
+## 7. Weekly rewards and accounting
 Every week on Tuesday your solver will receive rewards for settling auctions. These are distributed in COW tokens to the rewards address you provided. Rewards in COW will be sent to that address on mainnet, and reimbursements for slippage will be distributed on the same network as where the solving took place.
 
 We advise using a single rewards address that is available on all networks.
 
-[You can find more information about how we calculate and distribute rewards here.](https://docs.cow.fi/cow-protocol/reference/core/auctions/rewards)
+[You can find more information about how we calculate and distribute rewards here.](https://docs.cow.fi/cow-protocol/reference/core/auctions/rewards). The accounting process is documented in detail [here](https://docs.cow.fi/cow-protocol/reference/core/auctions/accounting).
 
 ## 8. Slippage accounting
 Solvers are able to use the settlement contract's buffers when settling auctions. This can often result in one of two situations when prices move during an auction:
