@@ -21,7 +21,7 @@
 ### Requirements for joining the CoW DAO bonding pool
 The general KYC requirements are to send us documentation proving that you are the beneficial owners of the company behind the solver and 1-2 passports of some of the main developers of the solver. Do not send this before the meeting, we will explain the process during the meeting so that you can send the documents afterwards.
 
-Given the risk that will be carried by the CoW DAO bonding pool we also ask that solvers who join the solver competition through the CoW DAO Bonding pool start solving on Arbitrum first. After being in production on Arbitrum solvers can move to other L2's relatively easily. But joining the mainnet competition will require further evaluation after some time of solving on L2's.
+Given the risk that will be carried by the CoW DAO bonding pool we also ask that solvers who join the solver competition through the CoW DAO bonding pool start solving on Arbitrum first. After being in production on Arbitrum solvers can move to other L2's relatively easily. But joining the mainnet competition will require further evaluation after some time of solving on L2's.
 
 ### Service fees
 As specified in [CIP-48](https://snapshot.box/#/s:cow.eth/proposal/0x563ab9a66265ad72c47a8e55f620f927685dd07d4d49f6d1812905c683f05805) solvers that are part of the CoW DAO bonding pool will be charged a service fee that is withheld from their weekly rewards. This fee will begin six months after the solver has joined the CoW Bonding pool and will encompass 15% of the weekly COW rewards that the solver would have received.
@@ -77,9 +77,9 @@ The main goal of the onboarding call is to both make sure that your team underst
 ## 5. Joining the staging (barn) competition
 After the onboarding call, the CoW team will begin preparing the required infrastructure for your solver to join the solver competition. If you are joining the solver competition under the CoW DAO bonding pool, then this will involve setting up and managing the driver on your behalf and setting up and managing the submission keys on your behalf. 
 
-To do this, the team will generate keys for your solver to use for settling auctions on-chain and whitelisting those for the solver competition. In order to do this you will need to send a `rewards address` that you would like to use to receive weekly rewards on the chain that you are solving on. The rewards address needs to be controlled by the relevant solver team on both chain X and mainnet, as we send native token transfers to chain X while we send COW rewards to the mainnet address always
+To do this, the team will generate keys for your solver to use for settling auctions on-chain and whitelisting those for the solver competition. In order to do this you will need to send a `rewards address` that you would like to use to receive weekly rewards on the chain that you are solving on. Specifically, the rewards address needs to be controlled by the relevant solver team on both the chain it is currently solving and on mainnet, as we send native token transfers to the chain the solver is active while we send COW rewards to the mainnet address always.
 
-After this process is done, the team will send you the submission addresses that your solver will use to settle auctions on chain. While this is managed by the CoW team, it will be your responsibility to monitor this and make sure that is holds enough funds to cover gas fees. The driver has a minimum threshold for gas that it applies to make sure that the address holds (more than) enough funds to pay the required gas fees. Therefore we recommend these balances:
+After this process is done, the team will send you the submission addresses that your solver will use to settle auctions on-chain. While this is managed by the CoW team, it will be your responsibility to monitor this and make sure that is holds enough funds to cover gas fees. The driver has a minimum threshold for gas that it applies to make sure that the address holds (more than) enough funds to pay the required gas fees. Therefore we recommend these balances:
 
 | Network | Environment | Recommended initial balance |
 |---|---|---|
@@ -111,16 +111,14 @@ We advise using a single rewards address that is available on all networks.
 ## 8. Moving to other networks
 After joining the solver competition on Arbitrum we can enable your solver on other chains relatively soon. For this we will go through the same process of generating addresses, vouching for them, and whitelisting them. For each new chain that we deploy your solver on we will need:
 
-- A rewards address for receiving the weekly COW rewards associated with that network
-- An endpoint that you would like to use for staging ad production
+- A rewards address for receiving the weekly COW rewards associated with that network;
+- An endpoint that you would like to use for staging amd production.
 
 ## 9. Joining the mainnet competition
 We usually wait a bit before migrating solvers to mainnet. After your solver has been active on other networks for some time the team can enable your solver on mainnet. 
 
 ## 10. Joining the quoting competition
-Besides the solving competition, there is also a quoting competition. This involves responding to a single order batch with a proposed execution for the order and a price that could be delivered to the user. 
-
-More information about the quoting competition can be found [here](https://docs.cow.fi/cow-protocol/reference/core/auctions/rewards#price-estimation-competition-rewards-cips-27-57-72).
+Besides the solving competition, there is also a quoting competition. More information about the quoting competition can be found [here](https://docs.cow.fi/cow-protocol/reference/core/auctions/rewards#price-estimation-competition-rewards-cips-27-57-72).
 
 ## 11. F.A.Q.
 ### Can we get access to the orderbook API?
