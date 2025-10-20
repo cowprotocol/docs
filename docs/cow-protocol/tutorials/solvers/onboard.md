@@ -145,7 +145,7 @@ Yes, we can whitelist solvers so that they can have access to the orderbook API.
 ### How do we integrate CoW AMM's?
 [We have a section in the documentation about integrating CoW AMM's.](https://docs.cow.fi/cow-amm/tutorials/cow-amm-for-solvers)
 
-### Is there a way to find out the cow reward in real time immediately after the trade?
+### Is there a way to find out the COW reward in real time immediately after the trade?
 [This table](https://dune.com/queries/5270914) contains reward data per solver and per auction (denominated in the native token of the chain). Note that data is updated every 2 hours.
 
 ### What are the environments?
