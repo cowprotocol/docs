@@ -11,10 +11,10 @@
 5. Joining the staging competition
 6. Moving to production
 7. Weekly rewards and accounting
-9. Moving to other networks
-10. Joining the mainnet competition
-11. Joining the quoting competition
-12. F.A.Q.
+8. Moving to other networks
+9. Joining the mainnet competition
+10. Joining the quoting competition
+11. F.A.Q.
 
 ## 1. Essential information for joining the solver competition
 
@@ -108,34 +108,21 @@ We advise using a single rewards address that is available on all networks.
 
 [You can find more information about how we calculate and distribute rewards here.](https://docs.cow.fi/cow-protocol/reference/core/auctions/rewards). The accounting process is documented in detail [here](https://docs.cow.fi/cow-protocol/reference/core/auctions/accounting).
 
-## 8. Slippage accounting
-Solvers are able to use the settlement contract's buffers when settling auctions. This can often result in one of two situations when prices move during an auction:
-
-1. The settlement contract receives more tokens than what was promised to the user.
-
-In this situation, some extra tokens will be left in the settlement contract after the auction is finished.
-
-2. The settlement contract receives less tokens than what was promised to the user.
-
-In this situation, if the settlement contract has enough of the tokens in its buffers, then the user will still receive the amount of tokens that they were promised. But, some of the funds will have been borrowed from the settlement contract's buffers.
-
-These will be converted to native currencies (ETH or xDAI) and transferred to your solver at the end of the week. If the settlement contract received more tokens in total over the week than what was borrowed, then you will receive this amount to your rewards address. But if more was borrowed from the settlement contract than what was returned, then your solver will be asked to reimburse the difference.
-
-## 9. Moving to other networks
+## 8. Moving to other networks
 After joining the solver competition on Arbitrum we can enable your solver on other chains relatively soon. For this we will go through the same process of generating addresses, vouching for them, and whitelisting them. For each new chain that we deploy your solver on we will need:
 
 - A rewards address for receiving the weekly COW rewards associated with that network
 - An endpoint that you would like to use for staging ad production
 
-## 10. Joining the mainnet competition
+## 9. Joining the mainnet competition
 We usually wait a bit before migrating solvers to mainnet. After your solver has been active on other networks for some time the team can enable your solver on mainnet. 
 
-## 11. Joining the quoting competition
+## 10. Joining the quoting competition
 Besides the solving competition, there is also a quoting competition. This involves responding to a single order batch with a proposed execution for the order and a price that could be delivered to the user. 
 
 [More information about the quoting competition can be found here.](https://docs.cow.fi/cow-protocol/reference/core/auctions/rewards#price-estimation-competition-rewards-cips-27-57)
 
-## 12. F.A.Q.
+## 11. F.A.Q.
 ### Can we get access to the orderbook API?
 Yes, we can whitelist solvers so that they can have access to the orderbook API. Although we generally wait with this until your solver is live and settling orders on chain.
 
