@@ -43,7 +43,7 @@ As the flashloan needs to be available over the entire duration of the settlemen
 
 :::note
 
-Specifically for the AAVE integration, the driver is not required to inject any additional permissioned interactions. If the call to the flashloan router correctly is constructed correctly and the pre- and post-hooks of the order are included, the call should succeed.
+Specifically for the AAVE integration, the driver is not required to inject any additional permissioned interactions. If the call to the flashloan router is constructed correctly and the pre- and post-hooks of the order are included, the call should succeed.
 
 We stress again that this is fully handled by the reference driver.
 
@@ -83,9 +83,9 @@ Together with the support for flashloans, we want to minimize the order filterin
 
 AAVE will cover 3 new use cases:
 
-1. **Collateral swap**: User has a debt position and wants to change the collateral they use ([example]( https://explorer.cow.fi/gc/orders/0x413a7246f58441ad92ea19c09cef90d1b23a1e211e0963f3d39b7db48140533d669685c660c260d80b614f8d1a5ffd24c4e3b82668cd8760)).
+1. **Collateral swap**: User has a debt position and wants to change the collateral they use ([example](https://explorer.cow.fi/gc/orders/0x413a7246f58441ad92ea19c09cef90d1b23a1e211e0963f3d39b7db48140533d669685c660c260d80b614f8d1a5ffd24c4e3b82668cd8760)).
 
-2. **Repay debt with collateral**:  Use some of the collateral to repay the debt. This is essentially auto-liquidating without a fee ([example](https://explorer.cow.fi/gc/orders/0xab8596fb7eae317bf15b1b4d57169f5e6714479e38661e0f06df7e7f12409915d20982aedc2074bd3b798cd6c02f6e03e51743cc68cdd580
+2. **Repay debt with collateral**: Use some of the collateral to repay the debt. This is essentially auto-liquidating without a fee ([example](https://explorer.cow.fi/gc/orders/0xab8596fb7eae317bf15b1b4d57169f5e6714479e38661e0f06df7e7f12409915d20982aedc2074bd3b798cd6c02f6e03e51743cc68cdd580
 )).
 
 3. **Debt swap**: User has a debt in a token and wants to swap for something else. Think about leverage, changing the debt to reduce interest for example ([example](https://explorer.cow.fi/gc/orders/0x6c100f2f6bb46ebf1c9f52660fdbe31079d4f982f56b524605358bd419af3a6237c390b08d5a3104b3efc1401e8d11e52624c75868d305a0
