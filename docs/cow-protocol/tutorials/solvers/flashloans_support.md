@@ -16,7 +16,7 @@ Information about an order's flashloan is added by the user inside the order’s
 
 For example, this [staging order](https://explorer.cow.fi/gc/orders/0x413a7246f58441ad92ea19c09cef90d1b23a1e211e0963f3d39b7db48140533d669685c660c260d80b614f8d1a5ffd24c4e3b82668cd8760) has the appdata hash `0xa8476d34ec1e22b818cf3d6289e30271a04a4e38a8a3a71f947b5881de06a852` which can be looked up [here](https://barn.api.cow.fi/xdai/api/v1/app_data/0xa8476d34ec1e22b818cf3d6289e30271a04a4e38a8a3a71f947b5881de06a852). Specifically, in the `metadata` field, the `flashloan` entry looks as follows:
 
-```
+```json
       "flashloan": {
         "amount": "20000000000000000000",
         "liquidityProvider": "0xb50201558B00496A145fE76f7424749556E326D8",
