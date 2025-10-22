@@ -33,17 +33,13 @@ The purpose of this page is to let users know which fee models are active at any
 >
 > **Fee calculation:** quote improvement \* 0.5 **OR** volume \* 0.01 [whichever number is lower]
 
-### Volume fee on Gnosis Chain orders (excluding token pairs with correlated prices)
+### Volume Fee
 
-[//]: # 'If updating the list of stable coins, do not forget to update the actual code where this is handled on CoW Swap'
-[//]: # 'https://github.com/cowprotocol/cowswap/blob/develop/libs/common-const/src/tokens.ts#L293-L302'
-
-> **Definition:** 10 basis points on the total volume of the order
+> **Definition:** 2 basis points on the total volume of the order
 >
-> **Eligible orders:** all market orders, limit orders, and TWAPs made on Gnosis Chain, excluding tokens with correlated prices when traded for each other.
+> **Eligible orders:** all orders
 >
-> **Fee calculation:** volume \* 0.001
-
+> **Fee calculation:** volume \* 0.0002
 
 :::note
 
