@@ -43,7 +43,7 @@ As the flashloan needs to be available over the entire duration of the settlemen
 
 :::note
 
-Specifically for the AAVE integration, the driver is not required to inject any additional permissioned interactions. If the call to the flashloan router is constructed correctly and the pre- and post-hooks of the order are included, the call should succeed.
+Specifically for the Aave integration, the driver is not required to inject any additional permissioned interactions. If the call to the flashloan router is constructed correctly and the pre- and post-hooks of the order are included, the call should succeed.
 
 We stress again that this is fully handled by the reference driver.
 
@@ -51,7 +51,7 @@ We stress again that this is fully handled by the reference driver.
 
 ### Estimating the Gas Costs
 
-Solvers are responsible for capturing enough network fees to cover the total gas cost of a settlement. The flashloan flow requires a call to a wrapper contract, which takes the loans and then call to the settlement contract. This wrapper adds an overhead compared to just calling the settlement contract, and for this reason solvers should pay extra attention when estimating the total gas needed. 
+Solvers are responsible for capturing enough network fees to cover the total gas cost of a settlement. The flashloan flow, as described in the previous section, requires a call to a wrapper contract, which first takes the loans and then calls the settlement contract. This wrapper adds an overhead compared to just calling the settlement contract, and for this reason solvers should pay extra attention when estimating the total gas needed.
 
 
 :::caution
@@ -68,7 +68,7 @@ If the solver does a simulation of the `eth_call` as part of its gas estimation 
 
 ### Adjusting the Order Filtering Logic
 
-Many solvers implement some order filtering logic that, for example, discards orders with missing balances early so the matching engine does not have to process them. Orders may be placed if taking out a flashloan and executing the pre-hooks will lead to sufficient balance and allowance for the order. In AAVE’s case, for example, the order will only pass the signature verification check if the pre-hook executed successfully. And that can only be executed if the `receiver` in the flashloan hint got enough tokens before hand.
+Many solvers implement some order filtering logic that, for example, discards orders with missing balances early so the matching engine does not have to process them. Orders may be placed if taking out a flashloan and executing the pre-hooks will lead to sufficient balance and allowance for the order. In Aave’s case, for example, the order will only pass the signature verification check if the pre-hook executed successfully. And that can only be executed if the `receiver` in the flashloan hint got enough tokens before hand.
 
 There are multiple ways for a solver to handle this:
 - assume an order is good if it uses flashloan;
@@ -79,9 +79,9 @@ There are multiple ways for a solver to handle this:
 
 Together with the support for flashloans, we want to minimize the order filtering the autopilot does before even building the auction. This filtering was initially implemented as a performance optimization since most of the orders do not have sufficient balance, and the plan is to remove it. The order filtering is already implemented in the reference driver as well so nothing should change for solvers connected to that. For other solver/ drivers the auction in the `/solve` endpoint will contain ~3K orders or more from now on.
 
-## Details on AAVE’s Integration
+## Details on Aave’s Integration
 
-AAVE will cover 3 new use cases:
+Aave will cover 3 new use cases:
 
 1. **Collateral swap**: User has a debt position and wants to change the collateral they use ([example](https://explorer.cow.fi/gc/orders/0x413a7246f58441ad92ea19c09cef90d1b23a1e211e0963f3d39b7db48140533d669685c660c260d80b614f8d1a5ffd24c4e3b82668cd8760)).
 
@@ -93,8 +93,8 @@ AAVE will cover 3 new use cases:
 
 :::note 
 
-These orders do not involve AAVE’s `aToken` (i.e. `aUSDC` instead of `USDC`) but supporting them is recommended to participate in the non-flashloan version of each of the three usecases.
+These orders do not involve Aave’s `aToken` (i.e. `aUSDC` instead of `USDC`) but supporting them is recommended to participate in the non-flashloan version of each of the three usecases.
 
 :::
 
-Assuming the flashloan router call is encoded correctly, AAVE’s orders will move the flashloaned funds to the correct spot using the pre-hook and will repay the flashloan in the post-hook. No additional calls have to be encoded in a solution. However, for this to work the flashloan has to be taken out with the given flashloan information. Getting the tokens, for example, by private liquidity is not supported in this use case.
+Assuming the flashloan router call is encoded correctly, Aave’s orders will move the flashloaned funds to the correct spot using the pre-hook and will repay the flashloan in the post-hook. No additional calls have to be encoded in a solution. However, for this to work the flashloan has to be taken out with the given flashloan information. Getting the tokens, for example, by private liquidity is not supported in this use case.
