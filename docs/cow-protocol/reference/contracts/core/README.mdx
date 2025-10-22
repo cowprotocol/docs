@@ -161,3 +161,31 @@ Partner fees are encoded in the app data struct and are accounted for once the o
 From the perspective of the API, two orders with the same parameters and the same owner but different app data are two different valid orders.
 It can happen that the order that is part of the final settlement is the one controlled by the adversary, especially if other order parameters can be changed to create the appearence of an inflated surplus.
 In this case, the order surplus decreases as partner fees are taken from the surplus.
+
+### Loss of funds if a compromised Balancer contract is deployed
+
+A malicious solver can steal the entire amount of a user's trade if the Balancer contract is compromised and the solver processes a vulnerable user order.
+
+Due to a vulnerability in the [profanity vanity address generator](https://medium.com/@rebryk/how-to-hack-a-vanity-address-generated-with-profanity-ffad61ecacd2), the deployer wallet for the Balancer Vault was compromised. This allows arbitrary actors to deploy any bytecode to the address that is normally used to deploy [Balancer's Core Vault contract](https://docs.balancer.fi/concepts/vault/).
+
+In order to preserve a consistent settlement address on all chains, CoW Protocol uses the `CREATE2` opcode to deploy the settlement contract. Since the balancer vault address is supplied as an immutable constructor property, the Settlement contract contains a dependency upon this compromised contract.
+
+The Balancer vault is only used in `GPv2Transfer.sol` as an alternative way for a user to receive or supply funds from the settlement contract when the user sets `buyTokenBalance` or `sellTokenBalance` to `BALANCE_INTERNAL`.
+
+There are two general effects that this vulnerability can have:
+* If the compromised contract at the `Balancer` address reverts upon a call to `manageUserBalance`, the attacker can effectively DoS any trade batches that contain a trade using `BALANCE_INTERNAL`.
+* If the compromised contract does *not* revert, the settlement contract assumes that the user's balance was successfully transferred, and no further action is taken. This assumption allows for a solver to steal the full amount of a user's trade output, since the settlement contract does not verify that the funds were received by the user.
+
+In total, there are 3 conditions that are needed to make this vulnerability harmful:
+1. The user must be trading on a network with a compromised Balancer contract
+2. The trade must have been signed with `buyTokenBalance` or `sellTokenBalance` as `BALANCE_INTERNAL`
+3. A malicious solver must obtain the signed order outside of the usual order flow (the CoW Orderbook API rejects these order types) and steal the user's funds. For the attack to be profitable, the stolen amount must exceed the current bond amount (as of writing, 1.5m USDC).
+
+As of writing, these are the CoW-supported networks affected by this vulnerability:
+* Plasma
+
+:::warning
+
+In order to avoid being affected by this vulnerability, we do not reccomend signing orders with `buyTokenBalance` or `sellTokenBalance` set to `BALANCE_INTERNAL`.
+
+:::
