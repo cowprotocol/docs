@@ -69,7 +69,7 @@ The presence of the cap on rewards $$c_u$$, however, makes the problem more comp
 
 To summarize, truthfully revealing the (cost-adjusted) score that a solver can generate for each submitted solution is optimal if the cap is not binding, and misreporting does not affect $$\textrm{referenceScore}_i$$. It is not necessarily optimal in uncompetitive auctions when the difference between the best and second-best solution may be large, and in some edge cases in which a solver may benefit from making the filtering step less stringent. However, in these cases, deriving the optimal strategy is a very complex problem. We conclude by noting that most CoW Protocol batches are very competitive - the cap on rewards is binding only in about 9% of auctions - and that a solver benefits by making the filtering steps less stringent for its opponents only in sporadic cases.
 
-## Price estimation competition rewards (CIPs 27, 57)
+## Price estimation competition rewards (CIPs 27, 57, 72)
 
 The price estimation competition is a separate competition where solvers compete to provide the best response to a quote request. Quote requests look almost identical to single-order batch auctions, where there is only one order with a trivial limit price, and solvers propose executions of this order with the goal to maximize "out amount minus gas costs", in the case of a sell request, or minimize "in amount + gas costs" in the case of a buy request.
 
