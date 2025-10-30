@@ -4,7 +4,7 @@ sidebar_position: 2
 
 # How to specify an order with flash loan
 
-The flash loan is encoded into the [appData](/cow-protocol/reference/core/intents/app-data)'s metadata as an optional object. This information serves as a hint for the solver, but the solver ultimately can decide for a different approach in order to make the operation more optimal.
+The flash loan is encoded into the [appData](/cow-protocol/reference/intents/app-data)'s metadata as an optional object. This information serves as a hint for the solver, but the solver ultimately can decide for a different approach in order to make the operation more optimal.
 
 It is important to ensure that the flash loan gas overhead is added to the slippage tolerance when creating the order.
 

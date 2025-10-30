@@ -21,4 +21,4 @@ If the solvers are able to find optimizations within the batch auction your orde
 
 ## Getting started
 
-Wanting to make a market order? Check out our [market order tutorial](/cow-protocol/tutorials/cow-swap/swap).
+Wanting to make a market order? Check out our [market order tutorial](/cow-swap/swap).

@@ -157,3 +157,243 @@ html .menu_node_modules-\@docusaurus-theme-classic-lib-theme-DocSidebar-Desktop-
 div.theme-doc-markdown > div img {
   margin-bottom: 1em!important;
 }
+
+/* Product-specific color schemes */
+
+/* CoW Protocol - Blue theme (default) */
+html[data-current-docs-plugin-id="cow-protocol"]:root {
+  --ifm-color-primary: #012f7a;
+  --ifm-color-primary-dark: #012964;
+  --ifm-color-primary-darker: #01265d;
+  --ifm-color-primary-darkest: #011f4c;
+  --ifm-color-primary-light: #023590;
+  --ifm-color-primary-lighter: #023897;
+  --ifm-color-primary-lightest: #0341a8;
+}
+
+html[data-theme='dark'][data-current-docs-plugin-id="cow-protocol"]:root {
+  --ifm-color-primary: #5b9cff;
+  --ifm-color-primary-dark: #428eff;
+  --ifm-color-primary-darker: #2e82ff;
+  --ifm-color-primary-darkest: #0069ff;
+  --ifm-color-primary-light: #74aaff;
+  --ifm-color-primary-lighter: #88b6ff;
+  --ifm-color-primary-lightest: #b0cfff;
+}
+
+/* CoW Swap - Light Blue theme */
+html[data-current-docs-plugin-id="cow-swap"]:root {
+  --ifm-color-primary: #1b6aae;
+  --ifm-color-primary-dark: #185f9c;
+  --ifm-color-primary-darker: #175a93;
+  --ifm-color-primary-darkest: #134a79;
+  --ifm-color-primary-light: #1e75c0;
+  --ifm-color-primary-lighter: #1f7ac9;
+  --ifm-color-primary-lightest: #2489db;
+}
+
+html[data-theme='dark'][data-current-docs-plugin-id="cow-swap"]:root {
+  --ifm-color-primary: #6ba9e0;
+  --ifm-color-primary-dark: #529dd9;
+  --ifm-color-primary-darker: #4697d7;
+  --ifm-color-primary-darkest: #2c85cb;
+  --ifm-color-primary-light: #84b5e7;
+  --ifm-color-primary-lighter: #90bde9;
+  --ifm-color-primary-lightest: #b4d3f0;
+}
+
+/* CoW Widget - Green/Lime theme */
+html[data-current-docs-plugin-id="cow-widget"]:root {
+  --ifm-color-primary: #2d9a4d;
+  --ifm-color-primary-dark: #288b45;
+  --ifm-color-primary-darker: #268341;
+  --ifm-color-primary-darkest: #1f6c35;
+  --ifm-color-primary-light: #32a955;
+  --ifm-color-primary-lighter: #35b159;
+  --ifm-color-primary-lightest: #40c765;
+}
+
+html[data-theme='dark'][data-current-docs-plugin-id="cow-widget"]:root {
+  --ifm-color-primary: #5dd87d;
+  --ifm-color-primary-dark: #46d36b;
+  --ifm-color-primary-darker: #3ad062;
+  --ifm-color-primary-darkest: #26c24f;
+  --ifm-color-primary-light: #74dd8f;
+  --ifm-color-primary-lighter: #80e098;
+  --ifm-color-primary-lightest: #a6e9b5;
+}
+
+/* CoW AMM - Teal/Ocean theme */
+html[data-current-docs-plugin-id="cow-amm"]:root {
+  --ifm-color-primary: #0c5d99;
+  --ifm-color-primary-dark: #0b5489;
+  --ifm-color-primary-darker: #0a4f81;
+  --ifm-color-primary-darkest: #08416a;
+  --ifm-color-primary-light: #0d66a9;
+  --ifm-color-primary-lighter: #0e6bb1;
+  --ifm-color-primary-lightest: #107ac7;
+}
+
+html[data-theme='dark'][data-current-docs-plugin-id="cow-amm"]:root {
+  --ifm-color-primary: #3eb8f5;
+  --ifm-color-primary-dark: #26aff3;
+  --ifm-color-primary-darker: #19a9f2;
+  --ifm-color-primary-darkest: #0d97de;
+  --ifm-color-primary-light: #56c1f7;
+  --ifm-color-primary-lighter: #69c7f8;
+  --ifm-color-primary-lightest: #95d7fa;
+}
+
+/* MEV Blocker - Orange/Sunset theme */
+html[data-current-docs-plugin-id="mevblocker"]:root {
+  --ifm-color-primary: #f2994a;
+  --ifm-color-primary-dark: #f08a2f;
+  --ifm-color-primary-darker: #ef8222;
+  --ifm-color-primary-darkest: #e76d0a;
+  --ifm-color-primary-light: #f4a865;
+  --ifm-color-primary-lighter: #f5b072;
+  --ifm-color-primary-lightest: #f8c593;
+}
+
+html[data-theme='dark'][data-current-docs-plugin-id="mevblocker"]:root {
+  --ifm-color-primary: #fdb574;
+  --ifm-color-primary-dark: #fca85c;
+  --ifm-color-primary-darker: #fca04f;
+  --ifm-color-primary-darkest: #fb8e2e;
+  --ifm-color-primary-light: #fdc28c;
+  --ifm-color-primary-lighter: #feca99;
+  --ifm-color-primary-lightest: #feddb3;
+}
+
+/* CoW DAO - Purple/Governance theme */
+html[data-current-docs-plugin-id="cow-dao"]:root {
+  --ifm-color-primary: #5f3dc4;
+  --ifm-color-primary-dark: #5637b0;
+  --ifm-color-primary-darker: #5134a6;
+  --ifm-color-primary-darkest: #432b89;
+  --ifm-color-primary-light: #6843d8;
+  --ifm-color-primary-lighter: #7046dc;
+  --ifm-color-primary-lightest: #8556e8;
+}
+
+html[data-theme='dark'][data-current-docs-plugin-id="cow-dao"]:root {
+  --ifm-color-primary: #b197fc;
+  --ifm-color-primary-dark: #9f7efb;
+  --ifm-color-primary-darker: #9470fb;
+  --ifm-color-primary-darkest: #7654fa;
+  --ifm-color-primary-light: #c3b0fd;
+  --ifm-color-primary-lighter: #cebefd;
+  --ifm-color-primary-lightest: #e9dffe;
+}
+
+/* Navbar improvements - prevent wrapping and improve spacing */
+.navbar__inner {
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+/* Make navbar title more compact */
+.navbar__title {
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+/* Style navbar buttons to look more like buttons */
+.navbar__item.navbar__link,
+.navbar__link {
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1.5;
+  height: 36px;
+  box-sizing: border-box;
+}
+
+/* Products dropdown button styling */
+.navbar__link.navbar__link--active,
+.navbar__item.dropdown > .navbar__link {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  height: 36px;
+}
+
+html[data-theme='dark'] .navbar__link.navbar__link--active,
+html[data-theme='dark'] .navbar__item.dropdown > .navbar__link {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* CoW DAO button - make it stand out more */
+.navbar__items--left > .navbar__item:not(.dropdown) > .navbar__link {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  height: 36px;
+}
+
+html[data-theme='dark'] .navbar__items--left > .navbar__item:not(.dropdown) > .navbar__link {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Hover states */
+.navbar__link:hover,
+.navbar__item.dropdown > .navbar__link:hover {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.35);
+  text-decoration: none;
+}
+
+html[data-theme='dark'] .navbar__link:hover,
+html[data-theme='dark'] .navbar__item.dropdown > .navbar__link:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
+/* Adjust navbar item spacing for better fit */
+.navbar__item {
+  padding: 0;
+  margin: 0 0.4rem;
+}
+
+/* Prevent navbar from wrapping on smaller screens */
+@media (max-width: 1200px) {
+  .navbar__title {
+    font-size: 0.9rem;
+  }
+
+  .navbar__link {
+    padding: 0.35rem 0.7rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 996px) {
+  .navbar__title {
+    font-size: 0.85rem;
+  }
+
+  .navbar__link {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.85rem;
+  }
+
+  .navbar__item {
+    margin: 0 0.15rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar__title {
+    display: none;
+  }
+
+  .navbar__link {
+    padding: 0.3rem 0.5rem;
+    font-size: 0.8rem;
+  }
+}

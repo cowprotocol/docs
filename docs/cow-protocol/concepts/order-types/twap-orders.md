@@ -37,4 +37,4 @@ There are also several requirements for placing TWAP orders through CoW Protocol
 
 ## Getting started
 
-Wanting to place a TWAP order? Check out our [TWAP order tutorial](/cow-protocol/tutorials/cow-swap/twap). You can also [read about TWAP on our blog.](https://blog.cow.fi/cow-swap-launches-twap-orders-d5583135b472)
+Wanting to place a TWAP order? Check out our [TWAP order tutorial](/cow-swap/twap). You can also [read about TWAP on our blog.](https://blog.cow.fi/cow-swap-launches-twap-orders-d5583135b472)

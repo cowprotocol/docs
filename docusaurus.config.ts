@@ -27,6 +27,10 @@ const config: Config = {
 
   trailingSlash: false,
 
+  clientModules: [
+    require.resolve('./src/clientModules/gtagFix.js'),
+  ],
+
   // Even if you don't use internalization, you can use this field to set useful
   // metadata like html lang. For example, if your site is Chinese, you may want
   // to replace "en" with "zh-Hans".
@@ -45,18 +49,8 @@ const config: Config = {
     [
       'classic',
       {
-        docs: {
-          routeBasePath: '/',
-          sidebarPath: require.resolve('./sidebars.js'),
-          remarkPlugins: [
-            remarkMath,
-            [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true, converters: ['yarn', 'pnpm'] }],
-          ],
-          rehypePlugins: [rehypeKatex],
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl: 'https://github.com/cowprotocol/docs/tree/main',
-        },
+        docs: false, // Disable default docs
+        blog: false, // Disable blog
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
@@ -65,6 +59,96 @@ const config: Config = {
   ],
 
   plugins: [
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'cow-protocol',
+        path: 'docs/cow-protocol',
+        routeBasePath: 'cow-protocol',
+        sidebarPath: require.resolve('./sidebars-cow-protocol.ts'),
+        remarkPlugins: [
+          remarkMath,
+          [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true, converters: ['yarn', 'pnpm'] }],
+        ],
+        rehypePlugins: [rehypeKatex],
+        editUrl: 'https://github.com/cowprotocol/docs/tree/main',
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'cow-swap',
+        path: 'docs/cow-swap',
+        routeBasePath: 'cow-swap',
+        sidebarPath: require.resolve('./sidebars-cow-swap.ts'),
+        remarkPlugins: [
+          remarkMath,
+          [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true, converters: ['yarn', 'pnpm'] }],
+        ],
+        rehypePlugins: [rehypeKatex],
+        editUrl: 'https://github.com/cowprotocol/docs/tree/main',
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'cow-widget',
+        path: 'docs/cow-widget',
+        routeBasePath: 'cow-widget',
+        sidebarPath: require.resolve('./sidebars-cow-widget.ts'),
+        remarkPlugins: [
+          remarkMath,
+          [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true, converters: ['yarn', 'pnpm'] }],
+        ],
+        rehypePlugins: [rehypeKatex],
+        editUrl: 'https://github.com/cowprotocol/docs/tree/main',
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'cow-amm',
+        path: 'docs/cow-amm',
+        routeBasePath: 'cow-amm',
+        sidebarPath: require.resolve('./sidebars-cow-amm.ts'),
+        remarkPlugins: [
+          remarkMath,
+          [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true, converters: ['yarn', 'pnpm'] }],
+        ],
+        rehypePlugins: [rehypeKatex],
+        editUrl: 'https://github.com/cowprotocol/docs/tree/main',
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'mevblocker',
+        path: 'docs/mevblocker',
+        routeBasePath: 'mevblocker',
+        sidebarPath: require.resolve('./sidebars-mevblocker.ts'),
+        remarkPlugins: [
+          remarkMath,
+          [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true, converters: ['yarn', 'pnpm'] }],
+        ],
+        rehypePlugins: [rehypeKatex],
+        editUrl: 'https://github.com/cowprotocol/docs/tree/main',
+      },
+    ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'cow-dao',
+        path: 'docs/governance',
+        routeBasePath: 'cow-dao',
+        sidebarPath: require.resolve('./sidebars-cow-dao.ts'),
+        remarkPlugins: [
+          remarkMath,
+          [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true, converters: ['yarn', 'pnpm'] }],
+        ],
+        rehypePlugins: [rehypeKatex],
+        editUrl: 'https://github.com/cowprotocol/docs/tree/main',
+      },
+    ],
     [
       '@docusaurus/plugin-ideal-image',
       {
@@ -112,9 +196,9 @@ const config: Config = {
     // Replace with your project's social card
     image: 'img/og-meta-cowprotocol.png',
     navbar: {
-      title: 'Documentation - CoW DAO',
+      title: 'Docs',
       logo: {
-        alt: 'Documentation - CoW DAO',
+        alt: 'CoW DAO Documentation',
         src: 'img/cow-logo.svg',
         srcDark: 'img/cow-logo-dark.svg',
         href: '/',
@@ -128,6 +212,44 @@ const config: Config = {
           margin: 'auto 12px auto 0',
         },
       },
+      items: [
+        {
+          type: 'dropdown',
+          label: 'Products',
+          position: 'left',
+          items: [
+            {
+              label: 'CoW Protocol',
+              to: '/cow-protocol',
+            },
+            {
+              label: 'CoW Swap',
+              to: '/cow-swap',
+            },
+            {
+              label: 'CoW Widget',
+              to: '/cow-widget',
+            },
+            {
+              label: 'CoW AMM',
+              to: '/cow-amm',
+            },
+            {
+              label: 'MEV Blocker',
+              to: '/mevblocker',
+            },
+          ],
+        },
+        {
+          label: 'CoW DAO',
+          to: '/cow-dao',
+          position: 'left',
+        },
+        {
+          type: 'search',
+          position: 'right',
+        },
+      ],
     },
     footer: {
       style: 'dark',
@@ -183,6 +305,10 @@ const config: Config = {
       appId: '9SHPK9O441',
       apiKey: '03080030278ba4994327d955f694f2a4',
       indexName: 'cow',
+      contextualSearch: true,
+      searchParameters: {
+        facetFilters: ['type:content'],
+      },
     },
   } satisfies Preset.ThemeConfig,
 }

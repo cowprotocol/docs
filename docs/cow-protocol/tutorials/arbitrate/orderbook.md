@@ -6,7 +6,7 @@ sidebar_position: 1
 
 The orderbook is the main API that traders, UIs and other integrations use to interact with CoW Protocol.
 
-Its implementation can be found [here](https://github.com/cowprotocol/services/tree/main/crates/orderbook). The API is documented in detail [here](../../reference/apis/orderbook). 
+Its implementation can be found [here](https://github.com/cowprotocol/services/tree/main/crates/orderbook). The API is documented in detail [here](../../apis/orderbook). 
 
 ## Overview
 
@@ -103,8 +103,8 @@ Before an order is accepted in the database it is validated.
 Validation steps include
 - Asserting the order is well formed and all fields are properly encoded
 - The user has sufficient balance/allowance to place this order
-- The [signature type](/cow-protocol/reference/core/signing-schemes) is supported and the signature is valid
-- The pre-image for the order's [appData](/cow-protocol/reference/core/intents/app-data) hash is either provided in the request or publicly available on IPFS (to ensure any additional information about the order can be properly interpreted by the orderbook)
+- The [signature type](/cow-protocol/reference/signing-schemes) is supported and the signature is valid
+- The pre-image for the order's [appData](/cow-protocol/reference/intents/app-data) hash is either provided in the request or publicly available on IPFS (to ensure any additional information about the order can be properly interpreted by the orderbook)
 
 Each order is also associated with a quote for classification as either in or out of market price. This may have an effect on the fee policy used.
 For this either the trader provided `quoteId` is looked up or a fresh quote is created.
@@ -113,7 +113,7 @@ For this either the trader provided `quoteId` is looked up or a fresh quote is c
 
 The orderbook synchronizes state with the autopilot via a shared database.
 It communicates with solvers to produce price estimates.
-It uses IPFS to update and fetch [appData](/cow-protocol/reference/core/intents/app-data) documents.
+It uses IPFS to update and fetch [appData](/cow-protocol/reference/intents/app-data) documents.
 It also depends on on-chain state for:
 - checking the trader has sufficient balance/approval to place the order
 - simulate smart contract signatures and hooks

@@ -17,7 +17,7 @@ In order to get connected to the shadow competition, feel free to reach out to a
 
 ## Live competition (production)
 
-- To connect to the live competition, each solver is required to be part of a "bonding pool", as specified by [CIP-7](https://snapshot.org/#/cow.eth/proposal/0x267edf7a0bd3c771cfca763322f011ee106d8d5158612c11da29183260d1dba7); see [this section](/cow-protocol/reference/core/auctions/bonding-pools) for more details.
+- To connect to the live competition, each solver is required to be part of a "bonding pool", as specified by [CIP-7](https://snapshot.org/#/cow.eth/proposal/0x267edf7a0bd3c771cfca763322f011ee106d8d5158612c11da29183260d1dba7); see [this section](/cow-protocol/reference/auctions/bonding-pools) for more details.
 
 :::note
 

@@ -5,7 +5,7 @@ import path from 'path';
 const README_URL = 'https://raw.githubusercontent.com/cowprotocol/cow-sdk/refs/heads/main/packages/sdk/README.md';
 
 // Destination file in Docusaurus docs
-const DOCS_PATH = path.join(process.cwd(), 'docs/cow-protocol/reference/sdks/cow-sdk', 'README.mdx');
+const DOCS_PATH = path.join(process.cwd(), 'docs/cow-protocol/sdks/cow-sdk', 'README.mdx');
 
 async function fetchReadme() {
     try {

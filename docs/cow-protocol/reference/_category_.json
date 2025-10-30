@@ -1,9 +1,9 @@
 {
-    "position": 3,
-    "label": "Technical reference",
-    "collapsible": true,
-    "collapsed": true,
-    "link": {
-        "type": "generated-index"
-    }
+  "position": 3,
+  "label": "Protocol reference",
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index"
+  }
 }

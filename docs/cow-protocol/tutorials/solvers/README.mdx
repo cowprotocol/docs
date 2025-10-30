@@ -2,7 +2,7 @@
 
 ## What is a Solver?
 
-At the heart of the CoW Protocol there are _solvers_. In essence, a solver is a computer program that takes the orderbook as input, then computes the prices and traded amounts of all orders and liquidity sources (AMMs) that make the best possible overall trading experience. This problem, known as the [batch auction problem](/cow-protocol/reference/core/auctions/the-problem), is an interesting and challenging optimization problem for which there is _not a perfect algorithm_ for (and most [likely will never be](https://en.wikipedia.org/wiki/P_versus_NP_problem)).
+At the heart of the CoW Protocol there are _solvers_. In essence, a solver is a computer program that takes the orderbook as input, then computes the prices and traded amounts of all orders and liquidity sources (AMMs) that make the best possible overall trading experience. This problem, known as the [batch auction problem](/cow-protocol/reference/auctions/the-problem), is an interesting and challenging optimization problem for which there is _not a perfect algorithm_ for (and most [likely will never be](https://en.wikipedia.org/wiki/P_versus_NP_problem)).
 
 In the spirit of decentralization, on CoW Protocol multiple independent solvers compete for finding the best solution to the batch auction problem. Every few seconds, a round of the competition takes place, giving participating solvers the chance to solve a batch reflecting the most recent orderbook state. The solver that outputs the _best_ solution is rewarded, and thus its solution is the one to be settled on-chain.
 
@@ -17,7 +17,7 @@ There are different avenues to explore for designing a solver that is competitiv
 
 ## Landscape of Solvers
 
-In the spirit of decentralization and transparency, CoW Protocol maintains comprehensive [dashboards on Dune analytics](https://dune.com/cowprotocol/solver-info) detailing the performance of all solvers that have participated in the [solver auction](/cow-protocol/reference/core/auctions/rewards).
+In the spirit of decentralization and transparency, CoW Protocol maintains comprehensive [dashboards on Dune analytics](https://dune.com/cowprotocol/solver-info) detailing the performance of all solvers that have participated in the [solver auction](/cow-protocol/reference/auctions/rewards).
 
 Solvers that have participated to date:
 

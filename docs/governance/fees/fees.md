@@ -56,4 +56,4 @@ The purpose of this page is to let users know which fee models are active at any
 ### Partner fees
 
 Partners may charge a fee when integrating CoW Protocol.
-See the [Partner Fee](/governance/fees/partner-fee) section of these docs for details on how the partner fee is calculated, with examples and payment details.
+See the [Partner Fee](/cow-dao/fees/partner-fee) section of these docs for details on how the partner fee is calculated, with examples and payment details.

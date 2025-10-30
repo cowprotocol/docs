@@ -30,7 +30,7 @@ Each mode comes with its own set of configuration parameters (cf. [examples](htt
 
 ## Architecture
 
-Solver Engines implement the [API](../../../reference/apis/solver) expected by the driver component.
+Solver Engines implement the [API](../../../apis/solver) expected by the driver component.
 
 ```mermaid
 sequenceDiagram
@@ -99,7 +99,7 @@ The solver can receive an optional object with each order that provides hints fo
 - Use the provided hint: The solver can directly copy the flash loan hint included with the order.
 - Define a custom hint: The solver can specify a different flash loan hint, allowing for better optimization of flash loan usage.
 
-A key requirement for flash loans is that all steps must take place within the same caller context. By maintaining this context, flash loans remain risk-free, as the transaction can be reverted if the tokens cannot be returned at the end. However, CoW Protocol cannot hold on to this context directly. To ensure that all steps execute within the same caller context, the GPv2 Settlement contract's [settle](../../../reference/contracts/core/settlement.md#settle) function is called from within the [IFlashLoanRouter](../../../reference/contracts/periphery/flash-loans.md#iflashloanrouter-contract) contract callback. Rather than directly calling the GPv2 Settlement contract, the solver first interacts with the `IFlashLoanRouter` contract.
+A key requirement for flash loans is that all steps must take place within the same caller context. By maintaining this context, flash loans remain risk-free, as the transaction can be reverted if the tokens cannot be returned at the end. However, CoW Protocol cannot hold on to this context directly. To ensure that all steps execute within the same caller context, the GPv2 Settlement contract's [settle](../../../contracts/core/settlement.md#settle) function is called from within the [IFlashLoanRouter](../../../contracts/periphery/flash-loans.md#iflashloanrouter-contract) contract callback. Rather than directly calling the GPv2 Settlement contract, the solver first interacts with the `IFlashLoanRouter` contract.
 
 The solver must consider the gas cost implications of using a flash loan, as the associated overhead is non-negligible.
 

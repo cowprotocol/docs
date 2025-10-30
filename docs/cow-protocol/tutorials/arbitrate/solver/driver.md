@@ -43,7 +43,7 @@ sequenceDiagram
 
 Splitting the driver from the solver engine is just a design decision to keep the barrier of entry for new solvers low.
 However, there is nothing preventing you from patching, forking or reimplementing the driver.
-You can even merge the responsibilities of the driver and solver engine into one if you want to build the most optimal solver possible; the only hard requirement is that the component the autopilot interfaces with implements this [interface](/cow-protocol/reference/apis/driver).
+You can even merge the responsibilities of the driver and solver engine into one if you want to build the most optimal solver possible; the only hard requirement is that the component the autopilot interfaces with implements this [interface](/cow-protocol/apis/driver).
 
 ## Methodology
 
@@ -136,9 +136,9 @@ sequenceDiagram
 
 #### Flash Loans Encoding
 
-If a solver decides to encode the transaction without the help of the reference driver, the solver must call the `IFlashLoanRouter` contract's [flashLoanAndSettle](../../../reference/contracts/periphery/flash-loans.md#flashloanandsettle) function instead of the settlement contract's [settle](../../../reference/contracts/core/settlement.md#settle) function. The solver must provide all necessary flash loan inputs for the settlement, as well as the settle calldata, which will be executed within the same context by the `IFlashLoanRouter` contract. The `IFlashLoanRouter` contract will then request the specified flash loans and, once received, execute the settlement as instructed.
+If a solver decides to encode the transaction without the help of the reference driver, the solver must call the `IFlashLoanRouter` contract's [flashLoanAndSettle](../../../contracts/periphery/flash-loans.md#flashloanandsettle) function instead of the settlement contract's [settle](../../../contracts/core/settlement.md#settle) function. The solver must provide all necessary flash loan inputs for the settlement, as well as the settle calldata, which will be executed within the same context by the `IFlashLoanRouter` contract. The `IFlashLoanRouter` contract will then request the specified flash loans and, once received, execute the settlement as instructed.
 
-The entry point to the router contract ([IFlashLoanRouter](../../../reference/contracts/periphery/flash-loans.md#iflashloanrouter-contract)) is the function `flashLoanAndSettle`.
+The entry point to the router contract ([IFlashLoanRouter](../../../contracts/periphery/flash-loans.md#iflashloanrouter-contract)) is the function `flashLoanAndSettle`.
 It takes a list of loans with the following entries for each loan:
 
 - The loaned amount and ERC-20 token.
@@ -152,7 +152,7 @@ The flash-loan router is a solver for CoW Protocol and calls `settle` directly o
 The borrowers are the contracts that are called back by the lender once the flash loan is initiated; they are the contracts that receive the flash-loan proceeds and that are eventually responsible to repay the loan.
 
 The only way to move funds out of a borrower is through an ERC-20 approval transaction from the spender.
-Approvals can be set by calling the [approve](../../../reference/contracts/periphery/flash-loans.md#approve) function on the borrower contract ([IBorrower](../../../reference/contracts/periphery/flash-loans.md#iborrower-contract)) from the context of a settlement.
+Approvals can be set by calling the [approve](../../../contracts/periphery/flash-loans.md#approve) function on the borrower contract ([IBorrower](../../../contracts/periphery/flash-loans.md#iborrower-contract)) from the context of a settlement.
 For safe operations, like an approval for the settlement contract to spend the funds of the borrower, it's enough to set the approval once for an unlimited amount and reuse the same approval in future settlements.
 
 At the start of the settlement, it's expected that the loaned funds are transferred from the borrowers to where they are needed. For example, this can be the settlement contract itself, or the address of a user who wants to use the loan to retrieve the collateral needed to avoid liquidations.

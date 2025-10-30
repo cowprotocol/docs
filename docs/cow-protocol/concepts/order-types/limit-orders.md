@@ -20,4 +20,4 @@ CoW Protocol's limit orders provide more flexibility and better prices than othe
 
 ## Getting started
 
-Wanting to place a limit order? Check out our [limit order tutorial](/cow-protocol/tutorials/cow-swap/limit). You can also [read about limit orders on our blog.](https://blog.cow.fi/the-cow-has-no-limits-342e7eae8794)
+Wanting to place a limit order? Check out our [limit order tutorial](/cow-swap/limit). You can also [read about limit orders on our blog.](https://blog.cow.fi/the-cow-has-no-limits-342e7eae8794)

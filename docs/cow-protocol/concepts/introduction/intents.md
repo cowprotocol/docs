@@ -28,7 +28,7 @@ Solvers not only scan all available on-chain liquidity (similar to a DEX aggrega
 The intent-based architecture of CoW Protocol also provides a number of technical benefits: 
 
 - Enabling [solvers](./solvers) to execute all sorts of transactions (not just trades) based on specific instructions and on-chain conditions. This powers products like [CoW Hooks](../order-types/cow-hooks) and [Programmatic Orders](../order-types/programmatic-orders)
-- Establishing additional rules for the way orders settle on-chain, such as guaranteeing that the trade is settled at [EBBO](/cow-protocol/reference/core/definitions#ebbo) (Ethereum best bid and offer, guaranteeing that the baseline price for the trade is what on-chain AMMs offer) and uniform clearing prices (where trades with the same token pair in the same batch are cleared at the same price)
+- Establishing additional rules for the way orders settle on-chain, such as guaranteeing that the trade is settled at [EBBO](/cow-protocol/reference/definitions#ebbo) (Ethereum best bid and offer, guaranteeing that the baseline price for the trade is what on-chain AMMs offer) and uniform clearing prices (where trades with the same token pair in the same batch are cleared at the same price)
 - Allowing users to pay gas fees in their *sell token* without needing to hold the chain-native token (like ETH) in their wallet
 - Eliminating fees for failed transactions
 - Allowing users to place multiple orders at once

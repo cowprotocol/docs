@@ -85,14 +85,14 @@ The database stores the vast majority of available order information, including 
 
 Other information can only be retrieved on-chain and is updated every time a new block is mined. For example, it needs to know from the protocol:
 
-- Which [pre-signatures](/cow-protocol/reference/core/signing-schemes#presign) have been set
-- If new [native token orders](/cow-protocol/reference/contracts/periphery/eth-flow) have been created
-- Tracking which orders have been [invalidated](/cow-protocol/reference/contracts/core/settlement#invalidateorder) by the user
+- Which [pre-signatures](/cow-protocol/reference/signing-schemes#presign) have been set
+- If new [native token orders](/cow-protocol/contracts/periphery/eth-flow) have been created
+- Tracking which orders have been [invalidated](/cow-protocol/contracts/core/settlement#invalidateorder) by the user
 - Detecting if a batch has been settled and it should prepare a new auction
 
 Retrieved information isn't limited to the CoW Protocol itself.
 The autopilot needs to provide a reference price for each token in an order (a numéraire);
-the reference price is used to normalize the value of the [surplus](/cow-protocol/reference/core/auctions/the-problem), since the surplus must be comparable for all orders and two orders could use the most disparate `ERC-20` tokens.
+the reference price is used to normalize the value of the [surplus](/cow-protocol/reference/auctions/the-problem), since the surplus must be comparable for all orders and two orders could use the most disparate `ERC-20` tokens.
 The reference token is usually the chain's native token, since it's the token used to pay for the gas needed when executing a transaction. 
 Orders whose price can't be fetched are discarded and won't be included in an auction.
 
@@ -106,7 +106,7 @@ Orders that can't be settled are filtered out. This is the case if, for example:
 * the approval to the vault relayer is missing
 * the involved tokens aren't supported by the protocol
 
-The autopilot also checks that [`ERC-1271`](/cow-protocol/reference/core/signing-schemes#erc-1271) signatures are currently valid.
+The autopilot also checks that [`ERC-1271`](/cow-protocol/reference/signing-schemes#erc-1271) signatures are currently valid.
 
 More in general, the autopilot aims to remove from the auction all orders that have no chance to be settled.
 Still, this doesn't mean that all orders that appear in the auction can be settled: orders whose ability to be settled is ambiguous or unclear are remitted to the solvers' own judgment.
@@ -114,8 +114,8 @@ Still, this doesn't mean that all orders that appear in the auction can be settl
 ### Solver competition
 
 Once an auction is ready, the autopilot sends a `/solve` request to each solver.
-Solvers have a short amount of time (seconds) to come up with a [solution](/cow-protocol/reference/core/auctions/the-problem#solution) and return its _score_ to the autopilot, which represents the quality of a solution.
-The scoring process is described in detail in the [description of CoW Protocol's optimization problem](/cow-protocol/reference/core/auctions/the-problem).
+Solvers have a short amount of time (seconds) to come up with a [solution](/cow-protocol/reference/auctions/the-problem#solution) and return its _score_ to the autopilot, which represents the quality of a solution.
+The scoring process is described in detail in the [description of CoW Protocol's optimization problem](/cow-protocol/reference/auctions/the-problem).
 The autopilot selects the winner according to the highest score once the allotted time expires or all solvers have returned their batch proposal.
 
 Up to this point, the autopilot only knows the score.
@@ -128,7 +128,7 @@ The data returned by the solver is stored by the autopilot in the database.
 Other auction data is recorded as well, for example surplus fee for limit orders and the score returned by each solver.
 It also records the result of executing the settlement on-chain in order to track the difference in score caused by negative or positive slippage.
 
-This data will be used to compute the [solver payouts](/cow-protocol/reference/core/auctions/rewards).
+This data will be used to compute the [solver payouts](/cow-protocol/reference/auctions/rewards).
 
 ## Considerations
 
@@ -146,5 +146,5 @@ For this purpose, it's only responsible for documenting the proposed solution an
 Misbehavior is detected and accounted for when computing the solver payouts based on the data collected by the autopilot.
 The solver payouts are handled outside of the autopilot code.
 
-In the same way, the autopilot doesn't verify that the [rules of the game](/cow-protocol/reference/core/auctions/competition-rules) have been upheld.
+In the same way, the autopilot doesn't verify that the [rules of the game](/cow-protocol/reference/auctions/competition-rules) have been upheld.
 This is handled in the solver payout stage as well; in exceptional circumstances the DAO can decide to slash the amount the solver staked for vouching.

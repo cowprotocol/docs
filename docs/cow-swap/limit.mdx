@@ -1,0 +1,91 @@
+---
+sidebar_position: 3
+---
+
+import CancellationOffChainOnChain from '../partials/_cancellation_offchain_versus_onchain.mdx'
+
+# Limit orders
+
+CoW Protocol supports limit orders, where users are able to buy or sell tokens at a specified price or better.
+
+A buy limit order allows a trader to specify the maximum price they are willing to pay for a token, while a sell limit order allows a trader to specify the minimum price they are willing to sell a token for.
+
+CoW Swap provides an intuitive interface in which one may place their limit orders.
+
+## Place a limit order
+
+For example, let's say we want to sell `COW`. We can set the limit price at which we want to sell, and the duration over which the limit order is valid:
+
+![Limit orders](/img/cowswap/limit_place_order.png)
+
+:::info
+
+CoW Protocol does not charge a fee for placing limit orders. Instead, the protocol covers the fees by executing your order at a better price than your limit price. CoW Protocol will wait until the market price is sufficient to cover both your limit price and the network fees - which means that, in practice, your order may not execute exactly when the market price hits your limit price.
+
+:::
+
+At this point, CoW Swap will prompt you to review your limit order:
+
+![Review limit order](/img/cowswap/limit_review_order.png)
+
+:::tip
+
+By default, CoW Swap sets your limit order to _partially fillable_. 
+This allows your order to fill gradually as liquidity comes available. Partially fillable orders usually complete faster than _fill or kill_ orders and also provide better prices, so they are the default mechanism used to execute limit orders. 
+However, your order may not end up being filled completely, if the remaining fill amount is small compared to the required network fees of settling it.
+This can cause leftover amounts of sell tokens in your account.
+You can turn off partially fillable limit orders and revert back to _fill or kill_ through the swap panel settings.
+
+:::
+
+Once the limit order has been reviewed, click "Place limit order" to proceed with order signing:
+
+![Sign order](/img/cowswap/limit_sign.png)
+
+Upon signing the order with your wallet, the limit order will now appear in open orders:
+
+![View orders](/img/cowswap/limit_view_orders.png)
+
+## Track a limit order
+
+As mentioned above, limit orders on CoW Protocol don't always execute exactly when the limit price is reached.
+This is because the protocol waits for an even better price in order to cover the order's network fees.
+
+The CoW Swap UI makes this explicit by showing an open order's current _execution price_ in addition to its _limit price_.
+Check the "Executes at" column in the open orders panel to see, based on current network conditions, what price your tokens would have to reach for the order to execute.
+
+![Traffic lights on limit orders UI](/img/cowswap/limit_traffic-lights.png)
+
+The "Executes at" column has a "traffic light" system to give an estimation of how far the order is from being executed.
+It takes into the account current network fees, the size of the order and current market (spot) price.
+
+Hovering the mouse pointer over the column will give an indication of how far the price has to move for the order to enter the execution range.
+
+![Traffic lights on limit orders UI](/img/cowswap/limit_executes-at-go-down.png)
+
+Clicking on that field will invert the price display for the individual order, and the hover text will also reflect the change in direction.
+
+![Traffic lights on limit orders UI](/img/cowswap/limit_executes-at-go-up.png)
+
+
+## Cancel a limit order
+
+Now we've been doing some thinking and realised we shouldn't be selling `COW`, so we want to cancel our limit order. 
+We can do this by clicking the context menu on the order and selecting "Cancel order":
+
+![Cancel context menu](/img/cowswap/limit_cancel_context.png)
+
+After selecting "Cancel order", you will be prompted to confirm this action. 
+
+<CancellationOffChainOnChain
+    alt="Cancel confirm"
+    img={require("/img/cowswap/limit_cancel_confirm.png")}
+/>
+
+Cancelling limit orders is free as it's an `off-chain` transaction. So feel free to place and cancel limit orders as many times as you want! (Alternatively, if you want a limit order to be canceled as quickly as possible, you can choose to do the cancellation `on-chain` instead.)
+
+Once the order has been cancelled, it will be removed from the open orders list and move to the orders history:
+
+![Cancel confirmed](/img/cowswap/limit_cancel_confirmed.png)
+
+

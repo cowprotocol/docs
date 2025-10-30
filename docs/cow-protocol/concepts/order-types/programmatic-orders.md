@@ -26,4 +26,4 @@ Thanks to the Programmatic Order Framework, users can automate everything from c
 
 ## Getting started
 
-To start developing with the Programmatic Order Framework, check out our [technical documentation](/cow-protocol/reference/contracts/periphery/composable-cow). You can also read more about programmatic orders [on our blog](https://blog.cow.fi/introducing-the-programmatic-order-framework-from-cow-protocol-088a14cb0375).
+To start developing with the Programmatic Order Framework, check out our [technical documentation](/cow-protocol/contracts/periphery/composable-cow). You can also read more about programmatic orders [on our blog](https://blog.cow.fi/introducing-the-programmatic-order-framework-from-cow-protocol-088a14cb0375).

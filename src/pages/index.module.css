@@ -1,0 +1,267 @@
+.main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(135deg, var(--ifm-color-primary) 0%, var(--ifm-color-primary-dark) 100%);
+  color: white;
+  padding: 4rem 1rem;
+  text-align: center;
+}
+
+.heroContainer {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.heroTitle {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+}
+
+.heroSubtitle {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+  opacity: 0.95;
+}
+
+.heroDescription {
+  font-size: 1.125rem;
+  opacity: 0.9;
+  line-height: 1.6;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* Products Section */
+.productsSection {
+  padding: 3rem 0;
+}
+
+.sectionTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 3rem;
+  color: var(--ifm-heading-color);
+}
+
+.productsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.productCard {
+  background: var(--ifm-card-background-color);
+  border: 1px solid var(--ifm-color-emphasis-300);
+  border-radius: 12px;
+  padding: 2rem;
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.productCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--product-color);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.productCard:hover {
+  border-color: var(--product-color);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  transform: translateY(-4px);
+}
+
+.productCard:hover::before {
+  transform: scaleX(1);
+}
+
+.productEmoji {
+  font-size: 3.5rem;
+  line-height: 1;
+  margin-bottom: 0.5rem;
+}
+
+.productTitle {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: var(--ifm-heading-color);
+}
+
+.productDescription {
+  margin: 0;
+  flex: 1;
+  color: var(--ifm-color-emphasis-700);
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+.productLink {
+  color: var(--product-color);
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  transition: transform 0.2s ease;
+  font-size: 1rem;
+}
+
+.productCard:hover .productLink {
+  transform: translateX(4px);
+}
+
+/* Governance Section */
+.governanceSection {
+  padding: 3rem 0;
+  margin: 3rem 0;
+}
+
+.governanceCard {
+  background: var(--ifm-card-background-color);
+  border: 2px solid var(--ifm-color-primary);
+  border-radius: 12px;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.governanceCard:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+}
+
+.governanceEmoji {
+  font-size: 4rem;
+  line-height: 1;
+}
+
+.governanceContent {
+  max-width: 700px;
+}
+
+.governanceTitle {
+  margin: 0 0 1rem 0;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--ifm-heading-color);
+}
+
+.governanceDescription {
+  margin: 0;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.governanceButton {
+  background: var(--ifm-color-primary);
+  color: white;
+  padding: 0.875rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.125rem;
+  transition: all 0.2s ease;
+  display: inline-block;
+}
+
+.governanceButton:hover {
+  background: var(--ifm-color-primary-dark);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Methodology Section */
+.methodologySection {
+  padding: 4rem 0;
+  text-align: center;
+}
+
+.methodologyTitle {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--ifm-heading-color);
+}
+
+.methodologyDescription {
+  font-size: 1.125rem;
+  color: var(--ifm-color-emphasis-700);
+  margin-bottom: 2.5rem;
+}
+
+.methodologyGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.methodologyCard {
+  background: var(--ifm-background-surface-color);
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid var(--ifm-color-emphasis-300);
+}
+
+.methodologyCard h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--ifm-heading-color);
+}
+
+.methodologyCard p {
+  margin: 0;
+  line-height: 1.6;
+  color: var(--ifm-color-emphasis-700);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 2rem;
+  }
+
+  .heroSubtitle {
+    font-size: 1.25rem;
+  }
+
+  .productsGrid,
+  .methodologyGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .governanceCard {
+    padding: 2rem;
+  }
+
+  .sectionTitle {
+    font-size: 2rem;
+  }
+}

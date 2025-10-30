@@ -45,7 +45,7 @@ Below is a simple example of Order ID [`56ac15a9`](https://explorer.cow.fi/order
 
 ## Partially fillable
 
-A more complex example may be a user who has placed a _partially fillable_ order. This means that the user has expressed a swap intent for a certain amount of tokens, but the order may be filled in multiple batches. This can only be used with [Limit orders](../cow-swap/limit).
+A more complex example may be a user who has placed a _partially fillable_ order. This means that the user has expressed a swap intent for a certain amount of tokens, but the order may be filled in multiple batches. This can only be used with [Limit orders](/cow-swap/limit).
 
 ![Partially fillable order overview](/img/explorer/order_partial_overview.png)
 
