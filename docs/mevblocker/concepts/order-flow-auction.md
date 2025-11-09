@@ -16,7 +16,7 @@ Connected builders pay a weekly fee for MEV Blocker access, calculated per block
 
 Order flow originators can submit transactions via public endpoints without an API key or third-party permission.
 
-### 3 MEV Blocker Private Mempool Action - Hiding txs from searchers
+### 3. MEV Blocker Private Mempool Action - Hiding txs from searchers
 
 MEV Blocker RPC shares the transaction (without signature) with a permissioned or permission-less set of searchers (depending on the endpoint). It enhances security by mixing real and AI-generated fake transactions together.
 
