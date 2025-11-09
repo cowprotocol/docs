@@ -13,7 +13,7 @@ All Ethereum transaction require a gas fee to get included onchain. This gas fee
 
 ## **How MEV Blocker Recovers Priority Fees**
 
-MEV blocker is the only RPC that has a permissionless Order Flow Auction for which both searchers and builders are bound to public rules. To this date, MEV Blocker processes around 10% of dailty Etherem transcations, and 
+MEV blocker is the only RPC that has a permissionless Order Flow Auction for which both searchers and builders are bound to public rules.
 
 MEV Blocker currently protects and routes over 20% of all Ethereum mainnet transactions daily. It maintains strong relationships with top block builders — the entities responsible for selecting and packaging transactions into Ethereum blocks.
 
