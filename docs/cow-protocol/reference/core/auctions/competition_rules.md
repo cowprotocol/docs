@@ -121,6 +121,13 @@ At CoW DAO's discretion, systematic violation of these rules may lead to penaliz
   - **Base tokens**: [`WBNB`](https://bnbscan.com/address/0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c), [`BUSD`](https://bnbscan.com/address/0xe9e7cea3dedca5984780bafc599bd69add087d56), [`USDT`](https://bnbscan.com/address/0x55d398326f99059ff775485246999027b3197955), [`WETH`](https://bnbscan.com/address/0x2170ed0880ac9a755fd29b2688956bd959f933f8)
   </details>
 
+  <details>
+    <summary>Linea baseline protocols and tokens</summary>
+
+  - **Protocols**: Uniswap v3
+  - **Base tokens**: [`WETH`](https://lineascan.build/address/0xe5d7c2a44ffddf6b295a15c148167daaaf5cf34f), [`USDC`](https://lineascan.build/token/0x176211869ca2b568f2a7d4ee941e073a821ee1ff), [`USDT`](https://lineascan.build/token/0xa219439258ca9da29e9cc4ce5596924745e12b93)
+  </details>
+
 More details about how a certificate of an EBBO violation is computed, and what are the steps taken in case such a violation occurs can be found in [this](/cow-protocol/reference/core/auctions/ebbo-rules) section.
 
 - Inflation of the score ([CIP-11](https://snapshot.org/#/cow.eth/proposal/0x16d8c681d52b24f1ccd854084e07a99fce6a7af1e25fd21ddae6534b411df870)). Using tokens for the sole purpose of inflating the score of a solution or maximizing the reward is forbidden (e.g., by creating fake tokens, or wash-trading with real tokens).
