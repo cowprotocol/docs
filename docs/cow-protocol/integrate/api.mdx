@@ -1,0 +1,166 @@
+# API Integration
+
+The CoW Protocol API provides direct access to the protocol's functionality through RESTful endpoints. This approach offers maximum flexibility and control for backend integrations and custom implementations.
+
+## Overview
+
+The API integration allows you to interact with CoW Protocol at the lowest level, giving you complete control over order management, quote fetching, and trade execution. This is ideal for advanced integrations, backend services, and custom trading logic.
+
+## Key APIs
+
+### Order Book API
+The primary API for creating and managing orders on CoW Protocol.
+
+- **Base URL**: `https://api.cow.fi/`
+- **Purpose**: Quote generation, order submission, order management
+- **Authentication**: No API key required for basic operations
+
+### Key Endpoints
+
+- `POST /api/v1/quote` - Get trading quotes
+- `POST /api/v1/orders` - Submit signed orders
+- `GET /api/v1/orders/{uid}` - Get order details
+- `DELETE /api/v1/orders/{uid}` - Cancel orders
+- `GET /api/v1/trades` - Get trade history
+
+## Quick Start Example
+
+### 1. Get a Quote
+
+```bash
+curl -X POST "https://api.cow.fi/mainnet/api/v1/quote" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "sellToken": "0xA0b86a33E6411Ec5d0b9dd2E7dC15A9CAA6C1F8e",
+    "buyToken": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+    "sellAmountBeforeFee": "1000000",
+    "kind": "sell",
+    "from": "0xYourWalletAddress"
+  }'
+```
+
+### 2. Sign and Submit Order
+
+```javascript
+// After getting a quote, sign the order
+const order = {
+  ...quoteResponse,
+  signature: await signOrder(quoteResponse, signer),
+  signingScheme: "eip712"
+}
+
+// Submit the signed order
+const response = await fetch('https://api.cow.fi/mainnet/api/v1/orders', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(order)
+})
+
+const orderId = await response.text()
+```
+
+### 3. Monitor Order Status
+
+```javascript
+// Check order status
+const orderResponse = await fetch(
+  `https://api.cow.fi/mainnet/api/v1/orders/${orderId}`
+)
+const orderDetails = await orderResponse.json()
+
+console.log('Order status:', orderDetails.status)
+```
+
+## Network Endpoints
+
+CoW Protocol APIs are available on multiple networks:
+
+- **Mainnet**: `https://api.cow.fi/mainnet/api/v1/`
+- **Gnosis Chain**: `https://api.cow.fi/xdai/api/v1/`
+- **Arbitrum**: `https://api.cow.fi/arbitrum_one/api/v1/`
+- **Base**: `https://api.cow.fi/base/api/v1/`
+- **Sepolia (Testnet)**: `https://api.cow.fi/sepolia/api/v1/`
+
+## Order Signing
+
+Orders must be cryptographically signed before submission. The signing process involves:
+
+1. **EIP-712 Domain**: Chain-specific domain separator
+2. **Order Struct**: Structured order data
+3. **Signature**: ECDSA signature or pre-signed order
+
+```javascript
+import { ethers } from 'ethers'
+
+// Example order signing with ethers.js
+const domain = {
+  name: 'Gnosis Protocol',
+  version: 'v2',
+  chainId: 1,
+  verifyingContract: '0x9008D19f58AAbD9eD0D60971565AA8510560ab41'
+}
+
+const types = {
+  Order: [
+    { name: 'sellToken', type: 'address' },
+    { name: 'buyToken', type: 'address' },
+    { name: 'receiver', type: 'address' },
+    // ... other order fields
+  ]
+}
+
+const signature = await signer._signTypedData(domain, types, orderData)
+```
+
+## Error Handling
+
+The API returns standard HTTP status codes:
+
+- **200**: Success
+- **400**: Bad Request (invalid parameters)
+- **404**: Order not found
+- **429**: Rate limited
+- **500**: Internal server error
+
+```javascript
+try {
+  const response = await fetch(apiUrl, requestOptions)
+
+  if (!response.ok) {
+    const error = await response.json()
+    throw new Error(`API Error: ${error.description}`)
+  }
+
+  return await response.json()
+} catch (error) {
+  console.error('Order submission failed:', error)
+}
+```
+
+## When to Use the API
+
+- **Backend integration**: Server-side order management
+- **Custom trading logic**: Advanced order types and strategies
+- **High-frequency trading**: Programmatic order placement
+- **Multi-chain applications**: Cross-chain arbitrage and liquidity
+- **Analytics platforms**: Order and trade data analysis
+
+## Rate Limits
+
+- **Quote requests**: 10 requests/second
+- **Order submission**: 5 requests/second
+- **General endpoints**: 100 requests/minute
+
+## Next Steps
+
+For complete API documentation including all endpoints, parameters, and response schemas, see:
+
+- **[Order Book API Reference](/cow-protocol/reference/apis/orderbook)** - Complete endpoint documentation
+- **[API Documentation](https://api.cow.fi/docs/)** - Interactive API explorer
+
+## Resources
+
+- **[Order Book API Reference](/cow-protocol/reference/apis/orderbook)** - Detailed API documentation
+- **[API Explorer](https://api.cow.fi/docs/)** - Interactive documentation
+- **[GitHub Examples](https://github.com/cowprotocol/cow-sdk/tree/main/examples)** - Code examples
+- **[Order Signing Guide](../reference/core/signing_schemes.mdx)** - Cryptographic signing details
