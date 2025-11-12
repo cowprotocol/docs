@@ -42,6 +42,8 @@ The deadline for solutions depends on the network and is set as a specific numbe
 - Polygon: 20 blocks
 - Lens: 40 blocks
 - BNB: 40 blocks
+<!-- Blocks defined here https://github.com/cowprotocol/infrastructure/blob/staging/services/autopilot/config/index.ts#L21 -->
+- Linea: 20 blocks
 
 :::
 
@@ -119,6 +121,17 @@ At CoW DAO's discretion, systematic violation of these rules may lead to penaliz
 
   - **Protocols**: Uniswap v2/v3, Pancake Swap
   - **Base tokens**: [`WBNB`](https://bnbscan.com/address/0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c), [`BUSD`](https://bnbscan.com/address/0xe9e7cea3dedca5984780bafc599bd69add087d56), [`USDT`](https://bnbscan.com/address/0x55d398326f99059ff775485246999027b3197955), [`WETH`](https://bnbscan.com/address/0x2170ed0880ac9a755fd29b2688956bd959f933f8)
+  </details>
+
+  <details>
+    <summary>Linea chain baseline protocols and tokens</summary>
+
+<!-- Protocols defined here https://github.com/cowprotocol/infrastructure/blob/staging/services/driver/liquidity.ts#L285 -->
+
+- **Protocols**: Uniswap v3
+<!-- Base tokens defined here https://github.com/cowprotocol/infrastructure/blob/staging/services/config/tokens/base/linea.ts -->
+- **Base tokens**: [`WETH`](https://lineascan.build/token/0xe5d7c2a44ffddf6b295a15c148167daaaf5cf34f), [`USDC`](https://lineascan.build/token/0x176211869ca2b568f2a7d4ee941e073a821ee1ff), [`USDT`](https://lineascan.build/token/0xa219439258ca9da29e9cc4ce5596924745e12b93)
+
   </details>
 
 More details about how a certificate of an EBBO violation is computed, and what are the steps taken in case such a violation occurs can be found in [this](/cow-protocol/reference/core/auctions/ebbo-rules) section.
