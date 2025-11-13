@@ -81,59 +81,21 @@ Bellow you can see the `partnerFee` configuration variations:
 import { PartnerFee, SupportedChainId, TradeType } from '@cowprotocol/widget-lib'
 
 // The fee is 1% for all trades on all chains
-const a: PartnerFee = {
-  bps: 100,
-  recipient: '0x0000000000000000000000000000000000000000',
-}
+const a: PartnerFee = { bps: 100, recipient: '0x0000000000000000000000000000000000000000' }
 
 // Different fee per network and per trade type, same recipient for all
 const b: PartnerFee = {
   bps: {
-    [SupportedChainId.MAINNET]: {
-      [TradeType.SWAP]: 100,
-      [TradeType.LIMIT]: 50,
-      [TradeType.ADVANCED]: 30,
-    },
-    [SupportedChainId.ARBITRUM_ONE]: {
-      [TradeType.SWAP]: 100,
-      [TradeType.LIMIT]: 50,
-      [TradeType.ADVANCED]: 30,
-    },
-    [SupportedChainId.BASE]: {
-      [TradeType.SWAP]: 100,
-      [TradeType.LIMIT]: 50,
-      [TradeType.ADVANCED]: 30,
-    },
-    [SupportedChainId.GNOSIS_CHAIN]: {
-      [TradeType.SWAP]: 100,
-      [TradeType.LIMIT]: 50,
-      [TradeType.ADVANCED]: 30,
-    },
-    [SupportedChainId.AVALANCHE]: {
-      [TradeType.SWAP]: 100,
-      [TradeType.LIMIT]: 50,
-      [TradeType.ADVANCED]: 30,
-    },
-    [SupportedChainId.POLYGON]: {
-      [TradeType.SWAP]: 100,
-      [TradeType.LIMIT]: 50,
-      [TradeType.ADVANCED]: 30,
-    },
-    [SupportedChainId.LENS]: {
-      [TradeType.SWAP]: 100,
-      [TradeType.LIMIT]: 50,
-      [TradeType.ADVANCED]: 30,
-    },
-    [SupportedChainId.BNB]: {
-      [TradeType.SWAP]: 100,
-      [TradeType.LIMIT]: 50,
-      [TradeType.ADVANCED]: 30,
-    },
-    [SupportedChainId.SEPOLIA]: {
-      [TradeType.SWAP]: 100,
-      [TradeType.LIMIT]: 50,
-      [TradeType.ADVANCED]: 30,
-    },
+    [SupportedChainId.MAINNET]: { [TradeType.SWAP]: 100, [TradeType.LIMIT]: 50, [TradeType.ADVANCED]: 30 },
+    [SupportedChainId.ARBITRUM_ONE]: { [TradeType.SWAP]: 100, [TradeType.LIMIT]: 50, [TradeType.ADVANCED]: 30 },
+    [SupportedChainId.BASE]: { [TradeType.SWAP]: 100, [TradeType.LIMIT]: 50, [TradeType.ADVANCED]: 30 },
+    [SupportedChainId.GNOSIS_CHAIN]: { [TradeType.SWAP]: 100, [TradeType.LIMIT]: 50, [TradeType.ADVANCED]: 30 },
+    [SupportedChainId.AVALANCHE]: { [TradeType.SWAP]: 100, [TradeType.LIMIT]: 50, [TradeType.ADVANCED]: 30 },
+    [SupportedChainId.POLYGON]: { [TradeType.SWAP]: 100, [TradeType.LIMIT]: 50, [TradeType.ADVANCED]: 30 },
+    [SupportedChainId.LENS]: { [TradeType.SWAP]: 100, [TradeType.LIMIT]: 50, [TradeType.ADVANCED]: 30 },
+    [SupportedChainId.BNB]: { [TradeType.SWAP]: 100, [TradeType.LIMIT]: 50, [TradeType.ADVANCED]: 30 },
+    [SupportedChainId.LINEA]: { [TradeType.SWAP]: 100, [TradeType.LIMIT]: 50, [TradeType.ADVANCED]: 30 },
+    [SupportedChainId.SEPOLIA]: { [TradeType.SWAP]: 100, [TradeType.LIMIT]: 50, [TradeType.ADVANCED]: 30 },
   },
   recipient: '0x0000000000000000000000000000000000000000',
 }
@@ -151,6 +113,7 @@ const c: PartnerFee = {
       [SupportedChainId.POLYGON]: '0x...c',
       [SupportedChainId.LENS]: '0x...c',
       [SupportedChainId.BNB]: '0x...c',
+      [SupportedChainId.LINEA]: '0x...c',
       [SupportedChainId.SEPOLIA]: '0x...d',
     },
     [TradeType.LIMIT]: {
@@ -162,6 +125,7 @@ const c: PartnerFee = {
       [SupportedChainId.POLYGON]: '0x...y',
       [SupportedChainId.LENS]: '0x...y',
       [SupportedChainId.BNB]: '0x...y',
+      [SupportedChainId.LINEA]: '0x...y',
       [SupportedChainId.SEPOLIA]: '0x...h',
     },
     [TradeType.ADVANCED]: {
@@ -173,6 +137,7 @@ const c: PartnerFee = {
       [SupportedChainId.POLYGON]: '0x...t',
       [SupportedChainId.LENS]: '0x...t',
       [SupportedChainId.BNB]: '0x...t',
+      [SupportedChainId.LINEA]: '0x...t',
       [SupportedChainId.SEPOLIA]: '0x...l',
     },
   },
@@ -195,10 +160,7 @@ const recipient = '0x0000000000000000000000000000000000000000'
 
 const defaultPartnerFee = { bps: 50, recipient }
 
-const params: CowSwapWidgetParams = {
-  appCode: 'YOUR_APP_ID',
-  partnerFee: defaultPartnerFee,
-}
+const params: CowSwapWidgetParams = { appCode: 'YOUR_APP_ID', partnerFee: defaultPartnerFee }
 
 const listeners: CowEventListeners = [
   {
@@ -207,17 +169,11 @@ const listeners: CowEventListeners = [
       if (!updateParams) return
 
       if (event.sellToken.symbol === 'DAI') {
-        updateParams({
-          partnerFee: { bps: 20, recipient },
-        })
+        updateParams({ partnerFee: { bps: 20, recipient } })
       } else if (event.sellToken.symbol === 'USDC') {
-        updateParams({
-          partnerFee: { bps: 10, recipient },
-        })
+        updateParams({ partnerFee: { bps: 10, recipient } })
       } else {
-        updateParams({
-          partnerFee: defaultPartnerFee,
-        })
+        updateParams({ partnerFee: defaultPartnerFee })
       }
     },
   },
@@ -253,10 +209,7 @@ import type { CowSwapWidgetParams, SupportedChainId } from '@cowprotocol/widget-
 const params: CowSwapWidgetParams = {
   partnerFee: {
     bps: 50, // 0.5%
-    recipient: {
-      1: '0x0000000000000000000000000000000000000001',
-      100: '0x0000000000000000000000000000000000000002',
-    },
+    recipient: { 1: '0x0000000000000000000000000000000000000001', 100: '0x0000000000000000000000000000000000000002' },
   },
 }
 ```
@@ -318,16 +271,8 @@ import { SupportedChainId } from '@cowprotocol/widget-lib'
 
 const params: CowSwapWidgetParams = {
   slippage: {
-    [SupportedChainId.MAINNET]: {
-      min: 1,
-      max: 3900,
-      defaultValue: 3000,
-    },
-    [SupportedChainId.BASE]: {
-      min: 500,
-      max: 5000,
-      defaultValue: 600,
-    },
+    [SupportedChainId.MAINNET]: { min: 1, max: 3900, defaultValue: 3000 },
+    [SupportedChainId.BASE]: { min: 500, max: 5000, defaultValue: 600 },
   },
 }
 ```
@@ -346,16 +291,8 @@ const params: CowSwapWidgetParams = {
 ```json
 {
   "slippage": {
-    "1": {
-      "min": 1,
-      "max": 3900,
-      "defaultValue": 3000
-    },
-    "8453": {
-      "min": 500,
-      "max": 5000,
-      "defaultValue": 600
-    }
+    "1": { "min": 1, "max": 3900, "defaultValue": 3000 },
+    "8453": { "min": 500, "max": 5000, "defaultValue": 600 }
   }
 }
 ```
@@ -496,9 +433,7 @@ import { createCowSwapWidget, CowSwapWidgetParams } from '@cowprotocol/widget-li
 
 const container = document.getElementById('cowswap-widget')
 
-const params: CowSwapWidgetParams = {
-  tokenLists: ['https://files.cow.fi/tokens/CowSwap.json'],
-}
+const params: CowSwapWidgetParams = { tokenLists: ['https://files.cow.fi/tokens/CowSwap.json'] }
 
 createCowSwapWidget(container, { params })
 ```
@@ -531,9 +466,7 @@ const customTokens: TokenInfo = [
   },
 ]
 
-const params: CowSwapWidgetParams = {
-  customTokens,
-}
+const params: CowSwapWidgetParams = { customTokens }
 
 createCowSwapWidget(container, { params })
 ```
@@ -553,29 +486,18 @@ To avoid double display of notifications, enable the `disableToastMessages` opti
 ```typescript
 import { createCowSwapWidget, CowSwapWidgetParams, CowEventListeners, CowEvents } from '@cowprotocol/widget-lib'
 
-const params: CowSwapWidgetParams = {
-  appCode: 'YOUR_APP_ID',
-}
+const params: CowSwapWidgetParams = { appCode: 'YOUR_APP_ID' }
 
 const listeners: CowEventListeners = [
-  {
-    event: CowEvents.ON_TOAST_MESSAGE,
-    handler: (event) => console.log('[ON_TOAST_MESSAGE]', event.message),
-  },
-  {
-    event: CowEvents.ON_EXPIRED_ORDER,
-    handler: (event) => console.log('Order was expired:', event.order),
-  },
+  { event: CowEvents.ON_TOAST_MESSAGE, handler: (event) => console.log('[ON_TOAST_MESSAGE]', event.message) },
+  { event: CowEvents.ON_EXPIRED_ORDER, handler: (event) => console.log('Order was expired:', event.order) },
 ]
 
 const { updateListeners } = createCowSwapWidget(container, { params, listeners })
 
 // If you want to change listeners at some point, you can do it like:
 updateListeners([
-  {
-    event: CowEvents.ON_CANCELLED_ORDER,
-    handler: (event) => console.log('Order was cancelled:', event.order),
-  },
+  { event: CowEvents.ON_CANCELLED_ORDER, handler: (event) => console.log('Order was cancelled:', event.order) },
 ])
 ```
 
@@ -645,11 +567,7 @@ import { createCowSwapWidget, CowSwapWidgetParams } from '@cowprotocol/widget-li
 
 const container = document.getElementById('cowswap-widget')
 
-const params: CowSwapWidgetParams = {
-  images: {
-    emptyOrders: 'https://cow.fi/images/cowamm-illustration-lvr.svg',
-  },
-}
+const params: CowSwapWidgetParams = { images: { emptyOrders: 'https://cow.fi/images/cowamm-illustration-lvr.svg' } }
 
 createCowSwapWidget(container, { params })
 ```
@@ -666,11 +584,7 @@ import { createCowSwapWidget, CowSwapWidgetParams } from '@cowprotocol/widget-li
 
 const container = document.getElementById('cowswap-widget')
 
-const params: CowSwapWidgetParams = {
-  banners: {
-    hideSafeWebAppBanner: true,
-  },
-}
+const params: CowSwapWidgetParams = { banners: { hideSafeWebAppBanner: true } }
 
 createCowSwapWidget(container, { params })
 ```

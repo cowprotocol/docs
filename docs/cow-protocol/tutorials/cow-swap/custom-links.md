@@ -76,6 +76,7 @@ Native and wrapped tokens per chain:
 - Polygon: [`WPOL`](https://polygonscan.com/address/0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270) - wrapped `POL`
 - Lens: [`WGHO`](https://explorer.lens.xyz/address/0x6bdc36e20d267ff0dd6097799f82e78907105e2f) - wrapped `GHO`
 - BNB: [`WBNB`](https://bscscan.com/address/0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c) - wrapped `BNB`
+- Linea: [`WETH`](https://lineascan.build/token/0xe5D7C2a44FfDDf6b295A15c148167daaAf5Cf34f) - wrapped `ETH`
 - Sepolia: [`WETH`](https://sepolia.etherscan.io/address/0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14) - wrapped `ETH`
 
 :::

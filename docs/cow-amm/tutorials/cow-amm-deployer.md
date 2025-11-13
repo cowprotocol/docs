@@ -20,6 +20,7 @@ The current factory contract addresses are the following:
 - Polygon: N/A
 - Lens: N/A
 - BNB: N/A
+- Linea: N/A
 - Sepolia Testnet: [`0x1E3D76AC2BB67a2D7e8395d3A624b30AA9056DF9`](https://sepolia.etherscan.io/address/0x1E3D76AC2BB67a2D7e8395d3A624b30AA9056DF9#code)
 
 These contracts can be verified through [this](https://github.com/balancer/cow-amm) repository.

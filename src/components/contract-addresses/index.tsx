@@ -1,5 +1,5 @@
-import React from 'react';
 import Link from '@docusaurus/Link';
+import React from 'react';
 
 export const explorerByChain = {
   "Ethereum": "https://etherscan.io",
@@ -11,6 +11,8 @@ export const explorerByChain = {
   "Polygon": "https://polygonscan.com",
   "Lens": "https://explorer.lens.xyz",
   "BNB": "https://bscscan.com",
+  "Linea": "https://lineascan.build",
+  "Plasma": "https://plasmascan.to/",
   "Optimism": "https://optimistic.etherscan.io",
 } as const;
 
@@ -48,7 +50,7 @@ interface ExplorerLinksOptions {
  * explorer for the given address.
  */
 export function explorerLinks(chains: string[] | string, address: string, options?: ExplorerLinksOptions): React.ReactNode {
-  chains = (typeof chains == "string")? [chains] : chains;
+  chains = (typeof chains == "string") ? [chains] : chains;
   const separator = options?.separator ?? ", ";
   const urlTrailing = options?.urlTrailing ?? "#code";
   return chains.reduce(
@@ -56,8 +58,8 @@ export function explorerLinks(chains: string[] | string, address: string, option
       if (acc.length) {
         acc.push(separator)
       }
-      acc.push(<Link to={explorerUrl(chain, address, {urlTrailing})}>{chain}</Link>)
+      acc.push(<Link to={explorerUrl(chain, address, { urlTrailing })}>{chain}</Link>)
       return acc
     }
-  , []);
+    , []);
 }
