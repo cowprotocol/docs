@@ -7,7 +7,7 @@ sidebar_position: 1
 
 At a high level, a solver is an algorithm that takes as inputs the orders that are valid for an auction, the state of the liquidity sources that the solver can access, the rules set by the protocol (including those specifying the protocol fees), and returns one or multiple _solutions_, where a solution selects a subset of the orders valid in an auction and specifies feasible an in and out amounts for each of those orders. The solutions proposed by each solver during a given auction are the outcome of a two-step optimization problem: optimal routing and then optimal bidding. 
 
-In this section, we describe mathematically the different components of the "solving" problem. We do not discuss optimal routing but we do discuss optimal bidding [here](rewards#solvers-strategy).
+In this section, we describe mathematically the different components of the "solving" problem. We  discuss optimal routing and optimal bidding [in the solvers' strategy section](rewards#solvers-strategy).
 
 ## User orders
 
