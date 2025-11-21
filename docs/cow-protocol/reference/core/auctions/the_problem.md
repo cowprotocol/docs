@@ -80,7 +80,7 @@ Each user order may have an associated fee paid to the protocol. At a high level
 
 :::note
 
-Solvers are also expected to also charge a fee to cover the costs of executing an order (for example, gas). We discuss such fees later in the context of solvers' optimal bidding, but we do not account for them here as they are not part of the protocol.
+Solvers are also expected to charge a fee to cover the costs of executing an order (for example, gas). We discuss such fees later in the context of solvers' optimal bidding, but we do not account for them here as they are not part of the protocol.
 
 :::
 
