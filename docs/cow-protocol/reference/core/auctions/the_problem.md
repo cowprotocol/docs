@@ -25,7 +25,7 @@ Practically speaking, CoW Protocol allows only some types of orders, which we ca
 
 ### Sell Orders
 
-A  _sell order_ specifies a maximum sell amount of a given token _Y_ > 0, a buy token _b_, and a limit price $$\pi$$, that corresponds to the worst-case exchange rate that the user is willing to settle for. The limit price can be speficied explicitly (as in the case of limit orders) or derived from an underlying quote and a slippage tollerance parameter (as in the case of market orders). 
+A  _sell order_ specifies a maximum sell amount of a given token _Y_ > 0, a buy token _b_, and a limit price $$\pi$$, that corresponds to the worst-case exchange rate that the user is willing to settle for. The limit price can be specified explicitly (as in the case of limit orders) or derived from an underlying quote and a slippage tolerance parameter (as in the case of market orders).
 
 Sell orders can be fill-or-kill whenever the executed sell amount must be Y (or nothing). They can be partially fillable if the executed sell amount can be smaller or equal to Y.  Formally, if _x_ denotes the (proposed) buy amount and _y_ denotes the (proposed) sell amount of the order, a fill-or-kill limit sell order has the form
 
