@@ -45,7 +45,7 @@ The payment is capped from above and below using the function $$\textrm{cap}(x) 
 - Lens: $$c_l = c_u = 10 \;\textrm{GHO}$$.
 - BNB: $$c_l = 0.04 \;\textrm{BNB}$$, $$c_u = 0.048 \;\textrm{BNB}$$.
 
-If only one solver submits solutions, $$\textrm{referenceScore}_i$$ is, by definition, zero. Formally, this corresponds to always considering the empty solution which does not settle any trades as part of the submitted solutions.
+If only one solver submits solutions, $$\textrm{referenceScore}_i$$ is, by definition, zero.
 
 :::note
 
