@@ -37,7 +37,7 @@ We now briefly explain what each entry means:
 
 ### Encoding the Call to the Flashloan Router
 
-As the flashloan needs to be available over the entire duration of the settlement, all flashloan settlements will have to go through the [flashloan router](/cow-protocol/reference/contracts/periphery/flashloans#iflashloanrouter-contract) (deterministically deployed at `0x9da8b48441583a2b93e2ef8213aad0ec0b392c69`; see the [flash-loan-router repository](https://github.com/cowprotocol/flash-loan-router) and the mainnet deployment [here](https://etherscan.io/address/0x9da8b48441583a2b93e2ef8213aad0ec0b392c69#code)). So, instead of calling `settle()` on the settlement contract, the driver has to call `flashloanAndSettle()` on the flashloan router contract. This is `flashloanAndSettle()` call takes 2 arguments:
+As the flashloan needs to be available over the entire duration of the settlement, all flashloan settlements will have to go through the [flashloan router](/cow-protocol/reference/contracts/periphery/flashloans#iflashloanrouter-contract) (deterministically deployed at `0x9da8b48441583a2b93e2ef8213aad0ec0b392c69`; see the [flash-loan-router repository](https://github.com/cowprotocol/flash-loan-router) and the mainnet deployment [here](https://etherscan.io/address/0x9da8b48441583a2b93e2ef8213aad0ec0b392c69#code)). So, instead of calling `settle()` on the settlement contract, the driver has to call `flashloanAndSettle()` on the flashloan router contract. This `flashloanAndSettle()` call takes 2 arguments:
 1. `Loan.Data[]`, which can be trivially initialized with the data from the order’s `flashloan` field;
 2. the settlement, which is the calldata for the regular `settle()` call the router will eventually initiate after taking out all the flashloans.
 
