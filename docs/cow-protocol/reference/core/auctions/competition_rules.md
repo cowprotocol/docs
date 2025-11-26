@@ -18,7 +18,7 @@ All solvers participating in the solver competition must abide by certain rules.
 
 ## Off-chain protocol
 
-- Scores: Every solution is associated with a _score_. The score is computed from executed amounts of all trades and is roughly equivalent to the amount of surplus a solution generates for users. For concrete formulas see [the section on solving](#the-problem) or [CIP-38](https://snapshot.box/#/s:cow.eth/proposal/0xfb81daea9be89f4f1c251d53fd9d1481129b97c6f38caaddc42af7f3ce5a52ec) and [CIP-65](https://snapshot.box/#/s:cow.eth/proposal/0xd172281444c48254398881c57a57a2acbf0802a385e6c94384fd358b943aa4f4).
+- Scores: Every solution is associated with a _score_. The score is computed from executed amounts of all trades and is roughly equivalent to the amount of surplus a solution generates for users. For concrete formulas see [the section on solving](the-problem) or [CIP-38](https://snapshot.box/#/s:cow.eth/proposal/0xfb81daea9be89f4f1c251d53fd9d1481129b97c6f38caaddc42af7f3ce5a52ec) and [CIP-65](https://snapshot.box/#/s:cow.eth/proposal/0xd172281444c48254398881c57a57a2acbf0802a385e6c94384fd358b943aa4f4).
 
 - Valid solutions: A solution is _valid_ if:
   - it has a positive score; and
@@ -47,14 +47,14 @@ All solvers participating in the solver competition must abide by certain rules.
 
 - Deadline: Solvers that win an auction will receive a deadline by which they must settle the auction on-chain. If the transaction is not observed on chain before the deadline block is mined, then the solution will count as not having been executed.
 
-- Rewards: A solver that provided a winning solution is rewarded according to a second-price auction mechanism; for more information see [here](#rewards).
+- Rewards: A solver that provided a winning solution is rewarded according to a second-price auction mechanism; for more information see [here](rewards).
 
 - Buffer usage: solvers are allowed to use funds in the settlement contract for certain types of use cases.
   - Solvers are supposed to store _protocol and partner fees_ in the settlement contract.
   - Solvers are allowed store funds to cover _network fees_ in the contract.
   - Solvers are allowed to use funds in the settlement contract to offset price variations on liquidity sources, also referred to as _slippage_.
   - Solvers are allowed to use funds in the settlement contract for executing trades, also referred to as _internalizations_, if the token which accumulates in the contract is among a [list of allowlisted tokens](https://files.cow.fi/token_list.json).
-  Solvers bear responsibility for all changes to balances of the settlement contract. The concrete implementation of buffer accounting is described [here](#accounting).
+  Solvers bear responsibility for all changes to balances of the settlement contract. The concrete implementation of buffer accounting is described [here](accounting).
 
 
 :::note
@@ -148,7 +148,7 @@ At CoW DAO's discretion, systematic violation of these rules may lead to penaliz
   - **Base tokens**: [`WBNB`](https://bnbscan.com/address/0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c), [`BUSD`](https://bnbscan.com/address/0xe9e7cea3dedca5984780bafc599bd69add087d56), [`USDT`](https://bnbscan.com/address/0x55d398326f99059ff775485246999027b3197955), [`WETH`](https://bnbscan.com/address/0x2170ed0880ac9a755fd29b2688956bd959f933f8)
   </details>
 
-More details about how a certificate of an EBBO violation is computed, and what are the steps taken in case such a violation occurs can be found in [this](#ebbo-rules) section.
+More details about how a certificate of an EBBO violation is computed, and what are the steps taken in case such a violation occurs can be found in [this](ebbo-rules) section.
 
 - Inflation of the score ([CIP-11](https://snapshot.org/#/cow.eth/proposal/0x16d8c681d52b24f1ccd854084e07a99fce6a7af1e25fd21ddae6534b411df870)). Using tokens for the sole purpose of inflating the score of a solution or maximizing the reward is forbidden (e.g., by creating fake tokens, or wash-trading with real tokens).
 
