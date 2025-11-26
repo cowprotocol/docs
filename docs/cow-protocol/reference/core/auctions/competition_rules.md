@@ -51,7 +51,7 @@ All solvers participating in the solver competition must abide by certain rules.
 
 - Buffer usage: solvers are allowed to use funds in the settlement contract for certain types of use cases.
   - Solvers are supposed to store _protocol and partner fees_ in the settlement contract.
-  - Solvers are allowed store funds to cover _network fees_ in the contract.
+  - Solvers are allowed to store funds to cover _network fees_ in the contract.
   - Solvers are allowed to use funds in the settlement contract to offset price variations on liquidity sources, also referred to as _slippage_.
   - Solvers are allowed to use funds in the settlement contract for executing trades, also referred to as _internalizations_, if the token which accumulates in the contract is among a [list of allowlisted tokens](https://files.cow.fi/token_list.json).
   Solvers bear responsibility for all changes to balances of the settlement contract. The concrete implementation of buffer accounting is described [here](accounting).
