@@ -19,11 +19,11 @@ The following steps are taken, in case an EBBO violation is detected, either by 
 1. The core team calculates the value lost to users in a given settlement due to the EBBO violation, as described in the section above.
 
 2. The core team requests the involved solver team to reimburse the user directly, by informing them about the amount.
-  - The reimbursement is to be done in the surplus token and sent from an address directly linked to the responsible solver for clarity about who issued the refund. If the solver has no access to their submission account (in case this is managed by the core team), the reimbursement can be executed from the rewards address.
+   - The reimbursement is to be done in the surplus token and sent from an address directly linked to the responsible solver for clarity about who issued the refund. If the solver has no access to their submission account (in case this is managed by the core team), the reimbursement can be executed from the rewards address.
 
 3. Once the incident is communicated, the violating solver shall process the reimbursement within 72 hours of this notification.
-  - If the violating solver complies, the case is closed.
-  - If the violating solver does not comply, the slashing procedure will be triggered (see section below)
+   - If the violating solver complies, the case is closed.
+   - If the violating solver does not comply, the slashing procedure will be triggered (see section below)
 
 ## Escalation mechanism: Slashing of solver bond
 
