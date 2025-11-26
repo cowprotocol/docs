@@ -51,8 +51,8 @@ Outputs are adjusted to consider the execution cost of updating the AMM when use
 The graph originates over a set of "base tokens" plus the buy and sell token of the order.
 It aims to find the single path from buy to sell token that maximizes the output for sell orders and minimizes the input for buy orders.
 It handles partially fillable attempting to first fill the entire order.
-It doesn't produce Coincidences of Wants.
 If the resulting output doesn't satisfy the limit price, it re-attempts filling the order to 50% and keeps halving its amount until a match is found.
+It does not produce Coincidences of Wants.
 
 ## Flash Loans
 
