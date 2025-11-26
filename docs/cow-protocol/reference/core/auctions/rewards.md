@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # Solver rewards
 
-The protocol is currently subsidizing the solver competition on all chains it operates on, by rewarding solvers on a weekly basis (currently, every Tuesday) with rewards paid in COW. Solvers are rewarded based on their performance as solvers (i.e., when participating in the standard solver competition) as specified by [CIP-20](https://snapshot.org/#/cow.eth/proposal/0x2d3f9bd1ea72dca84b03e97dda3efc1f4a42a772c54bd2037e8b62e7d09a491f), [CIP-36](https://snapshot.org/#/cow.eth/proposal/0x4e58f9c1208121c0e06282b5541b458bc8c8b76090263e25448848f3194df986), [CIP-38](https://snapshot.org/#/cow.eth/proposal/0xfb81daea9be89f4f1c251d53fd9d1481129b97c6f38caaddc42af7f3ce5a52ec), [CIP-48](https://snapshot.org/#/cow.eth/proposal/0x563ab9a66265ad72c47a8e55f620f927685dd07d4d49f6d1812905c683f05805) [CIP-57](https://snapshot.box/#/s:cow.eth/proposal/0x46d4fea1492207cf400fcb7a01141a7d4c730791d658cc77236941fc9eb7dccb) and [CIP-67](https://snapshot.box/#/s:cow.eth/proposal/0xf9ecb08c4738f04c4525373d6b78085d16635f86adacd1b8ea77b2c176c99d32). Solver rewards for participating in the price estimation competition and providing quotes that are needed for the gas estimates and limit price computations of market orders are specified in [CIP-27](https://snapshot.org/#/cow.eth/proposal/0x64e061568e86e8d2eec344d4a892e4126172b992cabe59a0b24c51c4c7e6cc33) and [CIP-36](https://snapshot.org/#/cow.eth/proposal/0x4e58f9c1208121c0e06282b5541b458bc8c8b76090263e25448848f3194df986).
+The protocol is currently subsidizing the solver competition on all chains it operates on, by rewarding solvers on a weekly basis (currently, every Tuesday) with rewards paid in COW. Solvers are rewarded based on their performance as solvers (i.e., when participating in the standard solver competition) as specified by [CIP-20](https://snapshot.org/#/cow.eth/proposal/0x2d3f9bd1ea72dca84b03e97dda3efc1f4a42a772c54bd2037e8b62e7d09a491f), [CIP-36](https://snapshot.org/#/cow.eth/proposal/0x4e58f9c1208121c0e06282b5541b458bc8c8b76090263e25448848f3194df986), [CIP-38](https://snapshot.org/#/cow.eth/proposal/0xfb81daea9be89f4f1c251d53fd9d1481129b97c6f38caaddc42af7f3ce5a52ec), [CIP-48](https://snapshot.org/#/cow.eth/proposal/0x563ab9a66265ad72c47a8e55f620f927685dd07d4d49f6d1812905c683f05805) [CIP-57](https://snapshot.box/#/s:cow.eth/proposal/0x46d4fea1492207cf400fcb7a01141a7d4c730791d658cc77236941fc9eb7dccb), [CIP-67](https://snapshot.box/#/s:cow.eth/proposal/0xf9ecb08c4738f04c4525373d6b78085d16635f86adacd1b8ea77b2c176c99d32) and [CIP-74](https://snapshot.org/#/s:cow.eth/proposal/0x0c70c8cd92accee872b52614b4fa10e3e3214f45c5b6857f7e88e910607a3c1d). Solvers earn rewards for taking part in the price-estimation competition and supplying the quotes used to calculate gas estimates and limit prices for market orders, as outlined in [CIP-27](https://snapshot.org/#/cow.eth/proposal/0x64e061568e86e8d2eec344d4a892e4126172b992cabe59a0b24c51c4c7e6cc33) and [CIP-36](https://snapshot.org/#/cow.eth/proposal/0x4e58f9c1208121c0e06282b5541b458bc8c8b76090263e25448848f3194df986).
 
 :::note
 
@@ -12,7 +12,7 @@ For the interested reader, the main source of truth for the weekly payments to s
 
 :::
 
-## Solver competition rewards (CIPs 20, 36, 38, 48, 57, 67)
+## Solver competition rewards (CIPs 20, 36, 38, 48, 57, 67, 74)
 
 Solver rewards are computed using a mechanism akin to a Vickrey–Clarke–Groves mechanism (a generalization of a second-price auction to combinatorial auctions). First, each solver proposes multiple solutions. Each solution contains a price vector and a list of trades to execute, which can be used to compute the solution's score. The protocol then selects the winning solutions (and winning solvers) using a fair combinatorial auction, which first filters out the solutions deemed unfair and then selects the combination of fair solutions that maximizes the total score of the auction (see [here](competition-rules#off-chain-protocol) for more details).
 
@@ -36,15 +36,15 @@ The payment calculation can result in a negative figure, in which case the solve
 
 :::
 
-The payment is capped from above and below using the function $$\textrm{cap}(x) = \max(-c_l, \min(c_u, x))$$ that is chain-specific, and is determined by the following values:
+The payment is capped from above and below using the function $$\textrm{cap}(x) = \max(-c_l, \min(c_u, x))$$, where $$c_u$$ is the protocol fee (excluding partner fees) that the protocol earned from the trades in all solutions supplied by the solver in that auction and $$c_l$$ is chain-specific, determined by the following values:
 
-- Ethereum mainnet, Arbitrum, and Base chain: $$c_l = 0.010 \;\textrm{ETH}$$ and $$c_u = 0.012 \;\textrm{ETH}$$,
-- Gnosis Chain: $$c_l = c_u = 10 \;\textrm{xDAI}$$.
-- Avalanche: $$c_l = 0.3 \;\textrm{AVAX}$$, $$c_u 0.4 \;\textrm{AVAX}$$.
-- Polygon: $$c_l = 30 \;\textrm{POL}$$, $$c_u = 40 \;\textrm{POL}$$.
-- Lens: $$c_l = c_u = 10 \;\textrm{GHO}$$.
-- BNB: $$c_l = 0.04 \;\textrm{BNB}$$, $$c_u = 0.048 \;\textrm{BNB}$$.
-- Linea: $$c_l = 0.0015 \;\textrm{ETH}$$, $$c_u = 0.002 \;\textrm{ETH}$$.
+- Ethereum mainnet, Arbitrum, and Base chain: $$0.010 \;\textrm{ETH}$$
+- Gnosis Chain: $$10 \;\textrm{xDAI}$$
+- Avalanche: $$0.3 \;\textrm{AVAX}$$
+- Polygon: $$30 \;\textrm{POL}$$
+- Lens: $$10 \;\textrm{GHO}$$
+- BNB: $$0.04 \;\textrm{BNB}$$
+- Linea: $$c_l = 0.0015 \;\textrm{ETH}$$
 
 Solutions with scores that are non-positive will be ignored. If only one solver submits solutions, $$\textrm{referenceScore}_i$$ is, by definition, zero. Formally, this corresponds to always considering the empty solution which does not settle any trades and has a score equal to zero as part of the submitted solutions.
 
