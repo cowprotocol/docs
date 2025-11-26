@@ -42,8 +42,8 @@ The payment is capped from above and below using the function $$\textrm{cap}(x) 
 - Gnosis Chain: $$10 \;\textrm{xDAI}$$
 - Avalanche: $$0.3 \;\textrm{AVAX}$$
 - Polygon: $$30 \;\textrm{POL}$$
-- Lens: $$c_u = 10 \;\textrm{GHO}$$
-- BNB: $$c_l = 0.04 \;\textrm{BNB}$$
+- Lens: $$10 \;\textrm{GHO}$$
+- BNB: $$0.04 \;\textrm{BNB}$$
 
 Solutions with scores that are non-positive will be ignored. If only one solver submits solutions, $$\textrm{referenceScore}_i$$ is, by definition, zero. Formally, this corresponds to always considering the empty solution which does not settle any trades and has a score equal to zero as part of the submitted solutions.
 
