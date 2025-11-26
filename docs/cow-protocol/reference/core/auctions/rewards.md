@@ -36,7 +36,7 @@ The payment calculation can result in a negative figure, in which case the solve
 
 :::
 
-The payment is capped from above and below using the function $$\textrm{cap}(x) = \max(-c_l, \min(c_u, x))$$, where $$c_u$$ is the protocol fee (excluding partner fees) that the protocol earned from the trades in the supplied solution and $$c_l$$ is chain-specific, determined by the following values:
+The payment is capped from above and below using the function $$\textrm{cap}(x) = \max(-c_l, \min(c_u, x))$$, where $$c_u$$ is the protocol fee (excluding partner fees) that the protocol earned from the trades in all solutions supplied by the solver in that auction and $$c_l$$ is chain-specific, determined by the following values:
 
 - Ethereum mainnet, Arbitrum, and Base chain: $$0.010 \;\textrm{ETH}$$
 - Gnosis Chain: $$10 \;\textrm{xDAI}$$
