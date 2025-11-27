@@ -23,7 +23,7 @@ The following steps are taken, in case an EBBO violation is detected, either by 
 
 3. Once the incident is communicated, the violating solver shall process the reimbursement within 72 hours of this notification.
    - If the violating solver complies, the case is closed.
-   - If the violating solver does not comply, the slashing procedure will be triggered (see section below)
+   - If the violating solver does not comply, the slashing procedure will be triggered (see section below).
 
 ## Escalation mechanism: Slashing of solver bond
 
