@@ -6,9 +6,7 @@ sidebar_position: 5
 
 All the instances and solutions of the batch auction problem are formatted in [JSON](https://www.json.org/json-en.html). In this section, we describe these schemas.
 
-:::note
-More details can be found [here](https://docs.cow.fi/cow-protocol/reference/apis/solver).
-:::
+The api spec and schema can be found [here](https://docs.cow.fi/cow-protocol/reference/apis/solver).
 
 :::caution
 
