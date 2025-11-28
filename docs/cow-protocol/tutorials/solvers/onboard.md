@@ -1,8 +1,10 @@
 ---
-sidebar_position: 5
+sidebar_position: 1
 ---
 
 # Joining The CoW Protocol Solver Competition
+> **_NOTE:_** In order to get connected to the shadow competition, feel free to reach out to an admin of the ["CoW Swap Solvers"](https://t.me/+2Z_-DW57meA1MDlh) group on Telegram.
+
 > **_NOTE:_** Most of this document assumes that you will be joining the solver competition under the CoW DAO bonding pool. If you were to set up your own bonding pool then most of the information in this document is either optional or irrelevant. To join the solver competition under your own bonding pool refer to [this document](https://docs.cow.fi/cow-protocol/reference/core/auctions/bonding-pools) and reach out to help set up the bonding pool and whitelist your solver's address.
 
 ![General process for joining the solver competition](solver_onboarding_process.jpg)
@@ -43,6 +45,7 @@ If you would like to secure your solver, you can set up a firewall and only acce
 ### Exposed Endpoint
 The exposed endpoint provided must be of the following format: {base_url}/\${envName}/\${network} - for example: https://api.mysolver.io/staging/mainnet
 envName values: shadow, staging, prod
+supported networks: arbitrum-one, avalanche, base, bnb, lens, linea, mainnet, polygon, xdai (gnosis) and more are coming out!
 
 ### Driver configuration for your solver
 There are various configurations for your solver in the driver to help you optimize your solver: 
