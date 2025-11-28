@@ -28,8 +28,9 @@ All solvers participating in the solver competition must abide by certain rules.
   - The protocol first considers bids containing only orders on the same _directed token pair_, i.e., on the same token pair and in the same direction, and computes the best bid on each directed token pair, where the best bid is the one generating the highest score. The collection of these best bids is the reference outcome for each directed token pair, representing the best possible execution against outside liquidity.
   - The protocol then uses the reference outcome to filter out _unfair_ bids from the remaining batched bids (batched because, by definition, they contain orders on multiple directed token pairs). A batched bid is filtered out whenever it generates lower score for a given directed token pair than the reference outcome.
   - In the final step, the protocol considers all the batched bids that survived the filtering and the best bids on individual directed token pairs. It computes the collection of winning bids, under the constraint that all orders on the same directed token pair must be part of the same winning bid.
+  Winning solver are rewarded according to a second-price auction mechanism; for more information see the [rewards section](rewards).
 
-- Valid settlements: A settlement executed on chain is _valid_ if:
+- Valid settlements: A settlement executed on-chain is _valid_ if:
   - The solution was selected as winner and is executed as specified in the bidding stage with respect to solver, score, and executed amounts.
   - Hooks of executed trades, as specified in app data of respective orders, are executed according to the following rules:
     1. Pre-hooks need to be executed before pulling in user funds
@@ -43,18 +44,16 @@ All solvers participating in the solver competition must abide by certain rules.
       b. The hook needs to be attempted, meaning the hook reverting is not violating any rules
       c. Intermediate calls between the call to settle and hook execution must not revert
       d. The available gas forwarded to the hook CALL is greater or equal than specified gasLimit
-  Not following these rules can result in immediate denylisting of a solver until a manual inspection is executed. These rules are currently implemented [here](https://github.com/cowprotocol/circuit-breaker-validator).
+  Not following these rules can result in immediate denylisting of a solver until a manual inspection is executed. These rules are currently implemented in the [circuit-breaker-validator](https://github.com/cowprotocol/circuit-breaker-validator).
 
-- Deadline: Solvers that win an auction will receive a deadline by which they must settle the auction on-chain. If the transaction is not observed on chain before the deadline block is mined, then the solution will count as not having been executed.
-
-- Rewards: A solver that provided a winning solution is rewarded according to a second-price auction mechanism; for more information see [here](rewards).
+- Deadline: Solvers that win an auction will receive a deadline by which they must settle the auction on-chain. If the transaction is not observed on-chain before the deadline block is mined, then the solution will count as not having been executed.
 
 - Buffer usage: solvers are allowed to use funds in the settlement contract for certain types of use cases.
   - Solvers are supposed to store _protocol and partner fees_ in the settlement contract.
   - Solvers are allowed to store funds to cover _network fees_ in the contract.
   - Solvers are allowed to use funds in the settlement contract to offset price variations on liquidity sources, also referred to as _slippage_.
   - Solvers are allowed to use funds in the settlement contract for executing trades, also referred to as _internalizations_, if the token which accumulates in the contract is among a [list of allowlisted tokens](https://files.cow.fi/token_list.json).
-  Solvers bear responsibility for all changes to balances of the settlement contract. The concrete implementation of buffer accounting is described [here](accounting).
+  Solvers bear responsibility for all changes to balances of the settlement contract. The concrete implementation of buffer accounting is described in the [accounting section](accounting).
 
 
 :::note
