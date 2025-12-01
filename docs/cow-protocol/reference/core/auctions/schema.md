@@ -4,6 +4,8 @@ sidebar_position: 5
 
 # Schemas
 
+The purpose of this section is to provide an overview of the main API of the solve engine.
+
 All the instances and solutions of the batch auction problem are formatted in [JSON](https://www.json.org/json-en.html). In this section, we describe these schemas.
 
 The api spec and schema can be found [here](https://docs.cow.fi/cow-protocol/reference/apis/solver).
@@ -189,14 +191,6 @@ If both conditions are satisfied, a solver can set the `internalize` flag to `tr
 ```
 
 In such a case, the default driver will remove the interaction, and so the solution will end up using less gas, get better ranking, and also be risk-free (at least the part involving the internalized AMM interaction).
-
-### `score`
-
-The score is a key that describes the "bid" a solver makes for the batch in the [solver auction](rewards), as it will get ranked according to it. The protocol picks the solution with the highest score, given that it is strictly positive. The score maps to a dictionary with two entries. The first entry is the following:
-
-- `kind`: this is a string of the set {"solver", "riskAdjusted"}, that determines whether a solver will explicitly provide a score or will delegate the score computation to the default driver by only specifying a probability of success for the proposed solution.
-
-If we have `"kind": "solver"`, then there is a second entry, labeled `score`, that corresponds to a stringified float that specifies the score attached to the solution. On the other hand, if we have `"kind": "riskAdjusted"`, then there is a second entry, labeled `successProbability`, that is a stringified float that specifies the success probability of the proposed solution.
 
 ### `surplusCapturingJitOrderOwners`
 
