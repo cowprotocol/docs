@@ -10,40 +10,33 @@ This documentation refers to CoW Protocol fees. Builders connected to MEV blocke
 
 :::
 
-[CIP-34](https://snapshot.org/#/cow.eth/proposal/0xe358941aa3f3aeaf94d40e6904c9bb530c98f88e363c2f309d9898b0ffb16c1f) directs the core team of CoW DAO to spend 6 months testing fee models for the purpose of generating revenue from CoW Protocol (starting January 16, 2024).
-It also directs the core team to keep the DAO up to date on the progress of the testing.
-
 The purpose of this page is to let users know which fee models are active at any point in time, so they know what fees they will encounter when using CoW Protocol (either directly or through CoW Swap).
 
 ## Current Fees
 
 ### Surplus fee on out-of-market limit orders
 
-> **Definition:** 50% of surplus on out-of-market limit orders, capped at 1% of the total volume of the order
+> **Definition:** 50% of surplus on out-of-market limit orders, capped at 0.98% of the total volume of the order
 >
 > **Eligible orders:** the fee only applies to out-of-market limit orders and discrete TWAP orders where the order is not executable at the time it is generated
 >
-> **Fee calculation:** surplus \* 0.5 **OR** volume \* 0.01 [whichever number is lower]
+> **Fee calculation:** surplus \* 0.5 **OR** volume \* 0.0098 [whichever number is lower]
 
 ### Quote improvement fee on market orders
 
-> **Definition:** 50% of positive quote improvement on market orders (aka swaps), capped at 1% of the total volume of the order
+> **Definition:** 50% of positive quote improvement on market orders (aka swaps), capped at 0.98% of the total volume of the order
 >
 > **Eligible orders:** all market orders (including in-market limit and TWAP orders) where the user receives a better price than they were quoted
 >
-> **Fee calculation:** quote improvement \* 0.5 **OR** volume \* 0.01 [whichever number is lower]
+> **Fee calculation:** quote improvement \* 0.5 **OR** volume \* 0.0098 [whichever number is lower]
 
-### Volume fee on Gnosis Chain orders (excluding token pairs with correlated prices)
+### Volume Fee
 
-[//]: # 'If updating the list of stable coins, do not forget to update the actual code where this is handled on CoW Swap'
-[//]: # 'https://github.com/cowprotocol/cowswap/blob/develop/libs/common-const/src/tokens.ts#L293-L302'
-
-> **Definition:** 10 basis points on the total volume of the order
+> **Definition:** 2 basis points on the total volume of the order
 >
-> **Eligible orders:** all market orders, limit orders, and TWAPs made on Gnosis Chain, excluding tokens with correlated prices when traded for each other.
+> **Eligible orders:** all orders
 >
-> **Fee calculation:** volume \* 0.001
-
+> **Fee calculation:** volume \* 0.0002
 
 :::note
 

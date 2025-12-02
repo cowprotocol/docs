@@ -45,6 +45,7 @@ The helper contracts are deployed here:
 - Polygon N/A
 - Lens N/A
 - BNB N/A
+- Linea N/A
 
 ### Settling a custom order
 
