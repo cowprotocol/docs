@@ -24,7 +24,7 @@ Vouching contracts:
 - [Base](https://basescan.org/address/0xAAA4De096D02AE21729aA31D967E148D4e3Ae501)
 - [Avalanche](https://snowtrace.io/address/0xAAA4De096D02AE21729aA31D967E148D4e3Ae501)
 - [Polygon](https://polygonscan.com/address/0xAAA4De096D02AE21729aA31D967E148D4e3Ae501)
-- [Lens](https://lenscan.io/address/0xaaa4de096d02ae21729aa31d967e148d4e3ae501)
+- [Lens](https://lenscan.io/address/0xAAA4De096D02AE21729aA31D967E148D4e3Ae501)
 - [BNB](https://bscscan.com/address/0xAAA4De096D02AE21729aA31D967E148D4e3Ae501)
 - [Linea](https://lineascan.build/address/0xAAA4De096D02AE21729aA31D967E148D4e3Ae501)
 
