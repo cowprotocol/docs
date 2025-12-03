@@ -10,9 +10,9 @@ Once this safe has been confirmed by the CoW DAO team, the safe should be funded
 # Setting up a reduced bonding pool
 Solvers that are currently vouched under the CoW DAO Bonding pool may decide to set up a reduced bonding pool according to [CIP-44](https://snapshot.box/#/s:cow.eth/proposal/0x1b6f1171633ec3d20c4370db37074aa1bd830486d4d0d6c26165915cc42d9412), where the main benefit is that then they can fully control their calldata and the onchain submission process. Note that the interested solver team first needs to coordinate with the core team, that is currently managing the CoW DAO bonding pool, and the core team maintains the right to reject such a reduced pool setup.
 
-Assuming that the core team approves the creation of a reduced bonding pool, the first step for setting up a reduced bonding pool is to deploy a Gnosis safe on Mainnet that has only one signer (the CoW DAO Solver Payouts safe, that is, eth:0xA03be496e67Ec29bC62F01a428683D7F9c204930). After this is done and has been confirmed by the CoW DAO team, the solver needs to deposit \$50,000 in (yield bearing) stable coins or ETH, and 500,000 COW tokens to the newly created safe, and gradually build the pool's size all the way to \$100,000 in (yield bearing) stable coins or ETH, and 1,000,000 COW tokens.
+Assuming that the core team approves the creation of a reduced bonding pool, the first step for setting up a reduced bonding pool is to deploy a Gnosis safe on Mainnet that has only one signer (the CoW DAO Solver Payouts safe, that is, eth:0xA03be496e67Ec29bC62F01a428683D7F9c204930). After this is done and has been confirmed by the CoW DAO team, the solver needs to deposit \$50,000 in (yield bearing) stable coins or ETH, and 500,000 COW tokens to the newly created safe, and gradually build the pool's size over the course of the following year all the way to \$100,000 in (yield bearing) stable coins or ETH, and 1,000,000 COW tokens.
 
-We stress that the reduced bonding pool setup is just an arrangement within the CoW DAO bonding pool; meaning that the solver with a reduced bonding pool is still formally vouched under the CoW DAO bonding pool.
+We stress that the reduced bonding pool setup is just an arrangement within the CoW DAO bonding pool; meaning that a solver with a reduced bonding pool is still formally vouched under the CoW DAO bonding pool.
 
 # How to join a bonding pool
 This is done by vouching for a solver's submission address and rewards address with the bonding pool address. This is done by calling the `Vouch` method on the VouchRegister contract using the address that created the bonding pool.
@@ -22,6 +22,11 @@ Vouching contracts:
 - [Gnosis Chain](https://gnosisscan.io/address/0xAAA4De096D02AE21729aA31D967E148D4e3Ae501)
 - [Arbitrum](https://arbiscan.io/address/0xAAA4De096D02AE21729aA31D967E148D4e3Ae501)
 - [Base](https://basescan.org/address/0xAAA4De096D02AE21729aA31D967E148D4e3Ae501)
+- [Avalanche](https://snowtrace.io/address/0xAAA4De096D02AE21729aA31D967E148D4e3Ae501)
+- [Polygon](https://polygonscan.com/address/0xAAA4De096D02AE21729aA31D967E148D4e3Ae501)
+- [Lens](https://lenscan.io/address/0xaaa4de096d02ae21729aa31d967e148d4e3ae501)
+- [BNB](https://bscscan.com/address/0xAAA4De096D02AE21729aA31D967E148D4e3Ae501)
+- [Linea](https://lineascan.build/address/0xAAA4De096D02AE21729aA31D967E148D4e3Ae501)
 
 The `Vouch` method receives a list as an argument and can vouch for multiple submission addresses in a single transaction. The transaction must contain: the submission address for the solver, the bonding pool that is vouching for the solver, and the rewards address that the solver would like to use to receive their [rewards](/cow-protocol/reference/core/auctions/rewards).
 
