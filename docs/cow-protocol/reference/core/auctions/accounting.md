@@ -35,6 +35,10 @@ Certain orders come with a list of so-called fee policies; these policies provid
 
 Protocol and partner fees are naturally denominated in the surplus token of an order, and the accounting process uses the native prices provided in each auction to convert these fee amounts to the native token of the chain; this implies that the exchange rate of these fees with respect to the native token of the chain is determined at auction creation time.
 
+#### Auction price corrections
+
+In rare cases where an auction price recorded for a specific token is clearly anomalous (for example, due to upstream data inconsistencies), the accounting process applies a curated correction list to override the affected auction/token price. These corrections are applied deterministically during the accounting so that protocol/partner/network fee conversions to the native token reflect the intended auction pricing.
+
 For simplicity, the core team also maintains the following Dune table (https://dune.com/queries/4364122), that among other things, reveals the amounts charged as protocol and partner fees on a per trade basis. The relevant columns are `protocol_fee` and `partner_fee`. Note that the `protocol_fee` entry is the total protocol and partner fee charged, so in case there is a non-zero partner fee, in order to determine what amount is meant to be sent to the CoW DAO, one needs to subtract the `partner_fee` entry from the `protocol_fee` entry. The column `protocol_fee_native_price` can then be used to determine how these fee amounts are converted to the native token of the chain on a per trade basis (note that in order to get the final amount in the native token, one needs to multiply with the `protocol_fee_native_price` and then divide by 10^18).
 
 ## Buffer accounting
@@ -99,3 +103,17 @@ We now discuss some more details. To properly do slippage accounting, we start b
 Once we get the raw imbalances, the "fee corrections" are added for each transaction: https://dune.com/queries/4059683. Specifically, if we expect the solvers to deposit network, protocol and partner fees in the contract, and since these use the price feed provided in the corresponding auction instance and not the Dune price feed, what we do is that we assume that these fees were deposited fully in the settlement contract, and thus they need to be subtracted from the raw imbalances in order to evaluate how much "left-over" imbalance is there. This "left-over" imbalance is what we call slippage and this is what is evaluated using the price feed constructed in https://dune.com/queries/4064601.
 
 We note that currently all solvers use the settlement contract to deposit protocol/partner/network fees, and these fees are delivered to the appropriate receiver each Tuesday via the main accounting script the core team maintains.
+
+## Payout processing and operational adjustments
+
+### Service fee on COW rewards
+
+As specified in [CIP-48](https://snapshot.org/#/cow.eth/proposal/0x563ab9a66265ad72c47a8e55f620f927685dd07d4d49f6d1812905c683f05805), some solvers (e.g., those that are part of the CoW DAO bonding pool and flagged for a service fee) are charged a service fee on their COW-denominated rewards. The service fee is applied to positive COW rewards (performance and quote rewards) and is withheld before payout. The default factor is 15%, unless configured otherwise by governance.
+
+### Minimum transfer thresholds (dust handling)
+
+To avoid operational overhead from very small transfers, the accounting process enforces minimum transfer thresholds for both native-token and COW transfers. If a computed transfer amount is below the configured chain-specific threshold, that amount is not transferred for the given accounting period. Thresholds can differ per chain and asset type (native vs. COW).
+
+### Overdraft handling (negative net position)
+
+At the end of each accounting period, the accounting aggregates all native-token components (e.g., slippage and network fees) and adds the COW-denominated rewards after applying any service fee, converted into native using the period’s conversion rate. If the resulting total native balance is negative, the period is marked as an overdraft and no payout is initiated for that period.
