@@ -35,10 +35,6 @@ Certain orders come with a list of so-called fee policies; these policies provid
 
 Protocol and partner fees are naturally denominated in the surplus token of an order, and the accounting process uses the native prices provided in each auction to convert these fee amounts to the native token of the chain; this implies that the exchange rate of these fees with respect to the native token of the chain is determined at auction creation time.
 
-#### Auction price corrections
-
-In rare cases where an auction price recorded for a specific token is clearly anomalous (for example, due to upstream data inconsistencies), the accounting process applies a curated correction list to override the affected auction/token price. These corrections are applied deterministically during the accounting so that protocol/partner/network fee conversions to the native token reflect the intended auction pricing.
-
 For simplicity, the core team also maintains the following Dune table (https://dune.com/queries/4364122), that among other things, reveals the amounts charged as protocol and partner fees on a per trade basis. The relevant columns are `protocol_fee` and `partner_fee`. Note that the `protocol_fee` entry is the total protocol and partner fee charged, so in case there is a non-zero partner fee, in order to determine what amount is meant to be sent to the CoW DAO, one needs to subtract the `partner_fee` entry from the `protocol_fee` entry. The column `protocol_fee_native_price` can then be used to determine how these fee amounts are converted to the native token of the chain on a per trade basis (note that in order to get the final amount in the native token, one needs to multiply with the `protocol_fee_native_price` and then divide by 10^18).
 
 ## Buffer accounting
@@ -117,3 +113,7 @@ To avoid operational overhead from very small transfers, the accounting process 
 ### Overdraft handling (negative net position)
 
 At the end of each accounting period, the accounting aggregates all native-token components (e.g., slippage and network fees) and adds the COW-denominated rewards after applying any service fee, converted into native using the period’s conversion rate. If the resulting total native balance is negative, the period is marked as an overdraft and no payout is initiated for that period.
+
+### Auction price corrections
+
+In addition to the per-auction conversions described above, the payout process accounts for rare, anomalous price records by applying a curated correction list for specific auction/token prices. These corrections ensure native conversions (for protocol/partner/network fees) and the resulting payout aggregates reflect intended auction pricing, avoiding distorted transfers.
