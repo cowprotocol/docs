@@ -28,7 +28,7 @@ All solvers participating in the solver competition must abide by certain rules.
   - The protocol first considers bids containing only orders on the same _directed token pair_, i.e., on the same token pair and in the same direction, and computes the best bid on each directed token pair, where the best bid is the one generating the highest score. The collection of these best bids is the reference outcome for each directed token pair, representing the best possible execution against outside liquidity.
   - The protocol then uses the reference outcome to filter out _unfair_ bids from the remaining batched bids (batched because, by definition, they contain orders on multiple directed token pairs). A batched bid is filtered out whenever it generates lower score for a given directed token pair than the reference outcome.
   - In the final step, the protocol considers all the batched bids that survived the filtering and the best bids on individual directed token pairs. It computes the collection of winning bids, under the constraint that all orders on the same directed token pair must be part of the same winning bid.
-  Winning solver are rewarded according to a second-price auction mechanism; for more information see the [rewards section](rewards).
+  Winning solvers are rewarded according to a second-price auction mechanism; for more information see the [rewards section](rewards).
 
 - Valid settlements: A settlement executed on-chain is _valid_ if:
   - The solution was selected as winner and is executed as specified in the bidding stage with respect to solver, score, and executed amounts.
