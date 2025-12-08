@@ -99,3 +99,21 @@ We now discuss some more details. To properly do slippage accounting, we start b
 Once we get the raw imbalances, the "fee corrections" are added for each transaction: https://dune.com/queries/4059683. Specifically, if we expect the solvers to deposit network, protocol and partner fees in the contract, and since these use the price feed provided in the corresponding auction instance and not the Dune price feed, what we do is that we assume that these fees were deposited fully in the settlement contract, and thus they need to be subtracted from the raw imbalances in order to evaluate how much "left-over" imbalance is there. This "left-over" imbalance is what we call slippage and this is what is evaluated using the price feed constructed in https://dune.com/queries/4064601.
 
 We note that currently all solvers use the settlement contract to deposit protocol/partner/network fees, and these fees are delivered to the appropriate receiver each Tuesday via the main accounting script the core team maintains.
+
+## Payout processing and operational adjustments
+
+### Service fee on COW rewards
+
+As specified in [CIP-48](https://snapshot.org/#/cow.eth/proposal/0x563ab9a66265ad72c47a8e55f620f927685dd07d4d49f6d1812905c683f05805), some solvers (e.g., those that are part of the CoW DAO bonding pool and flagged for a service fee) are charged a service fee on their COW-denominated rewards. The service fee is applied to positive COW rewards (performance and quote rewards) and is withheld before payout. The default factor is 15%, unless configured otherwise by governance.
+
+### Minimum transfer thresholds (dust handling)
+
+To avoid operational overhead from very small transfers, the accounting process enforces minimum transfer thresholds for both native-token and COW transfers. If a computed transfer amount is below the configured chain-specific threshold, that amount is not transferred for the given accounting period. Thresholds can differ per chain and asset type (native vs. COW).
+
+### Overdraft handling (negative net position)
+
+At the end of each accounting period, the accounting aggregates all native-token components (e.g., slippage and network fees) and adds the COW-denominated rewards after applying any service fee, converted into native using the period’s conversion rate. If the resulting total native balance is negative, the period is marked as an overdraft and no payout is initiated for that period.
+
+### Auction price corrections
+
+In addition to the per-auction conversions described above, the payout process accounts for rare, anomalous price records by applying a curated correction list for specific auction/token prices. These corrections ensure native conversions (for protocol/partner/network fees) and the resulting payout aggregates reflect intended auction pricing, avoiding distorted transfers.
