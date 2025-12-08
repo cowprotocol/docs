@@ -44,9 +44,8 @@ All solvers participating in the solver competition must abide by certain rules.
       2. The hook needs to be attempted, meaning the hook reverting is not violating any rules
       3. Intermediate calls between the call to settle and hook execution must not revert
       4. The available gas forwarded to the hook CALL is greater or equal than specified gasLimit
+  - The settlement is executed before or at the deadline of that auction.
   Not following these rules can result in immediate denylisting of a solver until a manual inspection is executed. These rules are currently implemented in the [circuit-breaker-validator](https://github.com/cowprotocol/circuit-breaker-validator).
-
-- Deadline: Solvers that win an auction will receive a deadline by which they must settle the auction on-chain. If the transaction is not observed on-chain before the deadline block is mined, then the solution will count as not having been executed.
 
 - Buffer usage: solvers are allowed to use funds in the settlement contract for certain types of use cases.
   - Solvers are supposed to store _protocol and partner fees_ in the settlement contract.
