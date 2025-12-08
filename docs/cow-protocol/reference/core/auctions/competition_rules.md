@@ -36,14 +36,14 @@ All solvers participating in the solver competition must abide by certain rules.
     1. Pre-hooks need to be executed before pulling in user funds
     2. Post-hooks need to be executed after pushing out user order proceeds
     3. Partially fillable orders:
-      a. Should execute the pre-hooks on the first fill only
-      b. Should execute the post-hooks on every fill
+      1. Should execute the pre-hooks on the first fill only
+      2. Should execute the post-hooks on every fill
     4. Execution of a hook means:
-      a. There exists an internal CALL in the settlement transaction with a
+      1. There exists an internal CALL in the settlement transaction with a
       matching triplet: target, gasLimit, calldata
-      b. The hook needs to be attempted, meaning the hook reverting is not violating any rules
-      c. Intermediate calls between the call to settle and hook execution must not revert
-      d. The available gas forwarded to the hook CALL is greater or equal than specified gasLimit
+      2. The hook needs to be attempted, meaning the hook reverting is not violating any rules
+      3. Intermediate calls between the call to settle and hook execution must not revert
+      4. The available gas forwarded to the hook CALL is greater or equal than specified gasLimit
   Not following these rules can result in immediate denylisting of a solver until a manual inspection is executed. These rules are currently implemented in the [circuit-breaker-validator](https://github.com/cowprotocol/circuit-breaker-validator).
 
 - Deadline: Solvers that win an auction will receive a deadline by which they must settle the auction on-chain. If the transaction is not observed on-chain before the deadline block is mined, then the solution will count as not having been executed.
