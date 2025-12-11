@@ -12,7 +12,7 @@ Solvers that are currently vouched under the CoW DAO Bonding pool may decide to 
 
 Assuming that the core team approves the creation of a reduced bonding pool, the first step for setting up a reduced bonding pool is to deploy a Gnosis safe on Mainnet that has only one signer (the CoW DAO Solver Payouts safe, that is, eth:0xA03be496e67Ec29bC62F01a428683D7F9c204930). After this is done and has been confirmed by the CoW DAO team, the solver needs to deposit \$50,000 in (yield-bearing) stable coins or ETH, and 500,000 COW tokens to the newly created safe, and gradually build the pool's size over the course of the following year all the way to \$100,000 in (yield-bearing) stable coins or ETH, and 1,000,000 COW tokens.
 
-We stress that the reduced bonding pool setup is just an arrangement within the CoW DAO bonding pool; meaning that a solver with a reduced bonding pool is still formally vouched under the CoW DAO bonding pool.
+We stress that the reduced bonding pool setup is just an arrangement within the CoW DAO bonding pool; meaning that a solver with a reduced bonding pool is still formally vouched for under the CoW DAO bonding pool.
 
 # How to join a bonding pool
 This is done by vouching for a solver's submission address and rewards address with the bonding pool address. This is done by calling the `Vouch` method on the VouchRegister contract using the address that created the bonding pool.
