@@ -11,7 +11,7 @@ This page provides an overview of the application process. For complete details,
 1. **Review existing materials**:
    - Read the [Process Guide](https://forum.cow.fi/t/for-cow-grantees-process-guide-feb-2025/2830/2) and [Grant Agreement Terms](https://bafkreifcftgaleyxkekkic36beyveiomqmlwyduyfh3s25zj3uyngr6ht4.ipfs.dweb.link/)
    - Check the [Grants Program Forum Section](https://forum.cow.fi/c/cow-grants-program/10) for similar past proposals
-   - Review [RFPs](https://forum.cow.fi/t/template-for-rfps-incl-grants-dao-values/2816) if you're looking for ideas
+   - Review [RFPs](https://forum.cow.fi/tags/c/cow-grants-program/10/none/rfp) if you're looking for ideas
 
 2. **Create a forum post**:
    - Visit the [CoW Grants Program](https://forum.cow.fi/c/cow-grants-program/10) section
