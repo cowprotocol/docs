@@ -17,7 +17,7 @@
     "fmt": "prettier --write \"**/*.md\""
   },
   "dependencies": {
-    "@docusaurus/core": "^3.8.0",
+    "@docusaurus/core": "^3.9.2",
     "@docusaurus/plugin-google-gtag": "^3.8.0",
     "@docusaurus/plugin-ideal-image": "^3.8.0",
     "@docusaurus/preset-classic": "^3.8.0",
