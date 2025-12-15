@@ -20,7 +20,7 @@ All solvers participating in the solver competition must abide by certain rules.
 
 - Scores: Every solution is associated with a _score_. The score is computed from executed amounts of all trades and is roughly equivalent to the amount of surplus a solution generates for users. For concrete formulas see [the section on solving](the-problem) or [CIP-38](https://snapshot.box/#/s:cow.eth/proposal/0xfb81daea9be89f4f1c251d53fd9d1481129b97c6f38caaddc42af7f3ce5a52ec) and [CIP-65](https://snapshot.box/#/s:cow.eth/proposal/0xd172281444c48254398881c57a57a2acbf0802a385e6c94384fd358b943aa4f4).
 
-- Valid solutions: A solution is _valid_ if:
+- Valid solutions: A solution is _valid_ if
   - it has a positive score; and
   - respects Uniform Directional Clearing Prices (UDCP): all orders trading the same tokens in the same direction must receive the same price (with an exception for orders containing hooks to account for the cost of gas). Importantly, each solution must respect UDCP, but there is no obligation to respect UDCP across solutions, even if submitted by the same solver.
 
