@@ -17,13 +17,13 @@
     "fmt": "prettier --write \"**/*.md\""
   },
   "dependencies": {
-    "@docusaurus/core": "^3.8.0",
-    "@docusaurus/plugin-google-gtag": "^3.8.0",
-    "@docusaurus/plugin-ideal-image": "^3.8.0",
-    "@docusaurus/preset-classic": "^3.8.0",
-    "@docusaurus/remark-plugin-npm2yarn": "^3.8.0",
-    "@docusaurus/theme-live-codeblock": "^3.8.0",
-    "@docusaurus/theme-mermaid": "^3.8.0",
+    "@docusaurus/core": "3.9.2",
+    "@docusaurus/plugin-google-gtag": "3.9.2",
+    "@docusaurus/plugin-ideal-image": "3.9.2",
+    "@docusaurus/preset-classic": "3.9.2",
+    "@docusaurus/remark-plugin-npm2yarn": "3.9.2",
+    "@docusaurus/theme-live-codeblock": "3.9.2",
+    "@docusaurus/theme-mermaid": "3.9.2",
     "@mdx-js/react": "^3.1.0",
     "clsx": "^2.1.1",
     "docusaurus-json-schema-plugin": "^1.15.0",
@@ -36,9 +36,9 @@
     "swagger-ui-react": "5.30.3"
   },
   "devDependencies": {
-    "@docusaurus/module-type-aliases": "3.8.0",
-    "@docusaurus/tsconfig": "3.8.0",
-    "@docusaurus/types": "3.8.0",
+    "@docusaurus/module-type-aliases": "3.9.2",
+    "@docusaurus/tsconfig": "3.9.2",
+    "@docusaurus/types": "3.9.2",
     "@types/react": "^18.0.0",
     "docusaurus-plugin-typedoc": "^0.21.0",
     "dotenv": "^16.3.1",
