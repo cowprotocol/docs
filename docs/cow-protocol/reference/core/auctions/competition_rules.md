@@ -5,7 +5,7 @@ sidebar_position: 2
 
 # Solver competition rules
 
-All solvers participating in the solver competition must abide by certain rules. In this section, we outline all these rules, which are naturally split into three classes:
+All solvers participating in the solver competition must abide by certain rules. In this section, we outline all these rules. They naturally split into three classes:
 
 1. Those enforced explicitly by the [smart contract](#smart-contract)
 2. Those enforced by the [off-chain protocol](#off-chain-protocol) infrastructure
@@ -18,17 +18,42 @@ All solvers participating in the solver competition must abide by certain rules.
 
 ## Off-chain protocol
 
-- A solution is valid only if it contains at least one user or CoW AMM order and respects Uniform Directional Clearing Prices (UDCP): all orders trading the same tokens in the same direction must receive the same price (with an exception for orders containing hooks to account for the cost of gas). Importantly, each solution must respect UDCP, but there is no obligation to respect UDCP across solutions, even if submitted by the same solver.
+- Scores: Every solution is associated with a _score_. The score is computed from executed amounts of all trades and is roughly equivalent to the amount of surplus a solution generates for users. For concrete formulas see [the section on solving](the-problem) or [CIP-38](https://snapshot.box/#/s:cow.eth/proposal/0xfb81daea9be89f4f1c251d53fd9d1481129b97c6f38caaddc42af7f3ce5a52ec) and [CIP-65](https://snapshot.box/#/s:cow.eth/proposal/0xd172281444c48254398881c57a57a2acbf0802a385e6c94384fd358b943aa4f4).
 
-- Every valid solution is associated with a score relative to the amount of surplus it generates for the users, as described in [CIP-38](https://snapshot.box/#/s:cow.eth/proposal/0xfb81daea9be89f4f1c251d53fd9d1481129b97c6f38caaddc42af7f3ce5a52ec) and [CIP-65](https://snapshot.box/#/s:cow.eth/proposal/0xd172281444c48254398881c57a57a2acbf0802a385e6c94384fd358b943aa4f4). The set of winning solutions (and corresponding winning solvers) is chosen using a Fair Combinatorial Auction (see [CIP-67](https://snapshot.box/#/s:cow.eth/proposal/0xf9ecb08c4738f04c4525373d6b78085d16635f86adacd1b8ea77b2c176c99d32). At a high level, the protocol first considers bids containing only orders on the same token pair and in the same direction and computes the best bid on each directed token pair, where the best bid is the one generating the highest score. The collection of these best bids is the reference outcome for each directed token pair, representing the best possible execution against outside liquidity. The protocol then uses the reference outcome to filter out the remaining batched bids (batched because, by definition, they contain orders on multiple directed token pairs). A batched bid is filtered out whenever it generates lower score for a given directed token pair than the reference outcome. In the final step, the protocol considers all the batched bids that survived the filtering and the best bids on individual directed token pairs. It computes the collection of winning bids, under the constraint that all orders on the same directed token pair must be part of the same winning bid.
+- Valid solutions: A solution is _valid_ if
+  - it has a positive score; and
+  - respects Uniform Directional Clearing Prices (UDCP): all orders trading the same tokens in the same direction must receive the same price (with an exception for orders containing hooks to account for the cost of gas). Importantly, each solution must respect UDCP, but there is no obligation to respect UDCP across solutions, even if submitted by the same solver.
 
-- Deadline: Solvers that win an auction will receive a deadline by which they must settle the auction on-chain. If the transaction is not observed on chain before the deadline block is mined, then the solution will count as not submitted and the solver will be penalized.
+- Winner selection: The set of winning solutions (and corresponding winning solvers) is chosen using a _Fair Combinatorial Auction_ (see [CIP-67](https://snapshot.box/#/s:cow.eth/proposal/0xf9ecb08c4738f04c4525373d6b78085d16635f86adacd1b8ea77b2c176c99d32)) from all valid solutions. Each solution corresponds to a bid in the auction.
+  - The protocol first considers bids containing only orders on the same _directed token pair_, i.e., on the same token pair and in the same direction, and computes the best bid on each directed token pair, where the best bid is the one generating the highest score. The collection of these best bids is the reference outcome for each directed token pair, representing the best possible execution against outside liquidity.
+  - The protocol then uses the reference outcome to filter out _unfair_ bids from the remaining batched bids (batched because, by definition, they contain orders on multiple directed token pairs). A batched bid is filtered out whenever it generates lower score for a given directed token pair than the reference outcome.
+  - In the final step, the protocol considers all the batched bids that survived the filtering and the best bids on individual directed token pairs. It computes the collection of winning bids, under the constraint that all orders on the same directed token pair must be part of the same winning bid.
+  Winning solvers are rewarded according to a second-price auction mechanism; for more information see the [rewards section](rewards).
 
-- The solver that provided the winning solution is rewarded according to a second-price auction mechanism that the protocol uses; for more information see [here](/cow-protocol/reference/core/auctions/rewards).
+- Valid settlements: A settlement executed on-chain is _valid_ if:
+  - The solution was selected as winner and is executed as specified in the bidding stage with respect to solver, score, and executed amounts.
+  - Hooks of executed trades, as specified in app data of respective orders, are executed according to the following rules:
+    1. Pre-hooks need to be executed before pulling in user funds
+    2. Post-hooks need to be executed after pushing out user order proceeds
+    3. Partially fillable orders:
+        1. Should execute the pre-hooks on the first fill only
+        2. Should execute the post-hooks on every fill
+    4. Execution of a hook means:
+        1. There exists an internal CALL in the settlement transaction with a
+      matching triplet: target, gasLimit, calldata
+        2. The hook needs to be attempted, meaning the hook reverting is not violating any rules
+        3. Intermediate calls between the call to settle and hook execution must not revert
+        4. The available gas forwarded to the hook CALL is greater or equal than specified gasLimit
+  - The settlement is executed before or at the deadline of that auction.
+  Not following these rules can result in immediate denylisting of a solver until a manual inspection is executed. These rules are currently implemented in the [circuit-breaker-validator](https://github.com/cowprotocol/circuit-breaker-validator).
 
-- Internalization of interactions: a solver is allowed to "internalize" interactions. Concretely, if there is enough balance of the sell token of such an interaction in the settlement contract, then a solver can signal an internalization of such an interaction, which effectively means that the protocol is willing to buy and sell tokens stored in the settlement contract. The effect of such interactions is evaluated in what we call slippage accounting (see next point).
+- Buffer usage: solvers are allowed to use funds in the settlement contract for certain types of use cases.
+  - Solvers are supposed to store _protocol and partner fees_ in the settlement contract.
+  - Solvers are allowed to store funds to cover _network fees_ in the contract.
+  - Solvers are allowed to use funds in the settlement contract to offset price variations on liquidity sources, also referred to as _slippage_.
+  - Solvers are allowed to use funds in the settlement contract for executing trades, also referred to as _internalizations_, if the token which accumulates in the contract is among marked as `"trusted": true` in the auction json, see the [API specification](../../apis/driver.mdx).
+  Solvers bear responsibility for all changes to balances of the settlement contract. The concrete implementation of buffer accounting is described in the [accounting section](accounting).
 
-- Slippage accounting: With the exception of protocol, partner and network fees paid by users, any token imbalance within the settlement contract that is the result of a settlement is accounted for under the term "slippage accounting", and is fully owned by the corresponding solver, as specified in [CIP-17](https://snapshot.org/#/cow.eth/proposal/0xf9c98a2710dc72c906bbeab9b8fe169c1ed2e9af6a67776cc29b8b4eb44d0fb2). More information on the full accounting process, including slippage, can be found [here](/cow-protocol/reference/core/auctions/accounting).
 
 :::note
 
@@ -49,7 +74,7 @@ The deadline for solutions depends on the network and is set as a specific numbe
 
 ## Governance
 
-Social consensus rules are not enforced by the smart contract or the autopilot. However, by voting on them in a CoW improvement proposal (CIP), CoW DAO has decided that these rules should be followed to ensure a healthy competition. For that, the core team has developed monitoring tools that check every single on-chain settlement and flag suspicious ones.
+Social consensus rules are not enforced by the smart contract or the autopilot. However, by voting on them in a CoW Improvement Proposal (CIP), CoW DAO has decided that these rules should be followed to ensure a healthy competition. For that, the core team has developed monitoring tools that check every on-chain settlement and flag suspicious ones.
 
 :::caution
 
@@ -57,7 +82,7 @@ At CoW DAO's discretion, systematic violation of these rules may lead to penaliz
 
 :::
 
-- Provision of unfair solutions ([CIP-11](https://snapshot.org/#/cow.eth/proposal/0x16d8c681d52b24f1ccd854084e07a99fce6a7af1e25fd21ddae6534b411df870)). Uniform clearing prices computed by solvers should be in line (or even better) than what the users would get elsewhere. This becomes particularly relevant for solutions where CoWs happen, i.e., when some volume is settled as part of a CoW and not by routing through an AMM. This rule is often referenced as "EBBO" (Ethereum Best Bid and Offer), and the AMMs that "should" be considered by solvers when computing an execution route for an order are referenced as "Baseline liquidity". Baseline liquidity is defined with a set of protocols and a set of so-called base tokens, such that for every protocol and every order, the following pairs are considered:
+- Provision of unfair solutions ([CIP-11](https://snapshot.org/#/cow.eth/proposal/0x16d8c681d52b24f1ccd854084e07a99fce6a7af1e25fd21ddae6534b411df870)). Uniform directional clearing prices computed by solvers should be in line (or even better) than what the users would get elsewhere. This becomes particularly relevant for solutions where CoWs happen, i.e., when some volume is settled as part of a CoW and not by routing through an AMM. This rule is often referenced as "EBBO" (Ethereum Best Bid and Offer), and the AMMs that "should" be considered by solvers when computing an execution route for an order are referenced as "Baseline liquidity". Baseline liquidity is defined with a set of protocols and a set of so-called base tokens, such that for every protocol and every order, the following pairs are considered:
 
   - sell token / base token
   - buy token / base token
@@ -131,10 +156,8 @@ At CoW DAO's discretion, systematic violation of these rules may lead to penaliz
 
   </details>
 
-<!-- Protocols defined here https://github.com/cowprotocol/infrastructure/blob/staging/services/driver/liquidity.ts#L285 -->
-<!-- Base tokens defined here https://github.com/cowprotocol/infrastructure/blob/staging/services/config/tokens/base/linea.ts -->
+More details about how a certificate of an EBBO violation is computed, and what are the steps taken in case such a violation occurs can be found in [this](ebbo-rules) section.
 
-More details about how a certificate of an EBBO violation is computed, and what are the steps taken in case such a violation occurs can be found in [this](/cow-protocol/reference/core/auctions/ebbo-rules) section.
 
 - Inflation of the score ([CIP-11](https://snapshot.org/#/cow.eth/proposal/0x16d8c681d52b24f1ccd854084e07a99fce6a7af1e25fd21ddae6534b411df870)). Using tokens for the sole purpose of inflating the score of a solution or maximizing the reward is forbidden (e.g., by creating fake tokens, or wash-trading with real tokens).
 
@@ -142,6 +165,6 @@ More details about how a certificate of an EBBO violation is computed, and what 
 
 - Local Token Conservation, aka illegal surplus shifts ([CIP-11](https://snapshot.org/#/cow.eth/proposal/0x16d8c681d52b24f1ccd854084e07a99fce6a7af1e25fd21ddae6534b411df870)). Due to the nature of batching, a solver can intentionally transfer surplus among orders that share a common token. This is not allowed, and non-trivial surplus shifts can be penalized and can lead to solver slashing.
 
-- Pennying/overbidding ([CIP-13](https://snapshot.org/#/cow.eth/proposal/0x812273c78abe1cea303d8381e1fb901a4cb701715fd24f4b769d0a0b3779b3e2)). Pennying or the evolution of it in the context of CIP-20 known as overbidding, is the intentional inflation of the reported score, by a solver, with the hope that their solution will win and that solver rewards, and/or the possibility of positive slippage, will cover the loss that they seem to be committing to. Such behavior does not benefit anyone and thus, systematically doing so can lead to solver slashing.
+- Pennying/overbidding ([CIP-13](https://snapshot.org/#/cow.eth/proposal/0x812273c78abe1cea303d8381e1fb901a4cb701715fd24f4b769d0a0b3779b3e2)). Pennying or overbidding is the intentional inflation of the reported score, by a solver, with the hope that their solution will win and that solver rewards, and/or the possibility of positive slippage, will cover the loss that they seem to be committing to. Systematically doing so can lead to solver slashing.
 
 - Other malicious behavior ([CIP-11](https://snapshot.org/#/cow.eth/proposal/0x16d8c681d52b24f1ccd854084e07a99fce6a7af1e25fd21ddae6534b411df870)). Malicious solver behavior is not limited to the above examples. Slashing can still happen for other reasons where there is intentional harm caused to the user and/or the protocol at the discretion of the CoW DAO. A concrete example of such is a solver intentionally not including the [pre/post hooks](/cow-protocol/reference/core/intents/hooks) associated with an order.
