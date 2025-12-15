@@ -1,4 +1,5 @@
 ---
+id: rewards
 sidebar_position: 3
 ---
 
