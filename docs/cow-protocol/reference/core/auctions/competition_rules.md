@@ -51,7 +51,7 @@ All solvers participating in the solver competition must abide by certain rules.
   - Solvers are supposed to store _protocol and partner fees_ in the settlement contract.
   - Solvers are allowed to store funds to cover _network fees_ in the contract.
   - Solvers are allowed to use funds in the settlement contract to offset price variations on liquidity sources, also referred to as _slippage_.
-  - Solvers are allowed to use funds in the settlement contract for executing trades, also referred to as _internalizations_, if the token which accumulates in the contract is among marked as `"trusted": true` in the auction json, see the [API specification](../../api/driver.mdx).
+  - Solvers are allowed to use funds in the settlement contract for executing trades, also referred to as _internalizations_, if the token which accumulates in the contract is among marked as `"trusted": true` in the auction json, see the [API specification](../../apis/driver.mdx).
   Solvers bear responsibility for all changes to balances of the settlement contract. The concrete implementation of buffer accounting is described in the [accounting section](accounting).
 
 
