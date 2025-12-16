@@ -592,3 +592,9 @@ createCowSwapWidget(container, { params })
 This banner will be hidden:
 
 ![Hidden banner](/img/tutorials/widget-hidden-banner.png)
+
+## Troubleshooting
+
+### White background of the iframe
+
+1. If you use ` <meta name="color-scheme">` in your HTML document, it might affect the widget iframe background color. Try to remove the meta tag in that case. 
