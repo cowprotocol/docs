@@ -597,4 +597,4 @@ This banner will be hidden:
 
 ### White background of the iframe
 
-1. If you use ` <meta name="color-scheme">` in your HTML document, it might affect the widget iframe background color. Try to remove the meta tag in that case. 
+1. If you use `<meta name="color-scheme">` in your HTML document, it might affect the widget iframe background color. Try to remove the meta tag in that case. 
