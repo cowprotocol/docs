@@ -95,6 +95,7 @@ const b: PartnerFee = {
     [SupportedChainId.LENS]: { [TradeType.SWAP]: 100, [TradeType.LIMIT]: 50, [TradeType.ADVANCED]: 30 },
     [SupportedChainId.BNB]: { [TradeType.SWAP]: 100, [TradeType.LIMIT]: 50, [TradeType.ADVANCED]: 30 },
     [SupportedChainId.LINEA]: { [TradeType.SWAP]: 100, [TradeType.LIMIT]: 50, [TradeType.ADVANCED]: 30 },
+    [SupportedChainId.PLASMA]: { [TradeType.SWAP]: 100, [TradeType.LIMIT]: 50, [TradeType.ADVANCED]: 30 },
     [SupportedChainId.SEPOLIA]: { [TradeType.SWAP]: 100, [TradeType.LIMIT]: 50, [TradeType.ADVANCED]: 30 },
   },
   recipient: '0x0000000000000000000000000000000000000000',
@@ -114,6 +115,7 @@ const c: PartnerFee = {
       [SupportedChainId.LENS]: '0x...c',
       [SupportedChainId.BNB]: '0x...c',
       [SupportedChainId.LINEA]: '0x...c',
+      [SupportedChainId.PLASMA]: '0x...c',
       [SupportedChainId.SEPOLIA]: '0x...d',
     },
     [TradeType.LIMIT]: {
@@ -126,6 +128,7 @@ const c: PartnerFee = {
       [SupportedChainId.LENS]: '0x...y',
       [SupportedChainId.BNB]: '0x...y',
       [SupportedChainId.LINEA]: '0x...y',
+      [SupportedChainId.PLASMA]: '0x...y',
       [SupportedChainId.SEPOLIA]: '0x...h',
     },
     [TradeType.ADVANCED]: {
@@ -138,6 +141,7 @@ const c: PartnerFee = {
       [SupportedChainId.LENS]: '0x...t',
       [SupportedChainId.BNB]: '0x...t',
       [SupportedChainId.LINEA]: '0x...t',
+      [SupportedChainId.PLASMA]: '0x...t',
       [SupportedChainId.SEPOLIA]: '0x...l',
     },
   },
