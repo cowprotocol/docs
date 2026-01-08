@@ -21,6 +21,7 @@ At the core of CoW Protocol lies the COW token, which serves as a governance tok
 | Lens         | N/A                                                                                                                                       |
 | BNB          | N/A                                                                                                                                       |
 | Linea        | N/A                                                                                                                                       |
+| Plasma       | N/A                                                                                                                                       |
 
 [^bridgedTokens]:
     These contracts were not developed nor deployed by CoW DAO, however, they are the bridged versions of the canonical token from Ethereum, using the official bridges.
@@ -39,6 +40,7 @@ At the core of CoW Protocol lies the COW token, which serves as a governance tok
 | Lens         | N/A                                                                                                                    |
 | BNB          | N/A                                                                                                                    |
 | Linea        | N/A                                                                                                                    |
+| Plasma       | N/A                                                                                                                    |
 
 ## Supply & Inflation Schedule
 
@@ -94,7 +96,7 @@ This is the maximum number of COW tokens that will ever exist. For CoW Protocol,
 
 This is the starting point of the calculation-but not all of those tokens are active or tradeable yet.
 
-2. Unvested COW Tokens
+1. Unvested COW Tokens
 
 These are tokens that have been allocated (to team members, contributors, advisors, etc.) but are locked and not yet available for use or sale.
 
@@ -102,7 +104,7 @@ Vesting schedules are a common mechanism in crypto projects to align long-term i
 
 These are tokens that have been allocated (to team members, investors, advisors, etc.) but are not yet vested and therefore not yet available for use or sale.
 
-3. DAO Treasury Holdings
+1. DAO Treasury Holdings
 
 The DAO treasury holds a significant portion of the token supply for long-term governance, ecosystem growth, partnerships, and grants. These tokens are not circulating because they're not in the hands of individual users or entities who can trade them freely.
 
