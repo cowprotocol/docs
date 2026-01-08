@@ -46,6 +46,7 @@ The payment is capped from above and below using the function $$\textrm{cap}(x) 
 - Lens: $$10 \;\textrm{GHO}$$
 - BNB: $$0.04 \;\textrm{BNB}$$
 - Linea: $$0.0015 \;\textrm{ETH}$$
+- Plasma: $$0.XXX \;\textrm{XPL}$$
 
 If only one solver submits solutions, $$\textrm{referenceScore}_i$$ is, by definition, zero.
 
@@ -69,7 +70,7 @@ As already discussed, solvers are responsible for paying the gas cost of a solut
 
 With respect to optimal bidding, note that the protocol rewards allow a solver to participate in an auction without misreporting the score they can generate (net of expected costs). This is easy to see if the cap is not binding, and misreporting does not affect $$\textrm{referenceScore}_i$$. Then, by reducing the reported score of a solution, solver $$i$$ does not affect its payoff if this solution is among the winners (which only shifts from protocol rewards to positive slippage), while reducing the probability that this solution is a winner. It is therefore a dominant strategy to bid truthfully.
 
-The presence of the cap on rewards $$c_u$$, however, makes the problem more complex as it introduces a "first-price auction" logic: if the difference between the best and second-best solution is very large, then the winning solver wins more when it underreports its score.  The filtering step of the fair combinatorial auction also makes this problem more complex, because there are some edge cases in which by reducing the score of a solution, solver $i$ can benefit by making the filtering steps less stringent for its opponents (see [here](https://forum.cow.fi/t/combinatorial-auctions-from-theory-to-practice-via-some-more-theory-about-rewards/2877) for a discussion). However, determining the optimal amount of underreporting is very complex and requires each solver to make strong assumptions regarding the performance of competing solvers.
+The presence of the cap on rewards $$c_u$$, however, makes the problem more complex as it introduces a "first-price auction" logic: if the difference between the best and second-best solution is very large, then the winning solver wins more when it underreports its score. The filtering step of the fair combinatorial auction also makes this problem more complex, because there are some edge cases in which by reducing the score of a solution, solver $i$ can benefit by making the filtering steps less stringent for its opponents (see [here](https://forum.cow.fi/t/combinatorial-auctions-from-theory-to-practice-via-some-more-theory-about-rewards/2877) for a discussion). However, determining the optimal amount of underreporting is very complex and requires each solver to make strong assumptions regarding the performance of competing solvers.
 
 To summarize, truthfully revealing the (cost-adjusted) score that a solver can generate for each submitted solution is optimal if the cap is not binding, and misreporting does not affect $$\textrm{referenceScore}_i$$. It is not necessarily optimal in uncompetitive auctions when the difference between the best and second-best solution may be large, and in some edge cases in which a solver may benefit from making the filtering step less stringent. However, in these cases, deriving the optimal strategy is a very complex problem. We conclude by noting that most CoW Protocol batches are very competitive - at the time of writing (November 2025) the cap on rewards is binding only in about 9% of auctions - and that a solver benefits by making the filtering steps less stringent for its opponents only in sporadic cases.
 
@@ -95,5 +96,6 @@ The current rewards for eligible quotes are as follows:
 - Lens Chain: $$\min\{0.15 ~\textrm{GHO}, 6 ~\textrm{COW}\}$$
 - BNB Chain: $$\min\{0.001 ~\textrm{BNB}, 6 ~\textrm{COW}\}$$
 - Linea: $$\min\{0.00003 ~\textrm{ETH}, 6 ~\textrm{COW}\}$$.
+- Plasma: $$\min\{0.XXX ~\textrm{XPL}, 6 ~\textrm{COW}\}$$.
 
 where, again, the conversion from native token to COW is done by using an up-to-date price (specifically, the average native token/COW Dune prices of the past 24h before the payout are used to determine these exchange rates).
