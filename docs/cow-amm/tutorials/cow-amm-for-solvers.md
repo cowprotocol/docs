@@ -46,6 +46,7 @@ The helper contracts are deployed here:
 - Lens N/A
 - BNB N/A
 - Linea N/A
+- Plasma N/A
 
 ### Settling a custom order
 
