@@ -36,24 +36,23 @@ All solvers participating in the solver competition must abide by certain rules.
     1. Pre-hooks need to be executed before pulling in user funds
     2. Post-hooks need to be executed after pushing out user order proceeds
     3. Partially fillable orders:
-        1. Should execute the pre-hooks on the first fill only
-        2. Should execute the post-hooks on every fill
+       1. Should execute the pre-hooks on the first fill only
+       2. Should execute the post-hooks on every fill
     4. Execution of a hook means:
-        1. There exists an internal CALL in the settlement transaction with a
-      matching triplet: target, gasLimit, calldata
-        2. The hook needs to be attempted, meaning the hook reverting is not violating any rules
-        3. Intermediate calls between the call to settle and hook execution must not revert
-        4. The available gas forwarded to the hook CALL is greater or equal than specified gasLimit
+       1. There exists an internal CALL in the settlement transaction with a
+          matching triplet: target, gasLimit, calldata
+       2. The hook needs to be attempted, meaning the hook reverting is not violating any rules
+       3. Intermediate calls between the call to settle and hook execution must not revert
+       4. The available gas forwarded to the hook CALL is greater or equal than specified gasLimit
   - The settlement is executed before or at the deadline of that auction.
-  Not following these rules can result in immediate denylisting of a solver until a manual inspection is executed. These rules are currently implemented in the [circuit-breaker-validator](https://github.com/cowprotocol/circuit-breaker-validator).
+    Not following these rules can result in immediate denylisting of a solver until a manual inspection is executed. These rules are currently implemented in the [circuit-breaker-validator](https://github.com/cowprotocol/circuit-breaker-validator).
 
 - Buffer usage: solvers are allowed to use funds in the settlement contract for certain types of use cases.
   - Solvers are supposed to store _protocol and partner fees_ in the settlement contract.
   - Solvers are allowed to store funds to cover _network fees_ in the contract.
   - Solvers are allowed to use funds in the settlement contract to offset price variations on liquidity sources, also referred to as _slippage_.
   - Solvers are allowed to use funds in the settlement contract for executing trades, also referred to as _internalizations_, if the token which accumulates in the contract is among marked as `"trusted": true` in the auction json, see the [API specification](../../apis/driver.mdx).
-  Solvers bear responsibility for all changes to balances of the settlement contract. The concrete implementation of buffer accounting is described in the [accounting section](accounting).
-
+    Solvers bear responsibility for all changes to balances of the settlement contract. The concrete implementation of buffer accounting is described in the [accounting section](accounting).
 
 :::note
 
@@ -68,6 +67,7 @@ The deadline for solutions depends on the network and is set as a specific numbe
 - Lens: 40 blocks
 - BNB: 40 blocks
 - Linea: 20 blocks
+- Plasma: 20 blocks
 <!-- Blocks defined here https://github.com/cowprotocol/infrastructure/blob/staging/services/autopilot/config/index.ts#L21 -->
 
 :::
@@ -156,8 +156,15 @@ At CoW DAO's discretion, systematic violation of these rules may lead to penaliz
 
   </details>
 
-More details about how a certificate of an EBBO violation is computed, and what are the steps taken in case such a violation occurs can be found in [this](ebbo-rules) section.
+  <details>
+    <summary>Plasma chain baseline protocols and tokens</summary>
 
+  - **Protocols**: Uniswap v3
+  - **Base tokens**: [`WETH`](https://plasmascan.to/token/0x9895D81bB462A195b4922ED7De0e3ACD007c32CB), [`USDT0`](https://plasmascan.to/token/0xB8CE59FC3717ada4C02eaDF9682A9e934F625ebb), [`WXPL`](https://plasmascan.to/token/0x6100E367285b01F48D07953803A2d8dCA5D19873)
+
+  </details>
+
+More details about how a certificate of an EBBO violation is computed, and what are the steps taken in case such a violation occurs can be found in [this](ebbo-rules) section.
 
 - Inflation of the score ([CIP-11](https://snapshot.org/#/cow.eth/proposal/0x16d8c681d52b24f1ccd854084e07a99fce6a7af1e25fd21ddae6534b411df870)). Using tokens for the sole purpose of inflating the score of a solution or maximizing the reward is forbidden (e.g., by creating fake tokens, or wash-trading with real tokens).
 
