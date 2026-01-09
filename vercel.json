@@ -14,7 +14,7 @@
         },
         {
             "source": "/cow-sdk/getting-started-with-the-sdk",
-            "destination": "https://learn.cow.fi/tutorial/getting-started-order",
+            "destination": "/cow-protocol/integrate/sdk",
             "statusCode": 301
         },
         {
@@ -24,12 +24,12 @@
         },
         {
             "source": "/cow-sdk/querying-the-cow-subgraph",
-            "destination": "https://learn.cow.fi/tutorial/getting-started-order",
-            "permanent": false
+            "destination": "/cow-protocol/integrate/api",
+            "statusCode": 301
         },
         {
             "source": "/cow-sdk/sign-and-post-orders",
-            "destination": "https://learn.cow.fi/tutorial/sign-order",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
             "statusCode": 301
         },
         {
@@ -139,8 +139,8 @@
         },
         {
             "source": "/solvers/how-to-build-a-solver",
-            "destination": "/cow-protocol/tutorials/solvers",
-            "permanent": false
+            "destination": "/category/solver",
+            "statusCode": 301
         },
         {
             "source": "/solvers/in-depth-solver-specification",
@@ -149,7 +149,7 @@
         },
         {
             "source": "/solvers/solvers",
-            "destination": "/cow-protocol/tutorials/solvers",
+            "destination": "/category/solver",
             "statusCode": 301
         },
         {
@@ -159,17 +159,17 @@
         },
         {
             "source": "/tutorials/cowswap-trades-with-a-gnosis-safe-wallet",
-            "destination": "https://learn.cow.fi/tutorial/create-pre-signed-order",
+            "destination": "/cow-protocol/tutorials/swap-in-safe-app",
             "statusCode": 301
         },
         {
             "source": "/tutorials/how-to-place-erc-1271-smart-contract-orders",
-            "destination": "https://learn.cow.fi/tutorial/getting-started-order",
-            "permanent": false
+            "destination": "/cow-protocol/reference/core/signing-schemes",
+            "statusCode": 301
         },
         {
             "source": "/tutorials/how-to-submit-orders-via-the-api",
-            "destination": "https://learn.cow.fi/tutorial/getting-started-order",
+            "destination": "/cow-protocol/integrate/api",
             "statusCode": 301
         },
         {
@@ -189,12 +189,12 @@
         },
         {
             "source": "/cow-sdk/order-meta-data-appdata/bonus-cidv0-and-appdata",
-            "destination": "https://learn.cow.fi/tutorial/simple-app-data",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
             "statusCode": 301
         },
         {
             "source": "/cow-sdk/order-meta-data-appdata/create-a-meta-data-document",
-            "destination": "https://learn.cow.fi/tutorial/simple-app-data",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
             "statusCode": 301
         },
         {
@@ -204,12 +204,12 @@
         },
         {
             "source": "/cow-sdk/order-meta-data-appdata/get-the-appdata-hex",
-            "destination": "https://learn.cow.fi/tutorial/simple-app-data",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
             "statusCode": 301
         },
         {
             "source": "/cow-sdk/order-meta-data-appdata/upload-document-to-ipfs",
-            "destination": "https://learn.cow.fi/tutorial/simple-app-data",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
             "statusCode": 301
         },
         {
@@ -229,7 +229,7 @@
         },
         {
             "source": "/cow-sdk/sign-and-post-orders/step-2-sign-the-order",
-            "destination": "https://learn.cow.fi/tutorial/sign-order",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
             "statusCode": 301
         },
         {
@@ -239,22 +239,22 @@
         },
         {
             "source": "/front-end/creating-app-ids/choose-the-appcode-for-the-app",
-            "destination": "https://learn.cow.fi/tutorial/simple-app-data",
+            "destination": "/cow-protocol/integrate/widget",
             "statusCode": 301
         },
         {
             "source": "/front-end/creating-app-ids/create-the-order-meta-data-file",
-            "destination": "https://learn.cow.fi/tutorial/simple-app-data",
+            "destination": "/cow-protocol/integrate/widget",
             "statusCode": 301
         },
         {
             "source": "/front-end/creating-app-ids/get-the-digest-hash-from-the-cid",
-            "destination": "https://learn.cow.fi/tutorial/simple-app-data",
+            "destination": "/cow-protocol/integrate/widget",
             "statusCode": 301
         },
         {
             "source": "/front-end/creating-app-ids/upload-the-file-to-ipfs",
-            "destination": "https://learn.cow.fi/tutorial/simple-app-data",
+            "destination": "/cow-protocol/integrate/widget",
             "statusCode": 301
         },
         {
@@ -294,12 +294,12 @@
         },
         {
             "source": "/smart-contracts/eth-flow-contract/order-cancellation",
-            "destination": "https://learn.cow.fi/tutorial/cancel-eth-flow",
+            "destination": "/cow-protocol/reference/contracts/periphery/eth-flow",
             "statusCode": 301
         },
         {
             "source": "/smart-contracts/eth-flow-contract/order-creation",
-            "destination": "https://learn.cow.fi/tutorial/create-eth-flow",
+            "destination": "/cow-protocol/reference/contracts/periphery/eth-flow",
             "statusCode": 301
         },
         {
@@ -339,28 +339,28 @@
         },
         {
             "source": "/solvers/how-to-build-a-solver/how-to-test-a-solver-locally",
-            "destination": "/cow-protocol/tutorials/solvers",
-            "permanent": false
+            "destination": "/category/solver",
+            "statusCode": 301
         },
         {
             "source": "/solvers/how-to-build-a-solver/how-to-write-a-solver",
-            "destination": "/cow-protocol/tutorials/solvers",
-            "permanent": false
+            "destination": "/category/solver",
+            "statusCode": 301
         },
         {
             "source": "/solvers/how-to-build-a-solver/solver-workshop",
-            "destination": "/cow-protocol/tutorials/solvers",
-            "permanent": false
+            "destination": "/category/solver",
+            "statusCode": 301
         },
         {
             "source": "/solvers/in-depth-solver-specification/getting-notified-about-the-ranking",
-            "destination": "/cow-protocol/tutorials/solvers",
-            "permanent": false
+            "destination": "/cow-protocol/reference/apis/solver",
+            "statusCode": 301
         },
         {
             "source": "/solvers/in-depth-solver-specification/input-batch-auction-instances",
-            "destination": "/cow-protocol/tutorials/solvers",
-            "permanent": false
+            "destination": "/cow-protocol/reference/apis/solver",
+            "statusCode": 301
         },
         {
             "source": "/solvers/in-depth-solver-specification/introduction",
@@ -369,17 +369,17 @@
         },
         {
             "source": "/solvers/in-depth-solver-specification/output-batch-auction-solutions",
-            "destination": "/cow-protocol/tutorials/solvers",
-            "permanent": false
+            "destination": "/cow-protocol/reference/apis/solver",
+            "statusCode": 301
         },
         {
             "source": "/solvers/in-depth-solver-specification/sample-test-instances",
-            "destination": "/cow-protocol/tutorials/solvers",
-            "permanent": false
+            "destination": "/cow-protocol/reference/apis/solver",
+            "statusCode": 301
         },
         {
             "source": "/solvers/in-depth-solver-specification/slippage-accounting",
-            "destination": "/cow-protocol/reference/core/auctions/slippage",
+            "destination": "/cow-protocol/reference/apis/solver",
             "statusCode": 301
         },
         {
@@ -399,7 +399,7 @@
         },
         {
             "source": "/tutorials/cowswap-trades-with-a-gnosis-safe-wallet/approving-the-tokens-to-sell",
-            "destination": "https://learn.cow.fi/tutorial/create-pre-signed-order",
+            "destination": "/cow-protocol/tutorials/swap-in-safe-app",
             "statusCode": 301
         },
         {
@@ -409,38 +409,38 @@
         },
         {
             "source": "/tutorials/cowswap-trades-with-a-gnosis-safe-wallet/creating-the-order",
-            "destination": "https://learn.cow.fi/tutorial/create-pre-signed-order",
+            "destination": "/cow-protocol/tutorials/swap-in-safe-app",
             "statusCode": 301
         },
         {
             "source": "/tutorials/cowswap-trades-with-a-gnosis-safe-wallet/running-the-tx-from-the-safe",
-            "destination": "https://learn.cow.fi/tutorial/create-pre-signed-order",
+            "destination": "/cow-protocol/tutorials/swap-in-safe-app",
             "statusCode": 301
         },
         {
             "source": "/tutorials/how-to-place-erc-1271-smart-contract-orders/additional-use-cases",
-            "destination": "https://learn.cow.fi/tutorial/create-pre-signed-order",
-            "permanent": false
+            "destination": "/cow-protocol/reference/core/signing-schemes",
+            "statusCode": 301
         },
         {
             "source": "/tutorials/how-to-place-erc-1271-smart-contract-orders/current-orders",
-            "destination": "https://learn.cow.fi/tutorial/create-pre-signed-order",
-            "permanent": false
+            "destination": "/cow-protocol/reference/core/signing-schemes",
+            "statusCode": 301
         },
         {
             "source": "/tutorials/how-to-place-erc-1271-smart-contract-orders/good-after-time-gat-orders",
-            "destination": "https://learn.cow.fi/tutorial/create-pre-signed-order",
-            "permanent": false
+            "destination": "/cow-protocol/reference/core/signing-schemes",
+            "statusCode": 301
         },
         {
             "source": "/tutorials/how-to-place-erc-1271-smart-contract-orders/security",
-            "destination": "https://learn.cow.fi/tutorial/create-pre-signed-order",
-            "permanent": false
+            "destination": "/cow-protocol/reference/core/signing-schemes",
+            "statusCode": 301
         },
         {
             "source": "/tutorials/how-to-place-erc-1271-smart-contract-orders/smart-contract-wallet-orders",
-            "destination": "https://learn.cow.fi/tutorial/create-pre-signed-order",
-            "permanent": false
+            "destination": "/cow-protocol/reference/core/signing-schemes",
+            "statusCode": 301
         },
         {
             "source": "/tutorials/how-to-place-erc-1271-smart-contract-orders/smart-orders",
@@ -449,12 +449,12 @@
         },
         {
             "source": "/tutorials/how-to-place-erc-1271-smart-contract-orders/the-basics-of-erc-1271",
-            "destination": "https://learn.cow.fi/tutorial/create-pre-signed-order",
-            "permanent": false
+            "destination": "/cow-protocol/reference/core/signing-schemes",
+            "statusCode": 301
         },
         {
             "source": "/tutorials/how-to-submit-orders-via-the-api/1.-set-allowance-for-the-sell-token",
-            "destination": "https://learn.cow.fi/tutorial/approve-sell-token-order",
+            "destination": "/cow-protocol/integrate/api",
             "statusCode": 301
         },
         {
@@ -464,7 +464,7 @@
         },
         {
             "source": "/tutorials/how-to-submit-orders-via-the-api/4.-signing-the-order",
-            "destination": "https://learn.cow.fi/tutorial/sign-order",
+            "destination": "/cow-protocol/integrate/api",
             "statusCode": 301
         },
         {
@@ -504,7 +504,7 @@
         },
         {
             "source": "/front-end/creating-app-ids/create-the-order-meta-data-file/additional-order-preferences",
-            "destination": "https://learn.cow.fi/tutorial/simple-app-data",
+            "destination": "/cow-protocol/integrate/widget",
             "statusCode": 301
         },
         {
@@ -514,7 +514,7 @@
         },
         {
             "source": "/front-end/creating-app-ids/create-the-order-meta-data-file/metadata",
-            "destination": "https://learn.cow.fi/tutorial/simple-app-data",
+            "destination": "/cow-protocol/integrate/widget",
             "statusCode": 301
         },
         {
@@ -534,12 +534,12 @@
         },
         {
             "source": "/overview/cow-hooks/cow-hooks-example/requirements",
-            "destination": "https://learn.cow.fi/tutorial/getting-started-order",
-            "permanent": false
+            "destination": "/cow-protocol/concepts/order-types/cow-hooks",
+            "statusCode": 301
         },
         {
             "source": "/tutorials/submit-limit-orders-via-api/submitting-the-limit-order/1.-setting-allowance-for-the-sell-token",
-            "destination": "https://learn.cow.fi/tutorial/approve-sell-token-order",
+            "destination": "/cow-protocol/integrate/api",
             "statusCode": 301
         },
         {
@@ -559,22 +559,17 @@
         },
         {
             "source": "/tutorials/how-to-write-a-solver",
-            "destination": "/cow-protocol/tutorials/solvers",
-            "permanent": false
+            "destination": "/category/solver",
+            "statusCode": 301
         },
         {
             "source": "/tutorials/solver-workshop",
-            "destination": "/cow-protocol/tutorials/solvers",
-            "permanent": false
+            "destination": "/category/solver",
+            "statusCode": 301
         },
         {
             "source": "/tutorials/how-to-test-a-solver-locally",
-            "destination": "/cow-protocol/tutorials/solvers",
-            "permanent": false
-        },
-        {
-            "source": "/smart-contracts/eth-flow-contract",
-            "destination": "/cow-protocol/reference/contracts/periphery/eth-flow",
+            "destination": "/category/solver",
             "statusCode": 301
         },
         {
@@ -594,7 +589,752 @@
         },
         {
             "source": "/off-chain-services/in-depth-solver-specification/getting-notified-about-the-ranking",
-            "destination": "/cow-protocol/tutorials/solvers",
+            "destination": "/cow-protocol/reference/apis/solver",
+            "statusCode": 301
+        },
+        {
+            "source": "/,",
+            "destination": "/",
+            "statusCode": 301
+        },
+        {
+            "source": "/52fc4674f2c64092975024d52015917a",
+            "destination": "/governance/grants",
+            "statusCode": 301
+        },
+        {
+            "source": "/Application-Process-52fc4674f2c64092975024d52015917a",
+            "destination": "/governance/grants",
+            "statusCode": 301
+        },
+        {
+            "source": "/CoW-Grants-DAO-8c75d9e77e1144d99963913bfd839926",
+            "destination": "/governance/grants",
+            "statusCode": 301
+        },
+        {
+            "source": "/Committee-Members-and-Safe-Control-Structure-68ab5000cf654da186e46bff619cddfe",
+            "destination": "/governance/grants",
+            "statusCode": 301
+        },
+        {
+            "source": "/Completed-RFP-Safe-App-for-creating-milkman-orders-012bd8ac810a4608869e535928b50e15",
+            "destination": "/governance/grants",
+            "statusCode": 301
+        },
+        {
+            "source": "/IN-progress-RFP-Stop-Loss-Order-78d509fe655b45bcb50ddfa69655c2d5",
+            "destination": "/governance/grants",
+            "statusCode": 301
+        },
+        {
+            "source": "/Overview-and-Evaluation-Process-f5e8e89849264c48b2fa9a47199e788d",
+            "destination": "/governance/grants",
+            "statusCode": 301
+        },
+        {
+            "source": "/Request-For-Proposals-7e8b1c3b20af4911947c6987d499276e",
+            "destination": "/governance/grants",
+            "statusCode": 301
+        },
+        {
+            "source": "/blog",
+            "destination": "/",
+            "statusCode": 301
+        },
+        {
+            "source": "/category/concepts-2",
+            "destination": "/category/concepts",
+            "statusCode": 301
+        },
+        {
+            "source": "/category/integrators",
+            "destination": "/category/integrate",
+            "statusCode": 301
+        },
+        {
+            "source": "/category/mev-concepts",
+            "destination": "/mevblocker/concepts/MEV",
+            "statusCode": 301
+        },
+        {
+            "source": "/category/searchers",
+            "destination": "/mevblocker/searchers",
+            "statusCode": 301
+        },
+        {
+            "source": "/category/users",
+            "destination": "/category/integrate",
+            "statusCode": 301
+        },
+        {
+            "source": "/category/users--integrators",
+            "destination": "/category/integrate",
+            "statusCode": 301
+        },
+        {
+            "source": "/classic",
+            "destination": "/cow-protocol/tutorials/widget",
+            "statusCode": 301
+        },
+        {
+            "source": "/completed-RFP-Have-I-been-MEV-d-Twitter-bot-4850cc38b1124868b0e3d830dcc2105b",
+            "destination": "/governance/grants",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-",
+            "destination": "/cow-protocol",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/concepts/how-it-works",
+            "destination": "/category/how-it-works",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/concepts/intents",
+            "destination": "/cow-protocol/concepts/introduction/intents",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/concepts/introduction/batch-auctions",
+            "destination": "/cow-protocol/concepts/introduction/fair-combinatorial-auction",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/overview/what-is-cow-protocol",
+            "destination": "/cow-protocol",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/r",
+            "destination": "/cow-protocol",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/apis/quote",
+            "destination": "/cow-protocol/reference/apis/orderbook",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/classes/MetadataApi",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/interfaces/Ipfs",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/interfaces/v0_11_0.CoWHook",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/interfaces/v0_11_0.Widget",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/interfaces/v0_1_0.Referrer",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/interfaces/v0_3_0.Metadata",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/interfaces/v0_5_0.AppDataRootSchema",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/interfaces/v0_5_0.Metadata",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/interfaces/v0_5_0.OrderClass",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/interfaces/v0_6_0.AppDataRootSchema",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/interfaces/v0_6_0.OrderClass",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/interfaces/v0_8_0.Metadata",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/interfaces/v0_8_0.Referrer",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/interfaces/v0_9_0.OrderClass",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/interfaces/v0_9_0.Referrer",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/interfaces/v1_0_0.CoWHook",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/interfaces/v1_0_0.Metadata",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/interfaces/v1_0_0.Quote",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/interfaces/v1_0_0.Referrer",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/interfaces/v1_0_0.Widget",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/interfaces/v1_1_0.AppDataRootSchema",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/interfaces/v1_1_0.CoWHook",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/interfaces/v1_1_0.Referrer",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/interfaces/v1_3_0.CoWHook",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/interfaces/v1_3_0.Metadata",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/interfaces/v1_4_0.CoWHook",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/interfaces/v1_4_0.OrderInteractionHooks",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/interfaces/v1_5_0.Bridging",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/interfaces/v1_5_0.CoWHook",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/interfaces/v1_5_0.OrderInteractionHooks",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/interfaces/v1_5_0.Quote",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/interfaces/v1_5_0.Referrer",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/interfaces/v1_5_0.Widget",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/interfaces/v1_6_0.Bridging",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/interfaces/v1_6_0.OrderClass",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/interfaces/v1_6_0.OrderInteractionHooks",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/interfaces/v1_6_0.Quote",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/interfaces/v1_6_0.UTMCodes",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/modules",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/namespaces/v0_10_0",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/namespaces/v0_1_0",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/namespaces/v0_3_0",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/namespaces/v0_5_0",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/namespaces/v0_8_0",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/namespaces/v0_9_0",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/namespaces/v1_0_0",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/app-data/namespaces/v1_1_0",
+            "destination": "/cow-protocol/reference/core/intents/app-data",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/classes/AcrossBridgeProvider",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/classes/BridgeOrderParsingError",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/classes/BridgeProviderQuoteError",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/classes/BungeeBridgeProvider",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/classes/CowError",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/classes/CowShedHooks",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/classes/CowShedSdk",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/classes/OrderBookApi",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/classes/OrderBookApiError",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/classes/OrderSigningUtils",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/classes/SubgraphApi",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/classes/Twap",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/enums/EcdsaSigningScheme",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/enums/OrderCancellationError.errorType",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/enums/OrderStatus",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/enums/PriceEstimationError.errorType",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/enums/PriceQuality",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/enums/SigningScheme",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/enums/WeirollCommandFlags",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/interfaces/AcrossBridgeProviderOptions",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/interfaces/ApiContext",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/interfaces/BridgeCosts",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/interfaces/BridgeQuoteAmountsAndCosts",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/interfaces/BridgeStatusResult",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/interfaces/ChainInfo",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/interfaces/ConditionalOrderArguments",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/interfaces/CrossChainOrder",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/interfaces/EvmCall",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/interfaces/GetOrderParams",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/interfaces/IpfsConfig",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/interfaces/LimitTradeParameters",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/interfaces/PollResultUnexpectedError",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/interfaces/SwapAdvancedSettings",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/interfaces/ThemedImage",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/interfaces/TradeOptionalParameters",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/interfaces/TraderParameters",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/interfaces/TradingSdkOptions",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/interfaces/TransactionParams",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/interfaces/TwapStruct",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/interfaces/WebUrl",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/modules",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/reference/sdks/cow-sdk/namespaces/OnchainOrderData",
+            "destination": "/cow-protocol/reference/sdks/cow-sdk",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/tutorials/solvers",
+            "destination": "/category/solver",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/tutorials/solvers/",
+            "destination": "/category/solver",
+            "statusCode": 301
+        },
+        {
+            "source": "/cow-protocol/tutorials/solvers/from_shadow_to_prod",
+            "destination": "/category/solver",
+            "statusCode": 301
+        },
+        {
+            "source": "/governance/grants/application-process",
+            "destination": "/governance/grants/how-to-apply",
+            "statusCode": 301
+        },
+        {
+            "source": "/grant-application-template",
+            "destination": "/governance/grants",
+            "statusCode": 301
+        },
+        {
+            "source": "/introduction/overview",
+            "destination": "/cow-protocol",
+            "statusCode": 301
+        },
+        {
+            "source": "/mevblocker/concepts/mev-concepts/sandwich-attacks",
+            "destination": "/mevblocker/concepts/MEV/MEV%20Attacks/sandwich-attacks",
+            "statusCode": 301
+        },
+        {
+            "source": "/mevblocker/concepts/mev-concepts/what-is-backrunning",
+            "destination": "/mevblocker/concepts/MEV/MEV%20Attacks/what-is-backrunning",
+            "statusCode": 301
+        },
+        {
+            "source": "/mevblocker/concepts/mev-concepts/what-is-frontrunning",
+            "destination": "/mevblocker/concepts/MEV/MEV%20Attacks/what-is-frontrunning",
+            "statusCode": 301
+        },
+        {
+            "source": "/mevblocker/usecases",
+            "destination": "/mevblocker",
+            "statusCode": 301
+        },
+        {
+            "source": "/mevblocker/users-and-integrators/integrators/analytics",
+            "destination": "/mevblocker/orderflow-originators/API-reference/analytics",
+            "statusCode": 301
+        },
+        {
+            "source": "/mevblocker/users-and-integrators/integrators/configuring-fee-recipient-address",
+            "destination": "/mevblocker/orderflow-originators/API-reference/configuring-fee-recipient-address",
+            "statusCode": 301
+        },
+        {
+            "source": "/mevblocker/users-and-integrators/integrators/setting-up-free-cancellations",
+            "destination": "/mevblocker/orderflow-originators/API-reference/Cancelling-transactions",
+            "statusCode": 301
+        },
+        {
+            "source": "/mevblocker/users-and-integrators/users/api",
+            "destination": "/mevblocker/orderflow-originators/Endpoints",
+            "statusCode": 301
+        },
+        {
+            "source": "/mevblocker/users-and-integrators/users/available-endpoints",
+            "destination": "/mevblocker/orderflow-originators/Endpoints",
+            "statusCode": 301
+        },
+        {
+            "source": "/mevblocker/users-and-integrators/users/cancelling-transactions",
+            "destination": "/mevblocker/orderflow-originators/API-reference/Cancelling-transactions",
+            "statusCode": 301
+        },
+        {
+            "source": "/mevblocker/users-and-integrators/users/sending-transactions-via-rpc",
+            "destination": "/mevblocker/orderflow-originators/API-reference/Sending-transactions",
+            "statusCode": 301
+        },
+        {
+            "source": "/off-chain-services/in-depth-solver-specification/output-batch-auction-solutions",
+            "destination": "/cow-protocol/reference/apis/solver",
+            "statusCode": 301
+        },
+        {
+            "source": "/off-chain-services/in-depth-solver-specification/sample-test-instances",
+            "destination": "/cow-protocol/reference/apis/solver",
+            "statusCode": 301
+        },
+        {
+            "source": "/off-chain-services/in-depth-solver-specification/the-batch-auction-optimization-problem",
+            "destination": "/cow-protocol/reference/apis/solver",
+            "statusCode": 301
+        },
+        {
+            "source": "/off-chain-services/solvers",
+            "destination": "/cow-protocol/reference/apis/solver",
+            "statusCode": 301
+        },
+        {
+            "source": "/overview-1/batch-auctions",
+            "destination": "/cow-protocol",
+            "statusCode": 301
+        },
+        {
+            "source": "/overview-1/introduction",
+            "destination": "/cow-protocol",
+            "statusCode": 301
+        },
+        {
+            "source": "/pt-BR/",
+            "destination": "/",
+            "statusCode": 301
+        },
+        {
+            "source": "/react-cra",
+            "destination": "/cow-protocol/tutorials/widget",
+            "statusCode": 301
+        },
+        {
+            "source": "/react-cra-ts",
+            "destination": "/cow-protocol/tutorials/widget",
+            "statusCode": 301
+        },
+        {
+            "source": "/request-for-proposals/completed-rfp-safe-app-for-creating-milkman-orders",
+            "destination": "/governance/grants",
+            "statusCode": 301
+        },
+        {
+            "source": "/request-for-proposals/rfp-stop-loss-order",
+            "destination": "/governance/grants",
+            "statusCode": 301
+        },
+        {
+            "source": "/solvers/in-depth-solver-specification/solver-",
+            "destination": "/cow-protocol/reference/apis/solver",
+            "statusCode": 301
+        },
+        {
+            "source": "/tags/cicd",
+            "destination": "/",
+            "statusCode": 301
+        },
+        {
+            "source": "/v2-ui-documentation",
+            "destination": "/cow-protocol/tutorials/cow-swap",
+            "statusCode": 301
+        },
+        {
+            "source": "/v2-ui-troubleshooting-guide",
+            "destination": "/cow-protocol/tutorials/cow-swap",
+            "statusCode": 301
+        },
+        {
+            "source": "/webpack",
+            "destination": "/cow-protocol/tutorials/widget",
             "statusCode": 301
         }
     ]
