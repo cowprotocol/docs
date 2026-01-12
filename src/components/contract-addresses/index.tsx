@@ -12,7 +12,7 @@ export const explorerByChain = {
   "Lens": "https://explorer.lens.xyz",
   "BNB": "https://bscscan.com",
   "Linea": "https://lineascan.build",
-  "Plasma": "https://plasmascan.to/",
+  "Plasma": "https://plasmascan.to",
   "Optimism": "https://optimistic.etherscan.io",
 } as const;
 
