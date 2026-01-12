@@ -46,7 +46,7 @@ The payment is capped from above and below using the function $$\textrm{cap}(x) 
 - Lens: $$10 \;\textrm{GHO}$$
 - BNB: $$0.04 \;\textrm{BNB}$$
 - Linea: $$0.0015 \;\textrm{ETH}$$
-- Plasma: $$0.XXX \;\textrm{XPL}$$
+- Plasma: $$30 \;\textrm{XPL}$$
 
 If only one solver submits solutions, $$\textrm{referenceScore}_i$$ is, by definition, zero.
 
