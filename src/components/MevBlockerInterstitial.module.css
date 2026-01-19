@@ -64,8 +64,8 @@
    transform: translateY(-1px);
    box-shadow: 0 16px 28px rgba(212, 85, 44, 0.38);
    background: #b94724;
-   color: #ffffff;
    text-decoration: none;
+   color: #ffffff;
  }
 
  .fallback {
