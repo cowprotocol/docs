@@ -1,9 +1,0 @@
-{
-    "position": 2,
-    "label": "Fees",
-    "collapsible": true,
-    "collapsed": true,
-    "link": {
-        "type": "generated-index"
-    }
-}

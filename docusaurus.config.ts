@@ -48,6 +48,30 @@ const config: Config = {
         docs: {
           routeBasePath: '/',
           sidebarPath: require.resolve('./sidebars.js'),
+          sidebarItemsGenerator: async (args: any) => {
+            const items = await args.defaultSidebarItemsGenerator(args)
+
+            const hasMevblockerDocs = (item: any): boolean => {
+              if (item.type === 'doc') {
+                return item.id.startsWith('mevblocker/')
+              }
+              if (item.type === 'category') {
+                return item.items.some(hasMevblockerDocs)
+              }
+              return false
+            }
+
+            return items.map((item) => {
+              if (item.type === 'category' && hasMevblockerDocs(item)) {
+                return {
+                  type: 'doc',
+                  label: item.label ?? '🏖️ MEV Blocker',
+                  id: 'mevblocker/README',
+                }
+              }
+              return item
+            })
+          },
           remarkPlugins: [
             remarkMath,
             [require('@docusaurus/remark-plugin-npm2yarn'), { sync: true, converters: ['yarn', 'pnpm'] }],

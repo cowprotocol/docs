@@ -3,6 +3,11 @@
     "buildCommand": "npm install -g pnpm && yarn build",
     "redirects": [
         {
+            "source": "/mevblocker/(.+)",
+            "destination": "/mevblocker",
+            "statusCode": 301
+        },
+        {
             "source": "/cow-sdk",
             "destination": "/cow-protocol/reference/sdks/cow-sdk",
             "statusCode": 301
