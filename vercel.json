@@ -1208,61 +1208,6 @@
             "statusCode": 301
         },
         {
-            "source": "/mevblocker/concepts/mev-concepts/sandwich-attacks",
-            "destination": "/mevblocker/concepts/MEV/MEV%20Attacks/sandwich-attacks",
-            "statusCode": 301
-        },
-        {
-            "source": "/mevblocker/concepts/mev-concepts/what-is-backrunning",
-            "destination": "/mevblocker/concepts/MEV/MEV%20Attacks/what-is-backrunning",
-            "statusCode": 301
-        },
-        {
-            "source": "/mevblocker/concepts/mev-concepts/what-is-frontrunning",
-            "destination": "/mevblocker/concepts/MEV/MEV%20Attacks/what-is-frontrunning",
-            "statusCode": 301
-        },
-        {
-            "source": "/mevblocker/usecases",
-            "destination": "/mevblocker",
-            "statusCode": 301
-        },
-        {
-            "source": "/mevblocker/users-and-integrators/integrators/analytics",
-            "destination": "/mevblocker/orderflow-originators/API-reference/analytics",
-            "statusCode": 301
-        },
-        {
-            "source": "/mevblocker/users-and-integrators/integrators/configuring-fee-recipient-address",
-            "destination": "/mevblocker/orderflow-originators/API-reference/configuring-fee-recipient-address",
-            "statusCode": 301
-        },
-        {
-            "source": "/mevblocker/users-and-integrators/integrators/setting-up-free-cancellations",
-            "destination": "/mevblocker/orderflow-originators/API-reference/Cancelling-transactions",
-            "statusCode": 301
-        },
-        {
-            "source": "/mevblocker/users-and-integrators/users/api",
-            "destination": "/mevblocker/orderflow-originators/Endpoints",
-            "statusCode": 301
-        },
-        {
-            "source": "/mevblocker/users-and-integrators/users/available-endpoints",
-            "destination": "/mevblocker/orderflow-originators/Endpoints",
-            "statusCode": 301
-        },
-        {
-            "source": "/mevblocker/users-and-integrators/users/cancelling-transactions",
-            "destination": "/mevblocker/orderflow-originators/API-reference/Cancelling-transactions",
-            "statusCode": 301
-        },
-        {
-            "source": "/mevblocker/users-and-integrators/users/sending-transactions-via-rpc",
-            "destination": "/mevblocker/orderflow-originators/API-reference/Sending-transactions",
-            "statusCode": 301
-        },
-        {
             "source": "/off-chain-services/in-depth-solver-specification/output-batch-auction-solutions",
             "destination": "/cow-protocol/reference/apis/solver",
             "statusCode": 301
