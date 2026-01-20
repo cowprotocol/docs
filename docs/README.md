@@ -7,7 +7,7 @@ sidebar_position: 1
 
 CoW DAO is on a mission to innovate the most user-protective products in Ethereum. 
 
-Currently, CoW DAO's three main products are [**CoW Protocol**](cow-protocol), [**MEV Blocker**](https://mevblocker.io), and [CoW AMM](https://cow.fi/cow-amm), which it supports with development and marketing resources – including the [CoW Grants Program](https://grants.cow.fi), the [CoW Protocol Explorer](cow-protocol/tutorials/cow-explorer), and the [CoW Swap frontend](cow-protocol/tutorials/cow-swap).
+Currently, CoW DAO's three main products are [**CoW Protocol**](cow-protocol) and [CoW AMM](https://cow.fi/cow-amm), which it supports with development and marketing resources – including the [CoW Grants Program](https://grants.cow.fi), the [CoW Protocol Explorer](cow-protocol/tutorials/cow-explorer), and the [CoW Swap frontend](cow-protocol/tutorials/cow-swap).
 
 ## What is [CoW Protocol](cow-protocol)? 
 

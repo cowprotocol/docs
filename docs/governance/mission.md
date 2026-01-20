@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Mission statement
 
-CoW DAO is an open organization of developers, market makers, and community contributors on a mission to create a fairer, more-protective financial system. CoW DAO currently supports CoW Swap, CoW Protocol and MEV Blocker – decentralized trading products that leverage order flow auctions to shield users from MEV attacks and give them more than they ask for.
+CoW DAO is an open organization of developers, market makers, and community contributors on a mission to create a fairer, more-protective financial system. CoW DAO currently supports CoW Swap and CoW Protocol – decentralized trading products that leverage order flow auctions to shield users from MEV attacks and give them more than they ask for.
 
 ## Vision
 
