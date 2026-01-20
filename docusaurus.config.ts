@@ -56,7 +56,11 @@ const config: Config = {
                 return item.id.startsWith('mevblocker/')
               }
               if (item.type === 'category') {
-                return item.items.some(hasMevblockerDocs)
+                const linkIsMevblocker =
+                  item.link?.type === 'doc' &&
+                  typeof item.link.id === 'string' &&
+                  item.link.id.startsWith('mevblocker/')
+                return linkIsMevblocker || item.items.some(hasMevblockerDocs)
               }
               return false
             }
