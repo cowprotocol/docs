@@ -13,10 +13,6 @@ Currently, CoW DAO's three main products are [**CoW Protocol**](cow-protocol), [
 
 CoW Protocol is a fully permissionless trading protocol that leverages [fair combinatorial batch auctions](cow-protocol/concepts/introduction/fair-combinatorial-auction) as its price finding mechanism. CoW Protocol uses fair combinatorial auctions to maximize liquidity via Coincidence of Wants (CoWs) in addition to tapping all available on-chain liquidity whenever needed.
 
-## What is [MEV Blocker](https://mevblocker.io)?
-
-MEV Blocker is an RPC endpoint designed to protect user transactions from MEV (Maximal Extractable Value) attacks such as frontrunning and sandwiching. Aside from protecting user transactions from the dangers of MEV, MEV Blocker leverages an order flow auction of searchers and builders to offer users rebates from backrunning for their trades.
-
 ## What is [CoW AMM](https://cow.fi/cow-amm)?
 
 CoW AMM is a new type of AMM built from the ground up to protect LPs from price exploitation in the form of [LVR](https://cow.fi/learn/what-is-loss-versus-rebalancing-lvr). Liquidity providers expect their tokens to earn yield, but most liquidity pools are actually not profitable after accounting for stale prices. Arbitrageurs exploit these stale prices at the expense of LPs. CoW AMM fixes LVR once and for all, with liquidity pools proven to outperform reference Balancer and Uniswap pools. 
