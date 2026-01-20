@@ -61,16 +61,7 @@ const config: Config = {
               return false
             }
 
-            return items.map((item) => {
-              if (item.type === 'category' && hasMevblockerDocs(item)) {
-                return {
-                  type: 'doc',
-                  label: item.label ?? '🏖️ MEV Blocker',
-                  id: 'mevblocker/README',
-                }
-              }
-              return item
-            })
+            return items.filter((item) => !hasMevblockerDocs(item))
           },
           remarkPlugins: [
             remarkMath,
