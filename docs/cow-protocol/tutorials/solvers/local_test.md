@@ -27,7 +27,7 @@ cargo run --bin autopilot -- \
 --native-price-estimators "Driver|baseline|http://driver/baseline" \
 --skip-event-sync true \
 --node-url $NODE_URL \
---shadow https://api.cow.fi/mainnet \
+--shadow https://barn.api.cow.fi/mainnet \
 --drivers "mysolver1|http://localhost:11088|0x0000000000000000000000000000000000000000|0"
 ```
 
