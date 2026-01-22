@@ -1,0 +1,389 @@
+---
+sidebar_position: 1
+---
+
+# From Quote to Order: Applying Slippage
+
+This tutorial explains how to use the CoW Protocol API to get a quote, apply slippage tolerance, and place an order. This is the most common integration pattern for partners building on CoW Protocol.
+
+:::caution Important
+The quote response provides an **estimated** price. You should **not** sign and submit it directly. You must apply your desired slippage tolerance before signing the order.
+:::
+
+## Overview
+
+The flow consists of three steps:
+
+1. **Get a quote** - Call `/api/v1/quote` with your trade parameters
+2. **Apply slippage** - Adjust the quote amounts based on your slippage tolerance
+3. **Sign and submit** - Sign the adjusted order and submit to `/api/v1/orders`
+
+## Step 1: Get a Quote
+
+### Sell Order Example
+
+When you want to sell a specific amount of tokens:
+
+```bash
+curl -X POST "https://api.cow.fi/mainnet/api/v1/quote" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "sellToken": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+    "buyToken": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+    "sellAmountBeforeFee": "1000000000",
+    "kind": "sell",
+    "from": "0xYourWalletAddress"
+  }'
+```
+
+Response:
+
+```json
+{
+  "quote": {
+    "sellToken": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+    "buyToken": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+    "sellAmount": "999830727",
+    "buyAmount": "339197126040197395",
+    "feeAmount": "169273",
+    "kind": "sell",
+    "validTo": 1769119766,
+    "appData": "0x0000000000000000000000000000000000000000000000000000000000000000",
+    "partiallyFillable": false,
+    "sellTokenBalance": "erc20",
+    "buyTokenBalance": "erc20",
+    "signingScheme": "eip712"
+  },
+  "from": "0xYourWalletAddress",
+  "expiration": "2026-01-22T21:41:26.245665167Z",
+  "id": 1053640793,
+  "verified": true
+}
+```
+
+### Buy Order Example
+
+When you want to buy a specific amount of tokens:
+
+```bash
+curl -X POST "https://api.cow.fi/mainnet/api/v1/quote" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "sellToken": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+    "buyToken": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+    "buyAmountAfterFee": "100000000000000000",
+    "kind": "buy",
+    "from": "0xYourWalletAddress"
+  }'
+```
+
+Response:
+
+```json
+{
+  "quote": {
+    "sellToken": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+    "buyToken": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+    "sellAmount": "294554318",
+    "buyAmount": "100000000000000000",
+    "feeAmount": "147148",
+    "kind": "buy",
+    "validTo": 1769119810,
+    "appData": "0x0000000000000000000000000000000000000000000000000000000000000000",
+    "partiallyFillable": false,
+    "sellTokenBalance": "erc20",
+    "buyTokenBalance": "erc20",
+    "signingScheme": "eip712"
+  },
+  "from": "0xYourWalletAddress",
+  "expiration": "2026-01-22T21:42:10.715280266Z",
+  "id": 1053641256,
+  "verified": true
+}
+```
+
+## Step 2: Apply Slippage Tolerance
+
+This is the critical step that many integrators miss. The quote returns an estimated price, but market conditions can change. You must apply slippage tolerance to protect against price movements.
+
+### For Sell Orders
+
+You are selling a fixed amount and receiving tokens. Apply slippage to the **buy amount** (the amount you receive):
+
+```
+actualBuyAmount = quoteBuyAmount × (10000 - slippageBps) / 10000
+```
+
+Where `slippageBps` is slippage in basis points (50 = 0.5%, 100 = 1%).
+
+**Example with 0.5% slippage (50 basis points):**
+
+- Quote `buyAmount`: `339197126040197395` (≈0.339 WETH)
+- Slippage: 50 bps (0.5%)
+- Calculation: `339197126040197395 × (10000 - 50) / 10000 = 337501140409996408`
+- Actual `buyAmount`: `337501140409996408`
+
+This means you're willing to accept at minimum ~0.3375 WETH instead of the quoted ~0.339 WETH.
+
+### For Buy Orders
+
+You are buying a fixed amount and paying with tokens. Apply slippage to the **sell amount** (the amount you pay):
+
+```
+actualSellAmount = quoteSellAmount × (10000 + slippageBps) / 10000
+```
+
+Where `slippageBps` is slippage in basis points (50 = 0.5%, 100 = 1%).
+
+**Example with 0.5% slippage (50 basis points):**
+
+- Quote `sellAmount`: `294554318` (≈294.55 USDC)
+- Slippage: 50 bps (0.5%)
+- Calculation: `294554318 × (10000 + 50) / 10000 = 296027089`
+- Actual `sellAmount`: `296027089`
+
+This means you're willing to pay at most ~296.03 USDC instead of the quoted ~294.55 USDC.
+
+## Step 3: Sign and Submit the Order
+
+After applying slippage, create the order object with the adjusted amounts and sign it.
+
+### TypeScript Example
+
+:::tip Recommended
+Use the [`@cowprotocol/contracts`](https://www.npmjs.com/package/@cowprotocol/contracts) package for order signing. It handles the EIP-712 type hashing correctly and is the official implementation.
+:::
+
+```bash
+npm install @cowprotocol/contracts ethers
+```
+
+```typescript
+import { ethers } from 'ethers';
+import {
+  Order,
+  OrderBalance,
+  OrderKind,
+  SigningScheme,
+  domain,
+  signOrder
+} from '@cowprotocol/contracts';
+
+// Slippage tolerance in basis points (50 = 0.5%)
+// Using integers avoids floating-point precision issues
+const SLIPPAGE_BPS = 50n;
+const BPS_DENOMINATOR = 10000n;
+
+// Apply slippage based on order kind
+function applySlippage(quote: any, slippageBps: bigint): { sellAmount: string; buyAmount: string } {
+  if (quote.kind === 'sell') {
+    // For sell orders: reduce buyAmount (minimum you'll receive)
+    const buyAmount = BigInt(quote.buyAmount);
+    const adjustedBuyAmount = (buyAmount * (BPS_DENOMINATOR - slippageBps)) / BPS_DENOMINATOR;
+    return {
+      sellAmount: quote.sellAmount,
+      buyAmount: adjustedBuyAmount.toString()
+    };
+  } else {
+    // For buy orders: increase sellAmount (maximum you'll pay)
+    const sellAmount = BigInt(quote.sellAmount);
+    const adjustedSellAmount = (sellAmount * (BPS_DENOMINATOR + slippageBps)) / BPS_DENOMINATOR;
+    return {
+      sellAmount: adjustedSellAmount.toString(),
+      buyAmount: quote.buyAmount
+    };
+  }
+}
+
+async function placeOrder(quoteResponse: any, signer: ethers.Signer) {
+  const chainId = 1; // Mainnet
+  const settlementContract = '0x9008D19f58AAbD9eD0D60971565AA8510560ab41';
+  
+  // 1. Apply slippage to the quote
+  const adjustedAmounts = applySlippage(quoteResponse.quote, SLIPPAGE_BPS);
+  
+  // 2. Build the order object
+  const order: Order = {
+    sellToken: quoteResponse.quote.sellToken,
+    buyToken: quoteResponse.quote.buyToken,
+    receiver: quoteResponse.from,
+    sellAmount: adjustedAmounts.sellAmount,
+    buyAmount: adjustedAmounts.buyAmount,
+    validTo: quoteResponse.quote.validTo,
+    appData: quoteResponse.quote.appData,
+    feeAmount: quoteResponse.quote.feeAmount,
+    kind: quoteResponse.quote.kind === 'sell' ? OrderKind.SELL : OrderKind.BUY,
+    partiallyFillable: quoteResponse.quote.partiallyFillable,
+    sellTokenBalance: OrderBalance.ERC20,
+    buyTokenBalance: OrderBalance.ERC20,
+  };
+  
+  // 3. Sign the order using the contracts package
+  const orderDomain = domain(chainId, settlementContract);
+  const signature = await signOrder(orderDomain, order, signer, SigningScheme.EIP712);
+  
+  // 4. Submit the signed order to the API
+  const response = await fetch('https://api.cow.fi/mainnet/api/v1/orders', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      sellToken: order.sellToken,
+      buyToken: order.buyToken,
+      receiver: order.receiver,
+      sellAmount: order.sellAmount,
+      buyAmount: order.buyAmount,
+      validTo: order.validTo,
+      appData: order.appData,
+      feeAmount: order.feeAmount,
+      kind: quoteResponse.quote.kind, // API expects string: "sell" or "buy"
+      partiallyFillable: order.partiallyFillable,
+      sellTokenBalance: 'erc20', // API expects string
+      buyTokenBalance: 'erc20', // API expects string
+      signature: signature.data,
+      signingScheme: 'eip712',
+      from: quoteResponse.from
+    })
+  });
+  
+  if (!response.ok) {
+    const error = await response.json();
+    throw new Error(`Order submission failed: ${error.description}`);
+  }
+  
+  const orderId = await response.text();
+  return orderId;
+}
+```
+
+### Complete Flow Example
+
+```typescript
+import { ethers } from 'ethers';
+import {
+  Order,
+  OrderBalance,
+  OrderKind,
+  SigningScheme,
+  domain,
+  signOrder
+} from '@cowprotocol/contracts';
+
+// Slippage in basis points (50 = 0.5%, 100 = 1%)
+const SLIPPAGE_BPS = 50n;
+const BPS_DENOMINATOR = 10000n;
+
+async function swapTokens(
+  sellToken: string,
+  buyToken: string,
+  amount: string,
+  kind: 'sell' | 'buy',
+  signer: ethers.Signer
+) {
+  const walletAddress = await signer.getAddress();
+  const chainId = 1;
+  const settlementContract = '0x9008D19f58AAbD9eD0D60971565AA8510560ab41';
+  
+  // 1. Get quote from API
+  const quoteRequest = kind === 'sell' 
+    ? { sellToken, buyToken, sellAmountBeforeFee: amount, kind, from: walletAddress }
+    : { sellToken, buyToken, buyAmountAfterFee: amount, kind, from: walletAddress };
+  
+  const quoteResponse = await fetch('https://api.cow.fi/mainnet/api/v1/quote', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(quoteRequest)
+  });
+  
+  if (!quoteResponse.ok) {
+    const error = await quoteResponse.json();
+    throw new Error(`Quote failed: ${error.description}`);
+  }
+  
+  const quoteData = await quoteResponse.json();
+  const quote = quoteData.quote;
+  
+  // 2. Apply slippage tolerance using integer math (avoids floating-point issues)
+  let sellAmount = quote.sellAmount;
+  let buyAmount = quote.buyAmount;
+  
+  if (kind === 'sell') {
+    // Reduce buyAmount by slippage
+    const adjusted = (BigInt(buyAmount) * (BPS_DENOMINATOR - SLIPPAGE_BPS)) / BPS_DENOMINATOR;
+    buyAmount = adjusted.toString();
+  } else {
+    // Increase sellAmount by slippage
+    const adjusted = (BigInt(sellAmount) * (BPS_DENOMINATOR + SLIPPAGE_BPS)) / BPS_DENOMINATOR;
+    sellAmount = adjusted.toString();
+  }
+  
+  // 3. Build order for signing
+  const order: Order = {
+    sellToken: quote.sellToken,
+    buyToken: quote.buyToken,
+    receiver: walletAddress,
+    sellAmount,
+    buyAmount,
+    validTo: quote.validTo,
+    appData: quote.appData,
+    feeAmount: quote.feeAmount,
+    kind: kind === 'sell' ? OrderKind.SELL : OrderKind.BUY,
+    partiallyFillable: quote.partiallyFillable,
+    sellTokenBalance: OrderBalance.ERC20,
+    buyTokenBalance: OrderBalance.ERC20,
+  };
+  
+  // 4. Sign the order
+  const orderDomain = domain(chainId, settlementContract);
+  const signature = await signOrder(orderDomain, order, signer, SigningScheme.EIP712);
+  
+  // 5. Submit to API
+  const orderResponse = await fetch('https://api.cow.fi/mainnet/api/v1/orders', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      sellToken: order.sellToken,
+      buyToken: order.buyToken,
+      receiver: order.receiver,
+      sellAmount: order.sellAmount,
+      buyAmount: order.buyAmount,
+      validTo: order.validTo,
+      appData: order.appData,
+      feeAmount: order.feeAmount,
+      kind: kind,
+      partiallyFillable: order.partiallyFillable,
+      sellTokenBalance: 'erc20',
+      buyTokenBalance: 'erc20',
+      signature: signature.data,
+      signingScheme: 'eip712',
+      from: walletAddress
+    })
+  });
+  
+  if (!orderResponse.ok) {
+    const error = await orderResponse.json();
+    throw new Error(`Order submission failed: ${error.description}`);
+  }
+  
+  const orderId = await orderResponse.text();
+  console.log('Order placed successfully:', orderId);
+  return orderId;
+}
+```
+
+## Summary
+
+| Order Type | What You Specify | What Gets Adjusted | Formula (using basis points) |
+|------------|------------------|-------------------|------------------------------|
+| Sell | `sellAmountBeforeFee` | `buyAmount` (reduce) | `buyAmount × (10000 - bps) / 10000` |
+| Buy | `buyAmountAfterFee` | `sellAmount` (increase) | `sellAmount × (10000 + bps) / 10000` |
+
+:::tip
+Common slippage tolerances: 50 bps (0.5%) for stable pairs, 100-300 bps (1-3%) for volatile pairs. Higher slippage increases execution probability but may result in worse prices.
+:::
+
+## Next Steps
+
+- **[Order Signing Guide](../reference/core/signing_schemes.mdx)** - Detailed signing documentation
+- **[API Reference](/cow-protocol/reference/apis/orderbook)** - Complete endpoint documentation
+- **[SDK Integration](../integrate/sdk.mdx)** - Use the SDK for a higher-level abstraction
+
