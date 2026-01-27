@@ -4,6 +4,7 @@ import Head from '@docusaurus/Head'
 import styles from './MevBlockerInterstitial.module.css'
 
 const REDIRECT_URL = 'https://docs.mevblocker.io/'
+const ANNOUNCEMENT_URL = 'https://www.smg.org/memo/mevblocker'
 const DELAY_SECONDS = 10
 
 const MevBlockerInterstitial = () => {
@@ -49,6 +50,18 @@ const MevBlockerInterstitial = () => {
         <section className={styles.card} role="main">
           <span className={styles.tag}>MEV Blocker Update</span>
           <h1 className={styles.title}>MEV Blocker has been acquired.</h1>
+          <p className={styles.announcement}>
+            Read the announcement on{' '}
+            <a
+              className={styles.announcementLink}
+              href={ANNOUNCEMENT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              smg.org
+            </a>
+            .
+          </p>
           <p className={styles.text}>We are redirecting you to the new home.</p>
           <p className={styles.countdown} aria-live="polite">
             Redirecting you in {remaining} {secondLabel}.

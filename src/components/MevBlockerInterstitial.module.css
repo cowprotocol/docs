@@ -68,6 +68,22 @@
    color: #ffffff;
  }
 
+ .announcement {
+   margin: 14px 0 0;
+   font-size: 18px;
+   color: #6e5e54;
+ }
+
+ .announcementLink {
+   color: #1f5aa6;
+   font-weight: 600;
+ }
+
+ .announcementLink:hover,
+ .announcementLink:focus {
+   color: #b94724;
+ }
+
  .fallback {
    margin-top: 18px;
    font-size: 16px;
