@@ -50,12 +50,14 @@ Before signing, you should apply slippage tolerance to protect against price mov
 // For sell orders: reduce buyAmount by slippage (e.g., 0.5%)
 const buyAmountWithSlippage = BigInt(quoteResponse.quote.buyAmount) * 995n / 1000n
 const sellAmount = BigInt(quoteResponse.quote.sellAmount) + BigInt(quoteResponse.quote.feeAmount)
+const feeAmount = BigInt(0)
 
 // Build order for signing
 const order = {
   ...quoteResponse.quote,
   sellAmount: sellAmount.toString(),
-  buyAmount: buyAmountWithSlippage.toString()
+  buyAmount: buyAmountWithSlippage.toString(),
+  feeAmount: feeAmount.toString()
 }
 
 const signature = await signOrder(quoteResponse, signer)
