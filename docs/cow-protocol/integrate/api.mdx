@@ -58,11 +58,19 @@ const order = {
   buyAmount: buyAmountWithSlippage.toString(),
 }
 
+const signature =  signature: await signOrder(quoteResponse, signer)
+
+const signedOrder = {
+  ...oder,
+  signature: signature,
+  signingScheme: "eip712"
+}
+
 // Submit the signed order
 const response = await fetch('https://api.cow.fi/mainnet/api/v1/orders', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify(order)
+  body: JSON.stringify(signedOrder)
 })
 
 const orderId = await response.text()
