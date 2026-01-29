@@ -4,10 +4,10 @@ sidebar_position: 1
 
 # From Quote to Order: Applying Slippage
 
-This tutorial explains how to use the CoW Protocol API to get a quote, apply slippage tolerance, and place an order. This is the most common integration pattern for partners building on CoW Protocol.
+This tutorial explains how to use the CoW Protocol API to get a quote, apply slippage tolerance, and place an order.
 
 :::caution Important
-The quote response provides an **estimated** price. You should **not** sign and submit it directly. You must apply your desired slippage tolerance before signing the order.
+The quote response provides an **estimated** price and does not incorporate any slippage tolerance. Because of this, you should **not** sign and submit it directly, unless you want to submit an order with zero slippage tolerance.
 :::
 
 ## Overview
