@@ -55,13 +55,13 @@ const sellAmount = BigInt(quoteResponse.quote.sellAmount) + BigInt(quoteResponse
 const order = {
   ...quoteResponse.quote,
   sellAmount: sellAmount.toString(),
-  buyAmount: buyAmountWithSlippage.toString(),
+  buyAmount: buyAmountWithSlippage.toString()
 }
 
 const signature =  signature: await signOrder(quoteResponse, signer)
 
 const signedOrder = {
-  ...oder,
+  ...order,
   signature: signature,
   signingScheme: "eip712"
 }
