@@ -58,7 +58,7 @@ const order = {
   buyAmount: buyAmountWithSlippage.toString()
 }
 
-const signature =  signature: await signOrder(quoteResponse, signer)
+const signature = await signOrder(quoteResponse, signer)
 
 const signedOrder = {
   ...order,
