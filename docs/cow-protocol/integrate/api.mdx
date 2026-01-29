@@ -56,10 +56,6 @@ const order = {
   ...quoteResponse.quote,
   sellAmount: sellAmount.toString(),
   buyAmount: buyAmountWithSlippage.toString(),
-  receiver: walletAddress,
-  kind: OrderKind.SELL,
-  sellTokenBalance: OrderBalance.ERC20,
-  buyTokenBalance: OrderBalance.ERC20,
 }
 
 // Submit the signed order
