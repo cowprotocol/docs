@@ -62,7 +62,7 @@ const order = {
   buyTokenBalance: OrderBalance.ERC20,
 }
 
-// Submit the signed order 
+// Submit the signed order
 const response = await fetch('https://api.cow.fi/mainnet/api/v1/orders', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
