@@ -49,30 +49,32 @@ Before signing, you should apply slippage tolerance to protect against price mov
 // Apply slippage to the quote before signing
 // For sell orders: reduce buyAmount by slippage (e.g., 0.5%)
 const buyAmountWithSlippage = BigInt(quoteResponse.quote.buyAmount) * 995n / 1000n
+
+// IMPORTANT: Orders are always signed with feeAmount=0
+// Therefore, we must add the feeAmount back to the sellAmount
 const sellAmount = BigInt(quoteResponse.quote.sellAmount) + BigInt(quoteResponse.quote.feeAmount)
-const feeAmount = BigInt(0)
 
 // Build order for signing
 const order = {
   ...quoteResponse.quote,
   sellAmount: sellAmount.toString(),
   buyAmount: buyAmountWithSlippage.toString(),
-  feeAmount: feeAmount.toString()
+  feeAmount: "0", // Always sign with zero fee
+  receiver: walletAddress,
 }
 
-const signature = await signOrder(quoteResponse, signer)
-
-const signedOrder = {
-  ...order,
-  signature: signature,
-  signingScheme: "eip712"
-}
+const signature = await signOrder(order, signer)
 
 // Submit the signed order
 const response = await fetch('https://api.cow.fi/mainnet/api/v1/orders', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify(signedOrder)
+  body: JSON.stringify({
+    ...order,
+    signature: signature.data,
+    signingScheme: 'eip712',
+    from: walletAddress
+  })
 })
 
 const orderId = await response.text()
