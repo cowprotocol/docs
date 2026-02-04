@@ -32,11 +32,18 @@ The purpose of this page is to let users know which fee models are active at any
 
 ### Volume Fee
 
-> **Definition:** 2 basis points on the total volume of the order
+> **Definition:** A tiered fee based on the total volume of the order, adjusted by asset type
 >
 > **Eligible orders:** all orders
 >
-> **Fee calculation:** volume \* 0.0002
+> **Fee structure:**
+> - **Standard Assets:** 2 basis points (bps)
+> - **Correlated Assets (Stables/RWAs):** 0.3 basis points (bps)
+> 
+> **Fee calculation:**
+> - **Standard**: Volume * 0.0002
+> - **Correlated:** Volume * 0.00003 
+
 
 :::note
 
