@@ -10,7 +10,7 @@ The Partner Fee is calculated as the sum of all transactions traded through your
 The Partner Fee per order is calculated in the surplus token of the order (i.e. buy token for sell orders, and sell token for buy orders) and is then converted into WETH using an external price provider at the time of order settlement.
 
 A percentage of the Partner Fee shall be retained as a service fee to CoW Protocol (the "Service Fee"). 
-Per [CIP-61](https://snapshot.box/#/s:cow.eth/proposal/0xbafee087f3a1d5757e44a72fa76e8624ce212623153816a936a8888741485ef5), this Service Fee is set to 50% of the total eligible Partner Fee by default and can be negotiated with the core team on behalf of CoW DAO.
+Per [CIP-75](https://snapshot.box/#/s:cow.eth/proposal/0x64f3649a6eeab2ac1326d704c3ddaf04f0229a3d4605708deff04f4cba7ccd46), this Service Fee is set to 25% of the total eligible Partner Fee by default and can be negotiated with the core team on behalf of CoW DAO.
 
 The Partner Fee net of the Service Fee is the Partner Fee amount (the "Net Partner Fee") eligible for weekly payment.
 See the [Partner Fee calculation](#partner-fee-calculation-examples) section for examples.
@@ -19,7 +19,7 @@ See the [Partner Fee calculation](#partner-fee-calculation-examples) section for
 
 You may charge users a fee of no more than 100 bps of order volume through your Widget. 
 The Partner Fee will begin to accrue on April 4th, 2024 (the release date of the Partner Fee feature).
-The Partner Fee is currently only applicable to [Market order](https://docs.cow.fi/cow-protocol/concepts/order-types/market-orders) trades executed by your users through the Widget.
+The Partner Fee is currently only applicable to [Market order](https://docs.cow.fi/cow-protocol/concepts/order-types/market-orders) trades executed by your users through the Widget or API integration.
 
 :::
 
@@ -69,7 +69,7 @@ The Partner Fee is currently only applicable to [Market order](https://docs.cow.
 
 ### Partner Fee Payment Process
 
-1. Upon completing the implementation of the Partner Fee parameters on your Widget, you will be eligible to receive the Partner Fee on trades executed by your users through the Widget.
+1. Upon completing the implementation of the Partner Fee parameters, you will be eligible to receive the Partner Fee on trades executed by your users through the Widget or API integration.
 2. A data script will be run on a weekly basis on your project's eligible Partner Fee amount calculated based on the sum of all transactions traded through your project's Widget integration associated with Partner Fee defined in the [`appData`](/cow-protocol/reference/core/intents/app-data) your AppKey.
 3. The Net Partner Fee (refer to the [Partner Fee Calculation](#partner-fee-calculation) section for details on calculations) will be transferred to your designated Ethereum wallet address defined under the Partner Fee "Recipient" parameter of the Widget on a weekly basis.
 
