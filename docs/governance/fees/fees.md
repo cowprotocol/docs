@@ -41,7 +41,7 @@ The purpose of this page is to let users know which fee models are active at any
 > - **Correlated Assets (Stables/RWAs):** 0.3 basis points (bps)
 > 
 > **Fee calculation:**
-> -**Standard**: Volume * 0.0002
+> - **Standard**: Volume * 0.0002
 > - **Correlated:** Volume * 0.00003 
 
 
