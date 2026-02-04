@@ -10,7 +10,7 @@ The Partner Fee is calculated as the sum of all transactions traded through your
 The Partner Fee per order is calculated in the surplus token of the order (i.e. buy token for sell orders, and sell token for buy orders) and is then converted into WETH using an external price provider at the time of order settlement.
 
 A percentage of the Partner Fee shall be retained as a service fee to CoW Protocol (the "Service Fee"). 
-Per [CIP-61](https://snapshot.box/#/s:cow.eth/proposal/0xbafee087f3a1d5757e44a72fa76e8624ce212623153816a936a8888741485ef5), this Service Fee is set to 50% of the total eligible Partner Fee by default and can be negotiated with the core team on behalf of CoW DAO.
+Per [CIP-61](https://snapshot.box/#/s:cow.eth/proposal/0xbafee087f3a1d5757e44a72fa76e8624ce212623153816a936a8888741485ef5), this Service Fee is set at 50% of the total eligible Partner Fee by default and can be negotiated with the core team on behalf of CoW DAO.
 
 The Partner Fee net of the Service Fee is the Partner Fee amount (the "Net Partner Fee") eligible for weekly payment.
 See the [Partner Fee calculation](#partner-fee-calculation-examples) section for examples.
