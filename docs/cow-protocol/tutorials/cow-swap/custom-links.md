@@ -78,6 +78,7 @@ Native and wrapped tokens per chain:
 - BNB: [`WBNB`](https://bscscan.com/address/0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c) - wrapped `BNB`
 - Linea: [`WETH`](https://lineascan.build/token/0xe5D7C2a44FfDDf6b295A15c148167daaAf5Cf34f) - wrapped `ETH`
 - Plasma: [`WXPL`](https://plasmascan.to/token/0x6100E367285b01F48D07953803A2d8dCA5D19873) - wrapped `XPL`
+- Ink: [`WETH`](https://explorer.inkonchain.com/token/0x4200000000000000000000000000000000000006) - wrapped `ETH`
 - Sepolia: [`WETH`](https://sepolia.etherscan.io/address/0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14) - wrapped `ETH`
 
 :::

@@ -22,6 +22,7 @@ At the core of CoW Protocol lies the COW token, which serves as a governance tok
 | BNB          | N/A                                                                                                                                       |
 | Linea        | N/A                                                                                                                                       |
 | Plasma       | N/A                                                                                                                                       |
+| Ink          | N/A                                                                                                                                       |
 
 [^bridgedTokens]:
     These contracts were not developed nor deployed by CoW DAO, however, they are the bridged versions of the canonical token from Ethereum, using the official bridges.
@@ -41,6 +42,7 @@ At the core of CoW Protocol lies the COW token, which serves as a governance tok
 | BNB          | N/A                                                                                                                    |
 | Linea        | N/A                                                                                                                    |
 | Plasma       | N/A                                                                                                                    |
+| Ink          | N/A                                                                                                                    |
 
 ## Supply & Inflation Schedule
 
