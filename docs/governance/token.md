@@ -19,13 +19,16 @@ At the core of CoW Protocol lies the COW token, which serves as a governance tok
 | Polygon      | [`0x2f4efd3aa42e15a1ec6114547151b63ee5d39958`](https://polygonscan.com/token/0x2f4efd3aa42e15a1ec6114547151b63ee5d39958) [^bridgedTokens] |
 | Avalanche    | N/A                                                                                                                                       |
 | Lens         | N/A                                                                                                                                       |
-| BNB          | [`0x5bfdaa3f7c28b9994b56135403bf1acea02595b0`](https://bscscan.com/token/0x5bfdaa3f7c28b9994b56135403bf1acea02595b0)                      |
+| BNB          | [`0x5bfdaa3f7c28b9994b56135403bf1acea02595b0`](https://bscscan.com/token/0x5bfdaa3f7c28b9994b56135403bf1acea02595b0) [^stargateBridge]    |
 | Linea        | N/A                                                                                                                                       |
 | Plasma       | N/A                                                                                                                                       |
 
 [^bridgedTokens]:
     These contracts were not developed nor deployed by CoW DAO, however, they are the bridged versions of the canonical token from Ethereum, using the official bridges.
     [Omni bridge](https://gnosisscan.io/address/0xf6A78083ca3e2a662D6dd1703c939c8aCE2e268d#code) for Gnosis Chain, [Arbitrum One bridge](https://arbiscan.io/address/0x09e9222e96e7b4ae2a407b98d48e330053351eee#code) for Arbitrum one, [Superbridge](https://basescan.org/tx/0xf76a915b7db279a4e559dbc382462e23cb63615f3d3a87ddf36bd96cedf4ca56) for Base, and [Polygon Bridge](https://portal.polygon.technology/bridge) for Polygon.
+
+[^stargateBridge]:
+    These contracts were not developed nor deployed by CoW DAO, however, they are the bridged versions deployed using [Stargate](https://stargate.finance/).
 
 #### `vCOW` - Vesting token
 
