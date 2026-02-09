@@ -1,0 +1,273 @@
+---
+sidebar_position: 1
+---
+
+# From Quote to Order
+
+This tutorial explains how to use the CoW Protocol API to get a quote, apply the necessary adjustments, and place an order. This is the most common integration pattern for partners building on CoW Protocol.
+
+:::caution Important
+The quote response provides an **estimated** price. You should **not** sign and submit it directly. You must apply slippage tolerance (and partner fee, if applicable) before signing the order.
+:::
+
+## Overview
+
+The flow consists of three steps:
+
+1. **Get a quote** - Call `/api/v1/quote` with your trade parameters
+2. **Apply slippage** - Adjust the quote amounts based on your slippage tolerance
+3. **Sign and submit** - Sign the adjusted order and submit to `/api/v1/orders`
+
+## Step 1: Get a Quote
+
+### Sell Order Example
+
+When you want to sell a specific amount of tokens:
+
+```bash
+curl -X POST "https://api.cow.fi/mainnet/api/v1/quote" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "sellToken": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+    "buyToken": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+    "sellAmountBeforeFee": "1000000000",
+    "kind": "sell",
+    "from": "0xYourWalletAddress"
+  }'
+```
+
+Response:
+
+```json
+{
+  "quote": {
+    "sellToken": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+    "buyToken": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+    "sellAmount": "999830727",
+    "buyAmount": "339197126040197395",
+    "feeAmount": "169273",
+    "kind": "sell",
+    "validTo": 1769119766,
+    "appData": "0x0000000000000000000000000000000000000000000000000000000000000000",
+    "partiallyFillable": false,
+    "sellTokenBalance": "erc20",
+    "buyTokenBalance": "erc20",
+    "signingScheme": "eip712"
+  },
+  "from": "0xYourWalletAddress",
+  "expiration": "2026-01-22T21:41:26.245665167Z",
+  "id": 1053640793,
+  "verified": true
+}
+```
+
+### Understanding the Fee Decomposition
+
+Notice that the `sellAmountBeforeFee` in your request (1,000,000,000) is decomposed in the response as:
+
+```
+sellAmountBeforeFee = sellAmount + feeAmount
+1,000,000,000 = 999,830,727 + 169,273
+```
+
+The `feeAmount` is an **estimated protocol fee** that solvers may use to cover gas costs. However, this fee is just an estimation and is **not used for signing**.
+
+:::caution Critical: Fee=0 Signing
+Users **always sign orders with `feeAmount: "0"`**. This means when constructing the order for signing, you must add the `feeAmount` back to the `sellAmount`:
+
+```
+signingSellAmount = sellAmount + feeAmount
+```
+
+This ensures the full `sellAmountBeforeFee` is available for the trade. The actual fee deduction happens at execution time, handled by the protocol.
+:::
+
+### Buy Order Example
+
+When you want to buy a specific amount of tokens:
+
+```bash
+curl -X POST "https://api.cow.fi/mainnet/api/v1/quote" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "sellToken": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+    "buyToken": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+    "buyAmountAfterFee": "100000000000000000",
+    "kind": "buy",
+    "from": "0xYourWalletAddress"
+  }'
+```
+
+Response:
+
+```json
+{
+  "quote": {
+    "sellToken": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+    "buyToken": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2",
+    "sellAmount": "294554318",
+    "buyAmount": "100000000000000000",
+    "feeAmount": "147148",
+    "kind": "buy",
+    "validTo": 1769119810,
+    "appData": "0x0000000000000000000000000000000000000000000000000000000000000000",
+    "partiallyFillable": false,
+    "sellTokenBalance": "erc20",
+    "buyTokenBalance": "erc20",
+    "signingScheme": "eip712"
+  },
+  "from": "0xYourWalletAddress",
+  "expiration": "2026-01-22T21:42:10.715280266Z",
+  "id": 1053641256,
+  "verified": true
+}
+```
+
+## Step 2: Apply Slippage Tolerance
+
+This is the critical step that many integrators miss. The quote returns an estimated price, but market conditions can change. You must apply slippage tolerance to protect against price movements.
+
+**For both order types**: First add `feeAmount` back to `sellAmount` (see [Fee=0 Signing](#understanding-the-fee-decomposition) above), then apply slippage to the appropriate amount.
+
+### For Sell Orders
+
+You are selling a fixed amount and receiving tokens. Apply slippage to the **buy amount** (the amount you receive):
+
+```
+actualSellAmount = quoteSellAmount + quoteFeeAmount
+actualBuyAmount = quoteBuyAmount × (10000 - slippageBps) / 10000
+```
+
+Where `slippageBps` is slippage in basis points (50 = 0.5%, 100 = 1%).
+
+**Example with 0.5% slippage (50 basis points):**
+
+- Quote `sellAmount`: `999830727`
+- Quote `feeAmount`: `169273`
+- Actual `sellAmount`: `999830727 + 169273 = 1000000000` (original `sellAmountBeforeFee`)
+- Quote `buyAmount`: `339197126040197395` (≈0.339 WETH)
+- Slippage: 50 bps (0.5%)
+- Calculation: `339197126040197395 × (10000 - 50) / 10000 = 337501140409996408`
+- Actual `buyAmount`: `337501140409996408`
+
+This means you're willing to accept at minimum ~0.3375 WETH instead of the quoted ~0.339 WETH.
+
+### For Buy Orders
+
+You are buying a fixed amount and paying with tokens. Apply slippage to the **sell amount** (the amount you pay):
+
+```
+baseSellAmount = quoteSellAmount + quoteFeeAmount
+actualSellAmount = baseSellAmount × (10000 + slippageBps) / 10000
+```
+
+Where `slippageBps` is slippage in basis points (50 = 0.5%, 100 = 1%).
+
+**Example with 0.5% slippage (50 basis points):**
+
+- Quote `sellAmount`: `294554318` (≈294.55 USDC)
+- Quote `feeAmount`: `147148`
+- Base `sellAmount`: `294554318 + 147148 = 294701466`
+- Slippage: 50 bps (0.5%)
+- Calculation: `294701466 × (10000 + 50) / 10000 = 296174973`
+- Actual `sellAmount`: `296174973`
+
+This means you're willing to pay at most ~296.17 USDC instead of the quoted ~294.70 USDC (including fee).
+
+## Partner Fee (For Integrators)
+
+If you're a partner integration charging a fee, you must apply it manually. The quote API does **not** deduct partner fees from the quoted amounts—they are taken from surplus at settlement time.
+
+:::note
+Partner fees are specified in your [`appData`](/cow-protocol/reference/core/intents/app-data) document. See the [Partner Fee documentation](/governance/fees/partner-fee) for setup details.
+:::
+
+### For Sell Orders
+
+Reduce the `buyAmount` by your partner fee percentage:
+
+```
+buyAmountWithPartnerFee = buyAmount × (10000 - partnerFeeBps) / 10000
+```
+
+**Example with 50 bps (0.5%) partner fee:**
+
+- Slippage-adjusted `buyAmount`: `337501140409996408`
+- Partner fee: 50 bps
+- Calculation: `337501140409996408 × (10000 - 50) / 10000 = 335813634607796425`
+- Final `buyAmount`: `335813634607796425`
+
+### For Buy Orders
+
+Increase the `sellAmount` by your partner fee percentage:
+
+```
+sellAmountWithPartnerFee = sellAmount × (10000 + partnerFeeBps) / 10000
+```
+
+**Example with 50 bps (0.5%) partner fee:**
+
+- Slippage-adjusted `sellAmount`: `296174973`
+- Partner fee: 50 bps
+- Calculation: `296174973 × (10000 + 50) / 10000 = 297656347`
+- Final `sellAmount`: `297656347`
+
+### Complete Adjustment Sequence
+
+Apply adjustments in this order:
+
+1. **Add `feeAmount`** back to `sellAmount` (for fee=0 signing)
+2. **Apply slippage** tolerance
+3. **Apply partner fee** (if applicable)
+
+## Step 3: Sign and Submit the Order
+
+After applying slippage, construct the order object and sign it. Key points:
+
+1. **Set `feeAmount` to `"0"`** - Orders are always signed with zero fee
+2. **Use adjusted amounts** - Apply the slippage-adjusted `sellAmount` and `buyAmount`
+3. **Sign with EIP-712** - Use the CoW Protocol domain separator
+4. **Submit to API** - POST the signed order to `/api/v1/orders`
+
+For implementation details and code examples, see:
+- **[API Integration Guide](../integrate/api.mdx)** - Quick start with code examples
+- **[Order Signing Guide](../reference/core/signing_schemes.mdx)** - Detailed signing documentation
+- **[SDK Integration](../integrate/sdk.mdx)** - Higher-level abstraction with the SDK
+
+## Summary
+
+### Adjustment Formulas
+
+| Order Type | Signing `sellAmount` | Signing `buyAmount` |
+|------------|---------------------|---------------------|
+| **Sell** | `sellAmount + feeAmount` | `buyAmount × (10000 - slippageBps) / 10000 × (10000 - partnerFeeBps) / 10000` |
+| **Buy** | `(sellAmount + feeAmount) × (10000 + slippageBps) / 10000 × (10000 + partnerFeeBps) / 10000` | `buyAmount` (unchanged) |
+
+### What the API Handles vs. What You Handle
+
+| Adjustment | API Handles? | You Must Apply |
+|------------|--------------|----------------|
+| Protocol fee (`feeAmount`) | ✅ Estimated in quote | Add back to `sellAmount`, sign with `fee=0` |
+| Hook gas costs | ✅ Included in `feeAmount` | Already covered by fee handling |
+| Slippage tolerance | ❌ | Apply to `buyAmount` (sell) or `sellAmount` (buy) |
+| Partner fee | ❌ | Apply after slippage |
+
+:::info Fee Handling Summary
+1. **Request**: You send `sellAmountBeforeFee` (for sell orders) or `buyAmountAfterFee` (for buy orders)
+2. **Response**: API returns `sellAmount + feeAmount` (where `sellAmountBeforeFee = sellAmount + feeAmount`)
+3. **Signing**: Always use `feeAmount: "0"` and add the `feeAmount` back to `sellAmount`
+4. **For buy orders**: Add `feeAmount` first, then apply slippage (gives more room on limit price)
+5. **Partner fee**: Apply after slippage, reduces `buyAmount` (sell) or increases `sellAmount` (buy)
+6. **Result**: The protocol handles fee deduction at execution time
+:::
+
+:::tip
+Common slippage tolerances: 50 bps (0.5%) for stable pairs, 100-300 bps (1-3%) for volatile pairs. Higher slippage increases execution probability but may result in worse prices.
+:::
+
+## Next Steps
+
+- **[Order Signing Guide](../reference/core/signing_schemes.mdx)** - Detailed signing documentation
+- **[API Reference](/cow-protocol/reference/apis/orderbook)** - Complete endpoint documentation
+- **[SDK Integration](../integrate/sdk.mdx)** - Use the SDK for a higher-level abstraction
+
