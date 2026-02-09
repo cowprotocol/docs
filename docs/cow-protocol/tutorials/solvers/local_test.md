@@ -22,8 +22,13 @@ The repository where all the backend services can be found is this one: [https:/
 
 For the autopilot, we run
 
-```
-    cargo run --bin autopilot -- --native-price-estimators "baseline|http://driver/baseline" --skip-event-sync true --node-url $NODE_URL --shadow https://api.cow.fi/mainnet --drivers "mysolver1|http://localhost:11088/mysolver1"
+```shell
+cargo run --bin autopilot -- \
+--native-price-estimators "Driver|baseline|http://driver/baseline" \
+--skip-event-sync true \
+--node-url $NODE_URL \
+--shadow https://barn.api.cow.fi/mainnet \
+--drivers "mysolver1|http://localhost:11088|0x0000000000000000000000000000000000000000|0"
 ```
 
 where one needs to set the NODE_URL appropriately (e.g., a free Infura endpoint).
@@ -36,8 +41,8 @@ CoW Protocol services infrastructure can be very heavy on RPC resource consumpti
 
 For the driver, we run
 
-```
-    cargo run -p driver -- --config driver.config.toml --ethrpc $NODE_URL
+```shell
+cargo run -p driver -- --config driver.config.toml --ethrpc $NODE_URL
 ```
 
 where one needs to configure driver.config.toml to point to their solver engine. A sample such file can be found [here](https://github.com/cowprotocol/services/blob/main/crates/driver/example.toml).
