@@ -45,7 +45,7 @@ The payment is capped from above and below using the function $$\textrm{cap}(x) 
 - Polygon: $$30 \;\textrm{POL}$$
 - Lens: $$10 \;\textrm{GHO}$$
 - BNB: $$0.04 \;\textrm{BNB}$$
-- Linea: $$0.0015 \;\textrm{ETH}$$
+- Linea and Ink: $$0.0015 \;\textrm{ETH}$$
 - Plasma: $$30 \;\textrm{XPL}$$
 
 If only one solver submits solutions, $$\textrm{referenceScore}_i$$ is, by definition, zero.
@@ -97,5 +97,6 @@ The current rewards for eligible quotes are as follows:
 - BNB Chain: $$\min\{0.001 ~\textrm{BNB}, 6 ~\textrm{COW}\}$$
 - Linea: $$\min\{0.00003 ~\textrm{ETH}, 6 ~\textrm{COW}\}$$.
 - Plasma: $$\min\{0.6 ~\textrm{XPL}, 6 ~\textrm{COW}\}$$.
+- Ink: $$\min\{0.00003 ~\textrm{ETH}, 6 ~\textrm{COW}\}$$.
 
 where, again, the conversion from native token to COW is done by using an up-to-date price (specifically, the average native token/COW Dune prices of the past 24h before the payout are used to determine these exchange rates).

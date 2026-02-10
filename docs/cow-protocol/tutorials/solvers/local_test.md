@@ -66,5 +66,7 @@ Once the above are set up and running, one can then start testing their solver e
 | <https://api.cow.fi/linea/api>             | Linea        | Production  |
 | <https://barn.api.cow.fi/plasma/api>       | Plasma       | Staging     |
 | <https://api.cow.fi/plasma/api>            | Plasma       | Production  |
+| <https://barn.api.cow.fi/ink/api>          | Ink          | Staging     |
+| <https://api.cow.fi/ink/api>               | Ink          | Production  |
 | <https://barn.api.cow.fi/sepolia/api>      | Sepolia      | Staging     |
 | <https://api.cow.fi/sepolia/api>           | Sepolia      | Production  |
