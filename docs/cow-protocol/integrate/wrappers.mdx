@@ -1,0 +1,346 @@
+# Wrapper Integration
+
+Generalized wrappers enable custom logic to execute surrounding CoW Protocol settlements. This guide covers both using existing wrappers in your orders and building new wrapper contracts.
+
+**Choose your path:**
+- **[Building New Wrappers](#for-wrapper-developers)** - Develop custom wrapper contracts for advanced DeFi workflows
+- **[Using Existing Wrappers](#for-order-creators-and-frontend-developers)** - Add wrappers to your orders and integrate into your application
+- **[Executing Wrappers as a Solver](#for-solvers)** - Everything solvers need to know to execute wrapper orders
+
+---
+
+## For Wrapper Developers
+
+This section covers building new wrapper contracts from scratch.
+
+## Overview
+
+To build a wrapper, you will:
+
+1. Inherit from the `CowWrapper` abstract contract
+2. Implement `_wrap()` with your pre/post-settlement logic
+3. Implement `parseWrapperData()` for input validation
+4. Test thoroughly on testnets
+5. Submit for allowlist approval by the CoW Protocol team
+
+Read up on the details of creating a wrapper from [the wrapper contract information page](../reference/contracts/periphery/wrapper.mdx).
+
+---
+
+## For Order Creators and Frontend Developers
+
+This section shows you how to use existing wrappers in your orders and integrate wrapper support into your application.
+
+## Adding Wrappers to Orders
+
+To use a wrapper in your order, add it to the `appData` when creating the order:
+
+### AppData Structure
+
+```typescript
+interface WrapperCall {
+    target: string;        // Wrapper contract address (must be allowlisted)
+    data?: string;         // Optional hex-encoded wrapper-specific data
+    is_omittable?: boolean; // Whether solver can skip this wrapper (default: false)
+}
+```
+
+**Fields:**
+- **`target`** (required): Address of the allowlisted wrapper contract
+- **`data`** (optional): Hex-encoded data specific to the wrapper. Can be empty or omitted if the wrapper doesn't need custom data.
+- **`is_omittable`** (optional): Defaults to `false`
+  - `false` = Solver MUST execute the wrapper with exact data or be slashed
+  - `true` = Solver MAY skip the wrapper if they find a better solution
+
+### Example: Using the CoW SDK
+
+```typescript
+import { OrderBookApi, OrderQuoteRequest, OrderCreation } from '@cowprotocol/cow-sdk'
+
+// Create order with wrapper
+const orderCreation: OrderCreation = {
+    // ... standard order fields (sellToken, buyToken, amounts, etc.)
+
+    appData: {
+        // ... other appData fields
+        wrappers: [
+            {
+                target: "0x1234...",     // Flash loan wrapper address
+                data: "0xabcd...",       // Encoded flash loan params
+                is_omittable: false      // Must execute
+            }
+        ]
+    }
+}
+
+// Submit order
+const orderId = await orderBookApi.sendOrder(orderCreation)
+```
+
+### Example: Multiple Wrappers (Nested)
+
+You can chain multiple wrappers in a single order:
+
+```typescript
+appData: {
+    wrappers: [
+        {
+            target: "0x1111...",     // Flash loan wrapper
+            data: "0xaaaa...",
+            is_omittable: false
+        },
+        {
+            target: "0x2222...",     // Leverage wrapper
+            data: "0xbbbb...",
+            is_omittable: false
+        }
+    ]
+}
+```
+
+The wrappers execute in sequence: Wrapper1 → Wrapper2 → Settlement → Wrapper2 (post) → Wrapper1 (post). Note that wrappers from other user's orders may be interspersed, though this should generally not affect the execution of the order.
+
+## Validating Wrapper Configuration
+
+Before submitting an order, you can confirm the wrapper encoding is valid using `CowWrapperHelper`:
+
+```typescript
+// On-chain validation (via Ethers/Viem)
+const helper = new ethers.Contract(HELPER_ADDRESS, HELPER_ABI, provider)
+
+const isValid = await helper.verifyAndBuildWrapperData(
+    ["0x1234...", "0x5678..."],  // Wrapper addresses
+    ["0xabcd...", "0xef01..."]   // Wrapper data
+)
+// Returns encoded wrapperData if valid, reverts if invalid
+```
+
+This checks:
+- All wrappers are allowlisted
+- All wrappers use the same settlement contract
+- Each wrapper can parse its data successfully
+
+---
+
+## For Solvers
+
+This section explains how to execute settlements that include wrapper contracts as part of your solver implementation.
+
+## Detecting Wrapper Orders
+
+Wrappers are specified in the order's [`appData`](../reference/core/auctions/schema.md) under the `wrappers` field:
+
+```json
+{
+  "wrappers": [
+    {
+      "target": "0x1234...",
+      "data": "0xabcdef...",
+      "is_omittable": false
+    }
+  ]
+}
+```
+
+**Fields:**
+- **`target`**: Address of the wrapper contract (treat as opaque - don't parse)
+- **`data`**: Wrapper-specific data (treat as opaque - don't parse)
+- **`is_omittable`**: Critical flag for solver requirements (see below)
+
+:::warning
+Wrapper addresses and data should be treated as opaque values. Do not attempt to parse or validate them - simply pass them through in your encoding.
+:::
+
+## Solver Requirements
+
+### 1. Execute Non-Omittable Wrappers
+
+Orders with `"is_omittable": false` **MUST** be executed with the specified wrapper. You may be slashed for not doing so.
+
+If `"is_omittable": true`, you MAY skip the wrapper if you find a better solution without it.
+
+### 2. Verify Wrapper Authentication
+
+All approved wrappers will be approved by the DAO and registered in [`GPv2AllowlistAuthenticator`](../reference/contracts/core/allowlist.md). It is recommended to verify wrappers are allowlisted before including them in settlements.
+
+### 3. Include Wrappers in Solution
+
+Whether using the CoW-provided driver or your own, ensure wrapper information flows from the auction to your final settlement transaction.
+
+## Encoding Wrapper Settlements
+
+:::info
+If you're using the driver provided by the CoW team, you can skip this section - the driver handles encoding automatically.
+:::
+
+### Manual Encoding
+
+To execute a settlement with wrappers:
+
+#### 1. Change Transaction Target
+
+Your transaction should call `wrappedSettle()` on the **first** wrapper (not the settlement contract):
+
+```typescript
+// Without wrapper
+tx = {
+    to: SETTLEMENT_CONTRACT,
+    data: encodeSettle(...)
+}
+
+// With wrapper
+tx = {
+    to: wrappers[0].target,  // First wrapper address
+    data: encodeWrappedSettle(...) // See below
+}
+```
+
+#### 2. Construct settleData Parameter
+
+The `settleData` parameter is the **exact** calldata you would send to `GPv2Settlement.settle()`, including the 4-byte function selector:
+
+```typescript
+const settleData = settlementContract.interface.encodeFunctionData("settle", [
+    tokens,
+    clearingPrices,
+    trades,
+    interactions
+]);
+// This is your settleData - unchanged from normal settlement
+```
+
+#### 3. Encode wrapperData Parameter
+
+The `wrapperData` combines individual wrapper data with wrapper addresses:
+
+```typescript
+function encodeWrapperData(wrappers: WrapperCall[]): string {
+    let wrapperData = '0x';
+
+    for (const [index, wrapper] of wrappers.entries()) {
+        // Skip first wrapper's address (it's the transaction target)
+        if (index !== 0) {
+            // Add wrapper address (20 bytes, without 0x prefix)
+            wrapperData += wrapper.target.slice(2);
+        }
+
+        // Encode data length as u16 big-endian (2 bytes)
+        const dataLength = (wrapper.data.length - 2) / 2; // Remove '0x' and convert to byte length
+        const lengthHex = dataLength.toString(16).padStart(4, '0');
+        wrapperData += lengthHex;
+
+        // Add wrapper data (without 0x prefix)
+        wrapperData += wrapper.data.slice(2);
+    }
+
+    return wrapperData;
+}
+```
+
+**Encoding Structure:**
+```
+For 2 wrappers:
+[length₁(2B)][data₁][address₂(20B)][length₂(2B)][data₂]
+
+For 3 wrappers:
+[length₁(2B)][data₁][address₂(20B)][length₂(2B)][data₂][address₃(20B)][length₃(2B)][data₃]
+```
+
+#### 4. Call wrappedSettle
+
+```typescript
+const tx = {
+    to: wrappers[0].target,
+    data: wrapperContract.interface.encodeFunctionData("wrappedSettle", [
+        settleData,      // From step 2
+        chainedWrapperData      // From step 3
+    ])
+}
+```
+
+### Using CowWrapperHelper
+
+Alternatively, use the `CowWrapperHelper` contract for encoding and validation:
+
+```solidity
+// On-chain encoding and validation
+address[] memory wrapperAddresses = [wrapper1, wrapper2];
+bytes[] memory wrapperDatas = [data1, data2];
+
+bytes memory wrapperData = CowWrapperHelper(HELPER).verifyAndBuildWrapperData(
+    wrapperAddresses,
+    wrapperDatas
+);
+```
+
+In addition to producing the correct encoded data, the helper also validates:
+- All wrappers are allowlisted
+- All wrappers use the same settlement contract
+- Each wrapper can parse its data
+
+## Accumulating Wrappers in Solutions
+
+### Using CoW-Provided Driver
+
+If you're using the CoW team's driver, wrappers are handled automatically. Just ensure your solver process includes wrapper information in the solution output.
+
+### Custom Implementation
+
+If implementing your own solver:
+
+1. **Collect wrappers from orders**: As you process orders in an auction, collect all `wrappers` arrays from order appData
+2. **Aggregate for batch**: Combine wrappers needed for all orders in the settlement batch
+3. **Include in solution**: Add aggregated wrappers to your solution structure
+4. **Encode transaction**: Use the encoding algorithm above to construct the final transaction
+
+**Example (conceptual):**
+
+```typescript
+// Process auction
+const solution = {
+    orders: [...],
+    wrappers: []  // Collect here
+};
+
+for (const order of auction.orders) {
+    if (order.appData.wrappers) {
+        // Add wrappers needed for this order
+        solution.wrappers.push(...order.appData.wrappers);
+    }
+}
+
+// Encode final transaction
+const tx = encodeWrapperSettlement(solution);
+```
+
+## Testing and Validation
+
+### Gas Estimation
+
+Account for wrapper gas overhead in your bids. The easiest way to do this is to simpulate the wrapper transaction against an empty settlement.
+
+## Common Issues
+
+### Issue: "Not authorized" error
+
+**Cause**: Wrapper is not allowlisted in `GPv2AllowlistAuthenticator`
+
+**Solution**: Verify wrapper is DAO-approved before including in settlement
+
+### Issue: Settlement reverts in wrapper
+
+**Cause**: Incorrect encoding or wrapper-specific validation failure
+
+**Solution**:
+- Verify `settleData` is identical to what you'd send to `GPv2Settlement.settle()`
+- Check `wrapperData` encoding follows specification exactly
+- Use `CowWrapperHelper` for validation
+
+## Solver Resources
+
+### Documentation
+- **[Wrapper Concepts](../concepts/order-types/wrappers.md)** - High-level overview
+- **[Contracts Reference](../reference/contracts/periphery/wrapper.mdx)** - Contract specifications
+- **[Services PR #3700](https://github.com/cowprotocol/services/pull/3700)** - Reference encoding implementation in production
+
+---
