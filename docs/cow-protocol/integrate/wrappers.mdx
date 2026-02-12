@@ -4,12 +4,12 @@ Generalized wrappers enable custom logic to execute surrounding CoW Protocol set
 
 **Choose your path:**
 - **[Building New Wrappers](#for-wrapper-developers)** - Develop custom wrapper contracts for advanced DeFi workflows
-- **[Using Existing Wrappers](#for-order-creators--frontend-developers)** - Add wrappers to your orders and integrate into your application
-- **[Executing Wrappers as a Solver](#for-solvers) - Everything solvers need to know to execute wrapper orders
+- **[Using Existing Wrappers](#for-order-creators-and-frontend-developers)** - Add wrappers to your orders and integrate into your application
+- **[Executing Wrappers as a Solver](#for-solvers)** - Everything solvers need to know to execute wrapper orders
 
 ---
 
-# For Wrapper Developers
+## For Wrapper Developers
 
 This section covers building new wrapper contracts from scratch.
 
@@ -27,7 +27,7 @@ Read up on the details of creating a wrapper from [the wrapper contract informat
 
 ---
 
-# For Order Creators / Frontend Developers
+## For Order Creators and Frontend Developers
 
 This section shows you how to use existing wrappers in your orders and integrate wrapper support into your application.
 
@@ -122,13 +122,13 @@ This checks:
 
 ---
 
-# For Solvers
+## For Solvers
 
 This section explains how to execute settlements that include wrapper contracts as part of your solver implementation.
 
 ## Detecting Wrapper Orders
 
-Wrappers are specified in the order's [`appData`](TODO) under the `wrappers` field:
+Wrappers are specified in the order's [`appData`](../reference/core/auctions/schema.md) under the `wrappers` field:
 
 ```json
 {
@@ -161,7 +161,7 @@ If `"is_omittable": true`, you MAY skip the wrapper if you find a better solutio
 
 ### 2. Verify Wrapper Authentication
 
-All approved wrappers will be approved by the DAO and registered in [`GPv2AllowlistAuthenticator`](../references/contracts/core/allowlist.md). It is recommended to verify wrappers are allowlisted before including them in settlements.
+All approved wrappers will be approved by the DAO and registered in [`GPv2AllowlistAuthenticator`](../reference/contracts/core/allowlist.md). It is recommended to verify wrappers are allowlisted before including them in settlements.
 
 ### 3. Include Wrappers in Solution
 
@@ -340,7 +340,7 @@ Account for wrapper gas overhead in your bids. The easiest way to do this is to 
 
 ### Documentation
 - **[Wrapper Concepts](../concepts/order-types/wrappers.md)** - High-level overview
-- **[Contracts Reference](../reference/contracts/periphery/wrapper.md)** - Contract specifications
+- **[Contracts Reference](../reference/contracts/periphery/wrapper.mdx)** - Contract specifications
 - **[Services PR #3700](https://github.com/cowprotocol/services/pull/3700)** - Reference encoding implementation in production
 
 ---
