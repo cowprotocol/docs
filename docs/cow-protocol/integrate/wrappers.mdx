@@ -253,7 +253,7 @@ const tx = {
     to: wrappers[0].target,
     data: wrapperContract.interface.encodeFunctionData("wrappedSettle", [
         settleData,      // From step 2
-        chainedWrapperData      // From step 3
+        wrapperData      // From step 3
     ])
 }
 ```
@@ -317,7 +317,7 @@ const tx = encodeWrapperSettlement(solution);
 
 ### Gas Estimation
 
-Account for wrapper gas overhead in your bids. The easiest way to do this is to simpulate the wrapper transaction against an empty settlement.
+Account for wrapper gas overhead in your bids. The easiest way to do this is to simulate the wrapper transaction against an empty settlement.
 
 ## Common Issues
 

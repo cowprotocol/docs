@@ -333,9 +333,8 @@ Each wrapper in the chain consists of:
 - 20 bytes: address of next wrapper (omitted for the final wrapper)
 The final wrapper in the chain omits the next wrapper address and calls SETTLEMENT directly.
 
-```
-Example: 
-```
+Example:
+```text
 [0x0005][0xAABBCCDDEE][0x1234...ABCD][0x0003][0x112233]
 ↑len    ↑data         ↑next wrapper  ↑len   ↑data
 ```
@@ -487,7 +486,7 @@ function parseWrapperData(
 
 #### 1. Use CowWrapper Abstract Contract
 
-It is strongly reccomended to **NOT** implement `ICowWrapper` directly. The `CowWrapper` abstract contract provides:
+It is strongly recommended to **NOT** implement `ICowWrapper` directly. The `CowWrapper` abstract contract provides:
 - Solver authentication checks
 - Correct calldata parsing and decoding
 - Safe wrapper chain continuation
@@ -681,7 +680,7 @@ Wrappers need protocol approval, and are not fully permissionless.
 
 ### Settlement Upgrades
 
-When settlement contract upgrades, all wrappers must be redeployed. It is reccomended to use [Cannon](https://usecannon.com/learn) to make it easy to redeploy your wrappers.
+When settlement contract upgrades, all wrappers must be redeployed. It is recommended to use [Cannon](https://usecannon.com/learn) to make it easy to redeploy your wrappers.
 
 ## Events
 
