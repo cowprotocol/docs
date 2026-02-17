@@ -1,6 +1,22 @@
 ---
 name: cow-swap-order-creator
 description: Create and manage CoW Swap orders through the Order Book API, including quote-to-order conversion, fee=0 signing, slippage and partner-fee adjustments, EIP-712/ERC-1271/PreSign requirements, submission, status checks, and cancellation. Use when an agent needs to place, debug, or automate CoW Protocol orders from backend or script workflows.
+homepage: https://swap.cow.fi/
+metadata:
+  protocol: cow-protocol
+  category: dex
+  chains:
+    - mainnet
+    - xdai
+    - arbitrum_one
+    - base
+    - avalanche
+    - polygon
+    - lens
+    - bnb
+    - linea
+    - plasma
+    - sepolia
 ---
 
 # CoW Swap Order Creator
@@ -26,9 +42,15 @@ The `from` address is derived from `PRIVATE_KEY`. No API keys needed.
 | Gnosis Chain | `https://api.cow.fi/xdai/api/v1` | 100 |
 | Arbitrum One | `https://api.cow.fi/arbitrum_one/api/v1` | 42161 |
 | Base | `https://api.cow.fi/base/api/v1` | 8453 |
+| Avalanche | `https://api.cow.fi/avalanche/api/v1` | 43114 |
+| Polygon | `https://api.cow.fi/polygon/api/v1` | 137 |
+| Lens | `https://api.cow.fi/lens/api/v1` | 232 |
+| BNB | `https://api.cow.fi/bnb/api/v1` | 56 |
+| Linea | `https://api.cow.fi/linea/api/v1` | 59144 |
+| Plasma | `https://api.cow.fi/plasma/api/v1` | 9745 |
 | Sepolia | `https://api.cow.fi/sepolia/api/v1` | 11155111 |
 
-Routes: `POST /quote` · `POST /orders` · `GET /orders/{uid}` · `DELETE /orders/{uid}`
+Routes: `POST /quote` · `POST /orders` · `GET /orders/{uid}` 
 
 ## Contract Addresses (same on all chains)
 
@@ -38,6 +60,26 @@ Routes: `POST /quote` · `POST /orders` · `GET /orders/{uid}` · `DELETE /order
 | VaultRelayer | `0xC92E8bdf79f0507f65a392b0ab4667716BFE0110` |
 
 ## Common Token Addresses
+
+The tables below are examples only (not exhaustive).
+
+For production, use the canonical CoW token list JSON:
+
+- `https://files.cow.fi/tokens/CowSwap.json`
+
+Example lookups:
+
+```bash
+TOKEN_LIST_URL="https://files.cow.fi/tokens/CowSwap.json"
+
+# Find a token by chainId + symbol
+curl -s "$TOKEN_LIST_URL" \
+  | jq -r '.tokens[] | select(.chainId==1 and .symbol=="USDC") | "\(.address) decimals=\(.decimals)"'
+
+# List tokens on Gnosis Chain (chainId 100)
+curl -s "$TOKEN_LIST_URL" \
+  | jq -r '.tokens[] | select(.chainId==100) | "\(.symbol)\t\(.address)\t\(.decimals)"'
+```
 
 ### Mainnet (chain ID 1)
 
@@ -76,7 +118,7 @@ Routes: `POST /quote` · `POST /orders` · `GET /orders/{uid}` · `DELETE /order
 | WETH | `0x4200000000000000000000000000000000000006` | 18 |
 | USDC | `0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913` | 6 |
 
-If the token is not listed, query `decimals()` on the contract (selector `0x313ce567`) via RPC.
+If a token is missing from the token list, query `decimals()` on-chain (selector `0x313ce567`) via RPC.
 
 ## Converting Human Amounts to Atomic Units
 
@@ -96,7 +138,12 @@ All agent-created orders must include `"appCode": "agent"` in their appData docu
 | Hash | `0x6a45ce6deb3a32a35a97afa44fd544c8ebc355edc10b2a8e52ef0356b804df45` |
 | Registered on | mainnet, xdai, arbitrum_one, base, sepolia |
 
-Use this hash as the `appData` field in every order. No additional registration is needed.
+The `POST /quote` and `POST /orders` endpoints treat `appData` differently:
+
+- **`POST /quote`**: `appData` must be the full JSON document string, `appDataHash` must be the hash.
+- **`POST /orders`**: `appData` must be the hash (bytes32 hex string).
+
+No additional registration is needed for the pre-registered agent document.
 
 For custom metadata (referral, hooks), compute `keccak256` of the compact JSON string and register via `PUT /api/v1/app_data/{hash}` with body `{"fullAppData": "<json_string>"}`. Always include `"appCode": "agent"`.
 
@@ -104,9 +151,9 @@ For custom metadata (referral, hooks), compute `keccak256` of the compact JSON s
 
 ## Workflow
 
-### Step 0 — Pre-flight: token approval
+### Step 0 — Pre-flight: token approval (ERC-20 sell tokens)
 
-Before submitting any order, the sell token must be approved for the VaultRelayer. If not, the API rejects with `InsufficientAllowance`.
+For standard Order Book API orders with ERC-20 sell tokens, the sell token must be approved for the VaultRelayer. If not, the API rejects with `InsufficientAllowance`.
 
 Check allowance:
 
@@ -130,9 +177,14 @@ Sign and broadcast the approve tx using `$PRIVATE_KEY`. Use EIP-1559 (type 2) tr
 
 Wait for confirmation before proceeding.
 
-> Native ETH cannot be sold directly. Wrap to WETH first.
+> Native ETH sells are supported via Eth-flow. This Step 0 approval flow is for ERC-20 sell tokens; if you stay on this flow, wrap ETH to WETH first. See [Native tokens](https://docs.cow.fi/cow-protocol/tutorials/cow-swap/native) and [Eth-flow](https://docs.cow.fi/cow-protocol/reference/contracts/periphery/eth-flow).
 
 ### Step 1 — Request a quote
+
+Before building payloads, check the API schema:
+
+- Order Book API reference: <https://docs.cow.fi/cow-protocol/reference/apis/orderbook>
+- OpenAPI YAML: <https://raw.githubusercontent.com/cowprotocol/services/main/crates/orderbook/openapi.yml>
 
 ```bash
 curl -s -X POST "$API_BASE/quote" \
@@ -144,7 +196,7 @@ curl -s -X POST "$API_BASE/quote" \
     "kind": "sell",
     "from": "0xYOUR_ADDRESS",
     "receiver": "0xYOUR_ADDRESS",
-    "appData": "0x6a45ce6deb3a32a35a97afa44fd544c8ebc355edc10b2a8e52ef0356b804df45",
+    "appData": "{\"appCode\":\"agent\",\"metadata\":{},\"version\":\"1.6.0\"}",
     "appDataHash": "0x6a45ce6deb3a32a35a97afa44fd544c8ebc355edc10b2a8e52ef0356b804df45",
     "sellTokenBalance": "erc20",
     "buyTokenBalance": "erc20",
@@ -152,6 +204,8 @@ curl -s -X POST "$API_BASE/quote" \
     "signingScheme": "eip712"
   }'
 ```
+
+> **Note:** `appData` in the quote request is the full JSON document, not the hash. The hash goes in `appDataHash`.
 
 - For `sell` orders → send `sellAmountBeforeFee`
 - For `buy` orders → send `buyAmountAfterFee`
@@ -161,18 +215,26 @@ curl -s -X POST "$API_BASE/quote" \
 
 ### Step 2 — Adjust amounts before signing
 
+Apply adjustments in this order:
+
+1. Add `feeAmount` back to `sellAmount` (fee=0 signing)
+2. Apply slippage
+3. Apply partner fee (if any)
+
 **Sell order:**
 
 1. `signingSellAmount = quote.sellAmount + quote.feeAmount`
-2. `signingBuyAmount = quote.buyAmount × (10000 − slippageBps) / 10000`
-3. Optional partner fee: `signingBuyAmount = signingBuyAmount × (10000 − partnerFeeBps) / 10000`
+2. `buyAfterSlippage = quote.buyAmount × (10000 − slippageBps) / 10000`
+3. Optional partner fee: `signingBuyAmount = buyAfterSlippage × (10000 − partnerFeeBps) / 10000`
+4. If no partner fee: `signingBuyAmount = buyAfterSlippage`
 
 **Buy order:**
 
 1. `baseSellAmount = quote.sellAmount + quote.feeAmount`
-2. `signingSellAmount = baseSellAmount × (10000 + slippageBps) / 10000`
-3. Optional partner fee: `signingSellAmount = signingSellAmount × (10000 + partnerFeeBps) / 10000`
-4. `signingBuyAmount = quote.buyAmount` (unchanged)
+2. `sellAfterSlippage = baseSellAmount × (10000 + slippageBps) / 10000`
+3. Optional partner fee: `signingSellAmount = sellAfterSlippage × (10000 + partnerFeeBps) / 10000`
+4. If no partner fee: `signingSellAmount = sellAfterSlippage`
+5. `signingBuyAmount = quote.buyAmount` (unchanged)
 
 All arithmetic uses integer math in token atoms. Always sign with `feeAmount: "0"`.
 
@@ -268,7 +330,9 @@ Statuses: `open` · `fulfilled` · `cancelled` · `expired` · `presignaturePend
 
 ## End-to-End Example: Sell 10 USDC for WETH on Mainnet
 
-This is based on an actual executed order. It uses `curl` for HTTP and Python for signing.
+This is based on an actual executed order. It uses `curl` for all HTTP calls and Python
+only for local computation (address derivation, amount adjustment, EIP-712 signing).
+JSON payloads are passed through temp files to avoid shell-quoting issues.
 
 ```bash
 #!/usr/bin/env bash
@@ -281,8 +345,10 @@ SELL_TOKEN="0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48"  # USDC
 BUY_TOKEN="0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2"   # WETH
 SELL_AMOUNT="10000000"  # 10 USDC in 6-decimal atoms
 SLIPPAGE_BPS=50         # 0.5%
-APP_DATA="0x6a45ce6deb3a32a35a97afa44fd544c8ebc355edc10b2a8e52ef0356b804df45"
+APP_DATA_DOC='{"appCode":"agent","metadata":{},"version":"1.6.0"}'
+APP_DATA_HASH="0x6a45ce6deb3a32a35a97afa44fd544c8ebc355edc10b2a8e52ef0356b804df45"
 VAULT_RELAYER="0xC92E8bdf79f0507f65a392b0ab4667716BFE0110"
+SETTLEMENT="0x9008D19f58AAbD9eD0D60971565AA8510560ab41"
 
 # Derive from address from private key
 FROM=$(python3 -c "
@@ -299,38 +365,38 @@ ALLOWANCE_HEX=$(curl -s "$RPC" -X POST \
   -d "{\"jsonrpc\":\"2.0\",\"method\":\"eth_call\",\"params\":[{\"to\":\"$SELL_TOKEN\",\"data\":\"$ALLOWANCE_DATA\"},\"latest\"],\"id\":1}" \
   | python3 -c "import sys,json; print(json.load(sys.stdin)['result'])")
 
-ALLOWANCE=$(python3 -c "print(int('$ALLOWANCE_HEX', 16))")
-echo "Current allowance: $ALLOWANCE"
+# Use Python for comparison — shell arithmetic overflows on uint256 values
+NEEDS_APPROVAL=$(python3 -c "print(int('$ALLOWANCE_HEX', 16) < $SELL_AMOUNT)")
+echo "Current allowance: $(python3 -c "print(int('$ALLOWANCE_HEX', 16))")"
 
-if [ "$ALLOWANCE" -lt "$SELL_AMOUNT" ]; then
+if [ "$NEEDS_APPROVAL" = "True" ]; then
   echo "Approving VaultRelayer..."
   APPROVE_CALLDATA="0x095ea7b3$(printf '%064s' "${VAULT_RELAYER#0x}" | tr ' ' '0')ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
 
-  # Build, sign, and send approve tx (EIP-1559)
+  # Get nonce and gas params via curl, then sign with Python
+  NONCE_HEX=$(curl -s "$RPC" -X POST \
+    -H "Content-Type: application/json" \
+    -d "{\"jsonrpc\":\"2.0\",\"method\":\"eth_getTransactionCount\",\"params\":[\"$FROM\",\"latest\"],\"id\":1}" \
+    | python3 -c "import sys,json; print(json.load(sys.stdin)['result'])")
+
+  BASE_FEE_HEX=$(curl -s "$RPC" -X POST \
+    -H "Content-Type: application/json" \
+    -d "{\"jsonrpc\":\"2.0\",\"method\":\"eth_getBlockByNumber\",\"params\":[\"latest\",false],\"id\":1}" \
+    | python3 -c "import sys,json; print(json.load(sys.stdin)['result']['baseFeePerGas'])")
+
+  # Build and sign approve tx (Python — no HTTP needed)
   python3 -c "
-import os, json, urllib.request
 from eth_account import Account
-
 acct = Account.from_key('$PRIVATE_KEY')
-rpc = '$RPC'
-
-def rpc_call(method, params):
-    body = json.dumps({'jsonrpc':'2.0','method':method,'params':params,'id':1}).encode()
-    req = urllib.request.Request(rpc, body, {'Content-Type':'application/json'})
-    return json.loads(urllib.request.urlopen(req).read())['result']
-
-nonce = int(rpc_call('eth_getTransactionCount', [acct.address, 'latest']), 16)
-base_fee = int(rpc_call('eth_getBlockByNumber', ['latest', False])['baseFeePerGas'], 16)
-max_fee = base_fee * 3 + 2000000000
-max_priority = 2000000000
-
+nonce = int('$NONCE_HEX', 16)
+base_fee = int('$BASE_FEE_HEX', 16)
 tx = {
     'to': '$SELL_TOKEN',
     'data': '$APPROVE_CALLDATA',
     'nonce': nonce,
     'gas': 60000,
-    'maxFeePerGas': max_fee,
-    'maxPriorityFeePerGas': max_priority,
+    'maxFeePerGas': base_fee * 3 + 2000000000,
+    'maxPriorityFeePerGas': 2000000000,
     'chainId': 1,
     'type': 2,
 }
@@ -344,7 +410,6 @@ print(signed.raw_transaction.hex())
     | python3 -c "import sys,json; print(json.load(sys.stdin)['result'])")
   echo "Approve tx: $TX_HASH"
 
-  # Wait for confirmation
   echo "Waiting for confirmation..."
   for i in $(seq 1 30); do
     RECEIPT=$(curl -s "$RPC" -X POST \
@@ -357,120 +422,155 @@ print(signed.raw_transaction.hex())
 fi
 
 # --- Step 1: Get quote ---
-QUOTE=$(curl -s -X POST "$API/quote" \
+# Write quote request to temp file (avoids shell-quoting issues with JSON)
+python3 -c "
+import json
+payload = {
+    'sellToken': '$SELL_TOKEN',
+    'buyToken': '$BUY_TOKEN',
+    'sellAmountBeforeFee': '$SELL_AMOUNT',
+    'kind': 'sell',
+    'from': '$FROM',
+    'receiver': '$FROM',
+    'appData': '$APP_DATA_DOC',
+    'appDataHash': '$APP_DATA_HASH',
+    'sellTokenBalance': 'erc20',
+    'buyTokenBalance': 'erc20',
+    'partiallyFillable': False,
+    'signingScheme': 'eip712'
+}
+with open('/tmp/cow_quote_req.json', 'w') as f:
+    json.dump(payload, f)
+"
+
+curl -s -X POST "$API/quote" \
   -H "Content-Type: application/json" \
-  -d "{
-    \"sellToken\": \"$SELL_TOKEN\",
-    \"buyToken\": \"$BUY_TOKEN\",
-    \"sellAmountBeforeFee\": \"$SELL_AMOUNT\",
-    \"kind\": \"sell\",
-    \"from\": \"$FROM\",
-    \"receiver\": \"$FROM\",
-    \"appData\": \"$APP_DATA\",
-    \"appDataHash\": \"$APP_DATA\",
-    \"sellTokenBalance\": \"erc20\",
-    \"buyTokenBalance\": \"erc20\",
-    \"partiallyFillable\": false,
-    \"signingScheme\": \"eip712\"
-  }")
+  -d @/tmp/cow_quote_req.json > /tmp/cow_quote_resp.json
 
 echo "Quote response:"
-echo "$QUOTE" | python3 -m json.tool
+python3 -c "
+import json
+with open('/tmp/cow_quote_resp.json') as f:
+    data = json.load(f)
+print(json.dumps(data, indent=2))
+"
 
 # --- Step 2: Adjust amounts ---
-ADJUSTED=$(python3 -c "
+python3 -c "
 import json
-q = json.loads('$QUOTE')['quote']
+
+with open('/tmp/cow_quote_resp.json') as f:
+    resp = json.load(f)
+
+q = resp['quote']
+quote_id = resp.get('id', '')
 sell = int(q['sellAmount']) + int(q['feeAmount'])
 buy = int(q['buyAmount']) * (10000 - $SLIPPAGE_BPS) // 10000
 receiver = q.get('receiver') or '$FROM'
 valid_to = q['validTo']
-print(json.dumps({'sell': str(sell), 'buy': str(buy), 'receiver': receiver, 'validTo': valid_to}))
-")
 
-SIGNING_SELL=$(echo "$ADJUSTED" | python3 -c "import sys,json; print(json.load(sys.stdin)['sell'])")
-SIGNING_BUY=$(echo "$ADJUSTED" | python3 -c "import sys,json; print(json.load(sys.stdin)['buy'])")
-RECEIVER=$(echo "$ADJUSTED" | python3 -c "import sys,json; print(json.load(sys.stdin)['receiver'])")
-VALID_TO=$(echo "$ADJUSTED" | python3 -c "import sys,json; print(json.load(sys.stdin)['validTo'])")
-QUOTE_ID=$(echo "$QUOTE" | python3 -c "import sys,json; print(json.load(sys.stdin).get('id',''))")
+adjusted = {
+    'sell': str(sell),
+    'buy': str(buy),
+    'receiver': receiver,
+    'validTo': valid_to,
+    'quoteId': quote_id
+}
+with open('/tmp/cow_adjusted.json', 'w') as f:
+    json.dump(adjusted, f)
+print(json.dumps(adjusted, indent=2))
+"
+
+SIGNING_SELL=$(python3 -c "import json; print(json.load(open('/tmp/cow_adjusted.json'))['sell'])")
+SIGNING_BUY=$(python3 -c "import json; print(json.load(open('/tmp/cow_adjusted.json'))['buy'])")
+RECEIVER=$(python3 -c "import json; print(json.load(open('/tmp/cow_adjusted.json'))['receiver'])")
+VALID_TO=$(python3 -c "import json; print(json.load(open('/tmp/cow_adjusted.json'))['validTo'])")
+QUOTE_ID=$(python3 -c "import json; print(json.load(open('/tmp/cow_adjusted.json'))['quoteId'])")
 
 echo "Signing: sell=$SIGNING_SELL buy=$SIGNING_BUY receiver=$RECEIVER validTo=$VALID_TO"
 
 # --- Step 3: Sign (EIP-712) ---
+# Manual EIP-712 hashing — works with any eth_account version.
+# Only requires eth_account, eth_utils, and eth_abi (no minimum version).
 SIGNATURE=$(python3 -c "
 from eth_account import Account
-from eth_account.messages import encode_typed_data
+from eth_utils import keccak
+from eth_abi import encode_abi
 
-order_data = {
-    'sellToken':         '$SELL_TOKEN',
-    'buyToken':          '$BUY_TOKEN',
-    'receiver':          '$RECEIVER',
-    'sellAmount':        int('$SIGNING_SELL'),
-    'buyAmount':         int('$SIGNING_BUY'),
-    'validTo':           $VALID_TO,
-    'appData':           bytes.fromhex('${APP_DATA#0x}'),
-    'feeAmount':         0,
-    'kind':              'sell',
-    'partiallyFillable': False,
-    'sellTokenBalance':  'erc20',
-    'buyTokenBalance':   'erc20',
-}
-domain = {
-    'name':              'Gnosis Protocol',
-    'version':           'v2',
-    'chainId':           1,
-    'verifyingContract':  '0x9008D19f58AAbD9eD0D60971565AA8510560ab41',
-}
-types = {
-    'Order': [
-        {'name': 'sellToken',         'type': 'address'},
-        {'name': 'buyToken',          'type': 'address'},
-        {'name': 'receiver',          'type': 'address'},
-        {'name': 'sellAmount',        'type': 'uint256'},
-        {'name': 'buyAmount',         'type': 'uint256'},
-        {'name': 'validTo',           'type': 'uint32'},
-        {'name': 'appData',           'type': 'bytes32'},
-        {'name': 'feeAmount',         'type': 'uint256'},
-        {'name': 'kind',              'type': 'string'},
-        {'name': 'partiallyFillable', 'type': 'bool'},
-        {'name': 'sellTokenBalance',  'type': 'string'},
-        {'name': 'buyTokenBalance',   'type': 'string'},
-    ]
-}
+# Domain separator
+DOMAIN_TYPE_HASH = keccak(b'EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)')
+domain_separator = keccak(
+    DOMAIN_TYPE_HASH
+    + keccak(b'Gnosis Protocol')
+    + keccak(b'v2')
+    + encode_abi(['uint256'], [1])
+    + encode_abi(['address'], ['$SETTLEMENT'])
+)
+
+# Order struct hash
+ORDER_TYPE_HASH = keccak(b'Order(address sellToken,address buyToken,address receiver,uint256 sellAmount,uint256 buyAmount,uint32 validTo,bytes32 appData,uint256 feeAmount,string kind,bool partiallyFillable,string sellTokenBalance,string buyTokenBalance)')
+struct_hash = keccak(
+    ORDER_TYPE_HASH
+    + encode_abi(['address'], ['$SELL_TOKEN'])
+    + encode_abi(['address'], ['$BUY_TOKEN'])
+    + encode_abi(['address'], ['$RECEIVER'])
+    + encode_abi(['uint256'], [int('$SIGNING_SELL')])
+    + encode_abi(['uint256'], [int('$SIGNING_BUY')])
+    + encode_abi(['uint256'], [$VALID_TO])
+    + bytes.fromhex('${APP_DATA_HASH#0x}')
+    + encode_abi(['uint256'], [0])
+    + keccak(b'sell')
+    + encode_abi(['bool'], [False])
+    + keccak(b'erc20')
+    + keccak(b'erc20')
+)
+
+msg_hash = keccak(b'\x19\x01' + domain_separator + struct_hash)
 
 acct = Account.from_key('$PRIVATE_KEY')
-signed = acct.sign_typed_data(domain, types, order_data)
-print(signed.signature.hex())
+signed = acct.signHash(msg_hash)
+sig = signed.signature.hex()
+# Ensure no double 0x prefix
+print(sig if not sig.startswith('0x') else sig[2:])
 ")
 
 echo "Signature: 0x$SIGNATURE"
 
 # --- Step 4: Submit ---
+# Write order to temp file
+python3 -c "
+import json
+order = {
+    'sellToken': '$SELL_TOKEN',
+    'buyToken': '$BUY_TOKEN',
+    'receiver': '$RECEIVER',
+    'sellAmount': '$SIGNING_SELL',
+    'buyAmount': '$SIGNING_BUY',
+    'validTo': $VALID_TO,
+    'appData': '$APP_DATA_HASH',
+    'feeAmount': '0',
+    'kind': 'sell',
+    'partiallyFillable': False,
+    'sellTokenBalance': 'erc20',
+    'buyTokenBalance': 'erc20',
+    'from': '$FROM',
+    'signingScheme': 'eip712',
+    'signature': '0x$SIGNATURE',
+    'quoteId': $QUOTE_ID
+}
+with open('/tmp/cow_order_req.json', 'w') as f:
+    json.dump(order, f)
+"
+
 ORDER_UID=$(curl -s -X POST "$API/orders" \
   -H "Content-Type: application/json" \
-  -d "{
-    \"sellToken\": \"$SELL_TOKEN\",
-    \"buyToken\": \"$BUY_TOKEN\",
-    \"receiver\": \"$RECEIVER\",
-    \"sellAmount\": \"$SIGNING_SELL\",
-    \"buyAmount\": \"$SIGNING_BUY\",
-    \"validTo\": $VALID_TO,
-    \"appData\": \"$APP_DATA\",
-    \"feeAmount\": \"0\",
-    \"kind\": \"sell\",
-    \"partiallyFillable\": false,
-    \"sellTokenBalance\": \"erc20\",
-    \"buyTokenBalance\": \"erc20\",
-    \"from\": \"$FROM\",
-    \"signingScheme\": \"eip712\",
-    \"signature\": \"0x$SIGNATURE\",
-    \"quoteId\": $QUOTE_ID
-  }")
+  -d @/tmp/cow_order_req.json)
 
 echo "Order UID: $ORDER_UID"
 
 # --- Step 5: Monitor ---
-echo "Status: $(curl -s "$API/orders/$ORDER_UID" | python3 -c "import sys,json; print(json.load(sys.stdin).get('status','unknown'))")"
+curl -s "$API/orders/$ORDER_UID" > /tmp/cow_order_status.json
+echo "Status: $(python3 -c "import json; print(json.load(open('/tmp/cow_order_status.json')).get('status','unknown'))")"
 echo "Explorer: https://explorer.cow.fi/orders/$ORDER_UID"
 ```
 
@@ -488,6 +588,7 @@ echo "Explorer: https://explorer.cow.fi/orders/$ORDER_UID"
 
 | Error | Cause | Fix |
 |---|---|---|
+| `InvalidAppData` | Passed hash instead of JSON document in `POST /quote` `appData` field | Use full JSON document string as `appData` in quote requests; use hash as `appDataHash` |
 | `InsufficientAllowance` | Sell token not approved for VaultRelayer | Send `approve` tx (Step 0) |
 | `InsufficientBalance` | Wallet lacks sell token balance | Fund the wallet |
 | `SellAmountDoesNotCoverFee` | Amount too small to cover protocol fee | Increase sell amount |
@@ -499,9 +600,13 @@ For smart-contract wallets: use `eip1271` with contract as `from`, or `presign` 
 
 ## Tooling Notes
 
-- **Python**: `eth_account.Account.from_key(os.environ["PRIVATE_KEY"])` to load the signer. `.sign_typed_data` for EIP-712. Requires `eth_account >= 0.10`. The `appData` must be `bytes` (`bytes.fromhex(hex_str[2:])`) in the message dict.
+- **Python (EIP-712 signing)**: Two options depending on `eth_account` version:
+  - `eth_account >= 0.10`: `acct.sign_typed_data(domain, types, order_data)`. The `appData` must be `bytes` (`bytes.fromhex(hex_str[2:])`) in the message dict.
+  - `eth_account < 0.10` (or any version): Manual EIP-712 hash construction using `eth_utils.keccak` + `eth_abi.encode_abi`, then `acct.signHash(msg_hash)`. See the end-to-end example for the full implementation.
+- **Python (HTTP)**: Some Python installations (e.g. pyenv builds) lack the SSL module, which breaks `urllib.request` and `requests` for HTTPS URLs. Use `curl` for all HTTP calls and Python only for local computation and signing.
+- **Shell/curl**: Use `curl` for all HTTP calls. Write JSON payloads to temp files with Python (`json.dump` to `/tmp/...`) and pass them with `curl -d @/tmp/file.json` — this avoids shell quoting issues with inline JSON. Read responses from temp files rather than storing JSON in shell variables.
+- **Shell arithmetic**: Do not compare uint256 values with shell `[ -lt ]` or `(( ))` — bash/zsh truncate integers beyond ~20 digits. Use Python for big-number comparisons.
 - **TypeScript/Node**: `new ethers.Wallet(process.env.PRIVATE_KEY)` or `viem`'s `privateKeyToAccount`. Use `.signTypedData` for EIP-712.
-- **Shell/curl**: use `curl` for all HTTP calls and Python/Node inline for signing. Pass `$PRIVATE_KEY` to the signing script.
 - Use EIP-1559 (type 2) transactions for on-chain operations (approvals). Legacy transactions with low `gasPrice` get stuck.
 - Use `$ETH_RPC_URL` when set, otherwise fall back to public RPCs.
 
