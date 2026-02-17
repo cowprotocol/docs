@@ -275,27 +275,25 @@ import { CowWrapper } from "./CowWrapper.sol";
 contract MyWrapper is CowWrapper {
     constructor(address settlement) CowWrapper(settlement) {}
 
-    function _wrap(bytes calldata wrapperData) internal override {
+    function _wrap(bytes calldata settleData, bytes calldata wrapperData, bytes calldata remainingWrapperData) internal override {
         // Your custom pre-settlement logic here
         // Example: pull tokens, initiate flash loan, etc.
 
         // Continue the wrapper chain (calls settlement or next wrapper)
-        _next(wrapperData);
+        _next(settleData, remainingWrapperData);
 
         // Your custom post-settlement logic here
         // Example: repay flash loan, stake tokens, etc.
     }
 
-    function parseWrapperData(bytes calldata wrapperData)
+    function validateWrapperData(bytes calldata wrapperData)
         external
         view
         override
-        returns (bytes memory)
     {
-        // Validate and parse wrapper-specific data
+        // Validate wrapper-specific data
         // This must be deterministic - same input always returns same output
         // Revert if data is invalid
-        return wrapperData;
     }
 }
 ```
@@ -312,12 +310,18 @@ function wrappedSettle(
     bytes calldata chainedWrapperData
 ) external override {
     // Verify caller is an authenticated solver
-    require(
-        GPv2Authentication(SETTLEMENT).isSolver(msg.sender),
-        "Not authorized"
-    );
+    require(AUTHENTICATOR.isSolver(msg.sender), NotASolver(msg.sender));
 
-    _wrap(wrapperData);
+    // Find out how long the next wrapper data is supposed to be
+    uint256 nextWrapperDataLen = uint256(uint16(bytes2(chainedWrapperData[0:2])));
+
+    // Delegate to the wrapper's custom logic
+    uint256 remainingWrapperDataStart = 2 + nextWrapperDataLen;
+    _wrap(
+        settleData,
+        chainedWrapperData[2:remainingWrapperDataStart],
+        chainedWrapperData[remainingWrapperDataStart:]
+    );
 }
 ```
 
@@ -348,7 +352,7 @@ Each wrapper in the chain will successively pull off their own data and then cal
 Contains custom surrounding settlement logic. **Must** call `_next()` to continue the chain to the settlement contract.
 
 ```solidity
-function _wrap(bytes calldata wrapperData) internal virtual;
+function _wrap(bytes calldata settleData, bytes calldata wrapperData, bytes calldata remainingWrapperData) internal virtual;
 ```
 
 **Implementation Requirements:**
@@ -360,18 +364,15 @@ function _wrap(bytes calldata wrapperData) internal virtual;
 **Example:**
 
 ```solidity
-function _wrap(bytes calldata wrapperData) internal override {
-    // 1. Parse data (first 2 bytes = length)
-    uint16 myDataLength = uint16(bytes2(wrapperData[:2]));
-    bytes calldata myData = wrapperData[2:2+myDataLength];
-
-    (address token, uint256 amount) = abi.decode(myData, (address, uint256));
+function _wrap(bytes calldata settleData, bytes calldata wrapperData, bytes calldata remainingWrapperData) internal override {
+    // 1. Parse data
+    (address token, uint256 amount) = abi.decode(wrapperData, (address, uint256));
 
     // 2. Pre-settlement logic. Example, receive tokens from user
     IERC20(token).transferFrom(msg.sender, address(this), amount);
 
     // 3. Continue chain (REQUIRED)
-    _next(wrapperData[2+myDataLength:]);
+    _next(settleData, remainingWrapperData);
 
     // 4. Post-settlement logic. Example: stake tokens to a contract (for swap and stake)
     stakeTokens(token, amount);
@@ -385,7 +386,7 @@ function _wrap(bytes calldata wrapperData) internal override {
 Continues the wrapper chain or calls settlement. Handles all parsing and routing automatically.
 
 ```solidity
-function _next(bytes calldata remainingWrapperData) internal;
+function _next(bytes calldata settleData, bytes calldata remainingWrapperData) internal;
 ```
 
 **Behavior:**
@@ -395,7 +396,7 @@ function _next(bytes calldata remainingWrapperData) internal;
 - Handles wrapper nesting automatically
 
 **Implementation Details:**
-- Extracts next target address (last 20 bytes)
+- Extracts next target address (first 20 bytes)
 - Separates settle data from remaining wrapper data
 - Calls next wrapper via `wrappedSettle()` or settlement via `settle()`
 
@@ -406,11 +407,11 @@ Wrapper data uses an optimized encoding to minimize gas overhead:
 ### Structure
 
 ```
-┌─────────────────────┬──────┬──────────┬──────────┬──────┬──────────┬────────────┐
-│   Settle Calldata   │ Len₁ │  Data₁   │  Addr₂   │ Len₂ │  Data₂   │ Settlement │
-│   (to settlement)   │(2 B) │ (wrap1)  │ (20 B)   │(2 B) │ (wrap2)  │  (20 B)    │
-└─────────────────────┴──────┴──────────┴──────────┴──────┴──────────┴────────────┘
-│<─── settleData ───>│<────────────────── wrapperData ──────────────────────────>│
+┌─────────────────────┬──────┬──────────┬──────────┬──────┬──────────┐
+│   Settle Calldata   │ Len₁ │  Data₁   │  Addr₂   │ Len₂ │  Data₂   │
+│   (to settlement)   │(2 B) │ (wrap1)  │ (20 B)   │(2 B) │ (wrap2)  │
+└─────────────────────┴──────┴──────────┴──────────┴──────┴──────────┘
+│<─── settleData ───>│<──────────── wrapperData ─────────────────────>│
 ```
 
 **Components:**
@@ -420,7 +421,8 @@ Wrapper data uses an optimized encoding to minimize gas overhead:
 - **Addr₂**: 20-byte address of wrapper 2
 - **Len₂**: 2-byte (uint16) length of wrapper 2's data
 - **Data₂**: Wrapper 2's custom data
-- **Settlement**: 20-byte address of settlement contract (final target)
+
+Note: The settlement contract address is derived from the `SETTLEMENT` immutable and is not included in `wrapperData`.
 
 ### Data Consumption
 
@@ -458,15 +460,15 @@ contract CowWrapperHelper {
 
 To aid external integrators in encoding and verifying wrapper data, an additional view-only contract is provided.
 
-<script src="https://gist.github.com/kaze-cow/8c8a49f3305519948b1ec868c7efa5b9.js"></script>
+See the [CowWrapperHelper contract source code](https://github.com/cowprotocol/euler-integration-contracts/blob/main/src/CowWrapperHelper.sol) for the complete implementation.
 
 
-#### `parseWrapperData`
+#### `validateWrapperData`
 
 Validates wrapper-specific data. Must be deterministic and revert on invalid input.
 
 ```solidity
-function parseWrapperData(
+function validateWrapperData(
     bytes calldata wrapperData
 ) external view override returns (bytes memory);
 ```
@@ -516,11 +518,11 @@ Settlement data can be modified by nested wrappers, and solvers can supply arbit
 
 #### 4. Deterministic Parsing Required
 
-`parseWrapperData()` must always return same result for same input:
+`validateWrapperData()` must always return same result for same input:
 
 ```solidity
 // ❌ NOT DETERMINISTIC
-function parseWrapperData(bytes calldata wrapperData)
+function validateWrapperData(bytes calldata wrapperData)
     external view override returns (bytes memory)
 {
     uint256 deadline = abi.decode(wrapperData, (uint256));
@@ -529,7 +531,7 @@ function parseWrapperData(bytes calldata wrapperData)
 }
 
 // ✅ DETERMINISTIC
-function parseWrapperData(bytes calldata wrapperData)
+function validateWrapperData(bytes calldata wrapperData)
     external view override returns (bytes memory)
 {
     uint256 deadline = abi.decode(wrapperData, (uint256));
@@ -598,20 +600,18 @@ Minimal wrapper demonstrating the pattern:
 contract EmptyWrapper is CowWrapper {
     constructor(address settlement) CowWrapper(settlement) {}
 
-    function _wrap(bytes calldata wrapperData) internal override {
+    function _wrap(bytes calldata settleData, bytes calldata wrapperData, bytes calldata remainingWrapperData) internal override {
         // No pre-settlement logic
-        _next(wrapperData);  // Pass through
+        _next(settleData, remainingWrapperData);  // Pass through
         // No post-settlement logic
     }
 
-    function parseWrapperData(bytes calldata wrapperData)
+    function validateWrapperData(bytes calldata wrapperData)
         external
         view
         override
-        returns (bytes memory)
     {
         // No validation needed
-        return wrapperData;
     }
 }
 ```
@@ -630,12 +630,15 @@ contract FlashLoanWrapper is CowWrapper {
         lendingPool = ILendingPool(_lendingPool);
     }
 
-    function _wrap(bytes calldata wrapperData) internal override {
-        (address asset, uint256 amount, bytes memory params) =
-            abi.decode(wrapperData, (address, uint256, bytes));
+    function _wrap(bytes calldata settleData, bytes calldata wrapperData, bytes calldata remainingWrapperData) internal override {
+        (address asset, uint256 amount) =
+            abi.decode(wrapperData, (address, uint256));
+
+        // Store data for use in callback
+        // (In a real implementation, you would store settleData and remainingWrapperData)
 
         // Initiate flash loan (calls executeOperation)
-        lendingPool.flashLoan(address(this), asset, amount, params);
+        lendingPool.flashLoan(address(this), asset, amount, "");
     }
 
     function executeOperation(
@@ -648,26 +651,25 @@ contract FlashLoanWrapper is CowWrapper {
         require(msg.sender == address(lendingPool), "Unauthorized");
 
         // Execute settlement with borrowed funds
-        _next(params);
+        // (In a real implementation, retrieve stored settleData and remainingWrapperData)
+        // _next(settleData, remainingWrapperData);
 
         // Approve repayment
         IERC20(asset).approve(address(lendingPool), amount + premium);
         return true;
     }
 
-    function parseWrapperData(bytes calldata wrapperData)
+    function validateWrapperData(bytes calldata wrapperData)
         external
         view
         override
-        returns (bytes memory)
     {
-        require(wrapperData.length >= 96, "Invalid data length");
-        (address asset, uint256 amount,) = abi.decode(
+        require(wrapperData.length >= 64, "Invalid data length");
+        (address asset, uint256 amount) = abi.decode(
             wrapperData,
-            (address, uint256, bytes)
+            (address, uint256)
         );
         require(asset != address(0) && amount > 0, "Invalid parameters");
-        return wrapperData;
     }
 }
 ```

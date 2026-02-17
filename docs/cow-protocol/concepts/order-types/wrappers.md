@@ -65,9 +65,9 @@ For many use cases, this overhead is acceptable given the functionality unlocked
 
 Wrappers cannot be deployed and used immediately—they must be approved by CoW DAO through the allowlist authenticator. This approval process ensures high-quality wrapper implementations and safety for solvers, but means there's a roadblock for developers looking to extend CoW Protocol. Developers should plan for this approval process when building wrapper-based integrations.
 
-### Execution Not Enforced by the on-chain Protocol
+### On-Chain Protocol Does Not Enforce Execution
 
-Despite official rules enforcing the execution of wrappers when required by the user, a solver could still not execute a wrapper with an order. This means wrappers must be designed defensively:
+Despite official rules enforcing the execution of wrappers when required by the user, a solver may choose not to execute a wrapper with an order. This means wrappers must be designed defensively:
 
 - If a wrapper is strictly required, the order should fail to settle without it
 - Wrappers should validate all input data and fail in cases where a user's funds could be at risk
