@@ -12,14 +12,6 @@ Wrappers are smart contracts that "wrap" the settlement process, executing custo
 
 This mechanism extends CoW Protocol's functionality in a modular way, allowing new features and integrations to be added without modifying the core settlement contract or requiring any changes to solver implementations.
 
-### Wrapper Nesting
-
-One of the powerful features of wrappers is their ability to be nested. Multiple wrappers can be chained together in a single settlement transaction, allowing different orders in the same batch to each use their required wrapper functionality. For example, one order might need a flash loan wrapper while another needs a leverage wrapper—both can be executed in the same settlement.
-
-### Wrapper Authentication
-
-To ensure security and quality, all wrappers must be approved through CoW Protocol's `GPv2AllowlistAuthenticator` before they can be used. This ensures that solvers can interact confidently with any approved wrapper. It also unlocks additional features, such as guarenteed execution or revert, which is not supported with hooks because untrusted contracts can grief the settlement process by reverting.
-
 ## Use Cases
 
 Wrappers enable a wide variety of advanced trading and DeFi operations:
@@ -71,7 +63,7 @@ For many use cases, this overhead is acceptable given the functionality unlocked
 
 ### Requires Protocol Approval
 
-Wrappers cannot be deployed and used immediately—they must be approved by the CoW DAO through the allowlist authenticator. This approval process ensures high quality wrapper implementations and safety for solvers, but means there's a roadblock for developers looking to extend CoW Protocol. Developers should plan for this approval process when building wrapper-based integrations.
+Wrappers cannot be deployed and used immediately—they must be approved by CoW DAO through the allowlist authenticator. This approval process ensures high quality wrapper implementations and safety for solvers, but means there's a roadblock for developers looking to extend CoW Protocol. Developers should plan for this approval process when building wrapper-based integrations.
 
 ### Execution Not Enforced by the on-chain Protocol
 
