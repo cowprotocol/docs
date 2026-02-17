@@ -53,7 +53,7 @@ Unlike [CoW Hooks](./cow-hooks.mdx), which can revert even if the order is execu
 - Cross chain transfers (pre- or post- transfer)
 - Deposit in a vault or other wrapper contract (swap and stake)
 
-The key difference from hooks is that if a wrapper is required for an order, the settlement cannot proceed without it—making wrappers ideal for functionality that must not be skipped that is also approved.
+The key difference from hooks is that if a wrapper is required for an order, the settlement cannot proceed without it—making wrappers ideal for transactions requiring robust execution.
 
 ## Considerations
 
