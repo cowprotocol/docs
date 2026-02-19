@@ -14,7 +14,10 @@ export const explorerByChain = {
   "Linea": "https://lineascan.build",
   "Plasma": "https://plasmascan.to",
   "Optimism": "https://optimistic.etherscan.io",
+  "Ink": "https://explorer.inkonchain.com",
 } as const;
+
+export type ChainName = keyof typeof explorerByChain;
 
 interface ExplorerUrlOptions {
   /**
@@ -23,7 +26,7 @@ interface ExplorerUrlOptions {
    */
   urlTrailing?: string | undefined,
 }
-export function explorerUrl(chain: string, address: string, params?: ExplorerUrlOptions) {
+export function explorerUrl(chain: ChainName, address: string, params?: ExplorerUrlOptions) {
   const urlTrailing = params?.urlTrailing ?? "";
   if (!(chain in explorerByChain)) {
     throw new Error(`Explorer URL for chain ${chain} is not known`);
@@ -49,8 +52,8 @@ interface ExplorerLinksOptions {
  * chains separated by a comma. All chain names are links to that chain's
  * explorer for the given address.
  */
-export function explorerLinks(chains: string[] | string, address: string, options?: ExplorerLinksOptions): React.ReactNode {
-  chains = (typeof chains == "string") ? [chains] : chains;
+export function explorerLinks(chainsParam: ChainName[] | ChainName, address: string, options?: ExplorerLinksOptions): React.ReactNode {
+  const chains = asArray(chainsParam);
   const separator = options?.separator ?? ", ";
   const urlTrailing = options?.urlTrailing ?? "#code";
   return chains.reduce(
@@ -62,4 +65,8 @@ export function explorerLinks(chains: string[] | string, address: string, option
       return acc
     }
     , []);
+}
+
+function asArray<T>(arr: T | T[]): T[] {
+  return Array.isArray(arr) ? arr : [arr];
 }
