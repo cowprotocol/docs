@@ -1,0 +1,318 @@
+---
+sidebar_position: 4
+---
+
+# How Intents Are Formed
+
+An _intent_ in CoW Protocol is a signed message that represents a user's wish to trade. It doesn't execute a trade directly — instead, it delegates execution to [solvers](../introduction/solvers) who find the optimal path.
+
+:::caution
+
+This document explains the anatomy of intents and interaction with the API at a low level.  
+For practical use of the protocol, it is recommended to use high-level tools such as the **[CoW SDK](../../reference/sdks/cow-sdk)**.
+
+:::
+
+Forming an intent follows three stages:
+
+```
+Intention → Quote → Intent
+```
+
+## 1. Intention
+
+An intention is the user's raw desire to trade. To obtain a quote, you send this intention to the `/quote` API endpoint:
+
+```
+POST https://api.cow.fi/mainnet/api/v1/quote
+```
+
+The request body describes what the user wants. Basic fields of the request:
+
+```json
+{
+  "kind": "sell",
+  "sellToken": "0xfFf9976782d46CC05630D1f6eBAb18b2324d6B14",
+  "buyToken": "0xbe72E441BF55620febc26715db68d3494213D8Cb",
+  "sellAmountBeforeFee": "1000000000000000000",
+  "from": "0xfb3c7eb936cAA12B5A884d612393969A557d4307",
+  "receiver": "0xfb3c7eb936cAA12B5A884d612393969A557d4307",
+  "validFor": 1800,
+  ...
+}
+```
+
+| Field | Description |
+|---|---|
+| `kind` | `"sell"` or `"buy"` — whether you're fixing the sell or buy amount |
+| `sellToken` | Token address you're selling |
+| `buyToken` | Token address you're buying |
+| `sellAmountBeforeFee` | How much you want to sell (for `sell` orders) |
+| `from` | Address of the trader |
+| `receiver` | Address that receives the bought tokens (often same as `from`) |
+| `validFor` | Order validity period in seconds |
+
+:::note
+
+More details see in [Order Book API](../../reference/apis/orderbook.mdx)
+
+:::
+
+
+## 2. Quote
+
+The `/quote` response provides the price information needed to build the order, including fee breakdowns.
+
+### Sell order response
+
+![Quote for Sell Order](/img/concepts/intents/sell-order-quote.png)
+
+```json
+{
+  "protocolFeeBps": "2",
+  "quote": {
+    "buyAmount": "190120203",
+    "feeAmount": "378307495942172",
+    "sellAmount": "99621692504057828",
+    "kind": "sell"
+  },
+  ...
+}
+```
+
+| Field | Description |
+|---|---|
+| `protocolFeeBps` | Protocol fee in basis points |
+| `quote.sellAmount` | Sell amount **after** network costs have been deducted |
+| `quote.feeAmount` | Network costs, in **sell token** units |
+| `quote.buyAmount` | Buy amount **after** network costs and protocol fee have been deducted |
+
+### Buy order response
+
+![Quote for Buy Order](/img/concepts/intents/buy-order-quote.png)
+
+```json
+{
+  "protocolFeeBps": "2",
+  "quote": {
+    "buyAmount": "200000000",
+    "feeAmount": "320201733871320",
+    "sellAmount": "104979314628720568",
+    "kind": "buy"
+  },
+  ...
+}
+```
+
+For buy orders, `sellAmount` is **after** the protocol fee, and the `feeAmount` (network costs) is **not yet included** in the sell amount — it must be added separately.
+
+## 3. Amount Stages
+
+The quote response and order construction use a shared vocabulary of amount stages — each representing the token amount at a specific point in the fee pipeline. Understanding these terms is essential for interpreting quote values and building orders correctly.
+
+| Term | Description |
+|---|---|
+| **`beforeAllFees`** (= `spotPrice`) | The raw exchange rate with no fees applied. This is the theoretical "perfect world" price. It serves as the reference point for calculating partner fees and slippage. |
+| **`afterProtocolFees`** | Amount after CoW Protocol's own fee (`protocolFeeBps`) has been applied. |
+| **`afterNetworkCosts`** | Amount after gas costs (network costs) have been applied. Network costs are always denominated in the **sell token**, but may be converted to buy token units when applied to the buy side. |
+| **`afterPartnerFees`** | Amount after the integrator/partner fee has been deducted. |
+| **`afterSlippage`** | The final amount after the user's slippage tolerance has been applied. **This is the value signed into the order** — it is the minimum the user will receive (sell orders) or the maximum they will pay (buy orders). |
+
+### Flow for sell orders
+
+![Quote Amounts Sell Order](/img/concepts/intents/quote-amounts-sell.png)
+
+[//]: # (TODO: add a link to SDK)
+
+The `/quote` response maps directly to `afterNetworkCosts`. `beforeAllFees` is reconstructed from it for partner fee calculations:
+
+```ts
+// /quote response maps to afterNetworkCosts
+const afterNetworkCosts = {
+  sellAmount: quote.sellAmount,
+  buyAmount:  quote.buyAmount,
+}
+
+// reconstruct beforeAllFees (spot price) — used as the base for partner fee calculation
+const networkCostAmountInBuyCurrency = (quote.buyAmount * quote.feeAmount) / quote.sellAmount
+const beforeAllFees = {
+  sellAmount: quote.sellAmount + quote.feeAmount,
+  buyAmount:  quote.buyAmount + networkCostAmountInBuyCurrency + protocolFeeAmount,
+}
+
+// partner fee is deducted from buy amount, relative to spot price
+const afterPartnerFees = {
+  sellAmount: afterNetworkCosts.sellAmount,
+  buyAmount:  afterNetworkCosts.buyAmount - partnerFeeAmount,
+}
+// partnerFeeAmount = beforeAllFees.buyAmount * partnerFeeBps / 10000
+
+// slippage reduces buy amount (user accepts receiving less)
+const afterSlippage = {
+  sellAmount: afterPartnerFees.sellAmount,
+  buyAmount:  afterPartnerFees.buyAmount - slippageAmount,
+}
+// slippageAmount = afterPartnerFees.buyAmount * slippageBps / 10000
+
+// sell is set to spot price — settlement contract deducts network costs itself
+const amountsToSign = {
+  sellAmount: beforeAllFees.sellAmount,  // = quote.sellAmount + quote.feeAmount
+  buyAmount:  afterSlippage.buyAmount,   // minimum to receive
+}
+```
+
+### Flow for buy orders
+
+[//]: # (TODO: add a link to SDK)
+
+![Quote Amounts Buy Order](/img/concepts/intents/quote-amounts-buy.png)
+
+The `/quote` sell amount maps to `afterProtocolFees`. The buy amount is fixed and maps to `beforeAllFees`:
+
+```ts
+// /quote response: sell maps to afterProtocolFees, buy is fixed (= beforeAllFees)
+const afterProtocolFees = {
+  sellAmount: quote.sellAmount,
+  buyAmount:  quote.buyAmount,
+}
+
+// reconstruct beforeAllFees (spot price) — used as the base for partner fee calculation
+const beforeAllFees = {
+  sellAmount: quote.sellAmount - protocolFeeAmount,
+  buyAmount:  quote.buyAmount,
+}
+
+// add network costs to sell amount
+const afterNetworkCosts = {
+  sellAmount: quote.sellAmount + quote.feeAmount,
+  buyAmount:  quote.buyAmount,
+}
+
+// partner fee is added to sell amount, relative to spot price
+const afterPartnerFees = {
+  sellAmount: afterNetworkCosts.sellAmount + partnerFeeAmount,
+  buyAmount:  afterNetworkCosts.buyAmount,
+  // partnerFeeAmount = beforeAllFees.sellAmount * partnerFeeBps / 10000
+}
+
+// slippage increases sell amount (user accepts paying more)
+const afterSlippage = {
+  sellAmount: afterPartnerFees.sellAmount + slippageAmount,
+  buyAmount:  afterPartnerFees.buyAmount,
+  // slippageAmount = afterPartnerFees.sellAmount * slippageBps / 10000
+}
+
+// buy is fixed (exact amount to receive), sell includes all fees and slippage
+const amountsToSign = {
+  sellAmount: afterSlippage.sellAmount,  // maximum to pay
+  buyAmount:  beforeAllFees.buyAmount,   // = quote.buyAmount
+}
+```
+
+## 4. Fees & Slippage
+
+Several layers of fees transform the raw spot price into the final amounts signed in the order.
+
+### Fee types
+
+| Fee | Description | Token |
+|---|---|---|
+| **Network costs** | Gas fees for on-chain execution, estimated by the protocol | Sell token |
+| **Protocol fee** | CoW Protocol's fee, expressed in basis points (`protocolFeeBps`) | Buy token (sell orders) / Sell token (buy orders) |
+| **Partner fee** | Optional fee added by integrators (e.g. widget providers) | Buy token (sell orders) / Sell token (buy orders) |
+| **Slippage** | Tolerance buffer to account for price movements | Buy token (sell orders) / Sell token (buy orders) |
+
+## Spot Price (beforeAllFees)
+
+The spot price is the exchange rate before any fees are applied. It serves as the reference for partner fee and slippage calculations.
+
+### Sell order
+
+```
+beforeAllFees.sellAmount = quote.sellAmount + quote.feeAmount
+
+Network Costs (buy token) = (quote.buyAmount × quote.feeAmount) / quote.sellAmount
+
+beforeAllFees.buyAmount = quote.buyAmount + protocolFeeAmount + Network Costs (buy token)
+
+```
+
+
+### Buy order
+
+```
+beforeAllFees.sellAmount = quote.sellAmount - protocolFeeAmount
+
+beforeAllFees.buyAmount = quote.buyAmount\
+```
+
+## Protocol Fee
+
+The protocol fee is expressed as basis points (`protocolFeeBps`) in the quote response.
+
+### Sell orders (buy token units)
+
+For sell orders, `quote.buyAmount` is already **after** the protocol fee has been deducted:
+
+```
+protocolFeeAmount = quote.buyAmount × protocolFeeBps / (1 − protocolFeeBps)
+```
+
+### Buy orders (sell token units)
+
+For buy orders, the protocol fee is applied to the sum of sell amount and network costs:
+
+```
+protocolFeeAmount = (quote.sellAmount + quote.feeAmount) × protocolFeeBps / (1 + protocolFeeBps)
+```
+
+## Partner Fee
+
+The partner (integrator) fee is calculated as a percentage of the **spot price** (`beforeAllFees`), not the post-fee amounts.
+
+### Sell orders (buy token units)
+
+```
+partnerFeeAmount = beforeAllFees × partnerFeePercent / 100
+```
+
+### Buy orders (sell token units)
+
+The same formula applies, but the result is in sell token units.
+
+## Slippage
+
+Slippage tolerance uses the same calculation as the partner fee, but it is applied to the **`afterPartnerFees`** amount rather than the spot price:
+
+```
+slippageAmount = afterPartnerFees × slippagePercent / 100
+```
+
+## Forming the Final Order
+
+The signed order combines the quote API response with UI/integrator settings:
+
+| Source | Fields |
+|---|---|
+| `/quote` API response | `sellAmount`, `buyAmount`, `feeAmount`, `protocolFeeBps` |
+| UI / integrator settings | `partnerFee`, `slippage` |
+
+The resulting order contains the **`afterSlippage`** buy amount (for sell orders) or sell amount (for buy orders), which the protocol guarantees as the minimum the user will receive (or maximum they'll pay). Fixed amount is the spot price amount.
+
+### Sell order
+
+```typescript
+const orderToSign = {
+    sellAmount: beforeAllFees.sellAmount,
+    buyAmount: afterSlippage.buyAmount
+}
+```
+
+### Buy order
+
+```typescript
+const orderToSign = {
+    sellAmount: afterSlippage.sellAmount,
+    buyAmount: beforeAllFees.buyAmount
+}
+```
