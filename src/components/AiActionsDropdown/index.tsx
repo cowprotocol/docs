@@ -63,7 +63,7 @@ export default function AiActionsDropdown({ editUrl }: Props) {
 
   const openInChatGPT = () => {
     const q = encodeURIComponent(`Read from ${pageUrl} so I can ask questions about it`)
-    window.open(`https://chatgpt.com/?hints=search&q=${q}`, '_blank')
+    window.open(`https://chatgpt.com/?q=${q}`, '_blank')
     setOpen(false)
   }
 
@@ -77,6 +77,7 @@ export default function AiActionsDropdown({ editUrl }: Props) {
     if (rawUrl) {
       try {
         const res = await fetch(rawUrl)
+        if (!res.ok) throw new Error()
         const md = await res.text()
         await navigator.clipboard.writeText(md)
         setCopied(true)
