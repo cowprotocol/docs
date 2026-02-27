@@ -10,11 +10,16 @@
   padding: 6px 14px;
   border: none;
   border-radius: 8px;
-  background: var(--ifm-color-primary);
+  background: #052B65;
   color: #fff;
   font-size: 0.85rem;
   cursor: pointer;
   transition: opacity 0.15s, box-shadow 0.15s;
+}
+
+:global(html[data-theme='dark']) .trigger {
+  background: #CAE9FF;
+  color: #052B65;
 }
 
 .trigger:hover {
