@@ -98,6 +98,19 @@ const config: Config = {
         anonymizeIP: true,
       },
     ],
+    [
+      'docusaurus-plugin-llms',
+      {
+        generateLLMsTxt: true,
+        generateLLMsFullTxt: true,
+        excludeImports: true,
+        removeDuplicateHeadings: true,
+        ignoreFiles: ['mevblocker/**'],
+        pathTransformation: {
+          ignorePaths: ['docs'],
+        },
+      },
+    ],
   ],
 
   stylesheets: [
