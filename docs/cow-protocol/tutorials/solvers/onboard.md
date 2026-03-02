@@ -47,6 +47,8 @@ The exposed endpoint provided must be of the following format: {base_url}/\${env
 envName values: shadow, staging, prod
 supported networks: arbitrum-one, avalanche, base, bnb, lens, linea, mainnet, polygon, xdai (gnosis) and more are coming out!
 
+> **_NOTE_** The `/solve` response sent to your solver is quite large. If you are using Nginx then the default request size will be too small and prevent you from receiving any auctions.
+
 ### Driver configuration for your solver
 There are various configurations for your solver in the driver to help you optimize your solver: 
 
