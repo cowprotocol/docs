@@ -70,8 +70,8 @@ The Partner Fee is currently only applicable to [Market order](https://docs.cow.
 ### Partner Fee Payment Process
 
 1. Upon completing the implementation of the Partner Fee parameters, you will be eligible to receive the Partner Fee on trades executed by your users through the Widget or API integration.
-2. A data script will be run on a weekly basis on your project's eligible Partner Fee amount calculated based on the sum of all transactions traded through your project's Widget integration associated with Partner Fee defined in the [`appData`](/cow-protocol/reference/core/intents/app-data) your AppKey.
-3. The Net Partner Fee (refer to the [Partner Fee Calculation](#partner-fee-calculation) section for details on calculations) will be transferred to your designated Ethereum wallet address defined under the Partner Fee "Recipient" parameter of the Widget on a weekly basis.
+2. A data script will be run on a weekly basis on your project's eligible Partner Fee amount calculated based on the sum of all transactions traded through your project's Widget or API integration associated with Partner Fee defined in the [`appData`](/cow-protocol/reference/core/intents/app-data) your AppKey.
+3. The Net Partner Fee (refer to the [Partner Fee Calculation](#partner-fee-calculation) section for details on calculations) will be transferred to your designated Ethereum wallet address defined under the Partner Fee "Recipient" parameter of the integration on a weekly basis.
 
 :::note
 
