@@ -341,8 +341,8 @@ The final wrapper in the chain omits the next wrapper address and calls SETTLEME
 When no wrapper is left, the final wrapper in the chain calls SETTLEMENT directly.
 Example:
 ```text
-[0x0005][0xAABBCCDDEE][0x1234...ABCD][0x0003][0x112233]
-↑len    ↑data         ↑next wrapper  ↑len   ↑data
+[0x0005][0xAABBCCDDEE][0x1234567890123456789012345678901234567890][0x0003][0x112233]
+↑len    ↑data         ↑next wrapper                               ↑len    ↑data
 ```
 
 Each wrapper in the chain will successively pull off their own data and then call the next wrapper address (or the settlement address if no further wrapper data is supplied).
