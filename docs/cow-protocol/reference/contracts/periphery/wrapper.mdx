@@ -682,16 +682,6 @@ contract FlashLoanWrapper is CowWrapper {
 }
 ```
 
-## Known Limitations
-
-### Authentication Required
-
-Wrappers need protocol approval, and are not fully permissionless.
-
-### Settlement Upgrades
-
-When settlement contract upgrades, all wrappers must be redeployed. It is recommended to use [Cannon](https://usecannon.com/learn) to make it easy to redeploy your wrappers.
-
 ## Events
 
 No wrapper-specific events are emitted. Wrapper usage can be identified by:
