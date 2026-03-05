@@ -480,13 +480,17 @@ function validateWrapperData(
 - **View function**: Cannot modify state
 - **Revert on invalid**: Revert if data is malformed
 
-## Implementation Guidelines for Integrators
+## Implementation Requirements for Integrators
 
 ### Security Requirements
 
 :::warning Critical Requirements
 
-#### 1. Use CowWrapper Abstract Contract
+#### 1. Audit by a Reputable Firm
+
+The wrapper contract must be audited by a reputable security firm before submission for allowlist approval. The audit report should be made available to the CoW DAO as part of the approval process.
+
+#### 2. Use CowWrapper Abstract Contract
 
 It is strongly recommended to **NOT** implement `ICowWrapper` directly. The `CowWrapper` abstract contract provides:
 - Solver authentication checks
@@ -494,7 +498,7 @@ It is strongly recommended to **NOT** implement `ICowWrapper` directly. The `Cow
 - Safe wrapper chain continuation
 - Sanity checks for the settlement call
 
-#### 2. Intermediate Contracts for User Calls
+#### 3. Intermediate Contracts for User Calls
 
 If allowing user-defined calls, route through intermediate contracts:
 
@@ -512,11 +516,13 @@ function _wrap(bytes calldata wrapperData) internal override {
 }
 ```
 
-#### 3. Assume All Parameters Are Untrusted
+#### 4. Assume All Parameters Are Untrusted
 
 Settlement data can be modified by nested wrappers, and solvers can supply arbitrary calldata. If it is important for your wrapper to be able to validate the wrapper it is receiving, only trust signature-protected or on-chain validated parameters.
 
-#### 4. Deterministic Parsing Required
+As a concrete implication: **hooks cannot be enforced by inspecting settlement interaction data**. Neither checking that a desired hook is present in `settleData`, nor injecting a hook into the forwarded `settleData`, provides any guarantee — an intermediate wrapper can freely modify `settleData` before passing it along.
+
+#### 5. Deterministic Parsing Required
 
 `validateWrapperData()` must always return same result for same input:
 
@@ -542,9 +548,11 @@ function validateWrapperData(bytes calldata wrapperData)
 
 In the example above, your `_wrap` code can always reject deadline past expired instead.
 
-#### 5. Defensive Design
+#### 6. Defensive Design
 
-Though a solver would be slashed for doing so, there is no hard guarantee wrapper executes even if user specifies it. If wrapper is critical:
+Though a solver would be slashed for doing so, there is no hard guarantee wrapper executes even if user specifies it. Additionally, even when a wrapper does execute, there is no guarantee that `settle` will eventually be called — an earlier wrapper in the chain could skip calling `_next()` entirely. Wrappers should not assume that settlement will complete.
+
+If the wrapper is critical to the user's flow:
 
 **Option A: Make Order Fail Without Wrapper**
 ```solidity
