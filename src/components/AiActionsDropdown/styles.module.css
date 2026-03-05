@@ -1,0 +1,108 @@
+.wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border: none;
+  border-radius: 8px;
+  background: #052B65;
+  color: #fff;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: opacity 0.15s, box-shadow 0.15s;
+}
+
+:global(html[data-theme='dark']) .trigger {
+  background: #CAE9FF;
+  color: #052B65;
+}
+
+.trigger:hover {
+  opacity: 0.9;
+  box-shadow: var(--ifm-global-shadow-lw);
+}
+
+.triggerIcon {
+  width: 18px;
+  height: 18px;
+  opacity: 1;
+}
+
+.chevron {
+  width: 14px;
+  height: 14px;
+  opacity: 0.8;
+  transition: transform 0.15s;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  z-index: 100;
+  min-width: 260px;
+  padding: 6px;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: 10px;
+  background: var(--ifm-background-color);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 8px;
+  background: none;
+  color: var(--ifm-color-emphasis-800);
+  font-size: 0.85rem;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 0.12s;
+}
+
+.item:hover {
+  background: var(--ifm-background-surface-color);
+  color: var(--ifm-color-emphasis-900);
+  text-decoration: none;
+}
+
+.itemIcon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  opacity: 0.75;
+}
+
+.itemText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.itemLabel {
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.itemDesc {
+  font-size: 0.75rem;
+  color: var(--ifm-color-emphasis-700);
+  line-height: 1.3;
+}
+
+.copied .itemLabel {
+  color: #16a34a;
+}
