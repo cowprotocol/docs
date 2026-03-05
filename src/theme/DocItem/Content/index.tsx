@@ -29,7 +29,7 @@ export default function DocItemContent({children}: {children: React.ReactNode}) 
         </header>
       )}
       {!syntheticTitle && (
-        <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: -16 }}>
+        <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 8 }}>
           <AiActionsDropdown editUrl={metadata.editUrl} />
         </div>
       )}
