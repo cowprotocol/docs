@@ -42,14 +42,14 @@ To use a wrapper in your order, add it to the `appData` when creating the order:
 interface WrapperCall {
     target: string;        // Wrapper contract address (must be allowlisted)
     data?: string;         // Optional hex-encoded wrapper-specific data
-    is_omittable?: boolean; // Whether solver can skip this wrapper (default: false)
+    isOmittable?: boolean; // Whether solver can skip this wrapper (default: false)
 }
 ```
 
 **Fields:**
 - **`target`** (required): Address of the allowlisted wrapper contract
 - **`data`** (optional): Hex-encoded data specific to the wrapper. Can be empty or omitted if the wrapper doesn't need custom data.
-- **`is_omittable`** (optional): Defaults to `false`
+- **`isOmittable`** (optional): Defaults to `false`
   - `false` = Solver MUST execute the wrapper with exact data or be slashed
   - `true` = Solver MAY skip the wrapper if they find a better solution
 
@@ -68,7 +68,7 @@ const orderCreation: OrderCreation = {
             {
                 target: "0x1234...",     // Flash loan wrapper address
                 data: "0xabcd...",       // Encoded flash loan params
-                is_omittable: false      // Must execute
+                isOmittable: false      // Must execute
             }
         ]
     }
@@ -88,12 +88,12 @@ appData: {
         {
             target: "0x1111...",     // Flash loan wrapper
             data: "0xaaaa...",
-            is_omittable: false
+            isOmittable: false
         },
         {
             target: "0x2222...",     // Leverage wrapper
             data: "0xbbbb...",
-            is_omittable: false
+            isOmittable: false
         }
     ]
 }
@@ -137,7 +137,7 @@ Wrappers are specified in the order's [`appData`](../reference/core/auctions/sch
     {
       "target": "0x1234...",
       "data": "0xabcdef...",
-      "is_omittable": false
+      "isOmittable": false
     }
   ]
 }
@@ -146,7 +146,7 @@ Wrappers are specified in the order's [`appData`](../reference/core/auctions/sch
 **Fields:**
 - **`target`**: Address of the wrapper contract (treat as opaque - don't parse)
 - **`data`**: Wrapper-specific data (treat as opaque - don't parse)
-- **`is_omittable`**: Critical flag for solver requirements (see below)
+- **`isOmittable`**: Critical flag for solver requirements (see below)
 
 :::warning
 Wrapper addresses and data should be treated as opaque values. Do not attempt to parse or validate them - simply pass them through in your encoding.
@@ -156,9 +156,9 @@ Wrapper addresses and data should be treated as opaque values. Do not attempt to
 
 #### 1. Execute Non-Omittable Wrappers
 
-Orders with `"is_omittable": false` **MUST** be executed with the specified wrapper. You may be slashed for not doing so.
+Orders with `"isOmittable": false` **MUST** be executed with the specified wrapper. You may be slashed for not doing so.
 
-If `"is_omittable": true`, you MAY skip the wrapper if you find a better solution without it.
+If `"isOmittable": true`, you MAY skip the wrapper if you find a better solution without it.
 
 #### 2. Verify Wrapper Authentication
 
