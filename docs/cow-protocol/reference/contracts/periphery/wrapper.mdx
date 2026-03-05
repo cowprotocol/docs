@@ -404,34 +404,30 @@ function _next(bytes calldata settleData, bytes calldata remainingWrapperData) i
 
 ## Calldata Encoding Specification
 
-Wrapper data uses an optimized encoding to minimize gas overhead:
-
-### Structure
+The `chainedWrapperData`  parameter of `wrappedSettle(settleData, chainedWrapperData)` is specially encoded to minimize bit shuffling overhead:
 
 ```
-┌─────────────────────┬──────┬──────────┬──────────┬──────┬──────────┐
-│   Settle Calldata   │ Len₁ │  Data₁   │  Addr₂   │ Len₂ │  Data₂   │
-│   (to settlement)   │(2 B) │ (wrap1)  │ (20 B)   │(2 B) │ (wrap2)  │
-└─────────────────────┴──────┴──────────┴──────────┴──────┴──────────┘
-│<─── settleData ────>│<─────────── wrapperData ────────────────────>│
+┌──────┬──────────┬──────────┬──────┬──────────┐
+│ Len₁ │  Data₁   │  Addr₂   │ Len₂ │  Data₂   │
+│(2 B) │ (wrap1)  │ (20 B)   │(2 B) │ (wrap2)  │
+└──────┴──────────┴──────────┴──────┴──────────┘
+│<─────────── chainedWrapperData ─────────────>│
 ```
 
 **Components:**
-- **Settle Calldata**: `GPv2Settlement.settle(...)` calldata (function selector + args)
 - **Len₁**: 2-byte (uint16) length of wrapper 1's data
 - **Data₁**: Wrapper 1's custom data
 - **Addr₂**: 20-byte address of wrapper 2
 - **Len₂**: 2-byte (uint16) length of wrapper 2's data
 - **Data₂**: Wrapper 2's custom data
-
-Note: The settlement contract address is derived from the `SETTLEMENT` immutable and is not included in `wrapperData`.
+... (repeat Addr₂, Len₂, Data₂ for every subsequent wrapper)
 
 ### Data Consumption
 
 Each wrapper in the chain:
 1. Reads length prefix (2 bytes)
 2. Extracts its data (next N bytes)
-3. Passes remaining bytes to `_next()`
+3. Passes remaining bytes, along with the `settleData`, to `_next()`
 
 The `_next()` function:
 1. Reads next address (from appropriate offset)
