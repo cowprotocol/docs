@@ -336,7 +336,9 @@ Each wrapper in the chain consists of:
 - `length` bytes: wrapper-specific data for this wrapper
 - 20 bytes: address of next wrapper (or stop here if no wrappers are left)
 The final wrapper in the chain omits the next wrapper address and calls SETTLEMENT directly.
+- 20 bytes: address of next wrapper (or stop without an address if no wrappers are left)
 
+When no wrapper is left, the final wrapper in the chain calls SETTLEMENT directly.
 Example:
 ```text
 [0x0005][0xAABBCCDDEE][0x1234...ABCD][0x0003][0x112233]
