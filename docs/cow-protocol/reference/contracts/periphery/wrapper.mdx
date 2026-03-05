@@ -422,18 +422,6 @@ The `chainedWrapperData`  parameter of `wrappedSettle(settleData, chainedWrapper
 - **Data₂**: Wrapper 2's custom data
 ... (repeat Addr₂, Len₂, Data₂ for every subsequent wrapper)
 
-### Data Consumption
-
-Each wrapper in the chain:
-1. Reads length prefix (2 bytes)
-2. Extracts its data (next N bytes)
-3. Passes remaining bytes, along with the `settleData`, to `_next()`
-
-The `_next()` function:
-1. Reads next address (from appropriate offset)
-2. Calls next wrapper or settlement
-3. Passes remaining data
-
 ## CowWrapperHelper
 
 Utility contract for on-chain validation and encoding.
