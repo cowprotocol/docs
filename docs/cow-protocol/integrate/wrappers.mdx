@@ -317,7 +317,13 @@ const tx = encodeWrapperSettlement(solution);
 
 #### Gas Estimation
 
-Account for wrapper gas overhead in your bids. The easiest way to do this is to simulate the wrapper transaction against an empty settlement.
+Account for wrapper gas overhead in your bids. Benchmarks show that even an empty wrapper adds approximately 22,272 gas (~11.4% overhead). The actual overhead depends on:
+
+- The complexity of the wrapper's logic
+- The size of the settlement data being passed through
+- The number of nested wrappers in the chain
+
+The easiest way to estimate overhead for a specific wrapper is to simulate the wrapper transaction against an empty settlement.
 
 ### Common Issues
 

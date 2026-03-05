@@ -32,13 +32,7 @@ While wrappers are powerful, there are important considerations to keep in mind:
 
 ### Gas Overhead
 
-Wrappers add gas overhead to settlement transactions. Benchmarks show that even an empty wrapper (one that does nothing but pass through to settlement) adds approximately 22,272 gas, or about 11.4% overhead. The actual overhead depends on:
-
-- The complexity of the wrapper's logic
-- The size of the settlement data being passed through
-- The number of nested wrappers in the chain
-
-For many use cases, this overhead is acceptable given the functionality unlocked, but it's an important factor in deciding whether to use a wrapper.
+Wrappers add gas overhead to settlement transactions. This is an important factor in deciding whether to use a wrapper — see the [Integration Guide](../../integrate/wrappers.mdx#gas-estimation) for benchmarks and estimation guidance.
 
 ### Requires Protocol Approval
 
@@ -50,10 +44,6 @@ Despite off-chain rules incentivizing solvers to execute wrappers as specified b
 
 - If a wrapper is strictly required, the order should fail to settle without it
 - Wrappers should validate all input data and fail in cases where a user's funds could be at risk
-
-### Encoding Complexity
-
-To improve gas performance, wrapper data is encoded in a condensed format. Constructing wrapper calldata correctly can be complex, especially when nesting multiple wrappers. While the protocol provides helper contracts like `CowWrapperHelper` to simplify this, developers need to understand the encoding scheme to build robust integrations.
 
 ## Getting Started
 
