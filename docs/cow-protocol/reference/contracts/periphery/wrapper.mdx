@@ -334,7 +334,7 @@ function wrappedSettle(
 Each wrapper in the chain consists of:
 - 2 bytes: uint16 length of wrapper-specific data
 - `length` bytes: wrapper-specific data for this wrapper
-- 20 bytes: address of next wrapper (omitted for the final wrapper)
+- 20 bytes: address of next wrapper (or stop here if no wrappers are left)
 The final wrapper in the chain omits the next wrapper address and calls SETTLEMENT directly.
 
 Example:
