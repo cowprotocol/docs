@@ -312,8 +312,18 @@ for (const order of auction.orders) {
     }
 }
 
-// Encode final transaction
-const tx = encodeWrapperSettlement(solution);
+// Encode final transaction using the manual encoding steps described above:
+// 1. Set tx target to solution.wrappers[0].target
+// 2. Build settleData from your normal GPv2Settlement.settle() calldata
+// 3. Build wrapperData using encodeWrapperData(solution.wrappers)
+// 4. Call wrappedSettle(settleData, wrapperData) on the first wrapper
+const tx = {
+    to: solution.wrappers[0].target,
+    data: wrapperContract.interface.encodeFunctionData("wrappedSettle", [
+        settleData,
+        encodeWrapperData(solution.wrappers) // NOTE: implementation of this function is above
+    ])
+};
 ```
 
 ### Testing and Validation
