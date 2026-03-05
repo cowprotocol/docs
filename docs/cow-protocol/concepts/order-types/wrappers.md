@@ -38,11 +38,12 @@ Wrappers add gas overhead to settlement transactions. This is an important facto
 
 Wrappers cannot be deployed and used immediately—they must be approved by CoW DAO through the allowlist authenticator. This approval process ensures high-quality wrapper implementations and safety for solvers, but means there's a roadblock for developers looking to extend CoW Protocol. Developers should plan for this approval process when building wrapper-based integrations.
 
-### On-Chain Protocol Does Not Enforce Execution
+### Wrapper and Settlement Call Pairing not Guaranteed On-chain
 
-Despite off-chain rules incentivizing solvers to execute wrappers as specified by an order, this is not enforced onchain and a solver may (due to technical error or malicious intent) execute an order without the corresponding wrapper. This means wrappers must be designed defensively:
+Despite off-chain rules incentivizing solvers to execute wrappers as specified by an order, this is not enforced onchain and a solver may (due to technical error or malicious intent) execute an order without the corresponding wrapper. Conversely, the solver may execute the wrapper without the corresponding order in the settlement call. This means wrappers must be designed defensively:
 
-- If a wrapper is strictly required, the order should fail to settle without it
+- If a wrapper is strictly required as part of an order, the order should fail to settle without it
+- If the wrapper call must be executed with the order settlement, it should revert if the settlement output is not delivered.
 - Wrappers should validate all input data and fail in cases where a user's funds could be at risk
 
 ## Getting Started
