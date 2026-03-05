@@ -334,13 +334,15 @@ function wrappedSettle(
 Each wrapper in the chain consists of:
 - 2 bytes: uint16 length of wrapper-specific data
 - `length` bytes: wrapper-specific data for this wrapper
-- 20 bytes: address of next wrapper (omitted for the final wrapper)
+- 20 bytes: address of next wrapper (or stop here if no wrappers are left)
 The final wrapper in the chain omits the next wrapper address and calls SETTLEMENT directly.
+- 20 bytes: address of next wrapper (or stop without an address if no wrappers are left)
 
+When no wrapper is left, the final wrapper in the chain calls SETTLEMENT directly.
 Example:
 ```text
-[0x0005][0xAABBCCDDEE][0x1234...ABCD][0x0003][0x112233]
-↑len    ↑data         ↑next wrapper  ↑len   ↑data
+[0x0005][0xAABBCCDDEE][0x1234567890123456789012345678901234567890][0x0003][0x112233]
+↑len    ↑data         ↑next wrapper                               ↑len    ↑data
 ```
 
 Each wrapper in the chain will successively pull off their own data and then call the next wrapper address (or the settlement address if no further wrapper data is supplied).
@@ -411,7 +413,7 @@ Wrapper data uses an optimized encoding to minimize gas overhead:
 │   Settle Calldata   │ Len₁ │  Data₁   │  Addr₂   │ Len₂ │  Data₂   │
 │   (to settlement)   │(2 B) │ (wrap1)  │ (20 B)   │(2 B) │ (wrap2)  │
 └─────────────────────┴──────┴──────────┴──────────┴──────┴──────────┘
-│<─── settleData ───>│<──────────── wrapperData ─────────────────────>│
+│<─── settleData ────>│<─────────── wrapperData ────────────────────>│
 ```
 
 **Components:**
@@ -681,16 +683,6 @@ contract FlashLoanWrapper is CowWrapper {
     }
 }
 ```
-
-## Known Limitations
-
-### Authentication Required
-
-Wrappers need protocol approval, and are not fully permissionless.
-
-### Settlement Upgrades
-
-When settlement contract upgrades, all wrappers must be redeployed. It is recommended to use [Cannon](https://usecannon.com/learn) to make it easy to redeploy your wrappers.
 
 ## Events
 
