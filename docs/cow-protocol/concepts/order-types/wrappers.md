@@ -54,7 +54,7 @@ Wrappers are a powerful tool for advanced integrations on CoW Protocol. To start
 
 To learn more about wrappers and see example implementations:
 
-- [Euler Integration Contracts Repository](https://github.com/cowprotocol/euler-integration-contracts) - Contains the `CowWrapper` abstract contract and example implementations
-- [Services Repository PR #3700](https://github.com/cowprotocol/services/pull/3700) - Backend integration implementation. Good reference for solvers looking to support wrappers.
+- **For Wrapper Contract Builders:** [Euler Integration Contracts Repository](https://github.com/cowprotocol/euler-integration-contracts) - Contains the `CowWrapper` abstract contract and example implementations
+- **For Solvers:** [Services Repository PR #3700](https://github.com/cowprotocol/services/pull/3700) - Example backend integration implementation. Good reference for solvers looking to support wrappers.
 
 Wrappers represent a significant evolution in CoW Protocol's capabilities, enabling complex DeFi workflows while maintaining security and simplicity for solvers. As more wrappers are developed and approved, they will continue to expand what's possible with intent-based trading.
