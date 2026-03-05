@@ -20,7 +20,7 @@ sequenceDiagram
     Solver->>Wrapper1: wrappedSettle(settleData, wrapperData)
     activate Wrapper1
     Note over Wrapper1: Pre-settlement logic
-    Wrapper1->>Wrapper2: _next(remainingData)
+    Wrapper1->>Wrapper2: _next(settleData, remainingData)
     activate Wrapper2
     Note over Wrapper2: Pre-settlement logic
     Wrapper2->>Settlement: settle(settleData)
