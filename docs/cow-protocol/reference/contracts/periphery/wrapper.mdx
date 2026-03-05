@@ -498,9 +498,7 @@ function validateWrapperData(
 ```
 
 **Requirements:**
-- **Deterministic**: Same input must always produce same output
-- **No time-based logic**: Cannot use `block.timestamp`, `block.number`, etc.
-- **No mutable state**: Cannot read external mutable state
+- **Deterministic**: Same input must always produce same output. This means you cannot check the timestamp and revert if the order is valid, for example.
 - **View function**: Cannot modify state
 - **Revert on invalid**: Revert if data is malformed
 
@@ -574,33 +572,6 @@ In the example above, your `_wrap` code can always reject deadline past expired 
 
 Though a solver would be slashed for doing so, there is no hard guarantee wrapper executes even if user specifies it. Additionally, even when a wrapper does execute, there is no guarantee that `settle` will eventually be called — an earlier wrapper in the chain could skip calling `_next()` entirely. Wrappers should not assume that settlement will complete.
 
-If the wrapper is critical to the user's flow:
-
-**Option A: Make Order Fail Without Wrapper**
-```solidity
-// Pull required funds in wrapper
-function _wrap(bytes calldata settleData, bytes calldata wrapperData, bytes calldata remainingWrapperData) internal override {
-    vault.withdraw(user, token, amount);  // Funds now in wrapper
-    _next(settleData, remainingWrapperData);
-    // Settlement uses these funds - fails if wrapper didn't execute
-}
-```
-
-**Option B: EIP-1271 Authentication**
-```solidity
-// Order signature only valid if wrapper executed
-function isValidSignature(bytes32 hash, bytes memory signature)
-    external view returns (bytes4)
-{
-    require(wrapperExecuted[hash], "Wrapper required");
-    return EIP1271_MAGIC;
-}
-```
-
-There may be other similar ways to enforce execution, but these patterns serve as a starting point.
-
-:::
-
 ### Gas Overhead
 
 Wrapper execution adds gas overhead to settlements.
@@ -645,72 +616,6 @@ contract EmptyWrapper is CowWrapper {
     }
 }
 ```
-
-### Flash Loan Wrapper
-
-Wrapper coordinating with lending protocol:
-
-```solidity
-contract FlashLoanWrapper is CowWrapper {
-    ILendingPool public immutable lendingPool;
-
-    constructor(address settlement, address _lendingPool)
-        CowWrapper(settlement)
-    {
-        lendingPool = ILendingPool(_lendingPool);
-    }
-
-    function _wrap(bytes calldata settleData, bytes calldata wrapperData, bytes calldata remainingWrapperData) internal override {
-        (address asset, uint256 amount) =
-            abi.decode(wrapperData, (address, uint256));
-
-        // Store data for use in callback
-        // (In a real implementation, you would store settleData and remainingWrapperData)
-
-        // Initiate flash loan (calls executeOperation)
-        lendingPool.flashLoan(address(this), asset, amount, "");
-    }
-
-    function executeOperation(
-        address asset,
-        uint256 amount,
-        uint256 premium,
-        address,
-        bytes calldata params
-    ) external returns (bool) {
-        require(msg.sender == address(lendingPool), "Unauthorized");
-
-        // Execute settlement with borrowed funds
-        // (In a real implementation, retrieve stored settleData and remainingWrapperData)
-        // _next(settleData, remainingWrapperData);
-
-        // Approve repayment
-        IERC20(asset).approve(address(lendingPool), amount + premium);
-        return true;
-    }
-
-    function validateWrapperData(bytes calldata wrapperData)
-        external
-        view
-        override
-    {
-        require(wrapperData.length >= 64, "Invalid data length");
-        (address asset, uint256 amount) = abi.decode(
-            wrapperData,
-            (address, uint256)
-        );
-        require(asset != address(0) && amount > 0, "Invalid parameters");
-    }
-}
-```
-
-## Events
-
-No wrapper-specific events are emitted. Wrapper usage can be identified by:
-
-1. Transaction target is wrapper address (not settlement)
-2. Function signature is `wrappedSettle(bytes,bytes)` (not `settle(...)`)
-3. Analyzing transaction trace for wrapper contract calls
 
 ## Resources
 
