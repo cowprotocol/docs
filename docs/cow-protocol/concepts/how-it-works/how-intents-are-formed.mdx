@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # How Intents Are Formed
 
-An _intent_ in CoW Protocol is a signed message that represents a user's wish to trade. It doesn't execute a trade directly — instead, it delegates execution to [solvers](../introduction/solvers) who find the optimal path.
+An [_intent_](https://docs.cow.fi/cow-protocol/concepts/introduction/intents) in CoW Protocol is a signed message that represents a user's wish to trade. It doesn't execute a trade directly — instead, it delegates execution to [solvers](../introduction/solvers) who find the optimal path.
 
 :::caution
 
@@ -54,7 +54,7 @@ The request body describes what the user wants. Basic fields of the request:
 
 :::note
 
-More details see in [Order Book API](../../reference/apis/orderbook.mdx)
+More details see the [Order Book API](../../reference/apis/orderbook.mdx)
 
 :::
 
@@ -126,7 +126,7 @@ The quote response and order construction use a shared vocabulary of amount stag
 
 ![Quote Amounts Sell Order](/img/concepts/intents/quote-amounts-sell.png)
 
-[//]: # (TODO: add a link to SDK)
+>The code below is simplified, see the full working code in [CoW SDK `getQuoteAmountsAndCosts`](https://github.com/cowprotocol/cow-sdk/blob/main/packages/order-book/src/quoteAmountsAndCosts/getQuoteAmountsAndCosts.ts).
 
 The `/quote` response maps directly to `afterNetworkCosts`. `beforeAllFees` is reconstructed from it for partner fee calculations:
 
@@ -167,7 +167,7 @@ const amountsToSign = {
 
 ### Flow for buy orders
 
-[//]: # (TODO: add a link to SDK)
+>The code below is simplified, see the full working code in [CoW SDK `getQuoteAmountsAndCosts`](https://github.com/cowprotocol/cow-sdk/blob/main/packages/order-book/src/quoteAmountsAndCosts/getQuoteAmountsAndCosts.ts).
 
 ![Quote Amounts Buy Order](/img/concepts/intents/quote-amounts-buy.png)
 
@@ -247,7 +247,7 @@ beforeAllFees.buyAmount = quote.buyAmount + protocolFeeAmount + Network Costs (b
 ```
 beforeAllFees.sellAmount = quote.sellAmount - protocolFeeAmount
 
-beforeAllFees.buyAmount = quote.buyAmount\
+beforeAllFees.buyAmount = quote.buyAmount
 ```
 
 ## Protocol Fee
@@ -259,7 +259,7 @@ The protocol fee is expressed as basis points (`protocolFeeBps`) in the quote re
 For sell orders, `quote.buyAmount` is already **after** the protocol fee has been deducted:
 
 ```
-protocolFeeAmount = quote.buyAmount × protocolFeeBps / (1 − protocolFeeBps)
+protocolFeeAmount = quote.buyAmount × (protocolFeeBps / 10000) / (1 − protocolFeeBps / 10000)
 ```
 
 ### Buy orders (sell token units)
@@ -267,7 +267,7 @@ protocolFeeAmount = quote.buyAmount × protocolFeeBps / (1 − protocolFeeBps)
 For buy orders, the protocol fee is applied to the sum of sell amount and network costs:
 
 ```
-protocolFeeAmount = (quote.sellAmount + quote.feeAmount) × protocolFeeBps / (1 + protocolFeeBps)
+protocolFeeAmount = (quote.sellAmount + quote.feeAmount) × (protocolFeeBps / 10000) / (1 + protocolFeeBps / 10000)
 ```
 
 ## Partner Fee
@@ -301,7 +301,7 @@ The signed order combines the quote API response with UI/integrator settings:
 | `/quote` API response | `sellAmount`, `buyAmount`, `feeAmount`, `protocolFeeBps` |
 | UI / integrator settings | `partnerFee`, `slippage` |
 
-The resulting order contains the **`afterSlippage`** buy amount (for sell orders) or sell amount (for buy orders), which the protocol guarantees as the minimum the user will receive (or maximum they'll pay). Fixed amount is the spot price amount.
+The resulting order contains the **`afterSlippage`** buy amount (for sell orders) or sell amount (for buy orders), which the protocol guarantees as the minimum the user will receive (or maximum they'll pay). Fixed amount (`sellAmount` for `SELL` order, `buyAmount` for `BUY` order), meanwhile, corresponds to the spot price amount.
 
 ### Sell order
 
