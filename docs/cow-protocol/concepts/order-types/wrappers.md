@@ -20,8 +20,7 @@ As we begin to roll out wrappers more widely across our infrastructure, we look 
     - This case is utilized by [Euler](https://github.com/cowprotocol/euler-integration-contracts) to open, close, and collateral swap leverage positions with the [Ethereum Vault Connector](https://evc.wtf/) in the flagship implementation of the wrapper contracts.
 * **Flash Loan Integration:** Currently, CoW Protocol uses a dedicated `FlashLoanRouter` contract for flash loan functionality. However, this implementation comes with additional implementation effort from both the solvers and the CoW Protocol backend infrastructure. With generalized wrappers, flash loan integration becomes simpler and more flexible.
 * **Programmatic Orders:** Wrappers can place, gate, or cancel the execution of user orders when authorized, allowing for advanced order types like TWAP, OCO, Stop-Loss/Take-Profit, or DCA with support for every type of wallet.
-* **Protocol-Approved Hooks:** Unlike [CoW Hooks](./cow-hooks.mdx), which can revert even if the order is executed successfully, wrappers provide a way to enforce required pre- and post-settlement operations. Since wrappers are protocol-approved through the allowlist authenticator, they can implement critical functionality that must execute:
-    - Compliance checks (e.g., OFAC screening)
+* **Protocol-Approved Hooks:** Unlike [CoW Hooks](./cow-hooks.mdx), which can revert even if the order is executed successfully, wrappers provide a way to enforce required pre- and post-settlement operations that the user may want. Since wrappers are protocol-approved through the allowlist authenticator, they can implement critical functionality that must execute:
     - Cross chain transfers (pre- or post-transfer)
     - Deposit in a vault or other wrapper contract (swap and stake)
 * **Something else:** Anyone can build and submit a new wrapper contract, and there are few restrictions on what a wrapper can do during execution.
