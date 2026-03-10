@@ -25,7 +25,12 @@ sidebar_position: 1
 ## 1. Essential information for joining the solver competition
 
 ### Requirements for joining the CoW DAO bonding pool
-The general KYC requirements are to send us documentation proving that you are the beneficial owners of the company behind the solver and 1-2 passports of some of the main developers of the solver. Do not send this before the meeting, we will explain the process during the meeting so that you can send the documents afterwards.
+The general KYC requirements are to send us:
+
+- Incorporation details of the company behind the solver that includes details of who the shareholders are
+- One or two passports of the main shareholders and developers of the solver
+
+Do not send this before the meeting, we will explain the process during the meeting so that you can send the documents afterwards. We usually expect the KYC process to take about 1 to 3 working days, but it may vary.
 
 Given the risk that will be carried by the CoW DAO bonding pool we also ask that solvers who join the solver competition through the CoW DAO bonding pool start solving on Arbitrum first. After being in production on Arbitrum solvers can move to other L2's relatively easily. But joining the mainnet competition will require further evaluation after some time of solving on L2's.
 
