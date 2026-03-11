@@ -100,6 +100,20 @@ Once we get the raw imbalances, the "fee corrections" are added for each transac
 
 We note that currently all solvers use the settlement contract to deposit protocol/partner/network fees, and these fees are delivered to the appropriate receiver each Tuesday via the main accounting script the core team maintains.
 
+### Overdrafts
+
+During the payouts, any penalties or negative slippage that the solver has incurred will be deducted from that week's COW rewards. But, if the COW rewards for that week are not enough to cover the penalties and negative slippage, then that solver will have incurred an overdraft for that week. These overdrafts are tracked on-chain using the overdrafts management contract. This can be found at `0x8fd67ea651329fd142d7cfd8e90406f133f26e8a` on all networks and can be used by solvers to both track their outstanding overdrafts and to repay their outstanding overdrafts.
+
+![Checking a solver's outstanding overdraft](checking_overdraft.png)
+
+#### Checking outstanding overdrafts
+
+In order to check your outstanding overdrafts you can call the `solverOverdraftBalance` method on the overdrafts manager contract using the address of the solver who's outstanding overdraft you would like to check. This will return that solver's outstanding overdraft in wei.
+
+#### Paying outstanding overdrafts
+
+In order to pay a solver's outstanding overdraft balance you can call the `payOverdraft` method on the overdrafts manager contract using the address of the solver who's outstanding overdraft you would like to pay, together with the amount that you would like to pay. Note, this amount is in ETH and not in wei.
+
 ## Payout processing and operational adjustments
 
 ### Service fee on COW rewards
