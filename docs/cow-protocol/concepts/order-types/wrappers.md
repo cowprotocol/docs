@@ -14,7 +14,7 @@ This mechanism extends CoW Protocol's functionality in a modular way, allowing n
 
 ## Use Cases
 
-As we begin to roll out wrappers more widely across our infrastructure, we look forward to building out new advanced trading and DeFi integrations:
+As we begin to roll out wrappers more widely across our infrastructure, below is an overview of some of the ways Wrappers can be used.
 
 * **Leveraged Positions:** By wrapping the execution context of a CoW settlement, protocols implementing leveraged position opening capabilities can be supported.
     - This case is utilized by [Euler](https://github.com/cowprotocol/euler-integration-contracts) to open, close, and collateral swap leverage positions with the [Ethereum Vault Connector](https://evc.wtf/) in the flagship implementation of the wrapper contracts.
