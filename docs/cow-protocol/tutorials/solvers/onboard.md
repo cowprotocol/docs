@@ -45,7 +45,7 @@ If you would like to secure your solver, you can set up a firewall and only acce
 ### Exposed Endpoint
 The exposed endpoint provided must be of the following format: {base_url}/\${envName}/\${network} - for example: https://api.mysolver.io/staging/mainnet
 envName values: shadow, staging, prod
-supported networks: arbitrum-one, avalanche, base, bnb, lens, linea, mainnet, polygon, xdai (gnosis) and more are coming out!
+supported networks: arbitrum-one, avalanche, base, bnb, mainnet, xdai (gnosis), ink, linea, optimism, polygon, sepolia, and more are coming out!
 
 :::note
 The `/solve` response sent to your solver is quite large. If you are using Nginx then the default request size will be too small and prevent you from receiving any auctions.

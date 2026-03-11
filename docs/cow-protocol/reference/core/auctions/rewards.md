@@ -43,7 +43,6 @@ The payment is capped from above and below using the function $$\textrm{cap}(x) 
 - Gnosis Chain: $$10 \;\textrm{xDAI}$$
 - Avalanche: $$0.3 \;\textrm{AVAX}$$
 - Polygon: $$30 \;\textrm{POL}$$
-- Lens: $$10 \;\textrm{GHO}$$
 - BNB: $$0.04 \;\textrm{BNB}$$
 - Linea and Ink: $$0.0015 \;\textrm{ETH}$$
 - Plasma: $$30 \;\textrm{XPL}$$
@@ -93,7 +92,6 @@ The current rewards for eligible quotes are as follows:
 - Base Chain: $$\min\{0.00024 ~\textrm{ETH}, 6 ~\textrm{COW}\}$$,
 - Avalanche-C Chain: $$\min\{0.006 ~\textrm{AVAX}, 6 ~\textrm{COW}\}$$,
 - Polygon Chain: $$\min\{0.6 ~\textrm{POL}, 6 ~\textrm{COW}\}$$
-- Lens Chain: $$\min\{0.15 ~\textrm{GHO}, 6 ~\textrm{COW}\}$$
 - BNB Chain: $$\min\{0.001 ~\textrm{BNB}, 6 ~\textrm{COW}\}$$
 - Linea: $$\min\{0.00003 ~\textrm{ETH}, 6 ~\textrm{COW}\}$$.
 - Plasma: $$\min\{0.6 ~\textrm{XPL}, 6 ~\textrm{COW}\}$$.

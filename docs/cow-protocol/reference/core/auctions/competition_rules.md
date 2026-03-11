@@ -64,7 +64,6 @@ The deadline for solutions depends on the network and is set as a specific numbe
 - Base: 20 blocks
 - Avalanche: 20 blocks
 - Polygon: 20 blocks
-- Lens: 40 blocks
 - BNB: 40 blocks
 - Linea: 20 blocks
 - Plasma: 20 blocks
@@ -132,13 +131,6 @@ At CoW DAO's discretion, systematic violation of these rules may lead to penaliz
 
   - **Protocols**: Uniswap v2/v3, Balancer v2
   - **Base tokens**: [`WPOL`](https://polygonscan.com/address/0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270), [`USDC`](https://polygonscan.com/address/0x3c499c542cEF5E3811e1192ce70d8cC03d5c3359), [`USDT`](https://polygonscan.com/address/0xc2132d05d31c914a87c6611c10748aeb04b58e8f)
-  </details>
-
-  <details>
-    <summary>Lens chain baseline protocols and tokens</summary>
-
-  - **Protocols**: Uniswap v3
-  - **Base tokens**: [`WGHO`](https://explorer.lens.xyz/address/0x6bdc36e20d267ff0dd6097799f82e78907105e2f), [`USDC`](https://explorer.lens.xyz/address/0x88f08e304ec4f90d644cec3fb69b8ad414acf884), [`WETH`](https://explorer.lens.xyz/address/0xe5ecd226b3032910ceaa43ba92ee8232f8237553), [`BONSAI`](https://explorer.lens.xyz/address/0xb0588f9a9cade7cd5f194a5fe77acd6a58250f82)
   </details>
 
   <details>
