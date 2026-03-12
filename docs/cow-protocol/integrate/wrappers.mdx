@@ -164,7 +164,12 @@ If `"isOmittable": true`, you MAY skip the wrapper if you find a better solution
 
 #### 2. Verify Wrapper Authentication
 
-All approved wrappers will be approved by the DAO and registered in [`GPv2AllowlistAuthenticator`](../reference/contracts/core/allowlist.md). It is recommended to verify wrappers are allowlisted before including them in settlements.
+All approved wrappers will be approved by the DAO and registered in [`GPv2AllowlistAuthenticator`](../reference/contracts/core/allowlist.md).
+
+:::warning
+The wrapper will be _directly_ called from the solver address and will mediate the settlement.
+This value is provided _directly_ by the user and it may be malicious.
+:::
 
 #### 3. Include Wrappers in the Solution
 
