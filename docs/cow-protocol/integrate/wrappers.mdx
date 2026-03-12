@@ -267,23 +267,7 @@ const tx = {
 
 #### Using CowWrapperHelper
 
-Alternatively, use the `CowWrapperHelper` contract for encoding and validation:
-
-```solidity
-// On-chain encoding and validation
-address[] memory wrapperAddresses = [wrapper1, wrapper2];
-bytes[] memory wrapperDatas = [data1, data2];
-
-bytes memory wrapperData = CowWrapperHelper(HELPER).verifyAndBuildWrapperData(
-    wrapperAddresses,
-    wrapperDatas
-);
-```
-
-In addition to producing the correct encoded data, the helper also validates:
-- All wrappers are allowlisted
-- All wrappers use the same settlement contract
-- Each wrapper can parse its data
+`CowWrapperHelper` is a read-only periphery contract that can be called to validate many important points prior to execution. See the [periphery contract documentation](../reference/contracts/periphery/wrapper.mdx#cowwrapperhelper).
 
 ### Accumulating Wrappers in Solutions
 
