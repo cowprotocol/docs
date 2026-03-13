@@ -58,8 +58,6 @@ Once the above are set up and running, one can then start testing their solver e
 | <https://api.cow.fi/avalanche/api>         | Avalanche    | Production  |
 | <https://barn.api.cow.fi/polygon/api>      | Polygon      | Staging     |
 | <https://api.cow.fi/polygon/api>           | Polygon      | Production  |
-| <https://barn.api.cow.fi/lens/api>         | Lens         | Staging     |
-| <https://api.cow.fi/lens/api>              | Lens         | Production  |
 | <https://barn.api.cow.fi/bnb/api>          | BNB          | Staging     |
 | <https://api.cow.fi/bnb/api>               | BNB          | Production  |
 | <https://barn.api.cow.fi/linea/api>        | Linea        | Staging     |
