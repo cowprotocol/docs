@@ -109,18 +109,26 @@ Before submitting an order, you can confirm the wrapper encoding is valid using 
 // On-chain validation (via Ethers/Viem)
 const helper = new ethers.Contract(HELPER_ADDRESS, HELPER_ABI, provider)
 
-const isValid = await helper.verifyAndBuildWrapperData(
-    ["0x1234...", "0x5678..."],  // Wrapper addresses
-    ["0xabcd...", "0xef01..."]   // Wrapper data
-)
-// Returns encoded wrapperData if valid, reverts if invalid
+const isValid = await helper.verifyAndBuildWrapperData([
+    {
+        target: '0xSomeAddress',
+        data: '0xSomeData'
+    },
+    {
+        target: '0xSomeAddress2',
+        data: '0x'
+    }
+])
+// Returns encoded chainedWrapperData if valid, reverts if invalid
 ```
 
 This checks:
 - All wrappers are allowlisted
 - Each wrapper can parse its data successfully
 
-Note: an official deployment of the `CowWrapperHelper` contract does not currently exist. If you would like to use this contract, please deploy it yourself using the [code in the gist](https://gist.github.com/kaze-cow/8c8a49f3305519948b1ec868c7efa5b9).
+The CoW Wrapper Helpers contract is deployed via `CREATE2`, and is being rolled out to the following addresses on each network supported by CoW:
+* Production: `0x8C8f88F3081A7d54fCbC2Bd7C6Cf5E9Fc26e30E9`
+* Staging: `0xfd1a35C8E7AEC58a4bB6AeDca0B2Bf9c9Be9E07F`
 
 ---
 
@@ -147,11 +155,7 @@ Wrappers are specified in the order's [`appData`](../reference/core/auctions/sch
 **Fields:**
 - **`target`**: Address of the wrapper contract (treat as opaque - don't parse)
 - **`data`**: Wrapper-specific data (treat as opaque - don't parse)
-- **`isOmittable`**: Critical flag for solver requirements (see below)
-
-:::warning
-Wrapper addresses and data should be treated as opaque values. Do not attempt to parse or validate them - simply pass them through in your encoding.
-:::
+- **`isOmittable`**: Whether the `target` and `data` must be executed unmodified as part of the order execution
 
 ### Solver Requirements
 
@@ -161,18 +165,20 @@ Orders with `"isOmittable": false` **MUST** be executed with the specified wrapp
 
 If `"isOmittable": true`, you MAY skip the wrapper if you find a better solution without it.
 
-#### 2. Verify Wrapper Authentication
+#### 2. Verify Wrapper Authentication and Simulate
 
-All approved wrappers will be approved by the DAO and registered in [`GPv2AllowlistAuthenticator`](../reference/contracts/core/allowlist.md).
+All approved wrappers will be approved by the DAO and registered in [`GPv2AllowlistAuthenticator`](../reference/contracts/core/allowlist.md). It is advised to verify this is the case before attempting to process a wrapper order.
+
+Additionally, wrappers define additional operations that may revert, so it is strongly recommended to *simulate the settlement transaction* while including the wrapper call to verify its viability. The call trace can also be inspected for any unusual behavior.
 
 :::warning
 The wrapper will be _directly_ called from the solver address and will mediate the settlement.
-This value is provided _directly_ by the user and it may be malicious.
+Since the data is user-supplied, it may be malicious.
 :::
 
 #### 3. Include Wrappers in the Solution
 
-Whether using the CoW Protocol-provided driver or your own, ensure wrapper information flows from the auction to your final settlement transaction.
+Whether using the CoW Protocol-provided driver or your own, ensure wrapper information flows from the auction to your final settlement transaction. This data should be passed unmodified from the orders in the auction to the final `Solution` submitted to the API.
 
 ### Encoding Wrapper Settlements
 
@@ -216,51 +222,20 @@ const settleData = settlementContract.interface.encodeFunctionData("settle", [
 // This is your settleData - unchanged from normal settlement
 ```
 
-##### 3. Encode wrapperData Parameter
+##### 3. Encode the `chainedWrapperData` Parameter
 
-The `wrapperData` combines individual wrapper data with wrapper addresses:
-
-```typescript
-function encodeWrapperData(wrappers: WrapperCall[]): string {
-    let wrapperData = '0x';
-
-    for (const [index, wrapper] of wrappers.entries()) {
-        // Skip first wrapper's address (it's the transaction target)
-        if (index !== 0) {
-            // Add wrapper address (20 bytes, without 0x prefix)
-            wrapperData += wrapper.target.slice(2);
-        }
-
-        // Encode data length as u16 big-endian (2 bytes)
-        const dataLength = (wrapper.data.length - 2) / 2; // Remove '0x' and convert to byte length
-        const lengthHex = dataLength.toString(16).padStart(4, '0');
-        wrapperData += lengthHex;
-
-        // Add wrapper data (without 0x prefix)
-        wrapperData += wrapper.data.slice(2);
-    }
-
-    return wrapperData;
-}
-```
-
-**Encoding Structure:**
-```
-For 2 wrappers:
-[length₁(2B)][data₁][address₂(20B)][length₂(2B)][data₂]
-
-For 3 wrappers:
-[length₁(2B)][data₁][address₂(20B)][length₂(2B)][data₂][address₃(20B)][length₃(2B)][data₃]
-```
+Build `chainedWrapperData` according to the [Calldata Encoding Specification](../reference/contracts/periphery/wrapper.mdx#calldata-encoding-specification).
 
 ##### 4. Call wrappedSettle
 
 ```typescript
 const tx = {
+    // The `chainedWrapperData` does not include the first wrapper to call,
+    // so it is supplied here as the _target_ of the settlement call.
     to: wrappers[0].target,
     data: wrapperContract.interface.encodeFunctionData("wrappedSettle", [
-        settleData,      // From step 2
-        wrapperData      // From step 3
+        settleData,           // From step 2
+        chainedWrapperData    // From step 3
     ])
 }
 ```
@@ -303,13 +278,13 @@ for (const order of auction.orders) {
 // Encode final transaction using the manual encoding steps described above:
 // 1. Set tx target to solution.wrappers[0].target
 // 2. Build settleData from your normal GPv2Settlement.settle() calldata
-// 3. Build wrapperData using encodeWrapperData(solution.wrappers)
-// 4. Call wrappedSettle(settleData, wrapperData) on the first wrapper
+// 3. Build chainedWrapperData per the Calldata Encoding Specification in the reference docs
+// 4. Call wrappedSettle(settleData, chainedWrapperData) on the first wrapper
 const tx = {
     to: solution.wrappers[0].target,
     data: wrapperContract.interface.encodeFunctionData("wrappedSettle", [
         settleData,
-        encodeWrapperData(solution.wrappers) // NOTE: implementation of this function is above
+        chainedWrapperData
     ])
 };
 ```
@@ -318,13 +293,7 @@ const tx = {
 
 #### Gas Estimation
 
-Account for wrapper gas overhead in your bids. Benchmarks show that even an empty wrapper adds approximately 22,272 gas (~11.4% overhead). The actual overhead depends on:
-
-- The complexity of the wrapper's logic
-- The size of the settlement data being passed through
-- The number of nested wrappers in the chain
-
-The easiest way to estimate overhead for a specific wrapper is to simulate the wrapper transaction against an empty settlement.
+Account for wrapper gas overhead in your bids — see [Gas Overhead](../reference/contracts/periphery/wrapper.mdx#gas-overhead) for benchmarks and scaling factors. The easiest way to estimate overhead for a specific wrapper is to simulate the wrapper transaction against an empty settlement.
 
 ### Common Issues
 
@@ -340,7 +309,7 @@ The easiest way to estimate overhead for a specific wrapper is to simulate the w
 
 **Solution**:
 - Verify `settleData` is identical to what you'd send to `GPv2Settlement.settle()`
-- Check `wrapperData` encoding follows specification exactly
+- Check `chainedWrapperData` encoding follows specification exactly
 - Use `CowWrapperHelper` for validation
 
 ### Solver Resources

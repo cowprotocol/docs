@@ -17,7 +17,7 @@ sequenceDiagram
     participant Wrapper2
     participant Settlement
 
-    Solver->>Wrapper1: wrappedSettle(settleData, wrapperData)
+    Solver->>Wrapper1: wrappedSettle(settleData, chainedWrapperData)
     activate Wrapper1
     Note over Wrapper1: Pre-settlement logic
     Wrapper1->>Wrapper2: _next(settleData, remainingData)
@@ -56,90 +56,7 @@ See the code for [`CowWrapper.sol` on GitHub](https://github.com/cowprotocol/eul
 
 ### Quick Start Example
 
-Here's a minimal wrapper implementation to use as a starting point:
-
-```solidity
-// SPDX-License-Identifier: GPL-3.0
-pragma solidity ^0.8.0;
-
-import { CowWrapper } from "./CowWrapper.sol";
-
-contract MyWrapper is CowWrapper {
-    constructor(address settlement) CowWrapper(settlement) {}
-
-    function _wrap(bytes calldata settleData, bytes calldata wrapperData, bytes calldata remainingWrapperData) internal override {
-        // Your custom pre-settlement logic here
-        // Example: pull tokens, initiate flash loan, etc.
-
-        // Continue the wrapper chain (calls settlement or next wrapper)
-        _next(settleData, remainingWrapperData);
-
-        // Your custom post-settlement logic here
-        // Example: repay flash loan, stake tokens, etc.
-    }
-
-    function validateWrapperData(bytes calldata wrapperData)
-        external
-        view
-        override
-    {
-        // Validate wrapper-specific data
-        // This must be deterministic - same input always returns same output
-        // Revert if data is invalid
-    }
-}
-```
-
-### Wrapper Public Functions
-
-#### `wrappedSettle`
-
-Entry point for wrapper execution. Validates caller authentication and delegates to `_wrap()`--where integrators place their custom logic.
-
-```solidity
-function wrappedSettle(
-    bytes calldata settleData,
-    bytes calldata chainedWrapperData
-) external override returns (bytes4) {
-    // Verify caller is an authenticated solver
-    require(AUTHENTICATOR.isSolver(msg.sender), NotASolver(msg.sender));
-
-    // Find out how long the next wrapper data is supposed to be
-    uint256 nextWrapperDataLen = uint256(uint16(bytes2(chainedWrapperData[0:2])));
-
-    // Delegate to the wrapper's custom logic
-    uint256 remainingWrapperDataStart = 2 + nextWrapperDataLen;
-    _wrap(
-        settleData,
-        chainedWrapperData[2:remainingWrapperDataStart],
-        chainedWrapperData[remainingWrapperDataStart:]
-    );
-
-    return ICowWrapper.wrappedSettle.selector;
-}
-```
-
-**Parameters:**
-- `settleData`: Original `GPv2Settlement.settle(...)` calldata
-- `chainedWrapperData`: 
-
-#### Chained Wrapper Data Encoding
-
-Each wrapper in the chain consists of:
-- 2 bytes: uint16 length of wrapper-specific data
-- `length` bytes: wrapper-specific data for this wrapper
-- 20 bytes: address of next wrapper (or stop here if no wrappers are left)
-The final wrapper in the chain omits the next wrapper address and calls SETTLEMENT directly.
-- 20 bytes: address of next wrapper (or stop without an address if no wrappers are left)
-
-When no wrapper is left, the final wrapper in the chain calls SETTLEMENT directly.
-Example:
-```text
-[0x0005][0xAABBCCDDEE][0x1234567890123456789012345678901234567890][0x0003][0x112233]
-↑len    ↑data         ↑next wrapper                               ↑len    ↑data
-```
-
-Each wrapper in the chain will successively pull off their own data and then call the next wrapper address (or the settlement address if no further wrapper data is supplied).
+The [`EmptyWrapper`](https://github.com/cowprotocol/euler-integration-contracts/blob/master/test/EmptyWrapper.sol) serves as a good starting point for building a wrapper. Following this, the implementation functions should be filled in as described below.
 
 ### Virtual Functions for integrators
 
@@ -175,7 +92,22 @@ function _wrap(bytes calldata settleData, bytes calldata wrapperData, bytes call
 }
 ```
 
-### Internal Functions (Provided)
+#### `validateWrapperData`
+
+Validates wrapper-specific data. Must be deterministic and revert on invalid input.
+
+```solidity
+function validateWrapperData(
+    bytes calldata wrapperData
+) external view override;
+```
+
+**Requirements:**
+- **Deterministic**: Same input must always produce same output. This means you cannot check the timestamp and revert if the order is valid, for example.
+- **View function**: Cannot modify state
+- **Revert on invalid**: Revert if data is malformed
+
+### Internal Functions (Provided for integrator use)
 
 #### `_next`
 
@@ -186,15 +118,8 @@ function _next(bytes calldata settleData, bytes calldata remainingWrapperData) i
 ```
 
 **Behavior:**
-- Reads next wrapper address from `remainingWrapperData`
-- Determines if more wrappers exist or if settlement is next
-- Makes appropriate call with correct data
-- Handles wrapper nesting automatically
-
-**Implementation Details:**
-- Extracts next target address (first 20 bytes)
-- Separates settle data from remaining wrapper data
-- Calls next wrapper via `wrappedSettle()` or settlement via `settle()`
+- Extracts the next target address (first 20 bytes of `remainingWrapperData`)
+- Calls the next wrapper via `wrappedSettle()`, or the settlement contract via `settle()` if no wrappers remain
 
 ## Calldata Encoding Specification
 
@@ -216,9 +141,19 @@ The `chainedWrapperData`  parameter of `wrappedSettle(settleData, chainedWrapper
 - **Data₂**: Wrapper 2's custom data
 ... (repeat Addr₂, Len₂, Data₂ for every subsequent wrapper)
 
+### Wrapper Public Functions
+
+#### `wrappedSettle`
+
+Entry point for wrapper execution. Validates caller authentication and delegates to `_wrap()`--where integrators place their custom logic. See the [full implementation in `CowWrapper.sol`](https://github.com/cowprotocol/euler-integration-contracts/blob/master/src/CowWrapper.sol).
+
+**Parameters:**
+- `settleData`: Original `GPv2Settlement.settle(...)` calldata
+- `chainedWrapperData`: Encoded wrapper chain — see [Calldata Encoding Specification](#calldata-encoding-specification)
+
 ## CowWrapperHelper
 
-Utility contract for on-chain validation and encoding.
+A view-only periphery contract for validating and encoding wrapper chains. See the [source code](https://github.com/cowprotocol/euler-integration-contracts/blob/master/src/CowWrapperHelper.sol) for the complete implementation.
 
 ### Interface
 
@@ -241,29 +176,6 @@ contract CowWrapperHelpers {
     ) external view returns (bytes memory chainedWrapperData);
 }
 ```
-
-
-### `CowWrapperHelpers`
-
-To aid external integrators in encoding and verifying wrapper data, an additional view-only contract is provided.
-
-See the [CowWrapperHelper contract source code](https://github.com/cowprotocol/euler-integration-contracts/blob/master/src/CowWrapperHelper.sol) for the complete implementation.
-
-
-#### `validateWrapperData`
-
-Validates wrapper-specific data. Must be deterministic and revert on invalid input.
-
-```solidity
-function validateWrapperData(
-    bytes calldata wrapperData
-) external view override;
-```
-
-**Requirements:**
-- **Deterministic**: Same input must always produce same output. This means you cannot check the timestamp and revert if the order is valid, for example.
-- **View function**: Cannot modify state
-- **Revert on invalid**: Revert if data is malformed
 
 ## Implementation Requirements for Integrators
 
