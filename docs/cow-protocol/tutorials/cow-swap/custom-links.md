@@ -74,7 +74,6 @@ Native and wrapped tokens per chain:
 - Base: [`WETH`](https://basescan.org/address/0x4200000000000000000000000000000000000006) - wrapped `ETH`
 - Avalanche: [`WAVAX`](https://snowscan.xyz/address/0xb31f66aa3c1e785363f0875a1b74e27b85fd66c7) - wrapped `AVAX`
 - Polygon: [`WPOL`](https://polygonscan.com/address/0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270) - wrapped `POL`
-- Lens: [`WGHO`](https://explorer.lens.xyz/address/0x6bdc36e20d267ff0dd6097799f82e78907105e2f) - wrapped `GHO`
 - BNB: [`WBNB`](https://bscscan.com/address/0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c) - wrapped `BNB`
 - Linea: [`WETH`](https://lineascan.build/token/0xe5D7C2a44FfDDf6b295A15c148167daaAf5Cf34f) - wrapped `ETH`
 - Plasma: [`WXPL`](https://plasmascan.to/token/0x6100E367285b01F48D07953803A2d8dCA5D19873) - wrapped `XPL`

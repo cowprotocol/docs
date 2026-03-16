@@ -18,7 +18,6 @@ The current factory contract addresses are the following:
 - Base: [`0x03362f847B4fAbC12e1Ce98b6b59F94401E4588e`](https://basescan.org/address/0x03362f847b4fabc12e1ce98b6b59f94401e4588e#code)
 - Avalanche: N/A
 - Polygon: N/A
-- Lens: N/A
 - BNB: N/A
 - Linea: N/A
 - Plasma: N/A

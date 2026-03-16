@@ -43,7 +43,6 @@ The helper contracts are deployed here:
 - [Base](https://basescan.org/address/0x467665d4ae90e7a99c9c9af785791058426d6ea0#code)
 - Avalanche N/A
 - Polygon N/A
-- Lens N/A
 - BNB N/A
 - Linea N/A
 - Plasma N/A

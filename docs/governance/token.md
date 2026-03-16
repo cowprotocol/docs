@@ -18,7 +18,6 @@ At the core of CoW Protocol lies the COW token, which serves as a governance tok
 | Base         | [`0xc694a91e6b071bf030a18bd3053a7fe09b6dae69`](https://basescan.org/token/0xc694a91e6b071bf030a18bd3053a7fe09b6dae69) [^bridgedTokens]    |
 | Polygon      | [`0x2f4efd3aa42e15a1ec6114547151b63ee5d39958`](https://polygonscan.com/token/0x2f4efd3aa42e15a1ec6114547151b63ee5d39958) [^bridgedTokens] |
 | Avalanche    | N/A                                                                                                                                       |
-| Lens         | N/A                                                                                                                                       |
 | BNB          | [`0x5bfdaa3f7c28b9994b56135403bf1acea02595b0`](https://bscscan.com/token/0x5bfdaa3f7c28b9994b56135403bf1acea02595b0) [^stargateBridge]    |
 | Linea        | N/A                                                                                                                                       |
 | Plasma       | N/A                                                                                                                                       |
@@ -41,7 +40,6 @@ At the core of CoW Protocol lies the COW token, which serves as a governance tok
 | Base         | N/A                                                                                                                    |
 | Avalanche    | N/A                                                                                                                    |
 | Polygon      | N/A                                                                                                                    |
-| Lens         | N/A                                                                                                                    |
 | BNB          | N/A                                                                                                                    |
 | Linea        | N/A                                                                                                                    |
 | Plasma       | N/A                                                                                                                    |

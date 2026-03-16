@@ -9,7 +9,6 @@ export const explorerByChain = {
   "Arbitrum One": "https://arbiscan.io",
   "Avalanche": "https://snowscan.xyz",
   "Polygon": "https://polygonscan.com",
-  "Lens": "https://explorer.lens.xyz",
   "BNB": "https://bscscan.com",
   "Linea": "https://lineascan.build",
   "Plasma": "https://plasmascan.to",
