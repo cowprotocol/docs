@@ -4,21 +4,20 @@ sidebar_position: 4
 
 # Program Structure
 
-The CoW Grants Program operates under a structured governance framework as defined in [CIP-63](https://snapshot.org/#/cow.eth/proposal/0xa83e2a3e98e9e4dfb41e54efdb94824a5e0e1ec9a2a381bc978ed46ef8f33a24).
+The CoW Grants Program operates under a structured governance framework as defined in [CIP-82](https://snapshot.box/#/s:cow.eth/proposal/0xe84793f122f1c9faa2bb9194faf71567ffd236df616bd60c300eead541f25304), which renewed the program for 2026.
 
 ## Committee Composition
 
 The Grants Committee consists of five members:
 - **3 Community Members**:
-  - [@Kubesqrt](https://forum.cow.fi/u/kubesqrt)
-  - [@Chim9](https://forum.cow.fi/u/chim9)
-  - [@mfw78](https://forum.cow.fi/u/mfw78)
+  - [@mfw78](https://forum.cow.fi/u/mfw78) (Technical Lead)
+  - [@Chim9](https://forum.cow.fi/u/chim9) (Grant Steward)
+  - [@Sov](https://forum.cow.fi/u/sov) (Grant Steward)
 
-- **2 Core Team Members**:
-  - [@middleway.eth](https://forum.cow.fi/u/middleway.eth)
+- **1 Core Team Member**:
   - [@Master_CoW](https://forum.cow.fi/u/Master_CoW)
 
-The committee operates as a Gnosis Safe with a 4/5 quorum required for approving grants.
+The committee operates as a Safe with a 3/4 quorum required for approving grants.
 
 ## Committee Roles
 
@@ -42,11 +41,12 @@ Each committee member may serve in one or more of these roles:
 
 ## Safe Structure
 
-As updated in February 2025, the Grants DAO operates with a streamlined Safe structure:
+As updated in January 2026, the Grants Treasury Safe has been migrated to Ethereum Mainnet to simplify accounting and treasury top-ups:
 
-- The Grants Committee Safe ([`gno:0xCA1F000D520c21C47E6c634DD31b92b91A6338bD`](https://app.safe.global/home?safe=gno:0xCA1F000D520c21C47E6c634DD31b92b91A6338bD)) ([Gnosisscan](https://gnosisscan.io/address/0xCA1F000D520c21C47E6c634DD31b92b91A6338bD)) directly manages grant disbursements
-- CoW DAO acts as the ultimate beneficial owner (UBO) of the Committee Safe
-- This structure improves operational efficiency while maintaining DAO oversight
+- The Grants Committee Safe ([`eth:0x0F641723997145715d23c0129b96041011d26666`](https://app.safe.global/home?safe=eth:0x0F641723997145715d23c0129b96041011d26666)) manages grant disbursements
+- To improve capital efficiency, funds are released in quarterly increments (25% of the annual allocation)
+- The committee maintains the authority to return up to 75% of idle assets to the CoW Treasury
+- CoW DAO remains the ultimate beneficial owner (UBO) of the Committee Safe
 
 ## Decision Making Process
 
@@ -54,7 +54,7 @@ As updated in February 2025, the Grants DAO operates with a streamlined Safe str
 2. The committee assigns a steward and reviewer
 3. Community discussion and feedback takes place
 4. The proposal moves to Snapshot for formal voting
-5. With 4/5 committee approval, the grant is executed
+5. With 3/4 committee approval, the grant is executed
 
 ## Grant Lifecycle Management
 
@@ -62,12 +62,13 @@ For each approved grant:
 - A steward oversees the grant's progress
 - A reviewer (internal or external) evaluates technical milestones
 - Monthly payout cycles process approved milestone payments
-- Regular updates are shared with the community
+- Grantee Feedback Forms are completed upon project conclusion to drive operational improvements
+- Regular updates are shared via the [CoW Grants Hub](https://sovs.notion.site/CoW-Grants-Hub-2a8000c0d59080b18bc3f17b694939b7)
 
 ## Communication and Resources
 
 - **Forum**: The [Grants Program Forum Section](https://forum.cow.fi/c/cow-grants-program/10) is the primary communication channel
-- **Discord**: The #grants channel in the CoW Protocol Discord serves as a secondary communication channel
+- **Discord**: The [#grants channel](https://discord.com/channels/869166959739170836/1232280402522275850) in the CoW Protocol Discord serves as a secondary communication channel
 - **Snapshot**: All formal votes happen on the [Grants Program Snapshot Space](https://snapshot.box/#/s:cowgrants.eth)
 
 For questions about the program structure, please post in the grants section of the forum.
