@@ -43,7 +43,7 @@ Each committee member may serve in one or more of these roles:
 
 As updated in January 2026, the Grants Treasury Safe has been migrated to Ethereum Mainnet to simplify accounting and treasury top-ups:
 
-- The Grants Committee Safe ([`eth:0x0F641723997145715d23c0129b96041011d26666`](https://app.safe.global/home?safe=eth:0x0F641723997145715d23c0129b96041011d26666)) manages grant disbursements
+- The Grants Committee Safe ([`eth:0xCA1F000D520c21C47E6c634DD31b92b91A6338bD`](https://app.safe.global/home?safe=eth:0xCA1F000D520c21C47E6c634DD31b92b91A6338bD)) manages grant disbursements
 - To improve capital efficiency, funds are released in quarterly increments (25% of the annual allocation)
 - The committee maintains the authority to return up to 75% of idle assets to the CoW Treasury
 - CoW DAO remains the ultimate beneficial owner (UBO) of the Committee Safe
