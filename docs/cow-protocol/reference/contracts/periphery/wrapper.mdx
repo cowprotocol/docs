@@ -151,9 +151,9 @@ Entry point for wrapper execution. Validates caller authentication and delegates
 - `settleData`: Original `GPv2Settlement.settle(...)` calldata
 - `chainedWrapperData`: Encoded wrapper chain — see [Calldata Encoding Specification](#calldata-encoding-specification)
 
-## CowWrapperHelper
+## CowWrapperHelpers
 
-A view-only periphery contract for validating and encoding wrapper chains. See the [source code](https://github.com/cowprotocol/euler-integration-contracts/blob/master/src/CowWrapperHelper.sol) for the complete implementation.
+A view-only periphery contract for validating and encoding wrapper chains. See the [source code](https://github.com/cowprotocol/euler-integration-contracts/blob/master/src/CowWrapperHelpers.sol) for the complete implementation.
 
 ### Deployments
 
@@ -165,7 +165,7 @@ The contract is deployed via `CREATE2`:
 | Staging | `0xfd1a35C8E7AEC58a4bB6AeDca0B2Bf9c9Be9E07F` |
 
 :::note
-`CowWrapperHelper` may not yet be deployed on all networks supported by CoW Protocol.
+`CowWrapperHelpers` may not yet be deployed on all networks supported by CoW Protocol.
 :::
 
 ### Interface

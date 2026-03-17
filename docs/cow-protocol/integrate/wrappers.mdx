@@ -107,7 +107,7 @@ The wrappers execute in sequence: Wrapper1 → Wrapper2 → Settlement → Wrapp
 
 ### Validating Wrapper Configuration
 
-Before submitting an order, you can confirm the wrapper encoding is valid using [`CowWrapperHelper`](https://gist.github.com/kaze-cow/8c8a49f3305519948b1ec868c7efa5b9):
+Before submitting an order, you can confirm the wrapper encoding is valid using [`CowWrapperHelpers`](../reference/contracts/periphery/wrapper.mdx#cowwrapperhelper).
 
 ```typescript
 // On-chain validation (via Ethers/Viem)
@@ -130,7 +130,7 @@ This checks:
 - All wrappers are allowlisted
 - Each wrapper can parse its data successfully
 
-See the [periphery contract reference](../reference/contracts/periphery/wrapper.mdx#deployments-1) for deployment addresses.
+See the [periphery contract reference](../reference/contracts/periphery/wrapper.mdx#cowwrapperhelpers) for deployment addresses.
 
 ---
 
@@ -244,9 +244,9 @@ const tx = {
 }
 ```
 
-#### Using CowWrapperHelper
+#### Using CowWrapperHelpers
 
-`CowWrapperHelper` is a read-only periphery contract that can be called to validate many important points prior to execution. See the [periphery contract documentation](../reference/contracts/periphery/wrapper.mdx#cowwrapperhelper).
+`CowWrapperHelpers` is a read-only periphery contract that can be called to validate many important points prior to execution. See the [periphery contract documentation](../reference/contracts/periphery/wrapper.mdx#cowwrapperhelper).
 
 ### Accumulating Wrappers in Solutions
 
@@ -314,7 +314,7 @@ Account for wrapper gas overhead in your bids — see [Gas Overhead](../referenc
 **Solution**:
 - Verify `settleData` is identical to what you'd send to `GPv2Settlement.settle()`
 - Check `chainedWrapperData` encoding follows specification exactly
-- Use `CowWrapperHelper` for validation
+- Use `CowWrapperHelpers` for validation
 
 ### Solver Resources
 
