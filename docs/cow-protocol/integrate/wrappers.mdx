@@ -153,9 +153,11 @@ Wrappers are specified in the order's [`appData`](../reference/core/auctions/sch
 ```
 
 **Fields:**
-- **`target`**: Address of the wrapper contract (treat as opaque - don't parse)
-- **`data`**: Wrapper-specific data (treat as opaque - don't parse)
+- **`target`**: Address of the wrapper contract
+- **`data`**: Wrapper-specific data
 - **`isOmittable`**: Whether the `target` and `data` must be executed unmodified as part of the order execution
+
+`target` may be any address and `data` is arbitrary bytes that will be passed to the target. There is generally no need for decoding the wrapper data since the execution process uses the same opaque format on each wrapper.
 
 ### Solver Requirements
 
