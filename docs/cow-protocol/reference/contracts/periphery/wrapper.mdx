@@ -128,7 +128,7 @@ The `chainedWrapperData`  parameter of `wrappedSettle(settleData, chainedWrapper
 ```
 ┌──────┬──────────┬──────────┬──────┬──────────┐
 │ Len₁ │  Data₁   │  Addr₂   │ Len₂ │  Data₂   │
-│(2 B) │ (wrap1)  │ (20 B)   │(2 B) │ (wrap2)  │
+│(2 B) │  (Len₁)  │ (20 B)   │(2 B) │  (Len₂)  │
 └──────┴──────────┴──────────┴──────┴──────────┘
 │<─────────── chainedWrapperData ─────────────>│
 ```
@@ -276,32 +276,6 @@ Wrapper execution adds gas overhead to settlements.
 - Number of nested wrappers
 
 **Methodology:** Single Uniswap V3 WETH→USDC trade. See [services PR #3700](https://github.com/cowprotocol/services/pull/3700).
-
-## Example Implementations
-
-### EmptyWrapper
-
-Minimal wrapper demonstrating the pattern:
-
-```solidity
-contract EmptyWrapper is CowWrapper {
-    constructor(address settlement) CowWrapper(settlement) {}
-
-    function _wrap(bytes calldata settleData, bytes calldata wrapperData, bytes calldata remainingWrapperData) internal override {
-        // No pre-settlement logic
-        _next(settleData, remainingWrapperData);  // Pass through
-        // No post-settlement logic
-    }
-
-    function validateWrapperData(bytes calldata wrapperData)
-        external
-        view
-        override
-    {
-        // No validation needed
-    }
-}
-```
 
 ## Resources
 
