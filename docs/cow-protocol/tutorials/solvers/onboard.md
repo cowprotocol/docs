@@ -27,9 +27,9 @@ sidebar_position: 1
 ### Requirements for joining the CoW DAO bonding pool
 The general KYC requirements are as follows:
 
-- Incorporation details of the company behind the solver that includes details of who the shareholders are
-- One or two passports of the main shareholders and developers of the solver
-- Please include the name of your solver in the email
+- Incorporation details of the company behind the solver that includes details of who the shareholders are.
+- One or two passports of the main shareholders and developers of the solver.
+- Please include the name of your solver in the email.
 
 Do not send this before the meeting, we will explain the process during the meeting so that you can send the documents afterwards. We usually expect the KYC process to take about 1 to 3 working days, but it may vary.
 
