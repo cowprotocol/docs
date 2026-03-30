@@ -21,7 +21,7 @@ Performance rewards are computed using a mechanism akin to a Vickrey–Clarke–
 
 :::note
 
-From the protocol's perspective, a solution as executed on chain must equal the solution as submitted at the bidding stage.
+From the protocol's perspective, a solution as executed on-chain must equal the solution as submitted at the bidding stage.
 
 :::
 
