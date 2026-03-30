@@ -49,7 +49,7 @@ The performance reward is capped from above and below using the function $$\text
 - Linea and Ink: $$\beta = 100\%$$, $$0.0015 \;\textrm{ETH}$$
 - Plasma: $$\beta = 100\%$$, $$30 \;\textrm{XPL}$$
 
-The parameter $$\beta$$, which naturally corresponds to a revenue-sharing parameter between protocol and solvers, is set to 50% by default. The core team has a mandate to change this parameter for individual networks to a value in the interval [50%, 100%], given that the network has a total revenue less than 5% of the revenue on mainnet.
+The parameter $$\beta$$, which naturally corresponds to a revenue-sharing parameter between protocol and solvers, is set to 50% by default. The core team has a mandate to change this parameter for individual networks, if needed, to a value in the interval [50%, 100%], given that the network has a total revenue less than 5% of the total protocol revenue.
 
 
 :::note
