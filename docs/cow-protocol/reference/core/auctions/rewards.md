@@ -96,7 +96,7 @@ The presence of the cap on rewards $$c_u$$, however, makes the problem more comp
 
 To summarize, truthfully revealing the (cost-adjusted) score that a solver can generate for each submitted solution is optimal if the cap is not binding, and misreporting does not affect $$\textrm{referenceScore}_i$$. It is not necessarily optimal in uncompetitive auctions when the difference between the best and second-best solution may be large, and in some edge cases in which a solver may benefit from making the filtering step less stringent. However, in these cases, deriving the optimal strategy is a very complex problem.
 
-Consistency rewards introduce an additional strategic dimension: since the order-count metric rewards solvers for submitting solutions to auctions in which orders are ultimately executed, solvers have an incentive to participate broadly across auctions, even in cases where they do not expect to win the performance reward.
+Consistency rewards introduce an additional strategic dimension; for example, the order-count metric rewards solvers for submitting solutions to auctions in which orders are ultimately executed, solvers have an incentive to participate broadly across auctions, even in cases where they do not expect to win the performance reward.
 
 ## Price estimation competition rewards (CIPs 27, 36, 57, 72)
 
