@@ -31,7 +31,7 @@ $$
 \textrm{performanceReward}_i = \textrm{cap}(\textrm{totalScore} - \textrm{referenceScore}_i-\textrm{missingScore}_i).
 $$
 
-Here $$\textrm{totalScore}$$ is the sum of the scores of all winning solutions in the auction and $$\textrm{missingScore}_i$$ is the sum of the scores of solver $$i$$'s winning solutions that reverted. Finally, $$\textrm{referenceScore}_i$$ is the total score of a counterfactual auction in which all bids from solver $$i$$ are removed from the set of bids that survive the fairness filtering.
+Here $$\textrm{totalScore}$$ is the sum of the scores of all winning solutions in the auction and $$\textrm{missingScore}_i$$ is the sum of the scores of solver $$i$$'s winning solutions that reverted. Finally, $$\textrm{referenceScore}_i$$ is the total score of a counterfactual auction in which all bids from solver $$i$$ are removed from the set of bids that survive the fairness filtering. If only one solver submits solutions, $$\textrm{referenceScore}_i$$ is, by definition, zero.
 
 :::note
 
@@ -39,7 +39,7 @@ The performance reward calculation can result in a negative value, in which case
 
 :::
 
-The performance reward is capped from above and below using the function $$\textrm{cap}(x) = \max(-c_l, \min(c_u, x))$$, where $$c_u$$ is a chain-specific $$\beta$$ percent of the protocol fee (excluding partner fees) that the protocol earned from the trades in all solutions successfully executed onchain by the solver in that auction and $$c_l$$ is chain-specific. $$\beta$ and $$c_l$$ are determined by the following values:
+The performance reward is capped from above and below using the function $$\textrm{cap}(x) = \max(-c_l, \min(c_u, x))$$, where $$c_u$$ is equal to a chain-specific $$\beta$$ percent of the protocol fee (excluding partner fees) that the protocol earned from the trades in all solutions successfully executed onchain by the solver in that auction, and $$c_l$$ is chain-specific as well. $$\beta$$ and $$c_l$$ are determined by the following values:
 
 - Ethereum mainnet, Arbitrum, and Base chain: $$\beta = 50\%$$, $$c_l = 0.010 \;\textrm{ETH}$$
 - Gnosis Chain: $$\beta = 100\%$$, $$10 \;\textrm{xDAI}$$
@@ -49,7 +49,8 @@ The performance reward is capped from above and below using the function $$\text
 - Linea and Ink: $$\beta = 100\%$$, $$0.0015 \;\textrm{ETH}$$
 - Plasma: $$\beta = 100\%$$, $$30 \;\textrm{XPL}$$
 
-If only one solver submits solutions, $$\textrm{referenceScore}_i$$ is, by definition, zero.
+The parameter $$\beta$$, which naturally corresponds to a revenue-sharing parameter between protocol and solvers, is set to 50% by default. The core team has a mandate to change this parameter for individual networks to a value in the interval [50%, 100%], given that the network has a total revenue less than 5% of the revenue on mainnet.
+
 
 :::note
 
