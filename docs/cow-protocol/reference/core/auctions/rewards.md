@@ -59,7 +59,10 @@ There is no guarantee that the per-auction rewards are greater than the costs of
 
 ### Consistency rewards
 
-In each auction, solver $$i$$'s contribution to the consistency budget is
+
+With CIP-XX (add snapshot link), the protocol introduced consistency rewards. These rewards are based on aggregate metrics evaluated over the full accounting week and are intended to incentivize consistent, reliable solver behavior, broad token coverage, and other aspects the core team considers important for maintaining healthy competition.
+
+Concretely, in each auction, solver $$i$$'s contribution to the consistency budget is
 
 $$
 \frac{1}{2} \cdot \textrm{protocolFee}_i - \max(0, \textrm{performanceReward}_i),
