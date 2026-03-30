@@ -70,7 +70,7 @@ $$
 
 where $$\textrm{protocolFee}_i$$ is the protocol fee (excluding partner fees) earned from the trades in all solutions supplied by solver $$i$$. When the performance reward is a penalty (i.e., negative), the full $$\frac{1}{2} \cdot \textrm{protocolFee}_i$$ is contributed to the consistency budget. The total consistency budget for an accounting period is the sum of these contributions across all solvers and auctions.
 
-The consistency budget is distributed at the end of each accounting period according to a consistency metric. The core team has a mandate to adapt this metric over time; every change will be announced in advance on the [CoW Protocol forum](https://forum.cow.fi).
+The consistency budget is distributed at the end of each accounting period according to a consistency metric. The core team has a mandate to adapt this metric when they see fit; every change will be announced in advance on the [CoW Protocol forum](https://forum.cow.fi).
 
 **Current metric: order count.** Each solver's share of the consistency budget is proportional to the number of executed orders for which it submitted a solution:
 
