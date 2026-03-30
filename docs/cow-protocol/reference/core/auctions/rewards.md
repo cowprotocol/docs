@@ -21,7 +21,7 @@ Performance rewards are computed using a mechanism akin to a Vickrey–Clarke–
 
 :::note
 
-From the protocol's perspective, a solution as executed on-chain must equal the solution as submitted at the bidding stage.
+From the protocol's perspective, a solution as executed onchain must equal the solution as submitted at the bidding stage.
 
 :::
 
@@ -39,15 +39,15 @@ The performance reward calculation can result in a negative value, in which case
 
 :::
 
-The performance reward is capped from above and below using the function $$\textrm{cap}(x) = \max(-c_l, \min(c_u, x))$$, where $$c_u$$ is 50% of the protocol fee (excluding partner fees) that the protocol earned from the trades in all solutions supplied by the solver in that auction and $$c_l$$ is chain-specific, determined by the following values:
+The performance reward is capped from above and below using the function $$\textrm{cap}(x) = \max(-c_l, \min(c_u, x))$$, where $$c_u$$ is a chain-specific $$\beta$$ percent of the protocol fee (excluding partner fees) that the protocol earned from the trades in all solutions successfully executed onchain by the solver in that auction and $$c_l$$ is chain-specific. $$\beta$ and $$c_l$$ are determined by the following values:
 
-- Ethereum mainnet, Arbitrum, and Base chain: $$0.010 \;\textrm{ETH}$$
-- Gnosis Chain: $$10 \;\textrm{xDAI}$$
-- Avalanche: $$0.3 \;\textrm{AVAX}$$
-- Polygon: $$30 \;\textrm{POL}$$
-- BNB: $$0.04 \;\textrm{BNB}$$
-- Linea and Ink: $$0.0015 \;\textrm{ETH}$$
-- Plasma: $$30 \;\textrm{XPL}$$
+- Ethereum mainnet, Arbitrum, and Base chain: $$\beta = 50\%$$, $$c_l = 0.010 \;\textrm{ETH}$$
+- Gnosis Chain: $$\beta = 100\%$$, $$10 \;\textrm{xDAI}$$
+- Avalanche: $$\beta = 100\%$$, $$0.3 \;\textrm{AVAX}$$
+- Polygon: $$\beta = 100\%$$, $$30 \;\textrm{POL}$$
+- BNB: $$\beta = 100\%$$, $$0.04 \;\textrm{BNB}$$
+- Linea and Ink: $$\beta = 100\%$$, $$0.0015 \;\textrm{ETH}$$
+- Plasma: $$\beta = 100\%$$, $$30 \;\textrm{XPL}$$
 
 If only one solver submits solutions, $$\textrm{referenceScore}_i$$ is, by definition, zero.
 
