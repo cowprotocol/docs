@@ -8,7 +8,7 @@ The CoW Swap Affiliate Program rewards affiliates and referred traders when refe
 
 The program operates within a governance-approved framework with defined parameters, eligibility requirements, and enforcement rights.
 
-For operational details, see the [Affiliate Program FAQ](/cow-protocol/tutorials/cow-swap/affiliate-program/faq).
+For operational details, see the [Affiliate Program FAQ](/cow-protocol/affiliate-program/faq).
 
 ## Definitions
 

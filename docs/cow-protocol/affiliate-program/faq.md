@@ -4,7 +4,7 @@ sidebar_label: FAQ
 sidebar_position: 2
 ---
 
-This page expands on the [CoW Swap Affiliate Program overview](/cow-protocol/tutorials/cow-swap/affiliate-program).
+This page expands on the [CoW Swap Affiliate Program overview](/cow-protocol/affiliate-program).
 
 ## Overview
 
