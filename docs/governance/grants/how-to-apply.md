@@ -6,6 +6,10 @@ sidebar_position: 2
 
 This page provides an overview of the application process. For complete details, please refer to the [official Process Guide](https://forum.cow.fi/t/grants-committee-for-cow-grantees-process-guide-feb-2025/2830) on the forum.
 
+:::note
+The Process Guide and Grant Agreement Terms linked below were written under CIP-63 and reference Gnosis Chain for payouts. Under [CIP-82](https://snapshot.box/#/s:cow.eth/proposal/0xe84793f122f1c9faa2bb9194faf71567ffd236df616bd60c300eead541f25304), the Grants Treasury has migrated to **Ethereum Mainnet**. Follow the CIP-82 guidance on this page where there are discrepancies.
+:::
+
 ## Application Steps
 
 1. **Review existing materials**:
