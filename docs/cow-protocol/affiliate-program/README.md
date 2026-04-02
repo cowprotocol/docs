@@ -12,18 +12,19 @@ For operational details, see the [Affiliate Program FAQ](/cow-protocol/affiliate
 
 ## Definitions
 
-- **Affiliate**: A participant who generates and distributes a referral link tied to their wallet
-- **Trader**: A wallet that activates an affiliate referral link and executes at least one qualifying trade on CoW Swap
+- **Affiliate**: A participant who generates and distributes a referral code or link tied to their wallet
+- **Trader**: A wallet that activates an affiliate referral link or code and executes at least one qualifying trade on CoW Swap
 - **Attribution window**: The period during which a referred wallet's qualifying volume is attributed to an affiliate
 - **Qualifying volume**: Eligible trading volume on CoW Swap counted toward milestone rewards, subject to exclusions
 
 ## Program Flow
 
-1. An affiliate generates a unique referral link tied to their wallet.
-2. A trader activates the link and executes a qualifying trade.
-3. The trader wallet becomes attributed to the affiliate.
-4. Qualifying volume is tracked during the attribution window.
-5. Rewards are distributed when milestone thresholds are reached.
+1. An affiliate generates a unique referral code tied to their wallet.
+2. A trader activates the code through a referral link or by entering it manually.
+3. The trader executes their first qualifying trade.
+4. The trader wallet becomes attributed to the affiliate.
+5. Qualifying volume is tracked during the attribution window.
+6. Rewards are distributed when milestone thresholds are reached.
 
 Attribution is wallet-based and not retroactive.
 
@@ -42,7 +43,7 @@ These parameters may be adjusted within governance-approved limits.
 ## Attribution Rules
 
 - Each referred wallet may be attributed to only one affiliate.
-- Attribution starts when a trader activates a referral link and completes a first qualifying trade.
+- Attribution starts when a trader activates a referral code and completes a first qualifying trade.
 - Only volume executed within the attribution window is eligible.
 - Volume executed before attribution does not count.
 
@@ -67,7 +68,7 @@ Rewards are triggered when cumulative qualifying volume reaches the defined mile
 
 - Rewards are paid in `USDC`.
 - At launch, both the affiliate and the referred trader receive rewards when eligible milestones are reached.
-- Payouts are processed weekly.
+- Payouts are processed weekly, typically by Friday.
 - A defined data cut-off applies to each payout cycle.
 - Rewards may be withheld pending review if suspicious activity is detected.
 
@@ -119,7 +120,8 @@ Changes outside the approved envelope require a new governance proposal.
 
 ## Irreversibility and Finality
 
-- Referral links are wallet-bound and permanent.
+- Referral codes and links are wallet-bound and permanent.
+- Wallet changes are not supported.
 - Attribution cannot be reassigned.
 - Rewards are calculated according to the program's eligibility rules.
 - Decisions regarding abuse and eligibility are final.

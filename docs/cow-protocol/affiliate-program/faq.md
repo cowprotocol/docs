@@ -14,7 +14,7 @@ The CoW Swap Affiliate Program is a 6-month pilot that rewards affiliates who re
 
 ### Who can participate?
 
-Affiliates who generate referral links or codes tied to their wallet can participate, as can traders who use those links and meet the program's eligibility and jurisdiction requirements.
+Anyone can participate by generating a referral code tied to their wallet and sharing it. Traders who use these codes or links and meet eligibility and jurisdiction requirements can be attributed as referred users.
 
 ### How do I apply?
 
@@ -32,7 +32,7 @@ The program runs for 6 months from launch. Renewal or material expansion require
 
 ### How do referral links work?
 
-Affiliates generate unique links or codes. A trader becomes attributed when they access CoW Swap through that link or code and complete a qualifying trade.
+Affiliates generate unique links or codes. A trader becomes attributed when they access CoW Swap via that link or code.
 
 ### Can I change my code or link?
 
@@ -40,7 +40,7 @@ No. Once a code or link is created, it cannot be changed.
 
 ### When does a trader become attributed to me?
 
-A trader is bound to an affiliate for up to 90 days starting from the first qualifying trade after clicking a referral link or entering a referral code.
+A trader is bound to an affiliate for up to 90 days starting when they click a referral link or enter a referral code manually and execute their first qualifying trade.
 
 ### How long does attribution last?
 
@@ -58,7 +58,9 @@ Rewards start counting when the referred trader wallet reaches cumulative qualif
 
 ### How are rewards calculated?
 
-Rewards are paid in `USDC` when referred trader wallets reach cumulative qualifying volume milestones. At launch, the program pays `10 USDC` per `250,000 USD` in cumulative qualifying volume generated. The reward curve and milestone thresholds can be adjusted within governance-approved limits.
+Rewards are paid in `USDC` when eligible referred trader wallets reach cumulative qualifying volume milestones. The current setting is `10 USDC` per `250,000 USD` in cumulative qualifying volume generated.
+
+Reward parameters, including milestone thresholds and amounts, may be adjusted within the governance-approved parameter envelope with public disclosure.
 
 ### What is a milestone?
 
@@ -70,7 +72,7 @@ The launch configuration is `10 USDC` per `250,000 USD` in cumulative qualifying
 
 ### Who earns rewards?
 
-Both the affiliate and the referred trader receive rewards when the referred wallet reaches an eligible milestone.
+Both the affiliate and the referred trader receive the reward amount of `10 USDC` per milestone.
 
 ### Is there a maximum reward per wallet?
 
@@ -84,11 +86,17 @@ Yes. Parameters can change within the governance-approved envelope, with public 
 
 ### What qualifies as a new wallet?
 
-A new wallet is a wallet with no prior trading history on CoW Swap.
+A new wallet is a wallet that has never executed a trade through the CoW Swap UI before activating a referral link. Only these wallets are eligible to be attributed to an affiliate.
+
+If a wallet has already traded through the CoW Swap UI in the past, it will not qualify as a referred trader.
+
+### Do trades on partner integrations affect new wallet eligibility?
+
+No. A wallet is still considered new if it has not traded directly on CoW Swap, even if it has executed trades through partner integrations that use CoW Protocol in the background.
 
 ### Are there jurisdiction restrictions?
 
-Yes. Participation is prohibited for users in restricted jurisdictions under the applicable CoW terms and conditions.
+Yes. Participation is prohibited if you are located in, or a citizen of, jurisdictions listed in [cow.fi/terms](https://cow.fi/terms).
 
 ### What counts as qualifying volume?
 
@@ -106,17 +114,7 @@ The program applies to all supported CoW Swap chains except Ink and Sepolia.
 
 ### How and when are rewards paid?
 
-Rewards are paid in `USDC` through weekly batch transfers. Ethereum Mainnet is the default payout chain. Additional chains may be supported when operationally feasible.
-
-### Is there an affiliate dashboard?
-
-Yes. Affiliates can use the [Affiliate Dashboard](https://swap.cow.fi/#/account/affiliate) to track referred activity and rewards.
-
-### Where can I track my referred volume?
-
-- Traders can use [My Rewards](https://swap.cow.fi/#/account/my-rewards) to see volume, number of trades, and all-time earnings.
-- Affiliates can use the [Affiliate Dashboard](https://swap.cow.fi/#/account/affiliate) to see referred volume, number of trades, referred traders, and all-time earnings.
-- CoW DAO does not track clicks directly. Affiliates can use a third-party link tracker for click analytics.
+Rewards are paid in `USDC` on a weekly basis, typically by Friday. Payouts are distributed through batch transfers, with Ethereum Mainnet as the default payout chain.
 
 ### Are payouts transparent?
 
@@ -128,19 +126,17 @@ Yes. The minimum payout threshold is `10 USDC`. Balances below that amount roll 
 
 ### Can I change my payout wallet?
 
-Rewards are distributed to the wallet associated with your affiliate participation.
-
-If you need to update your wallet, contact the team before the next payout cycle. Changes may not apply retroactively to already calculated rewards.
+No. The payout wallet is fixed and cannot be changed under any circumstances.
 
 ### What happens if I lose access to my wallet?
 
 Rewards are distributed on-chain to the registered wallet. If you lose access to that wallet, the program cannot recover previously distributed rewards.
 
-If access is lost before payout, contact the team immediately. Assistance may be limited depending on the stage of payout processing.
+If access is lost before payout, contact the team immediately. The team may review the situation, but recovery or changes are not guaranteed.
 
 ### What if I believe my rewards are incorrect?
 
-Please share the following in the Affiliate Program support channel on the [CoW Protocol Discord](https://discord.gg/cowprotocol):
+Please share the following in the Affiliate Discord channel on the [CoW Protocol Discord](https://discord.gg/cowprotocol):
 
 1. Your wallet address, never your private keys
 2. Your referral code
@@ -207,14 +203,23 @@ Once rewards have been distributed on-chain, they cannot be reversed. However, t
 
 ## Dashboard and Reporting
 
+### Is there an affiliate dashboard?
+
+Yes. You can use the [Affiliate Dashboard](https://swap.cow.fi/#/account/affiliate).
+
+### What can I track as an affiliate or trader?
+
+- Traders can use [My Rewards](https://swap.cow.fi/#/account/my-rewards) to see all-time earnings.
+- Affiliates can use the [Affiliate Dashboard](https://swap.cow.fi/#/account/affiliate) to see referred volume, referred traders, and all-time earnings.
+
 ### Where can I see my expected rewards?
 
-- Traders can use [My Rewards](https://swap.cow.fi/#/account/my-rewards) to see expected rewards for the next airdrop and previously distributed amounts.
-- Affiliates can use the [Affiliate Dashboard](https://swap.cow.fi/#/account/affiliate) to see expected rewards for the next airdrop and previously distributed amounts.
+- Traders can use [My Rewards](https://swap.cow.fi/#/account/my-rewards) to see expected rewards for the next payout cycle and past payout amounts.
+- Affiliates can use the [Affiliate Dashboard](https://swap.cow.fi/#/account/affiliate) to see expected rewards for the next payout cycle and past payout amounts.
 
 ### How often does the rewards data update?
 
-Rewards data updates four times per day at `01:00`, `07:00`, `13:00`, and `17:00` UTC.
+Rewards data updates four times per day at `01:00`, `07:00`, `13:00`, and `17:00` UTC. Data may be delayed and should not be considered real-time.
 
 ### Where can I see my payout history?
 
@@ -224,32 +229,28 @@ Payout history is visible in the relevant account page. All payouts are also rec
 
 ### Where will affiliate updates be shared?
 
-Official Affiliate Program updates are shared through the Affiliate Program channel in the [CoW Protocol Discord](https://discord.gg/cowprotocol).
+Official Affiliate Program updates are shared in the Affiliate Discord channel on the [CoW Protocol Discord](https://discord.gg/cowprotocol).
 
 ### Is support available?
 
-Yes. Questions about tracking, rewards, attribution, and payouts should be posted in the dedicated Affiliate Program support channel in the [CoW Protocol Discord](https://discord.gg/cowprotocol).
+Yes. If you have questions about tracking, rewards, attribution, or payouts, please post in the dedicated Affiliate Discord channel on the [CoW Protocol Discord](https://discord.gg/cowprotocol).
 
 ### How do I request support?
 
 When contacting support, please provide:
 
-- Your referral wallet address
-- The referral link you are using, if relevant
+- Your wallet address
+- The referral code you are using, if relevant
 - A transaction hash, if you are reporting a specific issue
 
-This helps the team locate your referral data and investigate efficiently.
+This helps the team locate your referral data and investigate efficiently. Requests without a wallet address may not be reviewed.
 
 ### What materials are available to me as an affiliate?
 
-Affiliates can access a dedicated Discord channel with:
+Affiliates can access a dedicated Discord channel (`#affiliate-program`) with:
 
-- Brand kit assets such as logos and usage guidelines
-- Ready-to-use visuals and banners
-- Campaign graphics
+- Brand kit assets such as logos and approved assets
 - Launch assets
-- Product feature highlights
-- Exclusive announcements related to upcoming launches
 - Program updates and parameter changes
 
 Materials are updated periodically.
