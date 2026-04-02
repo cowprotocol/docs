@@ -8,7 +8,8 @@ The CoW Grants Program operates under a structured governance framework as defin
 
 ## Committee Composition
 
-The Grants Committee consists of four members:
+CIP-82 established a five-member committee (three community members and two core team members) with a 3/5 signing threshold, designed to prevent core team veto while maintaining distributed control. Following the departure of [@middleway.eth](https://forum.cow.fi/u/middleway.eth) in March 2026, the committee now consists of four members with a 3/4 threshold:
+
 - **3 Community Members**:
   - [@mfw78](https://forum.cow.fi/u/mfw78) (Technical Lead)
   - [@Chim9](https://forum.cow.fi/u/chim9) (Grant Steward)
@@ -16,8 +17,6 @@ The Grants Committee consists of four members:
 
 - **1 Core Team Member**:
   - [@Master_CoW](https://forum.cow.fi/u/Master_CoW)
-
-The committee operates as a Safe with a 3/4 quorum required for approving grants.
 
 ## Committee Roles
 
