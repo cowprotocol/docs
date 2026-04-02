@@ -94,7 +94,7 @@ No. A wallet is still considered "new" if it has not traded directly on CoW Swap
 
 #### Are there jurisdiction restrictions?
 
-Yes. Participation is prohibited if located in, or a citizen of, jurisdictions listed on [cow.fi/terms](https://cow.fi/terms).
+Yes. Participation is prohibited if you are located in, or a citizen of, any jurisdiction prohibited by the [CoW Swap Terms](https://cow.fi/legal/cowswap-terms).
 
 #### What counts as a qualifying volume?
 
