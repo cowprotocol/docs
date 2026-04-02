@@ -63,4 +63,4 @@ The Grants DAO Committee utilizes a discretionary incentive structure to reward 
 * **Performance Bonuses:** Capped at 10,000 xDAI (or equivalent in COW) per grant. Awarded for exceptional results, significant ecosystem impact, or extraordinary efficiency.
 * **Partnership Incentives:** Introduced in CIP-82, committee members or partners who secure external ecosystem funding may receive a 5% success fee (capped at 10,000 xDAI), paid from the received external funds.
 
-For complete details on grant types and requirements, refer to the [CoW DAO Grant Agreement](https://github.com/cowprotocol/grants-program).
+For complete details on grant types and requirements, refer to the [CoW DAO Grant Agreement](https://bafkreifcftgaleyxkekkic36beyveiomqmlwyduyfh3s25zj3uyngr6ht4.ipfs.dweb.link/).
