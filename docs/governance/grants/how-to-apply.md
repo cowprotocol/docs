@@ -58,3 +58,4 @@ For questions about the grants program:
 - Post in the [CoW Grants Program](https://forum.cow.fi/c/cow-grants-program/10) forum section
 - Visit the #grants channel in the [CoW Protocol Discord](https://discord.gg/cowprotocol)
 - View active progress on the [CoW Grants Hub](https://sovs.notion.site/CoW-Grants-Hub-2a8000c0d59080b18bc3f17b694939b7)
+- Browse grant repositories on the [CoW DAO Grants GitHub](https://github.com/cowdao-grants)

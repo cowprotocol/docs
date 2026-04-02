@@ -70,5 +70,6 @@ For each approved grant:
 - **Forum**: The [Grants Program Forum Section](https://forum.cow.fi/c/cow-grants-program/10) is the primary communication channel
 - **Discord**: The [#grants channel](https://discord.com/channels/869166959739170836/1232280402522275850) in the CoW Protocol Discord serves as a secondary communication channel
 - **Snapshot**: All formal votes happen on the [Grants Program Snapshot Space](https://snapshot.box/#/s:cowgrants.eth)
+- **GitHub**: Grant repositories are hosted on the [CoW DAO Grants](https://github.com/cowdao-grants) organization
 
 For questions about the program structure, please post in the grants section of the forum.
