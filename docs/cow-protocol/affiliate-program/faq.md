@@ -215,7 +215,7 @@ Affiliates: Go to [swap.cow.fi/#/account/affiliate](https://swap.cow.fi/#/accoun
 
 #### How often does the rewards data update?
 
-Rewards data update every 6 hours at 01:00, 07:00, 13:00, 17:00 (UTC). Data may be delayed and should not be considered real-time.
+Rewards data updates every 24 hours at 02:00 UTC. Data may be delayed and should not be considered real-time.
 
 #### Where can I see my expected rewards?
 
