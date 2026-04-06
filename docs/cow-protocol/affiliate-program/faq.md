@@ -106,7 +106,7 @@ No. Swaps that are economically non-meaningful, below minimum protocol-fee thres
 
 #### Is the Affiliate Program available on all chains?
 
-The program applies to all supported CoW Swap chains, except Ink and Sepolia.
+The program applies to all supported CoW Swap chains, except Sepolia.
 
 ### Payouts & Tracking
 
