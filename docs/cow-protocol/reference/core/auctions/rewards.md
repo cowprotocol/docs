@@ -39,7 +39,7 @@ The performance reward calculation can result in a negative value, in which case
 
 :::
 
-The performance reward is capped from above and below using the function $$\textrm{cap}(x) = \max(-c_l, \min(c_u, x))$$, where $$c_u$$ is equal to a chain-specific $$\beta$$ percent of the protocol fee (excluding partner fees) that the protocol earned from the trades in all solutions successfully executed onchain by the solver in that auction, and $$c_l$$ is chain-specific as well. $$\beta$$ and $$c_l$$ are determined by the following values:
+The performance reward is capped from above and below using the function $$\textrm{cap}(x) = \max(-c_l, \min(c_u, x))$$, where $$c_u$$ is equal to a chain-specific fraction $$\beta$$ of the protocol fee (excluding partner fees) that the protocol earned from the trades in all solutions successfully executed onchain by the solver in that auction, and $$c_l$$ is chain-specific as well. $$\beta$$ and $$c_l$$ are determined by the following values:
 
 - Ethereum mainnet, Arbitrum, and Base chain: $$\beta = 50\%$$, $$c_l = 0.010 \;\textrm{ETH}$$
 - Gnosis Chain: $$\beta = 100\%$$, $$10 \;\textrm{xDAI}$$
