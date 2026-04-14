@@ -1,0 +1,9 @@
+{
+    "position": 6,
+    "label": "Contracts",
+    "collapsible": true,
+    "collapsed": true,
+    "link": {
+        "type": "generated-index"
+    }
+}

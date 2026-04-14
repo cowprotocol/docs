@@ -1,0 +1,92 @@
+import { explorerLinks } from '/src/components/contract-addresses'
+
+# Periphery
+
+Peripheral contracts are those that are not necessary for CoW Protocol to function, but are used to enhance user experience.
+
+## Deployments
+
+### EthFlow
+
+**Documentation**: [`EthFlow`](periphery/eth-flow)  
+**Upgradeable**: No ❎  
+**GitHub**: [CoWSwapEthFlow.sol](https://github.com/cowprotocol/ethflowcontract/blob/main/src/CoWSwapEthFlow.sol)
+
+| Environment              | Address                                      | Networks                                                                                                                                                        |
+| ------------------------ | -------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Production (all chains) | `0xbA3cB449bD2B4ADddBc894D8697F5170800EAdeC` | {explorerLinks(["Ethereum","Gnosis","Arbitrum One","Base","Avalanche","Polygon","BNB","Linea","Plasma","Ink","Sepolia"], "0xbA3cB449bD2B4ADddBc894D8697F5170800EAdeC")} |
+| Staging (all chains)    | `0x04501b9b1D52e67f6862d157E00D13419D2D6E95` | {explorerLinks(["Ethereum","Gnosis","Arbitrum One","Base","Avalanche","Polygon","BNB","Linea","Plasma","Ink","Sepolia"], "0x04501b9b1D52e67f6862d157E00D13419D2D6E95")} |
+
+:::warning
+
+Sending native tokens to the EthFlow contract in the wrong chain leads to **irrecoverable loss of funds**!
+Be very careful to choose the right address in the chains you're currently using.
+
+:::
+
+### HooksTrampoline
+
+**Documentation**: [`HooksTrampoline`](periphery/hooks-trampoline)  
+**Upgradeable**: No ❎  
+**GitHub**: [HooksTrampoline.sol](https://github.com/cowprotocol/hooks-trampoline/blob/main/src/HooksTrampoline.sol)
+
+**Address**: `0x60Bf78233f48eC42eE3F101b9a05eC7878728006`
+
+:::warning
+
+You should not assume that the HooksTrampoline contract address will remain fixed. Each solver may choose to use this implementation or another one, as long as it fulfills the hook intent.
+
+:::
+
+#### Networks
+
+{explorerLinks([
+"Arbitrum One",
+"Avalanche",
+"Base",
+"BNB",
+"Ethereum",
+"Gnosis",
+"Ink",
+"Linea",
+"Optimism",
+"Plasma",
+"Polygon",
+"Sepolia",
+], "0x60Bf78233f48eC42eE3F101b9a05eC7878728006")}
+
+
+### ComposableCoW
+
+**Documentation**: [`ComposableCoW`](periphery/composable-cow)  
+**Upgradeable**: No ❎  
+**GitHub**: [ComposableCoW.sol](https://github.com/cowprotocol/composable-cow/blob/main/src/ComposableCoW.sol)
+
+**Address**: `0xfdaFc9d1902f4e0b84f65F49f244b32b31013b74`
+
+**Networks**:
+
+{explorerLinks([
+"Arbitrum One",
+"Avalanche",
+"Base",
+"BNB",
+"Ethereum",
+"Gnosis",
+"Ink",
+"Linea",
+"Plasma",
+"Polygon",
+"Sepolia",
+], "0xfdaFc9d1902f4e0b84f65F49f244b32b31013b74")}
+
+### CoWUidGenerator
+
+**Documentation**: [`CoWUidGenerator`](periphery/cow-uid-generator)  
+**Upgradeable**: No ❎
+
+| Network                                                                   | Address                                      |
+| ------------------------------------------------------------------------- | -------------------------------------------- |
+| {explorerLinks("Ethereum", "0xe84DCd8587287B997F51299430A396AD03aAEC06")} | `0xe84DCd8587287B997F51299430A396AD03aAEC06` |
+| {explorerLinks("Gnosis", "0xCA51403B524dF7dA6f9D6BFc64895AD833b5d711")}   | `0xCA51403B524dF7dA6f9D6BFc64895AD833b5d711` |
+| {explorerLinks("Base", "0x96ddDAC514d0799e34e3F642c5006852aD24CD68")}     | `0x96ddDAC514d0799e34e3F642c5006852aD24CD68` |

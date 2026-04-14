@@ -1,0 +1,13 @@
+:::danger Warning
+
+Ensure that the `receiver` address is correct. Fake CoW Swap websites have been observed and often substitute this parameter with their own address. 
+This **should be set to  0x0...0 or your signer's address** to indicate that the tokens will be sent to the order signer's address. 
+If you have set a custom receiver, you should verify that the address is correct.
+
+The user interface should display a warning if the `receiver` address is not the address from which you are signing the order.
+
+:::
+
+Be careful when signing an order. 
+All of the associated parameters are final and cannot be changed once the order is signed and submitted to the API. 
+If you make a mistake, you will need to cancel the order and create a new one.
