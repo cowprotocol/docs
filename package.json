@@ -1,4 +1,7 @@
 {
   "name": "docs-v2",
-  "private": true
+  "private": true,
+  "scripts": {
+    "build": "echo \"No build step required\""
+  }
 }
