@@ -7,15 +7,15 @@ sidebar_position: 1
 
 CoW DAO is on a mission to innovate the most user-protective products in Ethereum. 
 
-Currently, CoW DAO's two main products are [**CoW Protocol**](cow-protocol) and [CoW AMM](https://cow.fi/cow-amm), which it supports with development and marketing resources – including the [CoW Grants Program](https://grants.cow.fi), the [CoW Protocol Explorer](cow-protocol/tutorials/cow-explorer), and the [CoW Swap frontend](cow-protocol/tutorials/cow-swap).
+Currently, CoW DAO's two main products are [**CoW Protocol**](cow-protocol) and [CoW AMM](https://cow.finance/cow-amm), which it supports with development and marketing resources – including the [CoW Grants Program](https://grants.cow.finance), the [CoW Protocol Explorer](cow-protocol/tutorials/cow-explorer), and the [CoW Swap frontend](cow-protocol/tutorials/cow-swap).
 
 ## What is [CoW Protocol](cow-protocol)? 
 
 CoW Protocol is a fully permissionless trading protocol that leverages [fair combinatorial batch auctions](cow-protocol/concepts/introduction/fair-combinatorial-auction) as its price finding mechanism. CoW Protocol uses fair combinatorial auctions to maximize liquidity via Coincidence of Wants (CoWs) in addition to tapping all available on-chain liquidity whenever needed.
 
-## What is [CoW AMM](https://cow.fi/cow-amm)?
+## What is [CoW AMM](https://cow.finance/cow-amm)?
 
-CoW AMM is a new type of AMM built from the ground up to protect LPs from price exploitation in the form of [LVR](https://cow.fi/learn/what-is-loss-versus-rebalancing-lvr). Liquidity providers expect their tokens to earn yield, but most liquidity pools are actually not profitable after accounting for stale prices. Arbitrageurs exploit these stale prices at the expense of LPs. CoW AMM fixes LVR once and for all, with liquidity pools proven to outperform reference Balancer and Uniswap pools. 
+CoW AMM is a new type of AMM built from the ground up to protect LPs from price exploitation in the form of [LVR](https://cow.finance/learn/what-is-loss-versus-rebalancing-lvr). Liquidity providers expect their tokens to earn yield, but most liquidity pools are actually not profitable after accounting for stale prices. Arbitrageurs exploit these stale prices at the expense of LPs. CoW AMM fixes LVR once and for all, with liquidity pools proven to outperform reference Balancer and Uniswap pools. 
 
 ## [Governance](governance)
 

@@ -8,7 +8,7 @@ The purpose of this section is to provide an overview of the main API of the sol
 
 All the instances and solutions of the batch auction problem are formatted in [JSON](https://www.json.org/json-en.html). In this section, we describe these schemas.
 
-The api spec and schema can be found [here](https://docs.cow.fi/cow-protocol/reference/apis/solver).
+The api spec and schema can be found [here](https://docs.cow.finance/cow-protocol/reference/apis/solver).
 
 :::caution
 
@@ -164,7 +164,7 @@ The above entries should be interpreted as follows:
 This key maps to a list of all orders that were selected for execution. Each trade is a dictionary that contains the following entries:
 
 - `kind`: this is string of the set {"fulfillment", "jit"}, which corresponds to an order existing in the orderbook, or a just-in-time liquidity order placed by the solver, respectively.
-- `order`: in case of a "fulfillment" trade, the `uid` of the order is provided here as a string. In case it is a just-in-time liquidity order, the specifications of the order are explicitly given as a dictionary; more details can be found [here](https://docs.cow.fi/cow-protocol/reference/apis/solver).
+- `order`: in case of a "fulfillment" trade, the `uid` of the order is provided here as a string. In case it is a just-in-time liquidity order, the specifications of the order are explicitly given as a dictionary; more details can be found [here](https://docs.cow.finance/cow-protocol/reference/apis/solver).
 - `fee`: this entry exists only for "fullilment" trades, and maps to a stringified integer describing the fee of the order (either pre-signed or solver computed), denominated in the sell token.
 - `executedAmount`: this is a stringified integer corresponding to the sell amount (for sell orders) or the buy amount (for buy orders) that would get executed. Note that this is amount is "separate" from the "fee" amount that was described above; this, for example, means that for a sell "fulfillment" order, the trader will send a total of `fee + executedAmount` sell tokens to the contract. We also stress that it is the `executedAmount` where uniform clearing prices are being applied to.
 
@@ -174,7 +174,7 @@ This key maps to a list of all interactions that are executed in the proposed so
 
 - `kind`: this is a string of the set {"liquidity", "custom"}, that specifies whether the interaction refers to an AMM/liquidity order included in the input json sent to the solvers, or it is a custom interaction.
 - `internalize`: this is a boolean flag that specifies whether the interaction can be internalized or not. More details about internalizations can be found in the section right below.
-- Depending on the "kind", the rest of the keys are different, and the details and specifications of those can be found [here](https://docs.cow.fi/cow-protocol/reference/apis/solver).
+- Depending on the "kind", the rest of the keys are different, and the details and specifications of those can be found [here](https://docs.cow.finance/cow-protocol/reference/apis/solver).
 
 
 #### Using internal buffers

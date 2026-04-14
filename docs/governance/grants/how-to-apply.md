@@ -4,18 +4,18 @@ sidebar_position: 2
 
 # How to Apply for a Grant
 
-This page provides an overview of the application process. For complete details, please refer to the [official Process Guide](https://forum.cow.fi/t/for-cow-grantees-process-guide-feb-2025/2830/2) on the forum.
+This page provides an overview of the application process. For complete details, please refer to the [official Process Guide](https://forum.cow.finance/t/for-cow-grantees-process-guide-feb-2025/2830/2) on the forum.
 
 ## Application Steps
 
 1. **Review existing materials**:
-   - Read the [Process Guide](https://forum.cow.fi/t/for-cow-grantees-process-guide-feb-2025/2830/2) and [Grant Agreement Terms](https://bafkreifcftgaleyxkekkic36beyveiomqmlwyduyfh3s25zj3uyngr6ht4.ipfs.dweb.link/)
-   - Check the [Grants Program Forum Section](https://forum.cow.fi/c/cow-grants-program/10) for similar past proposals
-   - Review [RFPs](https://forum.cow.fi/tags/c/cow-grants-program/10/none/rfp) if you're looking for ideas
+   - Read the [Process Guide](https://forum.cow.finance/t/for-cow-grantees-process-guide-feb-2025/2830/2) and [Grant Agreement Terms](https://bafkreifcftgaleyxkekkic36beyveiomqmlwyduyfh3s25zj3uyngr6ht4.ipfs.dweb.link/)
+   - Check the [Grants Program Forum Section](https://forum.cow.finance/c/cow-grants-program/10) for similar past proposals
+   - Review [RFPs](https://forum.cow.finance/tags/c/cow-grants-program/10/none/rfp) if you're looking for ideas
 
 2. **Create a forum post**:
-   - Visit the [CoW Grants Program](https://forum.cow.fi/c/cow-grants-program/10) section
-   - Click "New Topic" and use the [Grant Application Template](https://forum.cow.fi/t/for-grantees-grant-application-template/2768/2)
+   - Visit the [CoW Grants Program](https://forum.cow.finance/c/cow-grants-program/10) section
+   - Click "New Topic" and use the [Grant Application Template](https://forum.cow.finance/t/for-grantees-grant-application-template/2768/2)
    - Be sure to include all required sections and a clear funding request
 
 3. **Engage with feedback**:
@@ -54,5 +54,5 @@ If your grant is approved:
 ## Contact and Support
 
 For questions about the grants program:
-- Post in the [CoW Grants Program](https://forum.cow.fi/c/cow-grants-program/10) forum section
+- Post in the [CoW Grants Program](https://forum.cow.finance/c/cow-grants-program/10) forum section
 - Visit the #grants channel in the [CoW Protocol Discord](https://discord.gg/cowprotocol)

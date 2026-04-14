@@ -10,13 +10,13 @@ The CoW Grants Program operates under a structured governance framework as defin
 
 The Grants Committee consists of five members:
 - **3 Community Members**:
-  - [@Kubesqrt](https://forum.cow.fi/u/kubesqrt)
-  - [@Chim9](https://forum.cow.fi/u/chim9)
-  - [@mfw78](https://forum.cow.fi/u/mfw78)
+  - [@Kubesqrt](https://forum.cow.finance/u/kubesqrt)
+  - [@Chim9](https://forum.cow.finance/u/chim9)
+  - [@mfw78](https://forum.cow.finance/u/mfw78)
 
 - **2 Core Team Members**:
-  - [@middleway.eth](https://forum.cow.fi/u/middleway.eth)
-  - [@Master_CoW](https://forum.cow.fi/u/Master_CoW)
+  - [@middleway.eth](https://forum.cow.finance/u/middleway.eth)
+  - [@Master_CoW](https://forum.cow.finance/u/Master_CoW)
 
 The committee operates as a Gnosis Safe with a 4/5 quorum required for approving grants.
 
@@ -66,7 +66,7 @@ For each approved grant:
 
 ## Communication and Resources
 
-- **Forum**: The [Grants Program Forum Section](https://forum.cow.fi/c/cow-grants-program/10) is the primary communication channel
+- **Forum**: The [Grants Program Forum Section](https://forum.cow.finance/c/cow-grants-program/10) is the primary communication channel
 - **Discord**: The #grants channel in the CoW Protocol Discord serves as a secondary communication channel
 - **Snapshot**: All formal votes happen on the [Grants Program Snapshot Space](https://snapshot.box/#/s:cowgrants.eth)
 

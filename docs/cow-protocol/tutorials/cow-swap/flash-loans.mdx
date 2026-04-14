@@ -6,7 +6,7 @@ sidebar_position: 6
 
 We’ll walk through a concrete example of a debt repayment using flash loans on Sepolia.
 
-There is an [example order](https://explorer.cow.fi/sepolia/orders/0x86ff28a37bf70c549edfe753d899d44307b1b4c3ae943c6f5bdfe271942fd4f135ed9a9d1122a1544e031cc92fcc7ea599e28d9c67dc66ab) for this particular case on Sepolia, including the [corresponding on-chain transaction](https://sepolia.etherscan.io/tx/0x6f4fc9b450e08dab0ab2d935e7c7dcade9e44e330e484657e5b1fadb6c6e8851).
+There is an [example order](https://explorer.cow.finance/sepolia/orders/0x86ff28a37bf70c549edfe753d899d44307b1b4c3ae943c6f5bdfe271942fd4f135ed9a9d1122a1544e031cc92fcc7ea599e28d9c67dc66ab) for this particular case on Sepolia, including the [corresponding on-chain transaction](https://sepolia.etherscan.io/tx/0x6f4fc9b450e08dab0ab2d935e7c7dcade9e44e330e484657e5b1fadb6c6e8851).
 The example was executed using an [automated script](https://github.com/cowprotocol/cow-flashloan-tester) that places and signs a flash loan order on the Sepolia network. The following sections of the tutorial include code snippets from this tool.
 
 ## Setup
@@ -202,11 +202,11 @@ To programmatically create and submit a CoW Swap order, we can use [cow-sdk](htt
   console.log('Order created, id: ', orderId);
 ```
 
-We've now placed our order on CoW Swap. You can track its progress on [CoW Explorer](https://explorer.cow.fi/). Here is an [example of a filled order](https://explorer.cow.fi/sepolia/orders/0x86ff28a37bf70c549edfe753d899d44307b1b4c3ae943c6f5bdfe271942fd4f135ed9a9d1122a1544e031cc92fcc7ea599e28d9c67dc66ab) corresponding to the particular case shown in this tutorial.
+We've now placed our order on CoW Swap. You can track its progress on [CoW Explorer](https://explorer.cow.finance/). Here is an [example of a filled order](https://explorer.cow.finance/sepolia/orders/0x86ff28a37bf70c549edfe753d899d44307b1b4c3ae943c6f5bdfe271942fd4f135ed9a9d1122a1544e031cc92fcc7ea599e28d9c67dc66ab) corresponding to the particular case shown in this tutorial.
 
 ## Setting the pre-signature of the order
 
-After placing the order, its pre-signature must be submitted by calling the [`setPresignature` function on the CoW Settlement contract](https://docs.cow.fi/cow-protocol/reference/contracts/core/settlement#setpresignature):
+After placing the order, its pre-signature must be submitted by calling the [`setPresignature` function on the CoW Settlement contract](https://docs.cow.finance/cow-protocol/reference/contracts/core/settlement#setpresignature):
 ```solidity
 function setPreSignature(bytes calldata orderUid, bool signed) external;
 ```

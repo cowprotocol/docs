@@ -12,8 +12,8 @@ CoW DAO documentation follows the [llmstxt.org](https://llmstxt.org/) standard, 
 
 | File | Description |
 |------|-------------|
-| [llms.txt](https://docs.cow.fi/llms.txt) | Structured overview with links to all documentation pages |
-| [llms-full.txt](https://docs.cow.fi/llms-full.txt) | Complete documentation content in a single file |
+| [llms.txt](https://docs.cow.finance/llms.txt) | Structured overview with links to all documentation pages |
+| [llms-full.txt](https://docs.cow.finance/llms-full.txt) | Complete documentation content in a single file |
 
 ## Usage
 
@@ -31,4 +31,4 @@ See [Windsurf docs](https://docs.windsurf.com/windsurf/memories) for more detail
 
 ### Other tools
 
-Any AI tool that supports the llms.txt standard can use these files. Point it to `https://docs.cow.fi/llms.txt` or `https://docs.cow.fi/llms-full.txt` depending on whether you need an overview or full content.
+Any AI tool that supports the llms.txt standard can use these files. Point it to `https://docs.cow.finance/llms.txt` or `https://docs.cow.finance/llms-full.txt` depending on whether you need an overview or full content.

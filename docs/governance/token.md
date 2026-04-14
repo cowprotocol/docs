@@ -75,7 +75,7 @@ The allocation of the initial 1 Billion COW token supply is as follows:
 
 vCOW is a separate token contract with token holders that was issued during the TGE. The contract exposes a “swap” function allowing the conversion of vCOW into COW at 1:1.
 
-vCOW tokens are a virtual representation of the [CoW Protocol](https://docs.cow.fi/governance/token)'s core token, COW, used to incentivize long-term engagement by certain stakeholders like advisors, team members, and early investors.
+vCOW tokens are a virtual representation of the [CoW Protocol](https://docs.cow.finance/governance/token)'s core token, COW, used to incentivize long-term engagement by certain stakeholders like advisors, team members, and early investors.
 
 vCOW tokens are subject to a vesting schedule, unlocking linearly over a period of 4 years that starts at the time of deployment.
 

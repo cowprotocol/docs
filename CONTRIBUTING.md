@@ -15,7 +15,7 @@ Before contributing, make sure you have the following installed:
 You can help other users in the community to solve their issues in the [CoW Protocol Discord].
 
 [CoW Protocol Discord]: https://discord.gg/cowprotocol
-[CoW Protocol Forums]: https://forum.cow.fi
+[CoW Protocol Forums]: https://forum.cow.finance
 
 ## Opening an issue
 

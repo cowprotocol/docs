@@ -7,7 +7,7 @@ draft: true
 
 ## Getting notified about the ranking
 
-A very useful functionality provided by the driver is the "notify" endpoint, which notifies all solvers participating in an auction about the ranking, once the bidding has closed, i.e., once all solutions have been submitted and have been ranked. (To find out about how solutions are ranked, see [this](https://docs.cow.fi/off-chain-services/in-depth-solver-specification/solver-auction-and-rewards) section).
+A very useful functionality provided by the driver is the "notify" endpoint, which notifies all solvers participating in an auction about the ranking, once the bidding has closed, i.e., once all solutions have been submitted and have been ranked. (To find out about how solutions are ranked, see [this](https://docs.cow.finance/off-chain-services/in-depth-solver-specification/solver-auction-and-rewards) section).
 
 The implementation details of the notify endpoint can be found in this PR:
 [https://github.com/cowprotocol/services/pull/684](https://github.com/cowprotocol/services/pull/684)

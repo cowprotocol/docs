@@ -14,7 +14,7 @@
         },
         {
             "source": "/cow-sdk/cow-api",
-            "destination": "https://learn.cow.fi/tutorial/getting-started-order",
+            "destination": "https://learn.cow.finance/tutorial/getting-started-order",
             "statusCode": 301
         },
         {
@@ -24,7 +24,7 @@
         },
         {
             "source": "/cow-sdk/order-meta-data-appdata",
-            "destination": "https://learn.cow.fi/tutorial/simple-app-data",
+            "destination": "https://learn.cow.finance/tutorial/simple-app-data",
             "statusCode": 301
         },
         {
@@ -54,7 +54,7 @@
         },
         {
             "source": "/front-end/creating-app-ids",
-            "destination": "https://learn.cow.fi/tutorial/simple-app-data",
+            "destination": "https://learn.cow.finance/tutorial/simple-app-data",
             "statusCode": 301
         },
         {
@@ -179,12 +179,12 @@
         },
         {
             "source": "/tutorials/onchain-order-cancellation",
-            "destination": "https://learn.cow.fi/tutorial/cancel-on-chain-order",
+            "destination": "https://learn.cow.finance/tutorial/cancel-on-chain-order",
             "statusCode": 301
         },
         {
             "source": "/tutorials/submit-limit-orders-via-api",
-            "destination": "https://learn.cow.fi/tutorial/submit-order",
+            "destination": "https://learn.cow.finance/tutorial/submit-order",
             "statusCode": 301
         },
         {
@@ -204,7 +204,7 @@
         },
         {
             "source": "/cow-sdk/order-meta-data-appdata/download-a-document-given-the-appdata",
-            "destination": "https://learn.cow.fi/tutorial/view-app-data",
+            "destination": "https://learn.cow.finance/tutorial/view-app-data",
             "statusCode": 301
         },
         {
@@ -219,17 +219,17 @@
         },
         {
             "source": "/cow-sdk/sign-and-post-orders/bonus-show-link-to-explorer",
-            "destination": "https://learn.cow.fi/tutorial/view-order",
+            "destination": "https://learn.cow.finance/tutorial/view-order",
             "statusCode": 301
         },
         {
             "source": "/cow-sdk/sign-and-post-orders/enable-tokens",
-            "destination": "https://learn.cow.fi/tutorial/approve-sell-token-order",
+            "destination": "https://learn.cow.finance/tutorial/approve-sell-token-order",
             "statusCode": 301
         },
         {
             "source": "/cow-sdk/sign-and-post-orders/step-1-get-market-price",
-            "destination": "https://learn.cow.fi/tutorial/quote-order",
+            "destination": "https://learn.cow.finance/tutorial/quote-order",
             "statusCode": 301
         },
         {
@@ -239,7 +239,7 @@
         },
         {
             "source": "/cow-sdk/sign-and-post-orders/step-3-post-the-signed-order-to-the-api",
-            "destination": "https://learn.cow.fi/tutorial/submit-order",
+            "destination": "https://learn.cow.finance/tutorial/submit-order",
             "statusCode": 301
         },
         {
@@ -409,7 +409,7 @@
         },
         {
             "source": "/tutorials/cowswap-trades-with-a-gnosis-safe-wallet/conclusion",
-            "destination": "https://learn.cow.fi/tutorial/create-pre-signed-order",
+            "destination": "https://learn.cow.finance/tutorial/create-pre-signed-order",
             "statusCode": 301
         },
         {
@@ -449,7 +449,7 @@
         },
         {
             "source": "/tutorials/how-to-place-erc-1271-smart-contract-orders/smart-orders",
-            "destination": "https://learn.cow.fi/tutorial/create-pre-signed-order",
+            "destination": "https://learn.cow.finance/tutorial/create-pre-signed-order",
             "permanent": false
         },
         {
@@ -464,7 +464,7 @@
         },
         {
             "source": "/tutorials/how-to-submit-orders-via-the-api/2.-query-the-fee-endpoint",
-            "destination": "https://learn.cow.fi/tutorial/quote-order",
+            "destination": "https://learn.cow.finance/tutorial/quote-order",
             "statusCode": 301
         },
         {
@@ -474,17 +474,17 @@
         },
         {
             "source": "/tutorials/how-to-submit-orders-via-the-api/5.-placing-the-order",
-            "destination": "https://learn.cow.fi/tutorial/submit-order",
+            "destination": "https://learn.cow.finance/tutorial/submit-order",
             "statusCode": 301
         },
         {
             "source": "/tutorials/how-to-submit-orders-via-the-api/6.-checking-order-status",
-            "destination": "https://learn.cow.fi/tutorial/view-order",
+            "destination": "https://learn.cow.finance/tutorial/view-order",
             "statusCode": 301
         },
         {
             "source": "/tutorials/onchain-order-cancellation/submitting-invalidation",
-            "destination": "https://learn.cow.fi/tutorial/cancel-on-chain-order",
+            "destination": "https://learn.cow.finance/tutorial/cancel-on-chain-order",
             "statusCode": 301
         },
         {
@@ -494,7 +494,7 @@
         },
         {
             "source": "/tutorials/submit-limit-orders-via-api/general-overview",
-            "destination": "https://learn.cow.fi/tutorial/submit-order",
+            "destination": "https://learn.cow.finance/tutorial/submit-order",
             "statusCode": 301
         },
         {
@@ -504,7 +504,7 @@
         },
         {
             "source": "/tutorials/submit-limit-orders-via-api/submitting-the-limit-order",
-            "destination": "https://learn.cow.fi/tutorial/submit-order",
+            "destination": "https://learn.cow.finance/tutorial/submit-order",
             "statusCode": 301
         },
         {
@@ -514,7 +514,7 @@
         },
         {
             "source": "/front-end/creating-app-ids/create-the-order-meta-data-file/appcode",
-            "destination": "https://learn.cow.fi/tutorial/simple-app-data",
+            "destination": "https://learn.cow.finance/tutorial/simple-app-data",
             "statusCode": 301
         },
         {
@@ -524,17 +524,17 @@
         },
         {
             "source": "/overview/cow-hooks/cow-hooks-example/conclusion",
-            "destination": "https://learn.cow.fi/tutorial/getting-started-order",
+            "destination": "https://learn.cow.finance/tutorial/getting-started-order",
             "permanent": false
         },
         {
             "source": "/overview/cow-hooks/cow-hooks-example/configuration",
-            "destination": "https://learn.cow.fi/tutorial/getting-started-order",
+            "destination": "https://learn.cow.finance/tutorial/getting-started-order",
             "permanent": false
         },
         {
             "source": "/overview/cow-hooks/cow-hooks-example/permit-swap-and-bridge-cow-hook",
-            "destination": "https://learn.cow.fi/tutorial/getting-started-order",
+            "destination": "https://learn.cow.finance/tutorial/getting-started-order",
             "permanent": false
         },
         {
@@ -549,17 +549,17 @@
         },
         {
             "source": "/tutorials/submit-limit-orders-via-api/submitting-the-limit-order/2.-signing-the-limit-order",
-            "destination": "https://learn.cow.fi/tutorial/sign-order",
+            "destination": "https://learn.cow.finance/tutorial/sign-order",
             "statusCode": 301
         },
         {
             "source": "/tutorials/submit-limit-orders-via-api/submitting-the-limit-order/3.-placing-the-limit-order",
-            "destination": "https://learn.cow.fi/tutorial/submit-order",
+            "destination": "https://learn.cow.finance/tutorial/submit-order",
             "statusCode": 301
         },
         {
             "source": "/tutorials/submit-limit-orders-via-api/submitting-the-limit-order/4.-checking-limit-order-status",
-            "destination": "https://learn.cow.fi/tutorial/view-order",
+            "destination": "https://learn.cow.finance/tutorial/view-order",
             "statusCode": 301
         },
         {

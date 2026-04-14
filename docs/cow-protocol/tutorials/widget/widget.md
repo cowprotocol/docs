@@ -8,7 +8,7 @@ Integrate the power of `CoW Swap` into your product!
 With the widget, you can create an incredible trading interface. Specify the required pair of currencies, customize the
 look and much more!
 
-Create your own widget using the configurator <https://widget.cow.fi>.
+Create your own widget using the configurator <https://widget.cow.finance>.
 
 ![Demo](/img/tutorials/widget.png)
 
@@ -47,11 +47,11 @@ You must specify the `appCode` parameter when initializing the widget. This para
 orders.  
 The key must be a UTF8 string of up to 50 chars.  
 It will be a part of orders meta-data, see more in
-the [CoW Protocol Docs](https://docs.cow.fi/front-end/creating-app-ids/create-the-order-meta-data-file/appcode).
+the [CoW Protocol Docs](https://docs.cow.finance/front-end/creating-app-ids/create-the-order-meta-data-file/appcode).
 
 ## Partner fee
 
-You may participate in the Partner Fee program to collect fee on [Market order](https://docs.cow.fi/cow-protocol/concepts/order-types/market-orders) trades executed by your users through the Widget by
+You may participate in the Partner Fee program to collect fee on [Market order](https://docs.cow.finance/cow-protocol/concepts/order-types/market-orders) trades executed by your users through the Widget by
 adding the following parameter to your Widget:
 
 ```typescript
@@ -218,7 +218,7 @@ Once you have set up the partner fee, you will see the fee in the CoW Swap UI:
 
 ![Partner fee](/img/tutorials/partner-fee.png)
 
-[Terms and conditions](https://cow.fi/widget/terms-and-conditions) apply.
+[Terms and conditions](https://cow.finance/widget/terms-and-conditions) apply.
 
 See [here](/governance/fees/partner-fee) for detailed info about fee calculation and examples.
 
@@ -352,7 +352,7 @@ createCowSwapWidget(document.getElementById('cowswap-widget'), {
 | `chainId`                             | `number`               | 1                      | The blockchain ID on which the trade will take place. Currently supported: 1 (Mainnet), 100 (Gnosis chain), 42161 (Arbitrum one), 8453 (Base), 11155111 (Sepolia).                                                                                                                                                                                                                           |
 | `tradeType`                           | `TradeType`            | 'swap'                 | The type of trade. Can be `swap` or `limit` or `advanced`.                                                                                                                                                                                                                                                                                                                                   |
 | `env`                                 | `CowSwapWidgetEnv`     | 'prod'                 | The environment of the widget (`local` , `prod` , `dev` , `pr`). See [`COWSWAP_URLS`](https://github.com/cowprotocol/cowswap/blob/develop/libs/widget-lib/src/consts.ts) const value for urls.                                                                                                                                                                                               |
-| `sell`                                | `TradeAsset`           | Same as in swap.cow.fi | An object containing information about the sell asset. Example: `{ asset: 'WBTC', amount: 12 }` or `{ asset: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48' }`.                                                                                                                                                                                                                                |
+| `sell`                                | `TradeAsset`           | Same as in swap.cow.finance | An object containing information about the sell asset. Example: `{ asset: 'WBTC', amount: 12 }` or `{ asset: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48' }`.                                                                                                                                                                                                                                |
 | `buy`                                 | `TradeAsset`           | ---                    | An object containing information about the buy asset. Example: `{ asset: 'WBTC', amount: 12 }` or `{ asset: '0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48' }`.                                                                                                                                                                                                                                 |
 | `theme`                               | `CowSwapTheme`         | 'light'                | The theme of the widget (`'dark'` for dark theme or `'light'` for light theme). It is also possible to set your own colors (`CowSwapWidgetPalette`). See [Custom theme](#custom-theme) section for more details.                                                                                                                                                                             |
 | `sounds`                              | `CowSwapWidgetSounds`  | ---                    | The famous MOOO! sound can be changed to something else, just provide a link to a media file (mp3 or any other audio format supported by your browser). You can also specify a value of `null` to disable the sound.                                                                                                                                                                         |
@@ -407,7 +407,7 @@ const params: CowSwapWidgetParams = {
 createCowSwapWidget(widgetContainer, { params })
 ```
 
-Try it yourself: <https://widget.cow.fi>.
+Try it yourself: <https://widget.cow.finance>.
 
 ![Custom theme](/img/tutorials/custom-theme.png)
 
@@ -434,7 +434,7 @@ import { createCowSwapWidget, CowSwapWidgetParams } from '@cowprotocol/widget-li
 
 const container = document.getElementById('cowswap-widget')
 
-const params: CowSwapWidgetParams = { tokenLists: ['https://files.cow.fi/tokens/CowSwap.json'] }
+const params: CowSwapWidgetParams = { tokenLists: ['https://files.cow.finance/tokens/CowSwap.json'] }
 
 createCowSwapWidget(container, { params })
 ```
@@ -533,7 +533,7 @@ iframe.
 An example of URL:
 
 ```
-https://swap.cow.fi/#/100/swap/WXDAI/GNO?sellAmount=200&theme=dark
+https://swap.cow.finance/#/100/swap/WXDAI/GNO?sellAmount=200&theme=dark
 ```
 
 ## Customization
@@ -548,7 +548,7 @@ const container = document.getElementById('cowswap-widget')
 const params: CowSwapWidgetParams = {
   sounds: {
     // The sound that will be played when the order is placed
-    postOrder: 'https://swap.cow.fi/audio/send-winterTheme.mp3',
+    postOrder: 'https://swap.cow.finance/audio/send-winterTheme.mp3',
     // Nothing will be played when the order is executed
     orderExecuted: null,
     // Since `orderError` is not specified, the default sound will be played
@@ -568,7 +568,7 @@ import { createCowSwapWidget, CowSwapWidgetParams } from '@cowprotocol/widget-li
 
 const container = document.getElementById('cowswap-widget')
 
-const params: CowSwapWidgetParams = { images: { emptyOrders: 'https://cow.fi/images/cowamm-illustration-lvr.svg' } }
+const params: CowSwapWidgetParams = { images: { emptyOrders: 'https://cow.finance/images/cowamm-illustration-lvr.svg' } }
 
 createCowSwapWidget(container, { params })
 ```

@@ -12,7 +12,7 @@ The batch auction details page provides:
 - A list of all orders that were settled in the batch auction
 - A graph showing the routing within the batch auction
 
-Let's take a look at the example batch auction [`0x35f6...0fac`](https://explorer.cow.fi/tx/0x35f65ec4a9d84e27bdb6844f13e7cb72d9de62e6ef95855181bf577d69300fac) below...
+Let's take a look at the example batch auction [`0x35f6...0fac`](https://explorer.cow.finance/tx/0x35f65ec4a9d84e27bdb6844f13e7cb72d9de62e6ef95855181bf577d69300fac) below...
 
 ## Orders
 

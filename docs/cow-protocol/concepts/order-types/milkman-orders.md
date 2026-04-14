@@ -4,7 +4,7 @@ sidebar_position: 5
 
 # Milkman orders
 
-Milkman is an order placement mechanism developed by [Yearn Finance](https://yearn.fi/) in collaboration with CoW Protocol through the [CoW DAO Grants program](https://grants.cow.fi/). 
+Milkman is an order placement mechanism developed by [Yearn Finance](https://yearn.fi/) in collaboration with CoW Protocol through the [CoW DAO Grants program](https://grants.cow.finance/). 
 
 The contract allows users to utilize a price feed for their orders rather than specifying a fixed price.
 This means orders can execute at a fair market price even far into the future, making Milkman a popular choice for DAOs and governance-dependent trades. 

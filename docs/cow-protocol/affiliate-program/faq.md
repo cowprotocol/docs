@@ -94,7 +94,7 @@ No. A wallet is still considered "new" if it has not traded directly on CoW Swap
 
 #### Are there jurisdiction restrictions?
 
-Yes. Participation is prohibited if you are located in, or a citizen of, any jurisdiction prohibited by the [CoW Swap Terms](https://cow.fi/legal/cowswap-terms).
+Yes. Participation is prohibited if you are located in, or a citizen of, any jurisdiction prohibited by the [CoW Swap Terms](https://cow.finance/legal/cowswap-terms).
 
 #### What counts as a qualifying volume?
 
@@ -205,13 +205,13 @@ However, the program reserves the right to disqualify participants and deny any 
 
 #### Is there an affiliate dashboard?
 
-Yes. You can see the affiliate dashboard here: [swap.cow.fi/#/account/affiliate](https://swap.cow.fi/#/account/affiliate).
+Yes. You can see the affiliate dashboard here: [swap.cow.finance/#/account/affiliate](https://swap.cow.finance/#/account/affiliate).
 
 #### What can I track as an affiliate or trader?
 
-Traders: Go to [swap.cow.fi/#/account/my-rewards](https://swap.cow.fi/#/account/my-rewards) to see your all-time earnings.
+Traders: Go to [swap.cow.finance/#/account/my-rewards](https://swap.cow.finance/#/account/my-rewards) to see your all-time earnings.
 
-Affiliates: Go to [swap.cow.fi/#/account/affiliate](https://swap.cow.fi/#/account/affiliate) to see your referred volume, referred traders, and all-time earnings.
+Affiliates: Go to [swap.cow.finance/#/account/affiliate](https://swap.cow.finance/#/account/affiliate) to see your referred volume, referred traders, and all-time earnings.
 
 #### How often does the rewards data update?
 
@@ -219,12 +219,12 @@ Rewards data updates every 24 hours at 02:00 UTC. Data may be delayed and should
 
 #### Where can I see my expected rewards?
 
-Traders: Visit [swap.cow.fi/#/account/my-rewards](https://swap.cow.fi/#/account/my-rewards) to see:
+Traders: Visit [swap.cow.finance/#/account/my-rewards](https://swap.cow.finance/#/account/my-rewards) to see:
 
 Expected rewards for the next payout cycle  
 Past payout amounts
 
-Affiliates: Visit [swap.cow.fi/#/account/affiliate](https://swap.cow.fi/#/account/affiliate) to see:
+Affiliates: Visit [swap.cow.finance/#/account/affiliate](https://swap.cow.finance/#/account/affiliate) to see:
 
 Expected rewards for the next payout cycle  
 Past payout amounts

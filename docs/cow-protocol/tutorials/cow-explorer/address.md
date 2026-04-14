@@ -9,7 +9,7 @@ A user may want to see the details of all orders that they have placed.
 When searching for their address, they will be presented with an overview of all orders that they have placed.
 
 For example, below the user has searched for their address [`0x2557...3af7`](
-https://explorer.cow.fi/gc/address/0x2557ed03e34f0141722a643589f007836a683af7) that contains multiple orders that were placed on CoW Protocol on Gnosis Chain:
+https://explorer.cow.finance/gc/address/0x2557ed03e34f0141722a643589f007836a683af7) that contains multiple orders that were placed on CoW Protocol on Gnosis Chain:
 
 ![User address overview](/img/explorer/address_overview.png)
 
