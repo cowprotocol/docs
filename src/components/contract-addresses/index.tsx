@@ -1,0 +1,71 @@
+import Link from '@docusaurus/Link';
+import React from 'react';
+
+export const explorerByChain = {
+  "Ethereum": "https://etherscan.io",
+  "Sepolia": "https://sepolia.etherscan.io",
+  "Gnosis": "https://gnosisscan.io",
+  "Base": "https://basescan.org",
+  "Arbitrum One": "https://arbiscan.io",
+  "Avalanche": "https://snowscan.xyz",
+  "Polygon": "https://polygonscan.com",
+  "BNB": "https://bscscan.com",
+  "Linea": "https://lineascan.build",
+  "Plasma": "https://plasmascan.to",
+  "Optimism": "https://optimistic.etherscan.io",
+  "Ink": "https://explorer.inkonchain.com",
+} as const;
+
+export type ChainName = keyof typeof explorerByChain;
+
+interface ExplorerUrlOptions {
+  /**
+   * Which parameters to append after the Explorer URL. For example, #code
+   * points to the contract code.
+   */
+  urlTrailing?: string | undefined,
+}
+export function explorerUrl(chain: ChainName, address: string, params?: ExplorerUrlOptions) {
+  const urlTrailing = params?.urlTrailing ?? "";
+  if (!(chain in explorerByChain)) {
+    throw new Error(`Explorer URL for chain ${chain} is not known`);
+  }
+  return `${explorerByChain[chain]}/address/${address}/${urlTrailing}`;
+}
+
+interface ExplorerLinksOptions {
+  /**
+   * Which string or React component to insert between links.
+   * Defaults to the string ", ".
+   */
+  separator?: React.ReactNode | undefined;
+  /**
+   * Which parameters to append after the URL. For example, #code points to the
+   * contract code.
+   * Defaults to #code.
+   */
+  urlTrailing?: string | undefined,
+}
+/**
+ * Given an array of chains and an address, it returns a component with all the
+ * chains separated by a comma. All chain names are links to that chain's
+ * explorer for the given address.
+ */
+export function explorerLinks(chainsParam: ChainName[] | ChainName, address: string, options?: ExplorerLinksOptions): React.ReactNode {
+  const chains = asArray(chainsParam);
+  const separator = options?.separator ?? ", ";
+  const urlTrailing = options?.urlTrailing ?? "#code";
+  return chains.reduce(
+    (acc, chain) => {
+      if (acc.length) {
+        acc.push(separator)
+      }
+      acc.push(<Link to={explorerUrl(chain, address, { urlTrailing })}>{chain}</Link>)
+      return acc
+    }
+    , []);
+}
+
+function asArray<T>(arr: T | T[]): T[] {
+  return Array.isArray(arr) ? arr : [arr];
+}
