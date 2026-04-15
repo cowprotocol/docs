@@ -123,7 +123,7 @@ Every week on Tuesday your solver will receive payments and rewards for settling
 
 We advise using a single rewards address that is available on all networks.
 
-[You can find more information about how we calculate and distribute rewards here.](https://docs.cow.fi/cow-protocol/reference/core/auctions/rewards). The accounting process is documented in detail [here](https://docs.cow.fi/cow-protocol/reference/core/auctions/accounting).
+[You can find more information about how we calculate and distribute rewards](https://docs.cow.fi/cow-protocol/reference/core/auctions/rewards). [The accounting process for auctions is documented in detail](https://docs.cow.fi/cow-protocol/reference/core/auctions/accounting).
 
 ## 8. Moving to other networks
 After joining the solver competition on Arbitrum we can enable your solver on other chains relatively soon. For this we will go through the same process of generating addresses, vouching for them, and whitelisting them. For each new chain that we deploy your solver on we will need:
