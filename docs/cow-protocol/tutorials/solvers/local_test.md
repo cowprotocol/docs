@@ -23,7 +23,7 @@ The repository where all the backend services can be found is this one: [https:/
 For the autopilot, we run
 
 ```
-    cargo run --bin autopilot -- --native-price-estimators "baseline|http://driver/baseline" --skip-event-sync true --node-url $NODE_URL --shadow https://api.cow.fi/mainnet --drivers "mysolver1|http://localhost:11088/mysolver1"
+    cargo run --bin autopilot -- --native-price-estimators "Driver|baseline|http://driver/baseline" --skip-event-sync true --node-url $NODE_URL --shadow https://api.cow.fi/mainnet --drivers "mysolver1|http://localhost:11088/mysolver1|0x0000000000000000000000000000000000000000|0"
 ```
 
 where one needs to set the NODE_URL appropriately (e.g., a free Infura endpoint).
