@@ -1,0 +1,106 @@
+# Widget Integration
+
+The CoW Widget is the fastest way to integrate CoW Protocol's trading functionality into your application. It provides a complete, pre-built trading interface that can be embedded with just a few lines of code.
+
+## Overview
+
+The CoW Widget is a ready-to-use React component that provides the full CoW Swap trading experience. It's perfect for projects that want to add trading functionality quickly without building a custom interface from scratch.
+
+## Key Features
+
+- **Zero configuration**: Works out-of-the-box with minimal setup
+- **Fully responsive**: Adapts to different screen sizes
+- **Customizable themes**: Light, dark, and custom color schemes
+- **Partner fees**: Earn revenue on trades through your integration
+- **Multi-network support**: All CoW Protocol-enabled networks
+- **Wallet integration**: Connect to existing wallet providers or standalone mode
+
+## Quick Start Example
+
+```typescript
+import { createCowSwapWidget, CowSwapWidgetParams } from '@cowprotocol/widget-lib'
+
+// HTML element where the widget will be rendered
+const widgetContainer = document.getElementById('cowswap-widget')
+
+const params: CowSwapWidgetParams = {
+  appCode: 'YOUR-APP-NAME', // Required: identifies your app
+  width: 600,
+  height: 640,
+  sell: { asset: 'USDC' },
+  buy: { asset: 'WETH', amount: '0.1' },
+  theme: 'light', // 'light' | 'dark' | custom theme object
+  partnerFee: {
+    bps: 50, // 0.5% fee
+    recipient: '0xYourFeeRecipientAddress',
+  },
+}
+
+createCowSwapWidget(widgetContainer, { params })
+```
+
+## Installation
+
+```bash
+# Install the widget library
+npm install @cowprotocol/widget-lib
+```
+
+## Configuration Options
+
+The widget supports extensive customization:
+
+- **Trading pairs**: Pre-select sell/buy tokens and amounts
+- **Partner fees**: Earn revenue on trades (up to 1%)
+- **Custom themes**: Match your app's branding
+- **Token lists**: Use custom token lists
+- **Wallet integration**: Connect to your app's wallet or standalone mode
+- **Event handling**: Listen to trading events and notifications
+
+## Example with Custom Theme
+
+```typescript
+import { createCowSwapWidget, CowSwapWidgetPalette } from '@cowprotocol/widget-lib'
+
+const customTheme: CowSwapWidgetPalette = {
+  baseTheme: 'light',
+  primary: '#00ff85',
+  background: '#f7f7f7',
+  paper: '#1a4435',
+  text: '#ffffff',
+}
+
+const params = {
+  appCode: 'YOUR-APP-NAME',
+  theme: customTheme,
+  // ... other params
+}
+
+createCowSwapWidget(widgetContainer, { params })
+```
+
+## When to Use the Widget
+
+- **Rapid integration**: Get trading functionality live in minutes
+- **Standard UI/UX**: When CoW Swap's interface meets your needs
+- **Minimal development**: Perfect for MVPs and quick prototypes
+- **Partner fees**: Easy way to monetize trading volume
+
+## Widget Configurator
+
+Use the interactive configurator at [widget.cow.fi](https://widget.cow.fi) to:
+- Preview different configurations
+- Generate code snippets
+- Test custom themes
+- Configure partner fees
+
+## Next Steps
+
+For detailed configuration options, event handling, and advanced customization, see the [Widget Tutorial](../tutorials/widget/widget.md).
+
+## Resources
+
+- **[Widget Configurator](https://widget.cow.fi)** - Interactive configuration tool
+- **[Complete Widget Guide](../tutorials/widget/widget.md)** - Detailed documentation
+- **[GitHub Repository](https://github.com/cowprotocol/cowswap)** - Source code
+- **[Partner Fee Program](/governance/fees/partner-fee)** - Revenue sharing details
