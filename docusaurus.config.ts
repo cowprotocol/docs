@@ -11,7 +11,7 @@ const config: Config = {
   favicon: 'img/favicon.png',
 
   // Set the production url of your site here
-  url: 'https://docs.cow.finance',
+  url: 'https://docs.cow.fi',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
@@ -139,7 +139,7 @@ const config: Config = {
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'twitter:site', content: '@CoWSwap' },
       { name: 'twitter:title', content: 'Documentation - CoW DAO' },
-      { name: 'twitter:image', content: 'https://docs.cow.finance/img/og-meta-cowprotocol.png' },
+      { name: 'twitter:image', content: 'https://docs.cow.fi/img/og-meta-cowprotocol.png' },
     ],
     // Replace with your project's social card
     image: 'img/og-meta-cowprotocol.png',
@@ -169,7 +169,7 @@ const config: Config = {
           items: [
             {
               label: 'Forum',
-              href: 'https://forum.cow.finance',
+              href: 'https://forum.cow.fi',
             },
             {
               label: 'Discord',
@@ -186,7 +186,7 @@ const config: Config = {
           items: [
             {
               label: 'Website',
-              href: 'https://cow.finance',
+              href: 'https://cow.fi',
             },
             {
               label: 'GitHub',

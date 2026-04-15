@@ -24,7 +24,7 @@ import CoWExplorerImg from '/img/cowswap/bridging/cow-explorer.png'
 
 # Cross-chain swaps
 
-The **Cross-chain swaps** feature on [swap.cow.finance](https://swap.cow.finance) lets you swap a token on one network and receive a different token on another network — all in one seamless transaction.
+The **Cross-chain swaps** feature on [swap.cow.fi](https://swap.cow.fi) lets you swap a token on one network and receive a different token on another network — all in one seamless transaction.
 
 This guide will walk you through the process step-by-step, from setting up your trade to tracking it in the explorer.
 
@@ -154,13 +154,13 @@ In the Swap form you can see a detailed breakdown of the expected swap and bridg
 
 ## 5. Understanding the Account Proxy
 
-The [**Account Proxy**](https://swap.cow.finance/#/1/account-proxy) (also known as **CoW Shed**) is a helper contract that powers advanced features like [**CoW Hooks**](/cow-protocol/reference/core/intents/hooks).
+The [**Account Proxy**](https://swap.cow.fi/#/1/account-proxy) (also known as **CoW Shed**) is a helper contract that powers advanced features like [**CoW Hooks**](/cow-protocol/reference/core/intents/hooks).
 
 * **CoW Hooks** allow solvers to execute additional Ethereum calls before or after your order is settled.
 * Your funds are safe:
 If anything goes wrong during execution, your assets will be sent to your personal proxy account. You can withdraw them to your wallet at any time.
 
->More detailed information can be found in [Account Proxy page](https://swap.cow.finance/#/1/account-proxy/help).
+>More detailed information can be found in [Account Proxy page](https://swap.cow.fi/#/1/account-proxy/help).
 
 ---
 
@@ -185,7 +185,7 @@ You can only soft‑cancel your order during the swap phase. Once the swap has e
 2. Once the swap completes:
 
 * The order goes into 'Bridging in progress' status.
-* The received amount is sent to your [**Account Proxy**](https://swap.cow.finance/#/1/account-proxy).
+* The received amount is sent to your [**Account Proxy**](https://swap.cow.fi/#/1/account-proxy).
 * From there, it’s deposited into the bridge provider’s smart contract.
 * These steps happen within **one transaction**.
 
@@ -202,7 +202,7 @@ You can only soft‑cancel your order during the swap phase. Once the swap has e
 
 :::note
 
-**Account modal** displays only last 10 orders. For your full order history, visit [CoW Explorer](https://explorer.cow.finance)
+**Account modal** displays only last 10 orders. For your full order history, visit [CoW Explorer](https://explorer.cow.fi)
 
 :::
 
@@ -212,13 +212,13 @@ You can only soft‑cancel your order during the swap phase. Once the swap has e
 
 In rare cases, the bridging step may fail. Don’t worry — your funds are safe.
 
-Most bridge providers will automatically send your funds back to your [**Account Proxy**](https://swap.cow.finance/#/1/account-proxy) once the deposit expires.
+Most bridge providers will automatically send your funds back to your [**Account Proxy**](https://swap.cow.fi/#/1/account-proxy) once the deposit expires.
 
 Expiration time varies by provider. For example, **Across** provider usually refunds after \~3 hours if the deposit hasn’t been completed.
 
 Once the refund arrives in your Account Proxy:
 
-* Open the CoW Swap [**Account Proxy**](https://swap.cow.finance/#/1/account-proxy/help) page. 
+* Open the CoW Swap [**Account Proxy**](https://swap.cow.fi/#/1/account-proxy/help) page. 
 * In the list of Account Proxy versions, select the latest Account Proxy version (unless you’ve been told to use a different one).
 * Open details of the required Account Proxy version.
 * Choose a token and recover the funds to your wallet.
@@ -230,7 +230,7 @@ Once the refund arrives in your Account Proxy:
 
 ## 8. Tracking Your Orders in the Explorer
 
-You can view all your Cross-chain swaps on [explorer.cow.finance](https://explorer.cow.finance).
+You can view all your Cross-chain swaps on [explorer.cow.fi](https://explorer.cow.fi).
 
 * See orders in any state — **In Progress**, **Completed**, **Cancelled**, and more.
 * Filter results and view full details for each trade.

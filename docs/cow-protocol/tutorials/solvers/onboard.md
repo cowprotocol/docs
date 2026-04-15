@@ -5,7 +5,7 @@ sidebar_position: 1
 # Joining The CoW Protocol Solver Competition
 > **_NOTE:_** In order to get connected to the shadow competition, feel free to reach out to an admin of the ["CoW Swap Solvers"](https://t.me/+2Z_-DW57meA1MDlh) group on Telegram.
 
-> **_NOTE:_** Most of this document assumes that you will be joining the solver competition under the CoW DAO bonding pool. If you were to set up your own bonding pool then most of the information in this document is either optional or irrelevant. To join the solver competition under your own bonding pool refer to [this document](https://docs.cow.finance/cow-protocol/reference/core/auctions/bonding-pools) and reach out to help set up the bonding pool and whitelist your solver's address.
+> **_NOTE:_** Most of this document assumes that you will be joining the solver competition under the CoW DAO bonding pool. If you were to set up your own bonding pool then most of the information in this document is either optional or irrelevant. To join the solver competition under your own bonding pool refer to [this document](https://docs.cow.fi/cow-protocol/reference/core/auctions/bonding-pools) and reach out to help set up the bonding pool and whitelist your solver's address.
 
 ![General process for joining the solver competition](solver_onboarding_process.jpg)
 
@@ -39,7 +39,7 @@ Given the risk that will be carried by the CoW DAO bonding pool we also ask that
 As specified in [CIP-48](https://snapshot.box/#/s:cow.eth/proposal/0x563ab9a66265ad72c47a8e55f620f927685dd07d4d49f6d1812905c683f05805) solvers that are part of the CoW DAO bonding pool will be charged a service fee that is withheld from their weekly rewards. This fee will begin six months after the solver has joined the CoW Bonding pool and will encompass 15% of the weekly COW rewards that the solver would have received.
 
 ## 2. Locally developing your solver
-The first step to joining the solver competition is to set up a solver. We have a [local set up guide](https://docs.cow.finance/cow-protocol/tutorials/solvers/local_test) that can help you set up a solver locally. There are also open-source example solvers available in the [solvers crate](https://github.com/cowprotocol/services/tree/main/crates/solvers) that you can use as a starting point for developing your solver.
+The first step to joining the solver competition is to set up a solver. We have a [local set up guide](https://docs.cow.fi/cow-protocol/tutorials/solvers/local_test) that can help you set up a solver locally. There are also open-source example solvers available in the [solvers crate](https://github.com/cowprotocol/services/tree/main/crates/solvers) that you can use as a starting point for developing your solver.
 
 API specification: https://github.com/cowprotocol/services/blob/main/crates/solvers/openapi.yml
 
@@ -64,15 +64,15 @@ There are various configurations for your solver in the driver to help you optim
 The default behavior for the driver is to set the native token address to `0xeee` and to insert interactions into your solution to unwrap the native token. It's also possible to configure this to either send the wrapped token address (WETH) and unwrap the native token, or send the wrapped token address and not unwrap the native token.
 
 #### - Liquidity fetching
-It is possible to enable or disable liquidity fetching for your solver. If this is enabled, the driver will search for on-chain liquidity sources for your solver to use and send them to your solver. [Docs](https://docs.cow.finance/cow-protocol/tutorials/arbitrate/solver/driver#fetching-liquidity)
+It is possible to enable or disable liquidity fetching for your solver. If this is enabled, the driver will search for on-chain liquidity sources for your solver to use and send them to your solver. [Docs](https://docs.cow.fi/cow-protocol/tutorials/arbitrate/solver/driver#fetching-liquidity)
 
 #### - Fairness checks for EBBO
 To ensure a fair execution for the users there are several EBBO rules that are maintained in the auction. Usually, an EBBO violation means that a reference pool from the base protocol would have given the user a better price than what they ended up receiving. 
 
-In the event of an EBBO violation the team will reach out and ask you to reimburse the user. [Docs](https://docs.cow.finance/cow-protocol/reference/core/auctions/ebbo-rules)
+In the event of an EBBO violation the team will reach out and ask you to reimburse the user. [Docs](https://docs.cow.fi/cow-protocol/reference/core/auctions/ebbo-rules)
 
 #### - Merging disjoint solutions
-It is possible for your solver to submit multiple solutions for a single auction and let the driver select the solution with the highest score to submit to the auction. It is possible to enable the driver to merge disjoint solutions into a single solution for the auction. [Docs](https://docs.cow.finance/cow-protocol/tutorials/arbitrate/solver/driver#postprocessing-solutions)
+It is possible for your solver to submit multiple solutions for a single auction and let the driver select the solution with the highest score to submit to the auction. It is possible to enable the driver to merge disjoint solutions into a single solution for the auction. [Docs](https://docs.cow.fi/cow-protocol/tutorials/arbitrate/solver/driver#postprocessing-solutions)
 
 ## 4. KYC checks and onboarding call
 Once your solver is tested and ready to join the solver competition, it is time to start the onboarding process. At this point, it would be best to reach out to the team on Telegram to schedule an onboarding call. During this call the team will go over the onboarding process and discuss the next steps.
@@ -113,7 +113,7 @@ After this process is done, the team will send you the submission addresses that
 
 After your solver is live and begins settling transactions, it will be your responsibility to monitor these addresses and to make sure that they hold enough funds to settle transactions for winning auctions.
 
-In order to create some volume to test your solver, you can create orders on staging by using our barn swap interface ([https://barn.cow.finance](https://barn.cow.finance)).
+In order to create some volume to test your solver, you can create orders on staging by using our barn swap interface ([https://barn.cow.fi](https://barn.cow.fi)).
 
 ## 6. Moving to production
 Once your solver has moved to staging we can deploy your solver on production. Usually the team will schedule your solver to go live with the next release (on Tuesday) after you are deployed on staging. This gives your team a few days to test your solver by settling some transactions on-chain before going live on production.
@@ -123,7 +123,7 @@ Every week on Tuesday your solver will receive payments and rewards for settling
 
 We advise using a single rewards address that is available on all networks.
 
-[You can find more information about how we calculate and distribute rewards here.](https://docs.cow.finance/cow-protocol/reference/core/auctions/rewards). The accounting process is documented in detail [here](https://docs.cow.finance/cow-protocol/reference/core/auctions/accounting).
+[You can find more information about how we calculate and distribute rewards here.](https://docs.cow.fi/cow-protocol/reference/core/auctions/rewards). The accounting process is documented in detail [here](https://docs.cow.fi/cow-protocol/reference/core/auctions/accounting).
 
 ## 8. Moving to other networks
 After joining the solver competition on Arbitrum we can enable your solver on other chains relatively soon. For this we will go through the same process of generating addresses, vouching for them, and whitelisting them. For each new chain that we deploy your solver on we will need:
@@ -135,14 +135,14 @@ After joining the solver competition on Arbitrum we can enable your solver on ot
 We usually wait a bit before migrating solvers to mainnet. After your solver has been active on other networks for some time the team can enable your solver on mainnet. 
 
 ## 10. Joining the quoting competition
-Besides the solving competition, there is also a quoting competition. More information about the quoting competition can be found [here](https://docs.cow.finance/cow-protocol/reference/core/auctions/rewards#price-estimation-competition-rewards-cips-27-57-72).
+Besides the solving competition, there is also a quoting competition. More information about the quoting competition can be found [here](https://docs.cow.fi/cow-protocol/reference/core/auctions/rewards#price-estimation-competition-rewards-cips-27-57-72).
 
 ## 11. F.A.Q.
 ### Can we get access to the orderbook API?
 Yes, we can whitelist solvers so that they can have access to the orderbook API. Although we generally wait with this until your solver is live and settling orders on-chain.
 
 ### How do we integrate CoW AMMs?
-[We have a section in the documentation about integrating CoW AMMs.](https://docs.cow.finance/cow-amm/tutorials/cow-amm-for-solvers)
+[We have a section in the documentation about integrating CoW AMMs.](https://docs.cow.fi/cow-amm/tutorials/cow-amm-for-solvers)
 
 ### Is there a way to find out the COW reward in real time immediately after the trade?
 [This table](https://dune.com/queries/5270914) contains reward data per solver and per auction (denominated in the native token of the chain). Note that data is updated every 2 hours.

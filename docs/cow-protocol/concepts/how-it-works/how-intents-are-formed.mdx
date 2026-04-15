@@ -4,7 +4,7 @@ sidebar_position: 4
 
 # How Intents Are Formed
 
-An [_intent_](https://docs.cow.finance/cow-protocol/concepts/introduction/intents) in CoW Protocol is a signed message that represents a user's wish to trade. It doesn't execute a trade directly — instead, it delegates execution to [solvers](../introduction/solvers) who find the optimal path.
+An [_intent_](https://docs.cow.fi/cow-protocol/concepts/introduction/intents) in CoW Protocol is a signed message that represents a user's wish to trade. It doesn't execute a trade directly — instead, it delegates execution to [solvers](../introduction/solvers) who find the optimal path.
 
 :::caution
 
@@ -24,7 +24,7 @@ Intention → Quote → Intent
 An intention is the user's raw desire to trade. To obtain a quote, you send this intention to the `/quote` API endpoint:
 
 ```
-POST https://api.cow.finance/mainnet/api/v1/quote
+POST https://api.cow.fi/mainnet/api/v1/quote
 ```
 
 The request body describes what the user wants. Basic fields of the request:

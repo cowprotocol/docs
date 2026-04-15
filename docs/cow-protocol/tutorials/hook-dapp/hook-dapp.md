@@ -189,4 +189,4 @@ To do this, the application must contain `manifest.json` file with following str
 For more complex scenarios, such as transferring the buy amount to another smart-contract or other smart-contract related actions, you will probably need CoW Shed:
 
 - [CoW Shed](https://github.com/cowdao-grants/cow-shed)
-- [Permit, Swap & Bridge CoW Hook example](https://v1.docs.cow.finance/overview/cow-hooks/cow-hooks-example/permit-swap-and-bridge-cow-hook)
+- [Permit, Swap & Bridge CoW Hook example](https://v1.docs.cow.fi/overview/cow-hooks/cow-hooks-example/permit-swap-and-bridge-cow-hook)

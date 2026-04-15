@@ -4,18 +4,18 @@ title: Make custom links
 
 # Custom Links
 
-[CoW Swap](https://swap.cow.finance) supports URL query parameters to allow anyone to create a custom link for sharing a specific trade with a friend or on social media, or for creating a custom link to a specific trade for your own use.
+[CoW Swap](https://swap.cow.fi) supports URL query parameters to allow anyone to create a custom link for sharing a specific trade with a friend or on social media, or for creating a custom link to a specific trade for your own use.
 
 ### Examples
 
-- [`https://swap.cow.finance`](https://swap.cow.finance) - CoW Swap main page (`swap` is default page)
-- [`https://swap.cow.finance/#/swap`](https://swap.cow.finance/#/swap) - `swap` page
-- [`https://swap.cow.finance/#/limit`](https://swap.cow.finance/#/limit) - `limit` orders page
-- [`https://swap.cow.finance/#/100/swap`](https://swap.cow.finance/#/100/swap) - `swap` page on Gnosis chain network
-- [`https://swap.cow.finance/#/100/limit/WXDAI/COW`](https://swap.cow.finance/#/100/limit/WXDAI/COW) - Create a `limit` order to sell `WXDAI` for `COW`
-- [`https://swap.cow.finance/#/1/swap/WETH/COW?sellAmount=100`](https://swap.cow.finance/#/1/swap/WETH/COW?sellAmount=100) - Swap `100 WETH` for `COW`
-- [`https://swap.cow.finance/#/1/swap/WETH/COW?buyAmount=10000&recipient=vitalik.eth`](https://swap.cow.finance/#/1/swap/WETH/COW?buyAmount=10000&recipient=vitalik.eth) - Buy on `swap` sending the outcome to a custom recipient (can be either address or ens)
-- [`https://swap.cow.finance/#/100/limit/WETH/WXDAI?sellAmount=2&buyAmount=6000`](https://swap.cow.finance/#/100/limit/WETH/WXDAI?sellAmount=2&buyAmount=6000) - Create a limit order to sell `2 WETH` for `6000 WXDAI`
+- [`https://swap.cow.fi`](https://swap.cow.fi) - CoW Swap main page (`swap` is default page)
+- [`https://swap.cow.fi/#/swap`](https://swap.cow.fi/#/swap) - `swap` page
+- [`https://swap.cow.fi/#/limit`](https://swap.cow.fi/#/limit) - `limit` orders page
+- [`https://swap.cow.fi/#/100/swap`](https://swap.cow.fi/#/100/swap) - `swap` page on Gnosis chain network
+- [`https://swap.cow.fi/#/100/limit/WXDAI/COW`](https://swap.cow.fi/#/100/limit/WXDAI/COW) - Create a `limit` order to sell `WXDAI` for `COW`
+- [`https://swap.cow.fi/#/1/swap/WETH/COW?sellAmount=100`](https://swap.cow.fi/#/1/swap/WETH/COW?sellAmount=100) - Swap `100 WETH` for `COW`
+- [`https://swap.cow.fi/#/1/swap/WETH/COW?buyAmount=10000&recipient=vitalik.eth`](https://swap.cow.fi/#/1/swap/WETH/COW?buyAmount=10000&recipient=vitalik.eth) - Buy on `swap` sending the outcome to a custom recipient (can be either address or ens)
+- [`https://swap.cow.fi/#/100/limit/WETH/WXDAI?sellAmount=2&buyAmount=6000`](https://swap.cow.fi/#/100/limit/WETH/WXDAI?sellAmount=2&buyAmount=6000) - Create a limit order to sell `2 WETH` for `6000 WXDAI`
 
 ## Query Parameters
 
@@ -27,11 +27,11 @@ Fortunately, the `swap` and `limit` pages have the same URL query parameters!
 
 #### Swap
 
-`https://swap.cow.finance/#/<chainId>/swap/<sellTokenSymbolOrAddress>/<buyTokenSymbolOrAddress>?recipient=<recipient>&sellAmount=<sellAmount>&buyAmount=<buyAmount>`
+`https://swap.cow.fi/#/<chainId>/swap/<sellTokenSymbolOrAddress>/<buyTokenSymbolOrAddress>?recipient=<recipient>&sellAmount=<sellAmount>&buyAmount=<buyAmount>`
 
 #### Limit
 
-`https://swap.cow.finance/#/<chainId>/limit/<sellTokenSymbolOrAddress>/<buyTokenSymbolOrAddress>?recipient=<recipient>&sellAmount=<sellAmount>&buyAmount=<buyAmount>`
+`https://swap.cow.fi/#/<chainId>/limit/<sellTokenSymbolOrAddress>/<buyTokenSymbolOrAddress>?recipient=<recipient>&sellAmount=<sellAmount>&buyAmount=<buyAmount>`
 
 ### Global parameters
 

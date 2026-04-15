@@ -6,7 +6,7 @@ sidebar_position: 1
 
 In this short tutorial, we describe how you can create and deploy their own Balancer CoW AMM.
 
-**You may also deploy a CoW AMM through the Balancer UI using [this guide.](https://cow.finance/learn/how-to-create-a-lvr-protected-liquidity-pool-on-cowamm)**
+**You may also deploy a CoW AMM through the Balancer UI using [this guide.](https://cow.fi/learn/how-to-create-a-lvr-protected-liquidity-pool-on-cowamm)**
 
 The proposed transactions and interactions can be executed through any smart contract or EOA transaction builder, Etherscan "Write Contract," from other UI mechanisms, or directly from the console.
 

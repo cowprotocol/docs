@@ -3,9 +3,9 @@ sidebar_position: 6
 ---
 
 # CoW AMM Deployer
-The [CoW AMM Deployer](https://app.safe.global/share/safe-app?appUrl=https%3A%2F%2Fdeploy-cow-amm.bleu.fi&chain=et) is a user-friendly Safe App that simplifies the process of deploying and managing [CoW AMMs](https://cow.finance/cow-amm) (Automated Market Makers) from Safe wallets. It enables users without programming skills to take advantage of the benefits of CoW AMM. 
+The [CoW AMM Deployer](https://app.safe.global/share/safe-app?appUrl=https%3A%2F%2Fdeploy-cow-amm.bleu.fi&chain=et) is a user-friendly Safe App that simplifies the process of deploying and managing [CoW AMMs](https://cow.fi/cow-amm) (Automated Market Makers) from Safe wallets. It enables users without programming skills to take advantage of the benefits of CoW AMM. 
 
-The app was developed by [bleu](https://github.com/bleu-fi) with sponsorship from the [CoW Grants DAO](https://grants.cow.finance/).
+The app was developed by [bleu](https://github.com/bleu-fi) with sponsorship from the [CoW Grants DAO](https://grants.cow.fi/).
 
 This app is only accessible from a Safe wallet. 
 
@@ -40,7 +40,7 @@ To create a new CoW AMM using the deployer, follow these steps:
    - **Token Pair**: Select the token pair you want to provide liquidity for. Both tokens should already be in your Safe wallet.
    - **Price Oracle**: Choose the price oracle (e.g., Balancer, Uniswap V2) to provide price hints to the watch-tower about your CoW AMM. Enter the pool identifier used by the selected protocol. You can also load this information from the protocol subgraph using the provided button. If the button fails, it means there isn't a pool with at least $1000 USD of TVL for that token pair.
    - **Minimum Trade Amount**: Specify the minimum amount of the first token required for each trade. For most tokens, this value is automatically filled. If not, a strategy may be to calculate the equivalent of $10 USD in the first token.
-   - **Fallback Handler**: If your wallet is unsupported, upgrade to a Safe with the special fallback handler. [Learn all about the new Safe Extensible Fallback Handler](https://blog.cow.finance/all-you-need-to-know-about-cow-swaps-new-safe-fallback-handler-8ef0439925d1) and its relevance to Safe in this [overview](https://help.safe.global/en/articles/40838-what-is-a-fallback-handler-and-how-does-it-relate-to-safe). Naturally, the upgrade process has undergone [extensive auditing](https://github.com/cowprotocol/composable-cow/tree/ab3addad9bc05acdbf5fb040eb5c336209b58e31/audits) for increased peace of mind.
+   - **Fallback Handler**: If your wallet is unsupported, upgrade to a Safe with the special fallback handler. [Learn all about the new Safe Extensible Fallback Handler](https://blog.cow.fi/all-you-need-to-know-about-cow-swaps-new-safe-fallback-handler-8ef0439925d1) and its relevance to Safe in this [overview](https://help.safe.global/en/articles/40838-what-is-a-fallback-handler-and-how-does-it-relate-to-safe). Naturally, the upgrade process has undergone [extensive auditing](https://github.com/cowprotocol/composable-cow/tree/ab3addad9bc05acdbf5fb040eb5c336209b58e31/audits) for increased peace of mind.
 4. Review the entered information and click on the "Create AMM" button.
 5. Sign the transaction on your Safe wallet to confirm the AMM creation.
 6. Wait for the transaction to be confirmed. You will be redirected to the "Manager" page once the AMM is successfully created.
@@ -63,10 +63,10 @@ From the "Manager" page, you can perform two actions:
 ![Manager page](/img/cowammdeployer/manager.png)
 
 ## Additional Resources
-- [CoW AMM Documentation](https://cow.finance/cow-amm)
-- [CoW Grants DAO](https://grants.cow.finance/)
+- [CoW AMM Documentation](https://cow.fi/cow-amm)
+- [CoW Grants DAO](https://grants.cow.fi/)
 - [Safe Wallet Documentation](https://help.safe.global/)
-- [CoW Swap (Safe App)](https://app.safe.global/share/safe-app?appUrl=https%3A%2F%2Fswap.cow.finance&chain=eth)
+- [CoW Swap (Safe App)](https://app.safe.global/share/safe-app?appUrl=https%3A%2F%2Fswap.cow.fi&chain=eth)
 
 ## Troubleshooting and FAQs
 

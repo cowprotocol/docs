@@ -16,7 +16,7 @@ For brevity, the `orderUid` is referred to as "Order ID" in the explorer, and is
 
 ## Fill-or-kill
 
-Below is a simple example of Order ID [`56ac15a9`](https://explorer.cow.finance/orders/0x56ac15a9dd943743936e29d45e836e87de20b69ee32481338588922b5cc9ee4a04d84e1d86cfad5ffea5e9ab833276481bf965e46322d6ea) that has been filled:
+Below is a simple example of Order ID [`56ac15a9`](https://explorer.cow.fi/orders/0x56ac15a9dd943743936e29d45e836e87de20b69ee32481338588922b5cc9ee4a04d84e1d86cfad5ffea5e9ab833276481bf965e46322d6ea) that has been filled:
 
 ![Order overview](/img/explorer/order_overview.png)
 

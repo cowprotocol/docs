@@ -23,7 +23,7 @@ The repository where all the backend services can be found is this one: [https:/
 For the autopilot, we run
 
 ```
-    cargo run --bin autopilot -- --native-price-estimators "baseline|http://driver/baseline" --skip-event-sync true --node-url $NODE_URL --shadow https://api.cow.finance/mainnet --drivers "mysolver1|http://localhost:11088/mysolver1"
+    cargo run --bin autopilot -- --native-price-estimators "baseline|http://driver/baseline" --skip-event-sync true --node-url $NODE_URL --shadow https://api.cow.fi/mainnet --drivers "mysolver1|http://localhost:11088/mysolver1"
 ```
 
 where one needs to set the NODE_URL appropriately (e.g., a free Infura endpoint).
@@ -46,25 +46,25 @@ Once the above are set up and running, one can then start testing their solver e
 
 | Orderbook URL                              | Network      | Environment |
 | ------------------------------------------ | ------------ | ----------- |
-| <https://barn.api.cow.finance/mainnet/api>      | Mainnet      | Staging     |
-| <https://api.cow.finance/mainnet/api>           | Mainnet      | Production  |
-| <https://barn.api.cow.finance/xdai/api>         | Gnosis Chain | Staging     |
-| <https://api.cow.finance/xdai/api>              | Gnosis Chain | Production  |
-| <https://barn.api.cow.finance/arbitrum_one/api> | Arbitrum One | Staging     |
-| <https://api.cow.finance/arbitrum_one/api>      | Arbitrum One | Production  |
-| <https://barn.api.cow.finance/base/api>         | Base         | Staging     |
-| <https://api.cow.finance/base/api>              | Base         | Production  |
-| <https://barn.api.cow.finance/avalanche/api>    | Avalanche    | Staging     |
-| <https://api.cow.finance/avalanche/api>         | Avalanche    | Production  |
-| <https://barn.api.cow.finance/polygon/api>      | Polygon      | Staging     |
-| <https://api.cow.finance/polygon/api>           | Polygon      | Production  |
-| <https://barn.api.cow.finance/bnb/api>          | BNB          | Staging     |
-| <https://api.cow.finance/bnb/api>               | BNB          | Production  |
-| <https://barn.api.cow.finance/linea/api>        | Linea        | Staging     |
-| <https://api.cow.finance/linea/api>             | Linea        | Production  |
-| <https://barn.api.cow.finance/plasma/api>       | Plasma       | Staging     |
-| <https://api.cow.finance/plasma/api>            | Plasma       | Production  |
-| <https://barn.api.cow.finance/ink/api>          | Ink          | Staging     |
-| <https://api.cow.finance/ink/api>               | Ink          | Production  |
-| <https://barn.api.cow.finance/sepolia/api>      | Sepolia      | Staging     |
-| <https://api.cow.finance/sepolia/api>           | Sepolia      | Production  |
+| <https://barn.api.cow.fi/mainnet/api>      | Mainnet      | Staging     |
+| <https://api.cow.fi/mainnet/api>           | Mainnet      | Production  |
+| <https://barn.api.cow.fi/xdai/api>         | Gnosis Chain | Staging     |
+| <https://api.cow.fi/xdai/api>              | Gnosis Chain | Production  |
+| <https://barn.api.cow.fi/arbitrum_one/api> | Arbitrum One | Staging     |
+| <https://api.cow.fi/arbitrum_one/api>      | Arbitrum One | Production  |
+| <https://barn.api.cow.fi/base/api>         | Base         | Staging     |
+| <https://api.cow.fi/base/api>              | Base         | Production  |
+| <https://barn.api.cow.fi/avalanche/api>    | Avalanche    | Staging     |
+| <https://api.cow.fi/avalanche/api>         | Avalanche    | Production  |
+| <https://barn.api.cow.fi/polygon/api>      | Polygon      | Staging     |
+| <https://api.cow.fi/polygon/api>           | Polygon      | Production  |
+| <https://barn.api.cow.fi/bnb/api>          | BNB          | Staging     |
+| <https://api.cow.fi/bnb/api>               | BNB          | Production  |
+| <https://barn.api.cow.fi/linea/api>        | Linea        | Staging     |
+| <https://api.cow.fi/linea/api>             | Linea        | Production  |
+| <https://barn.api.cow.fi/plasma/api>       | Plasma       | Staging     |
+| <https://api.cow.fi/plasma/api>            | Plasma       | Production  |
+| <https://barn.api.cow.fi/ink/api>          | Ink          | Staging     |
+| <https://api.cow.fi/ink/api>               | Ink          | Production  |
+| <https://barn.api.cow.fi/sepolia/api>      | Sepolia      | Staging     |
+| <https://api.cow.fi/sepolia/api>           | Sepolia      | Production  |

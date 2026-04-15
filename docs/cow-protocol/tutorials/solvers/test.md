@@ -11,8 +11,8 @@ Once I understood how a solver works, I wanted to solve a real order. To test th
 
 You have different options to create a limit order:
 
-- [https://docs.cow.finance/tutorials/cowswap-trades-with-a-gnosis-safe-wallet](https://docs.cow.finance/tutorials/cowswap-trades-with-a-gnosis-safe-wallet)
-- [https://bafybeias5x3tgdshkhj5umriqze2wioy5mjw4fdo2zzp2sl4pacq7rnwtm.ipfs.infura-ipfs.io/?orderbook=https://barn.api.cow.finance/xdai](https://bafybeias5x3tgdshkhj5umriqze2wioy5mjw4fdo2zzp2sl4pacq7rnwtm.ipfs.infura-ipfs.io/?orderbook=https://barn.api.cow.finance/xdai)
+- [https://docs.cow.fi/tutorials/cowswap-trades-with-a-gnosis-safe-wallet](https://docs.cow.fi/tutorials/cowswap-trades-with-a-gnosis-safe-wallet)
+- [https://bafybeias5x3tgdshkhj5umriqze2wioy5mjw4fdo2zzp2sl4pacq7rnwtm.ipfs.infura-ipfs.io/?orderbook=https://barn.api.cow.fi/xdai](https://bafybeias5x3tgdshkhj5umriqze2wioy5mjw4fdo2zzp2sl4pacq7rnwtm.ipfs.infura-ipfs.io/?orderbook=https://barn.api.cow.fi/xdai)
 - You call the API by hand
 
 Here's the example I created while testing:\
@@ -108,7 +108,7 @@ Reading the state of the blockchain requires issuing RPC calls to an Ethereum no
 In order to start the Driver, we can execute the following command in a terminal:
 
 ```bash
-cargo run -p solver -- --orderbook-url https://api.cow.finance/mainnet \
+cargo run -p solver -- --orderbook-url https://api.cow.fi/mainnet \
   --node-url "https://mainnet.infura.io/v3/INFURA_KEY" \
   --cow-dex-ag-solver-url "http://127.0.0.1:8000" \
   --solver-account 0xa6DDBD0dE6B310819b49f680F65871beE85f517e \
@@ -143,7 +143,7 @@ Here is a tx hash of a settlement that was executed on-chain.
 
 Starting from this hash, we can use the competition endpoint:
 
-[https://api.cow.finance/mainnet/api/v1/solver_competition/by_tx_hash/0x17271e39305217d36635afbcc882e9431f9195d561d814aba96986cdd12dd240](https://api.cow.finance/mainnet/api/v1/solver_competition/by_tx_hash/0x17271e39305217d36635afbcc882e9431f9195d561d814aba96986cdd12dd240)
+[https://api.cow.fi/mainnet/api/v1/solver_competition/by_tx_hash/0x17271e39305217d36635afbcc882e9431f9195d561d814aba96986cdd12dd240](https://api.cow.fi/mainnet/api/v1/solver_competition/by_tx_hash/0x17271e39305217d36635afbcc882e9431f9195d561d814aba96986cdd12dd240)
 
 and then we can see that the auction id was 6462225.
 

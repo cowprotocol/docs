@@ -14,7 +14,7 @@ Information about an order's flashloan is added by the user inside the order’s
 [Solvers](/docs/cow-protocol/tutorials/arbitrate/solver/solver-engine.md) connected to the reference driver already receive the full appdata from the driver.
 :::
 
-For example, this [staging order](https://explorer.cow.finance/gc/orders/0x413a7246f58441ad92ea19c09cef90d1b23a1e211e0963f3d39b7db48140533d669685c660c260d80b614f8d1a5ffd24c4e3b82668cd8760) has the appdata hash `0xa8476d34ec1e22b818cf3d6289e30271a04a4e38a8a3a71f947b5881de06a852` which can be looked up [here](https://barn.api.cow.finance/xdai/api/v1/app_data/0xa8476d34ec1e22b818cf3d6289e30271a04a4e38a8a3a71f947b5881de06a852). Specifically, in the `metadata` field, the `flashloan` entry looks as follows:
+For example, this [staging order](https://explorer.cow.fi/gc/orders/0x413a7246f58441ad92ea19c09cef90d1b23a1e211e0963f3d39b7db48140533d669685c660c260d80b614f8d1a5ffd24c4e3b82668cd8760) has the appdata hash `0xa8476d34ec1e22b818cf3d6289e30271a04a4e38a8a3a71f947b5881de06a852` which can be looked up [here](https://barn.api.cow.fi/xdai/api/v1/app_data/0xa8476d34ec1e22b818cf3d6289e30271a04a4e38a8a3a71f947b5881de06a852). Specifically, in the `metadata` field, the `flashloan` entry looks as follows:
 
 ```json
       "flashloan": {
@@ -83,12 +83,12 @@ Together with the support for flashloans, we want to minimize the order filterin
 
 Aave will cover 3 new use cases:
 
-1. **Collateral swap**: User has a debt position and wants to change the collateral they use ([example](https://explorer.cow.finance/gc/orders/0x413a7246f58441ad92ea19c09cef90d1b23a1e211e0963f3d39b7db48140533d669685c660c260d80b614f8d1a5ffd24c4e3b82668cd8760)).
+1. **Collateral swap**: User has a debt position and wants to change the collateral they use ([example](https://explorer.cow.fi/gc/orders/0x413a7246f58441ad92ea19c09cef90d1b23a1e211e0963f3d39b7db48140533d669685c660c260d80b614f8d1a5ffd24c4e3b82668cd8760)).
 
-2. **Repay debt with collateral**: Use some of the collateral to repay the debt. This is essentially auto-liquidating without a fee ([example](https://explorer.cow.finance/gc/orders/0xab8596fb7eae317bf15b1b4d57169f5e6714479e38661e0f06df7e7f12409915d20982aedc2074bd3b798cd6c02f6e03e51743cc68cdd580
+2. **Repay debt with collateral**: Use some of the collateral to repay the debt. This is essentially auto-liquidating without a fee ([example](https://explorer.cow.fi/gc/orders/0xab8596fb7eae317bf15b1b4d57169f5e6714479e38661e0f06df7e7f12409915d20982aedc2074bd3b798cd6c02f6e03e51743cc68cdd580
 )).
 
-3. **Debt swap**: User has a debt in a token and wants to swap for something else. Think about leverage, changing the debt to reduce interest for example ([example](https://explorer.cow.finance/gc/orders/0x6c100f2f6bb46ebf1c9f52660fdbe31079d4f982f56b524605358bd419af3a6237c390b08d5a3104b3efc1401e8d11e52624c75868d305a0
+3. **Debt swap**: User has a debt in a token and wants to swap for something else. Think about leverage, changing the debt to reduce interest for example ([example](https://explorer.cow.fi/gc/orders/0x6c100f2f6bb46ebf1c9f52660fdbe31079d4f982f56b524605358bd419af3a6237c390b08d5a3104b3efc1401e8d11e52624c75868d305a0
 )).
 
 :::note 
