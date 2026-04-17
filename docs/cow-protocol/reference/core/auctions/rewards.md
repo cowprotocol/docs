@@ -66,18 +66,14 @@ With [CIP-85](https://snapshot.box/#/s:cow.eth/proposal/0xb488c343df3ba5f3857a4c
 Concretely, in each auction, solver $$i$$'s contribution to the consistency budget is
 
 $$
-\frac{1}{2} \cdot \textrm{protocolFee}_i -  \textrm{performanceReward}_i,
+\beta \cdot \textrm{protocolFee}_i -  \textrm{performanceReward}_i,
 $$
 
-where $$\textrm{protocolFee}_i$$ is the protocol fee (excluding partner fees) earned from the trades in all successfully executed onchain by solver $$i$$ in that auction. When the performance reward is a penalty (i.e., negative), the penalty itself contributes to the consistency budget. The total consistency budget for an accounting period is the sum of these contributions across all solvers and auctions.
+where $$\textrm{protocolFee}_i$$ is the protocol fee (excluding partner fees) earned from the trades in all successfully executed onchain by solver $$i$$ in that auction and $$\beta$$ is the chain specific parameter defined above. When the performance reward is a penalty (i.e., negative), the penalty itself contributes to the consistency budget. The total consistency budget for an accounting period is the sum of these contributions across all solvers and auctions.
 
 The consistency budget is distributed at the end of each accounting period according to a consistency metric. The core team has a mandate to adapt this metric when they see fit; every change will be announced in advance on the [CoW Protocol forum](https://forum.cow.fi).
 
-**Current metric: order count.** Each solver's share of the consistency budget is proportional to the number of executed orders for which it submitted a solution:
-
-$$
-\textrm{consistencyReward}_i = \textrm{consistencyBudget} \times \frac{\textrm{orderCount}_i}{\sum_j \textrm{orderCount}_j}.
-$$
+**Current metric: order count.** Each solver's share of the consistency budget is proportional to the number of executed orders for which it submitted a solution. Only solutions from the auction in which an order is settled count towards the consistency reward.
 
 ### Buffer accounting
 
