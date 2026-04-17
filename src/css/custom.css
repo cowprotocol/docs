@@ -157,3 +157,31 @@ html .menu_node_modules-\@docusaurus-theme-classic-lib-theme-DocSidebar-Desktop-
 div.theme-doc-markdown > div img {
   margin-bottom: 1em!important;
 }
+
+html[class*="docs-doc-id-cow-protocol/affiliate-program/faq"] .theme-doc-markdown > h3 {
+  margin-top: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+html[class*="docs-doc-id-cow-protocol/affiliate-program/faq"] .theme-doc-markdown > h3:not(:first-of-type) {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid color-mix(in srgb, var(--ifm-color-content) 14%, transparent);
+}
+
+html[class*="docs-doc-id-cow-protocol/affiliate-program/faq"] .theme-doc-markdown > h4 {
+  margin-top: 1.75rem;
+  margin-bottom: 0.75rem;
+}
+
+html[class*="docs-doc-id-cow-protocol/affiliate-program/faq"] .theme-doc-markdown > h4 + p,
+html[class*="docs-doc-id-cow-protocol/affiliate-program/faq"] .theme-doc-markdown > h4 + ul,
+html[class*="docs-doc-id-cow-protocol/affiliate-program/faq"] .theme-doc-markdown > h4 + ol {
+  margin-top: 0.75rem;
+}
+
+html[class*="docs-doc-id-cow-protocol/affiliate-program/faq"] .theme-doc-markdown > p,
+html[class*="docs-doc-id-cow-protocol/affiliate-program/faq"] .theme-doc-markdown > ul,
+html[class*="docs-doc-id-cow-protocol/affiliate-program/faq"] .theme-doc-markdown > ol {
+  margin-bottom: 1rem;
+}
