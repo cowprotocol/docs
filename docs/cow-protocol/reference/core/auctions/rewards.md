@@ -69,7 +69,7 @@ $$
 \beta \cdot \textrm{protocolFee}_i -  \textrm{performanceReward}_i,
 $$
 
-where $$\textrm{protocolFee}_i$$ is the protocol fee (excluding partner fees) earned from the trades in all successfully executed onchain by solver $$i$$ in that auction and $$\beta$$ is the chain specific parameter defined above. When the performance reward is a penalty (i.e., negative), the penalty itself contributes to the consistency budget. The total consistency budget for an accounting period is the sum of these contributions across all solvers and auctions.
+where $$\textrm{protocolFee}_i$$ is the protocol fee (excluding partner fees) earned from the trades in all solutions successfully executed onchain by solver $$i$$ in that auction and $$\beta$$ is the chain-specific parameter defined above. When the performance reward is a penalty (i.e., negative), the penalty itself contributes to the consistency budget. The total consistency budget for an accounting period is the sum of these contributions across all solvers and auctions.
 
 The consistency budget is distributed at the end of each accounting period according to a consistency metric. The core team has a mandate to adapt this metric when they see fit; every change will be announced in advance on the [CoW Protocol forum](https://forum.cow.fi).
 
