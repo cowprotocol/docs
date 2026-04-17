@@ -153,8 +153,7 @@ After joining the solver competition on Arbitrum we can enable your solver on ot
 We usually wait a bit before migrating solvers to mainnet. After your solver has been active on other networks for some time the team can enable your solver on mainnet.
 
 ## 10. Joining the quoting competition
-
-Besides the solving competition, there is also a quoting competition. More information about the quoting competition can be found [here](https://docs.cow.fi/cow-protocol/reference/core/auctions/rewards#price-estimation-competition-rewards-cips-27-57-72).
+Besides the solving competition, there is also a quoting competition. More information about the quoting competition can be found [here](https://docs.cow.fi/cow-protocol/reference/core/auctions/rewards#price-estimation-competition-rewards-cips-27-36-57-72).
 
 ## 11. F.A.Q
 
