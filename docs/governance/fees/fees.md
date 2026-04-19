@@ -51,6 +51,8 @@ The purpose of this page is to let users know which fee models are active at any
 
 **Quote improvement** is defined as the difference between the executed price and the quoted price for an order, so long as the value is positive (if the value is negative, no fee is taken)
 
+All protocol fees are charged in the surplus token, i.e. in the buy token for sell orders and the sell token for buy orders.
+
 :::
 
 ### Partner fees
