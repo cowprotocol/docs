@@ -62,15 +62,10 @@ The security considerations of upgradeability are discussed in the [GPv2Allowlis
 
 ## Security / Known Issues
 
-### Partially fillable orders with zero amounts
+### Orders with zero amounts
 
-If a user creates an order with:
+If a user creates an order with `sellAmount = 0` or `buyAmount = 0`, then this order could be executed an arbitrary amount of times instead of just a single time.
 
-* `sellAmount = 0`
-* `buyAmount = 0`
-* `partiallyFillable = true`
-
-Then this order could be executed an arbitrary amount of times instead of just a single time.
 This means that any solver could drain the fee amount from the user until not enough funds are available anymore.
 
 :::tip
