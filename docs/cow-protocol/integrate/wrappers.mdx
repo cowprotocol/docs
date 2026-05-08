@@ -1,68 +1,80 @@
-# Wrapper Integration
+# Atomic Bundle Integration
 
-Generalized wrappers enable custom logic to execute surrounding CoW Protocol settlements. This guide covers both using existing wrappers in your orders and building new wrapper contracts.
+Atomic Bundles (formerly known as Generalized Wrappers) enable custom logic to execute surrounding CoW Protocol settlements. This guide covers both using existing bundles in your orders and building new bundle contracts.
 
 **Choose your path:**
-- **[Building New Wrappers](#for-wrapper-developers)** - Develop custom wrapper contracts for advanced DeFi workflows
-- **[Using Existing Wrappers](#for-order-creators-and-frontend-developers)** - Add wrappers to your orders and integrate into your application
-- **[Executing Wrappers as a Solver](#for-solvers)** - Everything solvers need to know to execute wrapper orders
+- **[Building New Bundles](#for-bundle-developers)** - Develop custom bundle contracts for advanced DeFi workflows
+- **[Using Existing Bundles](#for-order-creators-and-frontend-developers)** - Add bundles to your orders and integrate into your application
+- **[Executing Bundles as a Solver](#for-solvers)** - Everything solvers need to know to execute bundle orders
 
 ---
 
-## For Wrapper Developers
+## For Bundle Developers
 
-This section covers building new wrapper contracts from scratch.
+This section covers building new bundle contracts from scratch.
 
 ### Overview
 
-To build a wrapper, you will:
+To build a bundle, you will:
 
 1. Inherit from the `CowWrapper` abstract contract
 2. Implement `_wrap()` with your pre/post-settlement logic
 3. Implement `validateWrapperData()` for input validation
 4. Test thoroughly on testnets
-5. Review the [Implementation Requirements](../reference/contracts/periphery/wrapper.mdx#implementation-requirements-for-integrators) to ensure your wrapper meets the acceptance requirements
+5. Review the [Implementation Requirements](../reference/contracts/periphery/wrapper.mdx#implementation-requirements-for-integrators) to ensure your bundle meets the acceptance requirements
 6. Submit for allowlist approval by the CoW Protocol team
 
-Building a wrapper is a significant undertaking.
-An insecure wrapper would put user and protocol funds at risk.
+Building a bundle is a significant undertaking.
+An insecure bundle would put user and protocol funds at risk.
 Make sure you understand CoW Protocol well before starting.
-A contract audit by a reputable firm is mandatory before a wrapper is considered for approval.
-Read more on the details of creating a wrapper from [the wrapper contract information page](../reference/contracts/periphery/wrapper.mdx).
+A contract audit by a reputable firm is mandatory before a bundle is considered for approval.
+Read more on the details of creating a bundle from [the bundle contract information page](../reference/contracts/periphery/wrapper.mdx).
+
+### Getting Whitelisted on Staging
+
+Before a bundle can be used in production it must be approved by CoW DAO, but you can get it whitelisted on the staging environment much earlier to test end-to-end against real infrastructure.
+
+To get whitelisted on staging:
+
+1. **Meet the implementation requirements.** Review the [Implementation Requirements](../reference/contracts/periphery/wrapper.mdx#implementation-requirements-for-integrators) and make sure your bundle satisfies all of them. In particular, ensure your contract uses the `CowWrapper` abstract contract, that `validateWrapperData()` is deterministic, and that the bundle is designed defensively.
+2. **Reach out to the CoW Protocol team.** Contact the team (e.g. via the [CoW Protocol Discord](https://discord.com/invite/cowprotocol)) to request staging allowlist access. Share your contract which is verified and deployed on Etherscan and a brief description of the intended use case.
+3. **Deploy to a supported testnet.** The team will review your contract and, if it meets the requirements, add it to the staging allowlist so you can test your full integration.
+
+Note that staging whitelisting is not a substitute for the full DAO approval process required for production. Plan for the DAO governance timeline when building towards a mainnet launch.
 
 ---
 
 ## For Order Creators and Frontend Developers
 
-This section shows you how to use existing wrappers in your orders and integrate wrapper support into your application.
+This section shows you how to use existing bundles in your orders and integrate bundle support into your application.
 
-### Adding Wrappers to Orders
+### Adding Bundles to Orders
 
-To use a wrapper in your order, add it to the `appData` when creating the order:
+To use a bundle in your order, add it to the `appData` when creating the order:
 
 ### AppData Structure
 
 ```typescript
 interface WrapperCall {
-    target: string;        // Wrapper contract address (must be allowlisted)
-    data?: string;         // Optional hex-encoded wrapper-specific data
-    isOmittable?: boolean; // Whether solver can skip this wrapper (default: false)
+    target: string;        // Bundle contract address (must be allowlisted)
+    data?: string;         // Optional hex-encoded bundle-specific data
+    isOmittable?: boolean; // Whether solver can skip this bundle (default: false)
 }
 ```
 
 **Fields:**
-- **`target`** (required): Address of the allowlisted wrapper contract
-- **`data`** (optional): Hex-encoded data specific to the wrapper. Can be empty or omitted if the wrapper doesn't need custom data.
+- **`target`** (required): Address of the allowlisted bundle contract
+- **`data`** (optional): Hex-encoded data specific to the bundle. Can be empty or omitted if the bundle doesn't need custom data.
 - **`isOmittable`** (optional): Defaults to `false`
-  - `false` = Solver MUST execute the wrapper with exact data or be slashed
-  - `true` = Solver MAY skip the wrapper if they find a better solution
+  - `false` = Solver MUST execute the bundle with exact data or be slashed
+  - `true` = Solver MAY skip the bundle if they find a better solution
 
 ### Example: Using the CoW SDK
 
 ```typescript
 import { OrderBookApi, OrderQuoteRequest, OrderCreation } from '@cowprotocol/cow-sdk'
 
-// Create order with wrapper
+// Create order with bundle
 const orderCreation: OrderCreation = {
     // ... standard order fields (sellToken, buyToken, amounts, etc.)
 
@@ -70,7 +82,7 @@ const orderCreation: OrderCreation = {
         // ... other appData fields
         wrappers: [
             {
-                target: "0x1234...",     // Flash loan wrapper address
+                target: "0x1234...",     // Flash loan bundle address
                 data: "0xabcd...",       // Encoded flash loan params
                 isOmittable: false      // Must execute
             }
@@ -82,20 +94,20 @@ const orderCreation: OrderCreation = {
 const orderId = await orderBookApi.sendOrder(orderCreation)
 ```
 
-### Example: Multiple Wrappers (Nested)
+### Example: Multiple Bundles (Nested)
 
-You can chain multiple wrappers in a single order:
+You can chain multiple bundles in a single order:
 
 ```typescript
 appData: {
     wrappers: [
         {
-            target: "0x1111...",     // Flash loan wrapper
+            target: "0x1111...",     // Flash loan bundle
             data: "0xaaaa...",
             isOmittable: false
         },
         {
-            target: "0x2222...",     // Leverage wrapper
+            target: "0x2222...",     // Leverage bundle
             data: "0xbbbb...",
             isOmittable: false
         }
@@ -103,11 +115,11 @@ appData: {
 }
 ```
 
-The wrappers execute in sequence: Wrapper1 → Wrapper2 → Settlement → Wrapper2 (post) → Wrapper1 (post). Note that wrappers from other users' orders may be interspersed, though this should generally not affect the execution of the order.
+The bundles execute in sequence: Bundle1 → Bundle2 → Settlement → Bundle2 (post) → Bundle1 (post). Note that bundles from other users' orders may be interspersed, though this should generally not affect the execution of the order.
 
-### Validating Wrapper Configuration
+### Validating Bundle Configuration
 
-Before submitting an order, you can confirm the wrapper encoding is valid using [`CowWrapperHelpers`](../reference/contracts/periphery/wrapper.mdx#cowwrapperhelpers).
+Before submitting an order, you can confirm the bundle encoding is valid using [`CowWrapperHelpers`](../reference/contracts/periphery/wrapper.mdx#cowwrapperhelpers).
 
 ```typescript
 // On-chain validation (via Ethers/Viem)
@@ -127,8 +139,8 @@ const isValid = await helper.verifyAndBuildWrapperData([
 ```
 
 This checks:
-- All wrappers are allowlisted
-- Each wrapper can parse its data successfully
+- All bundles are allowlisted
+- Each bundle can parse its data successfully
 
 See the [periphery contract reference](../reference/contracts/periphery/wrapper.mdx#cowwrapperhelpers) for deployment addresses.
 
@@ -136,11 +148,11 @@ See the [periphery contract reference](../reference/contracts/periphery/wrapper.
 
 ## For Solvers
 
-This section explains how to execute settlements that include wrapper contracts as part of your solver implementation.
+This section explains how to execute settlements that include bundle contracts as part of your solver implementation.
 
-### Detecting Wrapper Orders
+### Detecting Bundle Orders
 
-Wrappers are specified in the order's [`appData`](../reference/core/auctions/schema.md) under the `wrappers` field:
+Bundles are specified in the order's [`appData`](../reference/core/auctions/schema.md) under the `wrappers` field:
 
 ```json
 {
@@ -155,36 +167,36 @@ Wrappers are specified in the order's [`appData`](../reference/core/auctions/sch
 ```
 
 **Fields:**
-- **`target`**: Address of the wrapper contract
-- **`data`**: Wrapper-specific data
+- **`target`**: Address of the bundle contract
+- **`data`**: Bundle-specific data
 - **`isOmittable`**: Whether the `target` and `data` must be executed unmodified as part of the order execution
 
-`target` may be any address and `data` is arbitrary bytes that will be passed to the target. There is generally no need for decoding the wrapper data since the execution process uses the same opaque format on each wrapper.
+`target` may be any address and `data` is arbitrary bytes that will be passed to the target. There is generally no need for decoding the bundle data since the execution process uses the same opaque format on each bundle.
 
 ### Solver Requirements
 
-#### 1. Execute Non-Omittable Wrappers
+#### 1. Execute Non-Omittable Bundles
 
-Orders with `"isOmittable": false` **MUST** be executed with the specified wrapper. You may be slashed for not doing so.
+Orders with `"isOmittable": false` **MUST** be executed with the specified bundle. You may be slashed for not doing so.
 
-If `"isOmittable": true`, you MAY skip the wrapper if you find a better solution without it.
+If `"isOmittable": true`, you MAY skip the bundle if you find a better solution without it.
 
-#### 2. Verify Wrapper Authentication and Simulate
+#### 2. Verify Bundle Authentication and Simulate
 
-All approved wrappers will be approved by the DAO and registered in [`GPv2AllowlistAuthenticator`](../reference/contracts/core/allowlist.md). It is advised to verify this is the case before attempting to process a wrapper order.
+All approved bundles will be approved by the DAO and registered in [`GPv2AllowlistAuthenticator`](../reference/contracts/core/allowlist.md). It is advised to verify this is the case before attempting to process a bundle order.
 
-Additionally, wrappers define additional operations that may revert, so it is strongly recommended to *simulate the settlement transaction* while including the wrapper call to verify its viability. The call trace can also be inspected for any unusual behavior.
+Additionally, bundles define additional operations that may revert, so it is strongly recommended to *simulate the settlement transaction* while including the bundle call to verify its viability. The call trace can also be inspected for any unusual behavior.
 
 :::warning
-The wrapper will be _directly_ called from the solver address and will mediate the settlement.
+The bundle will be _directly_ called from the solver address and will mediate the settlement.
 Since the data is user-supplied, it may be malicious.
 :::
 
-#### 3. Include Wrappers in the Solution
+#### 3. Include Bundles in the Solution
 
-Whether using the CoW Protocol-provided driver or your own, ensure wrapper information flows from the auction to your final settlement transaction. This data should be passed unmodified from the orders in the auction to the final `Solution` submitted to the API.
+Whether using the CoW Protocol-provided driver or your own, ensure bundle information flows from the auction to your final settlement transaction. This data should be passed unmodified from the orders in the auction to the final `Solution` submitted to the API.
 
-### Encoding Wrapper Settlements
+### Encoding Bundle Settlements
 
 :::info
 If you're using the driver provided by CoW Protocol, you can skip this section - the driver handles encoding automatically.
@@ -192,22 +204,22 @@ If you're using the driver provided by CoW Protocol, you can skip this section -
 
 #### Manual Encoding
 
-To execute a settlement with wrappers:
+To execute a settlement with bundles:
 
 ##### 1. Change Transaction Target
 
-Your transaction should call `wrappedSettle()` on the **first** wrapper (not the settlement contract):
+Your transaction should call `wrappedSettle()` on the **first** bundle (not the settlement contract):
 
 ```typescript
-// Without wrapper
+// Without bundle
 tx = {
     to: SETTLEMENT_CONTRACT,
     data: encodeSettle(...)
 }
 
-// With wrapper
+// With bundle
 tx = {
-    to: wrappers[0].target,  // First wrapper address
+    to: wrappers[0].target,  // First bundle address
     data: encodeWrappedSettle(...) // See below
 }
 ```
@@ -234,7 +246,7 @@ Build `chainedWrapperData` according to the [Calldata Encoding Specification](..
 
 ```typescript
 const tx = {
-    // The `chainedWrapperData` does not include the first wrapper to call,
+    // The `chainedWrapperData` does not include the first bundle to call,
     // so it is supplied here as the _target_ of the settlement call.
     to: wrappers[0].target,
     data: wrapperContract.interface.encodeFunctionData("wrappedSettle", [
@@ -248,19 +260,19 @@ const tx = {
 
 `CowWrapperHelpers` is a read-only periphery contract that can be called to validate many important points prior to execution. See the [periphery contract documentation](../reference/contracts/periphery/wrapper.mdx#cowwrapperhelpers).
 
-### Accumulating Wrappers in Solutions
+### Accumulating Bundles in Solutions
 
 #### Using CoW-Provided Driver
 
-If you're using the CoW Protocol-provided driver, wrappers are handled automatically. Just ensure your solver process includes wrapper information in the solution output.
+If you're using the CoW Protocol-provided driver, bundles are handled automatically. Just ensure your solver process includes bundle information in the solution output.
 
 #### Custom Implementation
 
 If implementing your own solver:
 
-1. **Collect wrappers from orders**: As you process orders in an auction, collect all `wrappers` arrays from order appData
-2. **Aggregate for batch**: Combine wrappers needed for all orders in the settlement batch
-3. **Include in solution**: Add aggregated wrappers to your solution structure
+1. **Collect bundles from orders**: As you process orders in an auction, collect all `wrappers` arrays from order appData
+2. **Aggregate for batch**: Combine bundles needed for all orders in the settlement batch
+3. **Include in solution**: Add aggregated bundles to your solution structure
 4. **Encode transaction**: Use the encoding algorithm above to construct the final transaction
 
 **Example (conceptual):**
@@ -274,7 +286,7 @@ const solution = {
 
 for (const order of auction.orders) {
     if (order.appData.wrappers) {
-        // Add wrappers needed for this order
+        // Add bundles needed for this order
         solution.wrappers.push(...order.appData.wrappers);
     }
 }
@@ -283,7 +295,7 @@ for (const order of auction.orders) {
 // 1. Set tx target to solution.wrappers[0].target
 // 2. Build settleData from your normal GPv2Settlement.settle() calldata
 // 3. Build chainedWrapperData per the Calldata Encoding Specification in the reference docs
-// 4. Call wrappedSettle(settleData, chainedWrapperData) on the first wrapper
+// 4. Call wrappedSettle(settleData, chainedWrapperData) on the first bundle
 const tx = {
     to: solution.wrappers[0].target,
     data: wrapperContract.interface.encodeFunctionData("wrappedSettle", [
@@ -297,19 +309,19 @@ const tx = {
 
 #### Gas Estimation
 
-Account for wrapper gas overhead in your bids — see [Gas Overhead](../reference/contracts/periphery/wrapper.mdx#gas-overhead) for benchmarks and scaling factors. The easiest way to estimate overhead for a specific wrapper is to simulate the wrapper transaction against an empty settlement.
+Account for bundle gas overhead in your bids — see [Gas Overhead](../reference/contracts/periphery/wrapper.mdx#gas-overhead) for benchmarks and scaling factors. The easiest way to estimate overhead for a specific bundle is to simulate the bundle transaction against an empty settlement.
 
 ### Common Issues
 
 #### Issue: "Not authorized" error
 
-**Cause**: Wrapper is not allowlisted in `GPv2AllowlistAuthenticator`
+**Cause**: Bundle is not allowlisted in `GPv2AllowlistAuthenticator`
 
-**Solution**: Verify wrapper is DAO-approved before including in settlement
+**Solution**: Verify bundle is DAO-approved before including in settlement
 
-#### Issue: Settlement reverts in wrapper
+#### Issue: Settlement reverts in bundle
 
-**Cause**: Incorrect encoding or wrapper-specific validation failure
+**Cause**: Incorrect encoding or bundle-specific validation failure
 
 **Solution**:
 - Verify `settleData` is identical to what you'd send to `GPv2Settlement.settle()`
@@ -319,7 +331,7 @@ Account for wrapper gas overhead in your bids — see [Gas Overhead](../referenc
 ### Solver Resources
 
 #### Documentation
-- **[Wrapper Concepts](../concepts/order-types/wrappers.md)** - High-level overview
+- **[Bundle Concepts](../concepts/order-types/wrappers.md)** - High-level overview
 - **[Contracts Reference](../reference/contracts/periphery/wrapper.mdx)** - Contract specifications
 - **[Services PR #3700](https://github.com/cowprotocol/services/pull/3700)** - Reference encoding implementation in production
 
