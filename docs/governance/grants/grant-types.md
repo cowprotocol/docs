@@ -33,7 +33,7 @@ Time-based grants are not tied to specific deliverables but to the provision of 
 
 **When to choose:**
 * Your contribution involves ongoing work or maintenance
-* The value is in consistent effort rather than specific outputs
+* Value is measured in consistent effort rather than specific outputs
 * Your role requires flexibility in addressing emerging needs
 
 ## Volume Grants
