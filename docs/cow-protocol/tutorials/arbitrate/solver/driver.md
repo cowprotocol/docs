@@ -53,9 +53,10 @@ The auctions sent to the driver by the autopilot only contain the bare minimum o
 But usually a solver engine requires more information than that so the driver pre-processes the auction before forwarding it to the solver engine.
 We also want to reduce the overall workload of a solver engine, since it's usually expensive to match an order (in terms of time, RPC requests, API calls, etc.).
 That process includes:
-* fetching additional metadata (e.g. token decimals)
-* discarding orders that can definitely not be settled (e.g. user is missing balances)
-* very basic prioritization of remaining orders (e.g. orders below or close to the market price are most likely to settle)
+
+- fetching additional metadata (e.g. token decimals)
+- discarding orders that can definitely not be settled (e.g. user is missing balances)
+- very basic prioritization of remaining orders (e.g. orders below or close to the market price are most likely to settle)
 
 ### Fetching liquidity
 
@@ -92,10 +93,11 @@ The driver can be configured to use different submission strategies which it dyn
 If the settlement does not expose any MEV (e.g. it executes all trades without AMMs) it's safe and most efficient to directly submit to the public mempool.
 However, if a settlement exposes MEV the driver would submit to an MEV-protected RPC like [MEVBlocker](https://mevblocker.io).
 
+Solvers that need parallel settlement submission can use [Solver7702Delegate](../../solvers/solver-7702-delegate.md). It keeps the existing solver EOA as the settlement caller while auxiliary EOAs provide additional nonce lanes if the main solver EOA has pending transactions.
+
 ### Flash Loans
 
 The user is able to create a flash loan order's hint by attaching to the `appData` the specified metadata. The autopilot reads the order and cuts it into a [fair combinatorial batch auction](../../../concepts/introduction/fair-combinatorial-auction). Then the driver fetches the `appData` by calling the orderbook with `GET /v1/app_data/<app_data_hash>` for every order and caches them in memory. The driver should include the flash loan information into the batch auction's order before sending it to the solver(s).
-
 
 ```mermaid
 sequenceDiagram

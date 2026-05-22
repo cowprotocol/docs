@@ -48,6 +48,8 @@ The first step to joining the solver competition is to set up a solver. We have 
 
 API specification: <https://github.com/cowprotocol/services/blob/main/crates/solvers/openapi.yml>
 
+Solvers that need parallel settlement submission can use [Solver7702Delegate](./solver-7702-delegate.md) to keep their existing solver EOA while adding extra submission nonce lanes.
+
 ## 3. Joining the shadow (test) competition
 
 Once you have a solver running locally you can join the shadow competition to start testing your solver using CoW Protocol's order flow.
