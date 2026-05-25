@@ -140,11 +140,14 @@ If you run a custom driver, it must:
 - deploy the delegate with the expected caller set;
 - create the ERC-7702 authorization for the solver EOA;
 - submit the authorization transaction;
+- sign the authorization for the next nonce if the solver EOA also sends the authorization transaction;
 - route delegated settlements with `to = solver EOA`;
 - encode delegated calldata as `bytes20(target) || targetCalldata`;
 - simulate the exact transaction shape before sending it.
 
 The reference driver sends the delegation setup as an inert zero-value transaction from the solver EOA to the zero address with the ERC-7702 authorization attached. It does not combine delegation setup with delegate deployment, because a reverted transaction can still leave the ERC-7702 authorization applied.
+
+With Foundry, this means using `cast wallet sign-auth --self-broadcast` when the solver EOA submits its own authorization transaction. Do not use `--self-broadcast` when a different funded EOA submits that transaction.
 
 ## Verification
 
