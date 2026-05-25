@@ -55,7 +55,7 @@ We also want to reduce the overall workload of a solver engine, since it's usual
 That process includes:
 
 - fetching additional metadata (e.g. token decimals)
-- discarding orders that can definitely not be settled (e.g. user is missing balances)
+- discarding orders that cannot be settled (e.g. user is missing balances)
 - very basic prioritization of remaining orders (e.g. orders below or close to the market price are most likely to settle)
 
 ### Fetching liquidity
