@@ -13,7 +13,7 @@ There are a number of [financial](#financial-benefits-of-intents) and [technical
 
 When a user places a trade directly on-chain, the execution path is set in stone and the trader receives whatever price (+/- slippage) the AMM or aggregator they're trading on gives them. 
 
-Thanks to its intent-based architecture, CoW Protocol separates user intent expression from settlement-route optimisation. Independent [solvers](./solvers) compete to find valid settlement paths that satisfy user-signed constraints. 
+Thanks to its intent-based architecture, CoW Protocol separates user intent expression from settlement-route optimization. Independent [solvers](./solvers) compete to find valid settlement paths that satisfy user-signed constraints.
 
 Solvers not only scan all available on-chain liquidity (similar to a DEX aggregator) they also provide extra price improvements in several ways:
 
