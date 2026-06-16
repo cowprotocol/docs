@@ -156,4 +156,4 @@ In the staging (barn) competition settling happens on-chain but the volume is mu
 Finally, production is where the solver is participating in the main solver competition.
 
 ### Are there any prerequisites in the shadow environment that we must meet before being allowed to join staging?
-No, there are no prerequisites (other than KYC if joining the CoW DAO bonding pool) but it is recommended that the solver manages to submit and win solutions on shadow before staging.
+No prerequisites apply, though solvers are encouraged to successfully submit and win solutions on shadow before moving to staging. Note: joining the CoW DAO bonding pool requires KYC.
