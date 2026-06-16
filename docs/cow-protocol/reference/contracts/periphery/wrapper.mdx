@@ -2,9 +2,9 @@
 sidebar_position: 7
 ---
 
-# Generalized Wrappers
+# Atomic Bundles
 
-Generalized wrappers are smart contracts that enable custom logic to execute before and after CoW Protocol settlement operations. This reference documents the contract interfaces, implementation patterns, and on-chain behavior of the wrapper system.
+Atomic Bundles are smart contracts that enable custom logic to execute before and after CoW Protocol settlement operations. This reference documents the contract interfaces, implementation patterns, and on-chain behavior of the wrapper system.
 
 ## Architecture
 
@@ -39,24 +39,24 @@ sequenceDiagram
 ### Key Design Principles
 
 1. **Abstract**: There are very few limitations on what a wrapper can/can't do around a settlement transaction
-2. **Efficient Encoding**: Wrapper-specific data appended to minimize gas overhead
-3. **Nested Support**: Multiple wrappers chain by encoding addresses sequentially, allowing CoW orders
-4. **Authentication**: Only allowlisted wrappers can call settlement contract
+2. **Efficient Encoding**: Bundle-specific data appended to minimize gas overhead
+3. **Nested Support**: Multiple bundles chain by encoding addresses sequentially, allowing CoW orders
+4. **Authentication**: Only allowlisted bundles can call settlement contract
 
 ## Implementation
 
-Developers looking to integrate using wrappers should copy this all-in-one solidity file into their project as vendored dependency.
+Developers looking to integrate using Atomic Bundles should copy this all-in-one solidity file into their project as vendored dependency.
 
 It provides a few base contracts which can serve as the foundation for integration:
 
-- **`ICowWrapper`**: Core interface all wrappers must implement
+- **`ICowWrapper`**: Core interface all bundles must implement
 - **`CowWrapper`**: Abstract base contract providing security and utilities that all wrappers should use
 
 See the code for [`CowWrapper.sol` on GitHub](https://github.com/cowprotocol/euler-integration-contracts/blob/master/src/CowWrapper.sol).
 
 ### Quick Start Example
 
-The [`EmptyWrapper`](https://github.com/cowprotocol/euler-integration-contracts/blob/master/test/EmptyWrapper.sol) serves as a good starting point for building a wrapper. Following this, the implementation functions should be filled in as described below.
+The [`EmptyWrapper`](https://github.com/cowprotocol/euler-integration-contracts/blob/master/test/EmptyWrapper.sol) serves as a good starting point for building a bundle. Following this, the implementation functions should be filled in as described below.
 
 ### Virtual Functions for integrators
 
@@ -69,7 +69,7 @@ function _wrap(bytes calldata settleData, bytes calldata wrapperData, bytes call
 ```
 
 **Implementation Requirements:**
-- Parse wrapper-specific data from `wrapperData` as required
+- Parse bundle-specific data from `wrapperData` as required
 - Execute pre-settlement logic
 - Call `_next(remainingWrapperData)` to continue chain
 - Execute post-settlement logic
@@ -111,7 +111,7 @@ function validateWrapperData(
 
 #### `_next`
 
-Continues the wrapper chain or calls settlement. Handles all parsing and routing automatically.
+Continues the bundle chain or calls settlement. Handles all parsing and routing automatically.
 
 ```solidity
 function _next(bytes calldata settleData, bytes calldata remainingWrapperData) internal;
@@ -145,7 +145,7 @@ The `chainedWrapperData`  parameter of `wrappedSettle(settleData, chainedWrapper
 
 #### `wrappedSettle`
 
-Entry point for wrapper execution. Validates caller authentication and delegates to `_wrap()`--where integrators place their custom logic. See the [full implementation in `CowWrapper.sol`](https://github.com/cowprotocol/euler-integration-contracts/blob/master/src/CowWrapper.sol).
+Entry point for bundle execution. Validates caller authentication and delegates to `_wrap()`--where integrators place their custom logic. See the [full implementation in `CowWrapper.sol`](https://github.com/cowprotocol/euler-integration-contracts/blob/master/src/CowWrapper.sol).
 
 **Parameters:**
 - `settleData`: Original `GPv2Settlement.settle(...)` calldata
@@ -153,7 +153,7 @@ Entry point for wrapper execution. Validates caller authentication and delegates
 
 ## CowWrapperHelpers
 
-A view-only periphery contract for validating and encoding wrapper chains. See the [source code](https://github.com/cowprotocol/euler-integration-contracts/blob/master/src/CowWrapperHelpers.sol) for the complete implementation.
+A view-only periphery contract for validating and encoding bundle chains. See the [source code](https://github.com/cowprotocol/euler-integration-contracts/blob/master/src/CowWrapperHelpers.sol) for the complete implementation.
 
 ### Deployments
 
@@ -196,7 +196,7 @@ contract CowWrapperHelpers {
 
 #### 1. Audit by a Reputable Firm
 
-The wrapper contract must be audited by a reputable security firm before submission for allowlist approval. The audit report should be made available to the CoW DAO as part of the approval process.
+The bundle contract must be audited by a reputable security firm before submission for allowlist approval. The audit report should be made available to the CoW DAO as part of the approval process.
 
 #### 2. Use CowWrapper Abstract Contract
 
@@ -226,9 +226,9 @@ function _wrap(bytes calldata settleData, bytes calldata wrapperData, bytes call
 
 #### 4. Assume All Parameters Are Untrusted
 
-Settlement data can be modified by nested wrappers, and solvers can supply arbitrary calldata. If it is important for your wrapper to be able to validate the wrapper it is receiving, only trust signature-protected or on-chain validated parameters.
+Settlement data can be modified by nested bundles, and solvers can supply arbitrary calldata. If it is important for your bundle to be able to validate the bundle it is receiving, only trust signature-protected or on-chain validated parameters.
 
-As a concrete implication: **hooks cannot be enforced by inspecting settlement interaction data**. Neither checking that a desired hook is present in `settleData`, nor injecting a hook into the forwarded `settleData`, provides any guarantee — an intermediate wrapper can freely modify `settleData` before passing it along.
+As a concrete implication: **hooks cannot be enforced by inspecting settlement interaction data**. Neither checking that a desired hook is present in `settleData`, nor injecting a hook into the forwarded `settleData`, provides any guarantee — an intermediate bundle can freely modify `settleData` before passing it along.
 
 #### 5. Deterministic Parsing Required
 
@@ -256,11 +256,11 @@ In the example above, your `_wrap` code can always reject deadline past expired 
 
 #### 6. Defensive Design
 
-Though a solver would be slashed for doing so, there is no hard guarantee wrapper executes even if user specifies it. Additionally, even when a wrapper does execute, there is no guarantee that `settle` will eventually be called — an earlier wrapper in the chain could skip calling `_next()` entirely. Wrappers should not assume that settlement will complete.
+Though a solver would be slashed for doing so, there is no hard guarantee bundle executes even if user specifies it. Additionally, even when a bundle does execute, there is no guarantee that `settle` will eventually be called — an earlier bundle in the chain could skip calling `_next()` entirely. Bundles should not assume that settlement will complete.
 
 ### Gas Overhead
 
-Wrapper execution adds gas overhead to settlements.
+Atomic Bundle execution adds gas overhead to settlements.
 
 **Benchmark (EmptyWrapper on Ethereum mainnet):**
 
@@ -272,8 +272,8 @@ Wrapper execution adds gas overhead to settlements.
 
 **Scaling Factors:**
 - Settlement data size (calldata copying)
-- Wrapper logic complexity
-- Number of nested wrappers
+- Bundle logic complexity
+- Number of nested bundles
 
 **Methodology:** Single Uniswap V3 WETH→USDC trade. See [services PR #3700](https://github.com/cowprotocol/services/pull/3700).
 
