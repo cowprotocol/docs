@@ -93,7 +93,7 @@ The driver can be configured to use different submission strategies which it dyn
 If the settlement does not expose any MEV (e.g. it executes all trades without AMMs) it's safe and most efficient to directly submit to the public mempool.
 However, if a settlement exposes MEV the driver would submit to an MEV-protected RPC like [MEVBlocker](https://mevblocker.io).
 
-Solvers that need parallel settlement submission can use [Solver7702Delegate](../../solvers/solver-7702-delegate.md). It keeps the existing solver EOA as the settlement caller while auxiliary EOAs provide additional nonce lanes if the main solver EOA has pending transactions.
+Solvers that expect real settlement volume should set up [Solver7702Delegate](../../solvers/solver-7702-delegate.md) early. It keeps the existing solver EOA as the settlement caller while auxiliary EOAs provide additional nonce lanes when the solver EOA has pending transactions.
 
 ### Flash Loans
 
