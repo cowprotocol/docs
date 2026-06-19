@@ -38,6 +38,14 @@ The solver `account` must be able to sign the ERC-7702 authorization. Each `subm
 
 Fund each auxiliary EOA with the chain's native token so it can pay gas.
 
+:::warning
+
+Treat auxiliary EOAs as operationally sensitive accounts. Any approved auxiliary EOA can submit settlements through the solver EOA while the delegation is active. Keep their keys in the same security setup as the solver EOA, monitor their native-token balances, and make sure the team responsible for the solver EOA is also responsible for these accounts.
+
+If an auxiliary key is compromised, rotate the delegation by configuring a new approved caller set and re-delegating from the solver EOA.
+
+:::
+
 At startup, the reference driver deploys `Solver7702Delegate` at the expected CREATE2 address, or reuses the existing deployment at that address. When the solver EOA is busy, it uses the auxiliary accounts to submit settlements through separate nonce lanes.
 
 ## What changes when submitting
