@@ -15,6 +15,14 @@ keywords:
 
 Solvers expecting production volume should set this up early. With one EOA, a pending transaction can block every settlement behind it. Auxiliary EOAs can submit in parallel, while `GPv2Settlement` still sees the solver EOA as `msg.sender`.
 
+:::warning
+
+Treat auxiliary EOAs as operationally sensitive accounts. Any approved auxiliary EOA can submit settlements through the solver EOA while the delegation is active. Keep their keys in the same security setup as the solver EOA, monitor their native-token balances, and make sure the team responsible for the solver EOA is also responsible for these accounts.
+
+If an auxiliary key is compromised, rotate the delegation by configuring a new approved caller set and re-delegating from the solver EOA.
+
+:::
+
 ## Reference driver setup
 
 If you use the reference driver, add `submission-accounts` to the solver entry in your driver config. This is all most solvers need to configure.
@@ -37,14 +45,6 @@ submission-accounts = [
 The solver `account` must be able to sign the ERC-7702 authorization. Each `submission-accounts` entry must also include signing credentials, not only an address.
 
 Fund each auxiliary EOA with the chain's native token so it can pay gas.
-
-:::warning
-
-Treat auxiliary EOAs as operationally sensitive accounts. Any approved auxiliary EOA can submit settlements through the solver EOA while the delegation is active. Keep their keys in the same security setup as the solver EOA, monitor their native-token balances, and make sure the team responsible for the solver EOA is also responsible for these accounts.
-
-If an auxiliary key is compromised, rotate the delegation by configuring a new approved caller set and re-delegating from the solver EOA.
-
-:::
 
 At startup, the reference driver deploys `Solver7702Delegate` at the expected CREATE2 address, or reuses the existing deployment at that address. When the solver EOA is busy, it uses the auxiliary accounts to submit settlements through separate nonce lanes.
 
