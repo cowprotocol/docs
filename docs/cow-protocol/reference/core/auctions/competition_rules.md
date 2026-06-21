@@ -59,14 +59,15 @@ All solvers participating in the solver competition must abide by certain rules.
 The deadline for solutions depends on the network and is set as a specific number of blocks after the current block at the time of sending the settle request to the solver:
 
 - Mainnet: 3 blocks
-- Arbitrum: 40 blocks
-- Gnosis chain: 5 blocks
-- Base: 20 blocks
-- Avalanche: 20 blocks
-- Polygon: 20 blocks
-- BNB: 40 blocks
-- Linea: 20 blocks
-- Plasma: 20 blocks
+- Gnosis chain: 3 blocks
+- Arbitrum: 11 blocks
+- Base: 4 blocks
+- Avalanche: 8 blocks
+- Polygon: 8 blocks
+- BNB: 5 blocks
+- Linea: 4 blocks
+- Plasma: 5 blocks
+- Ink: 5 blocks
 <!-- Blocks defined here https://github.com/cowprotocol/infrastructure/blob/staging/services/autopilot/config/index.ts#L21 -->
 
 :::
