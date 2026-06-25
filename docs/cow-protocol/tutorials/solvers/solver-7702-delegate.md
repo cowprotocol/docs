@@ -11,9 +11,9 @@ keywords:
 
 # Parallel Settlement Submission
 
-`Solver7702Delegate` lets a solver keep its existing allowlisted EOA and use auxiliary EOAs as additional nonce lanes for settlement submission.
+[`Solver7702Delegate`](https://github.com/cowprotocol/solver-7702-delegate/blob/main/src/Solver7702Delegate.sol) lets a solver keep its existing allowlisted EOA and use auxiliary EOAs as additional nonce lanes for settlement submission.
 
-Solvers expecting production volume should set this up early. With one EOA, a pending transaction can block every settlement behind it. Auxiliary EOAs can submit in parallel, while `GPv2Settlement` still sees the solver EOA as `msg.sender`.
+If a solver may submit more than one settlement at a time, it can set this up early. Ethereum executes transactions from the same EOA in nonce order, so one pending transaction can block subsequent settlement transactions. Auxiliary EOAs can submit in parallel, while `GPv2Settlement` still sees the solver EOA as `msg.sender`.
 
 :::warning
 
@@ -48,6 +48,8 @@ Fund each auxiliary EOA with the chain's native token so it can pay gas.
 
 At startup, the reference driver deploys `Solver7702Delegate` at the expected CREATE2 address, or reuses the existing deployment at that address. When the solver EOA is busy, it uses the auxiliary accounts to submit settlements through separate nonce lanes.
 
+The delegate is immutable. Approved auxiliary EOAs are hardcoded into the deployed bytecode, so the caller set cannot be changed after deployment. To change it, deploy a new delegate and re-delegate the solver EOA.
+
 ## What changes when submitting
 
 When the solver EOA is free, it submits directly to `GPv2Settlement`. If it already has a pending transaction, an auxiliary EOA can submit to the solver EOA instead. The solver EOA runs `Solver7702Delegate`, which forwards the call to `GPv2Settlement`.
@@ -56,19 +58,28 @@ When the solver EOA is free, it submits directly to `GPv2Settlement`. If it alre
 flowchart LR
     SolverEOA{"Solver EOA"}
     DirectTx["tx.data = settle(...)"]
-    AuxEOAs{"Auxiliary EOAs<br/>0...N"}
+    Aux1{"Auxiliary EOA 1"}
+    Aux2{"Auxiliary EOA 2"}
+    Aux3{"Auxiliary EOA 3"}
+    Aux4{"Auxiliary EOA 4"}
+    Aux5{"Auxiliary EOA 5"}
     DelegatedTx["tx.data = bytes20(target)<br/>|| targetCalldata"]
     DelegatedSolver["Solver EOA<br/>delegated to Solver7702Delegate"]
     TargetCall["target = GPv2Settlement<br/>targetCalldata = settle(...)"]
     Settlement["GPv2Settlement"]
 
     SolverEOA --> DirectTx --> Settlement
-    AuxEOAs --> DelegatedTx --> DelegatedSolver --> TargetCall --> Settlement
+    Aux1 --> DelegatedTx
+    Aux2 --> DelegatedTx
+    Aux3 --> DelegatedTx
+    Aux4 --> DelegatedTx
+    Aux5 --> DelegatedTx
+    DelegatedTx --> DelegatedSolver --> TargetCall --> Settlement
 
     classDef eoa fill:#fff3bf,stroke:#b08900,color:#1f2937
     classDef tx fill:#f3f0ff,stroke:#7048e8,color:#1f2937
     classDef contract fill:#1864ab,stroke:#0b3558,stroke-width:3px,color:#ffffff,font-weight:bold
-    class SolverEOA,AuxEOAs eoa
+    class SolverEOA,Aux1,Aux2,Aux3,Aux4,Aux5 eoa
     class DirectTx,DelegatedTx,TargetCall tx
     class DelegatedSolver,Settlement contract
 ```
