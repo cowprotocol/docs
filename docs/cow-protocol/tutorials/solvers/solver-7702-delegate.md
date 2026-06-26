@@ -94,7 +94,7 @@ First, check that the solver EOA points to the expected delegate:
 cast code <solver_eoa> --rpc-url <rpc_url>
 ```
 
-For ERC-7702, the code has this form:
+Make sure, the returned code follows [ERC-7702](https://eips.ethereum.org/EIPS/eip-7702) standard. The code should be:
 
 ```text
 0xef0100 || delegate_address
