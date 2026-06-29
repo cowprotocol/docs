@@ -9,6 +9,7 @@ The API integration allows you to interact with CoW Protocol at the lowest level
 ## Key APIs
 
 ### Order Book API
+
 The primary API for creating and managing orders on CoW Protocol.
 
 - **Base URL**: `https://api.cow.fi/`
@@ -18,6 +19,7 @@ The primary API for creating and managing orders on CoW Protocol.
 ### Key Endpoints
 
 - `POST /api/v1/quote` - Get trading quotes
+- `POST /api/v1/quote/stream` - Stream quotes from individual solvers as they arrive (SSE)
 - `POST /api/v1/orders` - Submit signed orders
 - `GET /api/v1/orders/{uid}` - Get order details
 - `DELETE /api/v1/orders/{uid}` - Cancel orders
@@ -70,6 +72,39 @@ const orderDetails = await orderResponse.json()
 
 console.log('Order status:', orderDetails.status)
 ```
+
+## Streaming Quotes
+
+`POST /api/v1/quote/stream` takes the same request body as `POST /api/v1/quote` but returns a [Server-Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events) stream instead of one response. Each solver's quote arrives as its own event, so you can show prices as they come in instead of waiting for the slowest solver.
+
+Each event's `data` is an `OrderQuoteResponse`, the same shape `POST /api/v1/quote` returns, with `id` set to `null`. Solvers without a quote send nothing, so you may receive fewer events than there are solvers. If no solver returns a usable quote, the server sends a final `error` event with a `NoLiquidity` body, then closes.
+
+```bash
+curl -N -X POST "https://api.cow.fi/mainnet/api/v1/quote/stream" \
+  -H "Content-Type: application/json" \
+  -H "Accept: text/event-stream" \
+  -d '{
+    "sellToken": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+    "buyToken": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+    "sellAmountBeforeFee": "1000000000000000000",
+    "kind": "sell",
+    "from": "0xYourWalletAddress"
+  }'
+```
+
+### Choosing a timeout
+
+The client side owns this decision. The stream stays open until the request `timeout` elapses, or every solver has responded, so the value you set determines both how long you wait and which quotes you see. Set `timeout` (milliseconds) on the request, or close the connection yourself once you have a good-enough quote.
+
+Streaming delivers quotes as they arrive, but it doesn't make any solver respond faster, so it isn't simply a quicker `/quote`. How much a short timeout helps depends on the pair: fast solvers cover liquid pairs in a few hundred milliseconds, while a thinner pair might rely on a single slower solver that a tight timeout would miss. It's worth tuning the value to the pairs you serve.
+
+Treat the values below as a starting point, not a guarantee. Measure against your own traffic, and raise the timeout for pairs that only slower solvers can price. Quote response times also differ by network. These are guidance as of 2026-06 and shift as solver performance changes.
+
+| Network | `timeout` (ms) |
+|---|---|
+| Base, Gnosis Chain, Linea | 1000 |
+| Mainnet, BNB Chain | 1800 |
+| Arbitrum, Polygon, Avalanche, Ink | 2500 |
 
 ## Network Endpoints
 
@@ -164,3 +199,4 @@ For complete API documentation including all endpoints, parameters, and response
 - **[API Explorer](https://api.cow.fi/docs/)** - Interactive documentation
 - **[GitHub Examples](https://github.com/cowprotocol/cow-sdk/tree/main/examples)** - Code examples
 - **[Order Signing Guide](../reference/core/signing_schemes.mdx)** - Cryptographic signing details
+
