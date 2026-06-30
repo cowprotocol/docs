@@ -75,9 +75,12 @@ console.log('Order status:', orderDetails.status)
 
 ## Streaming Quotes
 
-`POST /api/v1/quote/stream` takes the same request body as `POST /api/v1/quote` but returns a [Server-Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events) stream instead of one response. Each solver's quote arrives as its own event, so you can show prices as they come in instead of waiting for the slowest solver.
+`POST /api/v1/quote/stream` takes the same request body as `POST /api/v1/quote`, but returns a [Server-Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events) stream instead of a single response.
+Each solver's quote arrives as its own event, so you can show a price as soon as the fastest solver responds instead of waiting for the whole competition.
 
-Each event's `data` is an `OrderQuoteResponse`, the same shape `POST /api/v1/quote` returns, with `id` set to `null`. Solvers without a quote send nothing, so you may receive fewer events than there are solvers. If no solver returns a usable quote, the server sends a final `error` event with a `NoLiquidity` body, then closes.
+Each event's `data` is an `OrderQuoteResponse`, the same shape `POST /api/v1/quote` returns, with `id` set to `null`.
+Solvers without a quote send nothing, so you may receive fewer events than there are solvers.
+If no solver returns a usable quote, the server sends a final `error` event with a `NoLiquidity` body, then closes.
 
 ```bash
 curl -N -X POST "https://api.cow.fi/mainnet/api/v1/quote/stream" \
@@ -94,11 +97,21 @@ curl -N -X POST "https://api.cow.fi/mainnet/api/v1/quote/stream" \
 
 ### Choosing a timeout
 
-The client side owns this decision. The stream stays open until the request `timeout` elapses, or every solver has responded, so the value you set determines both how long you wait and which quotes you see. Set `timeout` (milliseconds) on the request, or close the connection yourself once you have a good-enough quote.
+You receive each quote as soon as its solver responds, so a usable price arrives faster than with `POST /api/v1/quote`, which waits for the whole competition.
+Streaming does not make any solver compute faster, though.
+The quote you act on is only as good as the responses that arrived before you stopped reading, and the `timeout` sets that boundary.
 
-Streaming delivers quotes as they arrive, but it doesn't make any solver respond faster, so it isn't simply a quicker `/quote`. How much a short timeout helps depends on the pair: fast solvers cover liquid pairs in a few hundred milliseconds, while a thinner pair might rely on a single slower solver that a tight timeout would miss. It's worth tuning the value to the pairs you serve.
+The stream stays open until the request `timeout` elapses or every solver has responded.
+Slower solvers sometimes return a better price, especially on thin or unusual pairs that only one or two solvers can quote.
+A short timeout returns sooner, but it can leave you with a worse quote or none at all.
+A longer timeout gives the competition time to find a better price.
 
-Treat the values below as a starting point, not a guarantee. Measure against your own traffic, and raise the timeout for pairs that only slower solvers can price. Quote response times also differ by network. These are guidance as of 2026-06 and shift as solver performance changes.
+You own this tradeoff.
+Set `timeout` (milliseconds) on the request, or read events and close the connection once you have a good-enough quote.
+
+The table below is a starting point, not a guarantee.
+Measure against your own traffic, and raise the timeout for pairs that only slower solvers can price.
+Response times also differ by network, and these values shift as solver performance changes (guidance as of 2026-06).
 
 | Network | `timeout` (ms) |
 |---|---|
