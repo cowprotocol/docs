@@ -76,10 +76,10 @@ console.log('Order status:', orderDetails.status)
 ## Streaming Quotes
 
 `POST /api/v1/quote/stream` takes the same request body as `POST /api/v1/quote`, but returns a [Server-Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events) stream instead of a single response.
-Each solver's quote arrives as its own event, so you can show a price as soon as the fastest solver responds instead of waiting for the whole competition.
+Each solver's quote arrives as its own event, so the client can show a price as soon as the fastest solver responds instead of waiting for the whole competition.
 
 Each event's `data` is an `OrderQuoteResponse`, the same shape `POST /api/v1/quote` returns, with `id` set to `null`.
-Solvers without a quote send nothing, so you may receive fewer events than there are solvers.
+Solvers without a quote send nothing, so the stream may contain fewer events than there are solvers.
 If no solver returns a usable quote, the server sends a final `error` event with a `NoLiquidity` body, then closes.
 
 ```bash
@@ -97,20 +97,20 @@ curl -N -X POST "https://api.cow.fi/mainnet/api/v1/quote/stream" \
 
 ### Choosing a timeout
 
-You receive each quote as soon as its solver responds, so a usable price arrives faster than with `POST /api/v1/quote`, which waits for the whole competition.
+Each quote is delivered as soon as its solver responds, so a usable price arrives faster than with `POST /api/v1/quote`, which waits for the whole competition.
 Streaming does not make any solver compute faster, though.
-The quote you act on is only as good as the responses that arrived before you stopped reading, and the `timeout` sets that boundary.
+The final quote is only as good as the responses that arrived before the stream was closed, and the `timeout` sets that boundary.
 
 The stream stays open until the request `timeout` elapses or every solver has responded.
 Slower solvers sometimes return a better price, especially on thin or unusual pairs that only one or two solvers can quote.
-A short timeout returns sooner, but it can leave you with a worse quote or none at all.
+A short timeout returns sooner, but it can yield a worse quote or none at all.
 A longer timeout gives the competition time to find a better price.
 
-You own this tradeoff.
-Set `timeout` (milliseconds) on the request, or read events and close the connection once you have a good-enough quote.
+This tradeoff is controlled by the client through the `timeout`.
+The value is set (in milliseconds) on the request, or the connection is closed once a good-enough quote has arrived.
 
 The table below is a starting point, not a guarantee.
-Measure against your own traffic, and raise the timeout for pairs that only slower solvers can price.
+The values should be measured against real traffic and raised for pairs that only slower solvers can price.
 Response times also differ by network, and these values shift as solver performance changes (guidance as of 2026-06).
 
 | Network | `timeout` (ms) |
