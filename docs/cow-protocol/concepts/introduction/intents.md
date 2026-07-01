@@ -5,7 +5,7 @@ sidebar_position: 1
 # Intents
 
 Rather than placing orders by _**signing a raw transaction**_ that executes directly on-chain (i.e. as happens on Uniswap or SushiSwap), CoW Protocol users place orders by _**signing an "intent to trade" message**_ that specifies parameters like the assets and amounts they would like to trade.
-The intent is a signed message which allows the solvers to execute a trade on behalf of the user using their specified assets and amounts. 
+An intent is not an executable user transaction. It is a signed expression of trading constraints. Solvers compete to construct settlement solutions that satisfy those constraints, and the settlement contract verifies the user’s signature and settlement conditions before execution. 
 
 There are a number of [financial](#financial-benefits-of-intents) and [technical](#technical-benefits-of-intents) advantages to intent-based trading.
 
