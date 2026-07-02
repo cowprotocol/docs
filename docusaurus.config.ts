@@ -204,7 +204,7 @@ const config: Config = {
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
-      additionalLanguages: ['solidity', 'json'],
+      additionalLanguages: ['solidity', 'json', 'toml'],
     },
     colorMode: {
       defaultMode: 'light',
