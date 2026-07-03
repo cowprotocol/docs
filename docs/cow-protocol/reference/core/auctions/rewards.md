@@ -71,7 +71,13 @@ $$
 
 where $$\textrm{protocolFee}_i$$ is the protocol fee (excluding partner fees) earned from the trades in all solutions successfully executed onchain by solver $$i$$ in that auction and $$\beta$$ is the chain-specific parameter defined above. When the performance reward is a penalty (i.e., negative), the penalty itself contributes to the consistency budget. The total consistency budget for an accounting period is the sum of these contributions across all solvers and auctions.
 
-The consistency budget is distributed at the end of each accounting period according to a consistency metric. The core team has a mandate to adapt this metric when they see fit; every change will be announced in advance on the [CoW Protocol forum](https://forum.cow.fi).
+The consistency budget is distributed at the end of each accounting period according to a consistency metric: solver $$i$$ receives
+
+$$
+\textrm{consistencyReward}_i = \frac{\textrm{consistencyMetric}_i}{\sum_{j} \textrm{consistencyMetric}_j} \cdot \textrm{consistencyBudget},
+$$
+
+where the sum runs over all solvers. The core team has a mandate to adapt this metric when they see fit; every change will be announced in advance on the [CoW Protocol forum](https://forum.cow.fi).
 
 **Current metric: bid quality and settlement success.** Since June 30, 2026, each solver's share of the consistency budget is proportional to a metric that combines the quality of the solver's bids with its settlement success rate, as announced in [this forum post](https://forum.cow.fi/t/consistency-metric-v2/3474). It replaces an earlier metric that simply counted the executed orders a solver had bid on.
 
@@ -83,7 +89,7 @@ $$
 \textrm{orderShare}_i(o) = \frac{\textrm{surplus}_i(o)}{\sum_{j} \textrm{surplus}_j(o)},
 $$
 
-where $$\textrm{surplus}_i(o)$$ is the largest surplus that any of solver $$i$$'s solutions proposed for order $$o$$ in that auction (the difference between the proposed execution amounts and the order's limit amounts), and the sum runs over all solvers that bid on the order. Only solutions that pass the fairness filtering are considered. Since each order distributes a total weight of one, orders with few bidders yield a larger share for each of them, an incentive for solvers to join competitions with little participation.
+where $$\textrm{surplus}_i(o)$$ is the largest surplus that any of solver $$i$$'s solutions proposed for order $$o$$ in that auction (the difference between the proposed execution amounts and the order's limit amounts), and the sum runs over all solvers that bid on the order. We stress that only solutions that pass the fairness filtering are considered in the above computations. Since each executed order distributes a total weight of one, orders with few competitive bids yield a larger share for the solvers submitting them, an incentive for solvers to join such competitions with competitive bids.
 
 **2. Settlement success rate.** The success rate of solver $$i$$ in an accounting period is
 
@@ -101,7 +107,7 @@ $$
 
 where the sum runs over all order executions in the period (an order that is executed in several auctions, e.g., a partially fillable order, counts once per execution).
 
-For example, suppose four solvers bid on an order with proposed surplus of 0.1, 0.08, 0.019, and 0.001 ETH. The total proposed surplus is 0.2 ETH, so the order shares are 0.5, 0.4, 0.095, and 0.005. If the solvers have success rates of 0.8, 0.9, 1.0, and 0.5 in the accounting period, this order contributes 0.4, 0.36, 0.095, and 0.0025, respectively, to their consistency metrics.
+For example, suppose four solvers bid on an order with proposed surplus of 0.1, 0.08, 0.019, and 0.001 ETH. The total proposed surplus is 0.2 ETH, so the order shares are 0.5, 0.4, 0.095, and 0.005, respectively. If the solvers have success rates of 0.8, 0.9, 1.0, and 0.5 in the accounting period, this order contributes 0.4, 0.36, 0.095, and 0.0025, respectively, to their consistency metrics.
 
 :::note
 
