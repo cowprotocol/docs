@@ -78,7 +78,8 @@ console.log('Order status:', orderDetails.status)
 `POST /api/v1/quote/stream` takes the same request body as `POST /api/v1/quote`, but returns a [Server-Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events) stream instead of a single response.
 Each solver's quote arrives as its own event, so the client can show a price as soon as the fastest solver responds instead of waiting for the whole competition.
 
-Each event's `data` is an `OrderQuoteResponse`, the same shape `POST /api/v1/quote` returns, with `id` set to `null`.
+Each event's `data` is an `OrderQuoteResponse`, the same shape `POST /api/v1/quote` returns.
+The `id` on each event can be passed as `quoteId` when placing an order, the same as a quote from `POST /api/v1/quote`.
 Solvers without a quote send nothing, so the stream may contain fewer events than there are solvers.
 If no solver returns a usable quote, the server sends a final `error` event with a `NoLiquidity` body, then closes.
 
