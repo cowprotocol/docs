@@ -73,7 +73,41 @@ where $$\textrm{protocolFee}_i$$ is the protocol fee (excluding partner fees) ea
 
 The consistency budget is distributed at the end of each accounting period according to a consistency metric. The core team has a mandate to adapt this metric when they see fit; every change will be announced in advance on the [CoW Protocol forum](https://forum.cow.fi).
 
-**Current metric: order count.** Each solver's share of the consistency budget is proportional to the number of executed orders for which it submitted a solution. Only solutions from the auction in which an order is settled count towards the consistency reward.
+**Current metric: bid quality and settlement success.** Since June 30, 2026, each solver's share of the consistency budget is proportional to a metric that combines the quality of the solver's bids with its settlement success rate, as announced in [this forum post](https://forum.cow.fi/t/consistency-metric-v2/3474). It replaces an earlier metric that simply counted the executed orders a solver had bid on.
+
+The metric has two components:
+
+**1. Bid quality.** A solver bids on an order if it submits a solution containing that order. For each executed order, the solvers that bid on the order in the auction in which it was executed share a total weight of one, in proportion to the surplus they proposed. The share of solver $$i$$ for order $$o$$ is
+
+$$
+\textrm{orderShare}_i(o) = \frac{\textrm{surplus}_i(o)}{\sum_{j} \textrm{surplus}_j(o)},
+$$
+
+where $$\textrm{surplus}_i(o)$$ is the largest surplus that any of solver $$i$$'s solutions proposed for order $$o$$ in that auction (the difference between the proposed execution amounts and the order's limit amounts), and the sum runs over all solvers that bid on the order. Only solutions that pass the fairness filtering are considered. Since each order distributes a total weight of one, orders with few bidders yield a larger share for each of them, an incentive for solvers to join competitions with little participation.
+
+**2. Settlement success rate.** The success rate of solver $$i$$ in an accounting period is
+
+$$
+\textrm{successRate}_i = \frac{\textrm{count}(\textrm{auction-order pairs won and settled in time by } i)}{\textrm{count}(\textrm{auction-order pairs won by } i)}.
+$$
+
+Both counts are at the level of auction-order pairs: solver $$i$$ wins an order in an auction if the order is part of one of solver $$i$$'s winning solutions in that auction. Each such pair counts once towards the denominator, and towards the numerator only if solver $$i$$ then settled the order onchain within that auction's deadline. In particular, winning the same order repeatedly without settling it lowers the success rate: a solver that wins an order in $$n$$ auctions but only settles it after the $$n$$-th win has a success rate of $$1/n$$ (all else being equal). A solver that does not win any order in the period has a success rate of zero.
+
+The consistency metric of solver $$i$$ for an accounting period is the product
+
+$$
+\textrm{consistencyMetric}_i = \textrm{successRate}_i \cdot \sum_{o} \textrm{orderShare}_i(o),
+$$
+
+where the sum runs over all order executions in the period (an order that is executed in several auctions, e.g., a partially fillable order, counts once per execution).
+
+For example, suppose four solvers bid on an order with proposed surplus of 0.1, 0.08, 0.019, and 0.001 ETH. The total proposed surplus is 0.2 ETH, so the order shares are 0.5, 0.4, 0.095, and 0.005. If the solvers have success rates of 0.8, 0.9, 1.0, and 0.5 in the accounting period, this order contributes 0.4, 0.36, 0.095, and 0.0025, respectively, to their consistency metrics.
+
+:::note
+
+The [forum post](https://forum.cow.fi/t/consistency-metric-v2/3474) defines bid quality in terms of surplus relative to the winning bid. Since the winning bid's surplus cancels out in the normalization, that definition is equivalent to the one given here.
+
+:::
 
 ### Buffer accounting
 
@@ -93,7 +127,7 @@ The presence of the cap on rewards $$c_u$$, however, makes the problem more comp
 
 To summarize, truthfully revealing the (cost-adjusted) score that a solver can generate for each submitted solution is optimal if the cap is not binding, and misreporting does not affect $$\textrm{referenceScore}_i$$. It is not necessarily optimal in uncompetitive auctions when the difference between the best and second-best solution may be large, and in some edge cases in which a solver may benefit from making the filtering step less stringent. However, in these cases, deriving the optimal strategy is a very complex problem.
 
-Consistency rewards introduce an additional strategic dimension; for example, the order-count metric rewards solvers for submitting solutions to auctions in which orders are ultimately executed, solvers have an incentive to participate broadly across auctions, even in cases where they do not expect to win the performance reward.
+Consistency rewards introduce an additional strategic dimension; since the consistency metric rewards competitive bids on executed orders, solvers have an incentive to participate broadly across auctions with bids close to the winning one, even in cases where they do not expect to win the performance reward. At the same time, since bid quality is discounted by the settlement success rate, solvers should only submit bids they are prepared to settle.
 
 ## Price estimation competition rewards (CIPs 27, 36, 57, 72)
 
