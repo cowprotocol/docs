@@ -4,7 +4,7 @@ The CoW Widget is the fastest way to integrate CoW Protocol's trading functional
 
 ## Overview
 
-The CoW Widget is a ready-to-use React component that provides the full CoW Swap trading experience. It's perfect for projects that want to add trading functionality quickly without building a custom interface from scratch.
+The CoW Widget is a ready-to-use component that provides the full CoW Swap trading experience. It's perfect for projects that want to add trading functionality quickly without building a custom interface from scratch.
 
 ## Key Features
 
@@ -25,8 +25,8 @@ const widgetContainer = document.getElementById('cowswap-widget')
 
 const params: CowSwapWidgetParams = {
   appCode: 'YOUR-APP-NAME', // Required: identifies your app
-  width: 600,
-  height: 640,
+  width: '600px',
+  height: '640px',
   sell: { asset: 'USDC' },
   buy: { asset: 'WETH', amount: '0.1' },
   theme: 'light', // 'light' | 'dark' | custom theme object
@@ -46,6 +46,8 @@ createCowSwapWidget(widgetContainer, { params })
 npm install @cowprotocol/widget-lib
 ```
 
+Building with React? Use [`@cowprotocol/widget-react`](https://www.npmjs.com/package/@cowprotocol/widget-react) instead - it wraps the widget as a React component.
+
 ## Configuration Options
 
 The widget supports extensive customization:
@@ -56,28 +58,7 @@ The widget supports extensive customization:
 - **Token lists**: Use custom token lists
 - **Wallet integration**: Connect to your app's wallet or standalone mode
 - **Event handling**: Listen to trading events and notifications
-
-## Example with Custom Theme
-
-```typescript
-import { createCowSwapWidget, CowSwapWidgetPalette } from '@cowprotocol/widget-lib'
-
-const customTheme: CowSwapWidgetPalette = {
-  baseTheme: 'light',
-  primary: '#00ff85',
-  background: '#f7f7f7',
-  paper: '#1a4435',
-  text: '#ffffff',
-}
-
-const params = {
-  appCode: 'YOUR-APP-NAME',
-  theme: customTheme,
-  // ... other params
-}
-
-createCowSwapWidget(widgetContainer, { params })
-```
+- **And more**: Slippage limits, token pair constraints, custom sounds and images
 
 ## When to Use the Widget
 
