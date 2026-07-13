@@ -59,19 +59,14 @@ $$U(\{x,-y\})= x \cdot \pi - y$$.
 
 Also here, orders can be executed over multiple auctions.
 
-### CoW AMM orders
+### Surplus-capturing JIT orders
 
-To trade with a CoW AMM pool, a solver needs to specify both a buy (or "in") amount  _X_ > 0 and a sell (or "out") amount  _Y_ > 0 for the pool. Similarly to a sell order, the acceptance set of a CoW AMM pool and its surplus functions are
+Some on-chain liquidity sources (such as protocol-owned AMM pools) may expose their liquidity to solvers as _surplus-capturing just-in-time (JIT) orders_. 
+The protocol defines a set of addresses on whose behalf solvers are allowed to create orders and trades during the solver competition. 
+Any surplus generated on those trades counts towards the solver's competition score.
+Unlike user orders, the limit price of such an order is not signed and provided by the protocol; the solver itself has to figure out the price at which the address is willing to trade (typically by constructing an order the address will accept via ERC-1271). Once that limit price is known, surplus is computed just as for a sell order — as the difference between the limit price and the price at which the trade actually executes.
 
-$$S=\left\{\begin{bmatrix} x \\-y \end{bmatrix}~~s.t. ~~\frac{y}{\pi}\leq x \hbox{ and } y\in\{0,Y\} \right\},$$
-
-$$U(x,-y)= x-y / \pi$$.
-
-The main difference is that the limit price $$\pi$$ corresponds to the price at which a zero-fee traditional AMM would trade. For example, in the case of a simple, constant product CoW AMM pool with reserves _X_ and _Y_ , we have
-
-$$ \pi = X / (Y-y)$$
-
-Finally, unlike sell and buy orders that are not valid anymore once executed, CoW AMM orders are always present. That is, as soon as a CoW AMM pool is created, a CoW AMM order for that pool is valid in all subsequent auctions. 
+Finally, unlike sell and buy orders that are no longer valid once executed, these JIT orders are always present. That is, as long as the underlying liquidity source exists, a corresponding order is valid in all subsequent auctions. 
 
 
 ## Protocol Fees
@@ -86,7 +81,7 @@ Solvers are also expected to charge a fee to cover the costs of executing an ord
 
 ## Solution
 
-Solvers propose solutions to the protocol, where a solution is a set of trades to execute. Formally, suppose there are $$I$$ users and CoW AMM orders and _J_ external liquidity sources. A solution is a list of trades $$\{o_1, o_2, ...o_I, l_1, l_2, ..., l_J\}$$ for each user, CoW AMM pool and external liquidity source such that:
+Solvers propose solutions to the protocol, where a solution is a set of trades to execute. Formally, suppose there are $$I$$ user and surplus-capturing JIT orders and _J_ external liquidity sources. A solution is a list of trades $$\{o_1, o_2, ...o_I, l_1, l_2, ..., l_J\}$$ for each user order, JIT order and external liquidity source such that:
 
 * **Incentive compatibility and feasibility**: the solution respects the orders' acceptance set.  
 * **Uniform directional clearing prices**: all users trading the same token pair in the same direction must face the same prices. Importantly, this constraint is defined at the moment when the swap occurs. So, for example, suppose user _i_ receives _x_ units of token 1 in exchange for _y_ units of token 2 and that the protocol takes a fee in the sell token $$f_2$$. Define $$p_{1,2}=\frac{y-f_2}{x}$$ as the price at which the swap occurs. Uniform directional clearing prices means that $$p_{1,2}$$ is the same for all users buying token 1 and selling token 2. Deviations from uniform directional prices are allowed to account for the extra gas cost of orders triggering hooks.
@@ -101,7 +96,7 @@ At CoW DAO's discretion, systematic violation of these rules may lead to penaliz
 
 From the protocol viewpoint, each solution that satisfies the above constraints has a _score_ that is given by the total surplus generated and the fees paid to the protocol, all aggregated and denominated in some numéraire. More specifically, the score of a solution is equal to the sum of scores of the orders the solution proposes to execute, where the score of an order $$o$$ is defined as:
 
-* $$o$$ is a sell order or a CoW AMM order: $$\mathrm{score}(o) = (U(o)+ f(o)) \cdot p(b)$$, where $$p(b)$$ is an externally provided price of the buy token relative to a numéraire.
+* $$o$$ is a sell order or a surplus-capturing JIT order: $$\mathrm{score}(o) = (U(o)+ f(o)) \cdot p(b)$$, where $$p(b)$$ is an externally provided price of the buy token relative to a numéraire.
 * $$o$$ is a buy order:  $$\mathrm{score}(o) = (U(o)+ f(o)) \cdot p(b) \cdot \pi$$, where $$p(b)$$ is an externally provided price of the buy token relative to a numéraire and $$\pi$$ is the limit price of the order.
 
 Note that the above definition assumes that fees are specified in the surplus token of the order (i.e., in the buy token for sell orders and in the sell token for buy orders), which is currently the case. 
