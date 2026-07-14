@@ -194,4 +194,4 @@ In such a case, the default driver will remove the interaction, and so the solut
 
 ### `surplusCapturingJitOrderOwners`
 
-A list of all addresses that are allowed to capture surplus through [surplus-capturing JIT orders](/cow-protocol/reference/core/auctions/the_problem#surplus-capturing-jit-orders).
+A list of all addresses that are allowed to capture surplus through [surplus-capturing JIT orders](/cow-protocol/reference/core/auctions/the-problem#surplus-capturing-jit-orders).
