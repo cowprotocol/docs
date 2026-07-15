@@ -32,8 +32,10 @@ const widgetContainer = document.getElementById('cowswap-widget')
 
 const params: CowSwapWidgetParams = {
   appCode: 'NAME-OF-YOUR-APP', // Add here the name of your app. e.g. "Pig Swap"
-  width: '600px',
-  height: '640px',
+  rootStyle: {
+    width: '600px',
+    height: '640px',
+  },
   sell: { asset: 'DAI' },
   buy: { asset: 'USDC', amount: '0.1' },
 }
@@ -58,8 +60,10 @@ import { CowSwapWidget, CowSwapWidgetParams } from '@cowprotocol/widget-react'
 
 const params: CowSwapWidgetParams = {
   appCode: 'NAME-OF-YOUR-APP', // Add here the name of your app. e.g. "Pig Swap"
-  width: '600px',
-  height: '700px',
+  rootStyle: {
+    width: '600px',
+    height: '700px',
+  },
   tradeType: 'swap',
 }
 
