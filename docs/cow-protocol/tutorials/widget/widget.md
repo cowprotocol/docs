@@ -31,9 +31,11 @@ import { createCowSwapWidget, CowSwapWidgetParams } from '@cowprotocol/widget-li
 const widgetContainer = document.getElementById('cowswap-widget')
 
 const params: CowSwapWidgetParams = {
-  appCode: 'NAME-OF-YOU-APP', // Add here the name of your app. e.g. "Pig Swap"
-  width: '600px',
-  height: '640px',
+  appCode: 'NAME-OF-YOUR-APP', // Add here the name of your app. e.g. "Pig Swap"
+  rootStyle: {
+    width: '600px',
+    height: '640px',
+  },
   sell: { asset: 'DAI' },
   buy: { asset: 'USDC', amount: '0.1' },
 }
@@ -41,17 +43,48 @@ const params: CowSwapWidgetParams = {
 createCowSwapWidget(widgetContainer, { params })
 ```
 
+## React
+
+If your app is built with React, use the [`@cowprotocol/widget-react`](https://www.npmjs.com/package/@cowprotocol/widget-react) wrapper instead. It renders the same widget as a React component and accepts the same `CowSwapWidgetParams`:
+
+```bash
+yarn add @cowprotocol/widget-react
+```
+
+```bash
+npm install @cowprotocol/widget-react
+```
+
+```tsx
+import { CowSwapWidget, CowSwapWidgetParams } from '@cowprotocol/widget-react'
+
+const params: CowSwapWidgetParams = {
+  appCode: 'NAME-OF-YOUR-APP', // Add here the name of your app. e.g. "Pig Swap"
+  rootStyle: {
+    width: '600px',
+    height: '700px',
+  },
+  tradeType: 'swap',
+}
+
+function App() {
+  return <CowSwapWidget params={params} onReady={() => console.log('Widget ready')} />
+}
+```
+
+All configuration described in the rest of this guide applies to the React component as well.
+
 ## App key
 
 You must specify the `appCode` parameter when initializing the widget. This parameter is used to identify the source of
 orders.  
 The key must be a UTF8 string of up to 50 chars.  
 It will be a part of orders meta-data, see more in
-the [CoW Protocol Docs](https://docs.cow.fi/front-end/creating-app-ids/create-the-order-meta-data-file/appcode).
+the [app data docs](/cow-protocol/reference/core/intents/app-data).
 
 ## Partner fee
 
-You may participate in the Partner Fee program to collect fee on [Market order](https://docs.cow.fi/cow-protocol/concepts/order-types/market-orders) trades executed by your users through the Widget by
+You may participate in the Partner Fee program to collect fee on [Market order](/cow-protocol/concepts/order-types/market-orders) trades executed by your users through the Widget by
 adding the following parameter to your Widget:
 
 ```typescript
@@ -75,7 +108,7 @@ This configuration will apply a partner fee for all networks and trade types (sw
 
 Both `bps` and `recipient` can be set for different chains and different trade types (swap/limit/advanced).
 
-Bellow you can see the `partnerFee` configuration variations:
+Below you can see the `partnerFee` configuration variations:
 
 ```typescript
 import { PartnerFee, SupportedChainId, TradeType } from '@cowprotocol/widget-lib'
@@ -153,6 +186,8 @@ For example, you can define different fees for different assets:
 
 ```typescript
 import { createCowSwapWidget, CowSwapWidgetParams, CowEventListeners, CowEvents } from '@cowprotocol/widget-lib'
+
+const container = document.getElementById('cowswap-widget')
 
 let updateParams = null
 
@@ -304,7 +339,7 @@ Paste the snippet into **RAW JSON params** → open the **Swap** form → check 
 ## Wallet provider
 
 You can pass the wallet provider from your application to seamlessly use the widget as part of your application.
-Also, you can not specify the provider, in this case the widget will work in standalone mode with the ability to connect
+Alternatively, you can omit the provider, in this case the widget will work in standalone mode, letting users connect
 any wallet supported in CoW Swap.
 
 A provider must comply with [EIP-1193](https://eips.ethereum.org/EIPS/eip-1193) and implement the interface:
@@ -331,7 +366,7 @@ An example of connecting a widget to Rabby Wallet or Metamask:
 import { createCowSwapWidget, CowSwapWidgetParams } from '@cowprotocol/widget-lib'
 
 createCowSwapWidget(document.getElementById('cowswap-widget'), {
-  params: { appCode: 'NAME-OF-YOU-APP' }, // Add here the name of your app. e.g. "Pig Swap"
+  params: { appCode: 'NAME-OF-YOUR-APP' }, // Add here the name of your app. e.g. "Pig Swap"
   provider: window.ethereum, // <-------
 })
 ```
@@ -415,7 +450,7 @@ const theme: CowSwapWidgetPalette = {
   success: '#19ff64',
 }
 const params: CowSwapWidgetParams = {
-  appCode: 'NAME-OF-YOU-APP', // Add here the name of your app. e.g. "Pig Swap"
+  appCode: 'NAME-OF-YOUR-APP', // Add here the name of your app. e.g. "Pig Swap"
   theme,
 }
 
@@ -428,7 +463,7 @@ Try it yourself: <https://widget.cow.fi>.
 
 ## Custom tokens
 
-CowSwap uses the [token lists standard](https://tokenlists.org), which allows flexible and decentralized management of assets for trading.  
+CoW Swap uses the [token lists standard](https://tokenlists.org), which allows flexible and decentralized management of assets for trading.  
 You can manage the list of tokens in CoW Swap UI:
 
 ![Tokens management](/img/tutorials/widget-tokens-management.png)
@@ -463,7 +498,7 @@ import { createCowSwapWidget, CowSwapWidgetParams, TokenInfo } from '@cowprotoco
 
 const container = document.getElementById('cowswap-widget')
 
-const customTokens: TokenInfo = [
+const customTokens: TokenInfo[] = [
   {
     chainId: 1,
     address: '0x69D29F1b0cC37d8d3B61583c99Ad0ab926142069',
@@ -534,6 +569,8 @@ To avoid double display of notifications, enable the `disableToastMessages` opti
 ```typescript
 import { createCowSwapWidget, CowSwapWidgetParams, CowEventListeners, CowEvents } from '@cowprotocol/widget-lib'
 
+const container = document.getElementById('cowswap-widget')
+
 const params: CowSwapWidgetParams = { appCode: 'YOUR_APP_ID' }
 
 const listeners: CowEventListeners = [
@@ -559,14 +596,13 @@ import { createCowSwapWidget, CowSwapWidgetParams } from '@cowprotocol/widget-li
 const container = document.getElementById('cowswap-widget')
 
 const params: CowSwapWidgetParams = {
-  appCode: 'NAME-OF-YOU-APP', // Add here the name of your app. e.g. "Pig Swap"
-  logoUrl: 'YOUR_LOGO_URL',
+  appCode: 'NAME-OF-YOUR-APP', // Add here the name of your app. e.g. "Pig Swap"
 }
 
-const updateWidget = createCowSwapWidget(container, { params })
+const { updateParams } = createCowSwapWidget(container, { params })
 
 // Update the widget
-updateWidget({
+updateParams({
   ...params,
   theme: 'dark', // <- Change theme to dark
   hideNetworkSelector: true, // <- Hide the network selector
