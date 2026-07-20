@@ -4,7 +4,7 @@ sidebar_position: 7
 
 # Atomic Bundles
 
-Atomic Bundles are smart contracts that enable custom logic to execute before and after CoW Protocol settlement operations. This reference documents the contract interfaces, implementation patterns, and on-chain behavior of the wrapper system.
+Atomic Bundles (formerly known as Generalized Wrappers) are smart contracts that enable custom logic to execute before and after CoW Protocol settlement operations. This reference documents the contract interfaces, implementation patterns, and on-chain behavior of the bundle system.
 
 ## Architecture
 
@@ -38,7 +38,7 @@ sequenceDiagram
 
 ### Key Design Principles
 
-1. **Abstract**: There are very few limitations on what a wrapper can/can't do around a settlement transaction
+1. **Abstract**: There are very few limitations on what a bundle can/can't do around a settlement transaction
 2. **Efficient Encoding**: Bundle-specific data appended to minimize gas overhead
 3. **Nested Support**: Multiple bundles chain by encoding addresses sequentially, allowing CoW orders
 4. **Authentication**: Only allowlisted bundles can call settlement contract
@@ -50,7 +50,7 @@ Developers looking to integrate using Atomic Bundles should copy this all-in-one
 It provides a few base contracts which can serve as the foundation for integration:
 
 - **`ICowWrapper`**: Core interface all bundles must implement
-- **`CowWrapper`**: Abstract base contract providing security and utilities that all wrappers should use
+- **`CowWrapper`**: Abstract base contract providing security and utilities that all bundles should use
 
 See the code for [`CowWrapper.sol` on GitHub](https://github.com/cowprotocol/euler-integration-contracts/blob/master/src/CowWrapper.sol).
 
@@ -94,7 +94,7 @@ function _wrap(bytes calldata settleData, bytes calldata wrapperData, bytes call
 
 #### `validateWrapperData`
 
-Validates wrapper-specific data. Must be deterministic and revert on invalid input.
+Validates bundle-specific data. Must be deterministic and revert on invalid input.
 
 ```solidity
 function validateWrapperData(
@@ -119,7 +119,7 @@ function _next(bytes calldata settleData, bytes calldata remainingWrapperData) i
 
 **Behavior:**
 - Extracts the next target address (first 20 bytes of `remainingWrapperData`)
-- Calls the next wrapper via `wrappedSettle()`, or the settlement contract via `settle()` if no wrappers remain
+- Calls the next bundle via `wrappedSettle()`, or the settlement contract via `settle()` if no bundles remain
 
 ## Calldata Encoding Specification
 
@@ -134,14 +134,14 @@ The `chainedWrapperData`  parameter of `wrappedSettle(settleData, chainedWrapper
 ```
 
 **Components:**
-- **Len₁**: 2-byte (uint16) length of wrapper 1's data
-- **Data₁**: Wrapper 1's custom data
-- **Addr₂**: 20-byte address of wrapper 2
-- **Len₂**: 2-byte (uint16) length of wrapper 2's data
-- **Data₂**: Wrapper 2's custom data
-... (repeat Addr₂, Len₂, Data₂ for every subsequent wrapper)
+- **Len₁**: 2-byte (uint16) length of bundle 1's data
+- **Data₁**: Bundle 1's custom data
+- **Addr₂**: 20-byte address of bundle 2
+- **Len₂**: 2-byte (uint16) length of bundle 2's data
+- **Data₂**: Bundle 2's custom data
+... (repeat Addr₂, Len₂, Data₂ for every subsequent bundle)
 
-### Wrapper Public Functions
+### Bundle Public Functions
 
 #### `wrappedSettle`
 
@@ -149,7 +149,7 @@ Entry point for bundle execution. Validates caller authentication and delegates 
 
 **Parameters:**
 - `settleData`: Original `GPv2Settlement.settle(...)` calldata
-- `chainedWrapperData`: Encoded wrapper chain — see [Calldata Encoding Specification](#calldata-encoding-specification)
+- `chainedWrapperData`: Encoded bundle chain — see [Calldata Encoding Specification](#calldata-encoding-specification)
 
 ## CowWrapperHelpers
 
@@ -203,7 +203,7 @@ The bundle contract must be audited by a reputable security firm before submissi
 It is strongly recommended to **NOT** implement `ICowWrapper` directly. The `CowWrapper` abstract contract provides:
 - Solver authentication checks
 - Correct calldata parsing and decoding
-- Safe wrapper chain continuation
+- Safe bundle chain continuation
 - Sanity checks for the settlement call
 
 #### 3. Intermediate Contracts for User Calls
@@ -214,7 +214,7 @@ If allowing user-defined calls, route through intermediate contracts:
 // ❌ DANGEROUS
 function _wrap(bytes calldata settleData, bytes calldata wrapperData, bytes calldata remainingWrapperData) internal override {
     (address target, bytes memory data) = abi.decode(wrapperData, (address, bytes));
-    target.call(data);  // User could call anything they want, including the settlement contract, using the wrapper's authenticated context
+    target.call(data);  // User could call anything they want, including the settlement contract, using the bundle's authenticated context
 }
 
 // ✅ SAFE
@@ -267,7 +267,7 @@ Atomic Bundle execution adds gas overhead to settlements.
 | Metric | Value |
 |--------|-------|
 | With EmptyWrapper | 217,033 gas |
-| Without wrapper | 194,761 gas |
+| Without bundle | 194,761 gas |
 | **Overhead** | **22,272 gas (11.4%)** |
 
 **Scaling Factors:**
@@ -280,11 +280,11 @@ Atomic Bundle execution adds gas overhead to settlements.
 ## Resources
 
 ### Documentation
-- **[Wrapper Concepts](../../../concepts/order-types/wrappers.md)** - High-level overview and use cases
+- **[Bundle Concepts](../../../concepts/order-types/wrappers.md)** - High-level overview and use cases
 - **[Integration Guide](../../../integrate/wrappers.mdx)** - Implementation guide for order creators and developers
 - **[GPv2Settlement](../core/settlement.md)** - Core settlement contract documentation
 
 ### Code
 - **[CowWrapper.sol](https://github.com/cowprotocol/euler-integration-contracts/blob/master/src/CowWrapper.sol)** - Abstract contract and interfaces
 - **[EmptyWrapper](https://github.com/cowprotocol/euler-integration-contracts/blob/master/test/EmptyWrapper.sol)** - Minimal reference implementation
-- **[Euler Integration](https://github.com/cowprotocol/euler-integration-contracts)** - Complete production wrapper example
+- **[Euler Integration](https://github.com/cowprotocol/euler-integration-contracts)** - Complete production bundle example
