@@ -161,10 +161,6 @@ Besides the solving competition, there is also a quoting competition. More infor
 
 Yes, we can whitelist solvers so that they can have access to the orderbook API. Although we generally wait with this until your solver is live and settling orders on-chain.
 
-### How do we integrate CoW AMMs?
-
-[We have a section in the documentation about integrating CoW AMMs.](https://docs.cow.fi/cow-amm/tutorials/cow-amm-for-solvers)
-
 ### Is there a way to find out the COW reward in real time immediately after the trade?
 
 [This table](https://dune.com/queries/5270914) contains reward data per solver and per auction (denominated in the native token of the chain). Note that data is updated every 2 hours.
