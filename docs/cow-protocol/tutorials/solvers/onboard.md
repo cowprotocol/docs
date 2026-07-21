@@ -36,7 +36,7 @@ The general KYC requirements are as follows:
 
 Do not send this before the meeting, we will explain the process during the meeting so that you can send the documents afterwards. We usually expect the KYC process to take about 1 to 3 working days, but it may vary.
 
-Given the risk that will be carried by the CoW DAO bonding pool we also ask that solvers who join the solver competition through the CoW DAO bonding pool start solving on Arbitrum first. After being in production on Arbitrum solvers can move to other L2's relatively easily. But joining the mainnet competition will require further evaluation after some time of solving on L2's.
+Given the risk that will be carried by the CoW DAO bonding pool we also ask that solvers who join the solver competition through the CoW DAO bonding pool start solving on BNB Chain first. After being in production on BNB Chain solvers can move to other L2's relatively easily. But joining the mainnet competition will require further evaluation after some time of solving on L2's.
 
 ### Service fees
 
