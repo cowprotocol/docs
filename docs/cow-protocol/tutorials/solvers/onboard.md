@@ -143,7 +143,7 @@ We advise using a single rewards address that is available on all networks.
 
 ## 8. Moving to other networks
 
-After joining the solver competition on Arbitrum we can enable your solver on other chains relatively soon. For this we will go through the same process of generating addresses, vouching for them, and whitelisting them. For each new chain that we deploy your solver on we will need:
+After joining the solver competition on BNB we can enable your solver on other chains relatively soon. For this we will go through the same process of generating addresses, vouching for them, and whitelisting them. For each new chain that we deploy your solver on we will need:
 
 - A rewards address for receiving the weekly COW rewards associated with that network;
 - An endpoint that you would like to use for staging amd production.
