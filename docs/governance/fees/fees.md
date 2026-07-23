@@ -64,15 +64,17 @@ See the [Partner Fee](/governance/fees/partner-fee) section of these docs for de
 
 Fees are not charged as separate transfers. They are part of the execution of an order: the user receives less of the buy token (for sell orders) or pays more of the sell token (for buy orders) than they would have in a fee-free execution. Solvers keep these amounts as part of the settlement; the weekly [accounting](/cow-protocol/reference/core/auctions/accounting) then charges solvers for them, converted to the chain's native token.
 
-The fees of an order are fully determined by publicly available data:
+The fees of an executed order are fully determined by publicly available data:
 
 1. **The on-chain execution**: the executed sell and buy amounts of the trade.
-2. **The order's fee policies**: an ordered list of fees, fixed when the order is created. Protocol fees come first (the surplus or quote improvement fee, followed by the volume fee), then any [partner fees](/governance/fees/partner-fee) in the order they appear in the order's [app data](/cow-protocol/reference/core/intents/app-data).
+2. **The order's fee policies**: an ordered list of fees. Protocol fees come first (the surplus or quote improvement fee, followed by the volume fee), then any [partner fees](/governance/fees/partner-fee) in the order they appear in the order's [app data](/cow-protocol/reference/core/intents/app-data). The protocol attaches these policies to the order in every auction it is part of, based on the fee models active at that time; executions of the same order in different auctions can therefore be subject to different fees.
 3. **The quote** at order creation, used as the reference for quote improvement fees.
 
 Fees are computed iteratively, starting from the executed amounts and processing the list of fee policies in reverse order. Each step computes the fee of one policy from the current amounts and removes it from the execution; the resulting amounts are the input for the next policy. Because each step undoes one fee, the amounts after the last step are the fee-free execution of the order.
 
-The factor of a fee policy always refers to the amounts *before* that fee was charged. Since the computation starts from amounts that already have the fee deducted, the formulas use modified factors. With `amount` denoting the current executed amount in the surplus token:
+The order of the list corresponds to how a solver might charge the fees: starting from a fee-free execution, each policy takes its fee from the amounts left by the previous one, and the result is what settles on-chain. Since only this final result is observable, the protocol defines the fees in the reverse direction, undoing them one at a time starting with the last one charged.
+
+The factor of a fee policy always refers to the amounts *before* that fee was charged. Since the computation starts from amounts that already include the effect of the fee, the formulas use modified factors. With `amount` denoting the current executed amount in the surplus token:
 
 - **Volume fee** with factor `f`: the fee is `amount * f / (1 - f)` for sell orders and `amount * f / (1 + f)` for buy orders.
 - **Surplus and quote improvement fee** with factor `f`: the fee is `improvement * f / (1 - f)`, where the improvement is `amount - reference` for sell orders and `reference - amount` for buy orders; if the execution is not better than the reference, the fee is zero. The reference is the limit price of the order for surplus fees; for quote improvement fees it is the quoted amount, adjusted for the network fee of the quote and never beyond the limit price of the order. Each of these policies also carries a volume cap factor: the fee is capped at what a volume fee policy with that factor would charge.
