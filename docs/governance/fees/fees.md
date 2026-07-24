@@ -59,3 +59,52 @@ All protocol fees are charged in the surplus token, i.e. in the buy token for se
 
 Partners may charge a fee when integrating CoW Protocol.
 See the [Partner Fee](/governance/fees/partner-fee) section of these docs for details on how the partner fee is calculated, with examples and payment details.
+
+## How fees are charged
+
+Fees are not charged as separate transfers. They are part of the execution of an order: the user receives less of the buy token (for sell orders) or pays more of the sell token (for buy orders) than they would have in a fee-free execution. Solvers keep these amounts as part of the settlement; the weekly [accounting](/cow-protocol/reference/core/auctions/accounting) then charges solvers for them, converted to the chain's native token.
+
+The fees of an executed order are fully determined by publicly available data:
+
+1. **The on-chain execution**: the executed sell and buy amounts of the trade.
+2. **The order's fee policies**: an ordered list of fees. Protocol fees come first (the surplus or quote improvement fee, followed by the volume fee), then any [partner fees](/governance/fees/partner-fee) in the order they appear in the order's [app data](/cow-protocol/reference/core/intents/app-data). The protocol attaches these policies to the order in every auction it is part of, based on the fee models active at that time; executions of the same order in different auctions can therefore be subject to different fees.
+3. **The quote** at order creation, used as the reference for quote improvement fees.
+
+Fees are computed iteratively, starting from the executed amounts and processing the list of fee policies in reverse order. Each step computes the fee of one policy from the current amounts and removes it from the execution; the resulting amounts are the input for the next policy. Because each step undoes one fee, the amounts after the last step are the fee-free execution of the order.
+
+The order of the list corresponds to how a solver might charge the fees: starting from a fee-free execution, each policy takes its fee from the amounts left by the previous one, and the result is what settles on-chain. Since only this final result is observable, the protocol defines the fees in the reverse direction, undoing them one at a time starting with the last one charged.
+
+The factor of a fee policy always refers to the amounts *before* that fee was charged. Since the computation starts from amounts that already include the effect of the fee, the formulas use modified factors. With `amount` denoting the current executed amount in the surplus token:
+
+- **Volume fee** with factor `f`: the fee is `amount * f / (1 - f)` for sell orders and `amount * f / (1 + f)` for buy orders.
+- **Surplus and quote improvement fee** with factor `f`: the fee is `improvement * f / (1 - f)`, where the improvement is `amount - reference` for sell orders and `reference - amount` for buy orders; if the execution is not better than the reference, the fee is zero. The reference is the limit price of the order for surplus fees; for quote improvement fees it is the quoted amount, adjusted for the network fee of the quote and never beyond the limit price of the order. Each of these policies also carries a volume cap factor: the fee is capped at what a volume fee policy with that factor would charge.
+
+### Example
+
+A user places a market order selling 1 ETH, and the quote promises 10,000 USDC after network fees. The order carries three fee policies, in this order:
+
+1. Quote improvement fee of 50%, capped at 0.98% of volume (protocol)
+2. Volume fee of 2 bps (protocol)
+3. Volume fee of 1% (partner)
+
+On-chain, the order settles and the user receives **9,902.96901 USDC**. All fees are computed in the surplus token of the order (here the buy token, USDC) by processing the fee policies in reverse order:
+
+| Step | Fee policy | Amount after fee | Fee | Amount before fee |
+|------|-----------|------------------|-----|-------------------|
+| 1 | Volume fee 1% (partner) | 9,902.96901 | 9,902.96901 \* 0.01 / 0.99 = **100.02999** | 10,002.999 |
+| 2 | Volume fee 2 bps (protocol) | 10,002.999 | 10,002.999 \* 0.0002 / 0.9998 = **2.001** | 10,005 |
+| 3 | Quote improvement fee 50% (protocol, reference 10,000) | 10,005 | (10,005 - 10,000) \* 0.5 / 0.5 = **5** | 10,010 |
+
+(The cap in step 3 would allow a fee of up to 10,005 \* 0.0098 / 0.9902, about 99.02 USDC, so it does not bind.)
+
+In total, 107.03099 USDC of fees are charged: 7.001 USDC of protocol fees and 100.02999 USDC of partner fees. The last step recovers the fee-free execution of the order: without fees, the user would have received 10,010 USDC for their 1 ETH.
+
+The computed fees of every trade, including partner fees, are exposed in the `executedProtocolFees` field of the [trades API endpoint](https://api.cow.fi/docs/#/default/get_api_v1_trades).
+
+Note that fees are order dependent: the amount a fee policy is computed on includes the fees of all policies that come before it in the list, but not of those that come after it. In the example above, the partner volume fee is computed on the execution after both protocol fees have been deducted. In particular, partners can also charge a price improvement fee, the partner version of the quote improvement fee. Since it comes last in the list and uses the raw quote as reference, it can be zero even if the fee-free execution is better than the quote.
+
+:::note
+
+This section describes the current implementation. The ordering of fee policies and the references used for surplus and quote improvement fees may change through governance decisions.
+
+:::
