@@ -64,7 +64,7 @@ Also here, orders can be executed over multiple auctions.
 Some on-chain liquidity sources (such as protocol-owned AMM pools) may expose their liquidity to solvers as _surplus-capturing just-in-time (JIT) orders_. 
 The protocol defines a set of addresses on whose behalf solvers are allowed to create orders and trades during the solver competition. 
 Any surplus generated on those trades counts towards the solver's competition score.
-Unlike user orders, the limit price of such an order is not signed and provided by the protocol; the solver itself has to figure out the price at which the address is willing to trade (typically by constructing an order the address will accept via ERC-1271). Once that limit price is known, surplus is computed just as for a sell order — as the difference between the limit price and the price at which the trade actually executes.
+Unlike user orders, the limit price of such an order is not signed and provided by the protocol; the solver itself has to figure out the price at which the address is willing to trade (typically by constructing an order the address will accept via ERC-1271). Once that limit price is known, surplus is calculated the same way as for a sell order: the difference between the limit price and the actual execution price.
 
 Finally, unlike sell and buy orders that are no longer valid once executed, these JIT orders are always present. That is, as long as the underlying liquidity source exists, a corresponding order is valid in all subsequent auctions. 
 
