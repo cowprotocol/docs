@@ -92,7 +92,7 @@ function isValidSafeSignature(
 | `domainSeparator` | See [`EIP-712`](https://eips.ethereum.org/EIPS/eip-712#definition-of-domainseparator) |
 | `typeHash` | Not used |
 | `encodeData` | ABI-encoded [`GPv2Order.Data`](../core/settlement.md#gpv2orderdata-struct) (per [`EIP-712`](https://eips.ethereum.org/EIPS/eip-712#definition-of-encodedata)) to be settled |
-| `encodeData` | ABI-encoded [`GPv2Order.Data`](../core/settlement.md#gpv2orderdata-struct) to be settled |
+| `payload` | ABI-encoded [`PayloadStruct`](#payloadstruct) containing the Merkle proof, conditional order parameters, and off-chain input |
 
 In order to delegate signature verification to `ComposableCoW`, the delegating contract may either:
 
