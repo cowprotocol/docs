@@ -5,7 +5,7 @@ sidebar_position: 1
 
 # CoW DAO
 
-CoW DAO is on a mission to innovate the most user-protective products in Ethereum. 
+CoW DAO is on a mission to innovate the most user-protective products in Ethereum & Solana. 
 
 Currently, CoW DAO's two main products are [**CoW Protocol**](cow-protocol) and [CoW AMM](https://cow.fi/cow-amm), which it supports with development and marketing resources – including the [CoW Grants Program](https://grants.cow.fi), the [CoW Protocol Explorer](cow-protocol/tutorials/cow-explorer), and the [CoW Swap frontend](cow-protocol/tutorials/cow-swap).
 
