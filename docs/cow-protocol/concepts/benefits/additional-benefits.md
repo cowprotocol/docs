@@ -7,7 +7,7 @@ sidebar_position: 4
 CoW Protocol's [intent-based trading model](/cow-protocol/concepts/introduction/intents) and [its auction mechanism](/cow-protocol/concepts/introduction/fair-combinatorial-auction) that allows for batching provide a number of benefits, including support for expressing any intent, MEV protection, and price improvement. 
 
 There are also several additional benefits unique to CoW Protocol that every order inherits: 
-- Gasless trades (users pay settlement fees in their sell token; settlement fees can be lower than gas fees if the trade is included in a batch)
+- Gasless order signing and submission for standard ERC-20 orders (separate approval or other setup transactions may still require gas)
 - No fees for failed or cancelled orders (most exchanges make users pay gas fees regardless of whether their order executes or not)
 - Order settlement at Ethereum Best Bid Offer or better
 - Support for placing multiple orders at once
