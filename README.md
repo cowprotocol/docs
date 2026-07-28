@@ -4,6 +4,8 @@
 
 # CoW Protocol Documentation
 
+Live on Solana!
+
 The documentation is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
 ### Devcontainer
