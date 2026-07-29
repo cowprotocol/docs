@@ -19,7 +19,7 @@ CoW DAO documentation follows the [llmstxt.org](https://llmstxt.org/) standard, 
 
 ### Cursor
 
-Use the `@Docs` feature to add the llms.txt URL as a documentation source. This gives Cursor accurate context about CoW Protocol, CoW AMM, and Governance when generating code suggestions.
+Use the `@Docs` feature to add the llms.txt URL as a documentation source. This gives Cursor accurate context about CoW Protocol and Governance when generating code suggestions.
 
 See [Cursor docs](https://docs.cursor.com/context/@-symbols/@-docs) for more details.
 

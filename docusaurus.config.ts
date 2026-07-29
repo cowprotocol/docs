@@ -126,7 +126,7 @@ const config: Config = {
     metadata: [
       {
         name: 'description',
-        content: 'Documentation for CoW Protocol, CoW AMM and other CoW DAO products.',
+        content: 'Documentation for CoW Protocol and other CoW DAO products.',
       },
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'og:type', content: 'website' },
@@ -134,7 +134,7 @@ const config: Config = {
       { name: 'og:title', content: 'Documentation - CoW DAO' },
       {
         name: 'og:description',
-        content: 'Documentation for CoW Protocol, CoW AMM and other CoW DAO products.',
+        content: 'Documentation for CoW Protocol and other CoW DAO products.',
       },
       { name: 'twitter:card', content: 'summary_large_image' },
       { name: 'twitter:site', content: '@CoWSwap' },
