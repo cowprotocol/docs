@@ -76,8 +76,10 @@ This key maps to a list containing the set of orders in the batch. Each entry in
 - `uid`: this is the unique identifier of the order.
 - `sellToken`: a string denoting the address of the sell token.
 - `buyToken`: a string denoting the address of the buy token.
-- `sellAmount`: a stringified integer denoting the limit amount that is being sold, measured in terms of the smallest denomination of the sell token.
-- `buyAmount`: a stringified integer denoting the limit amount that is being bought. Similar to the `sellAmount`, it is measured in terms of the smallest denomination of the buy token.
+- `sellAmount`: a stringified integer denoting the limit amount that is being sold, measured in terms of the smallest denomination of the sell token. For a partially fillable order that has already been filled in a previous auction, this is the *remaining* amount that is still available to be matched (i.e., it already accounts for the `executed` amount), and is the value solvers should use when computing a solution.
+- `buyAmount`: a stringified integer denoting the limit amount that is being bought. Similar to the `sellAmount`, it is measured in terms of the smallest denomination of the buy token, and for a partially filled order it likewise reflects only the remaining, unexecuted portion.
+- `fullSellAmount`: a stringified integer denoting the *original*, full limit sell amount of the order as signed by the user, measured in terms of the smallest denomination of the sell token. Unlike `sellAmount`, this value is not reduced to account for any amount that has already been executed in a previous auction, so it stays constant across auctions for the same order.
+- `fullBuyAmount`: a stringified integer denoting the *original*, full limit buy amount of the order as signed by the user, measured in terms of the smallest denomination of the buy token. Unlike `buyAmount`, this value is not reduced to account for any amount that has already been executed in a previous auction, so it stays constant across auctions for the same order.
 - `created`: creation time of the order, denominated in epoch seconds.
 - `validTo`: integer indicating the time until which the order is valid.
 - `kind`: a string of the set {"sell", "buy"}, describing whether the order is a `sell` or `buy` order.
@@ -107,6 +109,8 @@ An example Fill-or-Kill user limit buy order that sells 1000 [COW](https://ether
     "buyToken": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
     "sellAmount": "1000000000000000000000",
     "buyAmount": "284138335",
+    "fullSellAmount": "1000000000000000000000",
+    "fullBuyAmount": "284138335",
     "feeAmount": "0",
     "kind": "sell",
     "partiallyFillable": false,
@@ -114,7 +118,7 @@ An example Fill-or-Kill user limit buy order that sells 1000 [COW](https://ether
 }
 ```
 
-The above entry should be interpreted as follows. It is a Fill-or-Kill order since the flag `partiallyFillable` is set to `false`. Moreover, it is a sell order since its `kind` is set to `sell`. Finally, this is a `limit` order, meaning that it has a zero-signed fee, which implies that the solver is free to choose an appropriate fee to cover its execution cost. This means that, if executed, the user will send a total of 1000000000000000000000 COW atoms to the settlement contract and, no matter how much fee the solver will charge, the user is guaranteed to receive at least 284138335 USDC atoms.
+The above entry should be interpreted as follows. It is a Fill-or-Kill order since the flag `partiallyFillable` is set to `false`. Moreover, it is a sell order since its `kind` is set to `sell`. Finally, this is a `limit` order, meaning that it has a zero-signed fee, which implies that the solver is free to choose an appropriate fee to cover its execution cost. This means that, if executed, the user will send a total of 1000000000000000000000 COW atoms to the settlement contract and, no matter how much fee the solver will charge, the user is guaranteed to receive at least 284138335 USDC atoms. Since this order has not been partially filled yet, `sellAmount`/`buyAmount` and `fullSellAmount`/`fullBuyAmount` coincide here; for a partially fillable order that already has a non-zero `executed` amount from a previous auction, `sellAmount` and `buyAmount` would instead reflect only the remaining, unfilled portion, while `fullSellAmount` and `fullBuyAmount` would still refer to the order's original amounts.
 
 
 ### `deadline`
