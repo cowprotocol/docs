@@ -39,18 +39,57 @@ The performance reward calculation can result in a negative value, in which case
 
 :::
 
-The performance reward is capped from above and below using the function $$\textrm{cap}(x) = \max(-c_l, \min(c_u, x))$$, where $$c_u$$ is equal to a chain-specific fraction $$\beta$$ of the protocol fee (excluding partner fees) that the protocol earned from the trades in all solutions successfully executed onchain by the solver in that auction, and $$c_l$$ is chain-specific as well. $$\beta$$ and $$c_l$$ are determined by the following values:
+The performance reward is capped from above and below using the function $$\textrm{cap}(x) = \max(-c_l, \min(c_u, x))$$.
 
-- Ethereum mainnet, Arbitrum, and Base chain: $$\beta = 50\%$$, $$c_l = 0.010 \;\textrm{ETH}$$
-- Gnosis Chain: $$\beta = 100\%$$, $$10 \;\textrm{xDAI}$$
-- Avalanche: $$\beta = 100\%$$, $$0.3 \;\textrm{AVAX}$$
-- Polygon: $$\beta = 100\%$$, $$30 \;\textrm{POL}$$
-- BNB: $$\beta = 100\%$$, $$0.04 \;\textrm{BNB}$$
-- Linea and Ink: $$\beta = 100\%$$, $$0.0015 \;\textrm{ETH}$$
-- Plasma: $$\beta = 100\%$$, $$30 \;\textrm{XPL}$$
+The upper cap $$c_u$$ is equal to a chain-specific fraction $$\beta$$ of the protocol fee (excluding partner fees) that the protocol earned from the trades in all solutions successfully executed onchain by the solver in that auction. $$\beta$$ is determined by the following values:
+
+- Ethereum mainnet, Arbitrum, and Base chain: $$\beta = 50\%$$
+- Gnosis Chain, Avalanche, Polygon, BNB, Linea, Ink, and Plasma: $$\beta = 100\%$$
 
 The parameter $$\beta$$, which naturally corresponds to a revenue-sharing parameter between protocol and solvers, is set to 50% by default. The core team has a mandate to change this parameter for individual networks, if needed, to a value in the interval [50%, 100%], given that the network has a total revenue less than 5% of the total protocol revenue.
 
+The lower cap $$c_l$$ is determined by the orders that solver $$i$$ won but did not settle. Every order has a penalty cap associated with it in each auction, expressed in the native token of the chain, and $$c_l$$ is the sum of the penalty caps of all orders in solver $$i$$'s winning solutions that were not executed in time, or not executed at all,
+
+$$
+c_l = \sum_{o \,\in\, \textrm{unsettled}_i} \textrm{penaltyCap}_o.
+$$
+
+In particular, a solver that settles all the orders it won within the auction deadline has $$c_l = 0$$, and its performance reward for that auction cannot be negative.
+
+#### Penalty caps
+
+The penalty cap of an order is a fraction of the order's quote, bounded by a global absolute cap:
+
+$$
+\textrm{penaltyCap}_o = \min(\phi_o \cdot \textrm{quote}_o, \bar{c}).
+$$
+
+Here $$\textrm{quote}_o$$ is the value of the quote of order $$o$$, expressed in the native token of the chain. The quote of an order is the buy amount with all volume fees deducted for sell orders, and the sell amount with all volume fees added for buy orders. The global bound $$\bar{c}$$ is the native token equivalent of 20 USD. For partially fillable orders, the penalty cap is scaled to the fraction of the order that the winning solution proposed to execute.
+
+The fraction $$\phi_o$$ depends on the chain and on whether the two tokens traded by the order are correlated. The classification into correlated and uncorrelated token pairs follows the same logic that is used in determining the [protocol volume fee](/governance/fees/fees). For correlated token pairs, $$\phi_o = 0.1 \;\textrm{bps}$$ on all chains. For uncorrelated token pairs, the values are:
+
+- Ethereum mainnet: $$4 \;\textrm{bps}$$
+- Gnosis Chain: $$3 \;\textrm{bps}$$
+- Arbitrum: $$1 \;\textrm{bps}$$
+- Base: $$2 \;\textrm{bps}$$
+- Avalanche: $$2 \;\textrm{bps}$$
+- Polygon: $$3 \;\textrm{bps}$$
+- BNB: $$1 \;\textrm{bps}$$
+- Linea: $$2 \;\textrm{bps}$$
+- Ink: $$1 \;\textrm{bps}$$
+- Plasma: $$1 \;\textrm{bps}$$
+
+For example, consider an order selling 9 wstETH for wETH with a quote of 10 wETH. Since the token pair is correlated, the penalty cap of that order is 0.1 bps of the quote, i.e., 0.0001 ETH. If a solver wins three orders in an auction and settles only one of them, with the two unsettled orders having penalty caps of 0.001 ETH and 0.005 ETH, then $$c_l = 0.006 \;\textrm{ETH}$$: an uncapped performance reward of, say, $$-0.02\;\textrm{ETH}$$ results in a penalty of 0.006 ETH.
+
+These caps are chosen such that solvers settle their winning solutions with a high probability, given estimates of price movements during the window of exclusivity, i.e., the time between the moment a solver is notified that it won and the deadline by which the auction has to be settled. The core team has a mandate to change the penalty cap per order within the interval [0 bps, 10 bps], if needed, to tune the trade-off between competitive prices and fast execution. Any change to the penalty cap is announced to solvers in advance and reflected in this documentation.
+
+<!-- TODO: replace the forum link below with the Snapshot link once the CIP has passed, and add the CIP to the list at the top of this page. -->
+
+:::note
+
+Penalty caps per order replace the earlier chain-specific absolute penalty caps, as specified in [this CIP](https://forum.cow.fi/t/cip-draft-penalty-cap-redesign/3520). The change is not intended to change the total payment to solvers, which is fixed to a fraction of protocol revenue by the consistency rewards described below, but the implied solver behavior and the distribution of rewards between solvers.
+
+:::
 
 :::note
 
@@ -125,13 +164,15 @@ Hence, although buffers and the possibility of using them are not an explicit el
 
 To determine the optimal routing, the recommended strategy for a solver is to start by dividing the available orders into groups of orders on the same directed token pairs - i.e., in each group, all orders have the same sell and buy tokens. The next step is to compute the best possible routing for each group and submit it as a solution. Note that, by construction, each of these solutions will use outside liquidity. Finally, a solver should check whether it is possible to improve these solutions by creating batched solutions containing orders on different directed token pairs. These additional efficiencies may come from, for example, exploiting liquidity already available on the protocol - using one order as liquidity for the other (in a CoW) or using [surplus-capturing JIT liquidity](/cow-protocol/reference/core/auctions/the-problem#surplus-capturing-jit-orders) - or from gas savings. Solvers should submit an additional solution for every combination of groups of orders for which additional efficiencies are possible. When submitting such a solution, they should pay attention to sharing the additional efficiencies among all orders in the batch; otherwise, the batched solution may be filtered out as unfair.
 
-As already discussed, solvers are responsible for paying the gas cost of a solution. Also, if a solution reverts, a solver may incur a penalty. Hence, when reporting their solution, solvers should adjust their reported score to account for the expected costs of settling a solution on the chain and the revert risk.
+As already discussed, solvers are responsible for paying the gas cost of a solution. Also, if a solution is not settled in time, a solver may incur a penalty, bounded by the sum of the penalty caps of the orders it does not settle. Hence, when reporting their solution, solvers should adjust their reported score to account for the expected costs of settling a solution on the chain and the revert risk.
 
 With respect to optimal bidding, note that the protocol rewards allow a solver to participate in an auction without misreporting the score they can generate (net of expected costs). This is easy to see if the cap is not binding, and misreporting does not affect $$\textrm{referenceScore}_i$$. Then, by reducing the reported score of a solution, solver $$i$$ does not affect its payoff if this solution is among the winners (which only shifts from protocol rewards to positive slippage), while reducing the probability that this solution is a winner. It is therefore a dominant strategy to bid truthfully.
 
 The presence of the cap on rewards $$c_u$$, however, makes the problem more complex as it introduces a "first-price auction" logic: if the difference between the best and second-best solution is very large, then the winning solver wins more when it underreports its score. The filtering step of the fair combinatorial auction also makes this problem more complex, because there are some edge cases in which by reducing the score of a solution, solver $i$ can benefit by making the filtering steps less stringent for its opponents (see [here](https://forum.cow.fi/t/combinatorial-auctions-from-theory-to-practice-via-some-more-theory-about-rewards/2877) for a discussion). However, determining the optimal amount of underreporting is very complex and requires each solver to make strong assumptions regarding the performance of competing solvers.
 
 To summarize, truthfully revealing the (cost-adjusted) score that a solver can generate for each submitted solution is optimal if the cap is not binding, and misreporting does not affect $$\textrm{referenceScore}_i$$. It is not necessarily optimal in uncompetitive auctions when the difference between the best and second-best solution may be large, and in some edge cases in which a solver may benefit from making the filtering step less stringent. However, in these cases, deriving the optimal strategy is a very complex problem.
+
+The penalty cap $$c_l$$ also has to be taken into account for optimal bidding: since a solver only pays a penalty up to the caps of the orders it does not settle, the caps determine the price movement at which a solver prefers not to settle a winning solution, and hence how aggressively it can bid on an order (see [here](https://forum.cow.fi/t/how-penalties-affect-bidding-of-solvers/3341) for a discussion).
 
 Consistency rewards introduce an additional strategic dimension; since the consistency metric rewards competitive bids on executed orders, solvers have an incentive to participate broadly across auctions with bids close to the winning one, even in cases where they do not expect to win the performance reward. At the same time, since bid quality is discounted by the settlement success rate, solvers should only submit bids they are prepared to settle.
 
