@@ -114,17 +114,11 @@ An example Fill-or-Kill user limit buy order that sells 1000 [COW](https://ether
     "feeAmount": "0",
     "kind": "sell",
     "partiallyFillable": false,
-    "class": "limit",
-    "protocolFees": [
-        {
-            "kind": "volume",
-            "factor": 0.0002
-        }
-    ]
+    "class": "limit"
 }
 ```
 
-The above entry should be interpreted as follows. It is a Fill-or-Kill order since the flag `partiallyFillable` is set to `false`. Moreover, it is a sell order since its `kind` is set to `sell`. Finally, this is a `limit` order, meaning that it has a zero-signed fee, which implies that the solver is free to choose an appropriate fee to cover its execution cost. This means that, if executed, the user will send a total of 1000000000000000000000 COW atoms to the settlement contract, and the user has signed for a minimum of 284138335 USDC atoms (`fullBuyAmount`). The order also carries a `protocolFees` entry for a 2 bps volume fee, which the driver will deduct from the buy side once the trade settles. Since the order has not been partially filled, `sellAmount` still equals `fullSellAmount`, but `buyAmount` is scaled up from `fullBuyAmount` to net out that fee: `buyAmount` = `fullBuyAmount` / (1 - 0.0002) = 284138335 / 0.9998 ≈ 284195174.03, rounded down to 284195174. Solvers can then route on `sellAmount`/`buyAmount` while ignoring fees entirely, and once the driver charges its 2 bps cut of the 284195174 USDC bought (≈56839 USDC atoms), the user is left with exactly the signed minimum of 284138335 USDC atoms — so the original limit is never violated. This is the usual case in practice: on most chains essentially every order carries some volume-based protocol or partner fee, so `buyAmount`/`sellAmount` differ from `fullBuyAmount`/`fullSellAmount` even without any partial fill; the two only coincide when there is no such fee, which is rare.
+The above entry should be interpreted as follows. It is a Fill-or-Kill order since the flag `partiallyFillable` is set to `false`. Moreover, it is a sell order since its `kind` is set to `sell`. Finally, this is a `limit` order, meaning that it has a zero-signed fee, which implies that the solver is free to choose an appropriate fee to cover its execution cost. This means that, if executed, the user will send a total of 1000000000000000000000 COW atoms to the settlement contract, and the user has signed for a minimum of 284138335 USDC atoms (`fullBuyAmount`). The order also carries a 2 bps volume fee, which the driver will deduct from the buy side once the trade settles. Since the order has not been partially filled, `sellAmount` still equals `fullSellAmount`, but `buyAmount` is scaled up from `fullBuyAmount` to net out that fee: `buyAmount` = `fullBuyAmount` / (1 - 0.0002) = 284138335 / 0.9998 ≈ 284195174.03, rounded down to 284195174. Solvers can then route on `sellAmount`/`buyAmount` while ignoring fees entirely, and once the driver charges its 2 bps cut of the 284195174 USDC bought (≈56839 USDC atoms), the user is left with exactly the signed minimum of 284138335 USDC atoms — so the original limit is never violated. This is the usual case in practice: on most chains essentially every order carries some volume-based protocol or partner fee, so `buyAmount`/`sellAmount` differ from `fullBuyAmount`/`fullSellAmount` even without any partial fill; the two only coincide when there is no such fee, which is rare.
 
 
 ### `deadline`
