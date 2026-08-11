@@ -76,8 +76,10 @@ This key maps to a list containing the set of orders in the batch. Each entry in
 - `uid`: this is the unique identifier of the order.
 - `sellToken`: a string denoting the address of the sell token.
 - `buyToken`: a string denoting the address of the buy token.
-- `sellAmount`: a stringified integer denoting the limit amount that is being sold, measured in terms of the smallest denomination of the sell token.
-- `buyAmount`: a stringified integer denoting the limit amount that is being bought. Similar to the `sellAmount`, it is measured in terms of the smallest denomination of the buy token.
+- `sellAmount`: a stringified integer denoting the sell amount solvers should use when computing a solution, measured in terms of the smallest denomination of the sell token. It can be smaller than `fullSellAmount` for two reasons: it's reduced by any amount already executed on a partially fillable order, and it's scaled down to net out any volume-based protocol/partner fee, so solvers can use it directly without worrying about fees.
+- `buyAmount`: the buy-side counterpart to `sellAmount`, measured in terms of the smallest denomination of the buy token. It can be smaller than `fullBuyAmount` for the same two reasons.
+- `fullSellAmount`: a stringified integer denoting the order's original sell amount as signed by the user, measured in terms of the smallest denomination of the sell token. It stays constant across auctions and is the limit the driver must not violate once fees are charged.
+- `fullBuyAmount`: a stringified integer denoting the order's original buy amount as signed by the user, measured in terms of the smallest denomination of the buy token. It stays constant across auctions and is the limit the driver must not violate once fees are charged.
 - `created`: creation time of the order, denominated in epoch seconds.
 - `validTo`: integer indicating the time until which the order is valid.
 - `kind`: a string of the set {"sell", "buy"}, describing whether the order is a `sell` or `buy` order.
@@ -106,7 +108,9 @@ An example Fill-or-Kill user limit buy order that sells 1000 [COW](https://ether
     "sellToken": "0xdef1ca1fb7fbcdc777520aa7f396b4e015f497ab",
     "buyToken": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
     "sellAmount": "1000000000000000000000",
-    "buyAmount": "284138335",
+    "buyAmount": "284195174",
+    "fullSellAmount": "1000000000000000000000",
+    "fullBuyAmount": "284138335",
     "feeAmount": "0",
     "kind": "sell",
     "partiallyFillable": false,
@@ -114,7 +118,7 @@ An example Fill-or-Kill user limit buy order that sells 1000 [COW](https://ether
 }
 ```
 
-The above entry should be interpreted as follows. It is a Fill-or-Kill order since the flag `partiallyFillable` is set to `false`. Moreover, it is a sell order since its `kind` is set to `sell`. Finally, this is a `limit` order, meaning that it has a zero-signed fee, which implies that the solver is free to choose an appropriate fee to cover its execution cost. This means that, if executed, the user will send a total of 1000000000000000000000 COW atoms to the settlement contract and, no matter how much fee the solver will charge, the user is guaranteed to receive at least 284138335 USDC atoms.
+The above entry should be interpreted as follows. It is a Fill-or-Kill order since the flag `partiallyFillable` is set to `false`. Moreover, it is a sell order since its `kind` is set to `sell`. Finally, this is a `limit` order, meaning that it has a zero-signed fee, which implies that the solver is free to choose an appropriate fee to cover its execution cost. This means that, if executed, the user will send a total of 1000000000000000000000 COW atoms to the settlement contract, and the user has signed for a minimum of 284138335 USDC atoms (`fullBuyAmount`). The order also carries a 2 bps volume fee, which the driver will deduct from the buy side once the trade settles. Since the order has not been partially filled, `sellAmount` still equals `fullSellAmount`, but `buyAmount` is scaled up from `fullBuyAmount` to net out that fee: `buyAmount` = `fullBuyAmount` / (1 - 0.0002) = 284138335 / 0.9998 ≈ 284195174.03, rounded down to 284195174. Solvers can then route on `sellAmount`/`buyAmount` while ignoring fees entirely, and once the driver charges its 2 bps cut of the 284195174 USDC bought (≈56839 USDC atoms), the user is left with exactly the signed minimum of 284138335 USDC atoms — so the original limit is never violated. This is the usual case in practice: on most chains essentially every order carries some volume-based protocol or partner fee, so `buyAmount`/`sellAmount` differ from `fullBuyAmount`/`fullSellAmount` even without any partial fill; the two only coincide when there is no such fee, which is rare.
 
 
 ### `deadline`
