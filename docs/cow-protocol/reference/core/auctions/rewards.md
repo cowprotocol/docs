@@ -66,7 +66,7 @@ $$
 
 Here $$\textrm{quote}_o$$ is the value of the quote of order $$o$$, expressed in the native token of the chain. The quote of an order is the buy amount with all volume fees deducted for sell orders, and the sell amount with all volume fees added for buy orders. The global bound $$\bar{c}$$ is the native token equivalent of 20 USD. For partially fillable orders, the penalty cap is scaled to the fraction of the order that the winning solution proposed to execute.
 
-The fraction $$\phi_o$$ depends on the chain and on whether the two tokens traded by the order are correlated. The classification into correlated and uncorrelated token pairs follows the same logic that is used in determining the [protocol volume fee](/governance/fees/fees). For correlated token pairs, $$\phi_o = 0.1 \;\textrm{bps}$$ on all chains. For uncorrelated token pairs, the values are:
+The fraction $$\phi_o$$ depends on the chain and on whether the two tokens traded by the order are correlated. The classification into correlated and uncorrelated token pairs follows the same logic that is used in determining the [protocol volume fee](/governance/fees). For correlated token pairs, $$\phi_o = 0.1 \;\textrm{bps}$$ on all chains. For uncorrelated token pairs, the values are:
 
 - Ethereum mainnet: $$4 \;\textrm{bps}$$
 - Gnosis Chain: $$3 \;\textrm{bps}$$
