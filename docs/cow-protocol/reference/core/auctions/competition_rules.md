@@ -117,7 +117,7 @@ At CoW DAO's discretion, systematic violation of these rules may lead to penaliz
     <summary>Base chain baseline protocols and tokens</summary>
 
   - **Protocols**: Uniswap v2/v3, Balancer v2
-  - **Base tokens**: [`WETH`](https://basescan.org/address/0x420000000000000000000000000000000000000), [`USDC`](https://basescan.org/address/0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913), [`DAI`](https://basescan.org/address/0x50c5725949A6F0c72E6C4a641F24049A917DB0Cb)
+  - **Base tokens**: [`WETH`](https://basescan.org/address/0x4200000000000000000000000000000000000006), [`USDC`](https://basescan.org/address/0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913), [`DAI`](https://basescan.org/address/0x50c5725949A6F0c72E6C4a641F24049A917DB0Cb)
   </details>
 
   <details>
@@ -138,7 +138,7 @@ At CoW DAO's discretion, systematic violation of these rules may lead to penaliz
     <summary>BNB chain baseline protocols and tokens</summary>
 
   - **Protocols**: Uniswap v2/v3, Pancake Swap
-  - **Base tokens**: [`WBNB`](https://bnbscan.com/address/0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c), [`BUSD`](https://bnbscan.com/address/0xe9e7cea3dedca5984780bafc599bd69add087d56), [`USDT`](https://bnbscan.com/address/0x55d398326f99059ff775485246999027b3197955), [`WETH`](https://bnbscan.com/address/0x2170ed0880ac9a755fd29b2688956bd959f933f8)
+  - **Base tokens**: [`WBNB`](https://bscscan.com/address/0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c), [`BUSD`](https://bscscan.com/address/0xe9e7cea3dedca5984780bafc599bd69add087d56), [`USDT`](https://bscscan.com/address/0x55d398326f99059ff775485246999027b3197955), [`WETH`](https://bscscan.com/address/0x2170ed0880ac9a755fd29b2688956bd959f933f8)
   </details>
 
   <details>
