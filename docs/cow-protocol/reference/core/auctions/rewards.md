@@ -31,7 +31,7 @@ $$
 \textrm{performanceReward}_i = \textrm{cap}(\textrm{totalScore} - \textrm{referenceScore}_i-\textrm{missingScore}_i).
 $$
 
-Here $$\textrm{totalScore}$$ is the sum of the scores of all winning solutions in the auction and $$\textrm{missingScore}_i$$ is the sum of the scores of solver $$i$$'s winning solutions that reverted. Finally, $$\textrm{referenceScore}_i$$ is the total score of a counterfactual auction in which all bids from solver $$i$$ are removed from the set of bids that survive the fairness filtering. If only one solver submits solutions, $$\textrm{referenceScore}_i$$ is, by definition, zero.
+Here $$\textrm{totalScore}$$ is the sum of the scores of all winning solutions in the auction and $$\textrm{missingScore}_i$$ is the sum of the scores of solver $$i$$'s winning solutions that did not settle in time. Finally, $$\textrm{referenceScore}_i$$ is the total score of a counterfactual auction in which all bids from solver $$i$$ are removed from the set of bids that survive the fairness filtering. If only one solver submits solutions, $$\textrm{referenceScore}_i$$ is, by definition, zero.
 
 :::note
 
