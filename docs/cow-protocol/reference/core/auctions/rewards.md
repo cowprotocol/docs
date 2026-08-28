@@ -58,13 +58,13 @@ where $$\textrm{unsettled}_i$$ is the set of orders that are part of one of solv
 
 #### Penalty caps
 
-The penalty cap of an order is a fraction of the order's quote, bounded by a global absolute cap:
+The penalty cap of an order is a fraction of the order's volume, bounded by a global absolute cap:
 
 $$
-\textrm{penaltyCap}_o = \min(\phi_o \cdot \textrm{quote}_o, \bar{c}).
+\textrm{penaltyCap}_o = \min(\phi_o \cdot \textrm{volume}_o, \bar{c}).
 $$
 
-Here $$\textrm{quote}_o$$ is the value of the quote of order $$o$$, expressed in the native token of the chain. The quote of an order is the buy amount with all volume fees deducted for sell orders, and the sell amount with all volume fees added for buy orders. The global bound $$\bar{c}$$ is the native token equivalent of 20 USD. For partially fillable orders, the penalty cap is scaled to the fraction of the order that the winning solution proposed to execute.
+Here $$\textrm{volume}_o$$ is the volume of order $$o$$, expressed in the native token of the chain: the sell amount for sell orders and the buy amount for buy orders, converted into the native token using the native prices of the auction. The global bound $$\bar{c}$$ is the native token equivalent of 20 USD. For partially fillable orders, $$\textrm{volume}_o$$ refers to the full order, and the penalty cap is scaled to the fraction of the order that the winning solution proposed to execute.
 
 The fraction $$\phi_o$$ depends on the chain and on whether the two tokens traded by the order are correlated. The classification into correlated and uncorrelated token pairs follows the same logic that is used in determining the [protocol volume fee](/governance/fees). For correlated token pairs, $$\phi_o = 0.1 \;\textrm{bps}$$ on all chains. For uncorrelated token pairs, the values are:
 
