@@ -62,6 +62,10 @@ The security considerations of upgradeability are discussed in the [GPv2Allowlis
 
 ## Security / Known Issues
 
+### Disabled settlement path
+
+Direct `GPv2Settlement.swap()` calls are disabled on Ethereum. Use the standard `settle()` flow instead.
+
 ### Orders with zero amounts
 
 If a user creates an order with `sellAmount = 0` or `buyAmount = 0`, then this order could be executed an arbitrary amount of times instead of just a single time.
