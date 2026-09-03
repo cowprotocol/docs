@@ -131,22 +131,24 @@ In this section, we provide sample instances following the json format described
 - [Multiple orders on multiple token pairs Instances](https://drive.google.com/file/d/10RuJ93gHwo5uBZ6xST4k7-UMTlXBbmj-/view?usp=sharing)
 - [Example Instance with solution containing calldata](https://drive.google.com/file/d/1sOXd8t4dfckVxAMz2TAnsisUve3M6iiG/view?usp=sharing)
 
-In general, the instance json's of all recent auctions can be found in the following links:
-- [prod] https://solver-instances.s3.eu-central-1.amazonaws.com/prod-mainnet/$AUCTION_ID.json
-- [barn] https://solver-instances.s3.eu-central-1.amazonaws.com/staging-mainnet/$AUCTION_ID.json
+In general, the instance json of every auction from roughly the last 30 days can be found in the public instance bucket:
+- [prod] https://solver-instances.s3.eu-central-1.amazonaws.com/prod/$CHAIN/auction/$AUCTION_ID.json
+- [barn] https://solver-instances.s3.eu-central-1.amazonaws.com/staging/$CHAIN/auction/$AUCTION_ID.json
 
-In the above urls, one needs to replace the $AUCTION_ID with an actual auction_id. As a clarification, each auction taking place has a unique identifier that determines it. The easiest way to recover the id of an auction that resulted in a settlement taking place on-chain is to start from the tx hash of the settlement, and use the competition endpoint to recover this id. Here is one such example.
+In the above urls, one needs to replace `$CHAIN` with the chain's name in the bucket (`mainnet`, `xdai`, `arbitrum-one`, `base`, `polygon`, `bnb`, `avalanche`, `linea`, `ink` or `plasma`) and `$AUCTION_ID` with an actual auction_id. Objects are served gzip-encoded (`curl --compressed` decodes them) and are expired from the bucket after roughly 30 days. As a clarification, each auction taking place has a unique identifier that determines it. The easiest way to recover the id of an auction that resulted in a settlement taking place on-chain is to start from the tx hash of the settlement, and use the competition endpoint to recover this id. Here is one such example.
 
 Here is a tx hash of a settlement that was executed on-chain.
 
-0x17271e39305217d36635afbcc882e9431f9195d561d814aba96986cdd12dd240
+0xc90348e355ecf4f3b9a9b18136579cc3e1daa0fea5bd18040e8b287f5f2ee919
 
 Starting from this hash, we can use the competition endpoint:
 
-[https://api.cow.fi/mainnet/api/v1/solver_competition/by_tx_hash/0x17271e39305217d36635afbcc882e9431f9195d561d814aba96986cdd12dd240](https://api.cow.fi/mainnet/api/v1/solver_competition/by_tx_hash/0x17271e39305217d36635afbcc882e9431f9195d561d814aba96986cdd12dd240)
+[https://api.cow.fi/mainnet/api/v2/solver_competition/by_tx_hash/0xc90348e355ecf4f3b9a9b18136579cc3e1daa0fea5bd18040e8b287f5f2ee919](https://api.cow.fi/mainnet/api/v2/solver_competition/by_tx_hash/0xc90348e355ecf4f3b9a9b18136579cc3e1daa0fea5bd18040e8b287f5f2ee919)
 
-and then we can see that the auction id was 6462225.
+and then we can see that the auction id was 13730541.
 
 Using this id, we can now recover the instance.json of that auction:
 
-[https://solver-instances.s3.eu-central-1.amazonaws.com/prod-mainnet/6462225.json](https://solver-instances.s3.eu-central-1.amazonaws.com/prod-mainnet/6462225.json)
+[https://solver-instances.s3.eu-central-1.amazonaws.com/prod/mainnet/auction/13730541.json](https://solver-instances.s3.eu-central-1.amazonaws.com/prod/mainnet/auction/13730541.json)
+
+Since instances expire, substitute a recent settlement when trying this: the [`/api/v2/solver_competition/latest`](https://api.cow.fi/mainnet/api/v2/solver_competition/latest) endpoint returns the most recent auction and its settlement transaction hashes.
