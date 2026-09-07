@@ -54,7 +54,7 @@ $$
 c_l = \sum_{o \,\in\, \textrm{unsettled}_i} \textrm{penaltyCap}_o,
 $$
 
-where $$\textrm{unsettled}_i$$ is the set of orders that are part of one of solver $$i$$'s winning solutions in that auction and that solver $$i$$ did not settle on-chain within the auction deadline.
+where $$\textrm{unsettled}_i$$ is the set of orders that are part of solver $$i$$'s winning solutions in that auction and that solver $$i$$ did not settle on-chain within the auction deadline.
 
 #### Penalty caps
 
