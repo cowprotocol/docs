@@ -131,7 +131,7 @@ In this section, we provide sample instances following the json format described
 - [Multiple orders on multiple token pairs Instances](https://drive.google.com/file/d/10RuJ93gHwo5uBZ6xST4k7-UMTlXBbmj-/view?usp=sharing)
 - [Example Instance with solution containing calldata](https://drive.google.com/file/d/1sOXd8t4dfckVxAMz2TAnsisUve3M6iiG/view?usp=sharing)
 
-In general, the instance json of every auction from roughly the last 30 days can be found in the public instance bucket:
+In general, the instance JSON for every auction from the past ~30 days is available in the public instance bucket:
 - [prod] https://solver-instances.s3.eu-central-1.amazonaws.com/prod/$CHAIN/auction/$AUCTION_ID.json
 - [barn] https://solver-instances.s3.eu-central-1.amazonaws.com/staging/$CHAIN/auction/$AUCTION_ID.json
 
