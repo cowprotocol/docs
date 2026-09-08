@@ -5,7 +5,7 @@ sidebar_position: 3
 
 # Solver rewards
 
-The protocol is currently subsidizing the solver competition on all chains it operates on, by rewarding solvers on a weekly basis (currently, every Tuesday) with rewards paid in COW. Solvers are rewarded based on their performance and participation in the solver competition as specified by [CIP-20](https://snapshot.org/#/cow.eth/proposal/0x2d3f9bd1ea72dca84b03e97dda3efc1f4a42a772c54bd2037e8b62e7d09a491f), [CIP-36](https://snapshot.org/#/cow.eth/proposal/0x4e58f9c1208121c0e06282b5541b458bc8c8b76090263e25448848f3194df986), [CIP-38](https://snapshot.org/#/cow.eth/proposal/0xfb81daea9be89f4f1c251d53fd9d1481129b97c6f38caaddc42af7f3ce5a52ec), [CIP-48](https://snapshot.org/#/cow.eth/proposal/0x563ab9a66265ad72c47a8e55f620f927685dd07d4d49f6d1812905c683f05805), [CIP-57](https://snapshot.box/#/s:cow.eth/proposal/0x46d4fea1492207cf400fcb7a01141a7d4c730791d658cc77236941fc9eb7dccb), [CIP-67](https://snapshot.box/#/s:cow.eth/proposal/0xf9ecb08c4738f04c4525373d6b78085d16635f86adacd1b8ea77b2c176c99d32), [CIP-74](https://snapshot.org/#/s:cow.eth/proposal/0x0c70c8cd92accee872b52614b4fa10e3e3214f45c5b6857f7e88e910607a3c1d), and [CIP-85](https://snapshot.box/#/s:cow.eth/proposal/0xb488c343df3ba5f3857a4c7a920a74e18c13a2cdce99d27af34216803da6abff). Solver rewards for participating in the price estimation competition and providing quotes that are needed for the gas estimates and limit price computations of market orders, which from now on we will call price estimation or quote rewards, are specified in [CIP-27](https://snapshot.org/#/cow.eth/proposal/0x64e061568e86e8d2eec344d4a892e4126172b992cabe59a0b24c51c4c7e6cc33), [CIP-36](https://snapshot.org/#/cow.eth/proposal/0x4e58f9c1208121c0e06282b5541b458bc8c8b76090263e25448848f3194df986), [CIP-57](https://snapshot.box/#/s:cow.eth/proposal/0x46d4fea1492207cf400fcb7a01141a7d4c730791d658cc77236941fc9eb7dccb), and [CIP-72](https://snapshot.box/#/s:cow.eth/proposal/0xc1b1252f0c99126b4e09730022faa31a7bb58073a3dc064c19b74d44164c39a7).
+The protocol is currently subsidizing the solver competition on all chains it operates on, by rewarding solvers on a weekly basis (currently, every Tuesday) with rewards paid in COW. Solvers are rewarded based on their performance and participation in the solver competition as specified by [CIP-20](https://snapshot.org/#/cow.eth/proposal/0x2d3f9bd1ea72dca84b03e97dda3efc1f4a42a772c54bd2037e8b62e7d09a491f), [CIP-36](https://snapshot.org/#/cow.eth/proposal/0x4e58f9c1208121c0e06282b5541b458bc8c8b76090263e25448848f3194df986), [CIP-38](https://snapshot.org/#/cow.eth/proposal/0xfb81daea9be89f4f1c251d53fd9d1481129b97c6f38caaddc42af7f3ce5a52ec), [CIP-48](https://snapshot.org/#/cow.eth/proposal/0x563ab9a66265ad72c47a8e55f620f927685dd07d4d49f6d1812905c683f05805), [CIP-57](https://snapshot.box/#/s:cow.eth/proposal/0x46d4fea1492207cf400fcb7a01141a7d4c730791d658cc77236941fc9eb7dccb), [CIP-67](https://snapshot.box/#/s:cow.eth/proposal/0xf9ecb08c4738f04c4525373d6b78085d16635f86adacd1b8ea77b2c176c99d32), [CIP-74](https://snapshot.org/#/s:cow.eth/proposal/0x0c70c8cd92accee872b52614b4fa10e3e3214f45c5b6857f7e88e910607a3c1d), [CIP-85](https://snapshot.box/#/s:cow.eth/proposal/0xb488c343df3ba5f3857a4c7a920a74e18c13a2cdce99d27af34216803da6abff), and [CIP-87](https://snapshot.box/#/s:cow.eth/proposal/0x0502452cbad7c84ce4136b1b2f31071d9601042cc044936a4c5a37e923844f72). Solver rewards for participating in the price estimation competition and providing quotes that are needed for the gas estimates and limit price computations of market orders, which from now on we will call price estimation or quote rewards, are specified in [CIP-27](https://snapshot.org/#/cow.eth/proposal/0x64e061568e86e8d2eec344d4a892e4126172b992cabe59a0b24c51c4c7e6cc33), [CIP-36](https://snapshot.org/#/cow.eth/proposal/0x4e58f9c1208121c0e06282b5541b458bc8c8b76090263e25448848f3194df986), [CIP-57](https://snapshot.box/#/s:cow.eth/proposal/0x46d4fea1492207cf400fcb7a01141a7d4c730791d658cc77236941fc9eb7dccb), and [CIP-72](https://snapshot.box/#/s:cow.eth/proposal/0xc1b1252f0c99126b4e09730022faa31a7bb58073a3dc064c19b74d44164c39a7).
 
 :::note
 
@@ -13,7 +13,7 @@ For the interested reader, the main source of truth for the weekly payments to s
 
 :::
 
-## Solver competition rewards (CIPs 20, 36, 38, 48, 57, 67, 74, 85)
+## Solver competition rewards (CIPs 20, 36, 38, 48, 57, 67, 74, 85, 87)
 
 ### Performance rewards
 
@@ -31,7 +31,7 @@ $$
 \textrm{performanceReward}_i = \textrm{cap}(\textrm{totalScore} - \textrm{referenceScore}_i-\textrm{missingScore}_i).
 $$
 
-Here $$\textrm{totalScore}$$ is the sum of the scores of all winning solutions in the auction and $$\textrm{missingScore}_i$$ is the sum of the scores of solver $$i$$'s winning solutions that reverted. Finally, $$\textrm{referenceScore}_i$$ is the total score of a counterfactual auction in which all bids from solver $$i$$ are removed from the set of bids that survive the fairness filtering. If only one solver submits solutions, $$\textrm{referenceScore}_i$$ is, by definition, zero.
+Here $$\textrm{totalScore}$$ is the sum of the scores of all winning solutions in the auction and $$\textrm{missingScore}_i$$ is the sum of the scores of solver $$i$$'s winning solutions that did not settle in time. Finally, $$\textrm{referenceScore}_i$$ is the total score of a counterfactual auction in which all bids from solver $$i$$ are removed from the set of bids that survive the fairness filtering. If only one solver submits solutions, $$\textrm{referenceScore}_i$$ is, by definition, zero.
 
 :::note
 
@@ -39,18 +39,47 @@ The performance reward calculation can result in a negative value, in which case
 
 :::
 
-The performance reward is capped from above and below using the function $$\textrm{cap}(x) = \max(-c_l, \min(c_u, x))$$, where $$c_u$$ is equal to a chain-specific fraction $$\beta$$ of the protocol fee (excluding partner fees) that the protocol earned from the trades in all solutions successfully executed onchain by the solver in that auction, and $$c_l$$ is chain-specific as well. $$\beta$$ and $$c_l$$ are determined by the following values:
+The performance reward is capped from above and below using the function $$\textrm{cap}(x) = \max(-c_l, \min(c_u, x))$$.
 
-- Ethereum mainnet, Arbitrum, and Base chain: $$\beta = 50\%$$, $$c_l = 0.010 \;\textrm{ETH}$$
-- Gnosis Chain: $$\beta = 100\%$$, $$10 \;\textrm{xDAI}$$
-- Avalanche: $$\beta = 100\%$$, $$0.3 \;\textrm{AVAX}$$
-- Polygon: $$\beta = 100\%$$, $$30 \;\textrm{POL}$$
-- BNB: $$\beta = 100\%$$, $$0.04 \;\textrm{BNB}$$
-- Linea and Ink: $$\beta = 100\%$$, $$0.0015 \;\textrm{ETH}$$
-- Plasma: $$\beta = 100\%$$, $$30 \;\textrm{XPL}$$
+The upper cap $$c_u$$ is equal to a chain-specific fraction $$\beta$$ of the protocol fee (excluding partner fees) that the protocol earned from the trades in all solutions successfully executed on-chain by the solver in that auction. $$\beta$$ is determined by the following values:
+
+- Ethereum mainnet, Arbitrum, Base chain, and BNB: $$\beta = 50\%$$
+- Gnosis Chain, Avalanche, Polygon, Linea, Ink, and Plasma: $$\beta = 100\%$$
 
 The parameter $$\beta$$, which naturally corresponds to a revenue-sharing parameter between protocol and solvers, is set to 50% by default. The core team has a mandate to change this parameter for individual networks, if needed, to a value in the interval [50%, 100%], given that the network has a total revenue less than 5% of the total protocol revenue.
 
+The lower cap $$c_l$$ is determined by the orders that solver $$i$$ won but did not settle. Every order has a penalty cap associated with it in each auction, expressed in the native token of the chain, and
+
+$$
+c_l = \sum_{o \,\in\, \textrm{unsettled}_i} \textrm{penaltyCap}_o,
+$$
+
+where $$\textrm{unsettled}_i$$ is the set of orders that are part of solver $$i$$'s winning solutions in that auction and that solver $$i$$ did not settle on-chain within the auction deadline.
+
+#### Penalty caps
+
+The penalty cap of an order is a fraction of the order's volume, bounded by a global absolute cap:
+
+$$
+\textrm{penaltyCap}_o = \min(\phi_o \cdot \textrm{volume}_o, \bar{c}).
+$$
+
+Here $$\textrm{volume}_o$$ is the volume of order $$o$$, expressed in the native token of the chain: the sell amount for sell orders and the buy amount for buy orders, converted into the native token using the native prices of the auction. The global bound $$\bar{c}$$ is the native token equivalent of 20 USD. For partially fillable orders, $$\textrm{volume}_o$$ refers to the full order, and the penalty cap is scaled to the fraction of the order that the winning solution proposed to execute.
+
+The fraction $$\phi_o$$ depends on the chain and on whether the two tokens traded by the order are correlated. The classification into correlated and uncorrelated token pairs follows the same logic that is used in determining the [protocol volume fee](/governance/fees). For correlated token pairs, $$\phi_o = 0.1 \;\textrm{bps}$$ on all chains. For uncorrelated token pairs, the values are:
+
+- Ethereum mainnet: $$4 \;\textrm{bps}$$
+- Gnosis Chain: $$3 \;\textrm{bps}$$
+- Arbitrum: $$1 \;\textrm{bps}$$
+- Base: $$2 \;\textrm{bps}$$
+- Avalanche: $$2 \;\textrm{bps}$$
+- Polygon: $$3 \;\textrm{bps}$$
+- BNB: $$1 \;\textrm{bps}$$
+- Linea: $$2 \;\textrm{bps}$$
+- Ink: $$1 \;\textrm{bps}$$
+- Plasma: $$1 \;\textrm{bps}$$
+
+These caps are chosen such that solvers settle their winning solutions with a high probability, given estimates of price movements during the window of exclusivity, i.e., the time between the moment a solver is notified that it won and the deadline by which the auction has to be settled. The core team has a mandate to change the penalty cap per order within the interval [0 bps, 10 bps], if needed, to tune the trade-off between competitive prices and fast execution. Any change to the penalty cap is announced to solvers in advance and reflected in this documentation.
 
 :::note
 
@@ -125,7 +154,7 @@ Hence, although buffers and the possibility of using them are not an explicit el
 
 To determine the optimal routing, the recommended strategy for a solver is to start by dividing the available orders into groups of orders on the same directed token pairs - i.e., in each group, all orders have the same sell and buy tokens. The next step is to compute the best possible routing for each group and submit it as a solution. Note that, by construction, each of these solutions will use outside liquidity. Finally, a solver should check whether it is possible to improve these solutions by creating batched solutions containing orders on different directed token pairs. These additional efficiencies may come from, for example, exploiting liquidity already available on the protocol - using one order as liquidity for the other (in a CoW) or using [surplus-capturing JIT liquidity](/cow-protocol/reference/core/auctions/the-problem#surplus-capturing-jit-orders) - or from gas savings. Solvers should submit an additional solution for every combination of groups of orders for which additional efficiencies are possible. When submitting such a solution, they should pay attention to sharing the additional efficiencies among all orders in the batch; otherwise, the batched solution may be filtered out as unfair.
 
-As already discussed, solvers are responsible for paying the gas cost of a solution. Also, if a solution reverts, a solver may incur a penalty. Hence, when reporting their solution, solvers should adjust their reported score to account for the expected costs of settling a solution on the chain and the revert risk.
+As already discussed, solvers are responsible for paying the gas cost of a solution. Also, if a solution is not settled in time, a solver may incur a penalty, bounded by the sum of the penalty caps of the orders it does not settle. Hence, when reporting their solution, solvers should adjust their reported score to account for the expected costs of settling a solution on the chain and the risk of not settling it in time.
 
 With respect to optimal bidding, note that the protocol rewards allow a solver to participate in an auction without misreporting the score they can generate (net of expected costs). This is easy to see if the cap is not binding, and misreporting does not affect $$\textrm{referenceScore}_i$$. Then, by reducing the reported score of a solution, solver $$i$$ does not affect its payoff if this solution is among the winners (which only shifts from protocol rewards to positive slippage), while reducing the probability that this solution is a winner. It is therefore a dominant strategy to bid truthfully.
 
