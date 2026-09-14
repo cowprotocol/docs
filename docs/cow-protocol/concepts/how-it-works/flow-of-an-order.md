@@ -24,3 +24,5 @@ The competition between solvers in a batch auction ensures that users (including
 
 Letting solvers do the heavy lifting means users don't have to worry about finding the best liquidity pool, setting the right gas price, or picking the optimal slippage tolerance for their trades.
 Solvers are also experts at avoiding MEV so users can rest assured their orders are protected from MEV bots that exploit their price through frontrunning and sandwich attacks.
+
+Most orders follow this batch-auction flow. One exception is a [fast-path order](../order-types/fast-path-orders), which settles out of competition right after placement instead of waiting for the next batch, trading some of the batch's benefits for a faster settlement.
