@@ -34,15 +34,15 @@ Fast path is decided at the quote stage, and the order settles in a few steps:
 2. Solvers compete for it, and the winning quote is returned to the user.
 3. The user signs that quote and places the order.
 4. The winning solver settles it directly, outside the batch, within a short
-   exclusivity window (the order's `validFrom`).
+   exclusivity window set by the protocol.
 5. If the window passes without a settlement, the order joins the next batch
    auction like any other order.
 
-`validFrom` (in the order's `appData`) is the timestamp from which an order may
-enter a regular batch auction. For a fast-path order it doubles as the
-exclusivity window: until `validFrom` passes, the order can only be settled
-through the fast-path route. It is an independent field, while a value you set 
-is always respected. But even if you leave it blank, we'll still apply a default.
+The exclusivity window on a fast-path order is set by the protocol, not by you.
+`validFrom` and fast path are mutually exclusive: set `validFrom` (in the order's
+`appData`) for a "wait for CoW" order that only becomes solvable at a time you pick,
+or opt into fast path for out-of-competition settlement, but not both. A fast-path
+order ignores `validFrom`.
 
 ## Enabling fast path
 
