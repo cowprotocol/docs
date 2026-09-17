@@ -168,7 +168,7 @@ Yes, we can whitelist solvers so that they can have access to the orderbook API.
 ### What are the environments?
 
 There are three environments: shadow, staging, and production.
-In the shadow competition (only arbitrum and mainnet now) the solver is tested using production order flow but without settling any orders. This is for testing the integration of the solver. It is possible to simulate the solver's solutions and see how it does.
+In the shadow competition (only plasma now) the solver is tested using production order flow but without settling any orders. This is for testing the integration of the solver. It is possible to simulate the solver's solutions and see how it does.
 
 In the staging (barn) competition settling happens on-chain but the volume is much lower. That way the solver is tested by actually settling orders on chain.
 
