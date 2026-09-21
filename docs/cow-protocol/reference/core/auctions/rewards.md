@@ -138,7 +138,7 @@ $$
 
 where the sum runs over all executions of market orders in the period (a market order that is executed in several auctions, e.g., a partially fillable order, counts once per execution). The settlement success rate is computed over all orders the solver won, market orders and out-of-market limit orders alike.
 
-For example, suppose four solvers bid on an order with proposed surplus of 0.1, 0.08, 0.019, and 0.001 ETH. The total proposed surplus is 0.2 ETH, so the order shares are 0.5, 0.4, 0.095, and 0.005, respectively. If the solvers have success rates of 0.8, 0.9, 1.0, and 0.5 in the accounting period, this order contributes 0.4, 0.36, 0.095, and 0.0025, respectively, to their consistency metrics.
+For example, suppose four solvers bid on a market order with proposed surplus of 0.1, 0.08, 0.019, and 0.001 ETH. The total proposed surplus is 0.2 ETH, so the order shares are 0.5, 0.4, 0.095, and 0.005, respectively. If the solvers have success rates of 0.8, 0.9, 1.0, and 0.5 in the accounting period, this order contributes 0.4, 0.36, 0.095, and 0.0025, respectively, to their consistency metrics.
 
 :::note
 
