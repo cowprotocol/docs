@@ -108,7 +108,7 @@ $$
 
 where the sum runs over all solvers. The core team has a mandate to adapt this metric when they see fit; every change will be announced in advance on the [CoW Protocol forum](https://forum.cow.fi).
 
-**Current metric: bid quality and settlement success on market orders.** Since June 30, 2026, each solver's share of the consistency budget is proportional to a metric that combines the quality of the solver's bids with its settlement success rate, as announced in [this forum post](https://forum.cow.fi/t/consistency-metric-v2/3474). It replaces an earlier metric that simply counted the executed orders a solver had bid on. Only executions of market orders enter the bid quality component; executions of out-of-market limit orders do not earn consistency rewards, as announced in [this forum post](https://forum.cow.fi/t/consistency-metric-v2-1-in-market-orders-only/3577).
+**Current metric: bid quality and settlement success on market orders.** Since June 30, 2026, each solver's share of the consistency budget is proportional to a metric that combines the quality of the solver's bids with its settlement success rate, as announced in [this forum post](https://forum.cow.fi/t/consistency-metric-v2/3474). It replaces an earlier metric that simply counted the executed orders a solver had bid on. Since September 15, 2026, only executions of market orders enter the bid quality component; executions of out-of-market limit orders do not earn consistency rewards, as announced in [this forum post](https://forum.cow.fi/t/consistency-metric-v2-1-in-market-orders-only/3577).
 
 The metric has two components:
 
