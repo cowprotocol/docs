@@ -51,7 +51,6 @@ The performance reward is capped from above and below using the function $$\text
 
 The parameter $$\beta$$, which naturally corresponds to a revenue-sharing parameter between protocol and solvers, is set to 50% by default. The core team has a mandate to change this parameter for individual networks, if needed, to a value in the interval [50%, 100%], given that the network has a total revenue less than 5% of the total protocol revenue.
 
-
 :::note
 
 There is no guarantee that the per-auction rewards are greater than the costs of executing a transaction (due to, for example, gas costs). Hence, solvers cover these costs by adjusting their reported score. Of course, a solver who adjusts their score downward too aggressively is then at a disadvantage in the auction. The mechanism, therefore, incentivizes the accurate estimation of costs such as gas.
@@ -59,7 +58,6 @@ There is no guarantee that the per-auction rewards are greater than the costs of
 :::
 
 ### Consistency rewards
-
 
 With [CIP-85](https://snapshot.box/#/s:cow.eth/proposal/0xb488c343df3ba5f3857a4c7a920a74e18c13a2cdce99d27af34216803da6abff), the protocol introduced consistency rewards. These rewards are based on aggregate metrics evaluated over the full accounting week and are intended to incentivize consistent, reliable solver behavior, broad token coverage, and other aspects the core team considers important for maintaining healthy competition.
 
@@ -125,15 +123,7 @@ Hence, although buffers and the possibility of using them are not an explicit el
 
 To determine the optimal routing, the recommended strategy for a solver is to start by dividing the available orders into groups of orders on the same directed token pairs - i.e., in each group, all orders have the same sell and buy tokens. The next step is to compute the best possible routing for each group and submit it as a solution. Note that, by construction, each of these solutions will use outside liquidity. Finally, a solver should check whether it is possible to improve these solutions by creating batched solutions containing orders on different directed token pairs. These additional efficiencies may come from, for example, exploiting liquidity already available on the protocol - using one order as liquidity for the other (in a CoW) or using [surplus-capturing JIT liquidity](/cow-protocol/reference/core/auctions/the-problem#surplus-capturing-jit-orders) - or from gas savings. Solvers should submit an additional solution for every combination of groups of orders for which additional efficiencies are possible. When submitting such a solution, they should pay attention to sharing the additional efficiencies among all orders in the batch; otherwise, the batched solution may be filtered out as unfair.
 
-As already discussed, solvers are responsible for paying the gas cost of a solution. Also, if a solution reverts, a solver may incur a penalty. Hence, when reporting their solution, solvers should adjust their reported score to account for the expected costs of settling a solution on the chain and the revert risk.
-
-With respect to optimal bidding, note that the protocol rewards allow a solver to participate in an auction without misreporting the score they can generate (net of expected costs). This is easy to see if the cap is not binding, and misreporting does not affect $$\textrm{referenceScore}_i$$. Then, by reducing the reported score of a solution, solver $$i$$ does not affect its payoff if this solution is among the winners (which only shifts from protocol rewards to positive slippage), while reducing the probability that this solution is a winner. It is therefore a dominant strategy to bid truthfully.
-
-The presence of the cap on rewards $$c_u$$, however, makes the problem more complex as it introduces a "first-price auction" logic: if the difference between the best and second-best solution is very large, then the winning solver wins more when it underreports its score. The filtering step of the fair combinatorial auction also makes this problem more complex, because there are some edge cases in which by reducing the score of a solution, solver $i$ can benefit by making the filtering steps less stringent for its opponents (see [here](https://forum.cow.fi/t/combinatorial-auctions-from-theory-to-practice-via-some-more-theory-about-rewards/2877) for a discussion). However, determining the optimal amount of underreporting is very complex and requires each solver to make strong assumptions regarding the performance of competing solvers.
-
-To summarize, truthfully revealing the (cost-adjusted) score that a solver can generate for each submitted solution is optimal if the cap is not binding, and misreporting does not affect $$\textrm{referenceScore}_i$$. It is not necessarily optimal in uncompetitive auctions when the difference between the best and second-best solution may be large, and in some edge cases in which a solver may benefit from making the filtering step less stringent. However, in these cases, deriving the optimal strategy is a very complex problem.
-
-Consistency rewards introduce an additional strategic dimension; since the consistency metric rewards competitive bids on executed orders, solvers have an incentive to participate broadly across auctions with bids close to the winning one, even in cases where they do not expect to win the performance reward. At the same time, since bid quality is discounted by the settlement success rate, solvers should only submit bids they are prepared to settle.
+For optimal bidding, including how to account for gas costs, settlement risk and the penalty cap in the reported score, see [Recommended Bidding Strategy for Solvers](/cow-protocol/tutorials/solvers/optimal-bidding).
 
 ## Price estimation competition rewards (CIPs 27, 36, 57, 72)
 
