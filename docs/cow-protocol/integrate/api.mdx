@@ -19,7 +19,7 @@ The primary API for creating and managing orders on CoW Protocol.
 ### Key Endpoints
 
 - `POST /api/v1/quote` - Get trading quotes
-- `POST /api/v1/quote/stream` - Stream quotes from individual solvers as they arrive (SSE)
+- `POST /api/v1/quote/stream` - Stream progressively improving quotes as solvers respond (SSE)
 - `POST /api/v1/orders` - Submit signed orders
 - `GET /api/v1/orders/{uid}` - Get order details
 - `DELETE /api/v1/orders/{uid}` - Cancel orders
@@ -76,12 +76,16 @@ console.log('Order status:', orderDetails.status)
 ## Streaming Quotes
 
 `POST /api/v1/quote/stream` takes the same request body as `POST /api/v1/quote`, but returns a [Server-Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events) stream instead of a single response.
-Each solver's quote arrives as its own event, so the client can show a price as soon as the fastest solver responds instead of waiting for the whole competition.
+The first event arrives as soon as the fastest solver responds, and after that a quote is only emitted when it ranks better than the best one already sent, so the client can show a price immediately and every update improves on the last.
 
 Each event's `data` is an `OrderQuoteResponse`, the same shape `POST /api/v1/quote` returns.
 The `id` on each event can be passed as `quoteId` when placing an order, the same as a quote from `POST /api/v1/quote`.
-Solvers without a quote send nothing, so the stream may contain fewer events than there are solvers.
-If no solver returns a usable quote, the server sends a final `error` event with a `NoLiquidity` body, then closes.
+The endpoint always queries all solvers and attempts verification (the request's `priceQuality` is ignored), and each event carries its own `verified` flag.
+A verified quote ranks above an unverified one regardless of the quoted amount, because unverified quotes often over-promise; a later event may therefore report a slightly worse price than an earlier one when it is the first verified quote.
+Solvers without a usable quote, and quotes that do not beat the best already sent, emit no event, so the stream may contain fewer events than there are solvers.
+Individual solver failures are not streamed; only if no solver returns a usable quote at all does the server send a final `error` event with a `PriceEstimationError` body (for example `NoLiquidity`), then close.
+
+Because every event improves on the previous one, the last event received when the stream closes is the best available quote — clients do not need to rank events themselves.
 
 ```bash
 curl -N -X POST "https://api.cow.fi/mainnet/api/v1/quote/stream" \
@@ -98,7 +102,7 @@ curl -N -X POST "https://api.cow.fi/mainnet/api/v1/quote/stream" \
 
 ### Choosing a timeout
 
-Each quote is delivered as soon as its solver responds, so a usable price arrives faster than with `POST /api/v1/quote`, which waits for the whole competition.
+The first quote is delivered as soon as the fastest solver responds, so a usable price arrives faster than with `POST /api/v1/quote`, which waits for the whole competition.
 Streaming does not make any solver compute faster, though.
 The final quote is only as good as the responses that arrived before the stream was closed, and the `timeout` sets that boundary.
 
