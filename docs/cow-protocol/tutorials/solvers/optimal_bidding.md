@@ -182,7 +182,7 @@ The exact value of the share depends on aggregate weekly metrics that themselves
 
 For each candidate solution $x$:
 
-1. For each candidate solution $x$, estimate $S(x)$, $p(x)$.
+1. Estimate $S(x)$, $p(x)$.
 2. Compute the baseline score $s_{\text{base}}(x) = \max\!\left( p(x)\ S(x) ,\ \ S(x) - \tfrac{1 - p(x)}{p(x)} \big(c_l\big) \right)$
 3. Set the settlement slippage tolerance using $\gamma(x) = S(x)-s(x)+\min(c_l,s(x))$
 4. For batched solutions, verify the fairness filter passes against the per-pair reference outcome.
