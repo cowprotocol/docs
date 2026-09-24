@@ -5,42 +5,62 @@ sidebar_position: 12
 
 # Recommended Bidding Strategy for Solvers
 
-This guide describes a recommended _baseline_ bidding strategy for solvers in CoW Protocol’s combinatorial auction, that is, the bid each solver should submit by default for a given solution, optimal under the standard assumptions that a solver values its own solution truthfully and does not model competitor behaviour. It gives a per-solution baseline formula, the inputs required to compute it, and the cases where deviating from this baseline may be profitable but requires additional information or assumptions, which is what the later sections cover.
+This guide describes a recommended bidding strategy for solvers in CoW Protocol’s combinatorial auction, that is, the bid each solver should submit by default for a given solution, optimal under the standard assumptions that a solver values its own solution truthfully and does not model competitor behaviour.
+It gives a per-solution formula, the inputs required to compute it, and the cases where deviating from this recommendation may be profitable but requires additional information or assumptions, which is what the later sections cover.
 
 The intended reader is someone running or planning to run a CoW Protocol solver who wants a self-contained operational reference.
 
 :::info
 **TL;DR: How to bid?**
 
-For each solution a solver can settle, the recommended bid is a score equal to the value the solution is expected to deliver, adjusted downward for the probability that the settlement does not land on chain. The score should be neither inflated to win more auctions nor reduced to retain more value: under the standard mechanism, the reported score determines only whether the solution wins, not the solver's payoff conditional on winning. The solver should also set a threshold on acceptable negative slippage, so that a solution is settled unless the loss from slippage exceeds the cost of not settling, and should submit every solution with a positive baseline score.
+For each solution $x$ a solver can settle, estimate its value $S(x)$ net of execution costs, the probability $p(x)$ that the settlement lands on chain before the deadline, and the penalty cap $c_l$ of its orders.
+The recommended bid is then the score
+
+$$
+s_{\text{rec}}(x) = \max\!\left( p(x)\ S(x) ,\ \ S(x) - \tfrac{1 - p(x)}{p(x)} \big(c_l\big) \right)
+$$
+
+that is, the value the solution is expected to deliver, adjusted downward for the probability that the settlement does not land on chain.
+The score should be neither inflated to win more auctions nor reduced to retain more value: under the standard mechanism, the reported score determines only whether the solution wins, not the solver's payoff conditional on winning.
+After winning, a solution is settled only as long as the loss from slippage does not exceed the unset penalty.
+The solver should submit every solution that creates positive value, i.e., $S(x) > 0$.
 :::
 
 ## Overview
 
-For each candidate solution $x$ the solver can submit, estimate the value it creates and the probability it settles successfully. Use the risk-adjusted score as the baseline bid. This is a dominant strategy in a simplified mechanism explained below and a recommended baseline in production. Deviations from the baseline require data about competitor scores, reward-cap binding, or fairness-filter effects.
+For each candidate solution $x$ the solver can submit, estimate the value it creates and the probability it settles successfully.
+Use the risk-adjusted score as the bid.
+This is a dominant strategy in a simplified mechanism explained below and a robust starting point in production.
+Deviations from it require data about competitor scores, reward-cap binding, or fairness-filter effects.
 
 ## The auction setting
 
-The protocol runs a **combinatorial auction** (see [competition rules](/cow-protocol/reference/core/auctions/competition-rules#off-chain-protocol)). In each auction, a solver can submit candidate **solutions**. A solution is a commitment to settle a specified set of orders together with a reported **score** $s$. A solution may cover:
+The protocol runs a **combinatorial auction** (see [competition rules](/cow-protocol/reference/core/auctions/competition-rules#off-chain-protocol)).
+In each auction, a solver can submit candidate **solutions**.
+A solution is a commitment to settle a specified set of orders together with a reported **score** $s$.
+A solution may cover:
 
 - A single directed token pair (handling all orders on that pair).
 - Multiple directed token pairs (a batched solution, useful when coincidence-of-wants (CoWs) between pairs allow for peer-to-peer trading or when shared gas improves the routing).
 
 The protocol filters batched solutions for fairness, then picks the combination of solutions across pairs and solvers that maximises total reported score.
 
-An operationally important constraint is that winner selection cannot choose two solutions that touch the same directed token pair, i.e., the same sell and buy tokens. If a solver wants to execute multiple orders on the same directed pair, those executions must be included in one combined solution. Multiple separate solutions on the same directed pair are not automatically aggregated by winner selection.
+For each winning solver, the protocol computes a performance reward by comparing the selected outcome with the reference outcome, i.e., the best outcome the protocol could have achieved without that solver.
+This reward is bounded by the lower penalty cap ($c_l$) and the upper reward cap ($c_u$) (see [rewards](/cow-protocol/reference/core/auctions/rewards#performance-rewards)).
 
-For each winning solver, the protocol computes a performance reward by comparing the selected outcome with the reference outcome, i.e., the best outcome the protocol could have achieved without that solver. This reward is bounded by the lower penalty cap ($c_l$) and the upper reward cap ($c_u$) (see [rewards](/cow-protocol/reference/core/auctions/rewards#performance-rewards)).
+After winning, the solver is responsible for settling on chain.
+If the settlement does not land before the deadline, the settlement is **unset** and the solver pays the protocol a penalty of at most $c_l$.
+This is why solvers should adjust reported scores for the risk of an unset.
 
-After winning, the solver is responsible for settling on chain. If the solver is the only winner of the auction and the settlement does not land before the deadline, the settlement is **unset**: the solver pays the protocol $\min(\text{reference score}, c_l)$. With multiple winning solutions, partial settlement failures require the corresponding more general accounting. This is why solvers should adjust reported scores for the risk of an unset.
-
-This single-winner view provides a useful approximation for reasoning about how expected settlement risks should enter reported scores.
+For simplicity, the rest of this guide assumes the solver is the only winner of the auction.
+In that case, the penalty for an unset is $\min(\text{reference score}, c_l)$ (see the [performance reward formula](/cow-protocol/reference/core/auctions/rewards#performance-rewards) for the general case).
 
 ## Score and value
 
 Let $x$ denote a candidate solution: the set of orders to be executed, their effective executed amounts, and the routing/liquidity sources used to execute them.
 
-There are two main ways to assign value to a solution. Conflating them is the most common source of confusion.
+There are two main ways to assign value to a solution.
+Conflating them is the most common source of confusion.
 
 - $S(x)$: the solver’s estimate of total score-relevant value created by solution $x$, net of execution costs (gas, AMM fees, slippage against liquidity sources used in the route).
 - $s(x)$: the score reported to the protocol for solution $x$.
@@ -51,11 +71,14 @@ $$
 s(x) = (\text{user surplus}) + (\text{protocol fee}) + (\text{partner fee})
 $$
 
-The user receives only the user surplus component. The remaining two are value generated by the trade that the protocol and any integrating partner collect.
+The user receives only the user surplus component.
+The remaining two are value generated by the trade that the protocol and any integrating partner collect.
 
-The solver retains the difference $S(x) - s(x)$, typically held as buffers in the settlement contract and reconciled weekly (a solver could also transfer the amount to itself immediately in the settled token). The guidance below assumes scores correspond to actual economic value in the unit the protocol uses for scoring.
+The solver retains the difference $S(x) - s(x)$, typically held as buffers in the settlement contract and reconciled weekly (a solver could also transfer the amount to itself immediately in the settled token).
+The guidance below assumes scores correspond to actual economic value in the unit the protocol uses for scoring.
 
-**Example.** The user sells 10 ETH and asks for at least 17,000 USDC. The solver's router finds a route that returns 17,110 USDC for the 10 ETH, and settling costs 10 USDC in gas:
+**Example.** The user sells 10 ETH and asks for at least 17,000 USDC.
+The solver's router finds a route that returns 17,110 USDC for the 10 ETH, and settling costs 10 USDC in gas:
 
 |               |     USDC |
 | ------------- | -------: |
@@ -64,11 +87,13 @@ The solver retains the difference $S(x) - s(x)$, typically held as buffers in th
 | Gas           |     − 10 |
 | **Value $S$** |  **100** |
 
-The solver now decides how to share these 100 USDC. Part goes to the user as surplus, part pays the order's fees, and the rest stays with the solver. The first two parts make up the score.
+The solver now decides how to share these 100 USDC.
+Part goes to the user as surplus, part pays the order's fees, and the rest stays with the solver.
+The first two parts make up the score.
 
 If the order pays 10 USDC in fees and the solver promises the user 60 USDC of surplus, the score is $s = 70$ and the solver keeps $S - s = 30$.
 
-## Recommended baseline bid
+## Recommended bid
 
 For each candidate solution $x$ the solver can submit, estimate:
 
@@ -76,10 +101,11 @@ For each candidate solution $x$ the solver can submit, estimate:
 - $p(x)$: probability the settlement succeeds before the auction deadline (does not become unset)
 - $c_l$: lower penalty cap.
 
-The recommended baseline should account for both settlement risk and the fact that the solver's downside on an unset is capped. Use this as the baseline score:
+The recommended bid should account for both settlement risk and the fact that the solver's downside on an unset is capped.
+Use this as the score:
 
 $$
-s_{\text{base}}(x) = \max\!\left( p(x)\ S(x) ,\ \ S(x) - \tfrac{1 - p(x)}{p(x)} \big(c_l\big) \right)
+s_{\text{rec}}(x) = \max\!\left( p(x)\ S(x) ,\ \ S(x) - \tfrac{1 - p(x)}{p(x)} \big(c_l\big) \right)
 $$
 
 The two terms correspond to two regimes.
@@ -87,34 +113,39 @@ The two terms correspond to two regimes.
 When the penalty cap does not bind, settlement risk discounts the value of the execution directly:
 
 $$
-s_{\text{base}}(x) =  p(x)\ S(x)
+s_{\text{rec}}(x) =  p(x)\ S(x)
 $$
-
-A strategy is dominant if it is the best choice regardless of what other solvers submit. This is the dominant strategy in the simplified mechanism where the reward cap does not bind and fairness filtering is ignored, and it is a robust baseline in production. In this setting, that means the solver does not need to predict the reference score or model competitor behaviour to choose the baseline score.
-
-The intuition is that, in this regime, when the relevant caps do not bind and fairness filtering is ignored, changing the reported score only changes whether the solution wins. It does not change the solver’s payoff conditional on that solution winning: lowering the score may lose profitable wins, while raising it may win unprofitable ones.
 
 When the lower penalty cap **does** bind, the loss from an unsuccessful settlement is bounded by $c_l$, so the cap on the unset penalty lets the solver bid more aggressively:
 
 $$
-s_{\text{base}}(x) = S(x) - \tfrac{1 - p(x)}{p(x)} \big(c_l\big)
+s_{\text{rec}}(x) = S(x) - \tfrac{1 - p(x)}{p(x)} \big(c_l\big)
 $$
 
-The recommended baseline is therefore the larger of the uncapped risk-adjusted score and the penalty-cap-adjusted score.
+The recommended score is therefore the larger of the uncapped risk-adjusted score and the penalty-cap-adjusted score.
+
+A strategy is dominant if it is the best choice regardless of what other solvers submit.
+This is the dominant strategy in the simplified mechanism (where the reward cap does not bind and fairness filtering is ignored) since the solver does not need to predict the reference score or model competitor behaviour to choose their score.
+
+The intuition is that, given the reward mechanism's second-price characteristics, changing the reported score only changes whether the solution wins.
+It does not change the solver’s payoff.
+Lowering the score may lose profitable wins, while raising it may win unprofitable ones.
 
 ## Worked example
 
-Continuing with the 10 ETH order, suppose the solver settles 90% of its wins in time ($p = 0.9$) and the order's penalty cap is $c_l = 45$ USDC. The penalty cap here is chosen large to make the effect visible; real penalty caps depend on the chain and the token pair (see [penalty caps](/cow-protocol/reference/core/auctions/rewards#penalty-caps)).
+Continuing with the 10 ETH order, suppose the solver settles 90% of its wins in time ($p = 0.9$) and the order's penalty cap is $c_l = 45$ USDC.
+The penalty cap here is chosen large to make the effect visible; real penalty caps depend on the chain and the token pair (see [penalty caps](/cow-protocol/reference/core/auctions/rewards#penalty-caps)).
 
 |                                                                 |   USDC |
 | --------------------------------------------------------------- | -----: |
 | $p \cdot S = 0.9 \times 100$                                    |     90 |
 | $S - \frac{1-p}{p} \cdot c_l = 100 - \frac{0.1}{0.9} \times 45$ | **95** |
-| **Baseline bid $s_{\text{base}}$**                              | **95** |
+| **Recommended bid $s_{\text{rec}}$**                            | **95** |
 
 The solver bids 95: it promises the user 85 USDC of surplus (95 minus 10 in fees) and keeps 5.
 
-To see why 95 is right, compare it with bidding the full value (100) and with ignoring the penalty cap (90). The value of a win is $0.9 \cdot (100 - s_{\text{ref}}) - 0.1 \cdot \min(s_{\text{ref}}, 45)$:
+To see why 95 is right, compare it with bidding the full value (100) and with ignoring the penalty cap (90).
+The value of a win is $0.9 \cdot (100 - s_{\text{ref}}) - 0.1 \cdot \min(s_{\text{ref}}, 45)$:
 
 | Competition $s_{\text{ref}}$ | Value of a win, without cap | Value of a win, with cap | Bid 100    | Bid 90   | Bid 95     |
 | ---------------------------: | --------------------------: | -----------------------: | ---------- | -------- | ---------- |
@@ -123,28 +154,38 @@ To see why 95 is right, compare it with bidding the full value (100) and with ig
 |                           97 |                          −7 |                     −1.8 | Wins, −1.8 | Loses, 0 | Loses, 0   |
 |                          105 |                         −15 |                       −9 | Loses, 0   | Loses, 0 | Loses, 0   |
 
-Bidding 100 wins an auction that loses money in expectation. Bidding 90 misses a profitable one. Bidding 95 takes every profitable win and skips every loss.
+Bidding 100 wins an auction that loses money in expectation.
+Bidding 90 misses a profitable one.
+Bidding 95 takes every profitable win and skips every loss.
 
 ## Slippage and unsuccessful settlements
 
-Solvers can choose not to settle a selected solution, for example, if the desired routing would return significantly fewer tokens than expected. One way to implement this is to set a slippage tolerance $\gamma$: the maximum negative slippage the solver is willing to absorb between bidding and settlement. If on-chain slippage would exceeds $-\gamma$, the settlement does not happen.
+Solvers can choose not to settle a selected solution, for example, if the desired routing would return significantly fewer tokens than expected.
+One way to implement this is to set a slippage tolerance $\gamma$: the maximum negative slippage the solver is willing to absorb between bidding and settlement.
+If negative slippage would exceed $\gamma$, the settlement does not happen.
 
-A conservative baseline per submitted solution:
+A conservative tolerance per submitted solution:
 
 $$
 \gamma(x) = S(x)-s(x)+\min(c_l,s(x))
 $$
 
-The solver compares the payoff from settling through adverse slippage with the realised payoff from unsetting. Settling yields approximately $S(x)−s(x)− \gamma$. Unsetting instead incurs a penalty $min(s(x),c_l)$. The slippage tolerance is therefore the point at which the solver is indifferent between these two outcomes.
+The solver compares the payoff from settling through adverse slippage with the realised payoff from unsetting.
+Settling yields approximately $S(x)−s(x)− \gamma$.
+Unsetting instead incurs a penalty $min(s(x),c_l)$.
+The slippage tolerance is therefore the point at which the solver is indifferent between these two outcomes.
 
-**Example.** Continuing the previous example, the solver won the 10 ETH order with a score of 95, keeping 5 USDC. Its tolerance is 100 − 95 + 45 = 50 USDC: the 5 USDC it kept, plus the 45 USDC penalty that settling avoids.
+**Example.** Continuing the previous example, the solver won the 10 ETH order with a score of 95, keeping 5 USDC.
+Its tolerance is 100 − 95 + 45 = 50 USDC: the 5 USDC it kept, plus the 45 USDC penalty that settling avoids.
 
 | Negative slippage | If the solver settles | If it does not settle | Decision      |
 | ----------------: | --------------------: | --------------------: | ------------- |
 |                30 |          5 − 30 = −25 |                   −45 | Settle        |
+|                50 |          5 − 50 = −45 |                   −45 | Indifferent   |
 |                70 |          5 − 70 = −65 |                   −45 | Do not settle |
 
-For small solutions where $s(x)\leq c_l$, this reduces to $\gamma(x)\approx S(x)$. For larger solutions, it becomes $\gamma(x)\approx S(x)-s(x)+c_l$, meaning the solver tolerates less negative slippage because the cost of unsetting is capped.
+For small solutions where $s(x)\leq c_l$, this reduces to $\gamma(x)\approx S(x)$.
+For larger solutions, it becomes $\gamma(x)\approx S(x)-s(x)+c_l$, meaning the solver tolerates less negative slippage because the cost of unsetting is capped.
 
 ## Fairness filtering
 
@@ -152,15 +193,18 @@ A batched solution is excluded by the fairness filter if it under-delivers on an
 
 Two operational implications:
 
-**Submit individual-pair fallbacks.** If a solver has a batched solution covering multiple pairs, also submit the underlying individual-pair solutions. A high-scoring batched solution that fails fairness is worth zero. The individual-pair fallbacks ensure the solver still wins the pairs it can.
+**Submit individual-pair fallbacks.** If a solver has a batched solution covering multiple pairs, also submit the underlying individual-pair solutions.
+A high-scoring batched solution that fails fairness is worth zero.
+The individual-pair fallbacks ensure the solver still wins the pairs it can.
 
 **Verify batched solutions pass the filter.** Compute the per-pair reference outcome from the best individual-pair solutions in the auction and check that the batched solution delivers at least that much on every directed pair it touches.
 
-Individual-vs-batch submission can also be strategic: strong individual-pair bids raise the fairness benchmark and can exclude competitors’ batched solutions, and vice versa. The baseline strategy in this guide does not rely on strategically changing scores to affect the fairness filter, and solvers are not advised to use the fairness filter as a strategic target. Instead, solvers should compute honest individual-pair solutions, submit batched solutions only when they create additional value, and verify that those batched solutions pass the fairness filter.
-
 ## Reward cap
 
-The upper reward cap $c_u$ makes the mechanism first-price-like when it binds. Beyond the cap, increasing the induced score no longer increases the solver’s protocol reward, but it can still reduce the value the solver retains. In that regime, shading the score downward can increase expected profit. Doing so safely, however, requires a model of competitor scores: shading too far increases the probability of losing the auction.
+The upper reward cap $c_u$ makes the mechanism first-price-like when it binds.
+Beyond the cap, increasing the induced score no longer increases the solver’s protocol reward, but it can still reduce the value the solver retains.
+In that regime, shading the score downward can increase expected profit.
+Doing so safely, however, requires a model of competitor scores: shading too far increases the probability of losing the auction.
 
 Empirically on Ethereum mainnet ([Dune](https://dune.com/queries/7560960) query, ~2,000 auctions), the cap binds in about a third of winning batches, but the value at stake is usually small and concentrated in tail auctions:
 
@@ -171,23 +215,26 @@ Empirically on Ethereum mainnet ([Dune](https://dune.com/queries/7560960) query,
 | p99 clipped, when binding    | \~0.075 ETH (\~$300) |
 | Max clipped, single auction  | ~0.849 ETH           |
 
-The baseline score remains the protocol's suggested starting point because it does not require predicting competitor behaviour. Solvers are free to use different scoring strategies, including reward-cap-aware shading, based on their own models of competition, execution risk, and expected payoff.
+The recommended score remains the protocol's suggested starting point because it does not require predicting competitor behaviour.
+Solvers are free to use different scoring strategies, including reward-cap-aware shading, based on their own models of competition, execution risk, and expected payoff.
 
 ## Consistency rewards
 
-[CIP-85](https://snapshot.box/#/s:cow.eth/proposal/0xb488c343df3ba5f3857a4c7a920a74e18c13a2cdce99d27af34216803da6abff) distributes a weekly consistency budget across solvers based on participation. Penalties paid on unsets feed this budget, so a solver receives back a fraction: their share of the budget at week-end.
-The exact value of the share depends on aggregate weekly metrics that themselves depend on other solvers' behaviour. The baseline formula above ignores these effects.
+[CIP-85](https://snapshot.box/#/s:cow.eth/proposal/0xb488c343df3ba5f3857a4c7a920a74e18c13a2cdce99d27af34216803da6abff) distributes a weekly consistency budget across solvers based on participation.
+Penalties paid on unsets feed this budget, so a solver receives back a fraction: their share of the budget at week-end.
+The exact value of the share depends on aggregate weekly metrics that themselves depend on other solvers' behaviour.
+The formula above ignores these effects.
 
 ## Practical checklist
 
 For each candidate solution $x$:
 
 1. Estimate $S(x)$, $p(x)$.
-2. Compute the baseline score $s_{\text{base}}(x) = \max\!\left( p(x)\ S(x) ,\ \ S(x) - \tfrac{1 - p(x)}{p(x)} \big(c_l\big) \right)$
+2. Compute the recommended score $s_{\text{rec}}(x) = \max\!\left( p(x)\ S(x) ,\ \ S(x) - \tfrac{1 - p(x)}{p(x)} \big(c_l\big) \right)$
 3. Set the settlement slippage tolerance using $\gamma(x) = S(x)-s(x)+\min(c_l,s(x))$
 4. For batched solutions, verify the fairness filter passes against the per-pair reference outcome.
-5. For multiple orders on the same directed pair, combine them into one solution.
-6. Submit individual-pair fallbacks alongside batched solutions.
-7. Submit every viable candidate.
+5. Submit individual-pair fallbacks alongside batched solutions.
+6. Submit every solution that creates positive value, i.e., $S(x) > 0$.
 
-The reward cap, consistency rewards and quote rewards can also affect how profitable a bid is. Solvers are free to experiment with moving away from the baseline to account for them.
+The reward cap, consistency rewards and quote rewards can also affect how profitable a bid is.
+Solvers are free to experiment with moving away from the recommended bid to account for them.
