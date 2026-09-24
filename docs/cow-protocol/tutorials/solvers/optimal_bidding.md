@@ -62,7 +62,7 @@ Let $x$ denote a candidate solution: the set of orders to be executed, their eff
 There are two main ways to assign value to a solution.
 Conflating them is the most common source of confusion.
 
-- $S(x)$: the solver’s estimate of total score-relevant value created by solution $x$, net of execution costs (gas, AMM fees, slippage against liquidity sources used in the route).
+- $S(x)$: the solver’s estimate of total value created by solution $x$, net of execution costs (gas, AMM fees, slippage against liquidity sources used in the route).
 - $s(x)$: the score reported to the protocol for solution $x$.
 
 The reported score induced by the solution $x$ is the sum of three components:
