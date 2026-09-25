@@ -170,24 +170,27 @@ Consistency rewards introduce an additional strategic dimension; since the consi
 
 The price estimation competition is a separate competition where solvers provide the best response to a quote request. Quote requests look almost identical to single-order batch auctions, where there is only one order with a trivial limit price, and solvers propose executions of this order with the goal to maximize "out amount minus gas costs" in the case of a sell request, or minimize "in amount + gas costs" in the case of a buy request.
 
-As specified in [CIP-27](https://snapshot.org/#/cow.eth/proposal/0x64e061568e86e8d2eec344d4a892e4126172b992cabe59a0b24c51c4c7e6cc33), [CIP-36](https://snapshot.org/#/cow.eth/proposal/0x4e58f9c1208121c0e06282b5541b458bc8c8b76090263e25448848f3194df986) [CIP-57](https://snapshot.box/#/s:cow.eth/proposal/0x46d4fea1492207cf400fcb7a01141a7d4c730791d658cc77236941fc9eb7dccb), and [CIP-72](https://snapshot.box/#/s:cow.eth/proposal/0xc1b1252f0c99126b4e09730022faa31a7bb58073a3dc064c19b74d44164c39a7), a solver that provides the best quote to an order that is then submitted is rewarded if and only if all of the following conditions are satisfied:
+As specified in [CIP-27](https://snapshot.org/#/cow.eth/proposal/0x64e061568e86e8d2eec344d4a892e4126172b992cabe59a0b24c51c4c7e6cc33), [CIP-36](https://snapshot.org/#/cow.eth/proposal/0x4e58f9c1208121c0e06282b5541b458bc8c8b76090263e25448848f3194df986) [CIP-57](https://snapshot.box/#/s:cow.eth/proposal/0x46d4fea1492207cf400fcb7a01141a7d4c730791d658cc77236941fc9eb7dccb), and [CIP-72](https://snapshot.box/#/s:cow.eth/proposal/0xc1b1252f0c99126b4e09730022faa31a7bb58073a3dc064c19b74d44164c39a7), [CIP-88](https://snapshot.box/#/s:cow.eth/proposal/0x3fc7dc270f3e315e9bc2449bf9f5d0288046125f82b9b140b5866c2886fe71ac), quote rewards are paid from a dedicated budget targeting 10% of protocol revenue per chain, separate from the performance and consistency reward budget.
 
-1. The order is a fill-or-kill market order;
-2. The quote is verified (i.e., its calldata successfully simulated in the autopilot);
-3. The order was executed (not necessarily by the quoting solver);
-4. The solver that provided the winning quote during order creation proposed an execution of the order (in at least one auction) that is at least as good as the quote, and that execution was not filtered out by the fairness filtering of the fair combinatorial auction mechanism.
+This budget is divided among the orders in scope giving each order $$o$$ a budget $$B_o$$.
+For each order $$o$$, the quote of solver $$i$$ is scored by its error against the executed price
 
-The current rewards for eligible quotes are as follows:
+$$
+e_{i,o} = \left| \frac{q_{i,o} − x_o} {x_o} \right|
+$$
 
-- Ethereum mainnet: $$\min\{0.0007 ~\textrm{ETH}, 6 ~\textrm{COW}\}$$,
-- Gnosis Chain: $$\min\{0.15 ~\textrm{xDAI}, 6 ~\textrm{COW}\}$$,
-- Arbitrum: $$\min\{0.00024 ~\textrm{ETH}, 6 ~\textrm{COW}\}$$,
-- Base Chain: $$\min\{0.00024 ~\textrm{ETH}, 6 ~\textrm{COW}\}$$,
-- Avalanche-C Chain: $$\min\{0.006 ~\textrm{AVAX}, 6 ~\textrm{COW}\}$$,
-- Polygon Chain: $$\min\{0.6 ~\textrm{POL}, 6 ~\textrm{COW}\}$$
-- BNB Chain: $$\min\{0.001 ~\textrm{BNB}, 6 ~\textrm{COW}\}$$
-- Linea: $$\min\{0.00003 ~\textrm{ETH}, 6 ~\textrm{COW}\}$$.
-- Plasma: $$\min\{0.6 ~\textrm{XPL}, 6 ~\textrm{COW}\}$$.
-- Ink: $$\min\{0.00003 ~\textrm{ETH}, 6 ~\textrm{COW}\}$$.
+where $$q_{i,o}$$ is the exchange rate of the solver's quote, adjusted for network and volume fee, and $$x_o$$ is the exchange rate at which the order was executed.
+A solver that submits several quotes for the same order is counted once, with its best-priced quote. Only the five quotes with the smallest error are rewarded.
 
-where, again, the conversion from native token to COW is done by using an up-to-date price (specifically, the average native token/COW Dune prices of the past 24h before the payout are used to determine these exchange rates).
+Denoting this set by $$T_o$$, solver $$i$$ receives quote reward $$r_{i,o}$$
+
+$$
+r_{i,o} = B_o \cdot \frac{1 / e_{i,o}^{2}}{\sum_{j \in T_o} 1 / e_{j,o}^{2}}
+$$
+
+and solvers outside $$T_o$$ receive nothing for that order.
+If one or more quotes match the executed rate exactly, they split $$B\cdot o$$ equally.
+A solver's quote reward for the accounting period is the sum of $$r_{i,o}$$ over all orders in scope, paid in COW as described in [accounting section](/cow-protocol/reference/core/auctions/accounting).
+
+The core team has a mandate to change how the quote reward budget is allocated among solvers, if needed, to strengthen the quote competition.
+Any change to the allocation is announced to solvers in advance and reflected in this documentation.
