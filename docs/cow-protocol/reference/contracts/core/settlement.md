@@ -97,7 +97,7 @@ struct Data {
 | `buyAmount` | Amount of `buyToken` that is bought in wei |
 | `validTo` | UNIX timestamp (in seconds) until which the order is valid |
 | `appData` | Extra information about the order. Not enforced by the smart contract outside of signature verification (may be used for referrals etc). |
-| `feeAmount` | Amount of fees paid in `sellToken` wei |
+| `feeAmount` | Amount of fees paid in `sellToken` wei. Must be `0`: the API rejects orders with a non-zero `feeAmount` (see [Signed fee amount](/cow-protocol/reference/contracts/core#signed-fee-amount)) |
 | `kind` | `buy` or `sell` |
 | `partiallyFillable` | partially fillable (`true`) or fill-or-kill (`false`) |
 | `sellTokenBalance` | From where the `sellToken` balance is withdrawn |

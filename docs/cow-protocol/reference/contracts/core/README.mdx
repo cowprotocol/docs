@@ -75,6 +75,20 @@ If developing smart contracts that create orders, make sure at a contract level 
 
 :::
 
+### Signed fee amount
+
+The order struct still contains a `feeAmount` field, which the settlement contract honors: if an order is signed with a non-zero `feeAmount`, that amount is transferred from the user in addition to the executed sell amount.
+
+The protocol no longer uses signed fees. Fees are included in the order's limit price, and the API rejects any order with a non-zero `feeAmount` (`NonZeroFee` error). On-chain orders (e.g. ETH flow) with a non-zero fee are recorded with a placement error and excluded from auctions.
+
+A non-zero `feeAmount` taken during settlement isn't a vulnerability: the user explicitly signed that amount.
+
+:::tip
+
+Always sign orders with `feeAmount = 0`.
+
+:::
+
 ### `ERC-1271` Replayability
 
 The security of [`ERC-1271`](../core/signing-schemes#erc-1271) signatures depend on the developers' implementation of the _signing smart contract_.
