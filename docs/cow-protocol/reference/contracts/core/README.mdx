@@ -78,7 +78,7 @@ If developing smart contracts that create orders, make sure at a contract level 
 ### Signed fee amount
 
 The order struct still contains a `feeAmount` field, which the settlement contract honors: if an order is signed with a non-zero `feeAmount`, that amount is transferred from the user in addition to the executed sell amount (pro rata for partially fillable orders).
-The limit price is checked against `sellAmount` and `buyAmount` only, so the effective price of an order with a signed fee is `buyAmount / (sellAmount + feeAmount)`.
+The limit price is checked against `sellAmount` and `buyAmount` only, so the minimum effective rate of an order with a signed fee is `buyAmount / (sellAmount + feeAmount)` (the trade may execute at this rate or better).
 
 The protocol no longer uses signed fees. Fees are included in the order's limit price, and the API rejects any order with a non-zero `feeAmount` (`NonZeroFee` error). On-chain orders (e.g. ETH flow) with a non-zero fee are recorded with a placement error and excluded from auctions.
 
