@@ -172,7 +172,7 @@ $$
 
 The solver compares the payoff from settling through adverse slippage with the realised payoff from unsetting.
 Settling yields approximately $S(x)−s(x)− \gamma$.
-Unsetting instead incurs a penalty $min(s(x),c_l)$.
+Unsetting instead incurs a penalty $\min(s(x),c_l)$.
 The slippage tolerance is therefore the point at which the solver is indifferent between these two outcomes.
 
 **Example.** Continuing the previous example, the solver won the 10 ETH order with a score of 95, keeping 5 USDC.
