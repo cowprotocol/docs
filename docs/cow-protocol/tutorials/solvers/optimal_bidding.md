@@ -125,7 +125,7 @@ $$
 The recommended score is therefore the larger of the uncapped risk-adjusted score and the penalty-cap-adjusted score.
 
 A strategy is dominant if it is the best choice regardless of what other solvers submit.
-This is the dominant strategy in the simplified mechanism (where the reward cap does not bind and fairness filtering is ignored) since the solver does not need to predict the reference score or model competitor behaviour to choose their score.
+The recommendation above is a dominant strategy in a simplified mechanism where the reward cap does not bind and only one order is settled. A solver does not need to predict the reference score or model competitor behaviour to choose their score.
 
 The intuition is that, given the reward mechanism's second-price characteristics, changing the reported score only changes whether the solution wins.
 It does not change the solver’s payoff.
