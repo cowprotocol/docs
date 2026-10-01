@@ -116,13 +116,14 @@ $$
 s_{\text{rec}}(x) =  p(x)\ S(x)
 $$
 
-When the lower penalty cap **does** bind, the loss from an unsuccessful settlement is bounded by $c_l$, so the cap on the unset penalty lets the solver bid more aggressively:
+When the lower penalty cap **does** bind, the loss from an unsuccessful settlement is bounded by $c_l$, so the cap on the unset penalty lets the solver share more surplus with the user:
 
 $$
 s_{\text{rec}}(x) = S(x) - \tfrac{1 - p(x)}{p(x)} \big(c_l\big)
 $$
 
 The recommended score is therefore the larger of the uncapped risk-adjusted score and the penalty-cap-adjusted score.
+Every solution with $S(x) > 0$ has a positive recommended score $s_{\text{rec}}(x) > 0$, so it is a valid solution and should be submitted.
 
 A strategy is dominant if it is the best choice regardless of what other solvers submit.
 The recommendation above is a dominant strategy in a simplified mechanism where the reward cap does not bind and only one order is settled. A solver does not need to predict the reference score or model competitor behaviour to choose their score.
@@ -133,7 +134,9 @@ Lowering the score may lose profitable wins, while raising it may win unprofitab
 
 ## Worked example
 
-Continuing with the 10 ETH order, suppose the solver settles 90% of its wins in time ($p = 0.9$) and the order's penalty cap is $c_l = 45$ USDC.
+Continuing with the 10 ETH order, the solution creates a value of $S = 100$ USDC to be shared.
+Suppose the solver settles 90% of its wins in time ($p = 0.9$) and the order's penalty cap is $c_l = 45$ USDC.
+These are the three inputs to the formula.
 The penalty cap here is chosen large to make the effect visible; real penalty caps depend on the chain and the token pair (see [penalty caps](/cow-protocol/reference/core/auctions/rewards#penalty-caps)).
 
 |                                                                 |   USDC |
@@ -145,6 +148,7 @@ The penalty cap here is chosen large to make the effect visible; real penalty ca
 The solver bids 95: it promises the user 85 USDC of surplus (95 minus 10 in fees) and keeps 5.
 
 To see why 95 is right, compare it with bidding the full value (100) and with ignoring the penalty cap (90).
+The table looks at four cases of what competitors do, each summarised by the reference score $s_{\text{ref}}$, the best score the protocol could reach without this solver.
 The value of a win is $0.9 \cdot (100 - s_{\text{ref}}) - 0.1 \cdot \min(s_{\text{ref}}, 45)$:
 
 | Competition $s_{\text{ref}}$ | Value of a win, without cap | Value of a win, with cap | Bid 100    | Bid 90   | Bid 95     |
@@ -229,12 +233,11 @@ The formula above ignores these effects.
 
 For each candidate solution $x$:
 
-1. Estimate $S(x)$, $p(x)$.
+1. Estimate $S(x)$ and $p(x)$, and compute $c_l$ as the sum of the [penalty caps](/cow-protocol/reference/core/auctions/rewards#penalty-caps) of all orders in the solution.
 2. Compute the recommended score $s_{\text{rec}}(x) = \max\!\left( p(x)\ S(x) ,\ \ S(x) - \tfrac{1 - p(x)}{p(x)} \big(c_l\big) \right)$
 3. Set the settlement slippage tolerance using $\gamma(x) = S(x)-s(x)+\min(c_l,s(x))$
 4. For batched solutions, verify the fairness filter passes against the per-pair reference outcome.
 5. Submit individual-pair fallbacks alongside batched solutions.
-6. Submit every solution that creates positive value, i.e., $S(x) > 0$.
 
 The reward cap, consistency rewards and quote rewards can also affect how profitable a bid is.
 Solvers are free to experiment with moving away from the recommended bid to account for them.
