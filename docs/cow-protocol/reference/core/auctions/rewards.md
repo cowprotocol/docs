@@ -171,7 +171,7 @@ The price estimation competition is a separate competition where solvers provide
 
 As specified in [CIP-88](https://snapshot.box/#/s:cow.eth/proposal/0x3fc7dc270f3e315e9bc2449bf9f5d0288046125f82b9b140b5866c2886fe71ac), quote rewards are paid from a dedicated budget targeting 10% of protocol revenue per chain, separate from the performance and consistency reward budget.
 This replaces the flat reward per eligible quote set by [CIP-27](https://snapshot.org/#/cow.eth/proposal/0x64e061568e86e8d2eec344d4a892e4126172b992cabe59a0b24c51c4c7e6cc33), [CIP-36](https://snapshot.org/#/cow.eth/proposal/0x4e58f9c1208121c0e06282b5541b458bc8c8b76090263e25448848f3194df986) [CIP-57](https://snapshot.box/#/s:cow.eth/proposal/0x46d4fea1492207cf400fcb7a01141a7d4c730791d658cc77236941fc9eb7dccb), and [CIP-72](https://snapshot.box/#/s:cow.eth/proposal/0xc1b1252f0c99126b4e09730022faa31a7bb58073a3dc064c19b74d44164c39a7), which no longer applies.
-The budget is computed for each accounting period, which runs weekly from Tuesday 00:00 UTC to the following Tuesday 00:00 UTC, as described in [accounting](/cow-protocol/reference/core/auctions/accounting).
+The budget is computed separately for each chain and each accounting period, which runs weekly from Tuesday 00:00 UTC to the following Tuesday 00:00 UTC, as described in [accounting](/cow-protocol/reference/core/auctions/accounting).
 
 The orders in scope are in-market fill-or-kill orders executed during the accounting period.
 The budget is divided equally among them, giving each order $$o$$ a budget $$B_o$$.
