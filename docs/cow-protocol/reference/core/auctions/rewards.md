@@ -195,4 +195,3 @@ If one or more quotes have $$e_{i,o} = 0$$, these quotes share the whole of $$B_
 A solver's quote reward for the accounting period is the sum of $$r_{i,o}$$ over all orders in scope, paid in COW as described in [accounting section](/cow-protocol/reference/core/auctions/accounting).
 
 The core team has a mandate to change how the quote reward budget is allocated among solvers, if needed, to strengthen the quote competition.
-Any change to the allocation is announced to solvers in advance and reflected in this documentation.
