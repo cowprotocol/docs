@@ -119,7 +119,7 @@ $$
 
 where $$\textrm{surplus}_i(o)$$ is the largest surplus that any of solver $$i$$'s solutions proposed for order $$o$$ in that auction (the difference between the proposed execution amounts and the order's limit amounts), and the sum runs over all solvers that bid on the order. If all bids on an order propose zero surplus, the share of every solver for that order is set to zero. We stress that only solutions that pass the fairness filtering are considered in the above computations. Since each executed order distributes a total weight of one, orders with few competitive bids yield a larger share for the solvers submitting them, an incentive for solvers to join such competitions with competitive bids.
 
-Only executions of **market orders** distribute a weight. An order is a market order if its limit price is no better than the price implied by the quote that led to the creation of the order, net of all fees. This is the same classification used for [quote rewards](#price-estimation-competition-rewards-cips-27-36-57-72).
+Only executions of **market orders** distribute a weight. An order is a market order if its limit price is no better than the price implied by the quote that led to the creation of the order, net of all fees. This is the same classification used for [quote rewards](#price-estimation-competition-rewards-cip-88).
 
 **2. Settlement success rate.** The success rate of solver $$i$$ in an accounting period is
 
