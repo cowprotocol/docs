@@ -52,13 +52,12 @@ line up:
 1. **You opt in.** Set `enableFastPath` in the order's
    [`appData`](/cow-protocol/reference/core/intents/app-data). It is signed with
    the order, so without it an order is never fast-pathed.
-2. **A supporting solver wins the quote.** Set `fastPath` on your `/quote`
-   request. The order is fast-pathed only if the winning quote comes from a
-   solver that supports it, which the protocol works out during the quote.
+2. **A supporting solver wins the quote.** The order is fast-pathed only if the
+   winning quote comes from a solver that supports it, which the protocol works
+   out during the quote.
 
 If both hold, the order is fast-pathed. Otherwise it settles through the normal
-batch auction. The `fastPath` request field is in the
-[Order Book API reference](/cow-protocol/reference/apis/orderbook).
+batch auction.
 
 ## Which orders can use fast path
 
