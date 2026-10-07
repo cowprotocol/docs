@@ -41,7 +41,7 @@ A solution is a commitment to settle a specified set of orders together with a r
 A solution may cover:
 
 - A single directed token pair (handling all orders on that pair).
-- Multiple directed token pairs (a batched solution, useful when coincidence-of-wants (CoWs) between pairs allow for peer-to-peer trading or when shared gas improves the routing).
+- Multiple directed token pairs (a batched solution, useful when coincidences of wants (CoWs) between pairs allow for peer-to-peer trading or when shared gas improves the routing).
 
 The protocol filters batched solutions for fairness, then picks the combination of solutions across pairs and solvers that maximises total reported score.
 
@@ -189,7 +189,7 @@ Its tolerance is 100 − 95 + 45 = 50 USDC: the 5 USDC it kept, plus the 45 USDC
 |                70 |          5 − 70 = −65 |                   −45 | Do not settle |
 
 For small solutions where $s(x)\leq c_l$, this reduces to $\gamma(x)\approx S(x)$.
-For larger solutions, it becomes $\gamma(x)\approx S(x)-s(x)+c_l$, meaning the solver tolerates less negative slippage because the cost of unsetting is capped.
+For larger solutions, it becomes $\gamma(x)\approx S(x)-s(x)+c_l$, meaning the solver tolerates less negative slippage than $S(x)$, since unsetting costs at most $c_l$.
 
 ## Fairness filtering
 
@@ -210,7 +210,7 @@ Beyond the cap, increasing the induced score no longer increases the solver’s 
 In that regime, shading the score downward can increase expected profit.
 Doing so safely, however, requires a model of competitor scores: shading too far increases the probability of losing the auction.
 
-Empirically on Ethereum mainnet ([Dune](https://dune.com/queries/7560960) query, ~2,000 auctions), the cap binds in about a third of winning batches, but the value at stake is usually small and concentrated in tail auctions:
+Empirically on Ethereum mainnet ([Dune](https://dune.com/queries/7560960) query, ~2,000 auctions, of which 1,464 had winning batches), the cap binds in about a third of winning batches, but the value at stake is usually small and concentrated in tail auctions:
 
 | Metric                       | Value                |
 | ---------------------------- | -------------------- |
