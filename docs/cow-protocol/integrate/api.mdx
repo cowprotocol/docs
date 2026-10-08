@@ -41,21 +41,45 @@ curl -X POST "https://api.cow.fi/mainnet/api/v1/quote" \
   }'
 ```
 
+The amounts in the response already have network costs and the protocol fee deducted. Read [Displaying and Comparing Quotes](#displaying-and-comparing-quotes) before showing them to users.
+
 ### 2. Sign and Submit Order
 
+Build the order from `quoteResponse.quote`, not from the whole response. For a sell order, sign the full sell amount with `feeAmount: "0"` and reduce the buy amount by the slippage tolerance (see [Forming the Final Order](../concepts/how-it-works/how-intents-are-formed.mdx#forming-the-final-order)):
+
 ```javascript
-// After getting a quote, sign the order
+const { quote } = quoteResponse
+const slippageBps = 50n // 0.5%
+
 const order = {
-  ...quoteResponse,
-  signature: await signOrder(quoteResponse, signer),
-  signingScheme: "eip712"
+  sellToken: quote.sellToken,
+  buyToken: quote.buyToken,
+  receiver: quote.receiver,
+  // quote.sellAmount is after network costs; sign the full amount
+  sellAmount: (BigInt(quote.sellAmount) + BigInt(quote.feeAmount)).toString(),
+  // minimum to receive
+  buyAmount: (BigInt(quote.buyAmount) * (10000n - slippageBps) / 10000n).toString(),
+  validTo: quote.validTo,
+  appData: quote.appDataHash ?? quote.appData, // signed as the bytes32 hash
+  feeAmount: "0", // network costs are taken from sellAmount at settlement
+  kind: quote.kind,
+  partiallyFillable: quote.partiallyFillable,
+  sellTokenBalance: quote.sellTokenBalance,
+  buyTokenBalance: quote.buyTokenBalance,
 }
 
-// Submit the signed order
+// Submit the signed order (see Order Signing below)
 const response = await fetch('https://api.cow.fi/mainnet/api/v1/orders', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify(order)
+  body: JSON.stringify({
+    ...order,
+    appData: quote.appData, // full app data JSON, if the quote request included it
+    from: quoteResponse.from,
+    quoteId: quoteResponse.id,
+    signature: await signOrder(order, signer),
+    signingScheme: "eip712",
+  })
 })
 
 const orderId = await response.text()
@@ -71,6 +95,105 @@ const orderResponse = await fetch(
 const orderDetails = await orderResponse.json()
 
 console.log('Order status:', orderDetails.status)
+```
+
+## Displaying and Comparing Quotes
+
+The `/quote` amounts are not "amount out" values that can be dropped into a generic quote UI as-is.
+This section covers what to display and how to rank a CoW Protocol quote against other sources.
+For the full derivation of every amount stage, see [How Intents Are Formed](../concepts/how-it-works/how-intents-are-formed.mdx#3-amount-stages).
+
+### What the amounts mean
+
+For a sell order:
+
+| Field | Meaning |
+|---|---|
+| `quote.sellAmount` | Sell amount **after** network costs (`sellAmountBeforeFee - feeAmount`) |
+| `quote.feeAmount` | Estimated network costs, in sell token atoms |
+| `quote.buyAmount` | Buy amount **after** network costs and the protocol fee (`protocolFeeBps`) |
+
+Partner fees are not included; your integration applies them on top.
+
+The user pays no separate gas for a CoW Protocol order (apart from a token approval, if one is needed): network costs are taken from the sell amount at settlement.
+`quote.buyAmount` is therefore an after-gas amount.
+
+### Comparing with other aggregators
+
+Other aggregators typically return their output amount **before** gas, and the user pays gas separately in the native token.
+Putting `quote.buyAmount` in the same column compares an after-gas amount with before-gas amounts, so CoW Protocol ranks last even when its price is the same.
+
+Convert every source to the same basis:
+
+- **Before network costs**, comparable to other aggregators' output amount: add the network costs back, converted to the buy token, then subtract your partner fee.
+
+  ```javascript
+  const networkCostsInBuyToken = buyAmount * feeAmount / sellAmount // quote.* amounts as BigInt
+  const amountBeforeNetworkCosts = buyAmount + networkCostsInBuyToken - partnerFeeAmount
+  ```
+
+- **After network costs**, what the user actually receives: `quote.buyAmount - partnerFeeAmount`. Compare it with other sources' output minus their gas cost, converted to the buy token.
+
+`partnerFeeAmount` is zero unless your integration charges a partner fee. It is computed on `beforeAllFees`, not on `quote.buyAmount` (see [Partner Fee](../concepts/how-it-works/how-intents-are-formed.mdx#partner-fee)).
+
+:::caution
+
+Don't rank on `beforeAllFees` (the spot price). Besides the network costs, it also adds back the protocol fee and leaves out the partner fee, so it shows more than the user can receive and overstates CoW Protocol against other sources.
+
+:::
+
+Executed amounts are often better than quoted: `feeAmount` is an estimate made at quote time, and solvers competing in the auction return any surplus they find to the user.
+
+### Example
+
+Selling 10 USDT for USDC on mainnet. The numbers are illustrative; network costs depend on the gas price at quote time.
+
+```json
+{
+  "quote": {
+    "sellAmount": "9572139",
+    "feeAmount": "427861",
+    "buyAmount": "9562076",
+    "kind": "sell"
+  },
+  "protocolFeeBps": "0.3"
+}
+```
+
+| Amount | USDC |
+|---|---|
+| After network costs: `quote.buyAmount` | 9.562 |
+| Network costs in buy token: `9.562076 × 0.427861 / 9.572139` | 0.427 |
+| Before network costs | 9.989 |
+
+Another aggregator returning 9.988 USDC, with about 0.43 USD of gas paid separately in ETH, is on par with CoW Protocol on either basis: 9.989 vs 9.988 before gas, 9.562 vs about 9.558 after gas.
+Showing 9.562 next to 9.988 makes CoW Protocol look about 4% worse than it is.
+
+### Buy orders
+
+For buy orders, `quote.buyAmount` is the fixed amount the user receives, and `quote.sellAmount` includes the protocol fee but **not** network costs.
+The amount the user pays is `quote.sellAmount + quote.feeAmount`, plus any partner fee and slippage tolerance.
+See [Flow for buy orders](../concepts/how-it-works/how-intents-are-formed.mdx#flow-for-buy-orders).
+
+### Using the SDK
+
+[`getQuoteAmountsAndCosts`](https://github.com/cowprotocol/cow-sdk/tree/main/packages/order-book/src/quoteAmountsAndCosts) computes every amount stage from a quote response, for both sell and buy orders:
+
+```typescript
+import { getQuoteAmountsAndCosts } from '@cowprotocol/cow-sdk'
+
+const amounts = getQuoteAmountsAndCosts({
+  orderParams: quoteResponse.quote,
+  protocolFeeBps: Number(quoteResponse.protocolFeeBps),
+  partnerFeeBps: 0, // your partner fee, if any
+  slippagePercentBps: 50,
+})
+
+// Before network costs, comparable to other aggregators (sell order)
+const displayAmount = amounts.beforeNetworkCosts.buyAmount - amounts.costs.partnerFee.amount
+
+// Amounts to sign in the order
+const { sellAmount, buyAmount } = amounts.amountsToSign
 ```
 
 ## Streaming Quotes
@@ -217,4 +340,5 @@ For complete API documentation including all endpoints, parameters, and response
 - **[API Explorer](https://api.cow.fi/docs/)** - Interactive documentation
 - **[GitHub Examples](https://github.com/cowprotocol/cow-sdk/tree/main/examples)** - Code examples
 - **[Order Signing Guide](../reference/core/signing_schemes.mdx)** - Cryptographic signing details
+- **[How Intents Are Formed](../concepts/how-it-works/how-intents-are-formed.mdx)** - Quote amount stages, fees, and the amounts to sign
 
