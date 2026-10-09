@@ -1,0 +1,176 @@
+---
+title: Paid quotes with x402
+description: Get CoW Protocol quotes using prepaid x402 payments and withdraw unused funds.
+sidebar_position: 4
+---
+
+import CodeBlock from '@theme/CodeBlock'
+import inspectSource from '!!raw-loader!@site/static/code-examples/x402/inspect.mjs'
+import quoteSource from '!!raw-loader!@site/static/code-examples/x402/quote.mts'
+import withdrawSource from '!!raw-loader!@site/static/code-examples/x402/withdraw.mts'
+
+# Paid quotes with x402
+
+Get CoW Protocol quotes from a script or agent without an API key. Deposit tokens into a prepaid channel, then authorise each quote with an off-chain signature. The deposit funds future requests; it is not an extra quote fee. CoW collects the charges in batches.
+
+## Get a quote
+
+This example uses **Node.js 22** and **USDC on Base** to buy an Ethereum quote.
+The payment and quote chains are independent. It returns a quote; it does not execute a swap.
+Browser paid retries are not supported.
+
+### 1. Check the terms
+
+Save <a href="/code-examples/x402/inspect.mjs" download="inspect.mjs">inspect.mjs</a> and run `node inspect.mjs`.
+It shows the current price, minimum deposit and withdrawal delay without a key, signature or payment.
+Fund your wallet with enough Base USDC if you accept the terms.
+
+<details>
+<summary>Read-only terms preview</summary>
+
+<CodeBlock language="javascript" title="inspect.mjs">
+  {inspectSource}
+</CodeBlock>
+
+</details>
+
+For illustration, a 1 USDC deposit at 0.001 USDC per quote funds 1,000 quotes while that price is unchanged.
+Always read current terms from the service.
+
+### 2. Set up the example
+
+```bash
+mkdir x402-quickstart
+cd x402-quickstart
+npm init -y
+npm install @x402/fetch@2.26.0 @x402/evm@2.26.0 @x402/core@2.26.0 viem
+npm install --save-dev tsx
+umask 077
+touch .env
+chmod 600 .env
+```
+
+Edit `.env` locally with your payer key and a Base RPC URL:
+
+```text
+PRIVATE_KEY=YOUR_PAYER_PRIVATE_KEY
+RPC_URL=YOUR_BASE_RPC_URL
+```
+
+Keep `.env`, `x402-state/`, `x402-channels/` and `x402-attempts/` out of source control.
+Saved signed attempts are sensitive too.
+
+The example defaults to **0.001 USDC per quote**, **1 USDC per deposit or top-up**, and a **24-hour maximum accepted withdrawal delay**. These are client limits, not guaranteed server terms. If an offer exceeds them, the script stops before signing.
+
+<details>
+<summary>Optional limits</summary>
+
+```text
+# Optional overrides; these are the example's defaults.
+MAX_QUOTE_USDC=0.001
+MAX_DEPOSIT_USDC=1
+MAX_WITHDRAW_DELAY_HOURS=24
+```
+
+`MAX_WITHDRAW_DELAY_HOURS` only limits which offers your client accepts. It does not choose the waiting period: a new channel takes the delay advertised by the server, and keeps that delay for its lifetime. You can omit this setting; the example accepts delays up to 24 hours.
+
+Enter price and deposit limits in human USDC units.
+A per-deposit limit applies to each top-up; it is not a lifetime spending cap.
+
+</details>
+
+### 3. Request a quote
+
+Save <a href="/code-examples/x402/quote.mts" download="quote.mts">quote.mts</a> in the project directory.
+It checks payment terms, uses SDK receipt validation and saves channel state and recovery files.
+The example uses `@x402/*` **2.26.0**.
+
+<details>
+<summary>Complete quote example</summary>
+
+<CodeBlock language="typescript" title="quote.mts">
+  {quoteSource}
+</CodeBlock>
+
+</details>
+
+```bash
+node --env-file=.env --import tsx quote.mts
+```
+
+A successful run prints `status: 200`, `quoteReceived: true`, the charge, a saved channel-file path and the quote JSON.
+The first request funds the channel; later requests reuse it and top up when needed, within your limits.
+CoW pays deposit and collection gas.
+
+Run one request at a time per channel and keep the saved files across restarts.
+
+:::info Uncertain payment outcomes
+
+If a request times out or returns a settlement error, keep the state, signed attempt and transaction hash. A charge or deposit may have succeeded even without a quote response. Do not repeatedly rerun it or create another deposit; check the original transaction and use the SDK’s validated recovery. Each new successful request can incur another charge.
+The [API reference](https://x402.cow.fi/docs/) describes the payment response and recovery errors.
+Never reset your charged total to on-chain claims alone: they omit charges awaiting collection.
+
+:::
+
+## Withdraw unused funds
+
+You initiate a withdrawal, wait for the saved channel's deadline, then finalize it.
+These are **two transactions**, paid by your wallet in Base ETH for this example.
+Finalization returns tokens to the payer; it is not automatic.
+
+Save <a href="/code-examples/x402/withdraw.mts" download="withdraw.mts">withdraw.mts</a> in the same project directory.
+In `.env`, set `CHANNEL` to the channel-file path printed by the quote example.
+Keep `RPC_URL` on that channel's payment chain.
+
+```text
+CHANNEL=./x402-channels/YOUR_CHANNEL_ID.json
+```
+
+<details>
+<summary>Complete withdrawal example</summary>
+
+<CodeBlock language="typescript" title="withdraw.mts">
+  {withdrawSource}
+</CodeBlock>
+
+</details>
+
+**1. Check status** without spending gas:
+
+```bash
+node --env-file=.env --import tsx withdraw.mts status
+```
+
+**2. Stop using the channel and initiate** the withdrawal:
+
+```bash
+node --env-file=.env --import tsx withdraw.mts initiate
+node --env-file=.env --import tsx withdraw.mts status
+```
+
+**3. Wait until `finalizeAt`**, calculated from the on-chain initiation time and that channel's original delay.
+A new offer cannot change it.
+
+**4. Finalize**, then check the receipt and your token balance:
+
+```bash
+node --env-file=.env --import tsx withdraw.mts finalize
+node --env-file=.env --import tsx withdraw.mts status
+```
+
+CoW may collect outstanding charges during the wait, reducing the returned amount.
+Collection happens only when economic; uncollected fees do not extend the withdrawal deadline.
+A pending withdrawal cannot be cancelled.
+If a transaction times out, check its hash and status before sending another.
+Resolve uncertain payments before withdrawing.
+
+## Other payment options and help
+
+The current options are Base USDC/COW, Ethereum USDC and BNB USDC.
+COW and BNB USDC require an explicit SDK asset entry and Permit2 approval.
+Approval and withdrawal gas is paid in the payment chain's native token.
+COW amounts have no guaranteed dollar equivalent.
+
+Use the [live API reference](https://x402.cow.fi/docs/) for payment fields, networks and errors.
+Contact [CoW Protocol Discord](https://discord.com/invite/cowprotocol) with your network, channel ID and transaction hash;
+never share keys or signed payments.
