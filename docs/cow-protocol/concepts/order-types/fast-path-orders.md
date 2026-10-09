@@ -5,26 +5,28 @@ description: Fast-path orders settle out of competition for faster execution. Wh
 
 # Fast-path orders
 
-On CoW Protocol, orders aren't settled one at a time. They're collected and
-solved together in a batch auction: each cycle, the protocol gathers the orders
-that are ready, solvers compete to settle the whole batch, and the winning
-solution is submitted on-chain. Solving orders as a batch is what earns users
-the best prices, since solvers can match trades directly against one another (a
+On CoW Protocol, orders aren't settled one at a time. They are collected and
+solved together in a fair combinatorial auction: in each auction, the protocol
+gathers the orders that are ready, solvers compete for the best execution on each
+directed token pair, and the winning solutions are submitted on-chain. Solving
+orders within an auction is what earns users the best prices, since solvers can
+match trades directly against one another (a
 [coincidence of wants](../how-it-works/coincidence-of-wants)) and compete on the
-surplus they find. The tradeoff is time: putting a batch together
-every cycle means an order waits for the next auction before it settles.
+surplus they find. The tradeoff is time: putting a (batched) solution together
+in every auction means an order waits for the next auction before it settles.
 
-But sometimes speed matters more than surplus. A user might want their order
-filled as quickly as possible, still at a fair price with their limit respected,
-without waiting for the whole auction cycle and the next batch to settle. That is
-what a fast-path order is for. The limit price is still respected for settling the
-order; they simply trade the extra surplus a batch can find for a faster settlement.
+But sometimes speed matters more than the potential benefits of batching. A user
+might want their order filled as quickly as possible, still at a fair price with
+their limit respected, without waiting for the whole auction cycle and the next
+batch to settle. That is what a fast-path order is for. The limit price is still
+respected for settling the order; they simply trade the extra surplus a fully
+fledged auction can potentially provide for a faster settlement.
 
 A fast-path order reuses the quote the user already holds. Quotes go through
 their own solver competition, and the winning quote is the one presented to the
-user to sign. Once signed, that solver gets the exclusive right to settle the
-order on-chain, using the solution it already produced, within a short window.
-
+user to sign. Once signed, the solver that provided the winning quote gets the
+exclusive right to settle the order on-chain, using the solution it already
+produced, within a short window.
 
 ## The flow
 
