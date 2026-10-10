@@ -18,7 +18,7 @@ There are 4 main steps to an order on CoW Protocol:
 3. Solvers have a set amount of time to propose settlements for the batch. The solvers that are able to generate the highest amount of surplus per token pair are declared the winners.
 4. The winning solvers’ solutions are executed on-chain on behalf of the users.
 
-Once each winning solver executes the orders for which they proposed the best bids on-chain, users receive their tokens.
+Users receive their tokens with the on-chain execution of winning solutions.
 
 The competition between solvers in a fair combinatorial auction ensures that users (including traders, DAOs, smart contracts, and bots) always receive the best prices for their trades.
 
