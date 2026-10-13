@@ -107,7 +107,7 @@ try {
       savedAttempt: latestAttemptFile,
       body,
     });
-    throw new Error("Payment outcome needs checking; follow Troubleshooting before retrying");
+    throw new Error("Payment outcome needs checking; follow the recovery guide before retrying");
   }
   const result = JSON.parse(body);
   if (!result.quote) throw new Error("Expected a quote in the successful response");
@@ -122,6 +122,6 @@ try {
   });
   console.log(result);
 } catch (error) {
-  console.error({ savedAttempt: latestAttemptFile, message: "Keep state and check Troubleshooting before rerunning an unresolved attempt." });
+  console.error({ savedAttempt: latestAttemptFile, message: "Keep state and check the recovery guide before rerunning an unresolved attempt." });
   throw error;
 }
