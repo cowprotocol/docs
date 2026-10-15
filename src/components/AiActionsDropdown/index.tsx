@@ -57,14 +57,16 @@ export default function AiActionsDropdown() {
     ? undefined
     : (pathname.replace(/\/$/, '') || '/index') + '.md'
 
+  const sourceUrl = markdownUrl && pageUrl ? new URL(markdownUrl, pageUrl).href : pageUrl
+
   const openInChatGPT = () => {
-    const q = encodeURIComponent(`Read from ${pageUrl} so I can ask questions about it`)
+    const q = encodeURIComponent(`Read from ${sourceUrl} so I can ask questions about it`)
     window.open(`https://chatgpt.com/?q=${q}`, '_blank')
     setOpen(false)
   }
 
   const openInClaude = () => {
-    const q = encodeURIComponent(`Read from ${pageUrl} so I can ask questions about it`)
+    const q = encodeURIComponent(`Read from ${sourceUrl} so I can ask questions about it`)
     window.open(`https://claude.ai/new?q=${q}`, '_blank')
     setOpen(false)
   }
