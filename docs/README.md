@@ -24,3 +24,8 @@ CoW DAO's documentation follows a "Concepts", "Tutorials", "Technical Reference"
 - **_What_** something is (example: batch auctions) → see [Concepts](/category/concepts)
 - **_How_** to do something (example: create an order) → see [Tutorials](/category/tutorials)
 - **_Technical_** information (example: such as SDKs, APIs) - see [Technical Reference](/category/technical-reference)
+
+## Documentation for AI agents
+
+- [Documentation index](/llms.txt): Find the relevant guide.
+- [Full documentation](/llms-full.txt): Read all guides in one file.
