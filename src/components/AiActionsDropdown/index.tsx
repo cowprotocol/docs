@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import styles from './styles.module.css'
+import { useLocation } from '@docusaurus/router'
 
 // Simple inline SVG icons
 const ChatGPTIcon = () => (
@@ -33,11 +34,8 @@ const ExternalIcon = () => (
   </svg>
 )
 
-interface Props {
-  editUrl?: string
-}
-
-export default function AiActionsDropdown({ editUrl }: Props) {
+export default function AiActionsDropdown() {
+  const { pathname } = useLocation()
   const [open, setOpen] = useState(false)
   const [copied, setCopied] = useState(false)
   const ref = useRef<HTMLDivElement>(null)
@@ -54,12 +52,10 @@ export default function AiActionsDropdown({ editUrl }: Props) {
 
   const pageUrl = typeof window !== 'undefined' ? window.location.href : ''
 
-  // Convert GitHub editUrl to raw content URL
-  // e.g. https://github.com/cowprotocol/docs/tree/main/docs/foo.md
-  //   -> https://raw.githubusercontent.com/cowprotocol/docs/main/docs/foo.md
-  const rawUrl = editUrl
-    ?.replace('github.com', 'raw.githubusercontent.com')
-    .replace('/tree/', '/')
+  // Mev Blocker pages are excluded from Markdown exports.
+  const markdownUrl = pathname === '/mevblocker' || pathname.startsWith('/mevblocker/')
+    ? undefined
+    : (pathname.replace(/\/$/, '') || '/index') + '.md'
 
   const openInChatGPT = () => {
     const q = encodeURIComponent(`Read from ${pageUrl} so I can ask questions about it`)
@@ -74,30 +70,27 @@ export default function AiActionsDropdown({ editUrl }: Props) {
   }
 
   const copyPage = async () => {
-    if (rawUrl) {
+    let text = document.querySelector('article')?.innerText
+    if (markdownUrl) {
       try {
-        const res = await fetch(rawUrl)
-        if (!res.ok) throw new Error()
-        const md = await res.text()
-        await navigator.clipboard.writeText(md)
-        setCopied(true)
-        setTimeout(() => setCopied(false), 2000)
+        const res = await fetch(markdownUrl)
+        if (!res.ok || res.headers.get('content-type')?.includes('text/html')) throw new Error()
+        text = await res.text()
       } catch {
-        // Fallback: copy article text if fetch fails
-        const article = document.querySelector('article')
-        if (article) {
-          await navigator.clipboard.writeText(article.innerText)
-          setCopied(true)
-          setTimeout(() => setCopied(false), 2000)
-        }
+        // Keep article text if the Markdown export is unavailable.
       }
+    }
+    if (text) {
+      await navigator.clipboard.writeText(text)
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
     }
     setOpen(false)
   }
 
   const viewMarkdown = () => {
-    if (rawUrl) {
-      window.open(rawUrl, '_blank')
+    if (markdownUrl) {
+      window.open(markdownUrl, '_blank', 'noopener,noreferrer')
     }
     setOpen(false)
   }
@@ -140,7 +133,7 @@ export default function AiActionsDropdown({ editUrl }: Props) {
             </span>
           </button>
 
-          {editUrl && (
+          {markdownUrl && (
             <button className={styles.item} onClick={viewMarkdown}>
               <MarkdownIcon />
               <span className={styles.itemText}>
