@@ -103,6 +103,7 @@ const config: Config = {
       {
         generateLLMsTxt: true,
         generateLLMsFullTxt: true,
+        // vercel.json serves .md as text/plain because some AI readers reject text/markdown.
         generateMarkdownFiles: true,
         preserveDirectoryStructure: false,
         excludeImports: true,
