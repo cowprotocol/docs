@@ -6,4 +6,12 @@ import {SwaggerDoc} from '../../../../src/components/swagger-doc/SwaggerDoc';
 
 # Order book API
 
+:::note Sell quotes already include gas costs
+
+For sell orders (`kind: "sell"`), the `/quote` response's `quote.buyAmount` is the quoted output **after estimated network costs (gas) and the applicable protocol fee have been deducted**. Do not subtract these costs again or compare this amount directly with another provider's before-gas output. Compare quotes on the same fee basis.
+
+See [Displaying and Comparing Quotes](../../integrate/api.mdx#displaying-and-comparing-quotes) for a worked comparison and calculations using the API response.
+
+:::
+
 <SwaggerDoc url="https://raw.githubusercontent.com/cowprotocol/services/main/crates/orderbook/openapi.yml" />
