@@ -103,6 +103,8 @@ const config: Config = {
       {
         generateLLMsTxt: true,
         generateLLMsFullTxt: true,
+        generateMarkdownFiles: true,
+        preserveDirectoryStructure: false,
         excludeImports: true,
         removeDuplicateHeadings: true,
         ignoreFiles: ['mevblocker/**'],
