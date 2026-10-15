@@ -106,6 +106,7 @@ const config: Config = {
         // vercel.json serves .md as text/plain because some AI readers reject text/markdown.
         generateMarkdownFiles: true,
         preserveDirectoryStructure: false,
+        useRelativeUrls: true,
         excludeImports: true,
         removeDuplicateHeadings: true,
         ignoreFiles: ['mevblocker/**'],
