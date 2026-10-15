@@ -27,5 +27,5 @@ CoW DAO's documentation follows a "Concepts", "Tutorials", "Technical Reference"
 
 ## Documentation for AI agents
 
-- [Documentation index](/llms.txt): Find the relevant guide.
-- [Full documentation](/llms-full.txt): Read all guides in one file.
+- <a href="/llms.txt" target="_blank" rel="noopener noreferrer">/llms.txt</a>: Find the relevant guide in the documentation index.
+- <a href="/llms-full.txt" target="_blank" rel="noopener noreferrer">/llms-full.txt</a>: Read all guides in one file.
