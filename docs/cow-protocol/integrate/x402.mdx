@@ -1,0 +1,114 @@
+---
+title: Paid quotes with x402
+description: Get CoW Protocol quotes using prepaid x402 payments and withdraw unused funds.
+sidebar_position: 4
+---
+
+import CodeBlock from '@theme/CodeBlock'
+import quoteSource from '!!raw-loader!@site/static/code-examples/x402/quote.mts'
+
+# Paid quotes with x402
+
+Get CoW Protocol quotes from a script or agent without an API key. Deposit tokens into a prepaid channel, then authorise each quote with an off-chain signature. The deposit funds future requests; it is not an extra quote fee. CoW collects the charges in batches.
+
+The x402 SDK handles the payment challenge, signing, paid retry and receipt validation.
+Your application configures a payer and spending limits, then uses a payment-aware `fetch`.
+
+## Get a quote
+
+This example uses **Node.js 22** and **USDC on Base** to buy an Ethereum quote.
+The payment and quote chains are independent. It returns a quote; it does not execute a swap.
+Browser paid retries are not supported.
+
+### 1. Check the terms
+
+Save <a href="/code-examples/x402/inspect.mjs" download="inspect.mjs">inspect.mjs</a> and run `node inspect.mjs`.
+It shows the current price, minimum deposit and withdrawal delay without a key, signature or payment.
+Fund your wallet with enough Base USDC if you accept the terms.
+
+Deposits remain available for later quotes until spent or withdrawn.
+
+### 2. Set up the example
+
+```bash
+mkdir x402-quickstart
+cd x402-quickstart
+npm init -y
+npm install @x402/fetch@2.26.0 @x402/evm@2.26.0 @x402/core@2.26.0 viem
+npm install --save-dev tsx
+umask 077
+touch .env
+chmod 600 .env
+```
+
+Edit `.env` locally with your payer key and a Base RPC URL:
+
+```text
+PRIVATE_KEY=YOUR_PAYER_PRIVATE_KEY
+RPC_URL=YOUR_BASE_RPC_URL
+```
+
+Keep `.env`, `x402-state/`, `x402-channels/` and `x402-attempts/` out of source control.
+Saved signed attempts are sensitive too.
+
+The runnable example defaults to **0.001 USDC per quote**, **1 USDC per deposit or top-up**, and a **24-hour maximum accepted withdrawal delay**. These are client limits, not guaranteed server terms. If an offer exceeds them, the script stops before signing.
+See [optional limits](./x402-recovery.mdx#client-limits) to change them. A per-deposit limit is not a lifetime spending cap.
+
+### 3. Request a quote
+
+The core SDK setup is below. This is an **excerpt**, not a standalone script:
+the [complete example](./x402-recovery.mdx#complete-quote-example) creates the RPC-backed
+`signer`, selects Base USDC, checks the expected receiver and your limits, and saves recovery files.
+
+<CodeBlock language="typescript" title="SDK setup (excerpt from quote.mts)">
+  {quoteSource.slice(quoteSource.indexOf('const client ='), quoteSource.indexOf('// Sign only')).trim()}
+</CodeBlock>
+
+Once that client is configured, request a quote with `paidFetch`:
+
+```typescript
+const paidFetch = wrapFetchWithPayment(fetch, client);
+const response = await paidFetch("https://x402.cow.fi/mainnet/api/v1/quote", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify(quoteRequest), // Standard orderbook quote parameters.
+});
+```
+
+To run it, save <a href="/code-examples/x402/quote.mts" download="quote.mts">quote.mts</a>
+in the project directory. It includes the imports, payment limits and a complete quote request.
+
+```bash
+node --env-file=.env --import tsx quote.mts
+```
+
+A successful run prints `status: 200`, `quoteReceived: true`, the charge, a saved channel-file path and the quote JSON.
+The first request funds the channel; later requests reuse it and top up when needed, within your limits.
+CoW pays deposit and collection gas.
+
+Run one request at a time per channel and keep the saved files across restarts.
+
+If a request times out or returns a settlement error, keep the saved files and transaction hash.
+A charge or deposit may have succeeded even without a quote response.
+Follow the [recovery guidance](./x402-recovery.mdx#recover-an-uncertain-payment) before retrying.
+
+## Withdraw unused funds
+
+You initiate a withdrawal, wait for the saved channel's deadline, then finalize it.
+These are **two transactions**, paid by your wallet in Base ETH for this example.
+Finalization returns tokens to the payer; it is not automatic.
+
+Follow the [withdrawal walkthrough](./x402-recovery.mdx#withdraw-unused-funds) using
+the original channel-file path printed by the quote example.
+Claims during the waiting period can reduce the amount returned.
+
+## Other payment options and help
+
+The current options are Base USDC/COW, Ethereum USDC and BNB USDC.
+COW and BNB USDC require an explicit SDK asset entry and Permit2 approval.
+Approval and withdrawal gas is paid in the payment chain's native token.
+COW amounts have no guaranteed dollar equivalent.
+
+Use the [live API reference](https://x402.cow.fi/docs/) for payment fields, networks and errors.
+Contact [CoW Protocol Discord](https://discord.com/invite/cowprotocol) with your network, channel ID and transaction hash;
+never share keys or signed payments.
