@@ -53,12 +53,8 @@ line up:
 1. **You opt in.** Set `enableFastPath` in the order's
    [`appData`](/cow-protocol/reference/core/intents/app-data). It is signed with
    the order, so without it an order is never fast-pathed.
-2. **A fast-path-capable solver wins the quote.** Solvers choose whether to
-   support fast path, and a solver that can't settle quickly enough simply
-   doesn't offer fast-path quotes. A solver that does offer one is committing to
-   it: if that quote wins and you sign it, the solver must settle on-chain within
-   the window, and the protocol holds it accountable for doing so. If it doesn't,
-   the order falls back to the normal auction and nothing is lost.
+2. **The winning solver settles in time.** The solver that provided the winning
+   quote settles the order within the fast-path deadline.
 
 If both hold, the order is fast-pathed. Otherwise it settles through the normal
 auction.
