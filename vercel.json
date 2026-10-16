@@ -1,6 +1,17 @@
 {
     "cleanUrls": true,
     "buildCommand": "npm install -g pnpm && yarn build",
+    "headers": [
+        {
+            "source": "/:path(.*)\\.md",
+            "headers": [
+                {
+                    "key": "Content-Type",
+                    "value": "text/plain; charset=utf-8"
+                }
+            ]
+        }
+    ],
     "redirects": [
         {
             "source": "/mevblocker/(.+)",
