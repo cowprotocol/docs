@@ -162,3 +162,18 @@ Partner fees are encoded in the app data struct and are accounted for once the o
 From the perspective of the API, two orders with the same parameters and the same owner but different app data are two different valid orders.
 It can happen that the order that is part of the final settlement is the one controlled by the adversary, especially if other order parameters can be changed to create the appearence of an inflated surplus.
 In this case, the order surplus decreases as partner fees are taken from the surplus.
+
+### Non-standard `ERC-20` tokens
+
+CoW Protocol assumes that all traded tokens behave as standard [`ERC-20`](https://eips.ethereum.org/EIPS/eip-20) tokens.
+In particular, it assumes that a successful `transfer` or `transferFrom` of `amount` tokens debits the sender's balance by exactly `amount` and credits the recipient's balance by exactly `amount`.
+
+Tokens that deviate from this behavior, such as fee-on-transfer tokens, rebasing tokens, or tokens that otherwise send more or fewer tokens than requested, are not supported.
+The behavior of orders and settlements involving such tokens is **undefined**: they may revert, execute at a different price than signed, or leave users or the settlement contract with fewer tokens than expected.
+
+:::caution
+
+Do not trade non-standard `ERC-20` tokens on CoW Protocol.
+See [supported tokens](/cow-protocol/reference/core/tokens) for more details on token requirements and the bad token list.
+
+:::
