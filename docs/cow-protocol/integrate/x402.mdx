@@ -9,7 +9,7 @@ import quoteSource from '!!raw-loader!@site/static/code-examples/x402/quote.mts'
 
 # Paid quotes with x402
 
-Get CoW Protocol quotes from a script or agent without an API key. Deposit tokens into a prepaid channel, then authorise each quote with an off-chain signature. The deposit funds future requests; it is not an extra quote fee. CoW collects the charges in batches.
+Get CoW Protocol quotes from a script or agent without an API key. Deposit tokens into a prepaid channel, then authorise each quote with an off-chain signature. The deposit funds future requests; it is not an extra quote fee. The CoW Protocol x402 payment service collects the charges in batches.
 
 The x402 SDK handles the payment challenge, signing, paid retry and receipt validation.
 Your application configures a payer and spending limits, then uses a payment-aware `fetch`.
@@ -84,7 +84,7 @@ node --env-file=.env --import tsx quote.mts
 
 A successful run prints `status: 200`, `quoteReceived: true`, the charge, a saved channel-file path and the quote JSON.
 The first request funds the channel; later requests reuse it and top up when needed, within your limits.
-CoW pays deposit and collection gas.
+The CoW Protocol x402 payment service pays deposit and collection gas.
 
 Run one request at a time per channel and keep the saved files across restarts.
 
@@ -104,10 +104,10 @@ Claims during the waiting period can reduce the amount returned.
 
 ## Other payment options and help
 
-The current options are Base USDC/COW, Ethereum USDC and BNB USDC.
-COW and BNB USDC require an explicit SDK asset entry and Permit2 approval.
+The current options are USDC or \$COW on Base, USDC on Ethereum and USDC on BNB.
+\$COW and BNB USDC require an explicit SDK asset entry and Permit2 approval.
 Approval and withdrawal gas is paid in the payment chain's native token.
-COW amounts have no guaranteed dollar equivalent.
+\$COW amounts have no guaranteed dollar equivalent.
 
 Use the [live API reference](https://x402.cow.fi/docs/) for payment fields, networks and errors.
 Contact [CoW Protocol Discord](https://discord.com/invite/cowprotocol) with your network, channel ID and transaction hash;
