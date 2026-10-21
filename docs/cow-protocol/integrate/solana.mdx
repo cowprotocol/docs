@@ -38,6 +38,8 @@ The user signs a creation transaction in both flows:
 | Signatures                                      | User signs first; CoW adds the sponsor's signature | User signs as owner and fee payer |
 | Submission                                      | Order Book API                                     | Solana RPC                        |
 
+Order creation locks SOL as rent in the order account. After the order is filled, cancelled, or expired, `ReclaimOrder` can close the account and return the rent to its original payer (`created_by`). This is the sponsor for sponsored orders or the user for user-funded orders.
+
 ### Sponsored Orders
 
 Use the quote's `funder` as fee payer and order account rent payer. If it is absent or null, use the user-funded flow.
@@ -59,6 +61,12 @@ See the [SDK quickstart](./sdk.mdx#quick-start-example-solana) or [Node.js examp
 5. **Track the order**: Check its status and executed amounts until fulfilled, cancelled, or expired.
 
 Use [`approveCowProtocol`](https://github.com/cowprotocol/cow-sdk/tree/main/packages/sdk-trading-solana#step-0--approve-the-settlement-program-as-spl-delegate) to approve the settlement state account as delegate. Check the delegate and remaining allowance before each trade; fills reduce the allowance.
+
+A token account has only one delegate. Approving another app on the same sell-token account replaces CoW's delegation and can prevent open orders from settling. Use `approveCowProtocol` to restore CoW's delegate and sufficient allowance.
+
+Settlement buffers hold the buy tokens before the program pays them to the user. For SPL token buys, ensure the buffer for the buy mint exists. Create a missing buffer with `CreateBuffers`, using a payer funded with SOL for its rent. This is separate from the order account rent.
+
+The [SDK example](./sdk.mdx#quick-start-example-solana) buys native SOL, whose buffer is created during program initialization, so it needs no buffer creation step.
 
 ### Expiration and Cancellation
 
