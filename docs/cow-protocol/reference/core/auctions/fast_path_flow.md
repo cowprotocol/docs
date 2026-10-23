@@ -5,7 +5,7 @@ sidebar_position: 5
 
 # Fast-path flow
 
-Besides the usual auctions that take place at CoW Protocol, there is a special type of flow, called [fast-path flow](/cow-protocol/concepts/order-types/fast-path-orders), where the competition among solvers is moved to the quoting stage. Specifically, there is a special `enableFastPath` flag in each quote request that, when enabled, implies the following. If this quote results in an order being signed by a user, then the quoter that provided this winning quote is automatically declared winner of the solver competition. In such a case, the following flow is triggered:
+Besides the regular auctions, there is a [fast-path flow](/cow-protocol/concepts/order-types/fast-path-orders) in which the competition among solvers takes place at the quoting stage. A quote request can set the `enableFastPath` flag. If a user then signs an order that matches the winning quote and meets the [fast-path conditions](/cow-protocol/concepts/order-types/fast-path-orders#which-orders-can-use-fast-path), Autopilot selects the solver that provided the winning quote as the winner of the competition. In that case:
 1. Winning quoter receives a `/settle` call from the protocol, together with the exact amounts it needs to deliver onchain to the user, right after the order is created.
 2. If the winning quoter fails to execute the order onchain within the given deadline, the order becomes available in all future auctions that will be created (i.e., falls back to the usual flow).
 
