@@ -11,7 +11,7 @@ Besides the regular auctions, there is a [fast-path flow](/cow-protocol/concepts
 
 The fast-path flow can be viewed as a single-order auction held at the quoting stage, so the rules and accounting described in the previous sections apply to it. Each quote response is a bid in this auction, and the settlement transaction for the selected bid must fill the order at the amounts of that bid. All other bids are used to compute the reference score. Rewards (if the order is filled in a successful settlement transaction included by the deadline) and penalties (otherwise) are computed as described in the previous sections.
 
-We note that currently the penalty cap for these fast-path orders is set to zero, and the settle deadline for fast-path auctions is:
+The penalty cap for fast-path orders is currently set to zero, so an unfilled fast-path order currently incurs no penalty. The deadline for fast-path auctions is currently:
 
 - Mainnet: 1 block
 - Gnosis chain: 1 block
