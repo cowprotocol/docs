@@ -593,6 +593,11 @@
             "statusCode": 301
         },
         {
+            "source": "/cow-protocol/reference/core/auctions/ebbo-rules",
+            "destination": "/cow-protocol/reference/core/auctions/competition-rules",
+            "statusCode": 301
+        },
+        {
             "source": "/off-chain-services/in-depth-solver-specification/getting-notified-about-the-ranking",
             "destination": "/cow-protocol/reference/apis/solver",
             "statusCode": 301

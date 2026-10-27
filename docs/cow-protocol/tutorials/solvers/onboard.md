@@ -76,12 +76,6 @@ The default behavior for the driver is to set the native token address to `0xeee
 
 It is possible to enable or disable liquidity fetching for your solver. If this is enabled, the driver will search for on-chain liquidity sources for your solver to use and send them to your solver. [Docs](https://docs.cow.fi/cow-protocol/tutorials/arbitrate/solver/driver#fetching-liquidity)
 
-#### - Fairness checks for EBBO
-
-To ensure a fair execution for the users there are several EBBO rules that are maintained in the auction. Usually, an EBBO violation means that a reference pool from the base protocol would have given the user a better price than what they ended up receiving.
-
-In the event of an EBBO violation the team will reach out and ask you to reimburse the user. [Docs](https://docs.cow.fi/cow-protocol/reference/core/auctions/ebbo-rules)
-
 #### - Merging disjoint solutions
 
 It is possible for your solver to submit multiple solutions for a single auction and let the driver select the solution with the highest score to submit to the auction. It is possible to enable the driver to merge disjoint solutions into a single solution for the auction. [Docs](https://docs.cow.fi/cow-protocol/tutorials/arbitrate/solver/driver#postprocessing-solutions)
@@ -100,7 +94,7 @@ The main goal of the onboarding call is to both make sure that your team underst
 
 - KYC process and requirements
 
-- Surplus shifting and the EBBO rules
+- The [rules of the solver competition](/cow-protocol/reference/core/auctions/competition-rules)
 
 - The slippage accounting process and weekly rewards
 
