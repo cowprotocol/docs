@@ -1,7 +1,7 @@
 ---
 title: Paid quotes with x402
 description: Get CoW Protocol quotes using prepaid x402 payments and withdraw unused funds.
-sidebar_position: 4
+sidebar_position: 5
 ---
 
 import CodeBlock from '@theme/CodeBlock'
@@ -19,6 +19,7 @@ Your application configures a payer and spending limits, then uses a payment-awa
 This example uses **Node.js 22** and **USDC on Base** to buy an Ethereum quote.
 The payment and quote chains are independent. It returns a quote; it does not execute a swap.
 Browser paid retries are not supported.
+Quote streaming is not available through the x402 endpoint.
 
 ### 1. Check the terms
 
@@ -109,6 +110,7 @@ The current options are USDC or \$COW on Base, USDC on Ethereum and USDC on BNB.
 Approval and withdrawal gas is paid in the payment chain's native token.
 \$COW amounts have no guaranteed dollar equivalent.
 
-Use the [live API reference](https://x402.cow.fi/docs/) for payment fields, networks and errors.
+Use the [live API reference](https://x402.cow.fi/docs/) for payment fields, networks and errors,
+or download the [OpenAPI specification](https://x402.cow.fi/openapi.json).
 Contact [CoW Protocol Discord](https://discord.com/invite/cowprotocol) with your network, channel ID and transaction hash;
 never share keys or signed payments.
