@@ -82,7 +82,7 @@ At CoW DAO's discretion, systematic violation of these rules may lead to penaliz
 
 :::
 
-- Inflation of the score ([CIP-11](https://snapshot.org/#/cow.eth/proposal/0x16d8c681d52b24f1ccd854084e07a99fce6a7af1e25fd21ddae6534b411df870), CIP-XX). Actions whose sole purpose is to inflate the score of a solution or the rewards of a solver are forbidden. Examples are creating order flow only to collect rewards on it, wash-trading, and creating tokens to inflate scores.
+- Inflation of rewards ([CIP-11](https://snapshot.org/#/cow.eth/proposal/0x16d8c681d52b24f1ccd854084e07a99fce6a7af1e25fd21ddae6534b411df870), CIP-XX). Influencing the orders or prices of an auction in order to increase [rewards](rewards) is forbidden.
 
 - Illegal use of internal buffers ([CIP-11](https://snapshot.org/#/cow.eth/proposal/0x16d8c681d52b24f1ccd854084e07a99fce6a7af1e25fd21ddae6534b411df870), CIP-XX). Internal buffers are made available to solvers to make settlements more efficient, e.g., to cover slippage on liquidity sources or to save gas on small trades (see [buffer usage](#off-chain-protocol)). They are not a liquidity source that the protocol offers at defined prices. Solvers bear full responsibility for all changes to buffer balances caused by their settlements. Using the buffers in a way that exposes the protocol to significant inventory risk, e.g., by systematically accumulating tokens that are not trusted, or creating any other attack vector on the buffers, is forbidden. For slippage accounting, the core team may convert buffer imbalances to the native token using any reasonable price vector.
 
