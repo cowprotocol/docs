@@ -68,7 +68,7 @@ Here $$\textrm{volume}_o$$ is the volume of order $$o$$, expressed in the native
 
 The fraction $$\phi_o$$ depends on the chain and on whether the two tokens traded by the order are correlated. The classification into correlated and uncorrelated token pairs follows the same logic that is used in determining the [protocol volume fee](/governance/fees). For correlated token pairs, $$\phi_o = 0.1 \;\textrm{bps}$$ on all chains. For uncorrelated token pairs, the values are:
 
-- Ethereum mainnet: $$4 \;\textrm{bps}$$
+- Ethereum mainnet: $$1 \;\textrm{bps}$$
 - Gnosis Chain: $$3 \;\textrm{bps}$$
 - Arbitrum: $$1 \;\textrm{bps}$$
 - Base: $$2 \;\textrm{bps}$$
