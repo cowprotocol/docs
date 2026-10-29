@@ -138,6 +138,34 @@ console.log('Order submitted:', orderId)
 
 The SDK sends the partially signed transaction to the Order Book API. CoW adds the sponsor's signature and submits it. Use `orderId` to [track the order](./solana.mdx#track-an-order) in either flow.
 
+### Limit Orders
+
+Use [`buildLimitOrder`](https://github.com/cowprotocol/cow-sdk/tree/main/packages/sdk-trading-solana#limit-orders) to set your own price without a quote. This example sells 1 USDC for at least 0.01 SOL, allows partial fills, and expires after one day.
+
+Use the SDK and tokens from the user-funded example. Replace the quote, approval, and order-building steps with the following code.
+
+```typescript
+const sellAmount = 1_000_000n // 1 USDC in base units
+const approval = sdk.approveCowProtocol({
+  ownerAddress: wallet.publicKey,
+  sellTokenAddress: sellToken,
+  approveAmount: sellAmount,
+})
+const { instruction, orderId } = await sdk.buildLimitOrder({
+  ownerAddress: wallet.publicKey,
+  sellTokenAddress: sellToken,
+  buyTokenAddress: buyToken,
+  sellAmount,
+  buyAmount: 10_000_000n, // 0.01 SOL in base units
+  kind: OrderKind.SELL,
+  validTo: Math.floor(Date.now() / 1000) + 86400,
+  partiallyFillable: true,
+  appData: new Uint8Array(32),
+})
+```
+
+Sign and submit as in the [user-funded example](#user-funded-orders). The user pays fees and account rent.
+
 ## Installation
 
 ```bash
