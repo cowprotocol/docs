@@ -4,8 +4,9 @@ sidebar_position: 1
 
 # Flow of an order
 
-Rather than creating executable on-chain transactions, CoW Protocol users submit their orders as signed [*intent to trade*](../introduction/intents) messages.
-This allows [solvers](https://docs.cow.fi/cow-protocol/concepts/introduction/solvers) to find the optimal execution path for the batch of orders before committing them on-chain.
+Rather than creating executable on-chain transactions, CoW Protocol users on EVM submit their orders as signed [*intent to trade*](../introduction/intents) messages. This allows [solvers](https://docs.cow.fi/cow-protocol/concepts/introduction/solvers) to find the optimal execution path for the batch of orders before committing them on-chain.
+
+On Solana, users sign [order creation transactions](../../integrate/solana.mdx#order-creation).
 
 Let's bring all of our main concepts together by taking a look at the flow of an order through CoW Protocol.
 

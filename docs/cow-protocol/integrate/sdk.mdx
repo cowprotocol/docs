@@ -62,7 +62,7 @@ console.log('Order created:', orderId)
 
 ## Quick Start Example (Solana)
 
-Both flows use a connected `wallet` and a Solana mainnet-beta `connection`.
+The examples use a connected `wallet` and a Solana mainnet-beta `connection`.
 
 ### User-funded Orders
 
@@ -115,7 +115,9 @@ console.log('Order submitted:', orderId)
 
 ### Sponsored Orders
 
-Use the same quote and approval above, replacing the order-building and submission steps with:
+Sponsored market orders need a valid quote with enough slippage. See the [sponsorship requirements](./solana.mdx#sponsored-orders) or the [user-funded limit order example](#limit-orders).
+
+Reuse the quote and approval above. Replace the order-building and submission steps with this code.
 
 ```typescript
 if (!solanaQuote.funder) throw new Error('Sponsorship is unavailable')
@@ -136,7 +138,7 @@ const orderId = await postSponsoredOrder(btoa(String.fromCharCode(...bytes)))
 console.log('Order submitted:', orderId)
 ```
 
-The SDK sends the partially signed transaction to the Order Book API. CoW adds the sponsor's signature and submits it. Use `orderId` to [track the order](./solana.mdx#track-an-order) in either flow.
+The SDK sends the partially signed transaction to the Order Book API. CoW adds the sponsor's signature and submits it when the order wins an auction. Use `orderId` to [track the order](./solana.mdx#track-an-order) in either flow.
 
 ### Limit Orders
 

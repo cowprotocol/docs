@@ -23,18 +23,21 @@ The primary API for creating and managing orders on CoW Protocol.
 ### Key Endpoints
 
 - `POST /api/v1/quote` - Get trading quotes
-- `POST /api/v1/quote/stream` - Stream progressively improving quotes as solvers respond (SSE, EVM only)
 - `POST /api/v1/orders` - Submit signed orders (EVM) or partially signed sponsored transactions (Solana)
 - `GET /api/v1/orders/{uid}` - Get order details
 - `GET /api/v1/orders/{uid}/status` - Get auction progress
-- `DELETE /api/v1/orders/{uid}` - Cancel orders (EVM only)
-- `GET /api/v1/trades` (EVM) or `GET /api/v2/trades` (Solana) - Get trade history
 
-On Solana, user-funded order creation and cancellation use on-chain transactions. See [Integrate on Solana](./solana.mdx) for both creation flows.
+## EVM
 
-## Quick Start Example (EVM)
+### Key Endpoints {#key-endpoints-evm}
 
-### 1. Get a Quote
+- `POST /api/v1/quote/stream` - Stream progressively improving quotes as solvers respond (SSE)
+- `DELETE /api/v1/orders/{uid}` - Cancel orders
+- `GET /api/v1/trades` - Get trade history
+
+### Quick Start Example {#quick-start-example-evm}
+
+#### 1. Get a Quote {#1-get-a-quote}
 
 ```bash
 curl -X POST "https://api.cow.fi/mainnet/api/v1/quote" \
@@ -48,7 +51,7 @@ curl -X POST "https://api.cow.fi/mainnet/api/v1/quote" \
   }'
 ```
 
-### 2. Sign and Submit Order
+#### 2. Sign and Submit Order {#2-sign-and-submit-order}
 
 ```javascript
 // After getting a quote, sign the order
@@ -68,7 +71,7 @@ const response = await fetch('https://api.cow.fi/mainnet/api/v1/orders', {
 const orderId = await response.text()
 ```
 
-### 3. Monitor Order Status
+#### 3. Monitor Order Status {#3-monitor-order-status}
 
 ```javascript
 // Check order status
@@ -80,121 +83,7 @@ const orderDetails = await orderResponse.json()
 console.log('Order status:', orderDetails.status)
 ```
 
-## Quick Start Example (Solana)
-
-This example uses sponsored order creation.
-
-### 1. Get a Quote
-
-```bash
-curl -X POST "https://api.cow.fi/solana/api/v1/quote" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "sellToken": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
-    "buyToken": "11111111111111111111111111111111",
-    "sellAmountBeforeFee": "1000000",
-    "kind": "sell",
-    "from": "YourSolanaWalletAddress"
-  }'
-```
-
-### 2. Sign and Submit Order
-
-Prepare `transaction` with delegate approval, a `CreateOrder` instruction, and a recent blockhash using the [SDK transaction builders](https://github.com/cowprotocol/cow-sdk/tree/main/packages/sdk-trading-solana#making-a-trade). Use the quote's `funder` as fee payer and order account rent payer. If `funder` is missing, use the [user-funded flow](./sdk.mdx#quick-start-example-solana).
-
-```javascript
-// Sign with the owner's wallet, leaving the sponsor's signature empty
-const signed = await wallet.signTransaction(transaction)
-const bytes = signed.serialize({ requireAllSignatures: false })
-const partiallySignedTx = btoa(String.fromCharCode(...bytes))
-
-// Submit the partially signed transaction
-const response = await fetch('https://api.cow.fi/solana/api/v1/orders', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify({ partiallySignedTx, quoteId: quoteResponse.id ?? undefined }),
-})
-const orderId = await response.json()
-```
-
-CoW adds the sponsor's signature and submits the transaction.
-
-### 3. Monitor Order Status
-
-```javascript
-const orderResponse = await fetch(
-  `https://api.cow.fi/solana/api/v1/orders/${orderId}`
-)
-const orderDetails = await orderResponse.json()
-
-console.log('Order status:', orderDetails.status)
-```
-
-See [Track an order](./solana.mdx#track-an-order) for statuses and fill amounts.
-
-## Streaming Quotes (EVM)
-
-`POST /api/v1/quote/stream` takes the same request body as `POST /api/v1/quote`, but returns a [Server-Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events) stream instead of a single response.
-The first event arrives as soon as the fastest solver responds, and after that a quote is only emitted when it ranks better than the best one already sent, so the client can show a price immediately and every update improves on the last.
-
-Each event's `data` is an `OrderQuoteResponse`, the same shape `POST /api/v1/quote` returns.
-The `id` on each event can be passed as `quoteId` when placing an order, the same as a quote from `POST /api/v1/quote`.
-The endpoint always queries all solvers and attempts verification (the request's `priceQuality` is ignored), and each event carries its own `verified` flag.
-A verified quote ranks above an unverified one regardless of the quoted amount, because unverified quotes often over-promise; a later event may therefore report a slightly worse price than an earlier one when it is the first verified quote.
-Solvers without a usable quote, and quotes that do not beat the best already sent, emit no event, so the stream may contain fewer events than there are solvers.
-Individual solver failures are not streamed; only if no solver returns a usable quote at all does the server send a final `error` event with a `PriceEstimationError` body (for example `NoLiquidity`), then close.
-
-Because every event improves on the previous one, the last event received when the stream closes is the best available quote — clients do not need to rank events themselves.
-
-```bash
-curl -N -X POST "https://api.cow.fi/mainnet/api/v1/quote/stream" \
-  -H "Content-Type: application/json" \
-  -H "Accept: text/event-stream" \
-  -d '{
-    "sellToken": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
-    "buyToken": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
-    "sellAmountBeforeFee": "1000000000000000000",
-    "kind": "sell",
-    "from": "0xYourWalletAddress"
-  }'
-```
-
-### Choosing a timeout (EVM)
-
-The first quote is delivered as soon as the fastest solver responds, so a usable price arrives faster than with `POST /api/v1/quote`, which waits for the whole competition.
-Streaming does not make any solver compute faster, though.
-The final quote is only as good as the responses that arrived before the stream was closed, and the `timeout` sets that boundary.
-
-The stream stays open until the request `timeout` elapses or every solver has responded.
-Slower solvers sometimes return a better price, especially on thin or unusual pairs that only one or two solvers can quote.
-A short timeout returns sooner, but it can yield a worse quote or none at all.
-A longer timeout gives the competition time to find a better price.
-
-This tradeoff is controlled by the client through the `timeout`.
-The value is set (in milliseconds) on the request, or the connection is closed once a good-enough quote has arrived.
-
-The table below is a starting point, not a guarantee.
-The values should be measured against real traffic and raised for pairs that only slower solvers can price.
-Response times also differ by network, and these values shift as solver performance changes (guidance as of 2026-06).
-
-| Network | `timeout` (ms) |
-|---|---|
-| Base, Gnosis Chain, Linea | 1000 |
-| Mainnet, BNB Chain | 1800 |
-| Arbitrum, Polygon, Avalanche, Ink | 2500 |
-
-## Network Endpoints
-
-CoW Protocol APIs are available on multiple networks:
-
-- **Mainnet**: `https://api.cow.fi/mainnet/api/v1/`
-- **Gnosis Chain**: `https://api.cow.fi/xdai/api/v1/`
-- **Arbitrum**: `https://api.cow.fi/arbitrum_one/api/v1/`
-- **Base**: `https://api.cow.fi/base/api/v1/`
-- **Solana**: `https://api.cow.fi/solana/api/v1/`
-- **Sepolia (Testnet)**: `https://api.cow.fi/sepolia/api/v1/`
-
-## Order Signing (EVM)
+### Order Signing {#order-signing-evm}
 
 Orders must be cryptographically signed before submission. The signing process involves:
 
@@ -225,11 +114,132 @@ const types = {
 const signature = await signer._signTypedData(domain, types, orderData)
 ```
 
-## Order Signing (Solana)
+### Streaming Quotes {#streaming-quotes-evm}
+
+`POST /api/v1/quote/stream` takes the same request body as `POST /api/v1/quote`, but returns a [Server-Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events) stream instead of a single response.
+The first event arrives as soon as the fastest solver responds, and after that a quote is only emitted when it ranks better than the best one already sent, so the client can show a price immediately and every update improves on the last.
+
+Each event's `data` is an `OrderQuoteResponse`, the same shape `POST /api/v1/quote` returns.
+The `id` on each event can be passed as `quoteId` when placing an order, the same as a quote from `POST /api/v1/quote`.
+The endpoint always queries all solvers and attempts verification (the request's `priceQuality` is ignored), and each event carries its own `verified` flag.
+A verified quote ranks above an unverified one regardless of the quoted amount, because unverified quotes often over-promise; a later event may therefore report a slightly worse price than an earlier one when it is the first verified quote.
+Solvers without a usable quote, and quotes that do not beat the best already sent, emit no event, so the stream may contain fewer events than there are solvers.
+Individual solver failures are not streamed; only if no solver returns a usable quote at all does the server send a final `error` event with a `PriceEstimationError` body (for example `NoLiquidity`), then close.
+
+Because every event improves on the previous one, the last event received when the stream closes is the best available quote — clients do not need to rank events themselves.
+
+```bash
+curl -N -X POST "https://api.cow.fi/mainnet/api/v1/quote/stream" \
+  -H "Content-Type: application/json" \
+  -H "Accept: text/event-stream" \
+  -d '{
+    "sellToken": "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2",
+    "buyToken": "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+    "sellAmountBeforeFee": "1000000000000000000",
+    "kind": "sell",
+    "from": "0xYourWalletAddress"
+  }'
+```
+
+#### Choosing a timeout {#choosing-a-timeout-evm}
+
+The first quote is delivered as soon as the fastest solver responds, so a usable price arrives faster than with `POST /api/v1/quote`, which waits for the whole competition.
+Streaming does not make any solver compute faster, though.
+The final quote is only as good as the responses that arrived before the stream was closed, and the `timeout` sets that boundary.
+
+The stream stays open until the request `timeout` elapses or every solver has responded.
+Slower solvers sometimes return a better price, especially on thin or unusual pairs that only one or two solvers can quote.
+A short timeout returns sooner, but it can yield a worse quote or none at all.
+A longer timeout gives the competition time to find a better price.
+
+This tradeoff is controlled by the client through the `timeout`.
+The value is set (in milliseconds) on the request, or the connection is closed once a good-enough quote has arrived.
+
+The table below is a starting point, not a guarantee.
+The values should be measured against real traffic and raised for pairs that only slower solvers can price.
+Response times also differ by network, and these values shift as solver performance changes (guidance as of 2026-06).
+
+| Network | `timeout` (ms) |
+|---|---|
+| Base, Gnosis Chain, Linea | 1000 |
+| Mainnet, BNB Chain | 1800 |
+| Arbitrum, Polygon, Avalanche, Ink | 2500 |
+
+### Network Endpoints {#network-endpoints}
+
+CoW Protocol APIs are available on multiple networks:
+
+- **Mainnet**: `https://api.cow.fi/mainnet/api/v1/`
+- **Gnosis Chain**: `https://api.cow.fi/xdai/api/v1/`
+- **Arbitrum**: `https://api.cow.fi/arbitrum_one/api/v1/`
+- **Base**: `https://api.cow.fi/base/api/v1/`
+- **Sepolia (Testnet)**: `https://api.cow.fi/sepolia/api/v1/`
+
+## Solana
+
+### Key Endpoints {#key-endpoints-solana}
+
+- `GET /api/v2/trades?orderUid={uid}` - Get trade history and transaction signatures
+
+User-funded order creation and cancellation use on-chain transactions. See [Integrate on Solana](./solana.mdx) for both creation flows.
+
+### Quick Start Example {#quick-start-example-solana}
+
+This example creates a sponsored market order from a valid quote with enough slippage. See the [sponsorship requirements](./solana.mdx#sponsored-orders) or the [user-funded limit order example](./sdk.mdx#limit-orders).
+
+#### 1. Get a Quote {#1-get-a-quote-1}
+
+```bash
+curl -X POST "https://api.cow.fi/solana/api/v1/quote" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "sellToken": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+    "buyToken": "11111111111111111111111111111111",
+    "sellAmountBeforeFee": "1000000",
+    "kind": "sell",
+    "from": "YourSolanaWalletAddress"
+  }'
+```
+
+#### 2. Sign and Submit Order {#2-sign-and-submit-order-1}
+
+Prepare `transaction` with delegate approval, a `CreateOrder` instruction, and a recent blockhash using the [SDK transaction builders](https://github.com/cowprotocol/cow-sdk/tree/main/packages/sdk-trading-solana#making-a-trade). Use the quote's `funder` as fee payer and order account rent payer. If `funder` is missing, use the [user-funded flow](./sdk.mdx#quick-start-example-solana).
+
+```javascript
+// Sign with the owner's wallet, leaving the sponsor's signature empty
+const signed = await wallet.signTransaction(transaction)
+const bytes = signed.serialize({ requireAllSignatures: false })
+const partiallySignedTx = btoa(String.fromCharCode(...bytes))
+
+// Submit the partially signed transaction
+const response = await fetch('https://api.cow.fi/solana/api/v1/orders', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({ partiallySignedTx, quoteId: quoteResponse.id ?? undefined }),
+})
+const orderId = await response.json()
+```
+
+CoW adds the sponsor's signature and submits the transaction when the order wins an auction.
+
+#### 3. Monitor Order Status {#3-monitor-order-status-1}
+
+```javascript
+const orderResponse = await fetch(
+  `https://api.cow.fi/solana/api/v1/orders/${orderId}`
+)
+const orderDetails = await orderResponse.json()
+
+console.log('Order status:', orderDetails.status)
+```
+
+`executedSellAmount` and `executedBuyAmount` show fill amounts in token base units. An `open` order may be partially filled; `fulfilled` means fully filled. See [Track an order](./solana.mdx#track-an-order) for indexing delays and Explorer links.
+
+### Order Signing {#order-signing-solana}
 
 Orders must be cryptographically signed before submission. The signing process involves:
 
-1. **Order Instruction**: A `CreateOrder` instruction built from the quote
+1. **Order Instruction**: A `CreateOrder` instruction built from a quote or limit-order parameters
 2. **Transaction**: The instruction, fee payer, and recent blockhash
 3. **Signature**: The owner's wallet signs the transaction
 
@@ -247,6 +257,11 @@ const signedTransaction = await wallet.signTransaction(transaction)
 ```
 
 For [sponsored orders](./sdk.mdx#sponsored-orders), CoW adds the sponsor's signature and submits the transaction. For [user-funded orders](./sdk.mdx#user-funded-orders), the owner is also the fee payer and submits through Solana RPC.
+
+### Network Endpoints {#network-endpoints-solana}
+
+- **Production**: `https://api.cow.fi/solana/api/v1/`
+- **Staging (barn)**: `https://barn.api.cow.fi/solana/api/v1/`
 
 ## Error Handling
 
@@ -299,5 +314,4 @@ For complete API documentation including all endpoints, parameters, and response
 - **[Order Book API Reference](/cow-protocol/reference/apis/orderbook)** - Detailed API documentation
 - **[API Explorer](https://api.cow.fi/docs/)** - Interactive documentation
 - **[GitHub Examples](https://github.com/cowprotocol/cow-sdk/tree/main/examples)** - Code examples
-- **[Order Signing Guide](../reference/core/signing_schemes.mdx)** - Cryptographic signing details
-
+- **[Order Signing Guide (EVM)](../reference/core/signing_schemes.mdx)** - Cryptographic signing details
