@@ -1,6 +1,6 @@
 ---
-sidebar_position: 4
-sidebar_label: Solana
+sidebar_position: 2
+sidebar_label: Orders on Solana
 description: Integrate Solana swaps, choose who pays for order creation, and track orders.
 ---
 
@@ -52,9 +52,13 @@ The user pays fees and account rent in SOL. Sign and submit the transaction thro
 
 See the [SDK quickstart](./sdk.mdx#quick-start-example-solana) or [Node.js example](https://github.com/cowprotocol/cow-sdk/blob/main/examples/nodejs/solana/src/index.ts#L60-L82).
 
+### Limit Orders
+
+Limit orders trade at your chosen price or better. Set `sellAmount` and `buyAmount` to define the price, and `validTo` for expiry. See the [SDK limit order example](./sdk.mdx#limit-orders) to create an order without a quote.
+
 ## Order Lifecycle
 
-1. **Get a quote**: Specify tokens, amount, owner, and order kind. Check the quote's `expiration`.
+1. **Set the price**: For swaps, get a quote and check its `expiration`. For limit orders, set the amounts and expiry.
 2. **Build the transaction**: Approve the sell tokens and add `CreateOrder`. Wrap native SOL into wSOL when selling it.
 3. **Sign and submit**: Use either flow above and save the order UID.
 4. **Wait for settlement**: Solvers compete to fill the order after creation.
@@ -72,7 +76,7 @@ The [SDK example](./sdk.mdx#quick-start-example-solana) buys native SOL, whose b
 
 Orders expire at `validTo` (Unix seconds). Creation transactions must land within the blockhash's 150-block lifetime, roughly [30 seconds at 200 ms per slot](https://solana.com/upgrades/reduced-slot-times). CoW Swap allows 20 seconds for signing, leaving 10 seconds for submission.
 
-If the transaction expires, get a fresh quote and transaction. Once created, the order stays open until filled, cancelled, or `validTo`.
+If the transaction expires, rebuild it with a fresh blockhash and, for swaps, a fresh quote. Once created, the order stays open until filled, cancelled, or `validTo`.
 
 Cancel with an owner-signed `CancelOrder` transaction. The SDK's [`cancelOrder`](https://github.com/cowprotocol/cow-sdk/tree/main/packages/sdk-trading-solana#cancelling-an-order) also supports cancellation before creation lands.
 
