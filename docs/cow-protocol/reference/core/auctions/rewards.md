@@ -174,7 +174,7 @@ e_{i,o} = \left| \frac{q_{i,o} - x_o} {x_o} \right|
 $$
 
 where $$q_{i,o}$$ is the exchange rate of the solver's quote, adjusted for network and volume fee, and $$x_o$$ is the exchange rate at which the order was executed.
-Only the five quotes with the smallest error are rewarded.  If at least one quote is verified, only verified quotes are considered in this ranking.
+Only the five quotes with the smallest error are rewarded. Only quotes ranked in the price estimation competition are considered in the ranking of errors. This means, that if at least one quote is verified, only verified quotes are considered.
 
 Denoting this set by $$T_o$$, solver $$i$$ receives quote reward $$r_{i,o}$$
 
