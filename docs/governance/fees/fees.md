@@ -21,8 +21,6 @@ The purpose of this page is to let users know which fee models are active at any
 > **Eligible orders:** the fee only applies to out-of-market limit orders and discrete TWAP orders where the order is not executable at the time it is generated
 >
 > **Fee calculation:** surplus \* 0.5 **OR** volume \* 0.99 [whichever number is lower]
->
-> The cap is a safeguard: for sell orders it can never apply, and for buy orders it only applies when the maximum sell amount is about three times the amount actually sold
 
 ### Quote improvement fee on market orders
 
