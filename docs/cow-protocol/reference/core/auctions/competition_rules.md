@@ -58,7 +58,7 @@ All solvers participating in the solver competition must abide by certain rules.
 
 The deadline for solutions depends on the network and is set as a specific number of blocks after the current block at the time of sending the settle request to the solver:
 
-- Mainnet: 3 blocks
+- Mainnet: 1 block
 - Gnosis chain: 3 blocks
 - Arbitrum: 11 blocks
 - Base: 4 blocks
