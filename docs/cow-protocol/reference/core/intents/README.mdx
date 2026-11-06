@@ -16,7 +16,7 @@ The parameters required for an intent can be broken down into three categories:
 * amounts to swap (i.e. `sellAmount` and `buyAmount`)
 * kind of swap (i.e. `sell` or `buy`)
 * partial fillability (i.e. `true` or `false`)
-* fees payable to the protocol (i.e. `feeAmount`)
+* signed fee (i.e. `feeAmount`), which must be `0`: fees are included in the limit price instead
 
 ### Co-ordination / Settlement
 
