@@ -34,6 +34,11 @@ One such example is tokens that take a fee on transfer.
 The bad token list is not exhaustive and is supplemented by automated bad token detection, which may be flaky, (e.g. if a token exhibits rounding issues on transfers) depending on certain conditions.
 In any case, if a token is on the bad token list, it will result in an `UnsupportedToken` error when attempting to retrieve a quote or place an order.
 
+## Solana tokens
+
+CoW Swap does not support all tokens on Solana.
+Some tokens use [Token-2022](https://spl.solana.com/token-2022) extensions, such as transfer fees, which do not operate optimally with CoW Protocol.
+
 ## New `ERC-20` tokens
 
 Have you created a new `ERC-20` and want to make it seemlessly tradeable on CoW Protocol?
