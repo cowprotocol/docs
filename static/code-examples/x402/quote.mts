@@ -80,6 +80,12 @@ client.onAfterPaymentCreation(async ({ paymentPayload }) => {
   writeFileSync(latestChannelFile, JSON.stringify({ network, channelId, channelConfig: config }, null, 2), { mode: 0o600 });
 });
 const paidFetch = wrapFetchWithPayment(fetch, client);
+let observedReceipt: {
+  paymentReceiptReceived: true;
+  paymentNetwork: string;
+  transaction: string;
+  chargedUSDC?: string;
+} | undefined;
 
 try {
   const res = await paidFetch("https://x402.cow.fi/mainnet/api/v1/quote", {
@@ -98,6 +104,17 @@ try {
   const responseHeader = res.headers.get("PAYMENT-RESPONSE");
   const challenge = requiredHeader ? decodePaymentRequiredHeader(requiredHeader) : undefined;
   const receipt = responseHeader ? decodePaymentResponseHeader(responseHeader) : undefined;
+  if (receipt?.success === true) {
+    const charged = receipt.extra?.chargedAmount;
+    observedReceipt = {
+      paymentReceiptReceived: true,
+      paymentNetwork: receipt.network,
+      transaction: receipt.transaction,
+      ...(typeof charged === "string" && /^\d+$/.test(charged)
+        ? { chargedUSDC: formatUnits(BigInt(charged), 6) }
+        : {}),
+    };
+  }
   const body = await res.text();
   if (res.status !== 200 || receipt?.success !== true) {
     console.error({
@@ -111,17 +128,25 @@ try {
   }
   const result = JSON.parse(body);
   if (!result.quote) throw new Error("Expected a quote in the successful response");
-  const charged = receipt.extra?.chargedAmount ?? "0";
-  if (typeof charged !== "string" || !/^\d+$/.test(charged)) throw new Error("Invalid receipt charge");
   console.log({
     status: res.status,
     quoteReceived: true,
     paymentNetwork: receipt.network,
-    chargedUSDC: formatUnits(BigInt(charged), 6),
+    ...(observedReceipt?.chargedUSDC === undefined
+      ? { chargeReported: false }
+      : { chargedUSDC: observedReceipt.chargedUSDC }),
     channelFile: latestChannelFile,
   });
   console.log(result);
 } catch (error) {
-  console.error({ savedAttempt: latestAttemptFile, message: "Keep state and check the recovery guide before rerunning an unresolved attempt." });
+  console.error({
+    savedAttempt: latestAttemptFile,
+    channelFile: latestChannelFile,
+    quoteReceived: false,
+    ...observedReceipt,
+    message: observedReceipt
+      ? "A successful payment receipt was received, but no usable quote was returned. Keep the receipt and saved attempt. Do not rerun to recover the original quote."
+      : "Keep state and check the recovery guide before rerunning an unresolved attempt.",
+  });
   throw error;
 }
