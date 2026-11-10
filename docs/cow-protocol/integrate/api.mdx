@@ -117,7 +117,7 @@ For a sell order, `/quote` returns amounts **after** network costs:
 
 Settlement network costs are already reflected in `quote.buyAmount`; `quote.feeAmount` describes those costs in the sell token, not an additional amount to deduct from the output.
 Other aggregators usually return their output **before** gas, which the user pays on top.
-Shown side by side as-is, CoW Protocol ranks lower even at the same price.
+When quotes are shown side by side as-is, CoW Protocol ranks lower even at the same price.
 
 Compare every source on the same basis and for the same total sell input. Convert separately paid gas to buy-token units before comparing output amounts:
 
@@ -132,9 +132,9 @@ The amounts are estimates, not guaranteed execution amounts. Execution can impro
 
 Selling 10 USDT for USDC at a 1:1 price, with 0.40 USDT of network costs and no protocol or partner fee (illustrative numbers).
 `/quote` returns `sellAmount: "9600000"`, `feeAmount: "400000"` and `buyAmount: "9600000"` (both tokens have 6 decimals).
-Another aggregator quotes 9.99 USDC, and the user pays 0.40 USD of gas on top.
+Another aggregator quotes 9.99 USDC, and the user pays gas on top in ETH, worth 0.40 USDC.
 
-| | CoW Protocol | Other aggregator |
+| | CoW Protocol (USDC) | Other aggregator (USDC) |
 |---|---|---|
 | Quoted output | 9.60 | 9.99 |
 | Before gas | 9.60 + 0.40 = **10.00** | **9.99** |
