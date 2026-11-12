@@ -19,6 +19,17 @@ Limits apply per IP address, across all networks combined.
 
 Both quote limits apply: you can send up to 1 request per second, but no more than 500 in any hour.
 
+## x402 limits
+
+[x402](./x402.mdx) at `x402.cow.fi` has its own limits, also per IP address:
+
+| Endpoints on `x402.cow.fi` | Limit |
+| --- | --- |
+| Paid quotes | 10 per second |
+| Everything else | 5 per second |
+
+There is no hourly cap on x402. `POST /api/v1/quote/stream` is not available on x402.
+
 ## If you go over a limit
 
 You get `429 Too Many Requests` with a `Retry-After` header. Wait that long, then retry with exponential backoff. Clients that keep sending far above their limit are blocked for an hour.
