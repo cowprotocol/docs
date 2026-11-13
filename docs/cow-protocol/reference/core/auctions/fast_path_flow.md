@@ -16,10 +16,11 @@ The penalty cap for fast-path orders is currently set to zero, so an unfilled fa
 - Mainnet: 1 block
 - Gnosis chain: 1 block
 - Arbitrum: 8 blocks
-- Base: 1 block
+- Base: 10 blocks
 - Avalanche: 2 blocks
 - Polygon: 2 blocks
 - BNB: 5 blocks
 - Linea: 1 block
 - Plasma: 2 blocks
 - Ink: 2 blocks
+- Robinhood: 20 blocks
