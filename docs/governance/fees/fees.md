@@ -30,19 +30,19 @@ The purpose of this page is to let users know which fee models are active at any
 >
 > **Fee calculation:** quote improvement \* 0.5 **OR** volume \* 0.0098 [whichever number is lower]
 
-### Volume Fee
+### Protocol volume fee
 
 > **Definition:** A tiered fee based on the total volume of the order, adjusted by asset type
 >
-> **Eligible orders:** all orders
+> **Eligible orders:** all orders, except orders between correlated assets (e.g. stablecoin to stablecoin), which are currently not charged a volume fee
 >
 > **Fee structure:**
 > - **Standard Assets:** 2 basis points (bps)
-> - **Correlated Assets (Stables/RWAs):** 0.3 basis points (bps)
-> 
+> - **Correlated Assets (Stables/RWAs):** 0 basis points (bps)
+>
 > **Fee calculation:**
 > - **Standard**: Volume * 0.0002
-> - **Correlated:** Volume * 0.00003 
+> - **Correlated:** no protocol volume fee
 
 
 :::note
