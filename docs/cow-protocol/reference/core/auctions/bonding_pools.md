@@ -32,6 +32,8 @@ Vouching contracts:
 - [BNB](https://bscscan.com/address/0xAAA4De096D02AE21729aA31D967E148D4e3Ae501)
 - [Linea](https://lineascan.build/address/0xAAA4De096D02AE21729aA31D967E148D4e3Ae501)
 - [Plasma](https://plasmascan.to/address/0xAAA4De096D02AE21729aA31D967E148D4e3Ae501#code)
+- [Ink](https://explorer.inkonchain.com/address/0xAAA4De096D02AE21729aA31D967E148D4e3Ae501)
+- [Robinhood](https://robin.etherscan.io/address/0xAAA4De096D02AE21729aA31D967E148D4e3Ae501)
 
 The `Vouch` method receives a list as an argument and can vouch for multiple submission addresses in a single transaction. The transaction must contain: the submission address for the solver, the bonding pool that is vouching for the solver, and the rewards address that the solver would like to use to receive their [rewards](/cow-protocol/reference/core/auctions/rewards).
 

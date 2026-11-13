@@ -61,13 +61,14 @@ The deadline for solutions depends on the network and is set as a specific numbe
 - Mainnet: 1 block
 - Gnosis chain: 3 blocks
 - Arbitrum: 11 blocks
-- Base: 4 blocks
+- Base: 13 blocks
 - Avalanche: 8 blocks
 - Polygon: 8 blocks
-- BNB: 5 blocks
+- BNB: 7 blocks
 - Linea: 4 blocks
 - Plasma: 5 blocks
 - Ink: 5 blocks
+- Robinhood: 23 blocks
 <!-- Blocks defined here https://github.com/cowprotocol/infrastructure/blob/staging/services/autopilot/config/index.ts#L21 -->
 
 :::
@@ -154,6 +155,14 @@ At CoW DAO's discretion, systematic violation of these rules may lead to penaliz
 
   - **Protocols**: Uniswap v3
   - **Base tokens**: [`WETH`](https://plasmascan.to/token/0x9895D81bB462A195b4922ED7De0e3ACD007c32CB), [`USDT0`](https://plasmascan.to/token/0xB8CE59FC3717ada4C02eaDF9682A9e934F625ebb), [`WXPL`](https://plasmascan.to/token/0x6100E367285b01F48D07953803A2d8dCA5D19873)
+
+  </details>
+
+  <details>
+    <summary>Robinhood chain baseline protocols and tokens</summary>
+
+  - **Protocols**: Uniswap v3
+  - **Base tokens**: [`WETH`](https://robin.etherscan.io/token/0x0Bd7D308f8E1639FAb988df18A8011f41EAcAD73), [`USDG`](https://robin.etherscan.io/token/0x5fc5360D0400a0Fd4f2af552ADD042D716F1d168)
 
   </details>
 
