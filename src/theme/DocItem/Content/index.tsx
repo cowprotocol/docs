@@ -18,19 +18,18 @@ function useSyntheticTitle() {
 
 export default function DocItemContent({children}: {children: React.ReactNode}) {
   const syntheticTitle = useSyntheticTitle()
-  const {metadata} = useDoc()
 
   return (
     <div className={clsx(ThemeClassNames.docs.docMarkdown, 'markdown')}>
       {syntheticTitle && (
         <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
           <Heading as="h1">{syntheticTitle}</Heading>
-          <AiActionsDropdown editUrl={metadata.editUrl} />
+          <AiActionsDropdown />
         </header>
       )}
       {!syntheticTitle && (
         <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: 8 }}>
-          <AiActionsDropdown editUrl={metadata.editUrl} />
+          <AiActionsDropdown />
         </div>
       )}
       <MDXContent>{children}</MDXContent>
