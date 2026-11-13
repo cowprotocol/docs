@@ -30,7 +30,7 @@ The purpose of this page is to let users know which fee models are active at any
 >
 > **Fee calculation:** quote improvement \* 0.5 **OR** volume \* 0.0098 [whichever number is lower]
 
-### Volume Fee
+### Protocol volume Fee
 
 > **Definition:** A tiered fee based on the total volume of the order, adjusted by asset type
 >
@@ -42,7 +42,7 @@ The purpose of this page is to let users know which fee models are active at any
 >
 > **Fee calculation:**
 > - **Standard**: Volume * 0.0002
-> - **Correlated:** no fee
+> - **Correlated:** no protocol volume fee
 
 
 :::note
