@@ -8,11 +8,7 @@ description: Integrate Solana swaps, choose who pays for order creation, and tra
 
 For Solana swaps, use the [Solana Trading SDK](https://github.com/cowprotocol/cow-sdk/tree/main/packages/sdk-trading-solana) or integrate directly with the [Solana Order Book API](https://barn.api.cow.fi/docs/?urls.primaryName=Solana+Orderbook).
 
-:::caution Alpha integration
-
-The Solana integration is in alpha, so program versions and APIs can change. Both staging and production use Solana mainnet-beta and real tokens; use a separate wallet with small amounts for testing.
-
-:::
+The settlement program was audited by [Neodyme](https://neodyme.io). Read the [audit report](https://github.com/cowprotocol/solana-programs/tree/main/audits).
 
 ## Choose an Environment
 
@@ -27,6 +23,12 @@ Select the environment with the SDK's `env` option:
 import { SolanaTradingSdk } from '@cowprotocol/sdk-trading-solana'
 const sdk = new SolanaTradingSdk({ env: 'prod' })
 ```
+
+:::info Both environments use real funds
+
+Staging and production both run on Solana mainnet-beta with real tokens. Staging is a separate order book and settlement program for integration testing, not a test network.
+
+:::
 
 ## Order Creation
 
