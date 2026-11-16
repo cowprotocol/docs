@@ -107,11 +107,11 @@ $$
 
 where the sum runs over all solvers. The core team has a mandate to adapt this metric when they see fit; every change will be announced in advance on the [CoW Protocol forum](https://forum.cow.fi).
 
-**Current metric: bid quality and settlement success on market orders.** Since June 30, 2026, each solver's share of the consistency budget is proportional to a metric that combines the quality of the solver's bids with its settlement success rate, as announced in [this forum post](https://forum.cow.fi/t/consistency-metric-v2/3474). It replaces an earlier metric that simply counted the executed orders a solver had bid on. Since September 15, 2026, only executions of market orders enter the bid quality component; executions of out-of-market limit orders do not earn consistency rewards, as announced in [this forum post](https://forum.cow.fi/t/consistency-metric-v2-1-in-market-orders-only/3577).
+**Current metric: bid quality and settlement success on fill-or-kill market orders.** Since June 30, 2026, each solver's share of the consistency budget is proportional to a metric that combines the quality of the solver's bids with its settlement success rate, as announced in [this forum post](https://forum.cow.fi/t/consistency-metric-v2/3474). It replaces an earlier metric that simply counted the executed orders a solver had bid on. Since September 15, 2026, only executions of market orders enter the bid quality component; executions of out-of-market limit orders do not earn consistency rewards, as announced in [this forum post](https://forum.cow.fi/t/consistency-metric-v2-1-in-market-orders-only/3577). Since November 10, 2026, only executions of fill-or-kill market orders enter the bid quality component; executions of partially fillable orders do not earn consistency rewards.
 
 The metric has two components:
 
-**1. Bid quality.** A solver bids on an order if it submits a solution containing that order. For each executed market order, the solvers that bid on the order in the auction in which it was executed share a total weight of one, in proportion to the surplus they proposed. The share of solver $$i$$ for order $$o$$ is
+**1. Bid quality.** A solver bids on an order if it submits a solution containing that order. For each executed fill-or-kill market order, the solvers that bid on the order in the auction in which it was executed share a total weight of one, in proportion to the surplus they proposed. The share of solver $$i$$ for order $$o$$ is
 
 $$
 \textrm{orderShare}_i(o) = \frac{\textrm{surplus}_i(o)}{\sum_{j} \textrm{surplus}_j(o)},
@@ -119,7 +119,7 @@ $$
 
 where $$\textrm{surplus}_i(o)$$ is the largest surplus that any of solver $$i$$'s solutions proposed for order $$o$$ in that auction (the difference between the proposed execution amounts and the order's limit amounts), and the sum runs over all solvers that bid on the order. If all bids on an order propose zero surplus, the share of every solver for that order is set to zero. We stress that only solutions that pass the fairness filtering are considered in the above computations. Since each executed order distributes a total weight of one, orders with few competitive bids yield a larger share for the solvers submitting them, an incentive for solvers to join such competitions with competitive bids.
 
-Only executions of **market orders** distribute a weight. An order is a market order if its limit price is no better than the price implied by the quote that led to the creation of the order, net of all fees. This is the same classification used for [quote rewards](#price-estimation-competition-rewards-cip-88).
+Only executions of **fill-or-kill market orders** distribute a weight. An order is a market order if its limit price is no better than the price implied by the quote that led to the creation of the order, net of all fees. This is the same classification used for [quote rewards](#price-estimation-competition-rewards-cip-88). An order is fill-or-kill if it is not partially fillable, i.e., it is either executed in full or not at all.
 
 **2. Settlement success rate.** The success rate of solver $$i$$ in an accounting period is
 
@@ -135,9 +135,9 @@ $$
 \textrm{consistencyMetric}_i = \textrm{successRate}_i \cdot \sum_{o} \textrm{orderShare}_i(o),
 $$
 
-where the sum runs over all executions of market orders in the period (a market order that is executed in several auctions, e.g., a partially fillable order, counts once per execution). The settlement success rate is computed over all orders the solver won, market orders and out-of-market limit orders alike.
+where the sum runs over all executions of fill-or-kill market orders in the period. The settlement success rate is computed over all orders the solver won, including out-of-market limit orders and partially fillable orders.
 
-For example, suppose four solvers bid on a market order with proposed surplus of 0.1, 0.08, 0.019, and 0.001 ETH. The total proposed surplus is 0.2 ETH, so the order shares are 0.5, 0.4, 0.095, and 0.005, respectively. If the solvers have success rates of 0.8, 0.9, 1.0, and 0.5 in the accounting period, this order contributes 0.4, 0.36, 0.095, and 0.0025, respectively, to their consistency metrics.
+For example, suppose four solvers bid on a fill-or-kill market order with proposed surplus of 0.1, 0.08, 0.019, and 0.001 ETH. The total proposed surplus is 0.2 ETH, so the order shares are 0.5, 0.4, 0.095, and 0.005, respectively. If the solvers have success rates of 0.8, 0.9, 1.0, and 0.5 in the accounting period, this order contributes 0.4, 0.36, 0.095, and 0.0025, respectively, to their consistency metrics.
 
 :::note
 
