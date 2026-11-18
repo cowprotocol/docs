@@ -14,10 +14,10 @@ Limits apply per IP address and per network: quoting on mainnet doesn't use up y
 
 | Endpoints | Limit |
 | --- | --- |
-| Quotes and prices: `POST /api/v1/quote`, `POST /api/v1/quote/stream`, `GET /api/v1/token/{token}/native_price` | 1 per second, and 500 per hour |
+| Quotes and prices: `POST /api/v1/quote`, `POST /api/v1/quote/stream`, `GET /api/v1/token/{token}/native_price` | 1 per second, and about 500 per hour on average |
 | Everything else | 5 per second |
 
-Both quote limits apply: you can send up to 1 request per second, but no more than 500 in any hour.
+Both quote limits apply. You can send up to 1 request per second. After a burst of a few hundred quotes, the hourly limit settles to about 8 a minute, which is about 500 an hour.
 
 ## x402 limits
 
