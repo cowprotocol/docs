@@ -400,6 +400,7 @@ createCowSwapWidget(document.getElementById('cowswap-widget'), {
 | `customTokens`                        | `TokenInfo[]`          | ---                 | Use tokens not in the default token lists by passing an array of ERC-20 token info objects. See also `tokenLists` for list-based configuration.                                                                                                                                                                            |
 | `hideRecentTokens`                    | `boolean`              | false               | Hides the "Recent tokens" section in the token selector.                                                                                                                                                                                                                                                                   |
 | `hideFavoriteTokens`                  | `boolean`              | false               | Hides the "Favorite tokens" section in the token selector.                                                                                                                                                                                                                                                                 |
+| `prioritizedTokens`                   | `Partial<Record<TargetChainId, string[]>>` | ---     | Token addresses per network to move up in the token selector, right after the native token and the tokens the wallet holds. See [Prioritized tokens](#prioritizedtokens) section for more details.                                                                                                                        |
 | `disableTokenImport`                  | `boolean`              | false               | Disables adding custom tokens and custom token lists by the user.                                                                                                                                                                                                                                                          |
 | `disableEIP2612Permits`               | `boolean`              | false               | Disables the EIP-2612 permit signing flow. When `true`, the widget never signs an off-chain permit and always sends an on-chain approval transaction, even for tokens that support permit.                                                                                                                                  |
 | `disableInfiniteApprove`              | `boolean`              | false               | Disables infinite (`MAX_UINT256`) ERC-20 approvals. When `true`, every approval transaction approves only the exact trade-size amount, and the "Partial approval" toggle in Settings is shown but locked on.                                                                                                                |
@@ -522,6 +523,39 @@ const params: CowSwapWidgetParams = { customTokens }
 
 createCowSwapWidget(container, { params })
 ```
+
+### `prioritizedTokens`
+
+Use `prioritizedTokens` to move your own tokens up the "All tokens" list in the token selector, without hiding the others. The list is keyed by chain id, and the selector uses the list of the network it shows, including a bridge destination network.
+
+The list is ordered as follows:
+
+1. The native token
+2. Tokens the wallet holds (a prioritized token with a balance stays in this group)
+3. Prioritized tokens without a balance, in the configured order
+4. All other tokens
+
+Only the order changes: prioritized tokens get no badge or separate section. Search results, "Favorite tokens" and "Recent tokens" are unchanged. Addresses missing from the active token lists are skipped; add them with [`customTokens`](#customtokens).
+
+```typescript
+import { createCowSwapWidget, CowSwapWidgetParams } from '@cowprotocol/widget-lib'
+
+const container = document.getElementById('cowswap-widget')
+
+const params: CowSwapWidgetParams = {
+  prioritizedTokens: {
+    1: [
+      '0x7f39C581F595B53c5cb19bD0b3f8dA6c935E2Ca0', // wstETH
+      '0x5A98FcBEA516Cf06857215779Fd812CA3beF1B32', // LDO
+    ],
+    42161: ['0x2f2a2543B76A4166549F7aaB2e75Bef0aefC5B0f'], // WBTC
+  },
+}
+
+createCowSwapWidget(container, { params })
+```
+
+In the [widget configurator](https://widget.cow.fi), set it under Tokens → "Prioritized tokens", one address per line.
 
 ---
 
