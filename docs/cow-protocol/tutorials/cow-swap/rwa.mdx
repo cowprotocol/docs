@@ -29,13 +29,13 @@ CoW RWA lists tokens on Ethereum, BNB Smart Chain, Base, Arbitrum, Polygon, Aval
 
 ## Find an asset
 
-The `Explore` page starts with a market overview: the tokenized market cap and volume, the most traded assets and the top movers. Below it is a table of every asset with its reference price, 24h change, 24h volume and tokenized market cap.
+The `Explore` page starts with a market overview: the tokenized market cap and volume, the most traded assets and the top movers. Below it is a table of every asset with its reference price, 24h change, 24h total volume and tokenized market cap.
 
 To narrow the table:
 
 - Use the tabs to switch between `All`, `Stocks`, `ETFs` and `Commodities`.
 - Type a name or a ticker in the search box. The search in the header also finds a token by its address.
-- Click `Filters` to filter by issuer or network.
+- Click `Filters` to filter by issuer, network, tokenized market cap or 24h volume.
 - Click the star next to an asset to add it to your `Watchlist`.
 
 <Image img={require("/img/cowswap/rwa/assets_table.png")} alt="Asset table with the Filters panel open, filtering by issuer and network" />
@@ -48,8 +48,9 @@ The asset page shows:
 
 - **Price chart**: switch between `Stock`, the price of the underlying share on its stock exchange, and `Tokenized stock`, the price of its tokens onchain. Next to the price, CoW RWA shows whether the US market is open.
 - **Trade panel**: on the right, to pick a token and trade it.
-- **Overview**: the `Stock tokens` table, the company profile and the issuer's news.
-- **Your positions**, **Open orders** and **Activity**: your holdings and orders for this asset.
+- Tabs below the chart:
+  - `Overview` (the default): the `Stock tokens` table, plus the company profile, the company's news and related assets when available.
+  - `Your positions`, `Open orders` and `Activity`: your holdings and orders for this asset.
 
 <Image img={require("/img/cowswap/rwa/asset_page.png")} alt="Asset page of NVIDIA with the price chart and the trade panel" />
 
@@ -69,7 +70,7 @@ In the trade panel, choose:
 
 1. The side: `Buy` or `Sell`.
 2. The network.
-3. The token. For each token, CoW RWA shows a CoW Swap quote per share and how it compares with the stock price. The best quote is on top, marked `Lowest price` when you buy or `Highest price` when you sell. Click `All 5 tokens` (the number depends on the asset) to see the tokens without a quote or liquidity too.
+3. The token. For each token, CoW RWA shows a CoW Swap quote per share and how it compares with the stock price. The best quote is on top, marked `Lowest verified price` when you buy or `Highest verified price` when you sell. If no quote could be verified, the best one is marked `Lowest price` or `Highest price`. Click `All 5 tokens` (the number depends on the asset) to see the tokens without a quote or liquidity too.
 
 <Image img={require("/img/cowswap/rwa/token_selector.png")} alt="Trade panel comparing the quotes of every NVIDIA token on Ethereum" />
 
@@ -81,7 +82,7 @@ A quote marked `Unverified` could not be simulated, so the price may change when
 
 ## Place your order
 
-Below the trade panel is the CoW Swap widget, with the token you picked already selected. It works exactly like [CoW Swap](/cow-protocol/tutorials/cow-swap/swap): enter an amount, pick the token you pay with or receive, and check the quote.
+Below the trade panel is the CoW Swap widget, with the token you picked already selected. It works like [CoW Swap](/cow-protocol/tutorials/cow-swap/swap): enter an amount, pick the token you pay with or receive, and check the quote. When you buy, you can pay with any token you hold. The stock token stays selected, so you can't switch the two tokens.
 
 Consider an example selling all our `NVDAon` (NVIDIA tokenized by Ondo) for `USDC` on Ethereum.
 
@@ -104,8 +105,8 @@ Once the order is signed, it is submitted to CoW Protocol and ready to be execut
 Some tokens have extra trading rules, which CoW Swap shows in the widget:
 
 - **Minimum order size**: xStocks tokens trade only in orders of at least $10 (for TWAP orders, $10 per part).
-- **Trading hours**: many tokens follow the US stock market, and may have little or no liquidity while it is closed. Ondo tokens can't be traded on weekends.
-- **Trading pauses**: issuers pause their tokens for corporate actions, such as dividends or stock splits, while the token balances update. The asset page shows when the pause ends.
+- **Trading hours**: many tokens follow the US stock market, and may have little or no liquidity while it is closed. On weekends, stock and ETF tokens often have no liquidity at all, and CoW Swap then tells you when they can be traded again.
+- **Trading pauses**: issuers pause their tokens for corporate actions, such as dividends or stock splits, while the token balances update. For xStocks tokens, the asset page shows upcoming and active pauses.
 - **Regional restrictions**: if your region is not allowed to hold a token, CoW Swap blocks the trade. If CoW Swap can't determine your region, it asks you to confirm that you are allowed to trade the token.
 
 :::
@@ -116,7 +117,7 @@ Click `Portfolio` in the header to see:
 
 - `Positions`: every stock token you hold, from any issuer and network, with the equivalent number of shares and its underlying value.
 - `Open orders`: your orders that are not filled yet.
-- `Activity`: your past orders. Open the row menu and click `View transaction` to see one on the block explorer.
+- `Activity`: your completed trades. Open the row menu and click `View transaction` to see one on the block explorer.
 
 <Image img={require("/img/cowswap/rwa/portfolio.png")} alt="Portfolio page with stock token positions grouped by asset" />
 
@@ -128,7 +129,9 @@ You can also follow any order on [CoW Explorer](/cow-protocol/tutorials/cow-expl
 
 Changed your mind? Find your order in the `Open orders` tab of the portfolio or of the asset page, open the row menu and pick how to cancel it:
 
-- `Cancel order`: free. You sign a message, and the order may still fill until the cancellation is processed.
+- `Cancel order`: free, shown when the order can be cancelled off-chain. You sign a message, and the order may still fill until the cancellation is processed.
 - `Cancel on-chain`: costs gas. You send a transaction, and the order can no longer fill once it confirms.
+
+TWAP orders are cancelled on-chain. For a TWAP order placed from a Safe, cancel it in the widget instead.
 
 Confirm the cancellation in your wallet and you are done!
