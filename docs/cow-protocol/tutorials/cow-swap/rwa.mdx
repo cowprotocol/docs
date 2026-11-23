@@ -1,0 +1,134 @@
+---
+sidebar_position: 7
+---
+
+import Image from "@theme/IdealImage"
+import ReceiverAndOrderWarning from "../../../partials/_receiver.mdx"
+
+# Tokenized stocks (RWA)
+
+[CoW RWA](https://swap.cow.fi/rwa?utm_source=docs.cow.fi&utm_content=rwa-tutorial) is the part of CoW Swap for tokenized real-world assets (RWAs): stocks, ETFs and commodities that issuers such as Ondo, xStocks, Coinbase, Paxos and Tether put onchain.
+
+One asset, such as NVIDIA or Gold, often has many tokens: one per issuer and network. CoW RWA groups them under the asset, so you can compare every token of an asset in one place and trade the one you want with CoW Swap.
+
+<Image img={require("/img/cowswap/rwa/home.png")} alt="CoW RWA home page with the market overview, most traded assets and top movers" />
+
+:::caution
+
+Tokenized assets are issued by independent third parties, each with its own terms and eligibility rules, and may not give you ownership of the underlying shares. Some issuers do not allow residents of certain countries to hold their tokens, so CoW Swap blocks trading these tokens from restricted regions. Check the issuer's terms before you trade. Nothing on CoW RWA is investment advice.
+
+:::
+
+## Connect wallet
+
+Go to [CoW RWA](https://swap.cow.fi/rwa?utm_source=docs.cow.fi&utm_content=rwa-tutorial) and click `Connect wallet` in the top right corner. See [Connect wallet](/cow-protocol/tutorials/cow-swap/swap#connect-wallet) for the supported wallets.
+
+CoW RWA shares the wallet connection with CoW Swap: if your wallet is already connected on [swap.cow.fi](https://swap.cow.fi), it is connected on CoW RWA too.
+
+CoW RWA lists tokens on Ethereum, BNB Smart Chain, Base, Arbitrum, Polygon, Avalanche, Plasma, Ink and Gnosis Chain.
+
+## Find an asset
+
+The `Explore` page starts with a market overview: the tokenized market cap and volume, the most traded assets and the top movers. Below it is a table of every asset with its reference price, 24h change, 24h volume and tokenized market cap.
+
+To narrow the table:
+
+- Use the tabs to switch between `All`, `Stocks`, `ETFs` and `Commodities`.
+- Type a name or a ticker in the search box. The search in the header also finds a token by its address.
+- Click `Filters` to filter by issuer or network.
+- Click the star next to an asset to add it to your `Watchlist`.
+
+<Image img={require("/img/cowswap/rwa/assets_table.png")} alt="Asset table with the Filters panel open, filtering by issuer and network" />
+
+Click an asset to open its page.
+
+## Explore the asset page
+
+The asset page shows:
+
+- **Price chart**: switch between `Stock`, the price of the underlying share on its stock exchange, and `Tokenized stock`, the price of its tokens onchain. Next to the price, CoW RWA shows whether the US market is open.
+- **Trade panel**: on the right, to pick a token and trade it.
+- **Overview**: the `Stock tokens` table, the company profile and the issuer's news.
+- **Your positions**, **Open orders** and **Activity**: your holdings and orders for this asset.
+
+<Image img={require("/img/cowswap/rwa/asset_page.png")} alt="Asset page of NVIDIA with the price chart and the trade panel" />
+
+The `Stock tokens` table lists every token of the asset, with its issuer, network, price per share, 24h DEX volume and tokenized market cap. Filter it by issuer or network, and click `Buy` or `Sell` next to a token to trade it.
+
+<Image img={require("/img/cowswap/rwa/stock_tokens.png")} alt="Stock tokens of NVIDIA from several issuers and networks" />
+
+:::note
+
+Tokens of different issuers can stand for a different number of shares, because issuers pass on dividends differently: xStocks reinvests them by increasing your token balance, while Ondo reinvests them into the token price, so one token stands for a growing number of shares. CoW RWA shows every price **per share**, so you can compare tokens directly.
+
+:::
+
+## Pick a token
+
+In the trade panel, choose:
+
+1. The side: `Buy` or `Sell`.
+2. The network.
+3. The token. For each token, CoW RWA shows a CoW Swap quote per share and how it compares with the stock price. The best quote is on top, marked `Lowest price` when you buy or `Highest price` when you sell. Click `All 5 tokens` (the number depends on the asset) to see the tokens without a quote or liquidity too.
+
+<Image img={require("/img/cowswap/rwa/token_selector.png")} alt="Trade panel comparing the quotes of every NVIDIA token on Ethereum" />
+
+:::tip
+
+A quote marked `Unverified` could not be simulated, so the price may change when you trade.
+
+:::
+
+## Place your order
+
+Below the trade panel is the CoW Swap widget, with the token you picked already selected. It works exactly like [CoW Swap](/cow-protocol/tutorials/cow-swap/swap): enter an amount, pick the token you pay with or receive, and check the quote.
+
+Consider an example selling all our `NVDAon` (NVIDIA tokenized by Ondo) for `USDC` on Ethereum.
+
+<Image img={require("/img/cowswap/rwa/trade_widget.png")} alt="CoW Swap widget selling NVDAon for USDC" />
+
+Use the `Swap` menu in the top left corner of the widget to switch to a [limit order](/cow-protocol/tutorials/cow-swap/limit) to buy or sell at your own price, or to a [TWAP order](/cow-protocol/tutorials/cow-swap/twap) to split a large trade over time.
+
+When you sell a token for the first time, you must approve the [vault relayer](/cow-protocol/reference/contracts/core/vault-relayer) to spend it. See [Approve sell token](/cow-protocol/tutorials/cow-swap/swap#approve-sell-token) for details.
+
+Click `Swap` and review the details of your order. If you're happy with them, click `Confirm Swap` and sign the order in your wallet.
+
+<ReceiverAndOrderWarning />
+
+<Image img={require("/img/cowswap/rwa/confirm.png")} alt="Review the swap before confirming it" />
+
+Once the order is signed, it is submitted to CoW Protocol and ready to be executed! 🎉
+
+:::info
+
+Some tokens have extra trading rules, which CoW Swap shows in the widget:
+
+- **Minimum order size**: xStocks tokens trade only in orders of at least $10 (for TWAP orders, $10 per part).
+- **Trading hours**: many tokens follow the US stock market, and may have little or no liquidity while it is closed. Ondo tokens can't be traded on weekends.
+- **Trading pauses**: issuers pause their tokens for corporate actions, such as dividends or stock splits, while the token balances update. The asset page shows when the pause ends.
+- **Regional restrictions**: if your region is not allowed to hold a token, CoW Swap blocks the trade. If CoW Swap can't determine your region, it asks you to confirm that you are allowed to trade the token.
+
+:::
+
+## Track your portfolio
+
+Click `Portfolio` in the header to see:
+
+- `Positions`: every stock token you hold, from any issuer and network, with the equivalent number of shares and its underlying value.
+- `Open orders`: your orders that are not filled yet.
+- `Activity`: your past orders. Open the row menu and click `View transaction` to see one on the block explorer.
+
+<Image img={require("/img/cowswap/rwa/portfolio.png")} alt="Portfolio page with stock token positions grouped by asset" />
+
+The asset page shows the same tabs for the tokens of that asset only.
+
+You can also follow any order on [CoW Explorer](/cow-protocol/tutorials/cow-explorer).
+
+## Cancel your order
+
+Changed your mind? Find your order in the `Open orders` tab of the portfolio or of the asset page, open the row menu and pick how to cancel it:
+
+- `Cancel order`: free. You sign a message, and the order may still fill until the cancellation is processed.
+- `Cancel on-chain`: costs gas. You send a transaction, and the order can no longer fill once it confirms.
+
+Confirm the cancellation in your wallet and you are done!
