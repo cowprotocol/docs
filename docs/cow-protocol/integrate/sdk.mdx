@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+sidebar_position: 3
 ---
 
 # SDK Integration
@@ -62,7 +62,7 @@ console.log('Order created:', orderId)
 
 ## Quick Start Example (Solana)
 
-The examples use a connected `wallet` and a Solana mainnet-beta `connection`.
+The examples use Solana Trading SDK 2.1 or later, a connected `wallet`, and a Solana mainnet-beta `connection`.
 
 ### User-funded Orders
 
@@ -71,29 +71,36 @@ The wallet needs USDC to sell and SOL for fees and account rent.
 ```typescript
 import { SolanaTradingSdk } from '@cowprotocol/sdk-trading-solana'
 import { OrderKind } from '@cowprotocol/sdk-order-book'
+import { TOKEN_PROGRAM_ID } from '@solana/spl-token'
 import { Transaction } from '@solana/web3.js'
 
 // Initialize SDK
 const sdk = new SolanaTradingSdk({ env: 'prod' })
 const sellToken = 'EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v' // USDC
 const buyToken = '11111111111111111111111111111111' // Native SOL
+const sellTokenProgramId = TOKEN_PROGRAM_ID
+const buyTokenProgramId = TOKEN_PROGRAM_ID // Native SOL uses the wrapped SOL mint
 
 // Get a quote
 const { solanaQuote, buildOrder, postSponsoredOrder } = await sdk.getQuote({
   ownerAddress: wallet.publicKey,
   sellTokenAddress: sellToken,
   sellTokenDecimals: 6,
+  sellTokenProgramId,
   buyTokenAddress: buyToken,
   buyTokenDecimals: 9,
+  buyTokenProgramId,
   amount: 1_000_000n, // 1 USDC in base units
   kind: OrderKind.SELL,
   slippageBps: 50, // 0.5%
+  appCode: 'YOUR_APP_CODE',
 })
 
 // Approve tokens and build the order
 const approval = sdk.approveCowProtocol({
   ownerAddress: wallet.publicKey,
   sellTokenAddress: sellToken,
+  sellTokenProgramId,
   approveAmount: solanaQuote.intent.sellAmount,
 })
 const { instruction, orderId } = await buildOrder()
@@ -138,25 +145,28 @@ const orderId = await postSponsoredOrder(btoa(String.fromCharCode(...bytes)))
 console.log('Order submitted:', orderId)
 ```
 
-The SDK sends the partially signed transaction to the Order Book API. CoW adds the sponsor's signature and submits it when the order wins an auction. Use `orderId` to [track the order](./solana.mdx#track-an-order) in either flow.
+The SDK sends the partially signed transaction to the Order Book API. The order book adds the sponsor's signature and submits the transaction when the order wins an auction. Use `orderId` to [track the order](./solana.mdx#track-an-order) in either flow.
 
 ### Limit Orders
 
 Use [`buildLimitOrder`](https://github.com/cowprotocol/cow-sdk/tree/main/packages/sdk-trading-solana#limit-orders) to set your own price without a quote. This example sells 1 USDC for at least 0.01 SOL, allows partial fills, and expires after one day.
 
-Use the SDK and tokens from the user-funded example. Replace the quote, approval, and order-building steps with the following code.
+Reuse the SDK, tokens, and token program IDs from the user-funded example. Replace the quote, approval, and order-building steps with the following code.
 
 ```typescript
 const sellAmount = 1_000_000n // 1 USDC in base units
 const approval = sdk.approveCowProtocol({
   ownerAddress: wallet.publicKey,
   sellTokenAddress: sellToken,
+  sellTokenProgramId,
   approveAmount: sellAmount,
 })
 const { instruction, orderId } = await sdk.buildLimitOrder({
   ownerAddress: wallet.publicKey,
   sellTokenAddress: sellToken,
+  sellTokenProgramId,
   buyTokenAddress: buyToken,
+  buyTokenProgramId,
   sellAmount,
   buyAmount: 10_000_000n, // 0.01 SOL in base units
   kind: OrderKind.SELL,
@@ -180,7 +190,7 @@ npm install @cowprotocol/sdk-ethers-v6-adapter ethers
 npm install @cowprotocol/sdk-ethers-v5-adapter ethers@^5.7.0
 
 # Install the Solana SDK
-npm install @cowprotocol/sdk-trading-solana @cowprotocol/sdk-order-book @solana/web3.js@1.98.4
+npm install @cowprotocol/sdk-trading-solana @cowprotocol/sdk-order-book @solana/spl-token@0.4.14 @solana/web3.js@1.98.4
 ```
 
 ## When to Use the SDK

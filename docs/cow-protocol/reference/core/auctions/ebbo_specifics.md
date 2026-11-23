@@ -1,5 +1,6 @@
 ---
 id: ebbo-rules
+sidebar_position: 8
 ---
 
 # EBBO violations: details

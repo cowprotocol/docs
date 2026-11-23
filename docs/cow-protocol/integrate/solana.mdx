@@ -1,5 +1,5 @@
 ---
-sidebar_position: 7
+sidebar_position: 9
 description: Integrate Solana swaps and limit orders, choose who pays for order creation, and track orders.
 ---
 
@@ -7,11 +7,7 @@ description: Integrate Solana swaps and limit orders, choose who pays for order 
 
 For Solana swaps and limit orders, use the [Solana Trading SDK](https://github.com/cowprotocol/cow-sdk/tree/main/packages/sdk-trading-solana) or integrate directly with the [Solana Order Book API](https://barn.api.cow.fi/docs/?urls.primaryName=Solana+Orderbook).
 
-:::caution Alpha integration
-
-The Solana integration is in alpha, so program versions and APIs can change. Both staging and production use Solana mainnet-beta and real tokens; use a separate wallet with small amounts for testing.
-
-:::
+The settlement program was audited by [Neodyme](https://neodyme.io). Read the [audit report](https://github.com/cowprotocol/solana-programs/tree/main/audits).
 
 ## Choose an Environment
 
@@ -29,16 +25,22 @@ import { SolanaTradingSdk } from '@cowprotocol/sdk-trading-solana'
 const sdk = new SolanaTradingSdk({ env: 'prod' })
 ```
 
+:::info Both environments use real funds
+
+Staging and production both run on Solana mainnet-beta with real tokens. Staging is a separate order book and settlement program for integration testing, not a test network.
+
+:::
+
 ## Order Creation
 
 Orders can be sponsored or user-funded. The user signs the creation transaction in both flows.
 
 |                                                 | Subsidised (sponsored)                             | Non-subsidised (user-funded)      |
 | ----------------------------------------------- | -------------------------------------------------- | --------------------------------- |
-| Creation transaction fee and order account rent | Paid by CoW's sponsor                              | Paid by the user                  |
-| Signatures                                      | User signs first; CoW adds the sponsor's signature | User signs as owner and fee payer |
+| Creation transaction fee and order account rent | Paid by the sponsor                                | Paid by the user                  |
+| Signatures                                      | User signs first, then the order book countersigns | User signs as owner and fee payer |
 | Submission                                      | Order Book API                                     | Solana RPC                        |
-| Order types                                     | Market orders                                     | Market and limit orders          |
+| Order types                                     | Market orders                                      | Market and limit orders           |
 
 Order creation locks SOL as rent in the order account. After the order is filled, cancelled, or expired, `ReclaimOrder` can close the account and return the rent to its original payer (`created_by`). This is the sponsor for sponsored orders or the user for user-funded orders.
 
@@ -48,7 +50,7 @@ Sponsored market orders need a valid quote with enough slippage to settle. Limit
 
 Use the quote's `funder` as fee payer and order account rent payer. If it is absent or null, use the user-funded flow.
 
-The user signs, leaving the sponsor's signature empty. Submit the base64-encoded transaction as `partiallySignedTx` to `POST /api/v1/orders`. CoW adds the sponsor's signature and submits it when the order wins an auction. See the [API quickstart](./api.mdx#quick-start-example-solana).
+The user signs, leaving the sponsor's signature empty. Submit the base64-encoded transaction as `partiallySignedTx` to `POST /api/v1/orders`. The order book adds the sponsor's signature and submits the transaction when the order wins an auction. See the [API quickstart](./api.mdx#quick-start-example-solana).
 
 The transaction must follow these rules:
 
@@ -76,7 +78,7 @@ See [Flow of an order](../concepts/how-it-works/flow-of-an-order.md) for auction
 
 Use [`approveCowProtocol`](https://github.com/cowprotocol/cow-sdk/tree/main/packages/sdk-trading-solana#step-0--approve-the-settlement-program-as-spl-delegate) to approve the settlement state account as delegate. Check the delegate and remaining allowance before each trade; fills reduce the allowance.
 
-A token account has only one delegate. Approving another app on the same sell-token account replaces CoW's delegation and can prevent open orders from settling. Use `approveCowProtocol` to restore CoW's delegate and sufficient allowance.
+A token account has only one delegate. Approving another app on the same sell-token account replaces the settlement delegate and can prevent open orders from settling. Use `approveCowProtocol` to restore the delegate and sufficient allowance.
 
 Settlement buffers hold the buy tokens before the program pays them to the user. For SPL token buys, ensure the buffer for the buy mint exists. Create a missing buffer with `CreateBuffers`, using a payer funded with SOL for its rent. This is separate from the order account rent.
 

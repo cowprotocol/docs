@@ -1,5 +1,6 @@
 ---
 id: bonding-pools
+sidebar_position: 7
 ---
 
 # Setting up a bonding pool

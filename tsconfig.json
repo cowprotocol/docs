@@ -1,6 +1,8 @@
 {
   // This file is not used in compilation. It is here just for a nice editor experience.
   "extends": "@docusaurus/tsconfig",
+  // Standalone Node examples are checked by yarn typecheck:x402, also run in CI.
+  "exclude": ["node_modules", ".docusaurus", "build", "static/code-examples/x402"],
   "compilerOptions": {
     "baseUrl": ".",
     "resolveJsonModule": true,
