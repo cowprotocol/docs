@@ -99,7 +99,7 @@ This key maps to a list containing the set of orders in the batch. Each entry in
 - `quote`: the winning quote for that order.
 - `penaltyCapNative`: a stringified integer denoting the cap on the penalty a solver can incur for winning this order but not settling it within the auction deadline, measured in terms of the smallest denomination of the native token of the chain. See the [solver rewards](/cow-protocol/reference/core/auctions/rewards#penalty-caps) page for how this cap is computed and used.
 
-  We clarify here that all `market` orders have a potentially non-zero predetermined fee, while all `limit` orders have necessarily a zero signed fee, and the actual fee charged to the order is computed and provided by the solvers when they propose an execution of such an order. More details are provided in the [solutions section](#solutions-output).
+  We clarify here that all orders have a zero signed fee (`feeAmount`), and the actual fee charged to the order is computed and provided by the solvers when they propose an execution of such an order. More details are provided in the [solutions section](#solutions-output).
 
 An example Fill-or-Kill user limit buy order that sells 1000 [COW](https://etherscan.io/token/0xdef1ca1fb7fbcdc777520aa7f396b4e015f497ab) for at least 284.138335 USDC [USDC](https://etherscan.io/token/0xba100000625a3754423978a60c9317c58a424e3d) is given below:
 
