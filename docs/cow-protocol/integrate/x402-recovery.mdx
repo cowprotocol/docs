@@ -79,7 +79,7 @@ The example uses `@x402/*` **2.26.0**.
 node --env-file=.env --import tsx quote.mts
 ```
 
-A successful run prints `status: 200`, `quoteReceived: true`, the charge, a saved channel-file path and the quote JSON.
+A successful run prints `status: 200`, `quoteReceived: true`, a saved channel-file path and the quote JSON. If the payment receipt supplies a charge, the script prints it; otherwise it prints `chargeReported: false` without assuming zero.
 The first request funds the channel; later requests reuse it and top up when needed, within your limits.
 The CoW Protocol x402 payment service pays deposit and collection gas.
 
@@ -124,7 +124,9 @@ node --env-file=.env --import tsx withdraw.mts status
 
 This reads the channel balance, claimed total and withdrawal status; it sends no transaction and needs no private key. If the original error included a transaction hash, also check its receipt in the payment chain's explorer. A pending or missing receipt remains unresolved. A successful deposit proves that funds reached the channel, not that the quote was charged. The on-chain claimed total omits charges awaiting collection.
 
-**4. Establish the payment outcome.** A completed example run prints `status: 200`, `quoteReceived: true` and `chargedUSDC` from the payment receipt. If you have that output, that request succeeded and another run is a new purchase. If the receipt was lost, failed validation, or the script reported an accounting/settlement error, the checks above cannot establish whether that request was charged.
+**4. Establish the payment outcome.** A completed example run prints `status: 200` and `quoteReceived: true` after receiving a successful payment receipt. Another run is a new purchase. If the receipt was lost, failed validation, or the script reported an accounting/settlement error, the checks above cannot establish whether that request was charged.
+
+If the example prints `paymentReceiptReceived: true` and `quoteReceived: false`, it received a successful payment receipt but could not return a usable quote. Preserve the transaction reference, saved attempt and any reported charge. This is not proof of quote delivery or of on-chain collection. Ask about the original quote before rerunning; another paid request does not retrieve it.
 
 Contact [CoW Protocol Discord](https://discord.com/invite/cowprotocol) with the payment network, channel ID, approximate request time, error code and any transaction hash. Ask the team to confirm the request's charge and reconcile the channel state before another payment or withdrawal. Do not post your private key, signed attempt or full state files. There is no public read-only payment-status endpoint for this check.
 
