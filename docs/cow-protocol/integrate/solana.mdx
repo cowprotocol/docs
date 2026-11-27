@@ -1,12 +1,11 @@
 ---
-sidebar_position: 4
-sidebar_label: Solana
-description: Integrate Solana swaps, choose who pays for order creation, and track orders.
+sidebar_position: 9
+description: Integrate Solana swaps and limit orders, choose who pays for order creation, and track orders.
 ---
 
 # Integrate on Solana
 
-For Solana swaps, use the [Solana Trading SDK](https://github.com/cowprotocol/cow-sdk/tree/main/packages/sdk-trading-solana) or integrate directly with the [Solana Order Book API](https://barn.api.cow.fi/docs/?urls.primaryName=Solana+Orderbook).
+For Solana swaps and limit orders, use the [Solana Trading SDK](https://github.com/cowprotocol/cow-sdk/tree/main/packages/sdk-trading-solana) or integrate directly with the [Solana Order Book API](https://barn.api.cow.fi/docs/?urls.primaryName=Solana+Orderbook).
 
 The settlement program was audited by [Neodyme](https://neodyme.io). Read the [audit report](https://github.com/cowprotocol/solana-programs/tree/main/audits).
 
@@ -18,6 +17,8 @@ Select the environment with the SDK's `env` option:
 | -------------- | -------------------------------- | -------------------- |
 | Production     | `https://api.cow.fi/solana`      | `{ env: 'prod' }`    |
 | Staging (barn) | `https://barn.api.cow.fi/solana` | `{ env: 'staging' }` |
+
+See the [settlement program addresses](https://github.com/cowprotocol/cow-sdk/blob/main/packages/config/src/chains/const/contracts.ts#L34-L36) for production and staging.
 
 ```typescript
 import { SolanaTradingSdk } from '@cowprotocol/sdk-trading-solana'
@@ -32,21 +33,34 @@ Staging and production both run on Solana mainnet-beta with real tokens. Staging
 
 ## Order Creation
 
-The user signs a creation transaction in both flows:
+Orders can be sponsored or user-funded. The user signs the creation transaction in both flows.
 
 |                                                 | Subsidised (sponsored)                             | Non-subsidised (user-funded)      |
 | ----------------------------------------------- | -------------------------------------------------- | --------------------------------- |
-| Creation transaction fee and order account rent | Paid by CoW's sponsor                              | Paid by the user                  |
-| Signatures                                      | User signs first; CoW adds the sponsor's signature | User signs as owner and fee payer |
+| Creation transaction fee and order account rent | Paid by the sponsor                                | Paid by the user                  |
+| Signatures                                      | User signs first, then the order book countersigns | User signs as owner and fee payer |
 | Submission                                      | Order Book API                                     | Solana RPC                        |
+| Order types                                     | Market orders                                      | Market and limit orders           |
 
 Order creation locks SOL as rent in the order account. After the order is filled, cancelled, or expired, `ReclaimOrder` can close the account and return the rent to its original payer (`created_by`). This is the sponsor for sponsored orders or the user for user-funded orders.
 
 ### Sponsored Orders
 
+Sponsored market orders need a valid quote with enough slippage to settle. Limit orders use the [user-funded flow](#limit-orders).
+
 Use the quote's `funder` as fee payer and order account rent payer. If it is absent or null, use the user-funded flow.
 
-The user signs, leaving the sponsor's signature empty. Submit the base64-encoded transaction as `partiallySignedTx` to `POST /api/v1/orders`. CoW adds the sponsor's signature and submits it. See the [API quickstart](./api.mdx#quick-start-example-solana).
+The user signs, leaving the sponsor's signature empty. Submit the base64-encoded transaction as `partiallySignedTx` to `POST /api/v1/orders`. The order book adds the sponsor's signature and submits the transaction when the order wins an auction. See the [API quickstart](./api.mdx#quick-start-example-solana).
+
+The transaction must follow these rules:
+
+- End with a `CreateOrder` instruction.
+- When selling native SOL, create, fund, and sync the wrapped-SOL account as needed before approval. The user pays its rent.
+- Approve the settlement delegate before `CreateOrder` if needed.
+- Do not create the buy token account. Settlement can create the owner's missing associated token account. A custom receiver's buy token account must already exist.
+- Do not include unrelated instructions. See the [transaction requirements](https://github.com/cowprotocol/services/blob/main/crates/solana-orderbook/openapi.yml#L268-L320) for the accepted preparation steps and signing format.
+
+Native SOL buys pay the wallet directly, so no buy token account is needed.
 
 ### User-funded Orders
 
@@ -54,17 +68,17 @@ The user pays fees and account rent in SOL. Sign and submit the transaction thro
 
 See the [SDK quickstart](./sdk.mdx#quick-start-example-solana) or [Node.js example](https://github.com/cowprotocol/cow-sdk/blob/main/examples/nodejs/solana/src/index.ts#L60-L82).
 
+### Limit Orders
+
+Limit orders trade at your chosen price or better. Set `sellAmount` and `buyAmount` to define the price, and `validTo` for expiry. They use the user-funded flow and do not need a quote. See the [SDK limit order example](./sdk.mdx#limit-orders).
+
 ## Order Lifecycle
 
-1. **Get a quote**: Specify tokens, amount, owner, and order kind. Check the quote's `expiration`.
-2. **Build the transaction**: Approve the sell tokens and add `CreateOrder`. Wrap native SOL into wSOL when selling it.
-3. **Sign and submit**: Use either flow above and save the order UID.
-4. **Wait for settlement**: Solvers compete to fill the order after creation.
-5. **Track the order**: Check its status and executed amounts until fulfilled, cancelled, or expired.
+See [Flow of an order](../concepts/how-it-works/flow-of-an-order.md) for auctions and settlement. On Solana, users sign order creation transactions. User-funded orders enter auctions after creation is indexed. Sponsored orders can enter before their creation transaction lands.
 
 Use [`approveCowProtocol`](https://github.com/cowprotocol/cow-sdk/tree/main/packages/sdk-trading-solana#step-0--approve-the-settlement-program-as-spl-delegate) to approve the settlement state account as delegate. Check the delegate and remaining allowance before each trade; fills reduce the allowance.
 
-A token account has only one delegate. Approving another app on the same sell-token account replaces CoW's delegation and can prevent open orders from settling. Use `approveCowProtocol` to restore CoW's delegate and sufficient allowance.
+A token account has only one delegate. Approving another app on the same sell-token account replaces the settlement delegate and can prevent open orders from settling. Use `approveCowProtocol` to restore the delegate and sufficient allowance.
 
 Settlement buffers hold the buy tokens before the program pays them to the user. For SPL token buys, ensure the buffer for the buy mint exists. Create a missing buffer with `CreateBuffers`, using a payer funded with SOL for its rent. This is separate from the order account rent.
 
@@ -74,34 +88,16 @@ The [SDK example](./sdk.mdx#quick-start-example-solana) buys native SOL, whose b
 
 Orders expire at `validTo` (Unix seconds). Creation transactions must land within the blockhash's 150-block lifetime, roughly [30 seconds at 200 ms per slot](https://solana.com/upgrades/reduced-slot-times). CoW Swap allows 20 seconds for signing, leaving 10 seconds for submission.
 
-If the transaction expires, get a fresh quote and transaction. Once created, the order stays open until filled, cancelled, or `validTo`.
+If the transaction expires, rebuild it with a fresh blockhash and, for swaps, a fresh quote. Once created, the order stays open until filled, cancelled, or `validTo`.
 
 Cancel with an owner-signed `CancelOrder` transaction. The SDK's [`cancelOrder`](https://github.com/cowprotocol/cow-sdk/tree/main/packages/sdk-trading-solana#cancelling-an-order) also supports cancellation before creation lands.
 
 ## Track an Order
 
-Use the SDK's `orderId` as the UID in `GET /api/v1/orders/{uid}`, as shown in the [API quickstart](./api.mdx#quick-start-example-solana).
+Use the SDK's `orderId` as the UID in `GET /api/v1/orders/{uid}`, as shown in the [API monitoring example](./api.mdx#3-monitor-order-status-1). The Solana UID is a `0x`-prefixed, 32-byte value, distinct from the order account address or transaction signature.
 
 RPC-submitted orders may return `404` before indexing. Keep the transaction signature to check confirmation through RPC.
 
-Poll while the order is `open`:
+<span id="link-to-cow-explorer" />
 
-| Status      | Meaning                                               |
-| ----------- | ----------------------------------------------------- |
-| `open`      | Still open; may have partial fills                    |
-| `fulfilled` | Fully filled                                          |
-| `cancelled` | Cancelled                                             |
-| `expired`   | The order or its pending creation transaction expired |
-
-`executedSellAmount` and `executedBuyAmount` are decimal strings in token base units (`1000000` = 1 USDC).
-
-`GET /api/v1/orders/{uid}/status` shows auction progress. Its `traded` type does not mean the order is fully filled; check the order's `status`. Use `GET /api/v2/trades?orderUid={uid}` for trades and transaction signatures.
-
-## Link to CoW Explorer
-
-Use `orderId` in the explorer URL. It is the same `0x`-prefixed, 32-byte UID format in both environments, distinct from the order account address or transaction signature.
-
-```text
-Production: https://explorer.cow.fi/solana/orders/{uid}
-Staging:    https://barn.explorer.cow.fi/solana/orders/{uid}
-```
+View orders at `https://explorer.cow.fi/solana/orders/{uid}` in production or `https://barn.explorer.cow.fi/solana/orders/{uid}` in staging.
