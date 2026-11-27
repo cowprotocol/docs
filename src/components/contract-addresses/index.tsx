@@ -14,6 +14,7 @@ export const explorerByChain = {
   "Plasma": "https://plasmascan.to",
   "Optimism": "https://optimistic.etherscan.io",
   "Ink": "https://explorer.inkonchain.com",
+  "Robinhood": "https://robin.etherscan.io",
 } as const;
 
 export type ChainName = keyof typeof explorerByChain;

@@ -44,7 +44,7 @@ The performance reward is capped from above and below using the function $$\text
 The upper cap $$c_u$$ is equal to a chain-specific fraction $$\beta$$ of the protocol fee (excluding partner fees) that the protocol earned from the trades in all solutions successfully executed on-chain by the solver in that auction. $$\beta$$ is determined by the following values:
 
 - Ethereum mainnet, Arbitrum, Base chain, and BNB: $$\beta = 50\%$$
-- Gnosis Chain, Avalanche, Polygon, Linea, Ink, and Plasma: $$\beta = 100\%$$
+- Gnosis Chain, Avalanche, Polygon, Linea, Ink, Plasma, and Robinhood: $$\beta = 100\%$$
 
 The parameter $$\beta$$, which naturally corresponds to a revenue-sharing parameter between protocol and solvers, is set to 50% by default. The core team has a mandate to change this parameter for individual networks, if needed, to a value in the interval [50%, 100%], given that the network has a total revenue less than 5% of the total protocol revenue.
 
@@ -78,6 +78,7 @@ The fraction $$\phi_o$$ depends on the chain and on whether the two tokens trade
 - Linea: $$2 \;\textrm{bps}$$
 - Ink: $$1 \;\textrm{bps}$$
 - Plasma: $$1 \;\textrm{bps}$$
+- Robinhood: $$1 \;\textrm{bps}$$
 
 These caps are chosen such that solvers settle their winning solutions with a high probability, given estimates of price movements during the window of exclusivity, i.e., the time between the moment a solver is notified that it won and the deadline by which the auction has to be settled. The core team has a mandate to change the penalty cap per order within the interval [0 bps, 10 bps], if needed, to tune the trade-off between competitive prices and fast execution. Any change to the penalty cap is announced to solvers in advance and reflected in this documentation.
 
